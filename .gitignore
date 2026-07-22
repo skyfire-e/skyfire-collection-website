@@ -1,3 +1,9 @@
 node_modules/
 .env
 data/users.json
+
+# Temp / scraper files
+DRAFT/
+_*.js
+_*.txt
+cookies.txt
