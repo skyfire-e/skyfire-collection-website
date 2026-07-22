@@ -2,22 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
 const path = require('path');
-const crypto = require('crypto');
 const fs = require('fs');
-
-// Load .env file if present (no dotenv dependency needed)
-try {
-  const envPath = path.join(__dirname, '.env');
-  if (fs.existsSync(envPath)) {
-    fs.readFileSync(envPath, 'utf8').split('\n').forEach(line => {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) return;
-      const eqIdx = trimmed.indexOf('=');
-      if (eqIdx === -1) return;
-      process.env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
-    });
-  }
-} catch(e) { /* ignore */ }
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,48 +14,34 @@ const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
 
-function readJSON(file, fallback) {
-  try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
-  catch (err) { console.error('Cannot read ' + path.basename(file) + ':', err.message); return fallback; }
+function readJSON(file) {
+  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return null; }
 }
 function writeJSON(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 }
-// Safe file deletion under uploads/
-function safeUnlink(imgPath) {
-  if (!imgPath || typeof imgPath !== 'string') return;
-  if (!imgPath.startsWith('/uploads/')) return;
-  const full = path.join(__dirname, imgPath);
-  try { fs.unlinkSync(full); }
-  catch (e) { if (e.code !== 'ENOENT') console.error('Failed to delete', imgPath, e.message); }
-}
 
 // Init data files
-['items.json'].forEach(f => {
+['items.json', 'users.json'].forEach(f => {
   const fp = path.join(DATA_DIR, f);
   if (!fs.existsSync(fp)) writeJSON(fp, []);
 });
 
+// Default admin user
+const users = readJSON(USERS_FILE) || [];
+if (users.length === 0) {
+  users.push({ username: 'admin', password: 'admin123', role: 'admin' });
+  writeJSON(USERS_FILE, users);
+}
+
 // --- Middleware ---
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const SESSION_SECRET = process.env.SESSION_SECRET;
-if (!SESSION_SECRET) {
-  console.error('SESSION_SECRET is not set. Generate one with: openssl rand -hex 32');
-  process.exit(1);
-}
-
-app.set('trust proxy', 1);
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: 'skyf1re-collection-session-secret-2026',
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000
-  }
+  cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
 }));
 
 // Serve static files
@@ -78,22 +49,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // --- File upload ---
-const ALLOWED_MIMES = ['image/jpeg', 'image/png', 'image/webp'];
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, 'uploads')),
-  filename: (req, file, cb) => {
-    const ext = file.mimetype === 'image/jpeg' ? '.jpg' : file.mimetype === 'image/png' ? '.png' : '.webp';
-    cb(null, crypto.randomUUID() + ext);
-  }
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
-const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    if (ALLOWED_MIMES.includes(file.mimetype)) return cb(null, true);
-    cb(new Error('Only JPEG/PNG/WebP allowed'));
-  }
-});
+const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
 
 // --- Auth middleware ---
 function requireAdmin(req, res, next) {
@@ -106,14 +66,10 @@ function requireAdmin(req, res, next) {
 // Auth
 app.post('/api/auth/login', (req, res) => {
   const { username, password } = req.body;
-  const adminUser = process.env.ADMIN_USERNAME || 'admin';
-  const adminPass = process.env.ADMIN_PASSWORD;
-  if (!adminPass) {
-    return res.status(500).json({ error: 'Server not configured' });
-  }
-  if (username === adminUser && password === adminPass) {
-    req.session.user = { username: adminUser, role: 'admin' };
-    return res.json({ success: true, user: { username: adminUser, role: 'admin' } });
+  const user = users.find(u => u.username === username && u.password === password);
+  if (user) {
+    req.session.user = { username: user.username, role: user.role };
+    return res.json({ success: true, user: { username: user.username, role: user.role } });
   }
   res.status(401).json({ error: 'Invalid credentials' });
 });
@@ -167,39 +123,20 @@ app.post('/api/categories', requireAdmin, (req, res) => {
 
 app.delete('/api/categories', requireAdmin, (req, res) => {
   const cats = readJSON(CATEGORIES_FILE);
-  const items = readJSON(ITEMS_FILE) || [];
   const { section, id, parentId } = req.body;
 
   if (!section || !cats[section]) return res.status(400).json({ error: 'Invalid section' });
 
-  // Collect all category IDs that will be affected
-  let affectedCats = [];
   if (!id) {
-    // Deleting entire section — affect all subcategories
-    const flatten = (subs) => { subs.forEach(c => { affectedCats.push(c.id); if (c.subcategories) flatten(c.subcategories); }); };
-    flatten(cats[section].subcategories || []);
-  } else if (parentId) {
-    affectedCats = [id];
-  } else {
-    affectedCats = [id];
-  }
-
-  // Check if any items reference these categories
-  const orphaned = items.filter(i => i.section === section && affectedCats.includes(i.category));
-  if (orphaned.length > 0) {
-    return res.status(400).json({
-      error: 'Cannot delete: ' + orphaned.length + ' item(s) still reference this category',
-      orphanedCount: orphaned.length
-    });
-  }
-
-  if (!id) {
+    // Delete entire section
     delete cats[section];
   } else if (parentId) {
+    // Delete nested subcategory within a group
     const parent = cats[section].subcategories.find(c => c.id === parentId);
     if (!parent || !parent.subcategories) return res.status(400).json({ error: 'Parent not found' });
     parent.subcategories = parent.subcategories.filter(c => c.id !== id);
   } else {
+    // Delete flat subcategory or group
     cats[section].subcategories = cats[section].subcategories.filter(c => c.id !== id);
   }
 
@@ -218,30 +155,16 @@ app.get('/api/items', (req, res) => {
 
 app.post('/api/items', requireAdmin, upload.array('images', 10), (req, res) => {
   const items = readJSON(ITEMS_FILE) || [];
-  const cats = readJSON(CATEGORIES_FILE);
   const settings = readJSON(SETTINGS_FILE) || {};
-
-  // Basic validation
-  if (!req.body.title || !req.body.title.trim()) return res.status(400).json({ error: 'Title is required' });
-  const section = req.body.section;
-  const category = req.body.category;
-  if (section && (!cats || !cats[section])) return res.status(400).json({ error: 'Invalid section' });
-  if (category && section && cats) {
-    const sec = cats[section];
-    const valid = sec.subcategories ? sec.subcategories.some(c => c.id === category || (c.subcategories && c.subcategories.some(sc => sc.id === category))) : false;
-    if (!valid) return res.status(400).json({ error: 'Invalid category for section' });
-  }
-
   const files = req.files || [];
   const images = files.map(f => '/uploads/' + f.filename);
-  const priceNum = parseFloat(req.body.price);
   const newItem = {
-    id: crypto.randomUUID(),
-    section: section,
-    category: category,
-    title: req.body.title.trim(),
+    id: Date.now(),
+    section: req.body.section,
+    category: req.body.category,
+    title: req.body.title || 'Untitled',
     author: req.body.author || '',
-    price: isNaN(priceNum) ? '' : priceNum,
+    price: req.body.price || '',
     recaster: req.body.recaster || '',
     combatPoints: req.body.combatPoints || '',
     status: req.body.status || '',
@@ -268,7 +191,6 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
   if (req.body.category !== undefined) items[idx].category = req.body.category;
   // Normalize images field (handle legacy {} case)
   if (!Array.isArray(items[idx].images)) items[idx].images = [];
-  const oldImages = [...items[idx].images]; // snapshot for disk cleanup
   // Handle image removal + reorder via finalOrder
   const files = req.files || [];
   let removeIdx = [];
@@ -317,18 +239,14 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
     files.forEach(f => items[idx].images.push('/uploads/' + f.filename));
   }
 
-  // Clean up removed image files from disk
-  if (Array.isArray(items[idx].images)) {
-    const newSet = new Set(items[idx].images);
-    oldImages.forEach(img => { if (!newSet.has(img)) safeUnlink(img); });
-  }
-
-  // Update cover image
-  if (items[idx].images && items[idx].images.length > 0) {
-    items[idx].image = items[idx].images[0];
-  } else {
-    items[idx].images = [];
-    items[idx].image = readJSON(SETTINGS_FILE)?.defaultImage || '/images/default.svg';
+  // Update cover image (only if images were actually changed)
+  if (files.length > 0 || removeIdx.length > 0 || finalOrder.length > 0) {
+    if (items[idx].images && items[idx].images.length > 0) {
+      items[idx].image = items[idx].images[0];
+    } else {
+      items[idx].images = [];
+      items[idx].image = readJSON(SETTINGS_FILE)?.defaultImage || '/images/default.svg';
+    }
   }
   writeJSON(ITEMS_FILE, items);
   res.json(items[idx]);
@@ -338,14 +256,8 @@ app.delete('/api/items/:id', requireAdmin, (req, res) => {
   let items = readJSON(ITEMS_FILE) || [];
   const idx = items.findIndex(i => i.id == req.params.id);
   if (idx === -1) return res.status(404).json({ error: 'Not found' });
-  const removed = items[idx];
   items.splice(idx, 1);
   writeJSON(ITEMS_FILE, items);
-  // Delete orphaned image files
-  if (removed) {
-    (removed.images || []).forEach(safeUnlink);
-    if (removed.image && !removed.image.includes('default.svg')) safeUnlink(removed.image);
-  }
   res.json({ success: true });
 });
 
@@ -375,7 +287,6 @@ app.get('/api/settings', (req, res) => {
 
 app.put('/api/settings', requireAdmin, (req, res) => {
   const settings = readJSON(SETTINGS_FILE) || {};
-  const oldDefault = settings.defaultImage;
   if (req.body.defaultImage) settings.defaultImage = req.body.defaultImage;
   if (req.body.siteName) settings.siteName = req.body.siteName;
   if (req.body.showSpreadsheet !== undefined) settings.showSpreadsheet = req.body.showSpreadsheet;
@@ -383,21 +294,6 @@ app.put('/api/settings', requireAdmin, (req, res) => {
   if (req.body.showMiniaturesColumns !== undefined) settings.showMiniaturesColumns = req.body.showMiniaturesColumns;
   if (req.body.currencies !== undefined) settings.currencies = req.body.currencies;
   writeJSON(SETTINGS_FILE, settings);
-  // Backfill: update existing items that have no images
-  if (oldDefault !== settings.defaultImage) {
-    const items = readJSON(ITEMS_FILE) || [];
-    let changed = 0;
-    items.forEach(item => {
-      const imgs = item.images;
-      const hasImages = Array.isArray(imgs) ? imgs.length > 0 : false;
-      if (!hasImages) {
-        item.image = settings.defaultImage;
-        item.images = [];
-        changed++;
-      }
-    });
-    if (changed > 0) writeJSON(ITEMS_FILE, items);
-  }
   res.json(settings);
 });
 
@@ -459,18 +355,23 @@ app.post('/api/upload/default', requireAdmin, upload.single('image'), (req, res)
   const settings = readJSON(SETTINGS_FILE) || {};
   settings.defaultImage = '/uploads/' + req.file.filename;
   writeJSON(SETTINGS_FILE, settings);
-  // Backfill: update existing items that have no images
+  res.json(settings);
+});
+
+// Backfill images array from image field for items that have photo but empty images[]
+app.post('/api/backfill-images', requireAdmin, (req, res) => {
   const items = readJSON(ITEMS_FILE) || [];
   let changed = 0;
   items.forEach(item => {
-    if (!Array.isArray(item.images) || item.images.length === 0) {
-      item.image = settings.defaultImage;
-      item.images = [];
+    const imgs = item.images;
+    const hasImages = Array.isArray(imgs) ? imgs.some(i => i && !i.includes('default.svg')) : false;
+    if (!hasImages && item.image && !item.image.includes('default.svg')) {
+      item.images = [item.image];
       changed++;
     }
   });
   if (changed > 0) writeJSON(ITEMS_FILE, items);
-  res.json(settings);
+  res.json({ updated: changed });
 });
 
 // Spreadsheet endpoint (admin only)
@@ -523,21 +424,6 @@ app.get('/:section', (req, res, next) => {
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// --- Error handling ---
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err.message || err);
-  if (err instanceof multer.MulterError) {
-    return res.status(400).json({ error: err.message });
-  }
-  if (err.code === 'LIMIT_FILE_SIZE') {
-    return res.status(400).json({ error: 'File too large (max 10MB)' });
-  }
-  if (err.message && err.message.includes('Only JPEG/PNG/WebP allowed')) {
-    return res.status(400).json({ error: err.message });
-  }
-  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {

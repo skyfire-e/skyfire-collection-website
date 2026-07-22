@@ -8,7 +8,9 @@
     "price": "40",
     "image": "/uploads/metal-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-1.jpg"
+    ]
   },
   {
     "id": 1784583148283,
@@ -19,7 +21,9 @@
     "price": "61",
     "image": "/uploads/metal-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-2.jpg"
+    ]
   },
   {
     "id": 1784583148284,
@@ -30,7 +34,9 @@
     "price": "71",
     "image": "/uploads/metal-dice-3.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-3.jpg"
+    ]
   },
   {
     "id": 1784583148285,
@@ -41,7 +47,9 @@
     "price": "40",
     "image": "/uploads/metal-dice-4.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-4.jpg"
+    ]
   },
   {
     "id": 1784583148286,
@@ -52,7 +60,9 @@
     "price": "35",
     "image": "/uploads/metal-dice-5.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-5.jpg"
+    ]
   },
   {
     "id": 1784583148287,
@@ -63,7 +73,9 @@
     "price": "60",
     "image": "/uploads/metal-dice-6.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-6.jpg"
+    ]
   },
   {
     "id": 1784583148288,
@@ -74,7 +86,9 @@
     "price": "77",
     "image": "/uploads/metal-dice-7.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-7.jpg"
+    ]
   },
   {
     "id": 1784583148290,
@@ -85,7 +99,9 @@
     "price": "18",
     "image": "/uploads/metal-dice-8.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-8.jpg"
+    ]
   },
   {
     "id": 1784583148291,
@@ -96,7 +112,9 @@
     "price": "18",
     "image": "/uploads/metal-dice-9.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-9.jpg"
+    ]
   },
   {
     "id": 1784583148292,
@@ -107,7 +125,9 @@
     "price": "52",
     "image": "/uploads/metal-dice-10.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-10.jpg"
+    ]
   },
   {
     "id": 1784583148293,
@@ -118,7 +138,9 @@
     "price": "52",
     "image": "/uploads/metal-dice-11.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-11.jpg"
+    ]
   },
   {
     "id": 1784583148294,
@@ -129,7 +151,9 @@
     "price": "52",
     "image": "/uploads/metal-dice-12.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-12.jpg"
+    ]
   },
   {
     "id": 1784583148295,
@@ -140,7 +164,9 @@
     "price": "80",
     "image": "/uploads/metal-dice-13.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-13.jpg"
+    ]
   },
   {
     "id": 1784583148296,
@@ -151,7 +177,9 @@
     "price": "60",
     "image": "/uploads/metal-dice-14.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-14.jpg"
+    ]
   },
   {
     "id": 1784583148297,
@@ -162,7 +190,9 @@
     "price": "26",
     "image": "/uploads/metal-dice-15.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-15.jpg"
+    ]
   },
   {
     "id": 1784583148298,
@@ -173,7 +203,9 @@
     "price": "40",
     "image": "/uploads/metal-dice-16.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-16.jpg"
+    ]
   },
   {
     "id": 1784583148299,
@@ -184,7 +216,9 @@
     "price": "50",
     "image": "/uploads/metal-dice-17.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-17.jpg"
+    ]
   },
   {
     "id": 1784583148300,
@@ -195,7 +229,9 @@
     "price": "35",
     "image": "/uploads/metal-dice-18.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-18.jpg"
+    ]
   },
   {
     "id": 1784583148301,
@@ -206,7 +242,9 @@
     "price": "19",
     "image": "/uploads/metal-dice-19.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-19.jpg"
+    ]
   },
   {
     "id": 1784583148302,
@@ -217,7 +255,9 @@
     "price": "20",
     "image": "/uploads/metal-dice-20.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-20.jpg"
+    ]
   },
   {
     "id": 1784583148303,
@@ -228,7 +268,9 @@
     "price": "45",
     "image": "/uploads/metal-dice-21.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-21.jpg"
+    ]
   },
   {
     "id": 1784583148304,
@@ -239,7 +281,9 @@
     "price": "20",
     "image": "/uploads/metal-dice-22.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-22.jpg"
+    ]
   },
   {
     "id": 1784583148305,
@@ -250,7 +294,9 @@
     "price": "35",
     "image": "/uploads/metal-dice-23.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-23.jpg"
+    ]
   },
   {
     "id": 1784583148306,
@@ -261,7 +307,9 @@
     "price": "30",
     "image": "/uploads/metal-dice-24.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-24.jpg"
+    ]
   },
   {
     "id": 1784583148307,
@@ -272,7 +320,9 @@
     "price": "20",
     "image": "/uploads/metal-dice-25.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-25.jpg"
+    ]
   },
   {
     "id": 1784583148308,
@@ -283,7 +333,9 @@
     "price": "20",
     "image": "/uploads/metal-dice-26.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-26.jpg"
+    ]
   },
   {
     "id": 1784583148309,
@@ -294,7 +346,9 @@
     "price": "35",
     "image": "/uploads/metal-dice-27.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-27.jpg"
+    ]
   },
   {
     "id": 1784583148310,
@@ -305,7 +359,9 @@
     "price": "35",
     "image": "/uploads/metal-dice-28.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-28.jpg"
+    ]
   },
   {
     "id": 1784583148311,
@@ -316,7 +372,9 @@
     "price": "15",
     "image": "/uploads/metal-dice-29.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/metal-dice-29.jpg"
+    ]
   },
   {
     "id": 1784583148312,
@@ -330,7 +388,9 @@
     "recaster": "",
     "combatPoints": "",
     "status": "",
-    "images": []
+    "images": [
+      "/uploads/1784672989417-images.jpg"
+    ]
   },
   {
     "id": 1784583148313,
@@ -341,7 +401,9 @@
     "price": "18",
     "image": "/uploads/resin-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-1.jpg"
+    ]
   },
   {
     "id": 1784583148314,
@@ -352,7 +414,9 @@
     "price": "18",
     "image": "/uploads/resin-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-2.jpg"
+    ]
   },
   {
     "id": 1784583148315,
@@ -363,7 +427,9 @@
     "price": "24",
     "image": "/uploads/resin-dice-3.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-3.jpg"
+    ]
   },
   {
     "id": 1784583148316,
@@ -374,7 +440,9 @@
     "price": "19",
     "image": "/uploads/resin-dice-4.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-4.jpg"
+    ]
   },
   {
     "id": 1784583148317,
@@ -385,7 +453,9 @@
     "price": "26",
     "image": "/uploads/resin-dice-5.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-5.jpg"
+    ]
   },
   {
     "id": 1784583148319,
@@ -396,7 +466,9 @@
     "price": "14",
     "image": "/uploads/resin-dice-6.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-6.jpg"
+    ]
   },
   {
     "id": 1784583148320,
@@ -407,7 +479,9 @@
     "price": "21",
     "image": "/uploads/resin-dice-7.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-7.jpg"
+    ]
   },
   {
     "id": 1784583148321,
@@ -418,7 +492,9 @@
     "price": "11",
     "image": "/uploads/resin-dice-8.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-8.jpg"
+    ]
   },
   {
     "id": 1784583148322,
@@ -429,7 +505,9 @@
     "price": "20",
     "image": "/uploads/resin-dice-9.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-9.jpg"
+    ]
   },
   {
     "id": 1784583148323,
@@ -440,7 +518,9 @@
     "price": "20",
     "image": "/uploads/resin-dice-10.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-10.jpg"
+    ]
   },
   {
     "id": 1784583148324,
@@ -451,7 +531,9 @@
     "price": "25",
     "image": "/uploads/resin-dice-11.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-11.jpg"
+    ]
   },
   {
     "id": 1784583148325,
@@ -462,7 +544,9 @@
     "price": "25",
     "image": "/uploads/resin-dice-12.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-12.jpg"
+    ]
   },
   {
     "id": 1784583148326,
@@ -473,7 +557,9 @@
     "price": "50",
     "image": "/uploads/resin-dice-13.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-13.jpg"
+    ]
   },
   {
     "id": 1784583148327,
@@ -484,7 +570,9 @@
     "price": "30",
     "image": "/uploads/resin-dice-14.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-14.jpg"
+    ]
   },
   {
     "id": 1784583148328,
@@ -495,7 +583,9 @@
     "price": "5",
     "image": "/uploads/resin-dice-15.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-15.jpg"
+    ]
   },
   {
     "id": 1784583148329,
@@ -506,7 +596,9 @@
     "price": "25",
     "image": "/uploads/resin-dice-16.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-16.jpg"
+    ]
   },
   {
     "id": 1784583148330,
@@ -517,7 +609,9 @@
     "price": "7",
     "image": "/uploads/resin-dice-17.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/resin-dice-17.jpg"
+    ]
   },
   {
     "id": 1784583148331,
@@ -528,7 +622,9 @@
     "price": "5",
     "image": "/uploads/acrylic-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-1.jpg"
+    ]
   },
   {
     "id": 1784583148332,
@@ -539,7 +635,9 @@
     "price": "20",
     "image": "/uploads/acrylic-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-2.jpg"
+    ]
   },
   {
     "id": 1784583148333,
@@ -550,7 +648,9 @@
     "price": "6",
     "image": "/uploads/acrylic-dice-3.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-3.jpg"
+    ]
   },
   {
     "id": 1784583148334,
@@ -561,7 +661,9 @@
     "price": "12",
     "image": "/uploads/acrylic-dice-4.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-4.jpg"
+    ]
   },
   {
     "id": 1784583148335,
@@ -572,7 +674,9 @@
     "price": "12",
     "image": "/uploads/acrylic-dice-5.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-5.jpg"
+    ]
   },
   {
     "id": 1784583148336,
@@ -583,7 +687,9 @@
     "price": "11",
     "image": "/uploads/acrylic-dice-6.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-6.jpg"
+    ]
   },
   {
     "id": 1784583148337,
@@ -594,7 +700,9 @@
     "price": "11",
     "image": "/uploads/acrylic-dice-7.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-7.jpg"
+    ]
   },
   {
     "id": 1784583148338,
@@ -605,7 +713,9 @@
     "price": "5",
     "image": "/uploads/acrylic-dice-8.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-8.jpg"
+    ]
   },
   {
     "id": 1784583148340,
@@ -616,7 +726,9 @@
     "price": "16",
     "image": "/uploads/acrylic-dice-9.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-9.jpg"
+    ]
   },
   {
     "id": 1784583148341,
@@ -627,7 +739,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-10.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-10.jpg"
+    ]
   },
   {
     "id": 1784583148342,
@@ -638,7 +752,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-11.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-11.jpg"
+    ]
   },
   {
     "id": 1784583148343,
@@ -649,7 +765,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-12.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-12.jpg"
+    ]
   },
   {
     "id": 1784583148344,
@@ -660,7 +778,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-13.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-13.jpg"
+    ]
   },
   {
     "id": 1784583148345,
@@ -671,7 +791,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-14.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-14.jpg"
+    ]
   },
   {
     "id": 1784583148346,
@@ -682,7 +804,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-15.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-15.jpg"
+    ]
   },
   {
     "id": 1784583148347,
@@ -693,7 +817,9 @@
     "price": "29",
     "image": "/uploads/acrylic-dice-16.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-16.jpg"
+    ]
   },
   {
     "id": 1784583148348,
@@ -704,7 +830,9 @@
     "price": "29",
     "image": "/uploads/acrylic-dice-17.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-17.jpg"
+    ]
   },
   {
     "id": 1784583148349,
@@ -715,7 +843,9 @@
     "price": "27",
     "image": "/uploads/acrylic-dice-18.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-18.jpg"
+    ]
   },
   {
     "id": 1784583148350,
@@ -726,7 +856,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-19.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-19.jpg"
+    ]
   },
   {
     "id": 1784583148351,
@@ -737,7 +869,9 @@
     "price": "20",
     "image": "/uploads/acrylic-dice-20.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-20.jpg"
+    ]
   },
   {
     "id": 1784583148352,
@@ -748,7 +882,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-21.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-21.jpg"
+    ]
   },
   {
     "id": 1784583148353,
@@ -759,7 +895,9 @@
     "price": "4",
     "image": "/uploads/acrylic-dice-22.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-22.jpg"
+    ]
   },
   {
     "id": 1784583148354,
@@ -770,7 +908,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-23.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-23.jpg"
+    ]
   },
   {
     "id": 1784583148355,
@@ -781,7 +921,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-24.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-24.jpg"
+    ]
   },
   {
     "id": 1784583148356,
@@ -792,7 +934,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-25.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-25.jpg"
+    ]
   },
   {
     "id": 1784583148357,
@@ -803,7 +947,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-26.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-26.jpg"
+    ]
   },
   {
     "id": 1784583148358,
@@ -814,7 +960,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-27.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-27.jpg"
+    ]
   },
   {
     "id": 1784583148359,
@@ -825,7 +973,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-28.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-28.jpg"
+    ]
   },
   {
     "id": 1784583148360,
@@ -836,7 +986,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-29.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-29.jpg"
+    ]
   },
   {
     "id": 1784583148361,
@@ -847,7 +999,9 @@
     "price": "3",
     "image": "/uploads/acrylic-dice-30.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-30.jpg"
+    ]
   },
   {
     "id": 1784583148362,
@@ -858,7 +1012,9 @@
     "price": "4",
     "image": "/uploads/acrylic-dice-31.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-31.jpg"
+    ]
   },
   {
     "id": 1784583148363,
@@ -869,7 +1025,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-32.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-32.jpg"
+    ]
   },
   {
     "id": 1784583148364,
@@ -880,7 +1038,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-33.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-33.jpg"
+    ]
   },
   {
     "id": 1784583148365,
@@ -891,7 +1051,9 @@
     "price": "4",
     "image": "/uploads/acrylic-dice-34.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-34.jpg"
+    ]
   },
   {
     "id": 1784583148366,
@@ -902,7 +1064,9 @@
     "price": "5",
     "image": "/uploads/acrylic-dice-35.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-35.jpg"
+    ]
   },
   {
     "id": 1784583148367,
@@ -913,7 +1077,9 @@
     "price": "6",
     "image": "/uploads/acrylic-dice-36.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-36.jpg"
+    ]
   },
   {
     "id": 1784583148368,
@@ -924,7 +1090,9 @@
     "price": "10",
     "image": "/uploads/acrylic-dice-37.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-37.jpg"
+    ]
   },
   {
     "id": 1784583148369,
@@ -935,7 +1103,9 @@
     "price": "15",
     "image": "/uploads/acrylic-dice-38.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-38.jpg"
+    ]
   },
   {
     "id": 1784583148370,
@@ -946,7 +1116,9 @@
     "price": "10",
     "image": "/uploads/acrylic-dice-39.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-39.jpg"
+    ]
   },
   {
     "id": 1784583148372,
@@ -957,7 +1129,9 @@
     "price": "20",
     "image": "/uploads/acrylic-dice-40.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-40.jpg"
+    ]
   },
   {
     "id": 1784583148373,
@@ -968,7 +1142,9 @@
     "price": "40",
     "image": "/uploads/acrylic-dice-41.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-41.jpg"
+    ]
   },
   {
     "id": 1784583148374,
@@ -979,7 +1155,9 @@
     "price": "20",
     "image": "/uploads/acrylic-dice-42.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-42.jpg"
+    ]
   },
   {
     "id": 1784583148375,
@@ -990,7 +1168,9 @@
     "price": "60",
     "image": "/uploads/acrylic-dice-43.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-43.jpg"
+    ]
   },
   {
     "id": 1784583148376,
@@ -1001,7 +1181,9 @@
     "price": "40",
     "image": "/uploads/acrylic-dice-44.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-44.jpg"
+    ]
   },
   {
     "id": 1784583148377,
@@ -1012,7 +1194,9 @@
     "price": "50",
     "image": "/uploads/acrylic-dice-45.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-45.jpg"
+    ]
   },
   {
     "id": 1784583148378,
@@ -1023,7 +1207,9 @@
     "price": "1",
     "image": "/uploads/acrylic-dice-46.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-46.jpg"
+    ]
   },
   {
     "id": 1784583148379,
@@ -1034,7 +1220,9 @@
     "price": "2",
     "image": "/uploads/acrylic-dice-47.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-47.jpg"
+    ]
   },
   {
     "id": 1784583148380,
@@ -1045,7 +1233,9 @@
     "price": "150",
     "image": "/uploads/acrylic-dice-48.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-48.jpg"
+    ]
   },
   {
     "id": 1784583148381,
@@ -1056,7 +1246,9 @@
     "price": "20",
     "image": "/uploads/acrylic-dice-49.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-49.jpg"
+    ]
   },
   {
     "id": 1784583148382,
@@ -1067,7 +1259,9 @@
     "price": "100",
     "image": "/uploads/acrylic-dice-50.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-50.jpg"
+    ]
   },
   {
     "id": 1784583148383,
@@ -1078,7 +1272,9 @@
     "price": "100",
     "image": "/uploads/acrylic-dice-51.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-51.jpg"
+    ]
   },
   {
     "id": 1784583148384,
@@ -1089,7 +1285,9 @@
     "price": "80",
     "image": "/uploads/acrylic-dice-52.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-52.jpg"
+    ]
   },
   {
     "id": 1784583148385,
@@ -1100,7 +1298,9 @@
     "price": "100",
     "image": "/uploads/acrylic-dice-53.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-53.jpg"
+    ]
   },
   {
     "id": 1784583148386,
@@ -1111,7 +1311,9 @@
     "price": "60",
     "image": "/uploads/acrylic-dice-54.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-54.jpg"
+    ]
   },
   {
     "id": 1784583148387,
@@ -1122,7 +1324,9 @@
     "price": "60",
     "image": "/uploads/acrylic-dice-55.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-55.jpg"
+    ]
   },
   {
     "id": 1784583148388,
@@ -1133,7 +1337,9 @@
     "price": "20",
     "image": "/uploads/acrylic-dice-56.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-56.jpg"
+    ]
   },
   {
     "id": 1784583148389,
@@ -1144,7 +1350,9 @@
     "price": "0",
     "image": "/uploads/acrylic-dice-57.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-57.jpg"
+    ]
   },
   {
     "id": 1784583148390,
@@ -1155,7 +1363,9 @@
     "price": "0",
     "image": "/uploads/acrylic-dice-58.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-58.jpg"
+    ]
   },
   {
     "id": 1784583148391,
@@ -1166,7 +1376,9 @@
     "price": "60",
     "image": "/uploads/acrylic-dice-59.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-59.jpg"
+    ]
   },
   {
     "id": 1784583148392,
@@ -1177,7 +1389,9 @@
     "price": "10",
     "image": "/uploads/acrylic-dice-60.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-dice-60.jpg"
+    ]
   },
   {
     "id": 1784583148393,
@@ -1188,7 +1402,9 @@
     "price": "44",
     "image": "/uploads/wooden-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/wooden-dice-1.jpg"
+    ]
   },
   {
     "id": 1784583148394,
@@ -1199,7 +1415,9 @@
     "price": "70",
     "image": "/uploads/wooden-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/wooden-dice-2.jpg"
+    ]
   },
   {
     "id": 1784583148395,
@@ -1210,7 +1428,9 @@
     "price": "15",
     "image": "/uploads/acrylic-figurines-1.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-1.jpg"
+    ]
   },
   {
     "id": 1784583148396,
@@ -1221,7 +1441,9 @@
     "price": "15",
     "image": "/uploads/acrylic-figurines-2.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-2.jpg"
+    ]
   },
   {
     "id": 1784583148397,
@@ -1232,7 +1454,9 @@
     "price": "35",
     "image": "/uploads/acrylic-figurines-3.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-3.jpg"
+    ]
   },
   {
     "id": 1784583148398,
@@ -1243,7 +1467,9 @@
     "price": "48",
     "image": "/uploads/acrylic-figurines-4.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-4.jpg"
+    ]
   },
   {
     "id": 1784583148399,
@@ -1254,7 +1480,9 @@
     "price": "25",
     "image": "/uploads/acrylic-figurines-5.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-5.jpg"
+    ]
   },
   {
     "id": 1784583148400,
@@ -1265,7 +1493,9 @@
     "price": "25",
     "image": "/uploads/acrylic-figurines-6.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-6.jpg"
+    ]
   },
   {
     "id": 1784583148401,
@@ -1276,7 +1506,9 @@
     "price": "25",
     "image": "/uploads/acrylic-figurines-7.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-7.jpg"
+    ]
   },
   {
     "id": 1784583148402,
@@ -1287,7 +1519,9 @@
     "price": "35",
     "image": "/uploads/acrylic-figurines-8.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-8.jpg"
+    ]
   },
   {
     "id": 1784583148403,
@@ -1298,7 +1532,9 @@
     "price": "19",
     "image": "/uploads/acrylic-figurines-9.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-9.jpg"
+    ]
   },
   {
     "id": 1784583148405,
@@ -1309,7 +1545,9 @@
     "price": "19",
     "image": "/uploads/acrylic-figurines-10.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-10.jpg"
+    ]
   },
   {
     "id": 1784583148406,
@@ -1320,7 +1558,9 @@
     "price": "19",
     "image": "/uploads/acrylic-figurines-11.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-11.jpg"
+    ]
   },
   {
     "id": 1784583148407,
@@ -1331,7 +1571,9 @@
     "price": "9",
     "image": "/uploads/acrylic-figurines-12.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-12.jpg"
+    ]
   },
   {
     "id": 1784583148408,
@@ -1342,7 +1584,9 @@
     "price": "9",
     "image": "/uploads/acrylic-figurines-13.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-13.jpg"
+    ]
   },
   {
     "id": 1784583148409,
@@ -1353,7 +1597,9 @@
     "price": "9",
     "image": "/uploads/acrylic-figurines-14.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-14.jpg"
+    ]
   },
   {
     "id": 1784583148410,
@@ -1364,7 +1610,9 @@
     "price": "9",
     "image": "/uploads/acrylic-figurines-15.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/acrylic-figurines-15.jpg"
+    ]
   },
   {
     "id": 1784583148411,
@@ -1375,7 +1623,9 @@
     "price": "102",
     "image": "/uploads/metal-figurines-1.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-1.jpg"
+    ]
   },
   {
     "id": 1784583148412,
@@ -1386,7 +1636,9 @@
     "price": "175",
     "image": "/uploads/metal-figurines-2.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-2.jpg"
+    ]
   },
   {
     "id": 1784583148413,
@@ -1397,7 +1649,9 @@
     "price": "200",
     "image": "/uploads/metal-figurines-3.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-3.jpg"
+    ]
   },
   {
     "id": 1784583148414,
@@ -1408,7 +1662,9 @@
     "price": "40",
     "image": "/uploads/metal-figurines-4.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-4.jpg"
+    ]
   },
   {
     "id": 1784583148415,
@@ -1419,7 +1675,9 @@
     "price": "30",
     "image": "/uploads/metal-figurines-5.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-5.jpg"
+    ]
   },
   {
     "id": 1784583148416,
@@ -1430,7 +1688,9 @@
     "price": "26",
     "image": "/uploads/metal-figurines-6.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-6.jpg"
+    ]
   },
   {
     "id": 1784583148417,
@@ -1441,7 +1701,9 @@
     "price": "100",
     "image": "/uploads/metal-figurines-7.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-7.jpg"
+    ]
   },
   {
     "id": 1784583148418,
@@ -1452,7 +1714,9 @@
     "price": "20",
     "image": "/uploads/metal-figurines-8.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-8.jpg"
+    ]
   },
   {
     "id": 1784583148419,
@@ -1463,7 +1727,9 @@
     "price": "10",
     "image": "/uploads/metal-figurines-9.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-9.jpg"
+    ]
   },
   {
     "id": 1784583148420,
@@ -1474,7 +1740,9 @@
     "price": "10",
     "image": "/uploads/metal-figurines-10.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-10.jpg"
+    ]
   },
   {
     "id": 1784583148421,
@@ -1485,7 +1753,9 @@
     "price": "60",
     "image": "/uploads/metal-figurines-11.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-11.jpg"
+    ]
   },
   {
     "id": 1784583148422,
@@ -1496,7 +1766,9 @@
     "price": "80",
     "image": "/uploads/metal-figurines-12.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-12.jpg"
+    ]
   },
   {
     "id": 1784583148423,
@@ -1507,7 +1779,9 @@
     "price": "25",
     "image": "/uploads/metal-figurines-13.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/metal-figurines-13.jpg"
+    ]
   },
   {
     "id": 1784583148424,
@@ -1518,7 +1792,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-1.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-1.jpg"
+    ]
   },
   {
     "id": 1784583148425,
@@ -1529,7 +1805,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-2.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-2.jpg"
+    ]
   },
   {
     "id": 1784583148426,
@@ -1540,7 +1818,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-3.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-3.jpg"
+    ]
   },
   {
     "id": 1784583148427,
@@ -1551,7 +1831,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-4.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-4.jpg"
+    ]
   },
   {
     "id": 1784583148428,
@@ -1562,7 +1844,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-5.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-5.jpg"
+    ]
   },
   {
     "id": 1784583148429,
@@ -1573,7 +1857,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-6.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-6.jpg"
+    ]
   },
   {
     "id": 1784583148430,
@@ -1584,7 +1870,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-7.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-7.jpg"
+    ]
   },
   {
     "id": 1784583148431,
@@ -1595,7 +1883,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-8.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-8.jpg"
+    ]
   },
   {
     "id": 1784583148432,
@@ -1606,7 +1896,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-9.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-9.jpg"
+    ]
   },
   {
     "id": 1784583148433,
@@ -1617,7 +1909,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-10.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-10.jpg"
+    ]
   },
   {
     "id": 1784583148434,
@@ -1628,7 +1922,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-11.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-11.jpg"
+    ]
   },
   {
     "id": 1784583148435,
@@ -1639,7 +1935,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-12.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-12.jpg"
+    ]
   },
   {
     "id": 1784583148436,
@@ -1650,7 +1948,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-13.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-13.jpg"
+    ]
   },
   {
     "id": 1784583148438,
@@ -1661,7 +1961,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-14.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-14.jpg"
+    ]
   },
   {
     "id": 1784583148439,
@@ -1672,7 +1974,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-15.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-15.jpg"
+    ]
   },
   {
     "id": 1784583148440,
@@ -1683,7 +1987,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-16.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-16.jpg"
+    ]
   },
   {
     "id": 1784583148441,
@@ -1694,7 +2000,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-17.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-17.jpg"
+    ]
   },
   {
     "id": 1784583148442,
@@ -1705,7 +2013,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-18.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-18.jpg"
+    ]
   },
   {
     "id": 1784583148443,
@@ -1716,7 +2026,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-19.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-19.jpg"
+    ]
   },
   {
     "id": 1784583148444,
@@ -1727,7 +2039,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-20.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-20.jpg"
+    ]
   },
   {
     "id": 1784583148445,
@@ -1738,7 +2052,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-21.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-21.jpg"
+    ]
   },
   {
     "id": 1784583148446,
@@ -1749,7 +2065,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-22.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-22.jpg"
+    ]
   },
   {
     "id": 1784583148447,
@@ -1760,7 +2078,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-23.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-23.jpg"
+    ]
   },
   {
     "id": 1784583148448,
@@ -1771,7 +2091,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-24.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-24.jpg"
+    ]
   },
   {
     "id": 1784583148449,
@@ -1782,7 +2104,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-25.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-25.jpg"
+    ]
   },
   {
     "id": 1784583148450,
@@ -1793,7 +2117,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-26.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-26.jpg"
+    ]
   },
   {
     "id": 1784583148451,
@@ -1804,7 +2130,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-27.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-27.jpg"
+    ]
   },
   {
     "id": 1784583148452,
@@ -1815,7 +2143,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-28.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-28.jpg"
+    ]
   },
   {
     "id": 1784583148454,
@@ -1826,7 +2156,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-29.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-29.jpg"
+    ]
   },
   {
     "id": 1784583148455,
@@ -1837,7 +2169,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-30.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-30.jpg"
+    ]
   },
   {
     "id": 1784583148456,
@@ -1848,7 +2182,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-31.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-31.jpg"
+    ]
   },
   {
     "id": 1784583148457,
@@ -1859,7 +2195,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-32.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-32.jpg"
+    ]
   },
   {
     "id": 1784583148458,
@@ -1870,7 +2208,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-33.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-33.jpg"
+    ]
   },
   {
     "id": 1784583148459,
@@ -1881,7 +2221,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-34.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-34.jpg"
+    ]
   },
   {
     "id": 1784583148460,
@@ -1892,7 +2234,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-35.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-35.jpg"
+    ]
   },
   {
     "id": 1784583148461,
@@ -1903,7 +2247,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-36.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-36.jpg"
+    ]
   },
   {
     "id": 1784583148462,
@@ -1914,7 +2260,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-37.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-37.jpg"
+    ]
   },
   {
     "id": 1784583148463,
@@ -1925,7 +2273,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-38.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-38.jpg"
+    ]
   },
   {
     "id": 1784583148464,
@@ -1936,7 +2286,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-39.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-39.jpg"
+    ]
   },
   {
     "id": 1784583148465,
@@ -1947,7 +2299,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-40.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-40.jpg"
+    ]
   },
   {
     "id": 1784583148466,
@@ -1958,7 +2312,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-41.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-41.jpg"
+    ]
   },
   {
     "id": 1784583148467,
@@ -1969,7 +2325,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-42.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-42.jpg"
+    ]
   },
   {
     "id": 1784583148468,
@@ -1980,7 +2338,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-43.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-43.jpg"
+    ]
   },
   {
     "id": 1784583148469,
@@ -1991,7 +2351,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-44.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-44.jpg"
+    ]
   },
   {
     "id": 1784583148470,
@@ -2002,7 +2364,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-45.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-45.jpg"
+    ]
   },
   {
     "id": 1784583148471,
@@ -2013,7 +2377,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-46.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-46.jpg"
+    ]
   },
   {
     "id": 1784583148472,
@@ -2024,7 +2390,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-47.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-47.jpg"
+    ]
   },
   {
     "id": 1784583148473,
@@ -2035,7 +2403,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-48.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-48.jpg"
+    ]
   },
   {
     "id": 1784583148474,
@@ -2046,7 +2416,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-49.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-49.jpg"
+    ]
   },
   {
     "id": 1784583148475,
@@ -2057,7 +2429,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-50.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-50.jpg"
+    ]
   },
   {
     "id": 1784583148476,
@@ -2068,7 +2442,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-51.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-51.jpg"
+    ]
   },
   {
     "id": 1784583148477,
@@ -2079,7 +2455,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-52.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-52.jpg"
+    ]
   },
   {
     "id": 1784583148478,
@@ -2090,7 +2468,9 @@
     "price": "",
     "image": "/uploads/citadel-skaven-53.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
-    "images": []
+    "images": [
+      "/uploads/citadel-skaven-53.jpg"
+    ]
   },
   {
     "id": 1784669249130,

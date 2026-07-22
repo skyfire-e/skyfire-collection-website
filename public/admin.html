@@ -363,33 +363,23 @@
           tbody.appendChild(catRow);
           catItems.forEach(item => {
             const tr = document.createElement('tr');
-            function addCell(text, cls) {
-              const td = document.createElement('td');
-              if (cls) td.className = cls;
-              td.textContent = text;
-              tr.appendChild(td);
-            }
-            addCell(item.title);
-            addCell(item.author || '');
-            addCell(item.price || '');
-            addCell(item.recaster || '');
-            addCell(item.combatPoints || '');
-            addCell(item.status || '');
-            addCell(item.section || '');
-            addCell(item.category || '');
-            const actionsTd = document.createElement('td');
-            actionsTd.className = 'actions-cell';
-            const editBtn = document.createElement('button');
-            editBtn.className = 'btn btn-sm edit-spr-btn';
-            editBtn.dataset.id = item.id;
-            editBtn.textContent = '✏️';
-            actionsTd.appendChild(editBtn);
-            const delBtn = document.createElement('button');
-            delBtn.className = 'btn btn-sm btn-danger del-spr-btn';
-            delBtn.dataset.id = item.id;
-            delBtn.textContent = '🗑️';
-            actionsTd.appendChild(delBtn);
-            tr.appendChild(actionsTd);
+            const cells = [
+              '<td>' + item.title + '</td>',
+              '<td>' + (item.author || '') + '</td>',
+              '<td>' + (item.price || '') + '</td>',
+              '<td>' + (item.recaster || '') + '</td>',
+              '<td>' + (item.combatPoints || '') + '</td>',
+              '<td>' + (item.status || '') + '</td>'
+            ];
+            cells.push(
+              '<td>' + (item.section || '') + '</td>',
+              '<td>' + (item.category || '') + '</td>',
+              '<td class="actions-cell">',
+                '<button class="btn btn-sm edit-spr-btn" data-id="' + item.id + '">✏️</button>',
+                '<button class="btn btn-sm btn-danger del-spr-btn" data-id="' + item.id + '">🗑️</button>',
+              '</td>'
+            );
+            tr.innerHTML = cells.join('');
             tbody.appendChild(tr);
             tr.querySelector('.del-spr-btn').addEventListener('click', async () => {
               if (confirm('Delete "' + item.title + '"?')) {
@@ -620,7 +610,7 @@
     function openEdit(item) {
       editingId = item.id;
       editCurrentItem = item;
-      const imgs = item.images && item.images.length > 0 ? item.images : (item.images ? [] : [item.image]);
+      const imgs = item.images && item.images.length > 0 ? item.images : (item.image && !item.image.includes('default.svg') ? [item.image] : []);
       editSlots = imgs.map((src, i) => ({ type: 'keep', originalIdx: i, src }));
       document.getElementById('editId').value = item.id;
       document.getElementById('editTitle').value = item.title;
@@ -763,7 +753,7 @@
           finalOrder.push(-1);
         }
       }
-      var origImgs = editCurrentItem.images && editCurrentItem.images.length > 0 ? editCurrentItem.images : (editCurrentItem.images ? [] : [editCurrentItem.image]);
+      var origImgs = editCurrentItem.images && editCurrentItem.images.length > 0 ? editCurrentItem.images : (editCurrentItem.image && !editCurrentItem.image.includes('default.svg') ? [editCurrentItem.image] : []);
       for (var oi = 0; oi < origImgs.length; oi++) {
         var still = editSlots.some(function(s) { return (s.type === 'keep' || s.type === 'replace') && s.originalIdx === oi; });
         if (!still && allRemoved.indexOf(oi) === -1) allRemoved.push(oi);

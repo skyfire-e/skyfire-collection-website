@@ -4,9 +4,9 @@
   "showSpreadsheet": true,
   "showPublicSpreadsheet": true,
   "showMiniaturesColumns": {
-    "recaster": false,
+    "recaster": true,
     "combatPoints": true,
-    "status": false
+    "status": true
   },
   "currencies": {
     "dice": "$",
