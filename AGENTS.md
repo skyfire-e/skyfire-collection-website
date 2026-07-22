@@ -8,8 +8,13 @@
 - Branches: `main` (stable), `test` (changes before merge)
 - ⚠️ NEVER merge to `main` without explicit user confirmation
 
+## Working Tools
+- Все скрипты для парсинга, миграции, черновики и временные файлы лежат в `gitignore/`
+- `gitignore/` добавлен в `.gitignore` — не попадает в репозиторий
+- Это наши рабочие инструменты, пока делаем сайт; корень проекта чистый
+
 ## Current Data State
-- `items.json` — 198 items across all Dice + Miniatures categories
+- `items.json` — 240 items across all Dice + Miniatures categories
 - `categories.json` — Dice (7 flat) + Miniatures (Skaven+SpaceOrks groups, остальные flat)
 - `uploads/` — 555+ image files (все scraped фото)
 - `settings.json` — defaultImage, siteName, showSpreadsheet, etc.
