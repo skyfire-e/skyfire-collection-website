@@ -144,6 +144,13 @@ function getCategoryLabel(sectionId, catId) {
   return catId;
 }
 
+function createCell(text, className) {
+  const td = document.createElement('td');
+  if (className) td.className = className;
+  td.textContent = text || '';
+  return td;
+}
+
 async function loadSpreadsheet() {
   const items = await API.get('/api/spreadsheet');
   const tbody = document.getElementById('spreadsheetBody');
@@ -152,7 +159,13 @@ async function loadSpreadsheet() {
   const sprCols = 9;
 
   if (items.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="' + sprCols + '" style="text-align:center;color:var(--text-muted);padding:40px">No items</td></tr>';
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = sprCols;
+    td.style.cssText = 'text-align:center;color:var(--text-muted);padding:40px';
+    td.textContent = 'No items';
+    tr.appendChild(td);
+    tbody.appendChild(tr);
     return;
   }
   const groups = {};
@@ -167,41 +180,51 @@ async function loadSpreadsheet() {
     const secLabel = categoriesData[secId]?.label || secId;
     const secRow = document.createElement('tr');
     secRow.className = 'spr-section-divider';
-    secRow.innerHTML = '<td colspan="' + sprCols + '">' + secLabel + '</td>';
+    const secTd = document.createElement('td');
+    secTd.colSpan = sprCols;
+    secTd.textContent = secLabel;
+    secRow.appendChild(secTd);
     tbody.appendChild(secRow);
     Object.entries(cats).forEach(([catId, catItems]) => {
       const catLabel = getCategoryLabel(secId, catId);
       const catRow = document.createElement('tr');
       catRow.className = 'spr-cat-divider';
-      catRow.innerHTML = '<td colspan="' + sprCols + '">' + catLabel + '</td>';
+      const catTd = document.createElement('td');
+      catTd.colSpan = sprCols;
+      catTd.textContent = catLabel;
+      catRow.appendChild(catTd);
       tbody.appendChild(catRow);
       catItems.forEach(item => {
         const tr = document.createElement('tr');
-        const cells = [
-          '<td>' + item.title + '</td>',
-          '<td>' + (item.author || '') + '</td>',
-          '<td>' + (item.price || '') + '</td>',
-          '<td>' + (item.recaster || '') + '</td>',
-          '<td>' + (item.combatPoints || '') + '</td>',
-          '<td>' + (item.status || '') + '</td>',
-          '<td>' + (item.section || '') + '</td>',
-          '<td>' + (item.category || '') + '</td>',
-          '<td class="actions-cell">' +
-            '<button class="btn btn-sm edit-spr-btn" data-id="' + item.id + '">\u270f\ufe0f</button>' +
-            '<button class="btn btn-sm btn-danger del-spr-btn" data-id="' + item.id + '">\ud83d\uddd1\ufe0f</button>' +
-          '</td>'
-        ];
-        tr.innerHTML = cells.join('');
-        tbody.appendChild(tr);
-        tr.querySelector('.del-spr-btn').addEventListener('click', async () => {
+        tr.appendChild(createCell(item.title));
+        tr.appendChild(createCell(item.author));
+        tr.appendChild(createCell(item.price));
+        tr.appendChild(createCell(item.recaster));
+        tr.appendChild(createCell(item.combatPoints));
+        tr.appendChild(createCell(item.status));
+        tr.appendChild(createCell(item.section));
+        tr.appendChild(createCell(item.category));
+
+        const actionsTd = document.createElement('td');
+        actionsTd.className = 'actions-cell';
+        const editBtn = document.createElement('button');
+        editBtn.className = 'btn btn-sm edit-spr-btn';
+        editBtn.textContent = '\u270f\ufe0f';
+        editBtn.addEventListener('click', () => openEdit(item, { onSave: loadSpreadsheet }));
+        actionsTd.appendChild(editBtn);
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn btn-sm btn-danger del-spr-btn';
+        delBtn.textContent = '\ud83d\uddd1\ufe0f';
+        delBtn.addEventListener('click', async () => {
           if (confirm('Delete "' + item.title + '"?')) {
             await API.del('/api/items/' + item.id);
             loadSpreadsheet();
           }
         });
-        tr.querySelector('.edit-spr-btn').addEventListener('click', () => {
-          openEdit(item, { onSave: loadSpreadsheet });
-        });
+        actionsTd.appendChild(delBtn);
+        tr.appendChild(actionsTd);
+
+        tbody.appendChild(tr);
       });
     });
   });

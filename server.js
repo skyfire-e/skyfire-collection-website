@@ -3,6 +3,7 @@ const session = require('express-session');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 
 require('dotenv').config();
 
@@ -32,6 +33,45 @@ function writeJSON(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 }
 
+function cleanupUploadedFiles(files) {
+  if (!files) return;
+  for (const f of Array.isArray(files) ? files : [files]) {
+    try { fs.unlinkSync(f.path); } catch (e) { if (e.code !== 'ENOENT') console.error(e); }
+  }
+}
+
+function validateItemInput(body, cats, partial) {
+  const errors = [];
+  const title = body.title !== undefined ? String(body.title).trim() : undefined;
+  const section = body.section !== undefined ? String(body.section).trim() : undefined;
+  const category = body.category !== undefined ? String(body.category).trim() : undefined;
+  const price = body.price !== undefined ? String(body.price).trim() : undefined;
+
+  if (!partial || body.title !== undefined) {
+    if (!title) errors.push('Title is required and must be non-empty');
+  }
+  if (!partial || body.section !== undefined) {
+    if (!section) errors.push('Section is required');
+    else if (!cats[section]) errors.push('Section "' + section + '" does not exist');
+  }
+  if (!partial || body.category !== undefined) {
+    if (!category) errors.push('Category is required');
+    else if (section && cats[section]) {
+      const exists = cats[section].subcategories.some(c => {
+        if (c.id === category) return true;
+        if (c.subcategories) return c.subcategories.some(sc => sc.id === category);
+        return false;
+      });
+      if (!exists) errors.push('Category "' + category + '" does not exist in section "' + section + '"');
+    }
+  }
+  if (!partial || body.price !== undefined) {
+    if (price && !/^\d+(\.\d{1,2})?$/.test(price)) errors.push('Invalid price format');
+  }
+
+  return errors.length > 0 ? errors : null;
+}
+
 // Init data files (only items.json — auth via .env)
 ['items.json'].forEach(f => {
   const fp = path.join(DATA_DIR, f);
@@ -58,7 +98,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // --- File upload ---
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, 'uploads')),
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+  filename: (req, file, cb) => cb(null, crypto.randomUUID() + path.extname(file.originalname))
 });
 const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
 
@@ -130,20 +170,57 @@ app.post('/api/categories', requireAdmin, (req, res) => {
 
 app.delete('/api/categories', requireAdmin, (req, res) => {
   const cats = readJSON(CATEGORIES_FILE);
+  const items = readJSON(ITEMS_FILE) || [];
   const { section, id, parentId } = req.body;
 
   if (!section || !cats[section]) return res.status(400).json({ error: 'Invalid section' });
 
+  function collectIds(cat) {
+    const ids = [cat.id];
+    if (cat.subcategories) cat.subcategories.forEach(sc => ids.push(...collectIds(sc)));
+    return ids;
+  }
+
+  let affectedCats = [];
   if (!id) {
-    // Delete entire section
-    delete cats[section];
+    // Delete entire section — check ALL items in this section
+    const sectionItems = items.filter(i => i.section === section);
+    if (sectionItems.length > 0) {
+      return res.status(409).json({
+        error: `Cannot delete section "${section}": ${sectionItems.length} items still reference it`
+      });
+    }
   } else if (parentId) {
     // Delete nested subcategory within a group
     const parent = cats[section].subcategories.find(c => c.id === parentId);
     if (!parent || !parent.subcategories) return res.status(400).json({ error: 'Parent not found' });
-    parent.subcategories = parent.subcategories.filter(c => c.id !== id);
+    const target = parent.subcategories.find(c => c.id === id);
+    if (target) affectedCats = collectIds(target);
   } else {
     // Delete flat subcategory or group
+    const target = cats[section].subcategories.find(c => c.id === id);
+    if (target && target.type === 'group' && target.subcategories) {
+      affectedCats = collectIds(target);
+    } else {
+      affectedCats = [id];
+    }
+  }
+
+  if (affectedCats.length > 0) {
+    const linked = items.filter(i => i.section === section && affectedCats.includes(i.category));
+    if (linked.length > 0) {
+      return res.status(409).json({
+        error: `Cannot delete category: ${linked.length} items still reference it`
+      });
+    }
+  }
+
+  if (!id) {
+    delete cats[section];
+  } else if (parentId) {
+    const parent = cats[section].subcategories.find(c => c.id === parentId);
+    parent.subcategories = parent.subcategories.filter(c => c.id !== id);
+  } else {
     cats[section].subcategories = cats[section].subcategories.filter(c => c.id !== id);
   }
 
@@ -162,11 +239,17 @@ app.get('/api/items', (req, res) => {
 
 app.post('/api/items', requireAdmin, upload.array('images', 10), (req, res) => {
   const items = readJSON(ITEMS_FILE) || [];
+  const cats = readJSON(CATEGORIES_FILE) || {};
   const settings = readJSON(SETTINGS_FILE) || {};
   const files = req.files || [];
   const images = files.map(f => '/uploads/' + f.filename);
+
+  // Validation
+  const errors = validateItemInput(req.body, cats);
+  if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
+
   const newItem = {
-    id: Date.now(),
+    id: crypto.randomUUID(),
     section: req.body.section,
     category: req.body.category,
     title: req.body.title || 'Untitled',
@@ -186,9 +269,16 @@ app.post('/api/items', requireAdmin, upload.array('images', 10), (req, res) => {
 
 app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) => {
   const items = readJSON(ITEMS_FILE) || [];
+  const cats = readJSON(CATEGORIES_FILE) || {};
+  const files = req.files || [];
   const idx = items.findIndex(i => i.id == req.params.id);
-  if (idx === -1) return res.status(404).json({ error: 'Not found' });
-  if (req.body.title !== undefined) items[idx].title = req.body.title;
+  if (idx === -1) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
+
+  // Partial validation — only validate fields that were sent
+  const errors = validateItemInput(req.body, cats, { partial: true });
+  if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
+
+  if (req.body.title !== undefined) items[idx].title = String(req.body.title).trim();
   if (req.body.author !== undefined) items[idx].author = req.body.author;
   if (req.body.price !== undefined) items[idx].price = req.body.price;
   if (req.body.recaster !== undefined) items[idx].recaster = req.body.recaster;
@@ -199,7 +289,6 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
   // Normalize images field (handle legacy {} case)
   if (!Array.isArray(items[idx].images)) items[idx].images = [];
   // Handle image removal + reorder via finalOrder
-  const files = req.files || [];
   let removeIdx = [];
   if (req.body.imagesToRemove) {
     try { removeIdx = JSON.parse(req.body.imagesToRemove); } catch(e) { removeIdx = []; }
@@ -210,12 +299,10 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
   }
 
   if (finalOrder.length > 0) {
-    // Rebuild images array from finalOrder
     const images = items[idx].images || [];
     const originalMap = {};
     images.forEach((img, i) => { originalMap[i] = img; });
 
-    // Mark removed indices as deleted from the map
     if (Array.isArray(removeIdx)) {
       removeIdx.forEach(i => delete originalMap[i]);
     }
@@ -231,22 +318,18 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
     }
     items[idx].images = newImages;
   } else if (Array.isArray(removeIdx) && removeIdx.length > 0 && items[idx].images) {
-    // Legacy path: remove only (no reorder)
     removeIdx.sort((a, b) => b - a).forEach(i => {
       if (i >= 0 && i < items[idx].images.length) items[idx].images.splice(i, 1);
     });
-    // Append any uploaded files
     files.forEach(f => {
       if (!items[idx].images) items[idx].images = [];
       items[idx].images.push('/uploads/' + f.filename);
     });
   } else if (files.length > 0) {
-    // Just append new files
     if (!items[idx].images) items[idx].images = [];
     files.forEach(f => items[idx].images.push('/uploads/' + f.filename));
   }
 
-  // Update cover image (only if images were actually changed)
   if (files.length > 0 || removeIdx.length > 0 || finalOrder.length > 0) {
     if (items[idx].images && items[idx].images.length > 0) {
       items[idx].image = items[idx].images[0];
