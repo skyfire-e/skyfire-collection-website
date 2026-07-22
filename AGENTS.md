@@ -51,6 +51,12 @@
 - Автоматический backfill при смене defaultImage **удалён** — только ручная кнопка "Backfill Default Image"
 - Все items имеют `images[]` — при создании фото пишутся в массив, `image` = cover
 
+## Iteration 2 — Applied (Jul 2026)
+- ✅ writeJSONAtomic — temp + rename, защита от битого JSON
+- ✅ cleanupUploadedFiles при ошибках валидации и сбоях записи (POST/PUT/DELETE/upload/default)
+- ✅ safeUnlink с проверкой пути + проверка ссылок от других items перед удалением
+- ✅ PUT/DELETE: сохранение JSON → потом удаление старых файлов
+
 ## Implemented Fixes (from security/code review)
 1. ✅ Пароль админа в `.env`, `users.json` удалён из git, в `.gitignore`
 2. ✅ Session secret в `SESSION_SECRET` env, guard при старте

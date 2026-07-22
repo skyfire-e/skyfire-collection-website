@@ -29,8 +29,23 @@ const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
 function readJSON(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return null; }
 }
-function writeJSON(file, data) {
+function writeJSONAtomic(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
+}
+
+function writeJSONAtomic(file, data) {
+  const tmp = file + '.' + process.pid + '.' + crypto.randomUUID() + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(data, null, 2), 'utf8');
+  fs.renameSync(tmp, file);
+}
+
+const UPLOADS_DIR = path.resolve(__dirname, 'uploads');
+
+function safeUnlink(imgPath) {
+  if (!imgPath || !imgPath.startsWith('/uploads/')) return;
+  const target = path.resolve(UPLOADS_DIR, path.basename(imgPath));
+  if (!target.startsWith(UPLOADS_DIR + path.sep)) return;
+  try { fs.unlinkSync(target); } catch (e) { if (e.code !== 'ENOENT') console.error(e); }
 }
 
 function cleanupUploadedFiles(files) {
@@ -75,7 +90,7 @@ function validateItemInput(body, cats, partial) {
 // Init data files (only items.json — auth via .env)
 ['items.json'].forEach(f => {
   const fp = path.join(DATA_DIR, f);
-  if (!fs.existsSync(fp)) writeJSON(fp, []);
+  if (!fs.existsSync(fp)) writeJSONAtomic(fp, []);
 });
 
 // Single admin user from .env
@@ -164,7 +179,7 @@ app.post('/api/categories', requireAdmin, (req, res) => {
     return res.status(400).json({ error: 'Invalid target' });
   }
 
-  writeJSON(CATEGORIES_FILE, cats);
+  writeJSONAtomic(CATEGORIES_FILE, cats);
   res.json(cats);
 });
 
@@ -224,7 +239,7 @@ app.delete('/api/categories', requireAdmin, (req, res) => {
     cats[section].subcategories = cats[section].subcategories.filter(c => c.id !== id);
   }
 
-  writeJSON(CATEGORIES_FILE, cats);
+  writeJSONAtomic(CATEGORIES_FILE, cats);
   res.json(cats);
 });
 
@@ -263,7 +278,13 @@ app.post('/api/items', requireAdmin, upload.array('images', 10), (req, res) => {
     createdAt: new Date().toISOString()
   };
   items.push(newItem);
-  writeJSON(ITEMS_FILE, items);
+  try {
+    writeJSONAtomic(ITEMS_FILE, items);
+  } catch (err) {
+    cleanupUploadedFiles(files);
+    console.error('Failed to save items.json:', err);
+    return res.status(500).json({ error: 'Failed to save data' });
+  }
   res.json(newItem);
 });
 
@@ -274,7 +295,6 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
   const idx = items.findIndex(i => i.id == req.params.id);
   if (idx === -1) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
-  // Partial validation — only validate fields that were sent
   const errors = validateItemInput(req.body, cats, { partial: true });
   if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
 
@@ -286,9 +306,10 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
   if (req.body.status !== undefined) items[idx].status = req.body.status;
   if (req.body.section !== undefined) items[idx].section = req.body.section;
   if (req.body.category !== undefined) items[idx].category = req.body.category;
-  // Normalize images field (handle legacy {} case)
+
   if (!Array.isArray(items[idx].images)) items[idx].images = [];
-  // Handle image removal + reorder via finalOrder
+  const oldImages = [...items[idx].images];
+
   let removeIdx = [];
   if (req.body.imagesToRemove) {
     try { removeIdx = JSON.parse(req.body.imagesToRemove); } catch(e) { removeIdx = []; }
@@ -299,13 +320,9 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
   }
 
   if (finalOrder.length > 0) {
-    const images = items[idx].images || [];
     const originalMap = {};
-    images.forEach((img, i) => { originalMap[i] = img; });
-
-    if (Array.isArray(removeIdx)) {
-      removeIdx.forEach(i => delete originalMap[i]);
-    }
+    oldImages.forEach((img, i) => { originalMap[i] = img; });
+    if (Array.isArray(removeIdx)) removeIdx.forEach(i => delete originalMap[i]);
 
     let fileIdx = 0;
     const newImages = [];
@@ -317,17 +334,14 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
       }
     }
     items[idx].images = newImages;
-  } else if (Array.isArray(removeIdx) && removeIdx.length > 0 && items[idx].images) {
+  } else if (Array.isArray(removeIdx) && removeIdx.length > 0 && oldImages.length > 0) {
     removeIdx.sort((a, b) => b - a).forEach(i => {
-      if (i >= 0 && i < items[idx].images.length) items[idx].images.splice(i, 1);
+      if (i >= 0 && i < oldImages.length) oldImages.splice(i, 1);
     });
-    files.forEach(f => {
-      if (!items[idx].images) items[idx].images = [];
-      items[idx].images.push('/uploads/' + f.filename);
-    });
-  } else if (files.length > 0) {
-    if (!items[idx].images) items[idx].images = [];
+    items[idx].images = oldImages;
     files.forEach(f => items[idx].images.push('/uploads/' + f.filename));
+  } else if (files.length > 0) {
+    items[idx].images = [...oldImages, ...files.map(f => '/uploads/' + f.filename)];
   }
 
   if (files.length > 0 || removeIdx.length > 0 || finalOrder.length > 0) {
@@ -338,7 +352,24 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
       items[idx].image = readJSON(SETTINGS_FILE)?.defaultImage || '/images/default.svg';
     }
   }
-  writeJSON(ITEMS_FILE, items);
+
+  try {
+    writeJSONAtomic(ITEMS_FILE, items);
+  } catch (err) {
+    cleanupUploadedFiles(files);
+    console.error('Failed to save items.json:', err);
+    return res.status(500).json({ error: 'Failed to save data' });
+  }
+
+  // After successful save, delete old images no longer referenced
+  const newSet = new Set(items[idx].images);
+  for (const img of oldImages) {
+    if (!newSet.has(img)) {
+      const stillReferenced = items.some((other, oi) => oi !== idx && (other.image === img || other.images?.includes(img)));
+      if (!stillReferenced) safeUnlink(img);
+    }
+  }
+
   res.json(items[idx]);
 });
 
@@ -346,8 +377,23 @@ app.delete('/api/items/:id', requireAdmin, (req, res) => {
   let items = readJSON(ITEMS_FILE) || [];
   const idx = items.findIndex(i => i.id == req.params.id);
   if (idx === -1) return res.status(404).json({ error: 'Not found' });
+  const deletedItem = items[idx];
+  const imagesToRemove = [deletedItem.image, ...(deletedItem.images || [])];
   items.splice(idx, 1);
-  writeJSON(ITEMS_FILE, items);
+
+  try {
+    writeJSONAtomic(ITEMS_FILE, items);
+  } catch (err) {
+    console.error('Failed to save items.json:', err);
+    return res.status(500).json({ error: 'Failed to save data' });
+  }
+
+  const uniquePaths = [...new Set(imagesToRemove.filter(Boolean))];
+  for (const img of uniquePaths) {
+    const stillReferenced = items.some(other => other.image === img || other.images?.includes(img));
+    if (!stillReferenced) safeUnlink(img);
+  }
+
   res.json({ success: true });
 });
 
@@ -366,7 +412,7 @@ app.post('/api/backfill-defaults', requireAdmin, (req, res) => {
       changed++;
     }
   });
-  if (changed > 0) writeJSON(ITEMS_FILE, items);
+  if (changed > 0) writeJSONAtomic(ITEMS_FILE, items);
   res.json({ updated: changed, defaultImage: defaultImg });
 });
 
@@ -383,7 +429,7 @@ app.put('/api/settings', requireAdmin, (req, res) => {
   if (req.body.showPublicSpreadsheet !== undefined) settings.showPublicSpreadsheet = req.body.showPublicSpreadsheet;
   if (req.body.showMiniaturesColumns !== undefined) settings.showMiniaturesColumns = req.body.showMiniaturesColumns;
   if (req.body.currencies !== undefined) settings.currencies = req.body.currencies;
-  writeJSON(SETTINGS_FILE, settings);
+  writeJSONAtomic(SETTINGS_FILE, settings);
   res.json(settings);
 });
 
@@ -444,7 +490,13 @@ app.post('/api/upload/default', requireAdmin, upload.single('image'), (req, res)
   if (!req.file) return res.status(400).json({ error: 'No file' });
   const settings = readJSON(SETTINGS_FILE) || {};
   settings.defaultImage = '/uploads/' + req.file.filename;
-  writeJSON(SETTINGS_FILE, settings);
+  try {
+    writeJSONAtomic(SETTINGS_FILE, settings);
+  } catch (err) {
+    cleanupUploadedFiles([req.file]);
+    console.error('Failed to save settings.json:', err);
+    return res.status(500).json({ error: 'Failed to save data' });
+  }
   res.json(settings);
 });
 
@@ -460,7 +512,7 @@ app.post('/api/backfill-images', requireAdmin, (req, res) => {
       changed++;
     }
   });
-  if (changed > 0) writeJSON(ITEMS_FILE, items);
+  if (changed > 0) writeJSONAtomic(ITEMS_FILE, items);
   res.json({ updated: changed });
 });
 
