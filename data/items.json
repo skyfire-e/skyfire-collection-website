@@ -5456,7 +5456,7 @@
     "title": "Orc Warboss with Goblin",
     "author": "Games Workshop Golden Demon Gamesday 2007 (Citadel) (sealed)",
     "section": "miniatures",
-    "category": "old-citadel-orks-oldhammer",
+    "category": "orruk-warclans",
     "price": "",
     "status": "",
     "image": "/uploads/46a30b11-1186-4e7a-bce1-ed53504740b8.jpg",
@@ -5722,6 +5722,150 @@
     "image": "/uploads/759ca2f8-52b0-495f-ab60-d944fe35b1b3.jpg",
     "images": [
       "/uploads/759ca2f8-52b0-495f-ab60-d944fe35b1b3.jpg"
+    ]
+  },
+  {
+    "id": "13bd6f4f-fcd7-46be-8b41-9662869ff1ec",
+    "title": "Airborne Shokk Skwad",
+    "author": "",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/1b83e3de-42ac-4c79-adc1-34326c23ca6c.jpg",
+    "images": [
+      "/uploads/1b83e3de-42ac-4c79-adc1-34326c23ca6c.jpg"
+    ]
+  },
+  {
+    "id": "0b625c48-7bf8-4f25-9772-6c63eb18eea5",
+    "title": "Iron Horde Spezialistz",
+    "author": "Artel W (Tekk Shzaman, Medikk (with Nurz), Mekkanik (with 2 Matez: Kurdan, da Inventur, Skruw, da Fettlar ) )",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/4a66f262-bd48-4c5f-85c1-453f638f9ffc.jpg",
+    "images": [
+      "/uploads/4a66f262-bd48-4c5f-85c1-453f638f9ffc.jpg"
+    ]
+  },
+  {
+    "id": "f034cca6-74b7-4a88-bfcf-6c470717ff23",
+    "title": "Gobbo`s Glorious Revolushun",
+    "author": "Artel W (Brunzh red fist ov da Revolushun, Tuczhan Rider ov da Revolushun, Shtrugg Gobbfalonier ov da Revolushun + 2 in \"Spezialistz\")",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/5b27eb0b-b93d-4f67-bd0d-2f0895ec9088.jpg",
+    "images": [
+      "/uploads/5b27eb0b-b93d-4f67-bd0d-2f0895ec9088.jpg"
+    ]
+  },
+  {
+    "id": "cd0fb376-bf4a-4749-88ff-35491ec40ae9",
+    "title": "Orck-band \"Da BoyZz\"",
+    "author": "Artel W (Butz Hordinzon, Skrima Spikead, Lash Udzon, Wuzh Arzon, Bzhum Krusha)",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/332eea4f-fd33-4236-8247-3c507471f98c.jpg",
+    "images": [
+      "/uploads/332eea4f-fd33-4236-8247-3c507471f98c.jpg"
+    ]
+  },
+  {
+    "id": "64298d2c-e7be-428f-8e5c-ff549bdcde88",
+    "title": "Iron Rider",
+    "author": "(+ Butz Hordinzon on platform)",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/76dd726f-ecbb-414f-8701-a998b14afab9.jpg",
+    "images": [
+      "/uploads/76dd726f-ecbb-414f-8701-a998b14afab9.jpg",
+      "/uploads/6a0f476a-7cca-4fc2-b889-8c7dd1c6e84c.jpg"
+    ]
+  },
+  {
+    "id": "27fca5dc-e3a4-404b-9bf1-58af82a7253a",
+    "title": "Da Boom! Skwad + Leader",
+    "author": "",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/19857113-1612-4c43-b09f-db4cf5e71228.jpg",
+    "images": [
+      "/uploads/19857113-1612-4c43-b09f-db4cf5e71228.jpg"
+    ]
+  },
+  {
+    "id": "79e9b14f-c333-40a3-9284-e63e37428eb3",
+    "title": "Morggoth, Da Mozt Kunnin",
+    "author": "",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/43ad8d47-fb2f-4a2b-92e3-0f57295ec47b.jpg",
+    "images": [
+      "/uploads/43ad8d47-fb2f-4a2b-92e3-0f57295ec47b.jpg"
+    ]
+  },
+  {
+    "id": "194c87ce-e73b-4acb-bf76-1c717233f7a7",
+    "title": "Skawt'N'Rekkon Skwad",
+    "author": "",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/aae93022-6e69-41ac-be4e-08257b9c7d80.jpg",
+    "images": [
+      "/uploads/aae93022-6e69-41ac-be4e-08257b9c7d80.jpg"
+    ]
+  },
+  {
+    "id": "14c6cbba-f782-4308-b8ba-8a30531f174f",
+    "title": "Pyromaniaks Skwad",
+    "author": "",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/ffc3cef3-ff6e-41c2-ad58-478c71fb2280.jpg",
+    "images": [
+      "/uploads/ffc3cef3-ff6e-41c2-ad58-478c71fb2280.jpg"
+    ]
+  },
+  {
+    "id": "124cd1ec-ae63-4b2d-a312-82d77979fd06",
+    "title": "Wroom!Wroom! Krew",
+    "author": "",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/2fadc440-22d6-4ddf-bac0-dd36f3692ce6.jpg",
+    "images": [
+      "/uploads/2fadc440-22d6-4ddf-bac0-dd36f3692ce6.jpg"
+    ]
+  },
+  {
+    "id": "14a50aec-48f6-4d64-ac4d-777a704490f0",
+    "title": "Wroom!Wroom! Skwad",
+    "author": "",
+    "section": "miniatures",
+    "category": "artel-w",
+    "price": "",
+    "status": "",
+    "image": "/uploads/b6526911-d069-4ae3-8a2d-29a55bd8770d.jpg",
+    "images": [
+      "/uploads/b6526911-d069-4ae3-8a2d-29a55bd8770d.jpg"
     ]
   }
 ]
