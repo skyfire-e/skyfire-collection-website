@@ -1,0 +1,15 @@
+{
+  "defaultImage": "/uploads/1784672989417-images.jpg",
+  "siteName": "skyf1re Collection",
+  "showSpreadsheet": true,
+  "showPublicSpreadsheet": true,
+  "showMiniaturesColumns": {
+    "recaster": false,
+    "combatPoints": true,
+    "status": false
+  },
+  "currencies": {
+    "dice": "$",
+    "miniatures": "RUB"
+  }
+}

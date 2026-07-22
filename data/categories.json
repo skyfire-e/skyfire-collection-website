@@ -1,0 +1,166 @@
+{
+  "dice": {
+    "label": "Dice",
+    "subcategories": [
+      {
+        "id": "stone-dice",
+        "label": "Stone Dice"
+      },
+      {
+        "id": "metal-dice",
+        "label": "Metal Dice"
+      },
+      {
+        "id": "resin-dice",
+        "label": "Resin Dice"
+      },
+      {
+        "id": "acrylic-dice",
+        "label": "Acrylic Dice"
+      },
+      {
+        "id": "wooden-dice",
+        "label": "Wooden Dice"
+      },
+      {
+        "id": "acrylic-figurines",
+        "label": "Acrylic Figurines"
+      },
+      {
+        "id": "metal-figurines",
+        "label": "Metal Figurines"
+      }
+    ]
+  },
+  "miniatures": {
+    "label": "Miniatures",
+    "subcategories": [
+      {
+        "id": "skaven",
+        "label": "Skaven",
+        "type": "group",
+        "subcategories": [
+          {
+            "id": "citadel-skaven",
+            "label": "Citadel Skaven"
+          },
+          {
+            "id": "old-citadel-skaven",
+            "label": "Old Citadel Skaven"
+          },
+          {
+            "id": "blood-bowl-skaven",
+            "label": "Blood Bowl Skaven"
+          },
+          {
+            "id": "forgeworld-skaven",
+            "label": "Forgeworld Skaven"
+          },
+          {
+            "id": "punga-miniatures-skaven",
+            "label": "Punga Miniatures Skaven"
+          },
+          {
+            "id": "3d-prints-skaven",
+            "label": "3d Prints Skaven"
+          }
+        ]
+      },
+      {
+        "id": "space-orks",
+        "label": "Space Orks",
+        "type": "group",
+        "subcategories": [
+          {
+            "id": "citadel-orks",
+            "label": "Citadel Orks"
+          },
+          {
+            "id": "forgeworld-orks",
+            "label": "Forgeworld Orks"
+          },
+          {
+            "id": "old-citadel-orks-oldhammer",
+            "label": "Old Citadel Orks (oldhammer)"
+          },
+          {
+            "id": "artel-w",
+            "label": "Artel W"
+          },
+          {
+            "id": "kromlech",
+            "label": "Kromlech"
+          },
+          {
+            "id": "various-studios",
+            "label": "Various Studios"
+          },
+          {
+            "id": "3d-printed-orks",
+            "label": "3d Printed Orks"
+          }
+        ]
+      },
+      {
+        "id": "gloomspite-gitz",
+        "label": "Gloomspite Gitz (AoS)"
+      },
+      {
+        "id": "adepta-sororitas",
+        "label": "Adepta Sororitas (40k)"
+      },
+      {
+        "id": "orruk-warclans",
+        "label": "Orruk Warclans (AoS)"
+      },
+      {
+        "id": "chaos-daemons",
+        "label": "Chaos Daemons"
+      },
+      {
+        "id": "soulblight-gravelords",
+        "label": "Soulblight Gravelords (AoS)"
+      },
+      {
+        "id": "astra-militarum",
+        "label": "Astra Militarum (40k)"
+      },
+      {
+        "id": "officio-assassinorum",
+        "label": "Officio Assassinorum"
+      },
+      {
+        "id": "ogor-mawtribes",
+        "label": "Ogor Mawtribes"
+      },
+      {
+        "id": "maggotkin-of-nurgle",
+        "label": "Maggotkin of Nurgle"
+      },
+      {
+        "id": "kharadron-overlords",
+        "label": "Kharadron Overlords"
+      },
+      {
+        "id": "empire",
+        "label": "Empire"
+      },
+      {
+        "id": "high-elves",
+        "label": "High Elves"
+      },
+      {
+        "id": "stormcast-eternals",
+        "label": "Stormcast Eternals"
+      },
+      {
+        "id": "terrain",
+        "label": "Terrain"
+      },
+      {
+        "id": "other",
+        "label": "Other"
+      }
+    ]
+  }
+}
