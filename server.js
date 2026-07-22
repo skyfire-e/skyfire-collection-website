@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+const rateLimit = require('express-rate-limit');
 
 require('dotenv').config();
 
@@ -123,22 +124,34 @@ function requireAdmin(req, res, next) {
   res.status(401).json({ error: 'Unauthorized' });
 }
 
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many login attempts, try again later' }
+});
+
 // --- API Routes ---
 
 // Auth
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', loginLimiter, (req, res) => {
   const { username, password } = req.body;
   const user = users.find(u => u.username === username && u.password === password);
-  if (user) {
+  if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+  req.session.regenerate(err => {
+    if (err) return res.status(500).json({ error: 'Session error' });
     req.session.user = { username: user.username, role: user.role };
-    return res.json({ success: true, user: { username: user.username, role: user.role } });
-  }
-  res.status(401).json({ error: 'Invalid credentials' });
+    res.json({ success: true, user: { username: user.username, role: user.role } });
+  });
 });
 
 app.post('/api/auth/logout', (req, res) => {
-  req.session.destroy();
-  res.json({ success: true });
+  req.session.destroy(err => {
+    if (err) return res.status(500).json({ error: 'Logout error' });
+    res.clearCookie('connect.sid');
+    res.json({ success: true });
+  });
 });
 
 app.get('/api/auth/me', (req, res) => {
@@ -520,6 +533,11 @@ app.post('/api/backfill-images', requireAdmin, (req, res) => {
 app.get('/api/spreadsheet', requireAdmin, (req, res) => {
   const items = readJSON(ITEMS_FILE) || [];
   res.json(items);
+});
+
+// 404 for unknown API endpoints
+app.use('/api', (req, res) => {
+  res.status(404).json({ error: 'API endpoint not found' });
 });
 
 // --- Page routes ---
