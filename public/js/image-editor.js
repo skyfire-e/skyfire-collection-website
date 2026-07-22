@@ -161,8 +161,8 @@ async function saveEdit() {
   fd.append('finalOrder', JSON.stringify(finalOrder));
 
   await API.put('/api/items/' + editingId, fd);
-  closeEdit();
   if (onSaveCallback) onSaveCallback();
+  closeEdit();
 }
 
 function closeEdit() {

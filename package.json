@@ -10,6 +10,7 @@
   "dependencies": {
     "dotenv": "^17.4.2",
     "express": "^4.21.0",
+    "express-rate-limit": "^8.6.0",
     "express-session": "^1.18.0",
     "jimp": "^1.6.1",
     "multer": "^2.0.0",

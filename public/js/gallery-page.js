@@ -79,52 +79,105 @@ export async function initGalleryPage() {
     });
   }
 
+  function handleImgError(img) {
+    if (!img.dataset.fallbackAttempted) {
+      img.dataset.fallbackAttempted = '1';
+      img.src = '/images/default.svg';
+    }
+  }
+
   function renderItems(items) {
     grid.innerHTML = '';
     if (items.length === 0) {
-      grid.innerHTML = '<div class="empty-state"><div class="icon">\ud83d\udced</div><p>No items yet</p></div>';
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      const icon = document.createElement('div');
+      icon.className = 'icon';
+      icon.textContent = '\ud83d\udced';
+      empty.appendChild(icon);
+      const p = document.createElement('p');
+      p.textContent = 'No items yet';
+      empty.appendChild(p);
+      grid.appendChild(empty);
       return;
     }
     items.forEach(item => {
       const card = document.createElement('div');
       card.className = 'gallery-card';
-      const imgCount = item.images && item.images.length > 0 ? item.images.length : 1;
-      card.innerHTML = `
-        <div class="img-wrap${imgCount > 1 ? ' multi-img' : ''}">
-          <img src="${item.image}" alt="${item.title}" loading="lazy"
-               onerror="this.src='/images/default.svg'">
-          ${imgCount > 1 ? `<span class="img-count-badge">${imgCount} photos</span>` : ''}
-        </div>
-        <div class="card-body">
-          <div class="title">${item.title}</div>
-          <div class="author">${item.author}</div>
-        </div>
-        ${isAdmin() ? `
-        <div class="card-actions">
-          <button class="edit-btn" data-id="${item.id}">\u270f\ufe0f Edit</button>
-          <button class="del-btn" data-id="${item.id}">\ud83d\uddd1\ufe0f Delete</button>
-        </div>` : ''}
-      `;
-      grid.appendChild(card);
 
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('.card-actions')) return;
-        openLightbox(item);
-      });
+      const imgCount = item.images && item.images.length > 0 ? item.images.length : 1;
+
+      const imgWrap = document.createElement('div');
+      imgWrap.className = 'img-wrap' + (imgCount > 1 ? ' multi-img' : '');
+
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.title || '';
+      img.loading = 'lazy';
+      img.addEventListener('error', () => handleImgError(img));
+      imgWrap.appendChild(img);
+
+      if (imgCount > 1) {
+        const badge = document.createElement('span');
+        badge.className = 'img-count-badge';
+        badge.textContent = imgCount + ' photos';
+        imgWrap.appendChild(badge);
+      }
+
+      card.appendChild(imgWrap);
+
+      const cardBody = document.createElement('div');
+      cardBody.className = 'card-body';
+
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'title';
+      titleDiv.textContent = item.title;
+      cardBody.appendChild(titleDiv);
+
+      const authorDiv = document.createElement('div');
+      authorDiv.className = 'author';
+      authorDiv.textContent = item.author;
+      cardBody.appendChild(authorDiv);
+
+      card.appendChild(cardBody);
 
       if (isAdmin()) {
-        card.querySelector('.del-btn').addEventListener('click', async (e) => {
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+
+        const editBtn = document.createElement('button');
+        editBtn.className = 'edit-btn';
+        editBtn.dataset.id = item.id;
+        editBtn.textContent = '\u270f\ufe0f Edit';
+        actions.appendChild(editBtn);
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'del-btn';
+        delBtn.dataset.id = item.id;
+        delBtn.textContent = '\ud83d\uddd1\ufe0f Delete';
+        actions.appendChild(delBtn);
+
+        card.appendChild(actions);
+
+        delBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
           if (confirm('Delete "' + item.title + '"?')) {
             await API.del('/api/items/' + item.id);
             loadItems();
           }
         });
-        card.querySelector('.edit-btn').addEventListener('click', (e) => {
+        editBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           openEdit(item, { onSave: loadItems });
         });
       }
+
+      grid.appendChild(card);
+
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.card-actions')) return;
+        openLightbox(item);
+      });
     });
   }
 

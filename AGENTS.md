@@ -6,6 +6,7 @@
 - Server: `server.js`, runs on `localhost:3000`
 - Git: GitHub (https://github.com/skyfire-e/skyfire-collection-website.git)
 - Branches: `main` (stable), `test` (changes before merge)
+- ⚠️ NEVER merge to `main` without explicit user confirmation
 
 ## Current Data State
 - `items.json` — 198 items across all Dice + Miniatures categories
@@ -50,22 +51,38 @@
 - Автоматический backfill при смене defaultImage **удалён** — только ручная кнопка "Backfill Default Image"
 - Все items имеют `images[]` — при создании фото пишутся в массив, `image` = cover
 
+## Iteration 2 — Applied (Jul 2026)
+- ✅ writeJSONAtomic — temp + rename, защита от битого JSON
+- ✅ cleanupUploadedFiles при ошибках валидации и сбоях записи (POST/PUT/DELETE/upload/default)
+- ✅ safeUnlink с проверкой пути + проверка ссылок от других items перед удалением
+- ✅ PUT/DELETE: сохранение JSON → потом удаление старых файлов
+
+## Iteration 3 — Applied (Jul 2026)
+- ✅ 404 для неизвестных `/api/*` (перед page routes)
+- ✅ Rate limit на `/api/auth/login` (express-rate-limit, 10/15min)
+- ✅ Session regeneration на login + destroy callback + clearCookie на logout
+
+## Iteration 4 — Applied (Jul 2026)
+- ✅ Удалён `style.css` — дубликат `base.css`
+- ✅ `trust proxy` + `secure: !!process.env.HTTPS` conditional
+- ✅ Price validation — уже была в validateItemInput (Iteration 1)
+
 ## Implemented Fixes (from security/code review)
 1. ✅ Пароль админа в `.env`, `users.json` удалён из git, в `.gitignore`
 2. ✅ Session secret в `SESSION_SECRET` env, guard при старте
-3. ✅ Stored XSS — `textContent` вместо `innerHTML`
-4. ✅ Upload validation — MIME filter (JPEG/PNG/WebP), UUID filenames
+3. ✅ Stored XSS — `textContent` вместо `innerHTML` (Jul 2026 — gallery + admin spreadsheet)
+4. ✅ Upload validation — MIME filter (JPEG/PNG/WebP), UUID filenames (Jul 2026 — crypto.randomUUID)
 5. ⬜ MemoryStore — не меняли (для одного сервера норм)
-6. ⬜ Rate limit — не ставили (личный сайт)
-7. ✅ Cookie: `httpOnly`, `sameSite: 'lax'`, `trust proxy`
+6. ✅ Rate limit — express-rate-limit, 10/15min на login (Jul 2026)
+7. ✅ Cookie: `httpOnly`, `sameSite: 'lax'`, `trust proxy` (Jul 2026 — trust proxy + HTTPS conditional)
 8. ⬜ Sync IO — оставили (198 items ~200KB, не критично)
 9. ✅ readJSON — логирует ошибки, fallback-параметр
 10. ✅ Централизованный error handler (multer + generic)
-11. ✅ Удаление категории — проверка на привязанные items
+11. ✅ Удаление категории — проверка на привязанные items (Jul 2026 — серверная проверка + 409)
 12. ✅ `safeUnlink` — чистка файлов при удалении item/фото
-13. ✅ `crypto.randomUUID()` вместо `Date.now()` для ID
-14. ✅ API validation — title required, section/category exist
-15. ✅ Price — хранится как number, не string
+13. ✅ `crypto.randomUUID()` вместо `Date.now()` для ID (Jul 2026 — multer + item IDs)
+14. ✅ API validation — title, section, category, price (Jul 2026 — POST + PUT, validateItemInput)
+15. ⬜ Price — хранится как number (пока строка, конвертируется в spreadsheet)
 16. ⬜ Рефакторинг HTML (модули) — не делали, возможен
 
 ## Known Issues & Fixes Applied
@@ -90,6 +107,53 @@
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)
   - Нужен токен от @BotFather
   - Пакет `node-telegram-bot-api`
+
+## Prioritized Fix Queue (from code review Jul 2026)
+
+Execute in order, 3 per iteration, test between iterations.
+
+### Iteration 1 — Security & Data Integrity
+1. **PUT /api/items/:id — валидация + UUID filenames**
+   - multer filename: `Date.now()` → `crypto.randomUUID()`
+   - PUT: валидировать title (required, non-empty), section (exists), category (exists в секции)
+   - Вынести общую валидацию в `validateItemInput(body, cats)`
+
+2. **DELETE /api/categories — проверка items на сервере**
+   - Перед удалением категории считать items с этой category/section
+   - Рекурсивно собирать все дочерние ID для групп
+   - Возвращать `409 Conflict` если есть привязанные items
+
+3. **innerHTML → textContent / createElement (XSS)**
+   - `gallery-page.js`: `renderItems` переписать на createElement, `textContent` для title/author
+   - `admin/items.js`: spreadsheet rows — createElement вместо innerHTML
+
+### Iteration 2 — File Handling & API Cleanup
+4. **writeJSON → atomic (temp + rename)**
+   - Писать во временный файл, затем `fs.renameSync`
+   - `writeJSONAtomic(file, data)`
+
+5. **cleanupUploadedFiles при ошибке валидации**
+   - Удалять `req.files` если POST/PUT вернул 400/404
+   - Helper `function cleanupUploadedFiles(files)`
+
+6. **Удаление старых фото после успешной записи JSON**
+   - В PUT: сохранить JSON → потом удалять старые файлы
+
+### Iteration 3 — Auth Hardening & Routing
+7. **404 для неизвестных `/api/*`**
+   - Перед catch-all `app.use('/api', (req, res) => res.status(404).json(...))`
+
+8. **Rate limit на `/api/auth/login`**
+   - Пакет `express-rate-limit`, 10 попыток за 15 мин
+
+9. **Session regeneration на login + logout callback**
+   - `req.session.regenerate()` при логине
+   - `req.session.destroy(callback)` при логауте
+
+### Iteration 4 — Housekeeping
+10. **Удалить `style.css`** — дубликат `base.css`
+11. **Cookie → `secure: true` conditional** — проверять `req.headers['x-forwarded-proto']`
+12. **Price validation в POST/PUT** — `/^\d+(\.\d{1,2})?$/`, reject невалидные
 
 ## How to Restart Server
 ```powershell
