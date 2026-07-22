@@ -57,14 +57,24 @@
 - ✅ safeUnlink с проверкой пути + проверка ссылок от других items перед удалением
 - ✅ PUT/DELETE: сохранение JSON → потом удаление старых файлов
 
+## Iteration 3 — Applied (Jul 2026)
+- ✅ 404 для неизвестных `/api/*` (перед page routes)
+- ✅ Rate limit на `/api/auth/login` (express-rate-limit, 10/15min)
+- ✅ Session regeneration на login + destroy callback + clearCookie на logout
+
+## Iteration 4 — Applied (Jul 2026)
+- ✅ Удалён `style.css` — дубликат `base.css`
+- ✅ `trust proxy` + `secure: !!process.env.HTTPS` conditional
+- ✅ Price validation — уже была в validateItemInput (Iteration 1)
+
 ## Implemented Fixes (from security/code review)
 1. ✅ Пароль админа в `.env`, `users.json` удалён из git, в `.gitignore`
 2. ✅ Session secret в `SESSION_SECRET` env, guard при старте
 3. ✅ Stored XSS — `textContent` вместо `innerHTML` (Jul 2026 — gallery + admin spreadsheet)
 4. ✅ Upload validation — MIME filter (JPEG/PNG/WebP), UUID filenames (Jul 2026 — crypto.randomUUID)
 5. ⬜ MemoryStore — не меняли (для одного сервера норм)
-6. ⬜ Rate limit — не ставили (личный сайт)
-7. ✅ Cookie: `httpOnly`, `sameSite: 'lax'`, `trust proxy`
+6. ✅ Rate limit — express-rate-limit, 10/15min на login (Jul 2026)
+7. ✅ Cookie: `httpOnly`, `sameSite: 'lax'`, `trust proxy` (Jul 2026 — trust proxy + HTTPS conditional)
 8. ⬜ Sync IO — оставили (198 items ~200KB, не критично)
 9. ✅ readJSON — логирует ошибки, fallback-параметр
 10. ✅ Централизованный error handler (multer + generic)

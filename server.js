@@ -98,13 +98,14 @@ function validateItemInput(body, cats, partial) {
 const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD, role: 'admin' }];
 
 // --- Middleware ---
+app.set('trust proxy', 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
+  cookie: { secure: !!process.env.HTTPS, maxAge: 24 * 60 * 60 * 1000 }
 }));
 
 // Serve static files
