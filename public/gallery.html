@@ -178,22 +178,54 @@ let lbCurrentImgIdx = 0;
         const card = document.createElement('div');
         card.className = 'gallery-card';
         const imgCount = item.images && item.images.length > 0 ? item.images.length : 1;
-        card.innerHTML = `
-          <div class="img-wrap${imgCount > 1 ? ' multi-img' : ''}">
-            <img src="${item.image}" alt="${item.title}" loading="lazy"
-                 onerror="this.src='/images/default.svg'">
-            ${imgCount > 1 ? `<span class="img-count-badge">${imgCount} photos</span>` : ''}
-          </div>
-          <div class="card-body">
-            <div class="title">${item.title}</div>
-            <div class="author">${item.author}</div>
-          </div>
-          ${isAdmin() ? `
-          <div class="card-actions">
-            <button class="edit-btn" data-id="${item.id}">✏️ Edit</button>
-            <button class="del-btn" data-id="${item.id}">🗑️ Delete</button>
-          </div>` : ''}
-        `;
+
+        // Image wrap
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'img-wrap' + (imgCount > 1 ? ' multi-img' : '');
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.title;
+        img.loading = 'lazy';
+        img.onerror = function() { this.src = '/images/default.svg'; };
+        imgWrap.appendChild(img);
+        if (imgCount > 1) {
+          const badge = document.createElement('span');
+          badge.className = 'img-count-badge';
+          badge.textContent = imgCount + ' photos';
+          imgWrap.appendChild(badge);
+        }
+        card.appendChild(imgWrap);
+
+        // Card body — title & author via textContent (XSS-safe)
+        const body = document.createElement('div');
+        body.className = 'card-body';
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'title';
+        titleDiv.textContent = item.title;
+        body.appendChild(titleDiv);
+        const authorDiv = document.createElement('div');
+        authorDiv.className = 'author';
+        authorDiv.textContent = item.author;
+        body.appendChild(authorDiv);
+        card.appendChild(body);
+
+        // Admin actions
+        if (isAdmin()) {
+          const actions = document.createElement('div');
+          actions.className = 'card-actions';
+          const editBtn = document.createElement('button');
+          editBtn.className = 'edit-btn';
+          editBtn.dataset.id = item.id;
+          editBtn.textContent = '✏️ Edit';
+          actions.appendChild(editBtn);
+          const delBtn = document.createElement('button');
+          delBtn.className = 'del-btn';
+          delBtn.dataset.id = item.id;
+          delBtn.textContent = '🗑️ Delete';
+          actions.appendChild(delBtn);
+          card.appendChild(actions);
+        }
+
         grid.appendChild(card);
 
         card.addEventListener('click', (e) => {
