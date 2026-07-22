@@ -1,0 +1,72 @@
+/* === Admin Page === */
+.admin-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.admin-page h1 { font-weight: 300; font-size: 2rem; margin-bottom: 24px; }
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+.admin-tabs button {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.admin-tabs button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.admin-tabs button:hover { color: var(--text); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Spreadsheet table */
+.spreadsheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.spreadsheet-table th,
+.spreadsheet-table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.spreadsheet-table th {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.spreadsheet-table tr:hover td { background: rgba(255,255,255,0.03); }
+.spreadsheet-table .actions-cell { display: flex; gap: 6px; }
+.mini-col { font-size: 0.82rem; color: var(--text-muted); }
+.mini-field { display: block; }
+.spr-section-divider td {
+  background: var(--accent-dark);
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.spr-cat-divider td {
+  background: rgba(79, 195, 247, 0.1);
+  color: var(--accent);
+  font-weight: 400;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+}

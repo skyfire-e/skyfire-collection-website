@@ -1,5 +1,4 @@
-// API helpers and auth state
-const API = {
+export const API = {
   async get(url) {
     const r = await fetch(url);
     return r.json();
@@ -33,12 +32,16 @@ const API = {
 
 let currentUser = null;
 
-async function checkAuth() {
+export async function checkAuth() {
   const data = await API.get('/api/auth/me');
   currentUser = data.user;
   return currentUser;
 }
 
-function isAdmin() {
+export function isAdmin() {
   return currentUser && currentUser.role === 'admin';
+}
+
+export function getCurrentUser() {
+  return currentUser;
 }

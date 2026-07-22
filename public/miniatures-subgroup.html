@@ -4,45 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title id="pageTitle">Category - skyf1re Collection</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/base.css">
 </head>
-<body>
+<body data-page-type="subgroup">
   <div class="section-page">
     <a id="backLink" href="/" class="back-link">&larr; Back</a>
     <h1 id="pageTitle2"></h1>
     <div class="category-grid" id="categoryGrid"></div>
   </div>
 
-  <script src="/js/api.js"></script>
-  <script>
-    const parts = window.location.pathname.replace(/\/$/g, '').split('/').filter(Boolean);
-    const sectionId = parts[0];
-    // URLs: /miniatures/warhammer/skaven (3 parts) or /:section/:groupId (2 parts)
-    const groupId = parts.length === 3 ? parts[2] : parts[1];
-    const titleEl = document.getElementById('pageTitle');
-    const titleEl2 = document.getElementById('pageTitle2');
-    const grid = document.getElementById('categoryGrid');
-    const backLink = document.getElementById('backLink');
-
-    API.get('/api/categories').then(data => {
-      const section = data[sectionId];
-      if (!section) return;
-      const group = section.subcategories.find(c => c.id === groupId);
-      if (!group || !group.subcategories) return;
-
-      titleEl.textContent = group.label + ' - skyf1re Collection';
-      titleEl2.textContent = group.label;
-      backLink.href = '/' + sectionId;
-      backLink.innerHTML = '&larr; Back to ' + section.label;
-
-      group.subcategories.forEach(c => {
-        const a = document.createElement('a');
-        a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
-        a.className = 'category-btn';
-        a.textContent = c.label;
-        grid.appendChild(a);
-      });
-    });
-  </script>
+  <script type="module" src="/js/section-pages.js"></script>
 </body>
 </html>

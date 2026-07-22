@@ -396,7 +396,7 @@ app.get(Object.keys(pages), (req, res) => {
 });
 
 // Subgroup pages for miniatures
-app.get('/miniatures/warhammer/:group', (req, res) => {
+app.get('/miniatures/:group', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'miniatures-subgroup.html'));
 });
 

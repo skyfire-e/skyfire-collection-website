@@ -23,17 +23,17 @@
 - `/` → homepage with Dice / Miniatures buttons
 - `/dice` → category grid → `/gallery?section=dice&category=...`
 - `/miniatures` → category grid (groups link to subgroup pages, leaf link to gallery)
-- `/miniatures/warhammer/skaven` → 6 subcategories
-- `/miniatures/warhammer/space-orks` → 7 subcategories
+- `/miniatures/skaven` → 6 subcategories
+- `/miniatures/space-orks` → 7 subcategories
 - `/gallery?section=...&category=...` → photo grid (lightbox + carousel)
 - `/admin` → admin panel (add/edit/delete items, categories, settings)
 - `/spreadsheet` → public spreadsheet with prices (по настройкам)
 
 ## Navigation Hierarchy
 **Miniatures groups** (с подстраницами):
-- Skaven → /miniatures/warhammer/skaven
+- Skaven → /miniatures/skaven
   - Citadel Skaven, Old Citadel Skaven, Blood Bowl Skaven, Forgeworld Skaven, Punga Miniatures Skaven, 3d Prints Skaven
-- Space Orks → /miniatures/warhammer/space-orks
+- Space Orks → /miniatures/space-orks
   - Citadel Orks, Forgeworld Orks, Old Citadel Orks (oldhammer), Artel W, Kromlech, Various Studios, 3d Printed Orks
 
 **Miniatures leaf** (прямо в галерею):

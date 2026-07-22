@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title id="pageTitle">Section - skyf1re Collection</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/base.css">
 </head>
-<body>
+<body data-page-type="section">
   <div class="section-page">
     <a href="/" class="back-link">&larr; Back to Home</a>
     <h1 id="sectionTitle"></h1>
@@ -18,35 +18,6 @@
     <button onclick="location.href='/admin#spreadsheet'">📊 Spreadsheet</button>
   </div>
 
-  <script src="/js/api.js"></script>
-  <script>
-    const sectionId = window.location.pathname.replace(/^\/|\/$/g, '');
-    const titleEl = document.getElementById('pageTitle');
-    const titleEl2 = document.getElementById('sectionTitle');
-    const grid = document.getElementById('categoryGrid');
-
-    API.get('/api/categories').then(data => {
-      const section = data[sectionId];
-      if (!section) return;
-      titleEl.textContent = section.label + ' - skyf1re Collection';
-      titleEl2.textContent = section.label;
-
-      section.subcategories.forEach(c => {
-        const a = document.createElement('a');
-        if (c.type === 'group') {
-          a.href = '/' + sectionId + '/' + c.id;
-        } else {
-          a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
-        }
-        a.className = 'category-btn' + (c.type === 'group' ? ' category-group' : '');
-        a.textContent = c.label;
-        grid.appendChild(a);
-      });
-    });
-
-    checkAuth().then(() => {
-      if (isAdmin()) document.getElementById('adminActions').style.display = 'flex';
-    });
-  </script>
+  <script type="module" src="/js/section-pages.js"></script>
 </body>
 </html>
