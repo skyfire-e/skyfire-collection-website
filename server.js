@@ -4,15 +4,26 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+require('dotenv').config();
+
+if (!process.env.SESSION_SECRET || !process.env.ADMIN_PASSWORD) {
+  console.error('Missing required env vars: SESSION_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD');
+  console.error('Create a .env file in the project root with these values.');
+  process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Admin credentials from .env
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // --- Data setup ---
 const DATA_DIR = path.join(__dirname, 'data');
 const ITEMS_FILE = path.join(DATA_DIR, 'items.json');
 const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
-const USERS_FILE = path.join(DATA_DIR, 'users.json');
 
 function readJSON(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return null; }
@@ -21,24 +32,20 @@ function writeJSON(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 }
 
-// Init data files
-['items.json', 'users.json'].forEach(f => {
+// Init data files (only items.json — auth via .env)
+['items.json'].forEach(f => {
   const fp = path.join(DATA_DIR, f);
   if (!fs.existsSync(fp)) writeJSON(fp, []);
 });
 
-// Default admin user
-const users = readJSON(USERS_FILE) || [];
-if (users.length === 0) {
-  users.push({ username: 'admin', password: 'admin123', role: 'admin' });
-  writeJSON(USERS_FILE, users);
-}
+// Single admin user from .env
+const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD, role: 'admin' }];
 
 // --- Middleware ---
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-  secret: 'skyf1re-collection-session-secret-2026',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }

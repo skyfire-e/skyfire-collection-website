@@ -8,6 +8,7 @@
     "dev": "node server.js"
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^4.21.0",
     "express-session": "^1.18.0",
     "jimp": "^1.6.1",
