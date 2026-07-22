@@ -1789,12 +1789,13 @@
     "category": "citadel-skaven",
     "title": "Clanrats",
     "author": "Games Workshop",
-    "price": "",
+    "price": "2625",
     "image": "/uploads/citadel-skaven-1.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-1.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148425,
@@ -1802,12 +1803,13 @@
     "category": "citadel-skaven",
     "title": "Rattachak Doom Coven",
     "author": "Games Workshop (Stormfiends, Warlock Bombardier, Warp Lightning Cannon) (Broken Realms)",
-    "price": "",
+    "price": "5775",
     "image": "/uploads/citadel-skaven-2.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-2.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148426,
@@ -1815,12 +1817,13 @@
     "category": "citadel-skaven",
     "title": "Warbringer (2018)",
     "author": "Games Workshop (Lord Skreech Verminking, Verminlord Corruptor, Verminlord Deceiver, Verminlord Warpseer)",
-    "price": "",
+    "price": "6100",
     "image": "/uploads/citadel-skaven-3.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-3.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148427,
@@ -1828,12 +1831,13 @@
     "category": "citadel-skaven",
     "title": "Start Collecting! Skaven Pestilence",
     "author": "Games Workshop (20 Plague Monks, Plague Furnace, Plague Claw)",
-    "price": "",
+    "price": "4909",
     "image": "/uploads/citadel-skaven-4.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-4.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148428,
@@ -1841,12 +1845,13 @@
     "category": "citadel-skaven",
     "title": "Thanquol and Boneripper",
     "author": "Games Workshop",
-    "price": "",
+    "price": "6080",
     "image": "/uploads/citadel-skaven-5.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-5.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148429,
@@ -1854,12 +1859,13 @@
     "category": "citadel-skaven",
     "title": "Hell Pit Abomination",
     "author": "Games Workshop",
-    "price": "",
+    "price": "4560",
     "image": "/uploads/citadel-skaven-6.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-6.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148430,
@@ -1867,12 +1873,13 @@
     "category": "citadel-skaven",
     "title": "Stormvermin",
     "author": "Games Workshop",
-    "price": "",
+    "price": "4180",
     "image": "/uploads/citadel-skaven-7.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-7.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148431,
@@ -1880,12 +1887,13 @@
     "category": "citadel-skaven",
     "title": "Doomwheel",
     "author": "Games Workshop",
-    "price": "",
+    "price": "2660",
     "image": "/uploads/citadel-skaven-8.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-8.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148432,
@@ -1893,12 +1901,13 @@
     "category": "citadel-skaven",
     "title": "Skaven Verminus Spiteclaw's Swarm (2018)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1900",
     "image": "/uploads/citadel-skaven-9.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-9.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148433,
@@ -1906,12 +1915,13 @@
     "category": "citadel-skaven",
     "title": "Skaven Deathmaster Snikch",
     "author": "Games Workshop (Finecast)",
-    "price": "",
+    "price": "1463",
     "image": "/uploads/citadel-skaven-10.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-10.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148434,
@@ -1919,12 +1929,13 @@
     "category": "citadel-skaven",
     "title": "Clawlord (Queek Headtaker)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1463",
     "image": "/uploads/citadel-skaven-11.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-11.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148435,
@@ -1932,12 +1943,13 @@
     "category": "citadel-skaven",
     "title": "Doom-Flayer (Weapon Team)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "2280",
     "image": "/uploads/citadel-skaven-12.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-12.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148436,
@@ -1945,12 +1957,13 @@
     "category": "citadel-skaven",
     "title": "Warlock Engineers",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1900",
     "image": "/uploads/citadel-skaven-13.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/citadel-skaven-13.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148438,
@@ -1958,12 +1971,13 @@
     "category": "citadel-skaven",
     "title": "Warp-Grinder (Weapon Team)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1140",
     "image": "/uploads/citadel-skaven-14.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-14.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148439,
@@ -1971,12 +1985,13 @@
     "category": "citadel-skaven",
     "title": "Rat Ogors, Giant Rats and Packmasters",
     "author": "Games Workshop",
-    "price": "",
+    "price": "3040",
     "image": "/uploads/citadel-skaven-15.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-15.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148440,
@@ -1984,12 +1999,13 @@
     "category": "citadel-skaven",
     "title": "Warplock Jezzails",
     "author": "Games Workshop",
-    "price": "",
+    "price": "4180",
     "image": "/uploads/citadel-skaven-16.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-16.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148441,
@@ -1997,12 +2013,13 @@
     "category": "citadel-skaven",
     "title": "Master Moulder (Packmaster)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1140",
     "image": "/uploads/citadel-skaven-17.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-17.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148442,
@@ -2010,12 +2027,13 @@
     "category": "citadel-skaven",
     "title": "Skryre Acolytes (Poison Wind Globadier)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1140",
     "image": "/uploads/citadel-skaven-18.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-18.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148443,
@@ -2023,12 +2041,13 @@
     "category": "citadel-skaven",
     "title": "Ratling Gun (Weapon Team)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1140",
     "image": "/uploads/citadel-skaven-19.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-19.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148444,
@@ -2036,12 +2055,13 @@
     "category": "citadel-skaven",
     "title": "Rat Swarms",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1368",
     "image": "/uploads/citadel-skaven-20.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-20.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148445,
@@ -2049,12 +2069,13 @@
     "category": "citadel-skaven",
     "title": "Arch-Warlock Ikit Claw",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1368",
     "image": "/uploads/citadel-skaven-21.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-21.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148446,
@@ -2062,12 +2083,13 @@
     "category": "citadel-skaven",
     "title": "Warpfire Thrower (2019)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1368",
     "image": "/uploads/citadel-skaven-22.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-22.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148447,
@@ -2075,12 +2097,13 @@
     "category": "citadel-skaven",
     "title": "Clawlord (Warlord 2014)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1900",
     "image": "/uploads/citadel-skaven-23.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-23.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148448,
@@ -2088,12 +2111,13 @@
     "category": "citadel-skaven",
     "title": "Gutter Runners",
     "author": "Games Workshop (Metal)",
-    "price": "",
+    "price": "1140",
     "image": "/uploads/citadel-skaven-24.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-24.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148449,
@@ -2101,12 +2125,13 @@
     "category": "citadel-skaven",
     "title": "Plague Censer Bearers",
     "author": "Games Workshop",
-    "price": "",
+    "price": "2660",
     "image": "/uploads/citadel-skaven-25.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-25.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148450,
@@ -2114,12 +2139,13 @@
     "category": "citadel-skaven",
     "title": "Grey Seer (2014)",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1900",
     "image": "/uploads/citadel-skaven-26.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-26.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148451,
@@ -2127,12 +2153,13 @@
     "category": "citadel-skaven",
     "title": "Night Runners",
     "author": "Games Workshop",
-    "price": "",
+    "price": "2660",
     "image": "/uploads/citadel-skaven-27.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-27.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148452,
@@ -2140,25 +2167,29 @@
     "category": "citadel-skaven",
     "title": "Plague Priest Skrolk",
     "author": "Games Workshop",
-    "price": "",
+    "price": "1140",
     "image": "/uploads/citadel-skaven-28.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
       "/uploads/citadel-skaven-28.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148454,
     "section": "miniatures",
     "category": "citadel-skaven",
     "title": "Warlord Spinetail",
-    "author": "",
-    "price": "",
+    "author": "Games Workshop (re-cast)",
+    "price": "400",
     "image": "/uploads/citadel-skaven-29.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-29.jpg"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood",
+    "combatPoints": "",
+    "status": ""
   },
   {
     "id": 1784583148455,
@@ -2166,12 +2197,13 @@
     "category": "citadel-skaven",
     "title": "Poisoned Wind Mortar",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "550",
     "image": "/uploads/citadel-skaven-30.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-30.jpg"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784583148456,
@@ -2179,12 +2211,13 @@
     "category": "citadel-skaven",
     "title": "Skaven Deathmaster (2022)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "600",
     "image": "/uploads/citadel-skaven-31.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-31.jpg"
-    ]
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": 1784583148457,
@@ -2192,12 +2225,13 @@
     "category": "citadel-skaven",
     "title": "Skittershank's Clawpack",
     "author": "Games Workshop (re-cast) (Underworlds)",
-    "price": "",
+    "price": "1250",
     "image": "/uploads/citadel-skaven-32.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-32.jpg"
-    ]
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": 1784583148458,
@@ -2205,12 +2239,13 @@
     "category": "citadel-skaven",
     "title": "Skaven Gnawholes",
     "author": "Games Workshop",
-    "price": "",
+    "price": "4800",
     "image": "/uploads/citadel-skaven-33.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-33.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148459,
@@ -2218,12 +2253,13 @@
     "category": "citadel-skaven",
     "title": "Endless Spells: Skaven",
     "author": "Games Workshop",
-    "price": "",
+    "price": "3200",
     "image": "/uploads/citadel-skaven-34.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-34.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148460,
@@ -2231,12 +2267,13 @@
     "category": "citadel-skaven",
     "title": "Screaming Bell",
     "author": "Games Workshop",
-    "price": "",
+    "price": "2000",
     "image": "/uploads/citadel-skaven-35.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-35.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148461,
@@ -2244,12 +2281,13 @@
     "category": "citadel-skaven",
     "title": "Clanrats",
     "author": "Games Workshop",
-    "price": "",
+    "price": "3300",
     "image": "/uploads/citadel-skaven-36.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-36.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148462,
@@ -2257,12 +2295,13 @@
     "category": "citadel-skaven",
     "title": "Skabbik's Plaguepack",
     "author": "Games Workshop",
-    "price": "",
+    "price": "4862",
     "image": "/uploads/citadel-skaven-37.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-37.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148463,
@@ -2270,12 +2309,13 @@
     "category": "citadel-skaven",
     "title": "Island of Blood",
     "author": "warlord, warlock engineer, 40 clan rats, packmaster, 2 rat ogres, warpfire thrower, poison wind mortar",
-    "price": "",
+    "price": "100",
     "image": "/uploads/citadel-skaven-38.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-38.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148464,
@@ -2283,12 +2323,13 @@
     "category": "citadel-skaven",
     "title": "Skaventide",
     "author": "Clawlord on Gnaw-Beast, Grey Seer 2024my, Warlock Engineer 2024my, Ratling Warpblaster, 3 Rat Ogors 2024my, 3 Warplock Jezzails 2024my, 40 Clanrats 2024my, terrain",
-    "price": "",
+    "price": "11000",
     "image": "/uploads/citadel-skaven-39.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-39.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148465,
@@ -2296,12 +2337,13 @@
     "category": "citadel-skaven",
     "title": "Skaventide",
     "author": "Clawlord on Gnaw-Beast, Grey Seer 2024my, Warlock Engineer 2024my, Ratling Warpblaster, 3 Rat Ogors 2024my, 3 Warplock Jezzails 2024my, 40 Clanrats 2024my, terrain",
-    "price": "",
+    "price": "21000",
     "image": "/uploads/citadel-skaven-40.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-40.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148466,
@@ -2309,12 +2351,13 @@
     "category": "citadel-skaven",
     "title": "Stormvermin",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "7000",
     "image": "/uploads/citadel-skaven-41.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-41.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148467,
@@ -2322,12 +2365,13 @@
     "category": "citadel-skaven",
     "title": "Vizzik Skour, Prophet of the Horned Rat",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "12500",
     "image": "/uploads/citadel-skaven-42.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-42.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148468,
@@ -2335,12 +2379,13 @@
     "category": "citadel-skaven",
     "title": "Kettek Throatbite",
     "author": "Games Workshop Commemorative 2025",
-    "price": "",
+    "price": "6500",
     "image": "/uploads/citadel-skaven-43.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-43.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148469,
@@ -2348,12 +2393,13 @@
     "category": "citadel-skaven",
     "title": "Brood Horror",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "5865",
     "image": "/uploads/citadel-skaven-44.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-44.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148470,
@@ -2361,12 +2407,13 @@
     "category": "citadel-skaven",
     "title": "Doom-Flayers",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "4902",
     "image": "/uploads/citadel-skaven-45.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-45.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148471,
@@ -2374,12 +2421,13 @@
     "category": "citadel-skaven",
     "title": "Krittok Foulblade",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "4150",
     "image": "/uploads/citadel-skaven-46.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-46.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148472,
@@ -2387,12 +2435,13 @@
     "category": "citadel-skaven",
     "title": "Arch-Warlock",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "4000",
     "image": "/uploads/citadel-skaven-47.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-47.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148473,
@@ -2400,12 +2449,13 @@
     "category": "citadel-skaven",
     "title": "Warlock Galvaneer",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "3450",
     "image": "/uploads/citadel-skaven-48.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-48.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148474,
@@ -2413,12 +2463,13 @@
     "category": "citadel-skaven",
     "title": "Master Moulder",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "3450",
     "image": "/uploads/citadel-skaven-49.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-49.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148475,
@@ -2426,12 +2477,13 @@
     "category": "citadel-skaven",
     "title": "Warpspark Weapon Battery",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "5000",
     "image": "/uploads/citadel-skaven-50.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-50.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148476,
@@ -2439,12 +2491,13 @@
     "category": "citadel-skaven",
     "title": "Warp-Grinder",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "4650",
     "image": "/uploads/citadel-skaven-51.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-51.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148477,
@@ -2452,12 +2505,13 @@
     "category": "citadel-skaven",
     "title": "Acolyte Globadiers",
     "author": "Games Workshop 2024",
-    "price": "",
+    "price": "5400",
     "image": "/uploads/citadel-skaven-52.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-52.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784583148478,
@@ -2465,12 +2519,13 @@
     "category": "citadel-skaven",
     "title": "Zikkit's Tunnelpack",
     "author": "Games Workshop 2024 (re-cast)",
-    "price": "",
+    "price": "1000",
     "image": "/uploads/citadel-skaven-53.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-53.jpg"
-    ]
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": 1784669249130,
@@ -2621,7 +2676,7 @@
     "category": "old-citadel-skaven",
     "title": "Assasssin Master (1999)",
     "author": "Games Workshop (Mordheim) (Metal) Sealed",
-    "price": "",
+    "price": "4000",
     "image": "/uploads/38684092-55ad-4315-869b-1290100ce6dc.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2639,7 +2694,7 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Slaves (1986)",
     "author": "Games Workshop (3-rd edition) (Metal) [2 pcs] Sealed",
-    "price": "",
+    "price": "7000",
     "image": "/uploads/48c9aad3-dca7-4aa5-a30b-5da10e4d8535.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2657,7 +2712,7 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Warriors (1987)",
     "author": "Games Workshop (4-th edition) (Metal) [5 pcs] Sealed",
-    "price": "",
+    "price": "6000",
     "image": "/uploads/f366c5d7-7880-4b3d-861c-353458bf8675.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2675,7 +2730,7 @@
     "category": "old-citadel-skaven",
     "title": "Master Moulder",
     "author": "Games Workshop (5-th edition) (Metal) [5 pcs] Sealed",
-    "price": "",
+    "price": "10000",
     "image": "/uploads/ea5ce692-6ee3-4a68-8d8d-be813f40e6fb.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2692,7 +2747,7 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Slaves (1988)",
     "author": "Games Workshop (3-th edition) (Metal) [5 pcs] Sealed",
-    "price": "",
+    "price": "4500",
     "image": "/uploads/67277be5-5970-48ec-a202-78347f4f99a3.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2709,13 +2764,14 @@
     "category": "old-citadel-skaven",
     "title": "Thanquol and Boneripper (olden)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "950",
     "image": "/uploads/0078ddb7-1ebe-4248-adcb-c2ee792c4b01.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/0078ddb7-1ebe-4248-adcb-c2ee792c4b01.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038609,
@@ -2723,13 +2779,14 @@
     "category": "old-citadel-skaven",
     "title": "Warlord (olden)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "300",
     "image": "/uploads/564c72fe-b1de-4b42-b89e-836190717b5c.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/564c72fe-b1de-4b42-b89e-836190717b5c.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": 1784670038610,
@@ -2737,13 +2794,14 @@
     "category": "old-citadel-skaven",
     "title": "Mordheim Warband",
     "author": "Games Workshop (2 assassin adepts, sorcerer, 2 black skaven, 2 night runner, rat ogre, Veskit) (re-cast)",
-    "price": "",
+    "price": "2600",
     "image": "/uploads/cb207b7e-c9c5-4f25-8e3c-cba36f3d146c.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/cb207b7e-c9c5-4f25-8e3c-cba36f3d146c.webp"
     ],
-    "description": "Games Workshop (2 assassin adepts, sorcerer, 2 black skaven, 2 night runner, rat ogre, Veskit) (re-cast)"
+    "description": "Games Workshop (2 assassin adepts, sorcerer, 2 black skaven, 2 night runner, rat ogre, Veskit) (re-cast)",
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": 1784670038611,
@@ -2751,13 +2809,14 @@
     "category": "old-citadel-skaven",
     "title": "Olden Jezzail Team (3)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "2000",
     "image": "/uploads/cc505e33-42f2-4b9b-a46c-1fcfd0c528ac.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/cc505e33-42f2-4b9b-a46c-1fcfd0c528ac.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038612,
@@ -2765,13 +2824,14 @@
     "category": "old-citadel-skaven",
     "title": "Stormvermin FCG (10) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "2625",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038613,
@@ -2779,13 +2839,14 @@
     "category": "old-citadel-skaven",
     "title": "Stormvermin FCG (10) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "2625",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038614,
@@ -2793,13 +2854,14 @@
     "category": "old-citadel-skaven",
     "title": "Warp Lightning Cannon (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "2000",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038615,
@@ -2807,13 +2869,14 @@
     "category": "old-citadel-skaven",
     "title": "Lord Nurglich (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "1100",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038616,
@@ -2821,13 +2884,14 @@
     "category": "old-citadel-skaven",
     "title": "Standard Bearer Warlord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "500",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038617,
@@ -2835,13 +2899,14 @@
     "category": "old-citadel-skaven",
     "title": "Verminlord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "800",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038618,
@@ -2849,13 +2914,14 @@
     "category": "old-citadel-skaven",
     "title": "Warlord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "400",
     "image": "/uploads/2606bd49-0e46-4298-ad4a-131f59147752.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/2606bd49-0e46-4298-ad4a-131f59147752.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038619,
@@ -2863,13 +2929,14 @@
     "category": "old-citadel-skaven",
     "title": "Plague Lord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "400",
     "image": "/uploads/2443dd1e-f5a1-4b98-a717-f9843bedba05.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/2443dd1e-f5a1-4b98-a717-f9843bedba05.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038620,
@@ -2877,13 +2944,14 @@
     "category": "old-citadel-skaven",
     "title": "Packmaster Greel (old Master Moulder)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "450",
     "image": "/uploads/20ace8de-0e55-4d38-b762-86f8ccd4232b.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/20ace8de-0e55-4d38-b762-86f8ccd4232b.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038621,
@@ -2891,13 +2959,14 @@
     "category": "old-citadel-skaven",
     "title": "Warplock Engineer Ratchitt (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "400",
     "image": "/uploads/5614f642-04e8-4e34-a3fd-5d2930024825.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/5614f642-04e8-4e34-a3fd-5d2930024825.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038622,
@@ -2905,13 +2974,14 @@
     "category": "old-citadel-skaven",
     "title": "Throt the Unclean (2001)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "400",
     "image": "/uploads/ae00893c-695b-4a9d-ac42-e1ce0ac9ec6c.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/ae00893c-695b-4a9d-ac42-e1ce0ac9ec6c.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка Stark Foundry"
   },
   {
     "id": 1784670038623,
@@ -2919,13 +2989,14 @@
     "category": "old-citadel-skaven",
     "title": "Augmented Rat Ogre",
     "author": "Games Workshop (by Phil Kelly) (re-cast)",
-    "price": "",
+    "price": "0",
     "image": "/uploads/7a0e5a6a-bfa7-4fcd-acee-a3a714083bf8.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/7a0e5a6a-bfa7-4fcd-acee-a3a714083bf8.webp"
     ],
-    "description": "Games Workshop (by Phil Kelly) (re-cast)"
+    "description": "Games Workshop (by Phil Kelly) (re-cast)",
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": 1784670038624,
@@ -2933,13 +3004,14 @@
     "category": "old-citadel-skaven",
     "title": "Rat Ogre olden",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "450",
     "image": "/uploads/06fe63f2-1824-404f-aabe-f60dc9ededa8.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/06fe63f2-1824-404f-aabe-f60dc9ededa8.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка OldHammer Мастерская"
   },
   {
     "id": 1784670038625,
@@ -2947,13 +3019,14 @@
     "category": "old-citadel-skaven",
     "title": "Standart Bearers olden",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "300",
     "image": "/uploads/7a68f41f-5144-4470-b025-97480965a696.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/7a68f41f-5144-4470-b025-97480965a696.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка OldHammer Мастерская"
   },
   {
     "id": 1784670038626,
@@ -2961,13 +3034,14 @@
     "category": "old-citadel-skaven",
     "title": "Tretch Craventail",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "350",
     "image": "/uploads/4fdcbe5c-bf1f-407b-a959-abcdca15ecb1.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/4fdcbe5c-bf1f-407b-a959-abcdca15ecb1.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка OldHammer Мастерская"
   },
   {
     "id": 1784670038627,
@@ -2975,13 +3049,14 @@
     "category": "old-citadel-skaven",
     "title": "Warlord (Golden Demon 2011 limited)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "350",
     "image": "/uploads/a3bf177d-fd3e-42cb-a8f4-55df9868f6a2.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/a3bf177d-fd3e-42cb-a8f4-55df9868f6a2.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка OldHammer Мастерская"
   },
   {
     "id": 1784670038628,
@@ -2989,13 +3064,14 @@
     "category": "old-citadel-skaven",
     "title": "Screaming Bell (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "2500",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038629,
@@ -3003,13 +3079,14 @@
     "category": "old-citadel-skaven",
     "title": "Death Master Snikch (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "350",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038630,
@@ -3017,13 +3094,14 @@
     "category": "old-citadel-skaven",
     "title": "Ikit Claw (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "450",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038631,
@@ -3031,13 +3109,14 @@
     "category": "old-citadel-skaven",
     "title": "Master Moulder (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "300",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038632,
@@ -3045,13 +3124,14 @@
     "category": "old-citadel-skaven",
     "title": "Giant Rats (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "500",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038633,
@@ -3059,13 +3139,14 @@
     "category": "old-citadel-skaven",
     "title": "Giant Rats (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "500",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038634,
@@ -3073,13 +3154,14 @@
     "category": "old-citadel-skaven",
     "title": "Rat Swarms (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "450",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038635,
@@ -3087,13 +3169,14 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Slaves (5) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "1250",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038636,
@@ -3101,13 +3184,14 @@
     "category": "old-citadel-skaven",
     "title": "Ratling Gun (2) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "1000",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038637,
@@ -3115,13 +3199,14 @@
     "category": "old-citadel-skaven",
     "title": "Warpfire Thrower (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "500",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038638,
@@ -3129,13 +3214,14 @@
     "category": "old-citadel-skaven",
     "title": "Clanrats (5) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "1350",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038639,
@@ -3143,13 +3229,14 @@
     "category": "old-citadel-skaven",
     "title": "Skryre Acolytes (3) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "900",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038640,
@@ -3157,13 +3244,14 @@
     "category": "old-citadel-skaven",
     "title": "Boneripper (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "750",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038641,
@@ -3171,13 +3259,14 @@
     "category": "old-citadel-skaven",
     "title": "Queek Headtaker (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "400",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038642,
@@ -3185,13 +3274,14 @@
     "category": "old-citadel-skaven",
     "title": "Warlords (3) (olden)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "950",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038643,
@@ -3199,13 +3289,14 @@
     "category": "old-citadel-skaven",
     "title": "Assassin (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "250",
     "image": "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/d205e19a-2bf6-4cc1-8bcd-8f3565931cad.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038644,
@@ -3213,13 +3304,14 @@
     "category": "old-citadel-skaven",
     "title": "Rat Ogre (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "",
+    "price": "750",
     "image": "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
       "/uploads/735f099f-36e3-439b-9476-ae2c41f22316.webp"
     ],
-    "description": "Games Workshop (re-cast)"
+    "description": "Games Workshop (re-cast)",
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": 1784670038645,
@@ -3227,12 +3319,13 @@
     "category": "blood-bowl-skaven",
     "title": "Bloodbowl Skaven Team - Skavenblight Scramblers",
     "author": "Games Workshop (Assembled, primed)",
-    "price": "",
+    "price": "2700",
     "image": "/uploads/6798c323-2a1c-45b4-a716-22a9dcaac9d5.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/6798c323-2a1c-45b4-a716-22a9dcaac9d5.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038646,
@@ -3240,12 +3333,13 @@
     "category": "blood-bowl-skaven",
     "title": "Skaven Team Booster",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "",
+    "price": "1050",
     "image": "/uploads/b894695f-d310-46c5-a21a-15a309a69fe9.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/b894695f-d310-46c5-a21a-15a309a69fe9.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038647,
@@ -3253,12 +3347,13 @@
     "category": "blood-bowl-skaven",
     "title": "Rat Ogre 2022",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "",
+    "price": "850",
     "image": "/uploads/fd347ba2-ea15-4582-be02-000a1effa915.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/fd347ba2-ea15-4582-be02-000a1effa915.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038648,
@@ -3266,12 +3361,13 @@
     "category": "blood-bowl-skaven",
     "title": "Rat Ogre 2017",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "",
+    "price": "850",
     "image": "/uploads/4991c301-9840-4708-983f-8f296fe77461.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/4991c301-9840-4708-983f-8f296fe77461.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038649,
@@ -3279,12 +3375,13 @@
     "category": "blood-bowl-skaven",
     "title": "Glart Smashrip",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "",
+    "price": "600",
     "image": "/uploads/0e8ccd3b-40a2-4180-a91a-72060abf7a20.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/0e8ccd3b-40a2-4180-a91a-72060abf7a20.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038650,
@@ -3292,12 +3389,13 @@
     "category": "blood-bowl-skaven",
     "title": "Hakflem Skuttlespike",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "",
+    "price": "550",
     "image": "/uploads/fb09324b-bc56-41ef-a4a0-6f18fa038e20.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/fb09324b-bc56-41ef-a4a0-6f18fa038e20.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038651,
@@ -3305,12 +3403,13 @@
     "category": "blood-bowl-skaven",
     "title": "Kreek ‘the Verminator’ Rustgouger",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "",
+    "price": "900",
     "image": "/uploads/e16451d0-ad36-4feb-93f7-35c41627ae22.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/e16451d0-ad36-4feb-93f7-35c41627ae22.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038652,
@@ -3318,12 +3417,13 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Apothecary",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/012ac266-398f-4aee-a0bc-98da9e2a5c7a.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/012ac266-398f-4aee-a0bc-98da9e2a5c7a.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038653,
@@ -3331,12 +3431,13 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Fan Opossum",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/0d3f7687-1e1b-4bc8-b7e3-9768229dbd9b.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/0d3f7687-1e1b-4bc8-b7e3-9768229dbd9b.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038654,
@@ -3344,12 +3445,13 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Rat Referee (Coach)",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/f5ae9bdd-ab3d-4b2b-9f34-5a039107b6a7.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/f5ae9bdd-ab3d-4b2b-9f34-5a039107b6a7.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038655,
@@ -3357,12 +3459,13 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Rat Food Seller",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/54da2532-9c50-4651-b43c-2dddeda1943f.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/54da2532-9c50-4651-b43c-2dddeda1943f.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038656,
@@ -3370,12 +3473,13 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Tavern Girl",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/291ffa81-9fa8-47c7-8a82-357f86a52f6e.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/291ffa81-9fa8-47c7-8a82-357f86a52f6e.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038657,
@@ -3383,12 +3487,13 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Goblin Water Boy",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/989a8d97-07a6-41b0-b83b-5018544bc10b.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/989a8d97-07a6-41b0-b83b-5018544bc10b.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038658,
@@ -3396,12 +3501,13 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Cheerleaders (6)",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "",
+    "price": "20000",
     "image": "/uploads/230f5d3a-de96-473b-a4d4-37c1a1ed77ca.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
       "/uploads/230f5d3a-de96-473b-a4d4-37c1a1ed77ca.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038659,
@@ -3409,12 +3515,13 @@
     "category": "forgeworld-skaven",
     "title": "Warpgnaw Verminlord (Exalted Verminlord)",
     "author": "Forgeworld (re-cast)",
-    "price": "",
+    "price": "2250",
     "image": "/uploads/0fcf0e89-218e-4285-a469-dc3b94c340cf.webp",
     "createdAt": "2026-07-22T16:42:28.890Z",
     "images": [
       "/uploads/0fcf0e89-218e-4285-a469-dc3b94c340cf.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038660,
@@ -3422,12 +3529,13 @@
     "category": "forgeworld-skaven",
     "title": "Clawlord on Brood Horror",
     "author": "Forgeworld (re-cast)",
-    "price": "",
+    "price": "2300",
     "image": "/uploads/522d597b-1f4d-4ba5-8098-450254c21689.webp",
     "createdAt": "2026-07-22T16:42:28.890Z",
     "images": [
       "/uploads/522d597b-1f4d-4ba5-8098-450254c21689.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038661,
@@ -3435,12 +3543,13 @@
     "category": "forgeworld-skaven",
     "title": "Wolf Rats",
     "author": "Forgeworld (re-cast)",
-    "price": "",
+    "price": "1800",
     "image": "/uploads/422e5893-4ac0-43b3-80b8-42b7dcd03ceb.webp",
     "createdAt": "2026-07-22T16:42:28.890Z",
     "images": [
       "/uploads/422e5893-4ac0-43b3-80b8-42b7dcd03ceb.webp"
-    ]
+    ],
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": 1784670038662,
@@ -3448,12 +3557,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Plague Doctor",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "700",
     "image": "/uploads/fd83b2fd-3dbd-41a8-8216-7848c31c3301.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/fd83b2fd-3dbd-41a8-8216-7848c31c3301.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038663,
@@ -3461,12 +3571,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Ratman Mortar Team / Globe Launcher",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "850",
     "image": "/uploads/0298ebf5-3cce-4c8d-917b-7437c62f56ae.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/0298ebf5-3cce-4c8d-917b-7437c62f56ae.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038664,
@@ -3474,12 +3585,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Elite Ratman Guard War Litter / Vermin Guard Litter",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "850",
     "image": "/uploads/f64e5b8b-7e78-4240-a6d3-fa7e178002c9.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/f64e5b8b-7e78-4240-a6d3-fa7e178002c9.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038665,
@@ -3487,12 +3599,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Teethbreaker Gun",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "750",
     "image": "/uploads/ffdc02cd-b2f5-415f-8ac5-6389536c8a53.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/ffdc02cd-b2f5-415f-8ac5-6389536c8a53.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038666,
@@ -3500,12 +3613,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Rat Ogre with War Litter",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "1100",
     "image": "/uploads/c4e2cb83-18f9-4cb0-a5f1-d383a4803d19.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/c4e2cb83-18f9-4cb0-a5f1-d383a4803d19.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038667,
@@ -3513,12 +3627,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Plague Prophet",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "750",
     "image": "/uploads/174c91c2-fb54-4bde-ada0-7c49c4ff41f7.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/174c91c2-fb54-4bde-ada0-7c49c4ff41f7.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038668,
@@ -3526,12 +3641,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Rat Cavalry",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "3400",
     "image": "/uploads/6de56e2d-bf54-47c4-ae41-4428d9731964.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/6de56e2d-bf54-47c4-ae41-4428d9731964.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038669,
@@ -3539,12 +3655,13 @@
     "category": "3d-prints-skaven",
     "title": "Rat Snipers",
     "author": "Eman G (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/9c65644f-bda8-499b-b71b-0e3446f0f24f.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/9c65644f-bda8-499b-b71b-0e3446f0f24f.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038670,
@@ -3552,12 +3669,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Deadly Runners (5)",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "1650",
     "image": "/uploads/0d432cf6-62c5-49df-94c1-fe93d666b464.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/0d432cf6-62c5-49df-94c1-fe93d666b464.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038671,
@@ -3565,12 +3683,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Plague Monk Musician",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "650",
     "image": "/uploads/f193ab4c-b28a-4579-860b-1267ba2839c9.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/f193ab4c-b28a-4579-860b-1267ba2839c9.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038672,
@@ -3578,12 +3697,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Globe Throwers (5)",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "1700",
     "image": "/uploads/4793604c-ccf2-4824-a5ff-a69a2873ab4b.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/4793604c-ccf2-4824-a5ff-a69a2873ab4b.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038673,
@@ -3591,12 +3711,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Flamethrowers",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "800",
     "image": "/uploads/493e11f7-f3b1-4236-b49e-3f9985ccbbce.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/493e11f7-f3b1-4236-b49e-3f9985ccbbce.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038674,
@@ -3604,12 +3725,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Teethbreaker Gun Crew",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "850",
     "image": "/uploads/e611fbd1-8d28-4d37-a02c-6014208153f5.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/e611fbd1-8d28-4d37-a02c-6014208153f5.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038675,
@@ -3617,12 +3739,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Gutter Blades (with alternative heads)",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "2400",
     "image": "/uploads/7f6a58aa-1191-48a8-b8a2-834511368a89.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/7f6a58aa-1191-48a8-b8a2-834511368a89.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038676,
@@ -3630,12 +3753,13 @@
     "category": "punga-miniatures-skaven",
     "title": "Giant Rat 4",
     "author": "Punga Miniatures",
-    "price": "",
+    "price": "300",
     "image": "/uploads/f3ac0e37-f303-4ccf-a085-13d4bb0c8988.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
       "/uploads/f3ac0e37-f303-4ccf-a085-13d4bb0c8988.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038677,
@@ -3643,12 +3767,13 @@
     "category": "3d-prints-skaven",
     "title": "Heskit One-Eye",
     "author": "One Page Rules Engineer + WesternCossack Steam Tank (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/563aefb2-9f1f-42f7-965d-79a411f25468.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/563aefb2-9f1f-42f7-965d-79a411f25468.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038678,
@@ -3656,12 +3781,13 @@
     "category": "3d-prints-skaven",
     "title": "Heavy Weapons Rat",
     "author": "Eman G (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/2770fc84-a868-40e4-8445-b9940a97d1d1.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/2770fc84-a868-40e4-8445-b9940a97d1d1.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038679,
@@ -3669,12 +3795,13 @@
     "category": "3d-prints-skaven",
     "title": "Sawyer Phantom Crossbow",
     "author": "Sewers of Thamarya (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/bb5db26c-f8c4-4bb6-9f84-8d9834292f6f.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/bb5db26c-f8c4-4bb6-9f84-8d9834292f6f.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038680,
@@ -3682,12 +3809,13 @@
     "category": "3d-prints-skaven",
     "title": "Sawyer Phantom Crossbows Assassin",
     "author": "Sewers of Thamarya (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/2770fc84-a868-40e4-8445-b9940a97d1d1.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/2770fc84-a868-40e4-8445-b9940a97d1d1.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038681,
@@ -3695,12 +3823,13 @@
     "category": "3d-prints-skaven",
     "title": "Rat Brothers Grimm",
     "author": "Tails from the Garden vol.2 (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/bb5db26c-f8c4-4bb6-9f84-8d9834292f6f.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/bb5db26c-f8c4-4bb6-9f84-8d9834292f6f.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038682,
@@ -3708,12 +3837,13 @@
     "category": "3d-prints-skaven",
     "title": "Rattling Gun Weapon Teams (3)",
     "author": "Eman G (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/bb5db26c-f8c4-4bb6-9f84-8d9834292f6f.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/bb5db26c-f8c4-4bb6-9f84-8d9834292f6f.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038683,
@@ -3721,12 +3851,13 @@
     "category": "3d-prints-skaven",
     "title": "Shootman Ratmen Set 1",
     "author": "vinciminiatures (3d print)",
-    "price": "",
+    "price": "1000",
     "image": "/uploads/6bf75f03-c444-475a-ade4-efa05ef5f8d2.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/6bf75f03-c444-475a-ade4-efa05ef5f8d2.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038684,
@@ -3734,12 +3865,13 @@
     "category": "3d-prints-skaven",
     "title": "Shootman Ratmen Set 2",
     "author": "vinciminiatures (3d print)",
-    "price": "",
+    "price": "1000",
     "image": "/uploads/e009dbe1-54df-40a7-a897-35c819f48059.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/e009dbe1-54df-40a7-a897-35c819f48059.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038685,
@@ -3747,12 +3879,13 @@
     "category": "3d-prints-skaven",
     "title": "Rat Walker 1",
     "author": "vinciminiatures (3d print)",
-    "price": "",
+    "price": "700",
     "image": "/uploads/0ed3c38b-8b9d-4a74-a0ab-834dd9e4cf7a.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/0ed3c38b-8b9d-4a74-a0ab-834dd9e4cf7a.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038686,
@@ -3760,12 +3893,13 @@
     "category": "3d-prints-skaven",
     "title": "Gunner Ratmen Set 1",
     "author": "vinciminiatures (3d print)",
-    "price": "",
+    "price": "1000",
     "image": "/uploads/bd19d6cf-dca8-47fb-81cc-04ca74282f58.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/bd19d6cf-dca8-47fb-81cc-04ca74282f58.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038687,
@@ -3773,12 +3907,13 @@
     "category": "3d-prints-skaven",
     "title": "Engineer with a Rocket-Glaive",
     "author": "Eman G (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/231feaac-59c8-406a-84b0-384ac13987ec.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/231feaac-59c8-406a-84b0-384ac13987ec.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038688,
@@ -3786,12 +3921,13 @@
     "category": "3d-prints-skaven",
     "title": "Bombardier with a DoomRocket-Launcher",
     "author": "Eman G (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/9e85f655-aac5-4c9f-a211-2b292465fe68.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/9e85f655-aac5-4c9f-a211-2b292465fe68.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038689,
@@ -3799,12 +3935,13 @@
     "category": "3d-prints-skaven",
     "title": "Adeptus-Rodenticus with a Rocket-Glaive",
     "author": "Eman G (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/7e659810-ac37-4f7f-96ac-f88a84285c82.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/7e659810-ac37-4f7f-96ac-f88a84285c82.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038690,
@@ -3812,12 +3949,13 @@
     "category": "3d-prints-skaven",
     "title": "The Black Paw (5)",
     "author": "Eman G (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/e45fdb1e-568a-480b-a034-5daa2bd6be6b.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/e45fdb1e-568a-480b-a034-5daa2bd6be6b.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038691,
@@ -3825,12 +3963,13 @@
     "category": "3d-prints-skaven",
     "title": "Rat Walker 2",
     "author": "vinciminiatures (3d print)",
-    "price": "",
+    "price": "700",
     "image": "/uploads/f8db5f2a-3736-4b5a-b222-a6d50cbadd2e.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/f8db5f2a-3736-4b5a-b222-a6d50cbadd2e.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038692,
@@ -3838,12 +3977,13 @@
     "category": "3d-prints-skaven",
     "title": "Rat Walker 3",
     "author": "vinciminiatures (3d print)",
-    "price": "",
+    "price": "700",
     "image": "/uploads/91f1e36e-8725-4ca3-b882-074d0760f778.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/91f1e36e-8725-4ca3-b882-074d0760f778.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038693,
@@ -3851,12 +3991,13 @@
     "category": "3d-prints-skaven",
     "title": "Ratmen Engineers (3)",
     "author": "One Page Rules (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/80659031-c68a-49f7-a493-02dfd99370de.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/80659031-c68a-49f7-a493-02dfd99370de.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038694,
@@ -3864,12 +4005,13 @@
     "category": "3d-prints-skaven",
     "title": "Ratfolk Chainguns (2)",
     "author": "Duncan Shadow (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/4dab098b-c489-4da1-99cd-7883c2022438.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/4dab098b-c489-4da1-99cd-7883c2022438.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038695,
@@ -3877,12 +4019,13 @@
     "category": "3d-prints-skaven",
     "title": "Ratfolk Assassin",
     "author": "Manuel_Boria (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/9f00dc28-5b9d-484b-8481-fc9816e0d44a.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/9f00dc28-5b9d-484b-8481-fc9816e0d44a.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038696,
@@ -3890,12 +4033,13 @@
     "category": "3d-prints-skaven",
     "title": "Rat Drummer",
     "author": "CrossLances (3d print)",
-    "price": "",
+    "price": "100",
     "image": "/uploads/a9a29f1d-fc8b-4390-99be-f3fed59f53ce.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/a9a29f1d-fc8b-4390-99be-f3fed59f53ce.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038697,
@@ -3903,7 +4047,7 @@
     "category": "3d-prints-skaven",
     "title": "Ratfolk Sniper",
     "author": "Duncan Shadow (3d print)",
-    "price": "",
+    "price": "100",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/fe783b10-b041-4a15-b3e6-ca06d5b91e13.jpg"
@@ -3919,12 +4063,13 @@
     "category": "3d-prints-skaven",
     "title": "Bomber Ratmen Set 1",
     "author": "vinciminiatures (3d print)",
-    "price": "",
+    "price": "700",
     "image": "/uploads/08e04357-f474-4ab1-8619-09da5e64bc0b.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/08e04357-f474-4ab1-8619-09da5e64bc0b.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038699,
@@ -3932,12 +4077,13 @@
     "category": "3d-prints-skaven",
     "title": "Sniper Engineer",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/b3662856-7554-4f1b-8d3b-bc92059ba2c9.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/b3662856-7554-4f1b-8d3b-bc92059ba2c9.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038700,
@@ -3945,12 +4091,13 @@
     "category": "3d-prints-skaven",
     "title": "Warlock",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/6a9b0de7-011d-4177-ad0d-b7ca2aae229b.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/6a9b0de7-011d-4177-ad0d-b7ca2aae229b.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038701,
@@ -3958,12 +4105,13 @@
     "category": "3d-prints-skaven",
     "title": "Snipers 1",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/88261b88-f43c-4774-a668-b697f7f66c77.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/88261b88-f43c-4774-a668-b697f7f66c77.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038702,
@@ -3971,12 +4119,13 @@
     "category": "3d-prints-skaven",
     "title": "Snipers 2",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/e02d9580-efe1-49f1-bd19-5e033795ae50.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/e02d9580-efe1-49f1-bd19-5e033795ae50.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038703,
@@ -3984,12 +4133,13 @@
     "category": "3d-prints-skaven",
     "title": "Snipers 3",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/c1a719e8-33f3-4db5-84d0-ee6c2d6be5af.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/c1a719e8-33f3-4db5-84d0-ee6c2d6be5af.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038704,
@@ -3997,12 +4147,13 @@
     "category": "3d-prints-skaven",
     "title": "Grenadiers",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/1c327b54-6f07-4fcf-a155-4afa69230cb1.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/1c327b54-6f07-4fcf-a155-4afa69230cb1.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038705,
@@ -4010,12 +4161,13 @@
     "category": "3d-prints-skaven",
     "title": "Giant Swarm",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/b809d93f-2c0f-40b1-8c0a-a205aa68756a.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/b809d93f-2c0f-40b1-8c0a-a205aa68756a.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038706,
@@ -4023,12 +4175,13 @@
     "category": "3d-prints-skaven",
     "title": "Assassin",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/c1ff1d2c-8201-4c3a-8956-4c6d6c258e84.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/c1ff1d2c-8201-4c3a-8956-4c6d6c258e84.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038707,
@@ -4036,7 +4189,7 @@
     "category": "3d-prints-skaven",
     "title": "Scouts",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/52695c8c-dcc4-4ea0-8f86-4f2dcebbd1fd.jpg"
@@ -4052,12 +4205,13 @@
     "category": "3d-prints-skaven",
     "title": "Weapon Team Grinder",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/485a748e-6eab-4e5d-b259-a2ec4fa432af.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/485a748e-6eab-4e5d-b259-a2ec4fa432af.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038709,
@@ -4065,12 +4219,13 @@
     "category": "3d-prints-skaven",
     "title": "Weapon Team Ratling Gun",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/93efdd96-cf99-41b0-97f2-1535f0e6a27c.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/93efdd96-cf99-41b0-97f2-1535f0e6a27c.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038710,
@@ -4078,12 +4233,13 @@
     "category": "3d-prints-skaven",
     "title": "Weapon Team Warpfire Thrower",
     "author": "One Page Rules",
-    "price": "",
+    "price": "100",
     "image": "/uploads/3bbdaf00-3609-4a6a-915b-e0b4159409e8.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/3bbdaf00-3609-4a6a-915b-e0b4159409e8.webp"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": 1784670038711,
@@ -4091,11 +4247,12 @@
     "category": "3d-prints-skaven",
     "title": "Rat Ogre",
     "author": "Manuel_Boria",
-    "price": "",
+    "price": "100",
     "image": "/uploads/7e022618-08fd-44d5-9122-f2a1f84446aa.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/7e022618-08fd-44d5-9122-f2a1f84446aa.webp"
-    ]
+    ],
+    "recaster": ""
   }
 ]
