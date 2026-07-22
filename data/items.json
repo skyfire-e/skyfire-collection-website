@@ -3906,8 +3906,12 @@
     "price": "",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
-      null
-    ]
+      "/uploads/fe783b10-b041-4a15-b3e6-ca06d5b91e13.jpg"
+    ],
+    "recaster": "",
+    "combatPoints": "",
+    "status": "",
+    "image": "/uploads/fe783b10-b041-4a15-b3e6-ca06d5b91e13.jpg"
   },
   {
     "id": 1784670038698,
@@ -4035,8 +4039,12 @@
     "price": "",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
-      null
-    ]
+      "/uploads/52695c8c-dcc4-4ea0-8f86-4f2dcebbd1fd.jpg"
+    ],
+    "recaster": "",
+    "combatPoints": "",
+    "status": "",
+    "image": "/uploads/52695c8c-dcc4-4ea0-8f86-4f2dcebbd1fd.jpg"
   },
   {
     "id": 1784670038708,
