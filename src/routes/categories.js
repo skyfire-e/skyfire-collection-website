@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
-const { readJSON, writeJSONAtomic, findCategory, withDataLock, CATEGORIES_FILE, ITEMS_FILE } = require('../helpers');
+const { readJSON, writeJSONAtomic, findCategory, withDataLock, appendAudit, CATEGORIES_FILE, ITEMS_FILE } = require('../helpers');
 
 const router = Router();
 
@@ -46,6 +46,7 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
       writeJSONAtomic(CATEGORIES_FILE, cats);
       return cats;
     });
+    appendAudit({ action: 'category.create', section, categoryId: catId, label, parentId });
     res.json(result);
   } catch (err) { if (err.status) return res.status(err.status).json({ error: err.message }); next(err); }
 });
@@ -109,6 +110,7 @@ router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
       writeJSONAtomic(CATEGORIES_FILE, cats);
       return cats;
     });
+    appendAudit({ action: 'category.delete', section, categoryId: id || section, parentId });
     res.json(result);
   } catch (err) { if (err.status) return res.status(err.status).json({ error: err.message }); next(err); }
 });

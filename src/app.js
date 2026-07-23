@@ -4,7 +4,7 @@ const FileStore = require('session-file-store')(session);
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
-const { ValidationError, DataCorruptionError } = require('./errors');
+const { ValidationError, DataCorruptionError, VersionConflictError } = require('./errors');
 const { readJSON, writeJSONAtomic, secureCookies, DATA_DIR, ITEMS_FILE, ROOT } = require('./helpers');
 
 // Init data files and session storage
@@ -65,6 +65,9 @@ app.use((error, req, res, next) => {
     return res.status(error.status).json({ error: error.message, details: error.details });
   }
   if (error instanceof DataCorruptionError) {
+    return res.status(error.status).json({ error: error.message });
+  }
+  if (error instanceof VersionConflictError) {
     return res.status(error.status).json({ error: error.message });
   }
   if (error.message === 'Unsupported image type' || error.message === 'Only JPEG, PNG and WebP are allowed') {

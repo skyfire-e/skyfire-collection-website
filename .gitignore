@@ -5,6 +5,9 @@ data/users.json
 # Non-site files (scrapers, temp, drafts)
 gitignore/
 
+# Session store
+data/sessions/
+
 # Backup artifacts
 backups/
 

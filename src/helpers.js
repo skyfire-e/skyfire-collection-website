@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const sharp = require('sharp');
-const { ValidationError, DataCorruptionError } = require('./errors');
+const { ValidationError, DataCorruptionError, VersionConflictError } = require('./errors');
 const { itemInputSchema, itemInputPartialSchema } = require('../lib/validate');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -10,6 +10,7 @@ const DATA_DIR = path.join(ROOT, 'data');
 const ITEMS_FILE = path.join(DATA_DIR, 'items.json');
 const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+const AUDIT_FILE = path.join(DATA_DIR, 'audit.json');
 const UPLOADS_DIR = path.resolve(ROOT, 'uploads');
 const TEMP_DIR = path.join(UPLOADS_DIR, '.tmp');
 
@@ -158,6 +159,18 @@ function parseJSONArray(value, fieldName) {
   }
 }
 
+function validateVersion(item, clientVersion) {
+  if (clientVersion !== undefined && item.version !== undefined && Number(clientVersion) !== item.version) {
+    throw new VersionConflictError();
+  }
+}
+
+function appendAudit(entry) {
+  const logs = (() => { try { return JSON.parse(require('fs').readFileSync(AUDIT_FILE, 'utf8')); } catch { return []; } })();
+  logs.push({ timestamp: new Date().toISOString(), ...entry });
+  try { require('fs').writeFileSync(AUDIT_FILE, JSON.stringify(logs, null, 2), 'utf8'); } catch (e) { console.error('Audit write failed:', e.message); }
+}
+
 let writeQueue = Promise.resolve();
 
 function withDataLock(operation) {
@@ -167,11 +180,12 @@ function withDataLock(operation) {
 }
 
 module.exports = {
-  ROOT, DATA_DIR, ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE, UPLOADS_DIR, TEMP_DIR,
+  ROOT, DATA_DIR, ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE, AUDIT_FILE, UPLOADS_DIR, TEMP_DIR,
   envBoolean, secureCookies,
   readJSON, writeJSONAtomic,
   safeUnlink, cleanupUploadedFiles,
   normalizeImage, findCategory, flattenCategories,
   validateItemInput, validateFinalOrder, parseJSONArray,
+  validateVersion, appendAudit,
   withDataLock
 };

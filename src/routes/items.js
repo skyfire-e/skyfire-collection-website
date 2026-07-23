@@ -4,6 +4,7 @@ const { requireAdmin, requireSameOrigin, upload } = require('../middleware');
 const {
   readJSON, writeJSONAtomic, safeUnlink, cleanupUploadedFiles,
   normalizeImage, findCategory, validateItemInput, validateFinalOrder, parseJSONArray,
+  validateVersion, appendAudit,
   withDataLock,
   ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE
 } = require('../helpers');
@@ -42,6 +43,7 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
         recaster: data.recaster || '',
         combatPoints: data.combatPoints || '',
         status: data.status || '',
+        version: 1,
         image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
         images: images,
         createdAt: new Date().toISOString()
@@ -150,6 +152,10 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       }
     }
 
+    validateVersion(currentItem, req.body.version);
+
+    candidate.version = (currentItem.version || 0) + 1;
+
     const oldImagesForCleanup = [...(currentItem.images || [])];
 
     await withDataLock(() => {
@@ -174,6 +180,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       }
     }
 
+    appendAudit({ action: 'item.update', entityId: candidate.id, title: candidate.title });
     res.json(candidate);
   } catch (err) { next(err); }
 });
@@ -191,6 +198,7 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
       writeJSONAtomic(ITEMS_FILE, items);
     });
     if (!deletedItem) return res.status(404).json({ error: 'Not found' });
+    appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
     const currentItems = readJSON(ITEMS_FILE) || [];
     for (const img of uniquePaths) {
       const stillReferenced = currentItems.some(other => other.image === img || other.images?.includes(img));

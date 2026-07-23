@@ -13,7 +13,8 @@
     ],
     "recaster": "",
     "combatPoints": "",
-    "status": ""
+    "status": "",
+    "version": 1
   },
   {
     "id": 1784583148283,
@@ -26,7 +27,8 @@
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
       "/uploads/metal-dice-2.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148284,
@@ -39,7 +41,8 @@
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
       "/uploads/metal-dice-3.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148285,
@@ -52,7 +55,8 @@
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
       "/uploads/metal-dice-4.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148286,
@@ -65,7 +69,8 @@
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
       "/uploads/metal-dice-5.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148287,
@@ -78,7 +83,8 @@
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
       "/uploads/metal-dice-6.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148288,
@@ -91,7 +97,8 @@
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
       "/uploads/metal-dice-7.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148290,
@@ -104,7 +111,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-8.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148291,
@@ -117,7 +125,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-9.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148292,
@@ -130,7 +139,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-10.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148293,
@@ -143,7 +153,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-11.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148294,
@@ -156,7 +167,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-12.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148295,
@@ -169,7 +181,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-13.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148296,
@@ -182,7 +195,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-14.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148297,
@@ -195,7 +209,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-15.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148298,
@@ -208,7 +223,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-16.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148299,
@@ -221,7 +237,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-17.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148300,
@@ -234,7 +251,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-18.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148301,
@@ -247,7 +265,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-19.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148302,
@@ -260,7 +279,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-20.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148303,
@@ -273,7 +293,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-21.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148304,
@@ -286,7 +307,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-22.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148305,
@@ -299,7 +321,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-23.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148306,
@@ -312,7 +335,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-24.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148307,
@@ -325,7 +349,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-25.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148308,
@@ -338,7 +363,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-26.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148309,
@@ -351,7 +377,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-27.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148310,
@@ -364,7 +391,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-28.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148311,
@@ -377,7 +405,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/metal-dice-29.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148312,
@@ -393,7 +422,8 @@
     "status": "",
     "images": [
       "/uploads/1784672989417-images.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148313,
@@ -406,7 +436,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/resin-dice-1.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148314,
@@ -419,7 +450,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/resin-dice-2.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148315,
@@ -432,7 +464,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/resin-dice-3.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148316,
@@ -445,7 +478,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/resin-dice-4.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148317,
@@ -458,7 +492,8 @@
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
       "/uploads/resin-dice-5.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148319,
@@ -471,7 +506,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-6.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148320,
@@ -484,7 +520,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-7.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148321,
@@ -497,7 +534,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-8.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148322,
@@ -510,7 +548,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-9.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148323,
@@ -523,7 +562,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-10.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148324,
@@ -536,7 +576,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-11.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148325,
@@ -549,7 +590,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-12.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148326,
@@ -562,7 +604,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-13.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148327,
@@ -575,7 +618,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-14.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148328,
@@ -588,7 +632,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-15.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148329,
@@ -601,7 +646,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-16.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148330,
@@ -614,7 +660,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/resin-dice-17.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148331,
@@ -627,7 +674,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-1.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148332,
@@ -640,7 +688,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-2.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148333,
@@ -653,7 +702,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-3.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148334,
@@ -666,7 +716,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-4.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148335,
@@ -679,7 +730,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-5.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148336,
@@ -692,7 +744,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-6.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148337,
@@ -705,7 +758,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-7.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148338,
@@ -718,7 +772,8 @@
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
       "/uploads/acrylic-dice-8.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148340,
@@ -731,7 +786,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-9.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148341,
@@ -744,7 +800,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-10.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148342,
@@ -757,7 +814,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-11.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148343,
@@ -770,7 +828,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-12.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148344,
@@ -783,7 +842,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-13.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148345,
@@ -796,7 +856,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-14.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148346,
@@ -809,7 +870,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-15.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148347,
@@ -822,7 +884,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-16.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148348,
@@ -835,7 +898,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-17.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148349,
@@ -848,7 +912,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-18.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148350,
@@ -861,7 +926,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-19.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148351,
@@ -874,7 +940,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-20.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148352,
@@ -887,7 +954,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-21.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148353,
@@ -900,7 +968,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-22.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148354,
@@ -913,7 +982,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-23.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148355,
@@ -926,7 +996,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-24.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148356,
@@ -939,7 +1010,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-25.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148357,
@@ -952,7 +1024,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-26.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148358,
@@ -965,7 +1038,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-27.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148359,
@@ -978,7 +1052,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-28.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148360,
@@ -991,7 +1066,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-29.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148361,
@@ -1004,7 +1080,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-30.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148362,
@@ -1017,7 +1094,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-31.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148363,
@@ -1030,7 +1108,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-32.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148364,
@@ -1043,7 +1122,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-33.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148365,
@@ -1056,7 +1136,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-34.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148366,
@@ -1069,7 +1150,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-35.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148367,
@@ -1082,7 +1164,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-36.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148368,
@@ -1095,7 +1178,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-37.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148369,
@@ -1108,7 +1192,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-38.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148370,
@@ -1121,7 +1206,8 @@
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
       "/uploads/acrylic-dice-39.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148372,
@@ -1134,7 +1220,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-40.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148373,
@@ -1147,7 +1234,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-41.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148374,
@@ -1160,7 +1248,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-42.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148375,
@@ -1173,7 +1262,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-43.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148376,
@@ -1186,7 +1276,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-44.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148377,
@@ -1199,7 +1290,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-45.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148378,
@@ -1212,7 +1304,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-46.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148379,
@@ -1225,7 +1318,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-47.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148380,
@@ -1238,7 +1332,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-48.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148381,
@@ -1251,7 +1346,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-49.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148382,
@@ -1264,7 +1360,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-50.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148383,
@@ -1277,7 +1374,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-51.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148384,
@@ -1290,7 +1388,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-52.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148385,
@@ -1303,7 +1402,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-53.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148386,
@@ -1316,7 +1416,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-54.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148387,
@@ -1329,7 +1430,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-55.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148388,
@@ -1342,7 +1444,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-56.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148389,
@@ -1355,7 +1458,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-57.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148390,
@@ -1368,7 +1472,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-58.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148391,
@@ -1381,7 +1486,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-59.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148392,
@@ -1394,7 +1500,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-dice-60.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148393,
@@ -1407,7 +1514,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/wooden-dice-1.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148394,
@@ -1420,7 +1528,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/wooden-dice-2.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148395,
@@ -1433,7 +1542,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-1.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148396,
@@ -1446,7 +1556,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-2.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148397,
@@ -1459,7 +1570,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-3.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148398,
@@ -1472,7 +1584,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-4.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148399,
@@ -1485,7 +1598,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-5.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148400,
@@ -1498,7 +1612,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-6.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148401,
@@ -1511,7 +1626,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-7.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148402,
@@ -1524,7 +1640,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-8.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148403,
@@ -1537,7 +1654,8 @@
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
       "/uploads/acrylic-figurines-9.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148405,
@@ -1550,7 +1668,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/acrylic-figurines-10.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148406,
@@ -1563,7 +1682,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/acrylic-figurines-11.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148407,
@@ -1576,7 +1696,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/acrylic-figurines-12.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148408,
@@ -1589,7 +1710,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/acrylic-figurines-13.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148409,
@@ -1602,7 +1724,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/acrylic-figurines-14.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148410,
@@ -1615,7 +1738,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/acrylic-figurines-15.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148411,
@@ -1628,7 +1752,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-1.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148412,
@@ -1641,7 +1766,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-2.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148413,
@@ -1654,7 +1780,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-3.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148414,
@@ -1667,7 +1794,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-4.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148415,
@@ -1680,7 +1808,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-5.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148416,
@@ -1693,7 +1822,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-6.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148417,
@@ -1706,7 +1836,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-7.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148418,
@@ -1719,7 +1850,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-8.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148419,
@@ -1732,7 +1864,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-9.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148420,
@@ -1745,7 +1878,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-10.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148421,
@@ -1758,7 +1892,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-11.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148422,
@@ -1771,7 +1906,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-12.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148423,
@@ -1784,7 +1920,8 @@
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
       "/uploads/metal-figurines-13.jpg"
-    ]
+    ],
+    "version": 1
   },
   {
     "id": 1784583148424,
@@ -1799,7 +1936,8 @@
       "/uploads/citadel-skaven-1.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148425,
@@ -1814,7 +1952,8 @@
       "/uploads/citadel-skaven-2.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148426,
@@ -1829,7 +1968,8 @@
       "/uploads/citadel-skaven-3.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148427,
@@ -1844,7 +1984,8 @@
       "/uploads/citadel-skaven-4.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148428,
@@ -1859,7 +2000,8 @@
       "/uploads/citadel-skaven-5.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148429,
@@ -1874,7 +2016,8 @@
       "/uploads/citadel-skaven-6.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148430,
@@ -1889,7 +2032,8 @@
       "/uploads/citadel-skaven-7.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148431,
@@ -1904,7 +2048,8 @@
       "/uploads/citadel-skaven-8.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148432,
@@ -1919,7 +2064,8 @@
       "/uploads/citadel-skaven-9.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148433,
@@ -1934,7 +2080,8 @@
       "/uploads/citadel-skaven-10.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148434,
@@ -1949,7 +2096,8 @@
       "/uploads/citadel-skaven-11.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148435,
@@ -1964,7 +2112,8 @@
       "/uploads/citadel-skaven-12.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148436,
@@ -1979,7 +2128,8 @@
       "/uploads/citadel-skaven-13.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148438,
@@ -1994,7 +2144,8 @@
       "/uploads/citadel-skaven-14.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148439,
@@ -2009,7 +2160,8 @@
       "/uploads/citadel-skaven-15.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148440,
@@ -2024,7 +2176,8 @@
       "/uploads/citadel-skaven-16.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148441,
@@ -2039,7 +2192,8 @@
       "/uploads/citadel-skaven-17.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148442,
@@ -2054,7 +2208,8 @@
       "/uploads/citadel-skaven-18.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148443,
@@ -2069,7 +2224,8 @@
       "/uploads/citadel-skaven-19.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148444,
@@ -2084,7 +2240,8 @@
       "/uploads/citadel-skaven-20.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148445,
@@ -2099,7 +2256,8 @@
       "/uploads/citadel-skaven-21.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148446,
@@ -2114,7 +2272,8 @@
       "/uploads/citadel-skaven-22.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148447,
@@ -2129,7 +2288,8 @@
       "/uploads/citadel-skaven-23.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148448,
@@ -2144,7 +2304,8 @@
       "/uploads/citadel-skaven-24.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148449,
@@ -2159,7 +2320,8 @@
       "/uploads/citadel-skaven-25.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148450,
@@ -2174,7 +2336,8 @@
       "/uploads/citadel-skaven-26.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148451,
@@ -2189,7 +2352,8 @@
       "/uploads/citadel-skaven-27.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148452,
@@ -2204,7 +2368,8 @@
       "/uploads/citadel-skaven-28.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148454,
@@ -2220,7 +2385,8 @@
     ],
     "recaster": "Литейка GreedIsGood",
     "combatPoints": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148455,
@@ -2235,7 +2401,8 @@
       "/uploads/citadel-skaven-30.jpg"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148456,
@@ -2250,7 +2417,8 @@
       "/uploads/citadel-skaven-31.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148457,
@@ -2265,7 +2433,8 @@
       "/uploads/citadel-skaven-32.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148458,
@@ -2280,7 +2449,8 @@
       "/uploads/citadel-skaven-33.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148459,
@@ -2295,7 +2465,8 @@
       "/uploads/citadel-skaven-34.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148460,
@@ -2310,7 +2481,8 @@
       "/uploads/citadel-skaven-35.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148461,
@@ -2325,7 +2497,8 @@
       "/uploads/citadel-skaven-36.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148462,
@@ -2340,7 +2513,8 @@
       "/uploads/citadel-skaven-37.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148463,
@@ -2356,7 +2530,8 @@
     ],
     "recaster": "",
     "status": "Rare",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784583148464,
@@ -2371,7 +2546,8 @@
       "/uploads/citadel-skaven-39.jpg"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784583148465,
@@ -2386,7 +2562,8 @@
       "/uploads/citadel-skaven-40.jpg"
     ],
     "recaster": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784583148466,
@@ -2401,7 +2578,8 @@
       "/uploads/citadel-skaven-41.jpg"
     ],
     "recaster": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784583148467,
@@ -2416,7 +2594,8 @@
       "/uploads/citadel-skaven-42.jpg"
     ],
     "recaster": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784583148468,
@@ -2431,7 +2610,8 @@
       "/uploads/citadel-skaven-43.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148469,
@@ -2446,7 +2626,8 @@
       "/uploads/citadel-skaven-44.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148470,
@@ -2461,7 +2642,8 @@
       "/uploads/citadel-skaven-45.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148471,
@@ -2476,7 +2658,8 @@
       "/uploads/citadel-skaven-46.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148472,
@@ -2491,7 +2674,8 @@
       "/uploads/citadel-skaven-47.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148473,
@@ -2506,7 +2690,8 @@
       "/uploads/citadel-skaven-48.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148474,
@@ -2521,7 +2706,8 @@
       "/uploads/citadel-skaven-49.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148475,
@@ -2536,7 +2722,8 @@
       "/uploads/citadel-skaven-50.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148476,
@@ -2551,7 +2738,8 @@
       "/uploads/citadel-skaven-51.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148477,
@@ -2566,7 +2754,8 @@
       "/uploads/citadel-skaven-52.jpg"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784583148478,
@@ -2581,7 +2770,8 @@
       "/uploads/citadel-skaven-53.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784669249130,
@@ -2599,7 +2789,8 @@
       "/uploads/stone-dice-1-2.jpg",
       "/uploads/stone-dice-1-1.jpg"
     ],
-    "createdAt": "2026-07-21T21:27:29.130Z"
+    "createdAt": "2026-07-21T21:27:29.130Z",
+    "version": 1
   },
   {
     "id": 1784669249131,
@@ -2617,7 +2808,8 @@
       "/uploads/stone-dice-2-1.jpg",
       "/uploads/stone-dice-2-3.jpg"
     ],
-    "createdAt": "2026-07-21T21:27:29.130Z"
+    "createdAt": "2026-07-21T21:27:29.130Z",
+    "version": 1
   },
   {
     "id": 1784669249132,
@@ -2635,7 +2827,8 @@
       "/uploads/stone-dice-3-1.jpg",
       "/uploads/stone-dice-3-3.jpg"
     ],
-    "createdAt": "2026-07-21T21:27:29.130Z"
+    "createdAt": "2026-07-21T21:27:29.130Z",
+    "version": 1
   },
   {
     "id": 1784669249134,
@@ -2653,7 +2846,8 @@
       "/uploads/stone-dice-4-2.jpg",
       "/uploads/stone-dice-4-1.jpg"
     ],
-    "createdAt": "2026-07-21T21:27:29.131Z"
+    "createdAt": "2026-07-21T21:27:29.131Z",
+    "version": 1
   },
   {
     "id": 1784669249135,
@@ -2672,7 +2866,8 @@
       "/uploads/stone-dice-5-1.jpg",
       "/uploads/stone-dice-5-2.jpg"
     ],
-    "createdAt": "2026-07-21T21:27:29.131Z"
+    "createdAt": "2026-07-21T21:27:29.131Z",
+    "version": 1
   },
   {
     "id": 1784669249136,
@@ -2690,7 +2885,8 @@
       "/uploads/stone-dice-6-2.jpg",
       "/uploads/stone-dice-6-3.jpg"
     ],
-    "createdAt": "2026-07-21T21:27:29.131Z"
+    "createdAt": "2026-07-21T21:27:29.131Z",
+    "version": 1
   },
   {
     "id": 1784669653389,
@@ -2707,7 +2903,8 @@
       "/uploads/metal-fig-pioneer-1.jpg",
       "/uploads/metal-fig-pioneer-2.jpg"
     ],
-    "createdAt": "2026-07-21T21:34:13.389Z"
+    "createdAt": "2026-07-21T21:34:13.389Z",
+    "version": 1
   },
   {
     "id": 1784670038602,
@@ -2724,7 +2921,8 @@
       "/uploads/resin-dice-sperm-1.jpg",
       "/uploads/resin-dice-sperm-2.jpg"
     ],
-    "createdAt": "2026-07-21T21:40:38.602Z"
+    "createdAt": "2026-07-21T21:40:38.602Z",
+    "version": 1
   },
   {
     "id": 1784670038603,
@@ -2742,7 +2940,8 @@
     "description": "Games Workshop (Mordheim) (Metal)",
     "recaster": "",
     "combatPoints": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784670038604,
@@ -2760,7 +2959,8 @@
     "description": "Sealed",
     "recaster": "",
     "combatPoints": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784670038605,
@@ -2778,7 +2978,8 @@
     "description": "Games Workshop (4-th edition) (Metal) [5 pcs]",
     "recaster": "",
     "combatPoints": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784670038606,
@@ -2795,7 +2996,8 @@
     "description": "Sealed",
     "recaster": "",
     "combatPoints": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784670038607,
@@ -2812,7 +3014,8 @@
     "description": "Games Workshop (3-th edition) (Metal) [5 pcs]",
     "recaster": "",
     "combatPoints": "",
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": 1784670038608,
@@ -2828,7 +3031,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038609,
@@ -2844,7 +3048,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038610,
@@ -2860,7 +3065,8 @@
     ],
     "description": "Games Workshop (2 assassin adepts, sorcerer, 2 black skaven, 2 night runner, rat ogre, Veskit) (re-cast)",
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038611,
@@ -2875,7 +3081,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Unbuilt / Boxed",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038612,
@@ -2890,7 +3097,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038613,
@@ -2905,7 +3113,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038614,
@@ -2920,7 +3129,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038615,
@@ -2935,7 +3145,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038616,
@@ -2950,7 +3161,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Unbuilt / Boxed",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038617,
@@ -2965,7 +3177,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Unbuilt / Boxed",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038618,
@@ -2981,7 +3194,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038619,
@@ -2997,7 +3211,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038620,
@@ -3013,7 +3228,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038621,
@@ -3029,7 +3245,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038622,
@@ -3045,7 +3262,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка Stark Foundry",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038623,
@@ -3061,7 +3279,8 @@
     ],
     "description": "Games Workshop (by Phil Kelly) (re-cast)",
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038624,
@@ -3077,7 +3296,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка OldHammer Мастерская",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038625,
@@ -3093,7 +3313,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка OldHammer Мастерская",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038626,
@@ -3109,7 +3330,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка OldHammer Мастерская",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038627,
@@ -3125,7 +3347,8 @@
     ],
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка OldHammer Мастерская",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038628,
@@ -3140,7 +3363,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038629,
@@ -3155,7 +3379,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038630,
@@ -3170,7 +3395,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038631,
@@ -3185,7 +3411,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038632,
@@ -3200,7 +3427,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038633,
@@ -3215,7 +3443,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038634,
@@ -3230,7 +3459,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038635,
@@ -3245,7 +3475,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038636,
@@ -3260,7 +3491,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038637,
@@ -3275,7 +3507,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038638,
@@ -3290,7 +3523,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038639,
@@ -3305,7 +3539,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038640,
@@ -3320,7 +3555,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038641,
@@ -3335,7 +3571,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038642,
@@ -3350,7 +3587,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038643,
@@ -3365,7 +3603,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038644,
@@ -3380,7 +3619,8 @@
     "description": "Games Workshop (re-cast)",
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038645,
@@ -3395,7 +3635,8 @@
       "/uploads/6798c323-2a1c-45b4-a716-22a9dcaac9d5.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038646,
@@ -3410,7 +3651,8 @@
       "/uploads/b894695f-d310-46c5-a21a-15a309a69fe9.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038647,
@@ -3425,7 +3667,8 @@
       "/uploads/fd347ba2-ea15-4582-be02-000a1effa915.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038648,
@@ -3440,7 +3683,8 @@
       "/uploads/4991c301-9840-4708-983f-8f296fe77461.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038649,
@@ -3455,7 +3699,8 @@
       "/uploads/0e8ccd3b-40a2-4180-a91a-72060abf7a20.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038650,
@@ -3470,7 +3715,8 @@
       "/uploads/fb09324b-bc56-41ef-a4a0-6f18fa038e20.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038651,
@@ -3485,7 +3731,8 @@
       "/uploads/e16451d0-ad36-4feb-93f7-35c41627ae22.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038652,
@@ -3500,7 +3747,8 @@
       "/uploads/012ac266-398f-4aee-a0bc-98da9e2a5c7a.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038653,
@@ -3515,7 +3763,8 @@
       "/uploads/0d3f7687-1e1b-4bc8-b7e3-9768229dbd9b.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038654,
@@ -3530,7 +3779,8 @@
       "/uploads/f5ae9bdd-ab3d-4b2b-9f34-5a039107b6a7.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038655,
@@ -3545,7 +3795,8 @@
       "/uploads/54da2532-9c50-4651-b43c-2dddeda1943f.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038656,
@@ -3560,7 +3811,8 @@
       "/uploads/291ffa81-9fa8-47c7-8a82-357f86a52f6e.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038657,
@@ -3575,7 +3827,8 @@
       "/uploads/989a8d97-07a6-41b0-b83b-5018544bc10b.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038658,
@@ -3591,7 +3844,8 @@
     ],
     "recaster": "",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038659,
@@ -3606,7 +3860,8 @@
       "/uploads/0fcf0e89-218e-4285-a469-dc3b94c340cf.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038660,
@@ -3621,7 +3876,8 @@
       "/uploads/522d597b-1f4d-4ba5-8098-450254c21689.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784670038661,
@@ -3636,7 +3892,8 @@
       "/uploads/422e5893-4ac0-43b3-80b8-42b7dcd03ceb.webp"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038662,
@@ -3651,7 +3908,8 @@
       "/uploads/fd83b2fd-3dbd-41a8-8216-7848c31c3301.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038663,
@@ -3666,7 +3924,8 @@
       "/uploads/0298ebf5-3cce-4c8d-917b-7437c62f56ae.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038664,
@@ -3681,7 +3940,8 @@
       "/uploads/f64e5b8b-7e78-4240-a6d3-fa7e178002c9.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038665,
@@ -3696,7 +3956,8 @@
       "/uploads/ffdc02cd-b2f5-415f-8ac5-6389536c8a53.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038666,
@@ -3711,7 +3972,8 @@
       "/uploads/c4e2cb83-18f9-4cb0-a5f1-d383a4803d19.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038667,
@@ -3726,7 +3988,8 @@
       "/uploads/174c91c2-fb54-4bde-ada0-7c49c4ff41f7.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038668,
@@ -3741,7 +4004,8 @@
       "/uploads/6de56e2d-bf54-47c4-ae41-4428d9731964.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038669,
@@ -3756,7 +4020,8 @@
       "/uploads/9c65644f-bda8-499b-b71b-0e3446f0f24f.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038670,
@@ -3771,7 +4036,8 @@
       "/uploads/0d432cf6-62c5-49df-94c1-fe93d666b464.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038671,
@@ -3786,7 +4052,8 @@
       "/uploads/f193ab4c-b28a-4579-860b-1267ba2839c9.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038672,
@@ -3801,7 +4068,8 @@
       "/uploads/4793604c-ccf2-4824-a5ff-a69a2873ab4b.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038673,
@@ -3816,7 +4084,8 @@
       "/uploads/493e11f7-f3b1-4236-b49e-3f9985ccbbce.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038674,
@@ -3831,7 +4100,8 @@
       "/uploads/e611fbd1-8d28-4d37-a02c-6014208153f5.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038675,
@@ -3846,7 +4116,8 @@
       "/uploads/7f6a58aa-1191-48a8-b8a2-834511368a89.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038676,
@@ -3861,7 +4132,8 @@
       "/uploads/f3ac0e37-f303-4ccf-a085-13d4bb0c8988.webp"
     ],
     "recaster": "",
-    "status": "Painted"
+    "status": "Painted",
+    "version": 1
   },
   {
     "id": 1784670038677,
@@ -3876,7 +4148,8 @@
       "/uploads/563aefb2-9f1f-42f7-965d-79a411f25468.webp"
     ],
     "recaster": "",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": 1784670038678,
@@ -3890,7 +4163,8 @@
     "images": [],
     "recaster": "",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038679,
@@ -3904,7 +4178,8 @@
     "images": [],
     "recaster": "",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038680,
@@ -3918,7 +4193,8 @@
     "images": [],
     "recaster": "",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038681,
@@ -3932,7 +4208,8 @@
     "images": [],
     "recaster": "",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038682,
@@ -3946,7 +4223,8 @@
     "images": [],
     "recaster": "",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": 1784670038683,
@@ -3961,7 +4239,8 @@
       "/uploads/6bf75f03-c444-475a-ade4-efa05ef5f8d2.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038684,
@@ -3976,7 +4255,8 @@
       "/uploads/e009dbe1-54df-40a7-a897-35c819f48059.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038685,
@@ -3991,7 +4271,8 @@
       "/uploads/0ed3c38b-8b9d-4a74-a0ab-834dd9e4cf7a.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038686,
@@ -4006,7 +4287,8 @@
       "/uploads/bd19d6cf-dca8-47fb-81cc-04ca74282f58.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038687,
@@ -4021,7 +4303,8 @@
       "/uploads/231feaac-59c8-406a-84b0-384ac13987ec.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038688,
@@ -4036,7 +4319,8 @@
       "/uploads/9e85f655-aac5-4c9f-a211-2b292465fe68.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038689,
@@ -4051,7 +4335,8 @@
       "/uploads/7e659810-ac37-4f7f-96ac-f88a84285c82.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038690,
@@ -4066,7 +4351,8 @@
       "/uploads/e45fdb1e-568a-480b-a034-5daa2bd6be6b.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038691,
@@ -4081,7 +4367,8 @@
       "/uploads/f8db5f2a-3736-4b5a-b222-a6d50cbadd2e.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038692,
@@ -4096,7 +4383,8 @@
       "/uploads/91f1e36e-8725-4ca3-b882-074d0760f778.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038693,
@@ -4111,7 +4399,8 @@
       "/uploads/80659031-c68a-49f7-a493-02dfd99370de.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038694,
@@ -4126,7 +4415,8 @@
       "/uploads/4dab098b-c489-4da1-99cd-7883c2022438.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038695,
@@ -4141,7 +4431,8 @@
       "/uploads/9f00dc28-5b9d-484b-8481-fc9816e0d44a.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038696,
@@ -4156,7 +4447,8 @@
       "/uploads/a9a29f1d-fc8b-4390-99be-f3fed59f53ce.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038697,
@@ -4172,7 +4464,8 @@
     "recaster": "",
     "combatPoints": "",
     "status": "Built",
-    "image": "/uploads/fe783b10-b041-4a15-b3e6-ca06d5b91e13.jpg"
+    "image": "/uploads/fe783b10-b041-4a15-b3e6-ca06d5b91e13.jpg",
+    "version": 1
   },
   {
     "id": 1784670038698,
@@ -4187,7 +4480,8 @@
       "/uploads/08e04357-f474-4ab1-8619-09da5e64bc0b.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038699,
@@ -4202,7 +4496,8 @@
       "/uploads/b3662856-7554-4f1b-8d3b-bc92059ba2c9.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038700,
@@ -4217,7 +4512,8 @@
       "/uploads/6a9b0de7-011d-4177-ad0d-b7ca2aae229b.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038701,
@@ -4232,7 +4528,8 @@
       "/uploads/88261b88-f43c-4774-a668-b697f7f66c77.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038702,
@@ -4247,7 +4544,8 @@
       "/uploads/e02d9580-efe1-49f1-bd19-5e033795ae50.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038703,
@@ -4262,7 +4560,8 @@
       "/uploads/c1a719e8-33f3-4db5-84d0-ee6c2d6be5af.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038704,
@@ -4277,7 +4576,8 @@
       "/uploads/1c327b54-6f07-4fcf-a155-4afa69230cb1.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038705,
@@ -4292,7 +4592,8 @@
       "/uploads/b809d93f-2c0f-40b1-8c0a-a205aa68756a.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038706,
@@ -4307,7 +4608,8 @@
       "/uploads/c1ff1d2c-8201-4c3a-8956-4c6d6c258e84.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038707,
@@ -4323,7 +4625,8 @@
     "recaster": "",
     "combatPoints": "",
     "status": "Built",
-    "image": "/uploads/52695c8c-dcc4-4ea0-8f86-4f2dcebbd1fd.jpg"
+    "image": "/uploads/52695c8c-dcc4-4ea0-8f86-4f2dcebbd1fd.jpg",
+    "version": 1
   },
   {
     "id": 1784670038708,
@@ -4338,7 +4641,8 @@
       "/uploads/485a748e-6eab-4e5d-b259-a2ec4fa432af.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038709,
@@ -4353,7 +4657,8 @@
       "/uploads/93efdd96-cf99-41b0-97f2-1535f0e6a27c.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038710,
@@ -4368,7 +4673,8 @@
       "/uploads/3bbdaf00-3609-4a6a-915b-e0b4159409e8.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": 1784670038711,
@@ -4383,7 +4689,8 @@
       "/uploads/7e022618-08fd-44d5-9122-f2a1f84446aa.webp"
     ],
     "recaster": "",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "4ff03e9a-6075-4562-93b3-6b7bac92f034",
@@ -4404,7 +4711,8 @@
       "/uploads/9003ebed-5815-487b-bd8f-6b656882dbc1.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "8fccb4bc-b9a6-49e5-b909-b74a31cb539b",
@@ -4419,7 +4727,8 @@
       "/uploads/73ce376e-9193-4de3-b337-8d52c1da3aae.jpg"
     ],
     "cp": "45",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "b18fc074-16af-4869-9633-49c7ae35bfb5",
@@ -4434,7 +4743,8 @@
       "/uploads/d1f9953c-60c6-4c3d-a57e-3c9fc1851c04.jpg"
     ],
     "cp": "75",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "19e31210-e019-4a15-8289-56b8cb325491",
@@ -4449,7 +4759,8 @@
       "/uploads/c7905f5c-2d83-4f80-a052-212f76f91196.jpg"
     ],
     "cp": "530",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "12b398dc-a97d-4651-b144-d853c0b9e660",
@@ -4464,7 +4775,8 @@
       "/uploads/32113cdb-dc0d-4487-9415-2a06e0aec991.jpg"
     ],
     "cp": "175",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "e45333d6-bf1a-4e94-9c96-5bccb31d4ab0",
@@ -4479,7 +4791,8 @@
       "/uploads/b1b5e2c9-30c8-4397-8b5f-f83f84048adf.jpg"
     ],
     "cp": "190",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "65ebdd24-7046-4198-8eb0-6b448b413b5c",
@@ -4494,7 +4807,8 @@
       "/uploads/32393bde-04df-4e95-9255-e1e896bdc099.jpg"
     ],
     "cp": "70",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "e1830c35-0359-4b5e-8e16-81e8d5e4cc44",
@@ -4509,7 +4823,8 @@
       "/uploads/5d70af13-e425-46d5-ad55-781f8323e2a9.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "a4f936d3-edba-4b78-bcd7-bc508eafc75c",
@@ -4524,7 +4839,8 @@
       "/uploads/7cf8d99b-2acc-4b1e-8b60-5be1daee854a.jpg"
     ],
     "cp": "365",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "1737d3ac-df14-4922-8441-77a4013cc456",
@@ -4539,7 +4855,8 @@
       "/uploads/d795d641-f92d-4127-9c25-80826f78758e.jpg"
     ],
     "cp": "70",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "a3eca407-a59c-41fe-a66a-266476d5ebee",
@@ -4554,7 +4871,8 @@
       "/uploads/4fa30727-edd4-4584-9f8b-73a27be8ce73.jpg"
     ],
     "cp": "135",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "bff96ff1-983a-48f3-a017-60e6ec279385",
@@ -4569,7 +4887,8 @@
       "/uploads/de617c8e-8bce-46a1-8f3b-9ab8115f429c.jpg"
     ],
     "cp": "85",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "cc7be72f-bee2-4397-9de6-8e9c790ecb19",
@@ -4584,7 +4903,8 @@
       "/uploads/07eb02aa-0e2e-46a9-88e1-00a7377a0c51.jpg"
     ],
     "cp": "55",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "59e166bf-5ee2-4b00-b5bb-aff3d409e681",
@@ -4599,7 +4919,8 @@
       "/uploads/6ac8355e-7d4e-4c4f-9204-c5d53fa3aa8d.jpg"
     ],
     "cp": "300",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "76ff779a-86bd-4e81-8976-56510d1dcdba",
@@ -4614,7 +4935,8 @@
       "/uploads/6b7e50c4-7890-4a24-a023-55d3854447f4.jpg"
     ],
     "cp": "80",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "453e6101-a045-4ce2-988e-86db13d32d88",
@@ -4629,7 +4951,8 @@
       "/uploads/6c604481-c0cb-4b5b-81cb-b8a760ae9006.jpg"
     ],
     "cp": "105",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "cb79f56f-46ea-44f6-8452-9d02c75b47fa",
@@ -4644,7 +4967,8 @@
       "/uploads/0875133e-ca72-44ac-98be-1c3695f75e04.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "126e68e9-f67c-42e9-900b-751ab1d9eacf",
@@ -4659,7 +4983,8 @@
       "/uploads/25bcf966-2077-4aed-a072-e6a6bfc26457.jpg"
     ],
     "cp": "85",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "bfe55de3-4f47-4a7e-86a0-faa1d39cf3e8",
@@ -4674,7 +4999,8 @@
       "/uploads/966b26ed-ff8c-4d81-a701-e9135597c7f1.jpg"
     ],
     "cp": "80",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "b7ad83fd-2429-409b-a595-69ea23479a1e",
@@ -4689,7 +5015,8 @@
       "/uploads/e24c7fed-2fc6-4331-a11d-bcb85ade9283.jpg"
     ],
     "cp": "120",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "17fbe9ef-a0d1-448a-aabd-6b1ec8358c72",
@@ -4704,7 +5031,8 @@
       "/uploads/3b2edbc8-6f2d-435c-ac57-eb568c810ecb.jpg"
     ],
     "cp": "85",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "1789ca2d-63dc-4e7e-9e8f-4c333da6e0b6",
@@ -4719,7 +5047,8 @@
       "/uploads/fd2cc047-5b55-4186-8fc7-52cd2697cc2c.jpg"
     ],
     "cp": "675",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "20372714-3011-4be8-b687-650bb9fe87cc",
@@ -4734,7 +5063,8 @@
       "/uploads/f829f8de-cc75-4a2c-ab69-29be9610d58e.jpg"
     ],
     "cp": "85",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "490268fa-ea8b-4bb8-8eb6-bce64a91e102",
@@ -4749,7 +5079,8 @@
       "/uploads/3dfd840e-a590-4e78-8392-ddd47649b69a.jpg"
     ],
     "cp": "95",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "6ef5353a-a306-41d4-ac99-3e9587ecc87f",
@@ -4764,7 +5095,8 @@
       "/uploads/96b62c34-e9e0-483f-9f00-33a23ebd9489.jpg"
     ],
     "cp": "25",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "af20aa67-1b8e-44f4-a1fd-ad549036727f",
@@ -4779,7 +5111,8 @@
       "/uploads/a05d8a26-afc9-4700-866d-d3f4742820a9.jpg"
     ],
     "cp": "85",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "f7ca2bff-1c33-46f9-9d18-516ae92ce380",
@@ -4794,7 +5127,8 @@
       "/uploads/89d14c33-c199-4d4d-bb1d-5626fd3ed2b4.jpg"
     ],
     "cp": "95",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "35542ef4-58d1-4458-94b4-0ffa490533ba",
@@ -4809,7 +5143,8 @@
       "/uploads/a927889e-8c31-4346-b6b2-4d0f43dbedeb.jpg"
     ],
     "cp": "690",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "1e2292ff-4224-4f86-ad6f-b41b33a7752e",
@@ -4824,7 +5159,8 @@
       "/uploads/69b4d712-49f5-4b97-a08d-53181b83d847.jpg"
     ],
     "cp": "100",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "7aa2e0ad-787b-4815-85c2-ce3aafb9dbae",
@@ -4839,7 +5175,8 @@
       "/uploads/0582b3dc-faf4-410a-befb-3f680a9b164d.jpg"
     ],
     "cp": "95",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "8b990589-d1d2-40da-b7d7-ceadefa11e2b",
@@ -4854,7 +5191,8 @@
       "/uploads/9a1e012b-f73b-41af-9def-01534607fe07.jpg"
     ],
     "cp": "170",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "1b83c01b-31c5-41b7-97fa-a34aee010594",
@@ -4869,7 +5207,8 @@
       "/uploads/0aecf9c0-15aa-413b-a3cb-1a9e3fcc7239.jpg"
     ],
     "cp": "420",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "810db66a-0432-4fb2-b95b-d5212a902bae",
@@ -4884,7 +5223,8 @@
       "/uploads/c3f9ae56-b79a-4038-b7f3-de37ca03f952.jpg"
     ],
     "cp": "55",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "0cb9a99d-61b8-4c41-a3cf-ad609b12152b",
@@ -4899,7 +5239,8 @@
       "/uploads/0f2a0c4d-4218-4981-a839-1f3fc49d8eef.jpg"
     ],
     "cp": "180",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "ee16b2f4-84b0-483f-aae1-d586f26eaf5c",
@@ -4914,7 +5255,8 @@
       "/uploads/e4d0b1a8-ff6a-45f4-b5de-7a7d1c3f5094.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "e6c05da2-b10a-43e5-9c3c-4abc72819b6f",
@@ -4929,7 +5271,8 @@
       "/uploads/1b7863c9-052f-4217-afa0-687795429710.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "a7b77b11-c277-4117-864f-9bd109f42be1",
@@ -4944,7 +5287,8 @@
       "/uploads/f2a75f22-4016-44f6-983e-662c8cd31f23.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "8113e5ec-99d0-4013-9a6c-2d1d9bc8a0d9",
@@ -4959,7 +5303,8 @@
       "/uploads/6d71e7e2-9ba0-426f-bf46-b6a2c5a57c3b.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "0cb09ade-bc6a-4673-9a14-2dc409c81346",
@@ -4974,7 +5319,8 @@
       "/uploads/ffa03ff7-3b71-4848-af25-e111af4f1a6d.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "be7670af-3a4b-45c8-ae2e-875fed3d5297",
@@ -4989,7 +5335,8 @@
       "/uploads/3d80cd18-4cf8-4a30-b8de-60d67e914c38.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "a81ea11d-39a2-4726-aead-ef898f940c95",
@@ -5004,7 +5351,8 @@
       "/uploads/6eabae90-5c17-4695-86f3-d5d933bdd19b.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "5cddfd0a-5037-4692-b732-6c74915d0e07",
@@ -5019,7 +5367,8 @@
       "/uploads/84754fe1-954e-43f5-9be2-90dce9520049.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "4b4eac62-f26f-4515-a350-44c4f504b21f",
@@ -5034,7 +5383,8 @@
       "/uploads/cfe45659-69fd-47d1-96b9-dfa1c7b9df87.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "d0a99789-d116-4786-8ff7-86560e4d2ade",
@@ -5049,7 +5399,8 @@
       "/uploads/2087c866-c493-43cc-b647-f6c8038fde7e.jpg"
     ],
     "cp": "110",
-    "recaster": "Литейка Stark Foundry"
+    "recaster": "Литейка Stark Foundry",
+    "version": 1
   },
   {
     "id": "b500cd20-8c0c-48e8-9200-1a7e759ca6ec",
@@ -5064,7 +5415,8 @@
       "/uploads/6d022e1d-5327-411c-8366-b6586350f3e4.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка Stark Foundry"
+    "recaster": "Литейка Stark Foundry",
+    "version": 1
   },
   {
     "id": "e86899d8-cdca-4604-8f55-46e0d9e6c27e",
@@ -5079,7 +5431,8 @@
       "/uploads/a20e4ec1-c7d3-43c9-8299-544ed936c582.jpg"
     ],
     "cp": "85",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "18500947-3307-4fec-9c57-221bbe796a02",
@@ -5094,7 +5447,8 @@
       "/uploads/48f224d3-26a3-4fd3-b18b-ff54360f1cce.jpg"
     ],
     "cp": "55",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "2f6903ba-d252-48d4-8bd2-5b98b1739fe0",
@@ -5109,7 +5463,8 @@
       "/uploads/70c9f85b-27af-4560-a014-06f04f4f80d5.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "cf51a2b1-2baa-4e10-af29-dcc5692b6e56",
@@ -5124,7 +5479,8 @@
       "/uploads/87ecb561-070e-4fbb-9f47-3b3b073e70ae.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "e000ac42-69c3-4602-8b8c-011d0f199b15",
@@ -5139,7 +5495,8 @@
       "/uploads/b524f08c-daa8-4ca2-bd83-1b11b2a7666f.jpg"
     ],
     "cp": "80",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "c190d013-6c7b-464a-97a1-b6deb6e20f9f",
@@ -5154,7 +5511,8 @@
       "/uploads/8ed50a16-b81c-4955-b03b-4342a137a57a.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "49398c7f-5097-48de-b9ea-68369e1861a8",
@@ -5169,7 +5527,8 @@
       "/uploads/9aaf6a62-1c8a-46e1-909b-db472e73a146.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "afee6337-2262-4e66-9ea2-fe20ea30ab5f",
@@ -5184,7 +5543,8 @@
       "/uploads/84ae39ae-f790-4dc5-bd08-b2a3fc406b80.jpg"
     ],
     "cp": "110",
-    "recaster": "Литейка Wako Lab"
+    "recaster": "Литейка Wako Lab",
+    "version": 1
   },
   {
     "id": "a355cb93-88c7-4c02-bf13-06f14dd0874e",
@@ -5200,7 +5560,8 @@
       "/uploads/e52aeb0d-2970-46a6-95c4-dfb5915f3e17.jpg"
     ],
     "cp": "95",
-    "recaster": "Литейка Wako Lab"
+    "recaster": "Литейка Wako Lab",
+    "version": 1
   },
   {
     "id": "81f07c48-eb1a-4ccf-a438-2965eba99b2e",
@@ -5215,7 +5576,8 @@
       "/uploads/48b5a2ae-0013-4091-b750-f3b7b8abf7c6.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "296256e9-9202-4e4a-86cc-ee855cdb7af1",
@@ -5230,7 +5592,8 @@
       "/uploads/220ba3d0-4301-4677-9320-ce44329b742d.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка Defiler's Resin Casting"
+    "recaster": "Литейка Defiler's Resin Casting",
+    "version": 1
   },
   {
     "id": "693e9043-224d-4de9-b25b-f1b891ad6a9c",
@@ -5245,7 +5608,8 @@
       "/uploads/b9fb683c-b50d-48d2-96ca-d46381cd70c5.jpg"
     ],
     "cp": "95",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "e01ed4cd-9c43-4b86-874a-710237365dfe",
@@ -5260,7 +5624,8 @@
       "/uploads/af1f339f-5343-41ed-a591-6435066502e0.jpg"
     ],
     "cp": "530",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "649e5c2a-e314-4cce-922e-be71dcbc126c",
@@ -5275,7 +5640,8 @@
       "/uploads/ee4819d5-8bb5-4c5e-bc7c-87f16503bdf8.jpg"
     ],
     "cp": "95",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "330bd1d9-4283-4e72-a75c-498fc526b06a",
@@ -5290,7 +5656,8 @@
       "/uploads/5d51d40a-3f98-452a-b277-392c1e91a0f1.jpg"
     ],
     "cp": "95",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "61341da8-1aa1-4fdf-bc79-b665168585e7",
@@ -5305,7 +5672,8 @@
       "/uploads/deb0ae26-fa6f-4650-8051-15de764c15e9.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "383f3e0f-97ff-48cb-a3d9-1fff9da71b5e",
@@ -5320,7 +5688,8 @@
       "/uploads/32b98ee6-6569-489e-b93d-29329b7e312b.jpg"
     ],
     "cp": "100",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "a88c24de-8420-4783-8afa-3fcf52b6be46",
@@ -5341,7 +5710,8 @@
       "/uploads/823a0a41-d0ad-4caf-b5d8-5b9f83003378.jpg"
     ],
     "cp": "510",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "5cb5016a-caa8-48e5-850a-539eb0398cb7",
@@ -5356,7 +5726,8 @@
       "/uploads/53b72e7e-aa3b-4561-808c-f1c53ac415ee.jpg"
     ],
     "cp": "140",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "95aa19e1-c166-4d0c-866a-eedcbf116cbd",
@@ -5371,7 +5742,8 @@
       "/uploads/d0e0b534-92f3-4977-b5d5-c2c427bac930.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "54a3c5ef-6d54-468e-b7f1-89cc762f2b82",
@@ -5386,7 +5758,8 @@
       "/uploads/fbcf1f34-a9c5-42fc-beed-5820b3fa6361.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "168b733c-914f-4df1-9ed8-63ef48692591",
@@ -5401,7 +5774,8 @@
       "/uploads/31101709-e278-4019-b016-53ba332cc570.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "8abb571d-933f-43ef-bca0-2cdf48b70ef9",
@@ -5416,7 +5790,8 @@
       "/uploads/f404cebd-3b3a-418b-83c8-44fa34464c1c.jpg"
     ],
     "cp": "115",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "6f71b019-39be-415d-b3de-144c9b63c094",
@@ -5433,7 +5808,8 @@
       "/uploads/d2f886f5-8dde-46fd-bc44-db8abdd86767.jpg"
     ],
     "cp": "325",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "77e4b2d8-6b20-492b-873b-31cae8773bd9",
@@ -5448,7 +5824,8 @@
       "/uploads/dcf30a04-5b85-43b5-ae39-eec87accaa6f.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "27d9f08c-0378-4652-b399-a5cbcc29b9fc",
@@ -5463,7 +5840,8 @@
       "/uploads/0d82b753-f4fd-4232-b2bc-89d2d3380020.jpg"
     ],
     "cp": "165",
-    "recaster": "Литейка darkminiatures.com"
+    "recaster": "Литейка darkminiatures.com",
+    "version": 1
   },
   {
     "id": "6d0c250d-9e36-4dd9-8a59-0ee933c13aed",
@@ -5478,7 +5856,8 @@
       "/uploads/fa15b43b-8a18-4a56-b454-722012a67318.jpg"
     ],
     "cp": "175",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "3d1fc627-7994-4d9e-858c-6f0033e6dcbb",
@@ -5493,7 +5872,8 @@
       "/uploads/5670e47f-2382-4d0e-8d73-9c386c546320.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "1d9a40cf-c77c-43a6-9dad-0dfb5caf5784",
@@ -5508,7 +5888,8 @@
       "/uploads/904141a2-2f73-49a7-b38a-0bae25222d51.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "7af2d950-d687-4e07-ae47-70bc95d2a807",
@@ -5523,7 +5904,8 @@
       "/uploads/447f12ea-71ac-4bea-aa6f-b7239140dfbb.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "7fc88abb-12c8-4a7f-b91c-59ea2d88eef7",
@@ -5538,7 +5920,8 @@
       "/uploads/7e0993bd-e5ae-4e4f-bcda-f1b06b54d7f5.jpg"
     ],
     "cp": "100",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "e01ec52c-9520-4b07-b1e2-5ad99f7fad4b",
@@ -5553,7 +5936,8 @@
       "/uploads/6bd1bb83-e220-4fc0-9148-3e365d171d5c.jpg"
     ],
     "cp": "100",
-    "recaster": "Литейка Северный Ветер"
+    "recaster": "Литейка Северный Ветер",
+    "version": 1
   },
   {
     "id": "cb732689-0cc8-4ae1-a2e2-12ad22e4a55b",
@@ -5568,7 +5952,8 @@
       "/uploads/7763be12-7b25-406d-9d10-756bd9aca573.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка Северный Ветер"
+    "recaster": "Литейка Северный Ветер",
+    "version": 1
   },
   {
     "id": "4f8e016d-9236-469f-b7df-339b016c2486",
@@ -5583,7 +5968,8 @@
       "/uploads/e5184fb1-f2e8-49b4-9136-0ecd3441987a.jpg"
     ],
     "cp": "40",
-    "recaster": "Литейка Plants vs Zombies"
+    "recaster": "Литейка Plants vs Zombies",
+    "version": 1
   },
   {
     "id": "0168d030-6800-4c1d-bc47-570145886924",
@@ -5598,7 +5984,8 @@
       "/uploads/46a30b11-1186-4e7a-bce1-ed53504740b8.jpg"
     ],
     "recaster": "",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "b67827fc-7716-44c0-99fa-5d0357a8d126",
@@ -5613,7 +6000,8 @@
       "/uploads/050b8585-e43e-4fe0-b468-903e6287c6a6.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "3e3cffbf-dec4-41b5-872d-e4d3ff7861c3",
@@ -5628,7 +6016,8 @@
       "/uploads/ceb22d12-ec8d-4e68-bb6c-a8b7cc42d9c3.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "863d102a-b7d4-4391-85c7-532979cceea2",
@@ -5643,7 +6032,8 @@
       "/uploads/f3e643b7-f9ee-4d2b-8536-07fba7d3caeb.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "6d54828f-1919-489f-bded-b0a66438a3a0",
@@ -5658,7 +6048,8 @@
       "/uploads/95df1953-60cd-4f9c-8ce5-eb9bdaf27c0f.jpg"
     ],
     "cp": "50",
-    "recaster": "Литейка Craft Тверь"
+    "recaster": "Литейка Craft Тверь",
+    "version": 1
   },
   {
     "id": "db068fb5-e3ee-47b9-bc77-d515083aedf5",
@@ -5673,7 +6064,8 @@
       "/uploads/7d13adc6-ab38-49d9-8a33-3d30741e110e.jpg"
     ],
     "cp": "85",
-    "recaster": "Литейка Craft Тверь"
+    "recaster": "Литейка Craft Тверь",
+    "version": 1
   },
   {
     "id": "84159c51-4e89-472e-a9b5-12a2c89b7471",
@@ -5688,7 +6080,8 @@
       "/uploads/575b7875-b60b-4534-8a9f-e848497a212e.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "c9cbec32-f5a4-467e-9ddd-7bb4ee0ab491",
@@ -5703,7 +6096,8 @@
       "/uploads/40ab58f2-0c59-47ab-9d6c-a3a9e8a9bd06.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "605a92b8-9f05-4e56-b83b-aad24df5d8cb",
@@ -5718,7 +6112,8 @@
       "/uploads/84edb01b-03f1-4ec9-a0e1-df43a88c5a23.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "5a032ab3-db72-4931-8f3c-94d9b5b2edef",
@@ -5733,7 +6128,8 @@
       "/uploads/a54dd949-b3f8-49b6-9d06-2621eb570b9c.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "b85d0391-defc-400a-b0b9-22b264c1228a",
@@ -5748,7 +6144,8 @@
       "/uploads/2ea790ef-3bc4-4134-bde0-f8d366341e97.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "cce5e3fe-cc76-4dea-9ad2-03e635953556",
@@ -5763,7 +6160,8 @@
       "/uploads/5b984cf9-ac52-4507-abda-d2a1b5895ac4.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "18205532-9ed7-4e3b-afd4-2562fb784a2a",
@@ -5778,7 +6176,8 @@
       "/uploads/4293c40f-aebb-4869-9520-aa495c4e4bcd.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "0f6e1ab2-f901-42df-9051-6a474f28dcf7",
@@ -5793,7 +6192,8 @@
       "/uploads/ac6289d3-c30d-4d9c-a7df-ba99d3261e79.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "dd6ff107-15ad-4980-929b-f860f0b85cab",
@@ -5807,7 +6207,8 @@
     "images": [],
     "cp": "0",
     "recaster": "",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "c58f50bc-abcd-4a14-950f-6f5863bb4404",
@@ -5821,7 +6222,8 @@
     "images": [],
     "cp": "0",
     "recaster": "",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "2de651d2-ebe0-480b-9bce-dfc196df7c5e",
@@ -5835,7 +6237,8 @@
     "images": [],
     "cp": "0",
     "recaster": "",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "61c32c65-de31-4563-b110-adbc28ffd405",
@@ -5850,7 +6253,8 @@
       "/uploads/b83b8495-467e-4209-9066-fa9d4f6cd3d3.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "06499e5c-02bf-496f-9936-df65cd6b38b1",
@@ -5865,7 +6269,8 @@
       "/uploads/d513ea3c-bdec-413f-967b-0d65606aaa0e.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "48f6ebf7-1218-4144-a9f3-5a7e5acf9969",
@@ -5880,7 +6285,8 @@
       "/uploads/73f0d7fe-83f3-4719-86bd-90ce8f2efc08.jpg"
     ],
     "cp": "50",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "7fb8845a-eb3f-49cd-bf5d-c879002a129c",
@@ -5895,7 +6301,8 @@
       "/uploads/759ca2f8-52b0-495f-ab60-d944fe35b1b3.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "13bd6f4f-fcd7-46be-8b41-9662869ff1ec",
@@ -5910,7 +6317,8 @@
       "/uploads/1b83e3de-42ac-4c79-adc1-34326c23ca6c.jpg"
     ],
     "cp": "150",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "0b625c48-7bf8-4f25-9772-6c63eb18eea5",
@@ -5926,7 +6334,8 @@
     ],
     "cp": "70",
     "recaster": "",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "f034cca6-74b7-4a88-bfcf-6c470717ff23",
@@ -5942,7 +6351,8 @@
     ],
     "cp": "30",
     "recaster": "",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "cd0fb376-bf4a-4749-88ff-35491ec40ae9",
@@ -5957,7 +6367,8 @@
       "/uploads/332eea4f-fd33-4236-8247-3c507471f98c.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "64298d2c-e7be-428f-8e5c-ff549bdcde88",
@@ -5973,7 +6384,8 @@
       "/uploads/6a0f476a-7cca-4fc2-b889-8c7dd1c6e84c.jpg"
     ],
     "cp": "81",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "27fca5dc-e3a4-404b-9bf1-58af82a7253a",
@@ -5988,7 +6400,8 @@
       "/uploads/19857113-1612-4c43-b09f-db4cf5e71228.jpg"
     ],
     "cp": "85",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "79e9b14f-c333-40a3-9284-e63e37428eb3",
@@ -6003,7 +6416,8 @@
       "/uploads/43ad8d47-fb2f-4a2b-92e3-0f57295ec47b.jpg"
     ],
     "cp": "95",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "194c87ce-e73b-4acb-bf76-1c717233f7a7",
@@ -6018,7 +6432,8 @@
       "/uploads/aae93022-6e69-41ac-be4e-08257b9c7d80.jpg"
     ],
     "cp": "50",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "14c6cbba-f782-4308-b8ba-8a30531f174f",
@@ -6033,7 +6448,8 @@
       "/uploads/ffc3cef3-ff6e-41c2-ad58-478c71fb2280.jpg"
     ],
     "cp": "55",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "124cd1ec-ae63-4b2d-a312-82d77979fd06",
@@ -6048,7 +6464,8 @@
       "/uploads/2fadc440-22d6-4ddf-bac0-dd36f3692ce6.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "14a50aec-48f6-4d64-ac4d-777a704490f0",
@@ -6063,7 +6480,8 @@
       "/uploads/b6526911-d069-4ae3-8a2d-29a55bd8770d.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "d3ee8225-3f7e-4c74-a1e6-4a9171b2fbdb",
@@ -6078,7 +6496,8 @@
       "/uploads/54f1060d-2349-4f80-b5e7-3ebe9ff05114.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "d288acb0-6dcb-4d2d-afcc-babf8061883e",
@@ -6093,7 +6512,8 @@
       "/uploads/606e6a81-e013-46a7-b223-edd0eb052d13.jpg"
     ],
     "cp": "50",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "b015da65-ebc2-4d3c-a72f-d8971d042d52",
@@ -6108,7 +6528,8 @@
       "/uploads/03a3a1e4-cad5-49e5-b5a3-ca33770f3fa4.jpg"
     ],
     "cp": "115",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "b8ff027d-3f37-408b-a60a-6cdbc4f81a0e",
@@ -6123,7 +6544,8 @@
       "/uploads/becd98a5-69ff-43b4-b034-2877edf20a59.jpg"
     ],
     "cp": "115",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "f5dc0b00-f3a0-42ff-9a1d-b9b155fb1b92",
@@ -6138,7 +6560,8 @@
       "/uploads/11aac59d-b49c-493b-bfe8-76cb73a249f8.jpg"
     ],
     "cp": "115",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "21db04e6-2ecf-4447-971f-ed095cc2110c",
@@ -6153,7 +6576,8 @@
       "/uploads/b0fe4b21-8d7d-4ef1-b2f0-4804ee171813.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "542e6d35-3104-4825-a945-0dd97df67191",
@@ -6168,7 +6592,8 @@
       "/uploads/23682d79-b3f5-430d-a3e2-61f4ecf1b48c.jpg"
     ],
     "cp": "190",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "bf2540a1-b7a8-4a88-a671-378a9e61eeb8",
@@ -6183,7 +6608,8 @@
       "/uploads/545b6658-a9b3-4932-b753-1392846091b2.jpg"
     ],
     "cp": "120",
-    "recaster": "Литейка Oi! Factory"
+    "recaster": "Литейка Oi! Factory",
+    "version": 1
   },
   {
     "id": "af7d28d9-3b8f-47ec-b099-88caa47b0d25",
@@ -6198,7 +6624,8 @@
       "/uploads/649a4d54-fcd6-445d-8fb7-7b4320aeb2cc.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "25563e21-f5ac-4571-83ba-0879e6dc4e64",
@@ -6217,7 +6644,8 @@
       "/uploads/39e634a7-f7c9-4ffe-9de6-d0a70f11ad31.jpg"
     ],
     "cp": "105",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "fcc6dc10-19e5-4c79-885f-e228cdc07bcf",
@@ -6232,7 +6660,8 @@
       "/uploads/548fa71e-e434-4275-947a-f9547039f852.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "709254f1-ded9-4ef6-92ed-6e5a2a681da1",
@@ -6247,7 +6676,8 @@
       "/uploads/255f6589-0fd0-4e55-8c74-b2d6bb1aa565.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "b1ea24ca-972b-4e7c-a336-bbf569d6e15f",
@@ -6262,7 +6692,8 @@
       "/uploads/5775716d-adfb-4989-bc34-7da2c86d1d5c.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "73ca18e8-328e-48f2-a28f-ce8d00ff204b",
@@ -6277,7 +6708,8 @@
       "/uploads/b57ee1f7-8263-4dfd-ae0e-82d37c17ae77.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "9e1df79c-29ec-4c95-b39d-e5a5fd5fcda6",
@@ -6292,7 +6724,8 @@
       "/uploads/38a866c3-bba3-4bfb-821c-f83e6ccb29e8.jpg"
     ],
     "cp": "0",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "aa76ecda-f863-4087-a733-461df7630cfe",
@@ -6307,7 +6740,8 @@
       "/uploads/4df41b70-e660-429e-a6c8-3e561215335d.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "ca4c3e20-ac3e-42f4-9e0c-6b7cb844f572",
@@ -6322,7 +6756,8 @@
       "/uploads/e068306f-b5e6-4f51-8a70-218bb80a9694.jpg"
     ],
     "cp": "70",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "9662b9c6-49b1-4d48-8007-455216cd0ea5",
@@ -6337,7 +6772,8 @@
       "/uploads/6a5503f9-939e-4ca6-bbbe-69f21d900162.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка Wako Lab"
+    "recaster": "Литейка Wako Lab",
+    "version": 1
   },
   {
     "id": "afff9cdc-d7d9-429b-9331-8cc0e77a228f",
@@ -6352,7 +6788,8 @@
       "/uploads/cbc49429-a662-4548-8bfb-b3faca07d695.jpg"
     ],
     "cp": "30",
-    "recaster": "Литейка Wako Lab"
+    "recaster": "Литейка Wako Lab",
+    "version": 1
   },
   {
     "id": "85b30e40-01c5-4d9d-9311-83e7f4028801",
@@ -6367,7 +6804,8 @@
       "/uploads/259311dc-2b2f-4d48-a297-5278135c3371.jpg"
     ],
     "cp": "0",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "c385d4b3-1f2a-4f42-8d74-ee9eed46eb3e",
@@ -6382,7 +6820,8 @@
       "/uploads/c393116c-2e68-4cdb-a795-71c7920e2b93.jpg"
     ],
     "cp": "90",
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "4324946f-2008-43d9-89c3-5ecb1b2041b3",
@@ -6397,7 +6836,8 @@
       "/uploads/eb5a58fb-2f8e-44ec-bf98-59dbe3b97908.jpg"
     ],
     "cp": "85",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "e52ac444-f942-49cc-b23f-5a8813599227",
@@ -6412,7 +6852,8 @@
       "/uploads/f5d8eeeb-fad4-4a04-b8d2-0e728b5bc74c.jpg"
     ],
     "cp": "25",
-    "recaster": "Литейка ThePiratesCountry"
+    "recaster": "Литейка ThePiratesCountry",
+    "version": 1
   },
   {
     "id": "d144ae31-06ff-4a52-9e56-a6fe1e0a0bfa",
@@ -6427,7 +6868,8 @@
       "/uploads/dd575280-d15e-4ef7-9c2d-8f6462b62a6b.jpg"
     ],
     "cp": "75",
-    "recaster": "Литейка BlackMarketMiniatures"
+    "recaster": "Литейка BlackMarketMiniatures",
+    "version": 1
   },
   {
     "id": "9d47bbc9-20ce-4d82-9fb5-fed01917772c",
@@ -6442,7 +6884,8 @@
       "/uploads/854830ad-9917-4750-8bd6-c9128fcfa223.jpg"
     ],
     "cp": "5",
-    "recaster": "Литейка 2d6"
+    "recaster": "Литейка 2d6",
+    "version": 1
   },
   {
     "id": "ba1c3597-1ce1-4d4a-b0e4-eb8bb288f4c2",
@@ -6457,7 +6900,8 @@
       "/uploads/0739cda2-1d9b-4cc2-85c4-cba6b0d5e83a.jpg"
     ],
     "cp": "50",
-    "recaster": "VasyaN"
+    "recaster": "VasyaN",
+    "version": 1
   },
   {
     "id": "90ee4437-3e0d-427f-8e37-7edc35bfd5aa",
@@ -6472,7 +6916,8 @@
       "/uploads/4020f9e4-6b15-4ffb-80c2-ed71441a70c6.jpg"
     ],
     "cp": "75",
-    "recaster": "VasyaN"
+    "recaster": "VasyaN",
+    "version": 1
   },
   {
     "id": "cac96b6f-acfb-4ddf-9196-a086ee45c5df",
@@ -6487,7 +6932,8 @@
       "/uploads/62afe0d5-d889-4231-adc6-8703ea4c0e42.jpg"
     ],
     "cp": "115",
-    "recaster": "VasyaN"
+    "recaster": "VasyaN",
+    "version": 1
   },
   {
     "id": "dae2faf5-8bd3-468b-a675-5cc9dd924c4a",
@@ -6502,7 +6948,8 @@
       "/uploads/ba40cc8e-0c3e-4b91-9867-60dd37705aaf.jpg"
     ],
     "cp": "75",
-    "recaster": "VasyaN"
+    "recaster": "VasyaN",
+    "version": 1
   },
   {
     "id": "580362c4-047b-448f-9458-f5a6b0c88dee",
@@ -6517,7 +6964,8 @@
       "/uploads/75052af0-3226-4c23-8235-7cca59281718.jpg"
     ],
     "cp": "75",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "25a37ca8-4d6f-4727-8569-85cd526f05dc",
@@ -6532,7 +6980,8 @@
       "/uploads/0c680efa-95a7-41b8-854e-86ea24653041.jpg"
     ],
     "cp": "75",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "207ac077-856d-4f6c-99d7-ba9ce502dad6",
@@ -6547,7 +6996,8 @@
       "/uploads/670cd3f8-0f54-4e51-9b62-5ad27fe04ad9.jpg"
     ],
     "cp": "15",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "eb60583a-d287-4472-8936-9e68210c1e05",
@@ -6562,7 +7012,8 @@
       "/uploads/4511a2e3-7956-4b28-b9ce-6576bb8fd308.jpg"
     ],
     "cp": "15",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "bf634e74-1083-4034-a53d-8a3db5cbed15",
@@ -6577,7 +7028,8 @@
       "/uploads/8eaf966e-05dc-4b6c-8ae8-e13b9ea73b0e.jpg"
     ],
     "cp": "75",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "48d07f01-3c24-49e3-a331-d47a00447ca8",
@@ -6592,7 +7044,8 @@
       "/uploads/d566239a-5a0f-45ef-babc-7f245c27fda7.jpg"
     ],
     "cp": "75",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "1f935de3-98b3-452b-8c72-46d2b2255f0c",
@@ -6607,7 +7060,8 @@
       "/uploads/9943dc3d-530d-4c4c-a8f4-f157c67344e8.jpg"
     ],
     "cp": "5",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "be6ca2a8-c681-43e5-b78a-88b38645db72",
@@ -6622,7 +7076,8 @@
       "/uploads/009fd0be-6560-46c4-bf0a-0f0cf09d7953.jpg"
     ],
     "cp": "5",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "bfecb2ea-46b7-4ece-a56f-172428f09a0a",
@@ -6637,7 +7092,8 @@
       "/uploads/1aaa6cef-6cb4-44e9-b17c-d64fe5dc651d.jpg"
     ],
     "cp": "80",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "b410fa95-309c-482d-b30a-0592c33efe6b",
@@ -6652,7 +7108,8 @@
       "/uploads/e54e14a2-bb34-483a-9df3-cb6a91c71d80.jpg"
     ],
     "cp": "75",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "808e0be3-ba80-4a60-85af-82b330368753",
@@ -6667,7 +7124,8 @@
       "/uploads/d32960c1-9314-47d9-8c81-147aae894b61.jpg"
     ],
     "cp": "30",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "e96b7f2d-5bed-4ef0-bb57-1170ba965227",
@@ -6682,7 +7140,8 @@
       "/uploads/611ee42e-0bca-4f78-b244-80215b7830b7.jpg"
     ],
     "cp": "30",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "1e4da62f-5d8e-425e-ab8b-31cbb360c31f",
@@ -6697,7 +7156,8 @@
       "/uploads/b617c51f-faff-46e6-a245-2b85d3df8837.jpg"
     ],
     "cp": "10",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "4cd69012-ab9b-4704-a32a-dfc074d23132",
@@ -6712,7 +7172,8 @@
       "/uploads/66c0d4b9-f968-4555-a45c-331446366127.jpg"
     ],
     "cp": "115",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "f1c41063-e288-4fff-b572-31d4b683154b",
@@ -6727,7 +7188,8 @@
       "/uploads/0bd0ad33-1788-4010-a0b0-6bb6c74ad0e6.jpg"
     ],
     "cp": "10",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "cd7b4ad3-c8ce-469b-aaa1-aa1f8c0b2e1d",
@@ -6742,7 +7204,8 @@
       "/uploads/17459617-b336-452c-97c8-86f4b786be9e.jpg"
     ],
     "cp": "75",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "6e43ffbd-443b-4a42-8c90-774033186b1d",
@@ -6757,7 +7220,8 @@
       "/uploads/d35b4b73-0fb6-4b98-826f-2c65f888b250.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "7145b049-af9b-4ec5-ba56-681e13a14f02",
@@ -6773,7 +7237,8 @@
     ],
     "cp": "90",
     "recaster": "",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "2b139832-3486-4e89-a4a2-9c17d030aba9",
@@ -6788,7 +7253,8 @@
       "/uploads/45ca693f-e405-4971-ae45-130af0d56890.jpg"
     ],
     "cp": "90",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "a57b227d-edc8-4563-8603-c9d59c759ab0",
@@ -6803,7 +7269,8 @@
       "/uploads/6bf944d6-8005-4de2-bc1a-714e1b5bcc84.jpg"
     ],
     "cp": "0",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "c7131bf8-e492-49b1-b030-8efa4a941c8c",
@@ -6818,7 +7285,8 @@
       "/uploads/6b31e6c0-c075-4e57-9d9f-b37a8a7022fc.jpg"
     ],
     "cp": "0",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "04ce06ee-39a8-40bd-92f7-5302f4130b0f",
@@ -6833,7 +7301,8 @@
       "/uploads/a6891a5d-6062-494b-8e8a-b947ccab82ab.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "1f0d7ae0-a005-4396-82b9-4f85bc34998d",
@@ -6848,7 +7317,8 @@
       "/uploads/de411cfd-498a-4620-9bfb-7be45d9b856c.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "3d8a7ecf-b197-4c94-a50c-b68f01421e4f",
@@ -6863,7 +7333,8 @@
       "/uploads/ec3c27f5-94a5-4790-9b2d-6679d0cbbb58.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "3331561b-326a-4515-911e-c4a42256be79",
@@ -6878,7 +7349,8 @@
       "/uploads/30d28b08-b4bd-4e22-9f81-6c202e4b65d8.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "c73e62c3-9db6-402f-a3ea-f88ebb6b815b",
@@ -6893,7 +7365,8 @@
       "/uploads/94783acc-6ccb-46fa-9096-1cfbaa582f60.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "2dd9452d-03ff-42e6-a8b5-a83e2d5ff692",
@@ -6908,7 +7381,8 @@
       "/uploads/ff0337a4-e695-44b1-8d7c-21264b4175f6.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "e1ac333e-8908-45ae-b7f4-f5c0937ba749",
@@ -6923,7 +7397,8 @@
       "/uploads/97380696-ed4c-4273-a1c8-7bc69206068e.jpg"
     ],
     "cp": "",
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "a02e6262-8861-46d1-8afa-a65a4783492b",
@@ -6937,7 +7412,8 @@
     "images": [
       "/uploads/2f724978-9668-4fb9-bfca-0d4a3be82c14.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "d19b7bf4-288a-4f74-91c0-4c979fc278ca",
@@ -6951,7 +7427,8 @@
     "images": [
       "/uploads/006d58cf-03de-4fc3-a4c1-15d3ef861b97.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "b8ef9932-ea5d-4b26-8b6a-7ec994644638",
@@ -6965,7 +7442,8 @@
     "images": [
       "/uploads/cfe2d01e-e84f-429a-b37a-014d6f2df416.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "c0138855-1d1a-4b73-89f7-3e19b2c81c39",
@@ -6979,7 +7457,8 @@
     "images": [
       "/uploads/1bcc0bbe-9ee8-4aaa-9e01-bdabb9f61e11.jpg"
     ],
-    "recaster": "Литейка Defiler's Resin Casting"
+    "recaster": "Литейка Defiler's Resin Casting",
+    "version": 1
   },
   {
     "id": "cf42a114-7754-464b-80ea-8b387e01886e",
@@ -6993,7 +7472,8 @@
     "images": [
       "/uploads/54245422-6132-4733-91be-57f851262c78.jpg"
     ],
-    "recaster": "Литейка GreedIsGood"
+    "recaster": "Литейка GreedIsGood",
+    "version": 1
   },
   {
     "id": "20be5876-a0cb-486b-8b4c-2bbf62c05543",
@@ -7007,7 +7487,8 @@
     "images": [
       "/uploads/ea92a0fa-052d-45c8-96f5-2789348542cd.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "31b578e3-7389-43d1-944a-3d208a74ba6f",
@@ -7021,7 +7502,8 @@
     "images": [
       "/uploads/16bd5dfa-5514-4c7f-9508-bc607bc75817.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "17835cb7-c93f-4bbb-bcce-0097d2d7372f",
@@ -7035,7 +7517,8 @@
     "images": [
       "/uploads/8d04501e-188e-43b2-9240-0230fdaded9c.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "d5dd9aa4-478f-43bf-8c66-e99359db4598",
@@ -7049,7 +7532,8 @@
     "images": [
       "/uploads/dfbf90e7-ee15-4e9e-aa05-a215870530c4.jpg"
     ],
-    "recaster": "Литейка LooneShroomFoundry"
+    "recaster": "Литейка LooneShroomFoundry",
+    "version": 1
   },
   {
     "id": "69de41de-5310-482e-9ff3-9796ac1935b4",
@@ -7063,7 +7547,8 @@
     "images": [
       "/uploads/297dcd20-30c4-47d6-b5f5-504d17b17a09.jpg"
     ],
-    "recaster": "Литейка LooneShroomFoundry"
+    "recaster": "Литейка LooneShroomFoundry",
+    "version": 1
   },
   {
     "id": "ffe934ed-4d82-4ffa-8fa5-e46c82e98474",
@@ -7077,7 +7562,8 @@
     "images": [
       "/uploads/3f0fe558-a78e-4985-ad81-1102e68d6997.jpg"
     ],
-    "recaster": "Литейка LooneShroomFoundry"
+    "recaster": "Литейка LooneShroomFoundry",
+    "version": 1
   },
   {
     "id": "25749af8-61d7-40be-b6ab-fe00391fdefa",
@@ -7091,7 +7577,8 @@
     "images": [
       "/uploads/25b3e7ff-ac01-4398-a426-a40cf8cd4b05.jpg"
     ],
-    "recaster": "Литейка OldHammer Мастерская"
+    "recaster": "Литейка OldHammer Мастерская",
+    "version": 1
   },
   {
     "id": "643d80fe-e78f-4dc1-8e72-63585ff375c1",
@@ -7104,7 +7591,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "a8e23044-55b9-4813-9e68-ccd1b6bdf8d8",
@@ -7117,7 +7605,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "03328f3c-10ef-4cea-84a3-4111158a5636",
@@ -7130,7 +7619,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "805c33ad-b4c9-4e24-b48c-aa04a816e197",
@@ -7144,7 +7634,8 @@
     "images": [
       "/uploads/7652443b-3dc3-42ac-b36b-ccb10cf379c9.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "e12cc930-fa20-44dd-a6f4-0348578badc6",
@@ -7158,7 +7649,8 @@
     "images": [
       "/uploads/c75eef66-721b-4615-b06c-b5e89789946b.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "a095f7a7-1a75-4251-9567-7cf6bba55cea",
@@ -7172,7 +7664,8 @@
     "images": [
       "/uploads/05573e61-9f60-43c4-b49c-8b43f74b0df3.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "dc6d99b1-a616-48c4-9e74-c2e2ec006d34",
@@ -7186,7 +7679,8 @@
     "images": [
       "/uploads/77417bf4-3b3d-4ee5-99c8-b3aa3d5c87b0.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "f3be3c46-3771-4ec4-9b45-38bf9214cdf0",
@@ -7200,7 +7694,8 @@
     "images": [
       "/uploads/f58a9415-e74c-4dab-98c7-9a2588640ba1.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "8af2fe6e-2405-43e6-a6dd-d5d5dae9b99b",
@@ -7214,7 +7709,8 @@
     "images": [
       "/uploads/71a63e7f-3133-425e-bf11-823dc972f603.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "f1f2efb1-f100-4de0-847d-9efaf4494e3a",
@@ -7228,7 +7724,8 @@
     "images": [
       "/uploads/0fa6f2fa-c03d-4dbc-92b3-b23c06da83f4.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "26431d4f-b913-4224-95eb-2cb0bac1e54c",
@@ -7242,7 +7739,8 @@
     "images": [
       "/uploads/08e76f83-d549-4823-a8e2-323f51d6764d.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "0e9cd6da-295d-49c4-8882-bfe4e7684fab",
@@ -7256,7 +7754,8 @@
     "images": [
       "/uploads/0de248ea-346b-415c-a715-47b0b4e31768.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "d4d518e9-3dbc-4ff9-afbb-26f33b30a5b8",
@@ -7270,7 +7769,8 @@
     "images": [
       "/uploads/fda10e6b-e172-4239-9731-f91012eb69ec.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "c22f19e4-8be7-47e2-b56c-393e6c243e31",
@@ -7284,7 +7784,8 @@
     "images": [
       "/uploads/706d21c1-3972-4009-b821-e4ea7be9c23a.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "257cb882-d05a-463a-992f-dfa990bfbe77",
@@ -7298,7 +7799,8 @@
     "images": [
       "/uploads/ee5eabb8-17d6-48a0-b8c6-d4837b3aa73f.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "5ad2ddf8-ef1f-4b08-8023-814c88235f61",
@@ -7312,7 +7814,8 @@
     "images": [
       "/uploads/673179fa-29a0-4f0c-a780-49efe273c5d8.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "27b3c6e1-4ba8-44b2-a4c9-c95235d7ecd1",
@@ -7326,7 +7829,8 @@
     "images": [
       "/uploads/0185b4b0-e15e-44a2-8381-a4c4f40d78ba.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "b52cf295-1343-449e-942f-5e4569f79b51",
@@ -7340,7 +7844,8 @@
     "images": [
       "/uploads/69827cd8-3211-4f39-ac91-fcad2f295d6a.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "487965fd-7e65-4185-bf9c-df71a7bd77fe",
@@ -7354,7 +7859,8 @@
     "images": [
       "/uploads/b951ddde-96ce-4319-a921-bc7a6e59cd32.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "9ceeeddf-86f3-452e-8b22-e5f5a23361b2",
@@ -7368,7 +7874,8 @@
     "images": [
       "/uploads/79db15b0-8932-4c66-892b-92522620952e.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "e9471788-31f5-4026-ac47-a7eec6f2ce27",
@@ -7382,7 +7889,8 @@
     "images": [
       "/uploads/f5e80d9f-b2cb-47bd-9dde-38710253c6f4.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "9a858b18-c8d7-42ac-be8d-1f7af0d754c0",
@@ -7396,7 +7904,8 @@
     "images": [
       "/uploads/b1c7d34a-d516-4e07-a4ed-d82bb97baa8e.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "0ded8ae1-5949-44df-b8ea-816b0d16eb62",
@@ -7410,7 +7919,8 @@
     "images": [
       "/uploads/abd6f103-eb10-47fe-8dfe-27a29b0bc290.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "ce65f926-2d85-4155-855f-373c04c52d13",
@@ -7424,7 +7934,8 @@
     "images": [
       "/uploads/3f4ae938-0ce9-4be6-b70a-255820a51614.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "03b3607b-3c9d-46c6-8d6d-700c742fe526",
@@ -7438,7 +7949,8 @@
     "images": [
       "/uploads/148850b7-e759-41ab-aa5d-44e9038d5331.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "260c7fe8-2193-484e-924e-9085ac9817f0",
@@ -7452,7 +7964,8 @@
     "images": [
       "/uploads/ad117ae9-45ca-4f8d-91e5-dce0e1f1cb40.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "45418c27-6e16-4fb6-9bc3-3098ccd2598d",
@@ -7466,7 +7979,8 @@
     "images": [
       "/uploads/a23d531b-1b71-4ba4-a341-99359e011e4a.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "8782dac2-892d-4afd-b3f4-a2507332439c",
@@ -7480,7 +7994,8 @@
     "images": [
       "/uploads/80454b17-62a5-4831-94d8-3b74e9686fff.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "c9e03e4c-efe8-47f9-a9e5-84cc93ca7719",
@@ -7494,7 +8009,8 @@
     "images": [
       "/uploads/4ce3878c-11d8-40e3-8504-9838b50492a2.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "f33d8569-88e7-46cf-8a14-78216f34fa43",
@@ -7508,7 +8024,8 @@
     "images": [
       "/uploads/4b03ef22-41d1-4e9c-9660-d61d0468a718.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "48a1d9f2-d164-4f27-81c1-35282dc645ca",
@@ -7522,7 +8039,8 @@
     "images": [
       "/uploads/c30d0b71-1c1f-4032-a758-94f4eca137f8.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "0ab724a7-1d3c-4fb8-8db5-68d6f2880252",
@@ -7536,7 +8054,8 @@
     "images": [
       "/uploads/1bef802d-085b-46b6-aeaa-86152d1a1011.jpg"
     ],
-    "recaster": "Литейка Defiler's Resin Casting"
+    "recaster": "Литейка Defiler's Resin Casting",
+    "version": 1
   },
   {
     "id": "bde72349-aaaa-4546-a6e7-05d89c8d7dbb",
@@ -7550,7 +8069,8 @@
     "images": [
       "/uploads/cded9070-7921-415d-bf8a-0880c7b44e48.jpg"
     ],
-    "recaster": "Литейка Defiler's Resin Casting"
+    "recaster": "Литейка Defiler's Resin Casting",
+    "version": 1
   },
   {
     "id": "fbcab297-56a3-42fc-a396-8e672f6fa9cf",
@@ -7564,7 +8084,8 @@
     "images": [
       "/uploads/cb97c4a8-152d-4d1a-9735-2e6cb95c02ad.jpg"
     ],
-    "recaster": "Литейка Defiler's Resin Casting"
+    "recaster": "Литейка Defiler's Resin Casting",
+    "version": 1
   },
   {
     "id": "5f6e2828-1e8a-4eb5-9e08-8fd68a48e8d1",
@@ -7578,7 +8099,8 @@
     "images": [
       "/uploads/4b0e0db2-02dd-43d4-9c3a-da10315e2b73.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "30fe4b52-1bb8-4b36-99a4-ca4ad62f0fc8",
@@ -7591,7 +8113,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "e6370b00-4fca-43fa-875c-6c17de54b7f3",
@@ -7604,7 +8127,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "42eaf0e8-d37d-465f-a861-695d10e2f592",
@@ -7617,7 +8141,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "31c1f3fc-1720-4f70-9689-d3c13ca2508c",
@@ -7630,7 +8155,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "ffd5580f-caf8-4542-b2e8-200e7bd5683f",
@@ -7645,7 +8171,8 @@
       "/uploads/223deae1-6490-4596-aac3-90a52350380d.jpg",
       "/uploads/65f01d43-ec8a-4cbc-b35e-2392c5b10689.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "278f81b8-26d9-4e1b-9021-15153da8158c",
@@ -7659,7 +8186,8 @@
     "images": [
       "/uploads/14faab2b-62e6-40a3-843a-b763303e3e41.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "d6a31902-3594-4041-8553-80df3373de4d",
@@ -7673,7 +8201,8 @@
     "images": [
       "/uploads/3a647a89-983a-42fd-9980-6b5c21b8fcf5.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "b3d80776-e564-4b87-9bc0-b90ecf3e546b",
@@ -7687,7 +8216,8 @@
     "images": [
       "/uploads/0ac8091c-3d54-4f60-894d-0654eb453c91.jpg"
     ],
-    "recaster": "Литейка Defiler's Resin Casting"
+    "recaster": "Литейка Defiler's Resin Casting",
+    "version": 1
   },
   {
     "id": "552c4394-959a-4db5-9e03-20fe425efbf1",
@@ -7700,7 +8230,8 @@
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "345c66c3-875e-4350-b6f2-773da3aa9db0",
@@ -7714,7 +8245,8 @@
     "images": [
       "/uploads/b35d32b2-3171-4bd2-9d16-ec2ba7ac85a2.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "0cd9a736-aac1-4816-8eb6-095a3c817e13",
@@ -7728,7 +8260,8 @@
     "images": [
       "/uploads/99871b6a-bc9f-429e-8e13-272bfd5b72dc.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "b95a50f1-030c-40ce-bf2e-371df3e60060",
@@ -7742,7 +8275,8 @@
     "images": [
       "/uploads/c6e10209-9139-4a16-8af7-2cdc28dcc6d3.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "931792ec-3df4-41ea-9427-31a19c676c30",
@@ -7756,7 +8290,8 @@
     "images": [
       "/uploads/b50107bd-ae63-443f-ab03-cef8169f5f32.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "6f6638a9-b9a0-4bed-8db8-e637b13c0023",
@@ -7770,7 +8305,8 @@
     "images": [
       "/uploads/39f287f1-69bc-499d-a2b8-d6647ff0c03f.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "7912e409-bb79-4a4a-8c5a-b96b4a0937d8",
@@ -7784,7 +8320,8 @@
     "images": [
       "/uploads/184573d5-7c76-4d5c-9526-a0bb67aeb44f.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "5d25a205-81b1-4157-82f0-bf32f168e1c3",
@@ -7798,7 +8335,8 @@
     "images": [
       "/uploads/33e514fb-8464-4993-aeba-2fb3bda4179f.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "0c521432-d000-4d4c-a04a-04463bbc5e89",
@@ -7812,7 +8350,8 @@
     "images": [
       "/uploads/5a158002-abc2-42e7-9fce-4fd1d312d0f7.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "af588627-fafc-46f6-a29a-d161f8a691bb",
@@ -7826,7 +8365,8 @@
     "images": [
       "/uploads/7ba5ccf9-1271-4225-9d4e-1856d72d47a4.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "2152d42b-90f8-48d3-a9a9-f24d89d605ef",
@@ -7840,7 +8380,8 @@
     "images": [
       "/uploads/510da773-6696-4305-aa66-3324552fe582.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "123fe234-6e42-409a-9266-32255314b2e6",
@@ -7854,7 +8395,8 @@
     "images": [
       "/uploads/e589a5fe-9d9c-4545-b8ad-64c0c1ebfa19.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "3e41303e-c860-4b34-b03f-de9062602d32",
@@ -7868,7 +8410,8 @@
     "images": [
       "/uploads/2741cea6-7588-48a0-8226-ceb9cb4ffd45.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "454bd07a-36e0-4ab6-8590-e528d87ce206",
@@ -7882,7 +8425,8 @@
     "images": [
       "/uploads/678ca3bf-9149-473a-b214-098f55a373de.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "9e0f7187-5fb9-4c96-b2d1-26e5a5debace",
@@ -7896,7 +8440,8 @@
     "images": [
       "/uploads/7df8f13f-bcbd-45a5-a981-dce4b1436b85.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "beb44db1-bcd9-438e-b3f6-39cc02cd216a",
@@ -7910,7 +8455,8 @@
     "images": [
       "/uploads/21169755-4e3e-4558-b028-b9448c380ade.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "35689b7b-d937-4ffe-8a06-1b91e883e4e9",
@@ -7924,7 +8470,8 @@
     "images": [
       "/uploads/6f3f242f-edaf-49af-9098-6e0581c3261c.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "32ae4bcc-7b0d-4155-8996-69d13272badf",
@@ -7938,7 +8485,8 @@
     "images": [
       "/uploads/eef1263f-b875-480e-93ce-d8be0838dd14.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "6c96f206-ab82-4912-b144-ed662eed15a5",
@@ -7952,7 +8500,8 @@
     "images": [
       "/uploads/c7663006-d013-455a-b3b8-e4d947a3694d.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "dcf10c09-c273-4052-b85b-43e02dc05441",
@@ -7966,7 +8515,8 @@
     "images": [
       "/uploads/b8695408-76ca-4898-a156-51003acb695a.jpg"
     ],
-    "recaster": ""
+    "recaster": "",
+    "version": 1
   },
   {
     "id": "139be451-32a3-441b-b34c-6a128aaa7cf0",
@@ -7980,7 +8530,8 @@
     "images": [
       "/uploads/1b9b782d-ce60-480e-8268-acf54d02f559.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "3dda0c4b-5d77-4190-bed9-3656cf9ff9ed",
@@ -7994,7 +8545,8 @@
     "images": [
       "/uploads/62bd2b55-aae0-4827-b099-96f85f0fc885.jpg"
     ],
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "dcae49b5-daf9-42e1-a67a-836b880d6bee",
@@ -8008,7 +8560,8 @@
     "images": [
       "/uploads/a16e4b1e-0eab-4266-8fe8-763425ec7368.jpg"
     ],
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "de328f33-5a08-420f-bcd9-dc589801e54f",
@@ -8023,7 +8576,8 @@
       "/uploads/6bd3e93c-43d0-4c3e-b9d0-25bfe4e7f8e4.jpg"
     ],
     "recaster": "Литейка ThePiratesCountry",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "e28256c0-c99f-4727-b660-8267a31f33d3",
@@ -8038,7 +8592,8 @@
       "/uploads/b8e02eda-a82b-4055-997a-38de875378b2.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "b45062dd-8784-4364-823e-7d379cf70847",
@@ -8052,7 +8607,8 @@
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "4aae8da8-fc11-4fe3-aa2d-988f640a979c",
@@ -8067,7 +8623,8 @@
       "/uploads/3697101b-0c3d-4ac1-9a8c-4490ef84a001.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "b88fc78b-47f3-45bb-9867-41fb5ec92842",
@@ -8081,7 +8638,8 @@
     "images": [
       "/uploads/359caace-9f92-462b-9182-8e6782400b9b.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "b72fc767-c44c-45f2-a581-e249dfcd339c",
@@ -8095,7 +8653,8 @@
     "images": [
       "/uploads/ce625301-5844-46fb-b72b-20cb99f0b760.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "3ec1b6b4-f9f2-4f51-a982-18dc3d920738",
@@ -8110,7 +8669,8 @@
       "/uploads/9a06bada-ef24-420f-8272-78f5b5767fc0.jpg"
     ],
     "recaster": "Литейка darkminiatures.com",
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "1894f082-13c5-4d2a-b3a0-67ea6cd1cae2",
@@ -8125,7 +8685,8 @@
       "/uploads/aa388d05-7abc-4c1b-8e53-55f73a55236a.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "d7522a8c-7aef-4a29-aa34-a50fc4f417bb",
@@ -8140,7 +8701,8 @@
       "/uploads/177b0022-6507-4a70-b7a5-a757313f1f4d.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "9c58864b-d01f-4ca2-9cb8-59c88db1e0fb",
@@ -8155,7 +8717,8 @@
       "/uploads/6c0d0ea5-cf77-4c74-b23c-de6b413bf17d.jpg"
     ],
     "recaster": "Литейка Defiler's Resin Casting",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "6282a5dc-f707-4803-8be7-6013bca4d177",
@@ -8169,7 +8732,8 @@
     "images": [
       "/uploads/d89cff2d-1645-40c7-8470-6e9910ec1f7b.jpg"
     ],
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": "078a6da4-1144-48d7-b0e4-969a74548671",
@@ -8183,7 +8747,8 @@
     "images": [
       "/uploads/df46bce1-12ce-4ae5-94e1-8bcfdf6fbb2f.jpg"
     ],
-    "status": "Rare"
+    "status": "Rare",
+    "version": 1
   },
   {
     "id": "4fdb5a40-933f-402a-b695-a57ce7d8d4b2",
@@ -8199,7 +8764,8 @@
       "/uploads/9d157c07-f800-4e7a-ba47-4d1b2ba8eee6.jpg",
       "/uploads/77c0641f-9479-4e6b-8ef9-12fd16e4b530.jpg"
     ],
-    "status": "Painted"
+    "status": "Painted",
+    "version": 1
   },
   {
     "id": "682a7c78-732b-4e7b-b9f4-44e6525832b6",
@@ -8217,7 +8783,8 @@
       "/uploads/07066752-a3c2-471a-9dbe-cc2e189f5d28.jpg",
       "/uploads/82c0e67c-e13b-4392-a1ae-45f8fe59b59d.jpg"
     ],
-    "status": "Painted"
+    "status": "Painted",
+    "version": 1
   },
   {
     "id": "50caab14-b006-42a0-b9ad-98284cf24c53",
@@ -8231,7 +8798,8 @@
     "images": [
       "/uploads/e45138de-c068-4944-9baf-08e7da01738f.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "612de034-15da-40d0-81c6-2180e2594a8a",
@@ -8245,7 +8813,8 @@
     "images": [
       "/uploads/3d2921e0-acd5-48fc-ade6-001ee32d4c8d.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "3c7e8e47-6bb4-4fa9-a5d6-a51099849952",
@@ -8259,7 +8828,8 @@
     "images": [
       "/uploads/f12cf31b-de78-4a5a-8277-7620dc70a7ed.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "dc30ecc7-0f93-4159-ad61-88b694d2fd32",
@@ -8273,7 +8843,8 @@
     "images": [
       "/uploads/1712ba99-8bfc-4be1-88f6-cb2a0a0b8167.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "0db48a3d-3be7-4b74-b2f5-6ceb96258720",
@@ -8287,7 +8858,8 @@
     "images": [
       "/uploads/13b940a0-4f90-4abd-96b9-f0914807872e.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "bf42e75c-a163-4c1d-88ef-0a637b7e78b1",
@@ -8301,7 +8873,8 @@
     "images": [
       "/uploads/d4d6f64f-ee23-4987-9887-124190ee494a.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "969b14e9-c6c8-4204-855c-2a677437f87d",
@@ -8315,7 +8888,8 @@
     "images": [
       "/uploads/eb939225-8229-4c48-9db4-5c927bdae568.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "fce9e003-b037-4cef-82be-04b520d4cf00",
@@ -8329,7 +8903,8 @@
     "images": [
       "/uploads/45e87a0e-ce44-47b9-9629-daec5751e76f.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "1372a363-167f-4cff-b25a-6e69009425b7",
@@ -8343,7 +8918,8 @@
     "images": [
       "/uploads/fb017e71-c205-4fc1-aaee-9a1bcc1c22d5.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "172d3514-a5a2-4e10-9fb0-7dc1b86ba50b",
@@ -8357,7 +8933,8 @@
     "images": [
       "/uploads/b7d76afa-b03e-4269-8d2d-ebd585bd46fc.jpg"
     ],
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "121f7a57-a701-4554-81fc-371caa5fffe7",
@@ -8371,7 +8948,8 @@
     "images": [
       "/uploads/b50ba6e4-f60e-4133-b837-b30d395e43ec.jpg"
     ],
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "35ce9294-0f19-4947-80ec-93f70bdcee06",
@@ -8385,7 +8963,8 @@
     "images": [
       "/uploads/9f20f8fa-b09a-469f-8ab8-2cca65d8994e.jpg"
     ],
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "d4a8e865-6b45-4e07-880b-98e872742d27",
@@ -8400,7 +8979,8 @@
       "/uploads/c5b537ed-0abb-4b61-acd5-6cd004c9c58a.jpg"
     ],
     "recaster": "Литейка ThePiratesCountry",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "d57d33ea-8abd-411b-9b75-e026267bed5f",
@@ -8414,7 +8994,8 @@
     "images": [
       "/uploads/7c14057d-10e1-4439-a375-6d6007976e04.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "9809fc47-4c0e-4be6-946c-0f0d33562489",
@@ -8428,7 +9009,8 @@
     "images": [
       "/uploads/86630887-06c8-4e2a-a0cc-1123f7a739fd.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "7dd31a43-cec9-436f-b781-77639292aecd",
@@ -8442,7 +9024,8 @@
     "images": [
       "/uploads/4512541c-77a5-4244-bf2b-3182a28ccc06.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "1b302fd1-9ab0-496e-8d7d-2fa8f8d41b6a",
@@ -8458,7 +9041,8 @@
       "/uploads/e43d9c1f-c6ee-42df-ba69-d6d31e7f4110.jpg"
     ],
     "recaster": "aliexpress",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "fa0c3be2-d8c6-47e5-9356-97cc498146cb",
@@ -8475,7 +9059,8 @@
       "/uploads/492bf0b8-a62c-4d3f-8ba2-27683deb54d8.jpg"
     ],
     "recaster": "aliexpress",
-    "status": "Painted"
+    "status": "Painted",
+    "version": 1
   },
   {
     "id": "9d055079-480a-4794-9173-78b473c5e76f",
@@ -8489,7 +9074,8 @@
     "images": [
       "/uploads/af940cb0-4d01-4b91-9f5b-2883a5c32a84.jpg"
     ],
-    "status": "Painted"
+    "status": "Painted",
+    "version": 1
   },
   {
     "id": "57afba13-bd6e-4f29-b00b-1fac71fe04cd",
@@ -8503,7 +9089,8 @@
     "images": [
       "/uploads/bd488e83-befd-4f0d-8d9e-27e751ceca14.jpg"
     ],
-    "status": "Painted"
+    "status": "Painted",
+    "version": 1
   },
   {
     "id": "14dee5a5-617c-49cc-9c6b-c6a8e06d11fd",
@@ -8518,7 +9105,8 @@
       "/uploads/93345c8a-67f9-4ab3-ad41-50b6365d42c4.jpg"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "cfe9c47e-9f1d-4a3c-a3b7-773160097546",
@@ -8533,7 +9121,8 @@
       "/uploads/c1d6fc78-8604-4c94-b3dc-74c9cf31c069.jpg"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "108e8f14-09f5-4e96-83b8-292c552c5695",
@@ -8547,7 +9136,8 @@
     "images": [
       "/uploads/453688d5-1818-4408-8637-c554e53627b5.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "9105c38d-dc57-43c6-8b1a-2b750d36ec14",
@@ -8561,7 +9151,8 @@
     "images": [
       "/uploads/d90a9c14-0af2-469f-95f7-bb851272b730.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "6844d960-290c-47f5-8a71-6ad5fcf27f39",
@@ -8575,7 +9166,8 @@
     "images": [
       "/uploads/065d708e-fd74-4d05-aac6-79f7f9c8e02d.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "80902381-6dd7-4cf7-9a5f-9f3fb34212e7",
@@ -8589,7 +9181,8 @@
     "images": [
       "/uploads/5dbdda73-a69a-4749-ba54-284aa82db525.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "1b560caf-4400-4a11-9a6d-1e9b1141a32f",
@@ -8603,7 +9196,8 @@
     "images": [
       "/uploads/6b7195c0-6126-4dfe-8c4b-3b2d7849820b.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "ec63ed50-c140-4fa0-adb9-f59d673ea4c2",
@@ -8617,7 +9211,8 @@
     "images": [
       "/uploads/7d7dff74-bab9-4747-a7b0-5ff321f03248.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "69020a0c-5d62-41d3-8587-0b26a1c3add4",
@@ -8631,7 +9226,8 @@
     "images": [
       "/uploads/70f97879-996e-4505-a406-07e1ca7b2215.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "214ec85b-d62d-4e4e-9134-4d13ef7ebe71",
@@ -8645,7 +9241,8 @@
     "images": [
       "/uploads/04e0e87a-1942-457e-a177-8b36a7204404.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "213f1b95-355c-4c22-9ef3-eeddcb7afefc",
@@ -8660,7 +9257,8 @@
       "/uploads/208c429b-c322-4a7a-8d60-94b0d1985752.jpg"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "15b3a345-7eeb-422e-ae3a-97aca773df9e",
@@ -8675,7 +9273,8 @@
       "/uploads/c30f2ecf-773b-4bee-82b4-550d5f14f4e1.jpg"
     ],
     "recaster": "Литейка GreedIsGood",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "e862bc16-26fa-46b3-a66d-54e070faa0bc",
@@ -8690,7 +9289,8 @@
       "/uploads/e72b92fd-20ec-4784-8463-8d354206031c.jpg",
       "/uploads/a0fab423-79d5-4347-8d12-f526cc0eb491.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "7c81edb1-fe23-404c-a5dc-8a5380c94685",
@@ -8704,7 +9304,8 @@
     "images": [
       "/uploads/b09c9e00-5061-464f-b99b-74ca870a8cae.jpg"
     ],
-    "status": "Unbuilt / Boxed"
+    "status": "Unbuilt / Boxed",
+    "version": 1
   },
   {
     "id": "dc9c767f-d24a-4161-a64b-964084c641fd",
@@ -8718,7 +9319,8 @@
     "images": [
       "/uploads/f760396f-bdf5-4e0d-a01b-222c81aad0c2.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "5b74776b-635b-494e-bfa8-abf4ff57ba0b",
@@ -8733,7 +9335,8 @@
       "/uploads/9e8604e6-27cf-492a-b4fe-a5f11e030ac7.jpg"
     ],
     "recaster": "Литейка Plants vs Zombies",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "fe749a0b-661a-474c-9a8a-14a5887abcfe",
@@ -8748,7 +9351,8 @@
       "/uploads/b9582ff1-f25c-442b-b7b8-5e11e915854c.jpg"
     ],
     "recaster": "Литейка Plants vs Zombies",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "a4ba1ee5-1248-4ac3-a2c8-68cb4c010740",
@@ -8763,7 +9367,8 @@
       "/uploads/06e5d209-d949-40a0-99b5-b61374447599.jpg"
     ],
     "recaster": "Литейка Plants vs Zombies",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "cfe8c363-9478-407a-b221-78ce84bd50c7",
@@ -8778,7 +9383,8 @@
       "/uploads/3899c491-8f80-4bf1-8820-923472530944.jpg"
     ],
     "recaster": "Литейка Plants vs Zombies",
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "a0750495-9ba1-4003-bdd7-7b243ba53fe1",
@@ -8792,7 +9398,8 @@
     "images": [
       "/uploads/99b29a2e-b9c3-453f-a4cc-1bdb676cba8d.jpg"
     ],
-    "status": "Built"
+    "status": "Built",
+    "version": 1
   },
   {
     "id": "92fc0e49-d989-4849-be9a-8a0c3d8905cf",
@@ -8806,7 +9413,8 @@
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   },
   {
     "id": "d36d9980-6ffa-4955-ae01-62b9811e2bea",
@@ -8820,6 +9428,7 @@
     "images": [],
     "recaster": "Литейка https://vk.com/osfoundry",
     "status": "Built",
-    "combatPoints": ""
+    "combatPoints": "",
+    "version": 1
   }
 ]

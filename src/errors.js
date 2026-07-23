@@ -4,5 +4,8 @@ class ValidationError extends Error {
 class DataCorruptionError extends Error {
   constructor(message) { super(message); this.name = 'DataCorruptionError'; this.status = 500; }
 }
+class VersionConflictError extends Error {
+  constructor() { super('Item was modified in another session. Reload and try again.'); this.name = 'VersionConflictError'; this.status = 409; }
+}
 
-module.exports = { ValidationError, DataCorruptionError };
+module.exports = { ValidationError, DataCorruptionError, VersionConflictError };

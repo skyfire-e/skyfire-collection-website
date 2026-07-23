@@ -206,8 +206,20 @@ async function saveEdit() {
     fd.append('imagesToRemove', JSON.stringify(allRemoved));
   }
   fd.append('finalOrder', JSON.stringify(finalOrder));
+  if (editCurrentItem.version !== undefined) {
+    fd.append('version', String(editCurrentItem.version));
+  }
 
-  await API.put('/api/items/' + editingId, fd);
+  try {
+    await API.put('/api/items/' + editingId, fd);
+  } catch (err) {
+    if (err.status === 409) {
+      alert('Item was modified in another session. Please reload and try again.');
+      closeEdit();
+      return;
+    }
+    throw err;
+  }
   if (onSaveCallback) onSaveCallback();
   closeEdit();
 }
