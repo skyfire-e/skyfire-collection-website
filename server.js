@@ -6,6 +6,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const rateLimit = require('express-rate-limit');
 const sharp = require('sharp');
+const { itemInputSchema, itemInputPartialSchema, settingsSchema } = require('./lib/validate');
 
 require('dotenv').config();
 
@@ -101,26 +102,25 @@ function findCategory(subcategories, targetId) {
 
 function validateItemInput(body, cats, partial) {
   const errors = [];
-  const title = body.title !== undefined ? String(body.title).trim() : undefined;
-  const section = body.section !== undefined ? String(body.section).trim() : undefined;
-  const category = body.category !== undefined ? String(body.category).trim() : undefined;
-  const price = body.price !== undefined ? String(body.price).trim() : undefined;
+  const schema = partial ? itemInputPartialSchema : itemInputSchema;
+  const result = schema.safeParse(body);
 
-  if (!partial || body.title !== undefined) {
-    if (!title) errors.push('Title is required and must be non-empty');
-  }
-  if (!partial || body.section !== undefined) {
-    if (!section) errors.push('Section is required');
-    else if (!cats[section]) errors.push('Section "' + section + '" does not exist');
-  }
-  if (!partial || body.category !== undefined) {
-    if (!category) errors.push('Category is required');
-    else if (section && cats[section] && !findCategory(cats[section].subcategories, category)) {
-      errors.push('Category "' + category + '" does not exist in section "' + section + '"');
+  if (!result.success) {
+    for (const issue of result.error.issues) {
+      errors.push(issue.message);
     }
   }
-  if (!partial || body.price !== undefined) {
-    if (price && !/^\d+(\.\d{1,2})?$/.test(price)) errors.push('Invalid price format');
+
+  const section = body.section !== undefined ? String(body.section).trim() : undefined;
+  const category = body.category !== undefined ? String(body.category).trim() : undefined;
+
+  if (!partial || body.section !== undefined) {
+    if (section && !cats[section]) errors.push('Section "' + section + '" does not exist');
+  }
+  if (!partial || body.category !== undefined) {
+    if (category && section && cats[section] && !findCategory(cats[section].subcategories, category)) {
+      errors.push('Category "' + category + '" does not exist in section "' + section + '"');
+    }
   }
 
   return errors.length > 0 ? errors : null;
@@ -554,30 +554,12 @@ app.get('/api/settings', (req, res) => {
 
 app.put('/api/settings', requireSameOrigin, requireAdmin, (req, res) => {
   const settings = readJSON(SETTINGS_FILE) || {};
-  if (req.body.siteName !== undefined) {
-    if (typeof req.body.siteName !== 'string') return res.status(400).json({ error: 'siteName must be a string' });
-    settings.siteName = req.body.siteName;
+  const result = settingsSchema.partial().safeParse(req.body);
+  if (!result.success) {
+    const msg = result.error.issues[0].message;
+    return res.status(400).json({ error: msg });
   }
-  if (req.body.showSpreadsheet !== undefined) {
-    if (typeof req.body.showSpreadsheet !== 'boolean') return res.status(400).json({ error: 'showSpreadsheet must be boolean' });
-    settings.showSpreadsheet = req.body.showSpreadsheet;
-  }
-  if (req.body.showPublicSpreadsheet !== undefined) {
-    if (typeof req.body.showPublicSpreadsheet !== 'boolean') return res.status(400).json({ error: 'showPublicSpreadsheet must be boolean' });
-    settings.showPublicSpreadsheet = req.body.showPublicSpreadsheet;
-  }
-  if (req.body.showMiniaturesColumns !== undefined) {
-    if (typeof req.body.showMiniaturesColumns !== 'object' || req.body.showMiniaturesColumns === null || Array.isArray(req.body.showMiniaturesColumns)) {
-      return res.status(400).json({ error: 'showMiniaturesColumns must be an object' });
-    }
-    settings.showMiniaturesColumns = req.body.showMiniaturesColumns;
-  }
-  if (req.body.currencies !== undefined) {
-    if (typeof req.body.currencies !== 'object' || req.body.currencies === null || Array.isArray(req.body.currencies)) {
-      return res.status(400).json({ error: 'currencies must be an object' });
-    }
-    settings.currencies = req.body.currencies;
-  }
+  Object.assign(settings, result.data);
   writeJSONAtomic(SETTINGS_FILE, settings);
   res.json(settings);
 });
