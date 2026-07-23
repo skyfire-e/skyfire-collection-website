@@ -1,9 +1,11 @@
 const express = require('express');
+const helmet = require('helmet');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
+const rateLimit = require('express-rate-limit');
 const { ValidationError, DataCorruptionError, VersionConflictError } = require('./errors');
 const { readJSON, writeJSONAtomic, secureCookies, DATA_DIR, ITEMS_FILE, ROOT } = require('./helpers');
 
@@ -18,8 +20,25 @@ if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
 const app = express();
 
 app.set('trust proxy', process.env.TRUST_PROXY === '1' ? 1 : false);
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Rate limiting on mutation endpoints
+const writeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, try again later' }
+});
+app.use('/api/items', writeLimiter);
+app.use('/api/categories', writeLimiter);
+app.use('/api/settings', writeLimiter);
+app.use('/api/upload', writeLimiter);
+app.use('/api/backfill-defaults', writeLimiter);
+app.use('/api/backfill-images', writeLimiter);
+
 app.use(session({
   name: 'skyfire.sid',
   secret: process.env.SESSION_SECRET,

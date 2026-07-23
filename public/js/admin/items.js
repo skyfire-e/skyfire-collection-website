@@ -263,14 +263,16 @@ function populateCatSectionDropdown(cats) {
 
 async function deleteCat(section, id, parentId) {
   if (!confirm('Delete "' + (parentId ? 'nested ' : '') + 'category"?')) return;
-  const res = await API.del('/api/categories', { section, id, parentId });
+  const params = new URLSearchParams({ section, ...(id && { id }), ...(parentId && { parentId }) });
+  const res = await API.del('/api/categories?' + params.toString());
   if (res.error) return alert(res.error);
   loadCatList();
 }
 
 async function deleteSection(key) {
   if (!confirm('Delete entire section "' + key + '" and all its subcategories?')) return;
-  const res = await API.del('/api/categories', { section: key });
+  const params = new URLSearchParams({ section: key });
+  const res = await API.del('/api/categories?' + params.toString());
   if (res.error) return alert(res.error);
   loadCatList();
 }

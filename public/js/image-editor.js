@@ -10,12 +10,57 @@ let cropCtx = null;
 let cropSrc = null;
 let cropQueue = [];
 
+let scrollPosition = 0;
+
 function isObjectURL(url) {
   return url && typeof url === 'string' && url.startsWith('blob:');
 }
 
 function revokeSlot(slot) {
   if (slot && isObjectURL(slot.src)) URL.revokeObjectURL(slot.src);
+}
+
+function lockScroll() {
+  scrollPosition = window.scrollY;
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = '-' + scrollPosition + 'px';
+  document.body.style.width = '100%';
+}
+
+function unlockScroll() {
+  document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  window.scrollTo(0, scrollPosition);
+}
+
+function trapFocus(modal) {
+  const focusable = modal.querySelectorAll('button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  first.focus();
+  function handler(e) {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+  modal.addEventListener('keydown', handler);
+  modal._focusTrap = handler;
+}
+
+function releaseTrap(modal) {
+  if (modal._focusTrap) {
+    modal.removeEventListener('keydown', modal._focusTrap);
+    delete modal._focusTrap;
+  }
 }
 
 export function openEdit(item, { onSave } = {}) {
@@ -40,7 +85,9 @@ export function openEdit(item, { onSave } = {}) {
 
   document.getElementById('editImage').value = '';
   renderEditImages();
+  lockScroll();
   document.getElementById('editModal').classList.add('open');
+  trapFocus(document.getElementById('editModal'));
   document.addEventListener('keydown', onEscapeKey);
 }
 
@@ -109,7 +156,9 @@ function openCrop(imageSrc, ctx) {
   cropSrc = imageSrc;
   cropQueue = (ctx && ctx.fileQueue) || [];
   document.getElementById('cropImage').src = imageSrc;
+  lockScroll();
   document.getElementById('cropModal').classList.add('open');
+  trapFocus(document.getElementById('cropModal'));
   document.addEventListener('keydown', onEscapeKey);
   setTimeout(() => {
     if (cropper) cropper.destroy();
@@ -126,6 +175,7 @@ function openCrop(imageSrc, ctx) {
 function closeCrop() {
   if (cropper) { cropper.destroy(); cropper = null; }
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
+  releaseTrap(document.getElementById('cropModal'));
   cropSrc = null;
   cropCtx = null;
   document.getElementById('cropModal').classList.remove('open');
@@ -234,6 +284,8 @@ function onEscapeKey(e) {
 }
 
 function closeEdit() {
+  unlockScroll();
+  releaseTrap(document.getElementById('editModal'));
   document.getElementById('editModal').classList.remove('open');
   document.removeEventListener('keydown', onEscapeKey);
   editSlots.forEach(revokeSlot);

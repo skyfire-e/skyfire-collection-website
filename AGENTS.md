@@ -11,7 +11,7 @@
 - GitHub: https://github.com/skyfire-e/skyfire-collection-website.git
 - Branches: `main` (stable), `test` (changes before merge)
 - ⚠️ NEVER merge to `main` without explicit user confirmation
-- Tags: v1.4.1 latest (Iteration D + P3 split)
+- Tags: v1.5.1 latest (Iteration F)
 
 ## Working Tools
 - Все скрипты (парсинг, миграция, проверка данных, smoke-test) лежат в `gitignore/`
@@ -142,14 +142,20 @@ backups/               — backup archives (excluded from git)
 - **#36**: Runtime deps cleanup (jimp, playwright, puppeteer-core → devDependencies)
 - **#40**: uploads/* added to .gitignore
 
+### Iteration F — P0+P1+P2 (Security hardening + Quality)
+- **server.js**: env guard accepts ADMIN_PASSWORD_HASH without ADMIN_PASSWORD
+- **P1**: Security headers via `helmet` (CSP, HSTS, XFO, X-Content-Type-Options)
+- **P2**: Rate limiting on mutation endpoints (60 req / 15 min)
+- **P2**: SRI integrity hashes for Cropper.js CDN assets
+- **P2**: README.md with setup and deployment instructions
+- **P2**: CI (GitHub Actions — lint, test, check)
+- **P2**: AGENTS.md synced to actual code state
+
 ## Known Gaps (from code review)
 | Issue | Priority | Status |
 |-------|----------|--------|
-| Optimistic locking (versioning) | Low | Not done (один сервер, write mutex добавлен) |
-| Recursive spreadsheet flatten | Low | Not done (работает для 2 уровней) |
-| Multi-file crop (File[] queue) | Low | Partially done (cropQueue + revoke) |
-| README.md + CI | Medium | Not done |
-| Migration endpoints → npm scripts | Low | Not done (auth-защищены + ручной backfill) |
+| Thumbnail pipeline (large/thumb) | Low | Not done (planned for P3) |
+| SQLite migration | Low | Not done (planned for P3) |
 
 ## Planned Features
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)

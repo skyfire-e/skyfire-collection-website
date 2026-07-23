@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-if (!process.env.SESSION_SECRET || !process.env.ADMIN_PASSWORD) {
-  console.error('Missing required env vars: SESSION_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD');
+if (!process.env.SESSION_SECRET || (!process.env.ADMIN_PASSWORD && !process.env.ADMIN_PASSWORD_HASH)) {
+  console.error('Missing required env vars: SESSION_SECRET, ADMIN_USERNAME, and either ADMIN_PASSWORD or ADMIN_PASSWORD_HASH');
   console.error('Create a .env file in the project root with these values.');
   process.exit(1);
 }

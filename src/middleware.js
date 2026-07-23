@@ -1,6 +1,6 @@
 const multer = require('multer');
 const rateLimit = require('express-rate-limit');
-const { TEMP_DIR, envBoolean } = require('./helpers');
+const { TEMP_DIR } = require('./helpers');
 
 const ALLOWED_MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 

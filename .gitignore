@@ -8,6 +8,9 @@ gitignore/
 # Session store
 data/sessions/
 
+# Audit log (runtime generated)
+data/audit.json
+
 # Backup artifacts
 backups/
 

@@ -53,7 +53,7 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
 
 router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
   try {
-    const { section, id, parentId } = req.body;
+    const { section, id, parentId } = req.query;
 
     if (!section) return res.status(400).json({ error: 'Invalid section' });
 
