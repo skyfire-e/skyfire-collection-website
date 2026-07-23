@@ -7,6 +7,16 @@ let onSaveCallback = null;
 
 let cropper = null;
 let cropCtx = null;
+let cropSrc = null;
+let cropQueue = [];
+
+function isObjectURL(url) {
+  return url && typeof url === 'string' && url.startsWith('blob:');
+}
+
+function revokeSlot(slot) {
+  if (slot && isObjectURL(slot.src)) URL.revokeObjectURL(slot.src);
+}
 
 export function openEdit(item, { onSave } = {}) {
   editingId = item.id;
@@ -39,39 +49,64 @@ function renderEditImages() {
   editSlots.forEach((slot, i) => {
     const wrapper = document.createElement('div');
     wrapper.className = 'edit-img-item';
-    wrapper.innerHTML = `
-      <img src="${slot.src}" alt="" onerror="this.src='/images/default.svg'">
-      <button class="edit-img-move-left">&lsaquo;</button>
-      <button class="edit-img-move-right">&rsaquo;</button>
-      <button class="edit-img-crop">&#9998;</button>
-      <button class="edit-img-del">&times;</button>
-      <span class="edit-img-idx">#${i + 1}</span>
-    `;
-    wrapper.querySelector('.edit-img-del').addEventListener('click', () => {
-      editSlots.splice(i, 1);
-      renderEditImages();
-    });
-    wrapper.querySelector('.edit-img-crop').addEventListener('click', () => {
-      openCrop(slot.src, { slotIdx: i });
-    });
-    const leftBtn = wrapper.querySelector('.edit-img-move-left');
-    const rightBtn = wrapper.querySelector('.edit-img-move-right');
+
+    const img = document.createElement('img');
+    img.src = slot.src;
+    img.alt = '';
+    img.onerror = function () { this.src = '/images/default.svg'; };
+    wrapper.appendChild(img);
+
+    const leftBtn = document.createElement('button');
+    leftBtn.className = 'edit-img-move-left';
+    leftBtn.textContent = '\u2039';
     if (i === 0) leftBtn.disabled = true;
-    if (i === editSlots.length - 1) rightBtn.disabled = true;
     leftBtn.addEventListener('click', () => {
       [editSlots[i - 1], editSlots[i]] = [editSlots[i], editSlots[i - 1]];
       renderEditImages();
     });
+    wrapper.appendChild(leftBtn);
+
+    const rightBtn = document.createElement('button');
+    rightBtn.className = 'edit-img-move-right';
+    rightBtn.textContent = '\u203A';
+    if (i === editSlots.length - 1) rightBtn.disabled = true;
     rightBtn.addEventListener('click', () => {
       [editSlots[i], editSlots[i + 1]] = [editSlots[i + 1], editSlots[i]];
       renderEditImages();
     });
+    wrapper.appendChild(rightBtn);
+
+    const cropBtn = document.createElement('button');
+    cropBtn.className = 'edit-img-crop';
+    cropBtn.textContent = '\u270E';
+    cropBtn.addEventListener('click', () => {
+      openCrop(slot.src, { slotIdx: i });
+    });
+    wrapper.appendChild(cropBtn);
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'edit-img-del';
+    delBtn.textContent = '\u00D7';
+    delBtn.addEventListener('click', () => {
+      editSlots.splice(i, 1);
+      renderEditImages();
+    });
+    wrapper.appendChild(delBtn);
+
+    const idxSpan = document.createElement('span');
+    idxSpan.className = 'edit-img-idx';
+    idxSpan.textContent = '#' + (i + 1);
+    wrapper.appendChild(idxSpan);
+
     grid.appendChild(wrapper);
   });
 }
 
 // --- Crop Modal ---
 function openCrop(imageSrc, ctx) {
+  if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
+  cropSrc = imageSrc;
+  cropQueue = ctx && ctx.newFilesQueue || [];
   document.getElementById('cropImage').src = imageSrc;
   document.getElementById('cropModal').classList.add('open');
   setTimeout(() => {
@@ -88,6 +123,10 @@ function openCrop(imageSrc, ctx) {
 
 function closeCrop() {
   if (cropper) { cropper.destroy(); cropper = null; }
+  if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
+  cropSrc = null;
+  cropQueue.forEach(function (url) { if (isObjectURL(url)) URL.revokeObjectURL(url); });
+  cropQueue = [];
   document.getElementById('cropModal').classList.remove('open');
   cropCtx = null;
 }
@@ -104,6 +143,7 @@ function applyCrop() {
 
     if (typeof slotIdx === 'number' && editSlots[slotIdx]) {
       const slot = editSlots[slotIdx];
+      revokeSlot(slot);
       editSlots[slotIdx] = { type: 'replace', originalIdx: slot.originalIdx, file, src: URL.createObjectURL(blob) };
       renderEditImages();
       closeCrop();
@@ -167,6 +207,7 @@ async function saveEdit() {
 
 function closeEdit() {
   document.getElementById('editModal').classList.remove('open');
+  editSlots.forEach(revokeSlot);
   editSlots = [];
   editCurrentItem = null;
   editingId = null;

@@ -6,6 +6,7 @@ let categoriesData = {};
 export async function initAdminItems() {
   categoriesData = await API.get('/api/categories');
   populateCatSectionDropdown(categoriesData);
+  populateAddSectionDropdown(categoriesData);
   loadCatList();
 
   initImageEditor();
@@ -94,39 +95,46 @@ export async function initAdminItems() {
   });
 
   // Add New Section
-  document.getElementById('addSectionBtn').addEventListener('click', async () => {
-    const label = document.getElementById('newSectionLabel').value.trim();
-    if (!label) return alert('Enter a section name');
-    const id = document.getElementById('newSectionId').value.trim() || undefined;
-    await API.post('/api/categories', { label, id, parentId: '__new_section__' });
-    document.getElementById('newSectionLabel').value = '';
-    document.getElementById('newSectionId').value = '';
-    categoriesData = await API.get('/api/categories');
-    populateCatSectionDropdown(categoriesData);
-    loadCatList();
-    const addSection = document.getElementById('addSection').value;
-    if (addSection) {
-      document.getElementById('addSection').dispatchEvent(new Event('change'));
-    }
+  document.getElementById('addSectionBtn').addEventListener('click', () => {
+    withPending(document.getElementById('addSectionBtn'), async () => {
+      const label = document.getElementById('newSectionLabel').value.trim();
+      if (!label) return alert('Enter a section name');
+      const id = document.getElementById('newSectionId').value.trim() || undefined;
+      await API.post('/api/categories', { label, id, parentId: '__new_section__' });
+      document.getElementById('newSectionLabel').value = '';
+      document.getElementById('newSectionId').value = '';
+      categoriesData = await API.get('/api/categories');
+      populateCatSectionDropdown(categoriesData);
+      populateAddSectionDropdown(categoriesData);
+      loadCatList();
+      const addSection = document.getElementById('addSection').value;
+      if (addSection) {
+        document.getElementById('addSection').dispatchEvent(new Event('change'));
+      }
+    });
   });
 
   // Add Subcategory
-  document.getElementById('addSubcatBtn').addEventListener('click', async () => {
-    const section = document.getElementById('catSection').value;
-    const parentId = document.getElementById('catParent').value;
-    const label = document.getElementById('catLabel').value.trim();
-    if (!section) return alert('Select a section');
-    if (!label) return alert('Enter a category label');
-    const id = document.getElementById('catId').value.trim() || undefined;
-    await API.post('/api/categories', { section, label, id, parentId: parentId || undefined });
-    document.getElementById('catLabel').value = '';
-    document.getElementById('catId').value = '';
-    categoriesData = await API.get('/api/categories');
-    loadCatList();
-    const addSection = document.getElementById('addSection').value;
-    if (addSection) {
-      document.getElementById('addSection').dispatchEvent(new Event('change'));
-    }
+  document.getElementById('addSubcatBtn').addEventListener('click', () => {
+    withPending(document.getElementById('addSubcatBtn'), async () => {
+      const section = document.getElementById('catSection').value;
+      const parentId = document.getElementById('catParent').value;
+      const label = document.getElementById('catLabel').value.trim();
+      if (!section) return alert('Select a section');
+      if (!label) return alert('Enter a category label');
+      const id = document.getElementById('catId').value.trim() || undefined;
+      await API.post('/api/categories', { section, label, id, parentId: parentId || undefined });
+      document.getElementById('catLabel').value = '';
+      document.getElementById('catId').value = '';
+      categoriesData = await API.get('/api/categories');
+      populateCatSectionDropdown(categoriesData);
+      populateAddSectionDropdown(categoriesData);
+      loadCatList();
+      const addSection = document.getElementById('addSection').value;
+      if (addSection) {
+        document.getElementById('addSection').dispatchEvent(new Event('change'));
+      }
+    });
   });
 }
 
@@ -230,6 +238,18 @@ async function loadSpreadsheet() {
   });
 }
 
+function populateAddSectionDropdown(cats) {
+  const sel = document.getElementById('addSection');
+  sel.innerHTML = '<option value="">Select section...</option>';
+  Object.entries(cats).forEach(function (_ref) {
+    const key = _ref[0], sec = _ref[1];
+    const opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = sec.label;
+    sel.appendChild(opt);
+  });
+}
+
 function populateCatSectionDropdown(cats) {
   const sel = document.getElementById('catSection');
   sel.innerHTML = '<option value="">Select section...</option>';
@@ -257,6 +277,9 @@ async function deleteSection(key) {
 
 async function loadCatList() {
   const data = await API.get('/api/categories');
+  categoriesData = data;
+  populateCatSectionDropdown(data);
+  populateAddSectionDropdown(data);
   const div = document.getElementById('catList');
   div.innerHTML = '';
   Object.entries(data).forEach(([key, sec]) => {
