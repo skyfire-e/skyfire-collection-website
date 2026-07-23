@@ -97,7 +97,7 @@ export async function initSpreadsheetPage() {
         if (section.showPrices) {
           const td3 = document.createElement('td');
           td3.className = 'ps-price-col';
-          td3.textContent = item.price ? section.currency + item.price : '';
+          td3.textContent = item.price ? section.currency + ' ' + item.price : '';
           tr.appendChild(td3);
         }
         tbody.appendChild(tr);
@@ -109,7 +109,7 @@ export async function initSpreadsheetPage() {
       sumRow.className = 'ps-subcat-sum';
       let sumText = sub.items.length + ' item' + (sub.items.length !== 1 ? 's' : '');
       if (section.showPrices && sub.sum > 0) {
-        sumText += ', Sum: ' + section.currency + sub.sum.toFixed(2);
+        sumText += ', Sum: ' + section.currency + ' ' + sub.sum.toFixed(2);
       }
       sumRow.textContent = sumText;
       subDiv.appendChild(sumRow);
@@ -121,7 +121,7 @@ export async function initSpreadsheetPage() {
     if (section.showPrices && section.sum > 0) {
       const sectionSum = document.createElement('div');
       sectionSum.className = 'ps-section-sum';
-      sectionSum.textContent = section.totalItems + ' items | Total for ' + section.label + ': ' + section.currency + section.sum.toFixed(2);
+      sectionSum.textContent = section.totalItems + ' items | Total for ' + section.label + ': ' + section.currency + ' ' + section.sum.toFixed(2);
       sectionDiv.appendChild(sectionSum);
     } else {
       const sectionSum = document.createElement('div');
