@@ -28,10 +28,13 @@ const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
 
 function readJSON(file) {
-  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return null; }
-}
-function writeJSONAtomic(file, data) {
-  fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (e) {
+    if (e.code === 'ENOENT') return null;
+    console.error('Corrupted JSON in ' + file + ':', e.message);
+    throw e;
+  }
 }
 
 function writeJSONAtomic(file, data) {
@@ -56,6 +59,15 @@ function cleanupUploadedFiles(files) {
   }
 }
 
+function findCategory(subcategories, targetId) {
+  for (const cat of subcategories || []) {
+    if (cat.id === targetId) return cat;
+    const nested = findCategory(cat.subcategories, targetId);
+    if (nested) return nested;
+  }
+  return null;
+}
+
 function validateItemInput(body, cats, partial) {
   const errors = [];
   const title = body.title !== undefined ? String(body.title).trim() : undefined;
@@ -72,13 +84,8 @@ function validateItemInput(body, cats, partial) {
   }
   if (!partial || body.category !== undefined) {
     if (!category) errors.push('Category is required');
-    else if (section && cats[section]) {
-      const exists = cats[section].subcategories.some(c => {
-        if (c.id === category) return true;
-        if (c.subcategories) return c.subcategories.some(sc => sc.id === category);
-        return false;
-      });
-      if (!exists) errors.push('Category "' + category + '" does not exist in section "' + section + '"');
+    else if (section && cats[section] && !findCategory(cats[section].subcategories, category)) {
+      errors.push('Category "' + category + '" does not exist in section "' + section + '"');
     }
   }
   if (!partial || body.price !== undefined) {
@@ -86,6 +93,37 @@ function validateItemInput(body, cats, partial) {
   }
 
   return errors.length > 0 ? errors : null;
+}
+
+function validateFinalOrder(order, oldImages, uploadedFiles) {
+  if (!Array.isArray(order)) return 'finalOrder must be an array';
+  if (!order.every(Number.isInteger)) return 'finalOrder must contain integers';
+  if (order.some(v => v < -1)) return 'Invalid finalOrder value';
+
+  const existingIndexes = order.filter(v => v >= 0);
+  if (new Set(existingIndexes).size !== existingIndexes.length) return 'Duplicate image indexes are not allowed';
+
+  if (existingIndexes.some(idx => idx >= oldImages.length)) return 'Invalid existing image index';
+
+  const uploadSlots = order.filter(v => v === -1).length;
+  if (uploadSlots !== uploadedFiles.length) return 'Uploaded files do not match finalOrder';
+
+  if (order.length > 10) return 'Maximum 10 images allowed';
+  return null;
+}
+
+function parseJSONArray(value, fieldName) {
+  if (value === undefined) return [];
+  try {
+    const parsed = JSON.parse(value);
+    if (!Array.isArray(parsed)) throw new Error(fieldName + ' must be an array');
+    return parsed;
+  } catch (e) {
+    const err = new Error(e.message || 'Invalid JSON for ' + fieldName);
+    err.statusCode = 400;
+    err.field = fieldName;
+    throw err;
+  }
 }
 
 // Init data files (only items.json — auth via .env)
@@ -101,11 +139,17 @@ const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD, role: 'admi
 app.set('trust proxy', 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const isProduction = process.env.NODE_ENV === 'production';
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: !!process.env.HTTPS, maxAge: 24 * 60 * 60 * 1000 }
+  cookie: {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000
+  }
 }));
 
 // Serve static files
@@ -113,11 +157,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // --- File upload ---
+const ALLOWED_MIMES = new Map([
+  ['image/jpeg', '.jpg'],
+  ['image/png', '.png'],
+  ['image/webp', '.webp']
+]);
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, 'uploads')),
-  filename: (req, file, cb) => cb(null, crypto.randomUUID() + path.extname(file.originalname))
+  filename: (req, file, cb) => {
+    const ext = ALLOWED_MIMES.get(file.mimetype);
+    if (!ext) return cb(new Error('Unsupported image type'));
+    cb(null, crypto.randomUUID() + ext);
+  }
 });
-const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    if (!ALLOWED_MIMES.has(file.mimetype)) return cb(new Error('Only JPEG, PNG and WebP are allowed'));
+    cb(null, true);
+  },
+  limits: { fileSize: 10 * 1024 * 1024, files: 10 }
+});
 
 // --- Auth middleware ---
 function requireAdmin(req, res, next) {
@@ -182,12 +243,18 @@ app.post('/api/categories', requireAdmin, (req, res) => {
     // Add subcategory under a group within the section
     const parent = cats[section].subcategories.find(c => c.id === parentId);
     if (parent && parent.subcategories) {
+      if (findCategory(cats[section].subcategories, catId)) {
+        return res.status(409).json({ error: 'Category ID "' + catId + '" already exists' });
+      }
       parent.subcategories.push({ id: catId, label });
     } else {
       return res.status(400).json({ error: 'Parent not found or not a group' });
     }
   } else if (section && cats[section]) {
     // Add flat subcategory to section root
+    if (findCategory(cats[section].subcategories, catId)) {
+      return res.status(409).json({ error: 'Category ID "' + catId + '" already exists' });
+    }
     cats[section].subcategories.push({ id: catId, label });
   } else {
     return res.status(400).json({ error: 'Invalid target' });
@@ -224,11 +291,13 @@ app.delete('/api/categories', requireAdmin, (req, res) => {
     const parent = cats[section].subcategories.find(c => c.id === parentId);
     if (!parent || !parent.subcategories) return res.status(400).json({ error: 'Parent not found' });
     const target = parent.subcategories.find(c => c.id === id);
-    if (target) affectedCats = collectIds(target);
+    if (!target) return res.status(404).json({ error: 'Category not found' });
+    affectedCats = collectIds(target);
   } else {
     // Delete flat subcategory or group
     const target = cats[section].subcategories.find(c => c.id === id);
-    if (target && target.type === 'group' && target.subcategories) {
+    if (!target) return res.status(404).json({ error: 'Category not found' });
+    if (target.type === 'group' && target.subcategories) {
       affectedCats = collectIds(target);
     } else {
       affectedCats = [id];
@@ -299,7 +368,7 @@ app.post('/api/items', requireAdmin, upload.array('images', 10), (req, res) => {
     console.error('Failed to save items.json:', err);
     return res.status(500).json({ error: 'Failed to save data' });
   }
-  res.json(newItem);
+  res.status(201).json(newItem);
 });
 
 app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) => {
@@ -309,34 +378,54 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
   const idx = items.findIndex(i => i.id == req.params.id);
   if (idx === -1) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
-  const errors = validateItemInput(req.body, cats, { partial: true });
+  // Build candidate — validate final state, not just partial fields
+  const candidate = {
+    ...items[idx],
+    ...(req.body.title !== undefined && { title: String(req.body.title).trim() }),
+    ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
+    ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
+    ...(req.body.price !== undefined && { price: String(req.body.price).trim() })
+  };
+  const errors = validateItemInput(candidate, cats);
   if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
 
-  if (req.body.title !== undefined) items[idx].title = String(req.body.title).trim();
+  if (req.body.title !== undefined) items[idx].title = candidate.title;
   if (req.body.author !== undefined) items[idx].author = req.body.author;
-  if (req.body.price !== undefined) items[idx].price = req.body.price;
+  if (req.body.price !== undefined) items[idx].price = candidate.price;
   if (req.body.recaster !== undefined) items[idx].recaster = req.body.recaster;
   if (req.body.combatPoints !== undefined) items[idx].combatPoints = req.body.combatPoints;
   if (req.body.status !== undefined) items[idx].status = req.body.status;
-  if (req.body.section !== undefined) items[idx].section = req.body.section;
-  if (req.body.category !== undefined) items[idx].category = req.body.category;
+  if (req.body.section !== undefined) items[idx].section = candidate.section;
+  if (req.body.category !== undefined) items[idx].category = candidate.category;
 
   if (!Array.isArray(items[idx].images)) items[idx].images = [];
   const oldImages = [...items[idx].images];
 
   let removeIdx = [];
-  if (req.body.imagesToRemove) {
-    try { removeIdx = JSON.parse(req.body.imagesToRemove); } catch(e) { removeIdx = []; }
-  }
   let finalOrder = [];
-  if (req.body.finalOrder) {
-    try { finalOrder = JSON.parse(req.body.finalOrder); } catch(e) { finalOrder = []; }
+  try {
+    removeIdx = parseJSONArray(req.body.imagesToRemove, 'imagesToRemove');
+    finalOrder = parseJSONArray(req.body.finalOrder, 'finalOrder');
+  } catch (e) {
+    cleanupUploadedFiles(files);
+    return res.status(400).json({ error: e.message });
+  }
+
+  if (!Array.isArray(removeIdx) || !removeIdx.every(Number.isInteger) || removeIdx.some(v => v < 0)) {
+    cleanupUploadedFiles(files);
+    return res.status(400).json({ error: 'imagesToRemove must contain non-negative integers' });
   }
 
   if (finalOrder.length > 0) {
+    const validationError = validateFinalOrder(finalOrder, oldImages, files);
+    if (validationError) {
+      cleanupUploadedFiles(files);
+      return res.status(400).json({ error: validationError });
+    }
+
+    const removedSet = new Set(removeIdx);
     const originalMap = {};
-    oldImages.forEach((img, i) => { originalMap[i] = img; });
-    if (Array.isArray(removeIdx)) removeIdx.forEach(i => delete originalMap[i]);
+    oldImages.forEach((img, i) => { if (!removedSet.has(i)) originalMap[Object.keys(originalMap).length] = img; });
 
     let fileIdx = 0;
     const newImages = [];
@@ -348,7 +437,7 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
       }
     }
     items[idx].images = newImages;
-  } else if (Array.isArray(removeIdx) && removeIdx.length > 0 && oldImages.length > 0) {
+  } else if (removeIdx.length > 0) {
     removeIdx.sort((a, b) => b - a).forEach(i => {
       if (i >= 0 && i < oldImages.length) oldImages.splice(i, 1);
     });
@@ -356,6 +445,11 @@ app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) =
     files.forEach(f => items[idx].images.push('/uploads/' + f.filename));
   } else if (files.length > 0) {
     items[idx].images = [...oldImages, ...files.map(f => '/uploads/' + f.filename)];
+  }
+
+  if (items[idx].images.length > 10) {
+    cleanupUploadedFiles(files);
+    return res.status(400).json({ error: 'Maximum 10 images per item' });
   }
 
   if (files.length > 0 || removeIdx.length > 0 || finalOrder.length > 0) {
@@ -411,25 +505,6 @@ app.delete('/api/items/:id', requireAdmin, (req, res) => {
   res.json({ success: true });
 });
 
-// Backfill default images for all items without photos
-app.post('/api/backfill-defaults', requireAdmin, (req, res) => {
-  const settings = readJSON(SETTINGS_FILE) || {};
-  const defaultImg = settings.defaultImage || '/images/default.svg';
-  const items = readJSON(ITEMS_FILE) || [];
-  let changed = 0;
-  items.forEach(item => {
-    const imgs = item.images;
-    const hasImages = Array.isArray(imgs) ? imgs.length > 0 : false;
-    if (!hasImages) {
-      item.image = defaultImg;
-      item.images = [];
-      changed++;
-    }
-  });
-  if (changed > 0) writeJSONAtomic(ITEMS_FILE, items);
-  res.json({ updated: changed, defaultImage: defaultImg });
-});
-
 // Settings
 app.get('/api/settings', (req, res) => {
   res.json(readJSON(SETTINGS_FILE));
@@ -437,12 +512,30 @@ app.get('/api/settings', (req, res) => {
 
 app.put('/api/settings', requireAdmin, (req, res) => {
   const settings = readJSON(SETTINGS_FILE) || {};
-  if (req.body.defaultImage) settings.defaultImage = req.body.defaultImage;
-  if (req.body.siteName) settings.siteName = req.body.siteName;
-  if (req.body.showSpreadsheet !== undefined) settings.showSpreadsheet = req.body.showSpreadsheet;
-  if (req.body.showPublicSpreadsheet !== undefined) settings.showPublicSpreadsheet = req.body.showPublicSpreadsheet;
-  if (req.body.showMiniaturesColumns !== undefined) settings.showMiniaturesColumns = req.body.showMiniaturesColumns;
-  if (req.body.currencies !== undefined) settings.currencies = req.body.currencies;
+  if (req.body.siteName !== undefined) {
+    if (typeof req.body.siteName !== 'string') return res.status(400).json({ error: 'siteName must be a string' });
+    settings.siteName = req.body.siteName;
+  }
+  if (req.body.showSpreadsheet !== undefined) {
+    if (typeof req.body.showSpreadsheet !== 'boolean') return res.status(400).json({ error: 'showSpreadsheet must be boolean' });
+    settings.showSpreadsheet = req.body.showSpreadsheet;
+  }
+  if (req.body.showPublicSpreadsheet !== undefined) {
+    if (typeof req.body.showPublicSpreadsheet !== 'boolean') return res.status(400).json({ error: 'showPublicSpreadsheet must be boolean' });
+    settings.showPublicSpreadsheet = req.body.showPublicSpreadsheet;
+  }
+  if (req.body.showMiniaturesColumns !== undefined) {
+    if (typeof req.body.showMiniaturesColumns !== 'object' || req.body.showMiniaturesColumns === null || Array.isArray(req.body.showMiniaturesColumns)) {
+      return res.status(400).json({ error: 'showMiniaturesColumns must be an object' });
+    }
+    settings.showMiniaturesColumns = req.body.showMiniaturesColumns;
+  }
+  if (req.body.currencies !== undefined) {
+    if (typeof req.body.currencies !== 'object' || req.body.currencies === null || Array.isArray(req.body.currencies)) {
+      return res.status(400).json({ error: 'currencies must be an object' });
+    }
+    settings.currencies = req.body.currencies;
+  }
   writeJSONAtomic(SETTINGS_FILE, settings);
   res.json(settings);
 });
@@ -503,6 +596,7 @@ app.get('/api/spreadsheet/public', (req, res) => {
 app.post('/api/upload/default', requireAdmin, upload.single('image'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file' });
   const settings = readJSON(SETTINGS_FILE) || {};
+  const oldDefault = settings.defaultImage;
   settings.defaultImage = '/uploads/' + req.file.filename;
   try {
     writeJSONAtomic(SETTINGS_FILE, settings);
@@ -511,23 +605,13 @@ app.post('/api/upload/default', requireAdmin, upload.single('image'), (req, res)
     console.error('Failed to save settings.json:', err);
     return res.status(500).json({ error: 'Failed to save data' });
   }
+  // Delete old default image if no items still reference it
+  if (oldDefault && oldDefault !== settings.defaultImage) {
+    const items = readJSON(ITEMS_FILE) || [];
+    const stillReferenced = items.some(i => i.image === oldDefault || i.images?.includes(oldDefault));
+    if (!stillReferenced) safeUnlink(oldDefault);
+  }
   res.json(settings);
-});
-
-// Backfill images array from image field for items that have photo but empty images[]
-app.post('/api/backfill-images', requireAdmin, (req, res) => {
-  const items = readJSON(ITEMS_FILE) || [];
-  let changed = 0;
-  items.forEach(item => {
-    const imgs = item.images;
-    const hasImages = Array.isArray(imgs) ? imgs.some(i => i && !i.includes('default.svg')) : false;
-    if (!hasImages && item.image && !item.image.includes('default.svg')) {
-      item.images = [item.image];
-      changed++;
-    }
-  });
-  if (changed > 0) writeJSONAtomic(ITEMS_FILE, items);
-  res.json({ updated: changed });
 });
 
 // Spreadsheet endpoint (admin only)
@@ -585,6 +669,18 @@ app.get('/:section', (req, res, next) => {
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Central error handler
+app.use((error, req, res, next) => {
+  console.error(error);
+  if (error instanceof multer.MulterError) {
+    return res.status(400).json({ error: 'Upload error', details: error.message });
+  }
+  if (error.message === 'Unsupported image type' || error.message === 'Only JPEG, PNG and WebP are allowed') {
+    return res.status(400).json({ error: error.message });
+  }
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {
