@@ -7666,13 +7666,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "2000",
+    "status": "Painted",
     "image": "/uploads/223deae1-6490-4596-aac3-90a52350380d.jpg",
     "images": [
       "/uploads/223deae1-6490-4596-aac3-90a52350380d.jpg",
       "/uploads/65f01d43-ec8a-4cbc-b35e-2392c5b10689.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "278f81b8-26d9-4e1b-9021-15153da8158c",
@@ -7680,12 +7681,13 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "4000",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/14faab2b-62e6-40a3-843a-b763303e3e41.jpg",
     "images": [
       "/uploads/14faab2b-62e6-40a3-843a-b763303e3e41.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "d6a31902-3594-4041-8553-80df3373de4d",
@@ -7693,12 +7695,13 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/3a647a89-983a-42fd-9980-6b5c21b8fcf5.jpg",
     "images": [
       "/uploads/3a647a89-983a-42fd-9980-6b5c21b8fcf5.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "b3d80776-e564-4b87-9bc0-b90ecf3e546b",
@@ -7706,12 +7709,13 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "900",
+    "status": "Built",
     "image": "/uploads/0ac8091c-3d54-4f60-894d-0654eb453c91.jpg",
     "images": [
       "/uploads/0ac8091c-3d54-4f60-894d-0654eb453c91.jpg"
-    ]
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": "552c4394-959a-4db5-9e03-20fe425efbf1",
@@ -7719,12 +7723,13 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "5850",
+    "status": "Built",
     "image": "/uploads/19f7721c-9b59-4592-abe2-9f397316b1e7.jpg",
     "images": [
       "/uploads/19f7721c-9b59-4592-abe2-9f397316b1e7.jpg"
-    ]
+    ],
+    "recaster": "Литейка https://vk.com/osfoundry"
   },
   {
     "id": "345c66c3-875e-4350-b6f2-773da3aa9db0",
@@ -7732,12 +7737,13 @@
     "author": "Punga Miniatures",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "1100",
+    "status": "Built",
     "image": "/uploads/b35d32b2-3171-4bd2-9d16-ec2ba7ac85a2.jpg",
     "images": [
       "/uploads/b35d32b2-3171-4bd2-9d16-ec2ba7ac85a2.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "0cd9a736-aac1-4816-8eb6-095a3c817e13",
@@ -7745,12 +7751,13 @@
     "author": "Citadel (Warhammer Age of Reckoning Collectors Edition 2008)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "2100",
+    "status": "Built",
     "image": "/uploads/99871b6a-bc9f-429e-8e13-272bfd5b72dc.jpg",
     "images": [
       "/uploads/99871b6a-bc9f-429e-8e13-272bfd5b72dc.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "b95a50f1-030c-40ce-bf2e-371df3e60060",
@@ -7758,12 +7765,13 @@
     "author": "Citadel (Underworlds)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "3600",
+    "status": "Built",
     "image": "/uploads/c6e10209-9139-4a16-8af7-2cdc28dcc6d3.jpg",
     "images": [
       "/uploads/c6e10209-9139-4a16-8af7-2cdc28dcc6d3.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "931792ec-3df4-41ea-9427-31a19c676c30",
@@ -7771,12 +7779,13 @@
     "author": "First Legion Miniatures (28001)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "456",
+    "status": "Built",
     "image": "/uploads/b50107bd-ae63-443f-ab03-cef8169f5f32.jpg",
     "images": [
       "/uploads/b50107bd-ae63-443f-ab03-cef8169f5f32.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "6f6638a9-b9a0-4bed-8db8-e637b13c0023",
@@ -7784,12 +7793,13 @@
     "author": "First Legion Miniatures (28003)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "456",
+    "status": "Built",
     "image": "/uploads/39f287f1-69bc-499d-a2b8-d6647ff0c03f.jpg",
     "images": [
       "/uploads/39f287f1-69bc-499d-a2b8-d6647ff0c03f.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "7912e409-bb79-4a4a-8c5a-b96b4a0937d8",
@@ -7797,12 +7807,13 @@
     "author": "First Legion Miniatures (28004)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "476",
+    "status": "Built",
     "image": "/uploads/184573d5-7c76-4d5c-9526-a0bb67aeb44f.jpg",
     "images": [
       "/uploads/184573d5-7c76-4d5c-9526-a0bb67aeb44f.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "5d25a205-81b1-4157-82f0-bf32f168e1c3",
@@ -7810,12 +7821,13 @@
     "author": "First Legion Miniatures (28005)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "461",
+    "status": "Built",
     "image": "/uploads/33e514fb-8464-4993-aeba-2fb3bda4179f.jpg",
     "images": [
       "/uploads/33e514fb-8464-4993-aeba-2fb3bda4179f.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "0c521432-d000-4d4c-a04a-04463bbc5e89",
@@ -7823,12 +7835,13 @@
     "author": "First Legion Miniatures (28006)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "461",
+    "status": "Built",
     "image": "/uploads/5a158002-abc2-42e7-9fce-4fd1d312d0f7.jpg",
     "images": [
       "/uploads/5a158002-abc2-42e7-9fce-4fd1d312d0f7.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "af588627-fafc-46f6-a29a-d161f8a691bb",
@@ -7836,12 +7849,13 @@
     "author": "First Legion Miniatures (28007)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "461",
+    "status": "Built",
     "image": "/uploads/7ba5ccf9-1271-4225-9d4e-1856d72d47a4.jpg",
     "images": [
       "/uploads/7ba5ccf9-1271-4225-9d4e-1856d72d47a4.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "2152d42b-90f8-48d3-a9a9-f24d89d605ef",
@@ -7849,12 +7863,13 @@
     "author": "First Legion Miniatures (28008)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "461",
+    "status": "Built",
     "image": "/uploads/510da773-6696-4305-aa66-3324552fe582.jpg",
     "images": [
       "/uploads/510da773-6696-4305-aa66-3324552fe582.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "123fe234-6e42-409a-9266-32255314b2e6",
@@ -7862,12 +7877,13 @@
     "author": "First Legion Miniatures (28009)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "461",
+    "status": "Built",
     "image": "/uploads/e589a5fe-9d9c-4545-b8ad-64c0c1ebfa19.jpg",
     "images": [
       "/uploads/e589a5fe-9d9c-4545-b8ad-64c0c1ebfa19.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "3e41303e-c860-4b34-b03f-de9062602d32",
@@ -7875,12 +7891,13 @@
     "author": "First Legion Miniatures (28012)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "506",
+    "status": "Built",
     "image": "/uploads/2741cea6-7588-48a0-8226-ceb9cb4ffd45.jpg",
     "images": [
       "/uploads/2741cea6-7588-48a0-8226-ceb9cb4ffd45.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "454bd07a-36e0-4ab6-8590-e528d87ce206",
@@ -7888,12 +7905,13 @@
     "author": "First Legion Miniatures (28106)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "529",
+    "status": "Built",
     "image": "/uploads/678ca3bf-9149-473a-b214-098f55a373de.jpg",
     "images": [
       "/uploads/678ca3bf-9149-473a-b214-098f55a373de.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "9e0f7187-5fb9-4c96-b2d1-26e5a5debace",
@@ -7901,12 +7919,13 @@
     "author": "First Legion Miniatures (28107)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "515",
+    "status": "Built",
     "image": "/uploads/7df8f13f-bcbd-45a5-a981-dce4b1436b85.jpg",
     "images": [
       "/uploads/7df8f13f-bcbd-45a5-a981-dce4b1436b85.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "beb44db1-bcd9-438e-b3f6-39cc02cd216a",
@@ -7914,12 +7933,13 @@
     "author": "First Legion Miniatures (28108)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "570",
+    "status": "Built",
     "image": "/uploads/21169755-4e3e-4558-b028-b9448c380ade.jpg",
     "images": [
       "/uploads/21169755-4e3e-4558-b028-b9448c380ade.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "35689b7b-d937-4ffe-8a06-1b91e883e4e9",
@@ -7927,12 +7947,13 @@
     "author": "First Legion Miniatures (28178)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "506",
+    "status": "Built",
     "image": "/uploads/6f3f242f-edaf-49af-9098-6e0581c3261c.jpg",
     "images": [
       "/uploads/6f3f242f-edaf-49af-9098-6e0581c3261c.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "32ae4bcc-7b0d-4155-8996-69d13272badf",
@@ -7940,12 +7961,13 @@
     "author": "First Legion Miniatures (28197)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "900",
+    "status": "Built",
     "image": "/uploads/eef1263f-b875-480e-93ce-d8be0838dd14.jpg",
     "images": [
       "/uploads/eef1263f-b875-480e-93ce-d8be0838dd14.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "6c96f206-ab82-4912-b144-ed662eed15a5",
@@ -7953,12 +7975,13 @@
     "author": "First Legion Miniatures (28198)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "900",
+    "status": "Built",
     "image": "/uploads/c7663006-d013-455a-b3b8-e4d947a3694d.jpg",
     "images": [
       "/uploads/c7663006-d013-455a-b3b8-e4d947a3694d.jpg"
-    ]
+    ],
+    "recaster": ""
   },
   {
     "id": "dcf10c09-c273-4052-b85b-43e02dc05441",
@@ -7966,11 +7989,12 @@
     "author": "First Legion Miniatures (28415)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "900",
+    "status": "Built",
     "image": "/uploads/b8695408-76ca-4898-a156-51003acb695a.jpg",
     "images": [
       "/uploads/b8695408-76ca-4898-a156-51003acb695a.jpg"
-    ]
+    ],
+    "recaster": ""
   }
 ]
