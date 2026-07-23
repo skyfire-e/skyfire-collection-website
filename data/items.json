@@ -2345,14 +2345,15 @@
     "category": "citadel-skaven",
     "title": "Island of Blood",
     "author": "warlord, warlock engineer, 40 clan rats, packmaster, 2 rat ogres, warpfire thrower, poison wind mortar",
-    "price": "100",
+    "price": "20000",
     "image": "/uploads/citadel-skaven-38.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
       "/uploads/citadel-skaven-38.jpg"
     ],
     "recaster": "",
-    "status": "Rare"
+    "status": "Rare",
+    "combatPoints": ""
   },
   {
     "id": 1784583148464,
@@ -5914,29 +5915,31 @@
     "author": "Artel W (Tekk Shzaman, Medikk (with Nurz), Mekkanik (with 2 Matez: Kurdan, da Inventur, Skruw, da Fettlar ) )",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "700",
+    "price": "3750",
     "status": "Built",
     "image": "/uploads/4a66f262-bd48-4c5f-85c1-453f638f9ffc.jpg",
     "images": [
       "/uploads/4a66f262-bd48-4c5f-85c1-453f638f9ffc.jpg"
     ],
     "cp": "70",
-    "recaster": ""
+    "recaster": "",
+    "combatPoints": ""
   },
   {
     "id": "f034cca6-74b7-4a88-bfcf-6c470717ff23",
     "title": "Gobbo`s Glorious Revolushun",
-    "author": "Artel W (Brunzh red fist ov da Revolushun, Tuczhan Rider ov da Revolushun, Shtrugg Gobbfalonier ov da Revolushun + 2 in \"Spezialistz\")",
+    "author": "Artel W (Brunzh red fist ov da Revolushun, Tuczhan Rider ov da Revolushun, Shtrugg Gobbfalonier ov da Revolushun)",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "550",
+    "price": "1650",
     "status": "Built",
-    "image": "/uploads/5b27eb0b-b93d-4f67-bd0d-2f0895ec9088.jpg",
+    "image": "/uploads/5f07e905-757c-4cfe-b6a0-111b01d1ead5.jpg",
     "images": [
-      "/uploads/5b27eb0b-b93d-4f67-bd0d-2f0895ec9088.jpg"
+      "/uploads/5f07e905-757c-4cfe-b6a0-111b01d1ead5.jpg"
     ],
     "cp": "30",
-    "recaster": ""
+    "recaster": "",
+    "combatPoints": ""
   },
   {
     "id": "cd0fb376-bf4a-4749-88ff-35491ec40ae9",
