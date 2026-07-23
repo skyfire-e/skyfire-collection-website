@@ -14,11 +14,23 @@
 - Это наши рабочие инструменты, пока делаем сайт; корень проекта чистый
 
 ## Current Data State
-- `items.json` — 240 items across all Dice + Miniatures categories
-- `categories.json` — Dice (7 flat) + Miniatures (Skaven+SpaceOrks groups, остальные flat)
-- `uploads/` — 555+ image files (все scraped фото)
+- `items.json` — 438 items across all Dice + Miniatures categories
+- `categories.json` — Dice (7 flat) + Miniatures (Skaven+SpaceOrks groups, 14 leaf)
+- `uploads/` — 1000+ image files (все scraped фото + миграции)
 - `settings.json` — defaultImage, siteName, showSpreadsheet, etc.
 - Auth: `data/users.json` исключён из git, аутентификация через `.env`
+
+## Space Orks — мигрированы из Google Sites (Jul 2026)
+
+| Категория | Items | Карусели | Статус |
+|-----------|-------|----------|--------|
+| Citadel Orks | 62 | Boomdakka (7), Beastboss (2) | ✅ |
+| Forgeworld Orks | 17 | Gargantuan Squiggoth (7), Kill Bursta (3) | ✅ |
+| Old Citadel Orks | 20 | — | ✅ |
+| Artel W | 11 | Iron Rider (2) | ✅ |
+| Kromlech | 20 | Goblin Scrap Tank III (5) | ✅ |
+| Various Studios | 5 | — | ✅ |
+| 3d Printed Orks | 32 | — | ✅ |
 
 ## Auth
 - Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` — оба в `.env`
@@ -40,10 +52,10 @@
 - Skaven → /miniatures/skaven
   - Citadel Skaven, Old Citadel Skaven, Blood Bowl Skaven, Forgeworld Skaven, Punga Miniatures Skaven, 3d Prints Skaven
 - Space Orks → /miniatures/space-orks
-  - Citadel Orks, Forgeworld Orks, Old Citadel Orks (oldhammer), Artel W, Kromlech, Various Studios, 3d Printed Orks
+  - Citadel Orks, Forgeworld Orks, Old Citadel Orks, Artel W, Kromlech, Various Studios, 3d Printed Orks
 
 **Miniatures leaf** (прямо в галерею):
-- Gloomspite Gitz (AoS), Adepta Sororitas (40k), Orruk Warclans (AoS), Chaos Daemons, Soulblight Gravelords (AoS), Astra Militarum (40k), Officio Assassinorum, Ogor Mawtribes, Maggotkin of Nurgle, Kharadron Overlords, Empire, High Elves, Stormcast Eternals, Terrain, Other
+- Gloomspite Gitz, Adepta Sororitas, Orruk Warclans, Chaos Daemons, Soulblight Gravelords, Astra Militarum, Officio Assassinorum, Ogor Mawtribes, Maggotkin of Nurgle, Kharadron Overlords, Empire, High Elves, Stormcast Eternals, Terrain, Other
 
 ## Categories JSON Format
 Группы имеют `type: "group"` и вложенный `subcategories`. Листовые — просто `{id, label}`.
@@ -89,6 +101,47 @@
 14. ✅ API validation — title, section, category, price (Jul 2026 — POST + PUT, validateItemInput)
 15. ⬜ Price — хранится как number (пока строка, конвертируется в spreadsheet)
 16. ⬜ Рефакторинг HTML (модули) — не делали, возможен
+
+## Space Orks — Google Sites Migration Pattern
+
+Все Space Orks категории мигрированы со страниц Google Sites через Puppeteer.
+
+### Шаблон миграционного скрипта (`gitignore/migrate-*.js`)
+```javascript
+// 1. Puppeteer открывает страницу, скроллит для ленивой загрузки
+// 2. Парсит все h2 с span.jgG6ef — из них извлекается номер + название
+//    Регекс для названия: /^(\d+)[-–]?\d*\)?\s*(.*)/
+//    - Обрабатывает "82-83) Title" (диапазон)
+//    - Обрабатывает "114Title" (нет скобки после числа)
+// 3. Для каждого h2 находится колонка (.parentElement до .LS81yb)
+// 4. В той же колонке ищется изображение:
+//    - Карусель: .mr3rhf → [style*="background-image"] → URL из url()
+//    - Одиночное: .t3iYD img → img.src
+// 5. Author: колонка → p → textContent
+// 6. Отчистка author: remove (painted) через sanitizeAuthor()
+// 7. Загрузка всех изображений через HTTPS с cookies
+// 8. Запись items в items.json (atomic: tmp + rename)
+// 9. Pre-flight валидация: category проверяется из categories.json
+```
+
+### Важные правила
+1. **Category ID** всегда сверять с `categories.json` — скрипт падает если не найдено
+2. **Section**: всегда `'miniatures'` для миниатюр
+3. **Carousel vs standalone**: все фото карусели берутся только из `.mr3rhf`, ни одно из `imgUrls`
+4. **Author**: очищается от `(painted)` через `sanitizeAuthor()`
+5. **Title**: числа и скобки вроде "172) " удаляются регексом
+6. **Структура DOM**: каждая секция `.yaqOZd` содержит 2 колонки (по 1 item в каждой),
+   колонки — прямые дети `.LS81yb`. В одной колонке и изображение, и текст (h2 + p).
+
+### Доступные скрипты миграции (`gitignore/`)
+| Скрипт | Откуда | Категория | Фичи |
+|--------|--------|-----------|------|
+| `migrate-orks.js` | Google Sites → Citadel Orks | `citadel-orks` | imgUrls + carouselUrls mapping |
+| `migrate-forgeworld.js` | Google Sites → Forgeworld Orks | `forgeworld-orks` | images[] from DOM direct |
+| `migrate-oldcitadel.js` | Google Sites → Old Citadel Orks | `old-citadel-orks-oldhammer` | + cat validation, + split-number title |
+| `migrate-artelw.js` | Google Sites → Artel W | `artel-w` | images[] from DOM |
+| `migrate-kromlech.js` | Google Sites → Kromlech | `kromlech` | + sanitizeAuthor (painted) |
+| `migrate-various.js` | Google Sites → Various Studios | `various-studios` | full template |
 
 ## Known Issues & Fixes Applied
 - **Backfill bug**: у 190 items было `images: []` при наличии `image`. Исправлено: `POST /api/backfill-images` скопировал `image` → `images[0]`. Авто-backfill убран. Модалка теперь показывает `image` если `images` пуст.

@@ -81,7 +81,7 @@
           },
           {
             "id": "old-citadel-orks-oldhammer",
-            "label": "Old Citadel Orks (oldhammer)"
+            "label": "Old Citadel Orks"
           },
           {
             "id": "artel-w",
@@ -103,15 +103,15 @@
       },
       {
         "id": "gloomspite-gitz",
-        "label": "Gloomspite Gitz (AoS)"
+        "label": "Gloomspite Gitz"
       },
       {
         "id": "adepta-sororitas",
-        "label": "Adepta Sororitas (40k)"
+        "label": "Adepta Sororitas"
       },
       {
         "id": "orruk-warclans",
-        "label": "Orruk Warclans (AoS)"
+        "label": "Orruk Warclans"
       },
       {
         "id": "chaos-daemons",
@@ -119,11 +119,11 @@
       },
       {
         "id": "soulblight-gravelords",
-        "label": "Soulblight Gravelords (AoS)"
+        "label": "Soulblight Gravelords"
       },
       {
         "id": "astra-militarum",
-        "label": "Astra Militarum (40k)"
+        "label": "Astra Militarum"
       },
       {
         "id": "officio-assassinorum",

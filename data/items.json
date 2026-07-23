@@ -4415,8 +4415,8 @@
     "author": "Games Workshop (painted)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3150",
+    "status": "Painted",
     "image": "/uploads/d746adc2-2638-44a2-a3fa-1bc1a8a7ec01.jpg",
     "images": [
       "/uploads/d746adc2-2638-44a2-a3fa-1bc1a8a7ec01.jpg",
@@ -4426,7 +4426,9 @@
       "/uploads/e918afd6-f95b-4c17-a022-22f241e7bf12.jpg",
       "/uploads/7e24bba7-a034-48ad-8569-851b86647e59.jpg",
       "/uploads/9003ebed-5815-487b-bd8f-6b656882dbc1.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "8fccb4bc-b9a6-49e5-b909-b74a31cb539b",
@@ -4434,12 +4436,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3300",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/73ce376e-9193-4de3-b337-8d52c1da3aae.jpg",
     "images": [
       "/uploads/73ce376e-9193-4de3-b337-8d52c1da3aae.jpg"
-    ]
+    ],
+    "cp": "45",
+    "recaster": ""
   },
   {
     "id": "b18fc074-16af-4869-9633-49c7ae35bfb5",
@@ -4447,12 +4451,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3300",
+    "status": "Built",
     "image": "/uploads/d1f9953c-60c6-4c3d-a57e-3c9fc1851c04.jpg",
     "images": [
       "/uploads/d1f9953c-60c6-4c3d-a57e-3c9fc1851c04.jpg"
-    ]
+    ],
+    "cp": "75",
+    "recaster": ""
   },
   {
     "id": "19e31210-e019-4a15-8289-56b8cb325491",
@@ -4460,12 +4466,14 @@
     "author": "Games Workshop (Warboss in Mega Armour, 20 Ork Boyz (2018 4th ed), 3 Deffkoptas, Deff Dread)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "8900",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/c7905f5c-2d83-4f80-a052-212f76f91196.jpg",
     "images": [
       "/uploads/c7905f5c-2d83-4f80-a052-212f76f91196.jpg"
-    ]
+    ],
+    "cp": "530",
+    "recaster": ""
   },
   {
     "id": "12b398dc-a97d-4651-b144-d853c0b9e660",
@@ -4473,12 +4481,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "4800",
+    "status": "Built",
     "image": "/uploads/32113cdb-dc0d-4487-9415-2a06e0aec991.jpg",
     "images": [
       "/uploads/32113cdb-dc0d-4487-9415-2a06e0aec991.jpg"
-    ]
+    ],
+    "cp": "175",
+    "recaster": ""
   },
   {
     "id": "e45333d6-bf1a-4e94-9c96-5bccb31d4ab0",
@@ -4486,12 +4496,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "9000",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/b1b5e2c9-30c8-4397-8b5f-f83f84048adf.jpg",
     "images": [
       "/uploads/b1b5e2c9-30c8-4397-8b5f-f83f84048adf.jpg"
-    ]
+    ],
+    "cp": "190",
+    "recaster": ""
   },
   {
     "id": "65ebdd24-7046-4198-8eb0-6b448b413b5c",
@@ -4499,12 +4511,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "2800",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/32393bde-04df-4e95-9255-e1e896bdc099.jpg",
     "images": [
       "/uploads/32393bde-04df-4e95-9255-e1e896bdc099.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": ""
   },
   {
     "id": "e1830c35-0359-4b5e-8e16-81e8d5e4cc44",
@@ -4512,12 +4526,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3150",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/5d70af13-e425-46d5-ad55-781f8323e2a9.jpg",
     "images": [
       "/uploads/5d70af13-e425-46d5-ad55-781f8323e2a9.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "a4f936d3-edba-4b78-bcd7-bc508eafc75c",
@@ -4525,12 +4541,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "7900",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/7cf8d99b-2acc-4b1e-8b60-5be1daee854a.jpg",
     "images": [
       "/uploads/7cf8d99b-2acc-4b1e-8b60-5be1daee854a.jpg"
-    ]
+    ],
+    "cp": "365",
+    "recaster": ""
   },
   {
     "id": "1737d3ac-df14-4922-8441-77a4013cc456",
@@ -4538,12 +4556,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1800",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/d795d641-f92d-4127-9c25-80826f78758e.jpg",
     "images": [
       "/uploads/d795d641-f92d-4127-9c25-80826f78758e.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": ""
   },
   {
     "id": "a3eca407-a59c-41fe-a66a-266476d5ebee",
@@ -4551,12 +4571,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3400",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/4fa30727-edd4-4584-9f8b-73a27be8ce73.jpg",
     "images": [
       "/uploads/4fa30727-edd4-4584-9f8b-73a27be8ce73.jpg"
-    ]
+    ],
+    "cp": "135",
+    "recaster": ""
   },
   {
     "id": "bff96ff1-983a-48f3-a017-60e6ec279385",
@@ -4564,12 +4586,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "2100",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/de617c8e-8bce-46a1-8f3b-9ab8115f429c.jpg",
     "images": [
       "/uploads/de617c8e-8bce-46a1-8f3b-9ab8115f429c.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": ""
   },
   {
     "id": "cc7be72f-bee2-4397-9de6-8e9c790ecb19",
@@ -4577,12 +4601,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "2100",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/07eb02aa-0e2e-46a9-88e1-00a7377a0c51.jpg",
     "images": [
       "/uploads/07eb02aa-0e2e-46a9-88e1-00a7377a0c51.jpg"
-    ]
+    ],
+    "cp": "55",
+    "recaster": ""
   },
   {
     "id": "59e166bf-5ee2-4b00-b5bb-aff3d409e681",
@@ -4590,12 +4616,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "4400",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/6ac8355e-7d4e-4c4f-9204-c5d53fa3aa8d.jpg",
     "images": [
       "/uploads/6ac8355e-7d4e-4c4f-9204-c5d53fa3aa8d.jpg"
-    ]
+    ],
+    "cp": "300",
+    "recaster": ""
   },
   {
     "id": "76ff779a-86bd-4e81-8976-56510d1dcdba",
@@ -4603,12 +4631,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3050",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/6b7e50c4-7890-4a24-a023-55d3854447f4.jpg",
     "images": [
       "/uploads/6b7e50c4-7890-4a24-a023-55d3854447f4.jpg"
-    ]
+    ],
+    "cp": "80",
+    "recaster": ""
   },
   {
     "id": "453e6101-a045-4ce2-988e-86db13d32d88",
@@ -4616,12 +4646,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3870",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/6c604481-c0cb-4b5b-81cb-b8a760ae9006.jpg",
     "images": [
       "/uploads/6c604481-c0cb-4b5b-81cb-b8a760ae9006.jpg"
-    ]
+    ],
+    "cp": "105",
+    "recaster": ""
   },
   {
     "id": "cb79f56f-46ea-44f6-8452-9d02c75b47fa",
@@ -4629,12 +4661,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3050",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/0875133e-ca72-44ac-98be-1c3695f75e04.jpg",
     "images": [
       "/uploads/0875133e-ca72-44ac-98be-1c3695f75e04.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "126e68e9-f67c-42e9-900b-751ab1d9eacf",
@@ -4642,12 +4676,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3050",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/25bcf966-2077-4aed-a072-e6a6bfc26457.jpg",
     "images": [
       "/uploads/25bcf966-2077-4aed-a072-e6a6bfc26457.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": ""
   },
   {
     "id": "bfe55de3-4f47-4a7e-86a0-faa1d39cf3e8",
@@ -4655,12 +4691,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "2470",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/966b26ed-ff8c-4d81-a701-e9135597c7f1.jpg",
     "images": [
       "/uploads/966b26ed-ff8c-4d81-a701-e9135597c7f1.jpg"
-    ]
+    ],
+    "cp": "80",
+    "recaster": ""
   },
   {
     "id": "b7ad83fd-2429-409b-a595-69ea23479a1e",
@@ -4668,12 +4706,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3415",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/e24c7fed-2fc6-4331-a11d-bcb85ade9283.jpg",
     "images": [
       "/uploads/e24c7fed-2fc6-4331-a11d-bcb85ade9283.jpg"
-    ]
+    ],
+    "cp": "120",
+    "recaster": ""
   },
   {
     "id": "17fbe9ef-a0d1-448a-aabd-6b1ec8358c72",
@@ -4681,12 +4721,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1850",
+    "status": "Built",
     "image": "/uploads/3b2edbc8-6f2d-435c-ac57-eb568c810ecb.jpg",
     "images": [
       "/uploads/3b2edbc8-6f2d-435c-ac57-eb568c810ecb.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": ""
   },
   {
     "id": "1789ca2d-63dc-4e7e-9e8f-4c333da6e0b6",
@@ -4694,12 +4736,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "9250",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/fd2cc047-5b55-4186-8fc7-52cd2697cc2c.jpg",
     "images": [
       "/uploads/fd2cc047-5b55-4186-8fc7-52cd2697cc2c.jpg"
-    ]
+    ],
+    "cp": "675",
+    "recaster": ""
   },
   {
     "id": "20372714-3011-4be8-b687-650bb9fe87cc",
@@ -4707,12 +4751,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1450",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/f829f8de-cc75-4a2c-ab69-29be9610d58e.jpg",
     "images": [
       "/uploads/f829f8de-cc75-4a2c-ab69-29be9610d58e.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": ""
   },
   {
     "id": "490268fa-ea8b-4bb8-8eb6-bce64a91e102",
@@ -4720,12 +4766,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1650",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/3dfd840e-a590-4e78-8392-ddd47649b69a.jpg",
     "images": [
       "/uploads/3dfd840e-a590-4e78-8392-ddd47649b69a.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": ""
   },
   {
     "id": "6ef5353a-a306-41d4-ac99-3e9587ecc87f",
@@ -4733,12 +4781,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1850",
+    "status": "Built",
     "image": "/uploads/96b62c34-e9e0-483f-9f00-33a23ebd9489.jpg",
     "images": [
       "/uploads/96b62c34-e9e0-483f-9f00-33a23ebd9489.jpg"
-    ]
+    ],
+    "cp": "25",
+    "recaster": ""
   },
   {
     "id": "af20aa67-1b8e-44f4-a1fd-ad549036727f",
@@ -4746,12 +4796,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3350",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/a05d8a26-afc9-4700-866d-d3f4742820a9.jpg",
     "images": [
       "/uploads/a05d8a26-afc9-4700-866d-d3f4742820a9.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": ""
   },
   {
     "id": "f7ca2bff-1c33-46f9-9d18-516ae92ce380",
@@ -4759,12 +4811,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1650",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/89d14c33-c199-4d4d-bb1d-5626fd3ed2b4.jpg",
     "images": [
       "/uploads/89d14c33-c199-4d4d-bb1d-5626fd3ed2b4.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": ""
   },
   {
     "id": "35542ef4-58d1-4458-94b4-0ffa490533ba",
@@ -4772,12 +4826,14 @@
     "author": "Games Workshop (Big Mek With Shokk Attack Gun, Deffkilla Wartrike, Dakkajet (4-in-1), Gretchin Runtherd, 20 Ork Boyz (2022 9th ed), 5 Ork Nobz w/Ammo Grot)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "15500",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/a927889e-8c31-4346-b6b2-4d0f43dbedeb.jpg",
     "images": [
       "/uploads/a927889e-8c31-4346-b6b2-4d0f43dbedeb.jpg"
-    ]
+    ],
+    "cp": "690",
+    "recaster": ""
   },
   {
     "id": "1e2292ff-4224-4f86-ad6f-b41b33a7752e",
@@ -4785,12 +4841,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3000",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/69b4d712-49f5-4b97-a08d-53181b83d847.jpg",
     "images": [
       "/uploads/69b4d712-49f5-4b97-a08d-53181b83d847.jpg"
-    ]
+    ],
+    "cp": "100",
+    "recaster": ""
   },
   {
     "id": "7aa2e0ad-787b-4815-85c2-ce3aafb9dbae",
@@ -4798,12 +4856,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3600",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/0582b3dc-faf4-410a-befb-3f680a9b164d.jpg",
     "images": [
       "/uploads/0582b3dc-faf4-410a-befb-3f680a9b164d.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": ""
   },
   {
     "id": "8b990589-d1d2-40da-b7d7-ceadefa11e2b",
@@ -4811,12 +4871,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "4875",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/9a1e012b-f73b-41af-9def-01534607fe07.jpg",
     "images": [
       "/uploads/9a1e012b-f73b-41af-9def-01534607fe07.jpg"
-    ]
+    ],
+    "cp": "170",
+    "recaster": ""
   },
   {
     "id": "1b83c01b-31c5-41b7-97fa-a34aee010594",
@@ -4824,12 +4886,14 @@
     "author": "Games Workshop (Zodgrod Wortsnagga, Nob on Smasha Squig, 3 Squighog Boyz, Bomb Squig, 20 Beast Snagga Boyz)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "13125",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/0aecf9c0-15aa-413b-a3cb-1a9e3fcc7239.jpg",
     "images": [
       "/uploads/0aecf9c0-15aa-413b-a3cb-1a9e3fcc7239.jpg"
-    ]
+    ],
+    "cp": "420",
+    "recaster": ""
   },
   {
     "id": "810db66a-0432-4fb2-b95b-d5212a902bae",
@@ -4837,12 +4901,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3000",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/c3f9ae56-b79a-4038-b7f3-de37ca03f952.jpg",
     "images": [
       "/uploads/c3f9ae56-b79a-4038-b7f3-de37ca03f952.jpg"
-    ]
+    ],
+    "cp": "55",
+    "recaster": ""
   },
   {
     "id": "0cb9a99d-61b8-4c41-a3cf-ad609b12152b",
@@ -4850,12 +4916,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "5250",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/0f2a0c4d-4218-4981-a839-1f3fc49d8eef.jpg",
     "images": [
       "/uploads/0f2a0c4d-4218-4981-a839-1f3fc49d8eef.jpg"
-    ]
+    ],
+    "cp": "180",
+    "recaster": ""
   },
   {
     "id": "ee16b2f4-84b0-483f-aae1-d586f26eaf5c",
@@ -4863,12 +4931,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "400",
+    "status": "Built",
     "image": "/uploads/e4d0b1a8-ff6a-45f4-b5de-7a7d1c3f5094.jpg",
     "images": [
       "/uploads/e4d0b1a8-ff6a-45f4-b5de-7a7d1c3f5094.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "e6c05da2-b10a-43e5-9c3c-4abc72819b6f",
@@ -4876,12 +4946,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "100",
+    "status": "Built",
     "image": "/uploads/1b7863c9-052f-4217-afa0-687795429710.jpg",
     "images": [
       "/uploads/1b7863c9-052f-4217-afa0-687795429710.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "a7b77b11-c277-4117-864f-9bd109f42be1",
@@ -4889,12 +4961,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "800",
+    "status": "Built",
     "image": "/uploads/f2a75f22-4016-44f6-983e-662c8cd31f23.jpg",
     "images": [
       "/uploads/f2a75f22-4016-44f6-983e-662c8cd31f23.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "8113e5ec-99d0-4013-9a6c-2d1d9bc8a0d9",
@@ -4902,12 +4976,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "725",
+    "status": "Built",
     "image": "/uploads/6d71e7e2-9ba0-426f-bf46-b6a2c5a57c3b.jpg",
     "images": [
       "/uploads/6d71e7e2-9ba0-426f-bf46-b6a2c5a57c3b.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "0cb09ade-bc6a-4673-9a14-2dc409c81346",
@@ -4915,12 +4991,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "500",
+    "status": "Built",
     "image": "/uploads/ffa03ff7-3b71-4848-af25-e111af4f1a6d.jpg",
     "images": [
       "/uploads/ffa03ff7-3b71-4848-af25-e111af4f1a6d.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "be7670af-3a4b-45c8-ae2e-875fed3d5297",
@@ -4928,12 +5006,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "200",
+    "status": "Built",
     "image": "/uploads/3d80cd18-4cf8-4a30-b8de-60d67e914c38.jpg",
     "images": [
       "/uploads/3d80cd18-4cf8-4a30-b8de-60d67e914c38.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "a81ea11d-39a2-4726-aead-ef898f940c95",
@@ -4941,12 +5021,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/6eabae90-5c17-4695-86f3-d5d933bdd19b.jpg",
     "images": [
       "/uploads/6eabae90-5c17-4695-86f3-d5d933bdd19b.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "5cddfd0a-5037-4692-b732-6c74915d0e07",
@@ -4954,12 +5036,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "666",
+    "status": "Built",
     "image": "/uploads/84754fe1-954e-43f5-9be2-90dce9520049.jpg",
     "images": [
       "/uploads/84754fe1-954e-43f5-9be2-90dce9520049.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "4b4eac62-f26f-4515-a350-44c4f504b21f",
@@ -4967,12 +5051,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/cfe45659-69fd-47d1-96b9-dfa1c7b9df87.jpg",
     "images": [
       "/uploads/cfe45659-69fd-47d1-96b9-dfa1c7b9df87.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "d0a99789-d116-4786-8ff7-86560e4d2ade",
@@ -4980,12 +5066,14 @@
     "author": "Games Workshop (re-cast) (metal)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "600",
+    "status": "Built",
     "image": "/uploads/2087c866-c493-43cc-b647-f6c8038fde7e.jpg",
     "images": [
       "/uploads/2087c866-c493-43cc-b647-f6c8038fde7e.jpg"
-    ]
+    ],
+    "cp": "110",
+    "recaster": "Литейка Stark Foundry"
   },
   {
     "id": "b500cd20-8c0c-48e8-9200-1a7e759ca6ec",
@@ -4993,12 +5081,14 @@
     "author": "Games Workshop (re-cast) (metal)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "170",
+    "status": "Built",
     "image": "/uploads/6d022e1d-5327-411c-8366-b6586350f3e4.jpg",
     "images": [
       "/uploads/6d022e1d-5327-411c-8366-b6586350f3e4.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка Stark Foundry"
   },
   {
     "id": "e86899d8-cdca-4604-8f55-46e0d9e6c27e",
@@ -5006,12 +5096,14 @@
     "author": "Games Workshop (re-cast) (duplicate)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/a20e4ec1-c7d3-43c9-8299-544ed936c582.jpg",
     "images": [
       "/uploads/a20e4ec1-c7d3-43c9-8299-544ed936c582.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "18500947-3307-4fec-9c57-221bbe796a02",
@@ -5019,12 +5111,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "350",
+    "status": "Built",
     "image": "/uploads/48f224d3-26a3-4fd3-b18b-ff54360f1cce.jpg",
     "images": [
       "/uploads/48f224d3-26a3-4fd3-b18b-ff54360f1cce.jpg"
-    ]
+    ],
+    "cp": "55",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "2f6903ba-d252-48d4-8bd2-5b98b1739fe0",
@@ -5032,12 +5126,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "400",
+    "status": "Built",
     "image": "/uploads/70c9f85b-27af-4560-a014-06f04f4f80d5.jpg",
     "images": [
       "/uploads/70c9f85b-27af-4560-a014-06f04f4f80d5.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "cf51a2b1-2baa-4e10-af29-dcc5692b6e56",
@@ -5045,12 +5141,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "400",
+    "status": "Built",
     "image": "/uploads/87ecb561-070e-4fbb-9f47-3b3b073e70ae.jpg",
     "images": [
       "/uploads/87ecb561-070e-4fbb-9f47-3b3b073e70ae.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "e000ac42-69c3-4602-8b8c-011d0f199b15",
@@ -5058,12 +5156,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1790",
+    "status": "Built",
     "image": "/uploads/b524f08c-daa8-4ca2-bd83-1b11b2a7666f.jpg",
     "images": [
       "/uploads/b524f08c-daa8-4ca2-bd83-1b11b2a7666f.jpg"
-    ]
+    ],
+    "cp": "80",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "c190d013-6c7b-464a-97a1-b6deb6e20f9f",
@@ -5071,12 +5171,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "520",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/8ed50a16-b81c-4955-b03b-4342a137a57a.jpg",
     "images": [
       "/uploads/8ed50a16-b81c-4955-b03b-4342a137a57a.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "49398c7f-5097-48de-b9ea-68369e1861a8",
@@ -5084,12 +5186,14 @@
     "author": "Games Workshop (re-cast) (duplicate)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "460",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/9aaf6a62-1c8a-46e1-909b-db472e73a146.jpg",
     "images": [
       "/uploads/9aaf6a62-1c8a-46e1-909b-db472e73a146.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "afee6337-2262-4e66-9ea2-fe20ea30ab5f",
@@ -5097,12 +5201,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "1628",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/84ae39ae-f790-4dc5-bd08-b2a3fc406b80.jpg",
     "images": [
       "/uploads/84ae39ae-f790-4dc5-bd08-b2a3fc406b80.jpg"
-    ]
+    ],
+    "cp": "110",
+    "recaster": "Литейка Wako Lab"
   },
   {
     "id": "a355cb93-88c7-4c02-bf13-06f14dd0874e",
@@ -5110,13 +5216,15 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "484",
+    "status": "Painted",
     "image": "/uploads/1050dc4e-7621-4242-bfe9-fbbeb8647833.jpg",
     "images": [
       "/uploads/1050dc4e-7621-4242-bfe9-fbbeb8647833.jpg",
       "/uploads/e52aeb0d-2970-46a6-95c4-dfb5915f3e17.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": "Литейка Wako Lab"
   },
   {
     "id": "81f07c48-eb1a-4ccf-a438-2965eba99b2e",
@@ -5124,12 +5232,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "2100",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/48b5a2ae-0013-4091-b750-f3b7b8abf7c6.jpg",
     "images": [
       "/uploads/48b5a2ae-0013-4091-b750-f3b7b8abf7c6.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "296256e9-9202-4e4a-86cc-ee855cdb7af1",
@@ -5137,12 +5247,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "500",
+    "status": "Built",
     "image": "/uploads/220ba3d0-4301-4677-9320-ce44329b742d.jpg",
     "images": [
       "/uploads/220ba3d0-4301-4677-9320-ce44329b742d.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка Defiler's Resin Casting"
   },
   {
     "id": "693e9043-224d-4de9-b25b-f1b891ad6a9c",
@@ -5150,12 +5262,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "3600",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/b9fb683c-b50d-48d2-96ca-d46381cd70c5.jpg",
     "images": [
       "/uploads/b9fb683c-b50d-48d2-96ca-d46381cd70c5.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": ""
   },
   {
     "id": "e01ed4cd-9c43-4b86-874a-710237365dfe",
@@ -5163,12 +5277,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "7400",
+    "status": "Built",
     "image": "/uploads/af1f339f-5343-41ed-a591-6435066502e0.jpg",
     "images": [
       "/uploads/af1f339f-5343-41ed-a591-6435066502e0.jpg"
-    ]
+    ],
+    "cp": "530",
+    "recaster": ""
   },
   {
     "id": "649e5c2a-e314-4cce-922e-be71dcbc126c",
@@ -5176,12 +5292,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "4000",
+    "status": "Rare",
     "image": "/uploads/ee4819d5-8bb5-4c5e-bc7c-87f16503bdf8.jpg",
     "images": [
       "/uploads/ee4819d5-8bb5-4c5e-bc7c-87f16503bdf8.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": ""
   },
   {
     "id": "330bd1d9-4283-4e72-a75c-498fc526b06a",
@@ -5189,12 +5307,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "4000",
+    "status": "Rare",
     "image": "/uploads/5d51d40a-3f98-452a-b277-392c1e91a0f1.jpg",
     "images": [
       "/uploads/5d51d40a-3f98-452a-b277-392c1e91a0f1.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": ""
   },
   {
     "id": "61341da8-1aa1-4fdf-bc79-b665168585e7",
@@ -5202,12 +5322,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "4500",
+    "status": "Rare",
     "image": "/uploads/deb0ae26-fa6f-4650-8051-15de764c15e9.jpg",
     "images": [
       "/uploads/deb0ae26-fa6f-4650-8051-15de764c15e9.jpg"
-    ]
+    ],
+    "cp": "",
+    "recaster": ""
   },
   {
     "id": "383f3e0f-97ff-48cb-a3d9-1fff9da71b5e",
@@ -5215,12 +5337,14 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "",
-    "status": "",
+    "price": "5300",
+    "status": "Rare",
     "image": "/uploads/32b98ee6-6569-489e-b93d-29329b7e312b.jpg",
     "images": [
       "/uploads/32b98ee6-6569-489e-b93d-29329b7e312b.jpg"
-    ]
+    ],
+    "cp": "100",
+    "recaster": ""
   },
   {
     "id": "a88c24de-8420-4783-8afa-3fcf52b6be46",
@@ -5228,8 +5352,8 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "16000",
+    "status": "Built",
     "image": "/uploads/6e786b1a-4289-4896-9065-b8b0a399e7e3.jpg",
     "images": [
       "/uploads/6e786b1a-4289-4896-9065-b8b0a399e7e3.jpg",
@@ -5239,7 +5363,9 @@
       "/uploads/05cc44fd-9c16-4424-9f62-e5066e2b8541.jpg",
       "/uploads/505760a8-0263-4a01-86c0-777b6acbf8a6.jpg",
       "/uploads/823a0a41-d0ad-4caf-b5d8-5b9f83003378.jpg"
-    ]
+    ],
+    "cp": "510",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "5cb5016a-caa8-48e5-850a-539eb0398cb7",
@@ -5247,12 +5373,14 @@
     "author": "Forge World",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "5500",
+    "status": "Built",
     "image": "/uploads/53b72e7e-aa3b-4561-808c-f1c53ac415ee.jpg",
     "images": [
       "/uploads/53b72e7e-aa3b-4561-808c-f1c53ac415ee.jpg"
-    ]
+    ],
+    "cp": "140",
+    "recaster": ""
   },
   {
     "id": "95aa19e1-c166-4d0c-866a-eedcbf116cbd",
@@ -5260,12 +5388,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/d0e0b534-92f3-4977-b5d5-c2c427bac930.jpg",
     "images": [
       "/uploads/d0e0b534-92f3-4977-b5d5-c2c427bac930.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "54a3c5ef-6d54-468e-b7f1-89cc762f2b82",
@@ -5273,12 +5403,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "800",
+    "status": "Built",
     "image": "/uploads/fbcf1f34-a9c5-42fc-beed-5820b3fa6361.jpg",
     "images": [
       "/uploads/fbcf1f34-a9c5-42fc-beed-5820b3fa6361.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "168b733c-914f-4df1-9ed8-63ef48692591",
@@ -5286,12 +5418,14 @@
     "author": "Forgeworld (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "2100",
+    "status": "Built",
     "image": "/uploads/31101709-e278-4019-b016-53ba332cc570.jpg",
     "images": [
       "/uploads/31101709-e278-4019-b016-53ba332cc570.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "8abb571d-933f-43ef-bca0-2cdf48b70ef9",
@@ -5299,12 +5433,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Built",
     "image": "/uploads/f404cebd-3b3a-418b-83c8-44fa34464c1c.jpg",
     "images": [
       "/uploads/f404cebd-3b3a-418b-83c8-44fa34464c1c.jpg"
-    ]
+    ],
+    "cp": "115",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "6f71b019-39be-415d-b3de-144c9b63c094",
@@ -5312,14 +5448,16 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "4500",
+    "status": "Built",
     "image": "/uploads/894174df-110e-4324-b547-2fca7004e7f7.jpg",
     "images": [
       "/uploads/894174df-110e-4324-b547-2fca7004e7f7.jpg",
       "/uploads/15fd639a-129e-44a5-96b3-0514df166ed7.jpg",
       "/uploads/d2f886f5-8dde-46fd-bc44-db8abdd86767.jpg"
-    ]
+    ],
+    "cp": "325",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "77e4b2d8-6b20-492b-873b-31cae8773bd9",
@@ -5327,12 +5465,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "2750",
+    "status": "Built",
     "image": "/uploads/dcf30a04-5b85-43b5-ae39-eec87accaa6f.jpg",
     "images": [
       "/uploads/dcf30a04-5b85-43b5-ae39-eec87accaa6f.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "27d9f08c-0378-4652-b399-a5cbcc29b9fc",
@@ -5340,12 +5480,14 @@
     "author": "Forgeworld (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "3500",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/0d82b753-f4fd-4232-b2bc-89d2d3380020.jpg",
     "images": [
       "/uploads/0d82b753-f4fd-4232-b2bc-89d2d3380020.jpg"
-    ]
+    ],
+    "cp": "165",
+    "recaster": "Литейка darkminiatures.com"
   },
   {
     "id": "6d0c250d-9e36-4dd9-8a59-0ee933c13aed",
@@ -5353,12 +5495,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "2850",
+    "status": "Built",
     "image": "/uploads/fa15b43b-8a18-4a56-b454-722012a67318.jpg",
     "images": [
       "/uploads/fa15b43b-8a18-4a56-b454-722012a67318.jpg"
-    ]
+    ],
+    "cp": "175",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "3d1fc627-7994-4d9e-858c-6f0033e6dcbb",
@@ -5366,12 +5510,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "2350",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/5670e47f-2382-4d0e-8d73-9c386c546320.jpg",
     "images": [
       "/uploads/5670e47f-2382-4d0e-8d73-9c386c546320.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "1d9a40cf-c77c-43a6-9dad-0dfb5caf5784",
@@ -5379,12 +5525,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "2250",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/904141a2-2f73-49a7-b38a-0bae25222d51.jpg",
     "images": [
       "/uploads/904141a2-2f73-49a7-b38a-0bae25222d51.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "7af2d950-d687-4e07-ae47-70bc95d2a807",
@@ -5392,12 +5540,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "850",
+    "status": "Built",
     "image": "/uploads/447f12ea-71ac-4bea-aa6f-b7239140dfbb.jpg",
     "images": [
       "/uploads/447f12ea-71ac-4bea-aa6f-b7239140dfbb.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "7fc88abb-12c8-4a7f-b91c-59ea2d88eef7",
@@ -5405,12 +5555,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "990",
+    "status": "Built",
     "image": "/uploads/7e0993bd-e5ae-4e4f-bcda-f1b06b54d7f5.jpg",
     "images": [
       "/uploads/7e0993bd-e5ae-4e4f-bcda-f1b06b54d7f5.jpg"
-    ]
+    ],
+    "cp": "100",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "e01ec52c-9520-4b07-b1e2-5ad99f7fad4b",
@@ -5418,12 +5570,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "3000",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/6bd1bb83-e220-4fc0-9148-3e365d171d5c.jpg",
     "images": [
       "/uploads/6bd1bb83-e220-4fc0-9148-3e365d171d5c.jpg"
-    ]
+    ],
+    "cp": "100",
+    "recaster": "Литейка Северный Ветер"
   },
   {
     "id": "cb732689-0cc8-4ae1-a2e2-12ad22e4a55b",
@@ -5431,12 +5585,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/7763be12-7b25-406d-9d10-756bd9aca573.jpg",
     "images": [
       "/uploads/7763be12-7b25-406d-9d10-756bd9aca573.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка Северный Ветер"
   },
   {
     "id": "4f8e016d-9236-469f-b7df-339b016c2486",
@@ -5444,12 +5600,14 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "",
-    "status": "",
+    "price": "1250",
+    "status": "Built",
     "image": "/uploads/e5184fb1-f2e8-49b4-9136-0ecd3441987a.jpg",
     "images": [
       "/uploads/e5184fb1-f2e8-49b4-9136-0ecd3441987a.jpg"
-    ]
+    ],
+    "cp": "40",
+    "recaster": "Литейка Plants vs Zombies"
   },
   {
     "id": "0168d030-6800-4c1d-bc47-570145886924",
@@ -5457,12 +5615,14 @@
     "author": "Games Workshop Golden Demon Gamesday 2007 (Citadel) (sealed)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "",
-    "status": "",
+    "price": "7000",
+    "status": "Rare (sealed)",
     "image": "/uploads/46a30b11-1186-4e7a-bce1-ed53504740b8.jpg",
     "images": [
       "/uploads/46a30b11-1186-4e7a-bce1-ed53504740b8.jpg"
-    ]
+    ],
+    "recaster": "",
+    "combatPoints": ""
   },
   {
     "id": "b67827fc-7716-44c0-99fa-5d0357a8d126",
@@ -5470,12 +5630,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "900",
+    "status": "Built",
     "image": "/uploads/050b8585-e43e-4fe0-b468-903e6287c6a6.jpg",
     "images": [
       "/uploads/050b8585-e43e-4fe0-b468-903e6287c6a6.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "3e3cffbf-dec4-41b5-872d-e4d3ff7861c3",
@@ -5483,12 +5645,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/ceb22d12-ec8d-4e68-bb6c-a8b7cc42d9c3.jpg",
     "images": [
       "/uploads/ceb22d12-ec8d-4e68-bb6c-a8b7cc42d9c3.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "863d102a-b7d4-4391-85c7-532979cceea2",
@@ -5496,12 +5660,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "400",
+    "status": "Built",
     "image": "/uploads/f3e643b7-f9ee-4d2b-8536-07fba7d3caeb.jpg",
     "images": [
       "/uploads/f3e643b7-f9ee-4d2b-8536-07fba7d3caeb.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "6d54828f-1919-489f-bded-b0a66438a3a0",
@@ -5509,12 +5675,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Built",
     "image": "/uploads/95df1953-60cd-4f9c-8ce5-eb9bdaf27c0f.jpg",
     "images": [
       "/uploads/95df1953-60cd-4f9c-8ce5-eb9bdaf27c0f.jpg"
-    ]
+    ],
+    "cp": "50",
+    "recaster": "Литейка Craft Тверь"
   },
   {
     "id": "db068fb5-e3ee-47b9-bc77-d515083aedf5",
@@ -5522,12 +5690,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/7d13adc6-ab38-49d9-8a33-3d30741e110e.jpg",
     "images": [
       "/uploads/7d13adc6-ab38-49d9-8a33-3d30741e110e.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": "Литейка Craft Тверь"
   },
   {
     "id": "84159c51-4e89-472e-a9b5-12a2c89b7471",
@@ -5535,12 +5705,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "500",
+    "status": "Built",
     "image": "/uploads/575b7875-b60b-4534-8a9f-e848497a212e.jpg",
     "images": [
       "/uploads/575b7875-b60b-4534-8a9f-e848497a212e.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "c9cbec32-f5a4-467e-9ddd-7bb4ee0ab491",
@@ -5548,12 +5720,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/40ab58f2-0c59-47ab-9d6c-a3a9e8a9bd06.jpg",
     "images": [
       "/uploads/40ab58f2-0c59-47ab-9d6c-a3a9e8a9bd06.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "605a92b8-9f05-4e56-b83b-aad24df5d8cb",
@@ -5561,12 +5735,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "550",
+    "status": "Built",
     "image": "/uploads/84edb01b-03f1-4ec9-a0e1-df43a88c5a23.jpg",
     "images": [
       "/uploads/84edb01b-03f1-4ec9-a0e1-df43a88c5a23.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "5a032ab3-db72-4931-8f3c-94d9b5b2edef",
@@ -5574,12 +5750,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "0",
+    "status": "Built",
     "image": "/uploads/a54dd949-b3f8-49b6-9d06-2621eb570b9c.jpg",
     "images": [
       "/uploads/a54dd949-b3f8-49b6-9d06-2621eb570b9c.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "b85d0391-defc-400a-b0b9-22b264c1228a",
@@ -5587,12 +5765,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "350",
+    "status": "Built",
     "image": "/uploads/2ea790ef-3bc4-4134-bde0-f8d366341e97.jpg",
     "images": [
       "/uploads/2ea790ef-3bc4-4134-bde0-f8d366341e97.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "cce5e3fe-cc76-4dea-9ad2-03e635953556",
@@ -5600,12 +5780,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "350",
+    "status": "Built",
     "image": "/uploads/5b984cf9-ac52-4507-abda-d2a1b5895ac4.jpg",
     "images": [
       "/uploads/5b984cf9-ac52-4507-abda-d2a1b5895ac4.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка 2d6"
   },
   {
     "id": "18205532-9ed7-4e3b-afd4-2562fb784a2a",
@@ -5613,12 +5795,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "150",
+    "status": "Built",
     "image": "/uploads/4293c40f-aebb-4869-9520-aa495c4e4bcd.jpg",
     "images": [
       "/uploads/4293c40f-aebb-4869-9520-aa495c4e4bcd.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "0f6e1ab2-f901-42df-9051-6a474f28dcf7",
@@ -5626,12 +5810,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "325",
+    "status": "Built",
     "image": "/uploads/ac6289d3-c30d-4d9c-a7df-ba99d3261e79.jpg",
     "images": [
       "/uploads/ac6289d3-c30d-4d9c-a7df-ba99d3261e79.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "dd6ff107-15ad-4980-929b-f860f0b85cab",
@@ -5639,12 +5825,13 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
-    "image": "/uploads/9e4f7e9f-cdaf-4bf4-8314-1089b3789f26.jpg",
-    "images": [
-      "/uploads/9e4f7e9f-cdaf-4bf4-8314-1089b3789f26.jpg"
-    ]
+    "price": "0",
+    "status": "Built",
+    "image": "/uploads/1784672989417-images.jpg",
+    "images": [],
+    "cp": "0",
+    "recaster": "",
+    "combatPoints": ""
   },
   {
     "id": "c58f50bc-abcd-4a14-950f-6f5863bb4404",
@@ -5652,12 +5839,13 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
-    "image": "/uploads/72aa2647-d176-416d-8f31-5baf196f1eaa.jpg",
-    "images": [
-      "/uploads/72aa2647-d176-416d-8f31-5baf196f1eaa.jpg"
-    ]
+    "price": "1000",
+    "status": "Built",
+    "image": "/uploads/1784672989417-images.jpg",
+    "images": [],
+    "cp": "0",
+    "recaster": "",
+    "combatPoints": ""
   },
   {
     "id": "2de651d2-ebe0-480b-9bce-dfc196df7c5e",
@@ -5665,12 +5853,13 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
-    "image": "/uploads/608ece84-88ca-4448-9751-43a590071b19.jpg",
-    "images": [
-      "/uploads/608ece84-88ca-4448-9751-43a590071b19.jpg"
-    ]
+    "price": "1000",
+    "status": "Built",
+    "image": "/uploads/1784672989417-images.jpg",
+    "images": [],
+    "cp": "0",
+    "recaster": "",
+    "combatPoints": ""
   },
   {
     "id": "61c32c65-de31-4563-b110-adbc28ffd405",
@@ -5678,12 +5867,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "550",
+    "status": "Built",
     "image": "/uploads/b83b8495-467e-4209-9066-fa9d4f6cd3d3.jpg",
     "images": [
       "/uploads/b83b8495-467e-4209-9066-fa9d4f6cd3d3.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "06499e5c-02bf-496f-9936-df65cd6b38b1",
@@ -5691,12 +5882,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "550",
+    "status": "Built",
     "image": "/uploads/d513ea3c-bdec-413f-967b-0d65606aaa0e.jpg",
     "images": [
       "/uploads/d513ea3c-bdec-413f-967b-0d65606aaa0e.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "48f6ebf7-1218-4144-a9f3-5a7e5acf9969",
@@ -5704,12 +5897,14 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "500",
+    "status": "Built",
     "image": "/uploads/73f0d7fe-83f3-4719-86bd-90ce8f2efc08.jpg",
     "images": [
       "/uploads/73f0d7fe-83f3-4719-86bd-90ce8f2efc08.jpg"
-    ]
+    ],
+    "cp": "50",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "7fb8845a-eb3f-49cd-bf5d-c879002a129c",
@@ -5717,12 +5912,14 @@
     "author": "Games Workshop (sealed)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "",
-    "status": "",
+    "price": "5000",
+    "status": "Rare",
     "image": "/uploads/759ca2f8-52b0-495f-ab60-d944fe35b1b3.jpg",
     "images": [
       "/uploads/759ca2f8-52b0-495f-ab60-d944fe35b1b3.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "13bd6f4f-fcd7-46be-8b41-9662869ff1ec",
@@ -5730,12 +5927,14 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "4500",
+    "status": "Built",
     "image": "/uploads/1b83e3de-42ac-4c79-adc1-34326c23ca6c.jpg",
     "images": [
       "/uploads/1b83e3de-42ac-4c79-adc1-34326c23ca6c.jpg"
-    ]
+    ],
+    "cp": "150",
+    "recaster": ""
   },
   {
     "id": "0b625c48-7bf8-4f25-9772-6c63eb18eea5",
@@ -5743,12 +5942,14 @@
     "author": "Artel W (Tekk Shzaman, Medikk (with Nurz), Mekkanik (with 2 Matez: Kurdan, da Inventur, Skruw, da Fettlar ) )",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "700",
+    "status": "Built",
     "image": "/uploads/4a66f262-bd48-4c5f-85c1-453f638f9ffc.jpg",
     "images": [
       "/uploads/4a66f262-bd48-4c5f-85c1-453f638f9ffc.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": ""
   },
   {
     "id": "f034cca6-74b7-4a88-bfcf-6c470717ff23",
@@ -5756,12 +5957,14 @@
     "author": "Artel W (Brunzh red fist ov da Revolushun, Tuczhan Rider ov da Revolushun, Shtrugg Gobbfalonier ov da Revolushun + 2 in \"Spezialistz\")",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "550",
+    "status": "Built",
     "image": "/uploads/5b27eb0b-b93d-4f67-bd0d-2f0895ec9088.jpg",
     "images": [
       "/uploads/5b27eb0b-b93d-4f67-bd0d-2f0895ec9088.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": ""
   },
   {
     "id": "cd0fb376-bf4a-4749-88ff-35491ec40ae9",
@@ -5769,12 +5972,14 @@
     "author": "Artel W (Butz Hordinzon, Skrima Spikead, Lash Udzon, Wuzh Arzon, Bzhum Krusha)",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "2500",
+    "status": "Built",
     "image": "/uploads/332eea4f-fd33-4236-8247-3c507471f98c.jpg",
     "images": [
       "/uploads/332eea4f-fd33-4236-8247-3c507471f98c.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "64298d2c-e7be-428f-8e5c-ff549bdcde88",
@@ -5782,13 +5987,15 @@
     "author": "(+ Butz Hordinzon on platform)",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "3500",
+    "status": "Built",
     "image": "/uploads/76dd726f-ecbb-414f-8701-a998b14afab9.jpg",
     "images": [
       "/uploads/76dd726f-ecbb-414f-8701-a998b14afab9.jpg",
       "/uploads/6a0f476a-7cca-4fc2-b889-8c7dd1c6e84c.jpg"
-    ]
+    ],
+    "cp": "81",
+    "recaster": ""
   },
   {
     "id": "27fca5dc-e3a4-404b-9bf1-58af82a7253a",
@@ -5796,12 +6003,14 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "3000",
+    "status": "Built",
     "image": "/uploads/19857113-1612-4c43-b09f-db4cf5e71228.jpg",
     "images": [
       "/uploads/19857113-1612-4c43-b09f-db4cf5e71228.jpg"
-    ]
+    ],
+    "cp": "85",
+    "recaster": ""
   },
   {
     "id": "79e9b14f-c333-40a3-9284-e63e37428eb3",
@@ -5809,12 +6018,14 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "850",
+    "status": "Built",
     "image": "/uploads/43ad8d47-fb2f-4a2b-92e3-0f57295ec47b.jpg",
     "images": [
       "/uploads/43ad8d47-fb2f-4a2b-92e3-0f57295ec47b.jpg"
-    ]
+    ],
+    "cp": "95",
+    "recaster": ""
   },
   {
     "id": "194c87ce-e73b-4acb-bf76-1c717233f7a7",
@@ -5822,12 +6033,14 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "2400",
+    "status": "Built",
     "image": "/uploads/aae93022-6e69-41ac-be4e-08257b9c7d80.jpg",
     "images": [
       "/uploads/aae93022-6e69-41ac-be4e-08257b9c7d80.jpg"
-    ]
+    ],
+    "cp": "50",
+    "recaster": ""
   },
   {
     "id": "14c6cbba-f782-4308-b8ba-8a30531f174f",
@@ -5835,12 +6048,14 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "2400",
+    "status": "Built",
     "image": "/uploads/ffc3cef3-ff6e-41c2-ad58-478c71fb2280.jpg",
     "images": [
       "/uploads/ffc3cef3-ff6e-41c2-ad58-478c71fb2280.jpg"
-    ]
+    ],
+    "cp": "55",
+    "recaster": ""
   },
   {
     "id": "124cd1ec-ae63-4b2d-a312-82d77979fd06",
@@ -5848,12 +6063,14 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "4350",
+    "status": "Built",
     "image": "/uploads/2fadc440-22d6-4ddf-bac0-dd36f3692ce6.jpg",
     "images": [
       "/uploads/2fadc440-22d6-4ddf-bac0-dd36f3692ce6.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "14a50aec-48f6-4d64-ac4d-777a704490f0",
@@ -5861,12 +6078,14 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "",
-    "status": "",
+    "price": "4350",
+    "status": "Built",
     "image": "/uploads/b6526911-d069-4ae3-8a2d-29a55bd8770d.jpg",
     "images": [
       "/uploads/b6526911-d069-4ae3-8a2d-29a55bd8770d.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": ""
   },
   {
     "id": "d3ee8225-3f7e-4c74-a1e6-4a9171b2fbdb",
@@ -5874,12 +6093,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "450",
+    "status": "Built",
     "image": "/uploads/54f1060d-2349-4f80-b5e7-3ebe9ff05114.jpg",
     "images": [
       "/uploads/54f1060d-2349-4f80-b5e7-3ebe9ff05114.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "d288acb0-6dcb-4d2d-afcc-babf8061883e",
@@ -5887,12 +6108,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "500",
+    "status": "Built",
     "image": "/uploads/606e6a81-e013-46a7-b223-edd0eb052d13.jpg",
     "images": [
       "/uploads/606e6a81-e013-46a7-b223-edd0eb052d13.jpg"
-    ]
+    ],
+    "cp": "50",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "b015da65-ebc2-4d3c-a72f-d8971d042d52",
@@ -5900,12 +6123,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Built",
     "image": "/uploads/03a3a1e4-cad5-49e5-b5a3-ca33770f3fa4.jpg",
     "images": [
       "/uploads/03a3a1e4-cad5-49e5-b5a3-ca33770f3fa4.jpg"
-    ]
+    ],
+    "cp": "115",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "b8ff027d-3f37-408b-a60a-6cdbc4f81a0e",
@@ -5913,12 +6138,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Built",
     "image": "/uploads/becd98a5-69ff-43b4-b034-2877edf20a59.jpg",
     "images": [
       "/uploads/becd98a5-69ff-43b4-b034-2877edf20a59.jpg"
-    ]
+    ],
+    "cp": "115",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "f5dc0b00-f3a0-42ff-9a1d-b9b155fb1b92",
@@ -5926,12 +6153,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Built",
     "image": "/uploads/11aac59d-b49c-493b-bfe8-76cb73a249f8.jpg",
     "images": [
       "/uploads/11aac59d-b49c-493b-bfe8-76cb73a249f8.jpg"
-    ]
+    ],
+    "cp": "115",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "21db04e6-2ecf-4447-971f-ed095cc2110c",
@@ -5939,12 +6168,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "1030",
+    "status": "Built",
     "image": "/uploads/b0fe4b21-8d7d-4ef1-b2f0-4804ee171813.jpg",
     "images": [
       "/uploads/b0fe4b21-8d7d-4ef1-b2f0-4804ee171813.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "542e6d35-3104-4825-a945-0dd97df67191",
@@ -5952,12 +6183,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "3000",
+    "status": "Built",
     "image": "/uploads/23682d79-b3f5-430d-a3e2-61f4ecf1b48c.jpg",
     "images": [
       "/uploads/23682d79-b3f5-430d-a3e2-61f4ecf1b48c.jpg"
-    ]
+    ],
+    "cp": "190",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "bf2540a1-b7a8-4a88-a671-378a9e61eeb8",
@@ -5965,12 +6198,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "1500",
+    "status": "Built",
     "image": "/uploads/545b6658-a9b3-4932-b753-1392846091b2.jpg",
     "images": [
       "/uploads/545b6658-a9b3-4932-b753-1392846091b2.jpg"
-    ]
+    ],
+    "cp": "120",
+    "recaster": "Литейка Oi! Factory"
   },
   {
     "id": "af7d28d9-3b8f-47ec-b099-88caa47b0d25",
@@ -5978,12 +6213,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "1000",
+    "status": "Built",
     "image": "/uploads/649a4d54-fcd6-445d-8fb7-7b4320aeb2cc.jpg",
     "images": [
       "/uploads/649a4d54-fcd6-445d-8fb7-7b4320aeb2cc.jpg"
-    ]
+    ],
+    "cp": "90",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "25563e21-f5ac-4571-83ba-0879e6dc4e64",
@@ -5991,8 +6228,8 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "760",
+    "status": "Painted",
     "image": "/uploads/ab1aa015-ada6-43d6-a9c6-a4a126da1688.jpg",
     "images": [
       "/uploads/ab1aa015-ada6-43d6-a9c6-a4a126da1688.jpg",
@@ -6000,7 +6237,9 @@
       "/uploads/5d7eebdf-4dfd-4b9d-83e4-64738137e9ea.jpg",
       "/uploads/4eaac7bf-2bbc-4802-8421-60ae96364d2c.jpg",
       "/uploads/39e634a7-f7c9-4ffe-9de6-d0a70f11ad31.jpg"
-    ]
+    ],
+    "cp": "105",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "fcc6dc10-19e5-4c79-885f-e228cdc07bcf",
@@ -6008,12 +6247,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "240",
+    "status": "Built",
     "image": "/uploads/548fa71e-e434-4275-947a-f9547039f852.jpg",
     "images": [
       "/uploads/548fa71e-e434-4275-947a-f9547039f852.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "709254f1-ded9-4ef6-92ed-6e5a2a681da1",
@@ -6021,12 +6262,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "250",
+    "status": "Built",
     "image": "/uploads/255f6589-0fd0-4e55-8c74-b2d6bb1aa565.jpg",
     "images": [
       "/uploads/255f6589-0fd0-4e55-8c74-b2d6bb1aa565.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "b1ea24ca-972b-4e7c-a336-bbf569d6e15f",
@@ -6034,12 +6277,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "1010",
+    "status": "Built",
     "image": "/uploads/5775716d-adfb-4989-bc34-7da2c86d1d5c.jpg",
     "images": [
       "/uploads/5775716d-adfb-4989-bc34-7da2c86d1d5c.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "73ca18e8-328e-48f2-a28f-ce8d00ff204b",
@@ -6047,12 +6292,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "760",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/b57ee1f7-8263-4dfd-ae0e-82d37c17ae77.jpg",
     "images": [
       "/uploads/b57ee1f7-8263-4dfd-ae0e-82d37c17ae77.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "9e1df79c-29ec-4c95-b39d-e5a5fd5fcda6",
@@ -6060,12 +6307,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "760",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/38a866c3-bba3-4bfb-821c-f83e6ccb29e8.jpg",
     "images": [
       "/uploads/38a866c3-bba3-4bfb-821c-f83e6ccb29e8.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "aa76ecda-f863-4087-a733-461df7630cfe",
@@ -6073,12 +6322,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "300",
+    "status": "Built",
     "image": "/uploads/4df41b70-e660-429e-a6c8-3e561215335d.jpg",
     "images": [
       "/uploads/4df41b70-e660-429e-a6c8-3e561215335d.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка ThePiratesCountry"
   },
   {
     "id": "ca4c3e20-ac3e-42f4-9e0c-6b7cb844f572",
@@ -6086,12 +6337,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "400",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/e068306f-b5e6-4f51-8a70-218bb80a9694.jpg",
     "images": [
       "/uploads/e068306f-b5e6-4f51-8a70-218bb80a9694.jpg"
-    ]
+    ],
+    "cp": "70",
+    "recaster": "Литейка GreedIsGood"
   },
   {
     "id": "9662b9c6-49b1-4d48-8007-455216cd0ea5",
@@ -6099,12 +6352,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "264",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/6a5503f9-939e-4ca6-bbbe-69f21d900162.jpg",
     "images": [
       "/uploads/6a5503f9-939e-4ca6-bbbe-69f21d900162.jpg"
-    ]
+    ],
+    "cp": "5",
+    "recaster": "Литейка Wako Lab"
   },
   {
     "id": "afff9cdc-d7d9-429b-9331-8cc0e77a228f",
@@ -6112,12 +6367,14 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "792",
+    "status": "Unbuilt / Boxed",
     "image": "/uploads/cbc49429-a662-4548-8bfb-b3faca07d695.jpg",
     "images": [
       "/uploads/cbc49429-a662-4548-8bfb-b3faca07d695.jpg"
-    ]
+    ],
+    "cp": "30",
+    "recaster": "Литейка Wako Lab"
   },
   {
     "id": "85b30e40-01c5-4d9d-9311-83e7f4028801",
@@ -6125,11 +6382,568 @@
     "author": "Kromlech",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "",
-    "status": "",
+    "price": "2500",
+    "status": "Built",
     "image": "/uploads/259311dc-2b2f-4d48-a297-5278135c3371.jpg",
     "images": [
       "/uploads/259311dc-2b2f-4d48-a297-5278135c3371.jpg"
-    ]
+    ],
+    "cp": "0",
+    "recaster": ""
+  },
+  {
+    "id": "c385d4b3-1f2a-4f42-8d74-ee9eed46eb3e",
+    "title": "Warmaster Gormakk",
+    "author": "Raging Heroes (re-cast)",
+    "section": "miniatures",
+    "category": "various-studios",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/c393116c-2e68-4cdb-a795-71c7920e2b93.jpg",
+    "images": [
+      "/uploads/c393116c-2e68-4cdb-a795-71c7920e2b93.jpg"
+    ],
+    "cp": "90",
+    "recaster": "Литейка GreedIsGood"
+  },
+  {
+    "id": "4324946f-2008-43d9-89c3-5ecb1b2041b3",
+    "title": "Looted Dread Boss",
+    "author": "Wargame Exclusive (re-cast)",
+    "section": "miniatures",
+    "category": "various-studios",
+    "price": "1040",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/eb5a58fb-2f8e-44ec-bf98-59dbe3b97908.jpg",
+    "images": [
+      "/uploads/eb5a58fb-2f8e-44ec-bf98-59dbe3b97908.jpg"
+    ],
+    "cp": "85",
+    "recaster": "Литейка ThePiratesCountry"
+  },
+  {
+    "id": "e52ac444-f942-49cc-b23f-5a8813599227",
+    "title": "Badass Ork Biker",
+    "author": "MaxMini (re-cast)",
+    "section": "miniatures",
+    "category": "various-studios",
+    "price": "810",
+    "status": "Built",
+    "image": "/uploads/f5d8eeeb-fad4-4a04-b8d2-0e728b5bc74c.jpg",
+    "images": [
+      "/uploads/f5d8eeeb-fad4-4a04-b8d2-0e728b5bc74c.jpg"
+    ],
+    "cp": "25",
+    "recaster": "Литейка ThePiratesCountry"
+  },
+  {
+    "id": "d144ae31-06ff-4a52-9e56-a6fe1e0a0bfa",
+    "title": "Goblin Bikers",
+    "author": "MaxMini (re-cast) [2]",
+    "section": "miniatures",
+    "category": "various-studios",
+    "price": "1400",
+    "status": "Built",
+    "image": "/uploads/dd575280-d15e-4ef7-9c2d-8f6462b62a6b.jpg",
+    "images": [
+      "/uploads/dd575280-d15e-4ef7-9c2d-8f6462b62a6b.jpg"
+    ],
+    "cp": "75",
+    "recaster": "Литейка BlackMarketMiniatures"
+  },
+  {
+    "id": "9d47bbc9-20ce-4d82-9fb5-fed01917772c",
+    "title": "Aaargh2D2",
+    "author": "Scibor Miniatures (re-cast)",
+    "section": "miniatures",
+    "category": "various-studios",
+    "price": "400",
+    "status": "Built",
+    "image": "/uploads/854830ad-9917-4750-8bd6-c9128fcfa223.jpg",
+    "images": [
+      "/uploads/854830ad-9917-4750-8bd6-c9128fcfa223.jpg"
+    ],
+    "cp": "5",
+    "recaster": "Литейка 2d6"
+  },
+  {
+    "id": "ba1c3597-1ce1-4d4a-b0e4-eb8bb288f4c2",
+    "title": "Trackbike and Rocket Launcher Trailer",
+    "author": "The Portal of Moro (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "1500",
+    "status": "Built",
+    "image": "/uploads/0739cda2-1d9b-4cc2-85c4-cba6b0d5e83a.jpg",
+    "images": [
+      "/uploads/0739cda2-1d9b-4cc2-85c4-cba6b0d5e83a.jpg"
+    ],
+    "cp": "50",
+    "recaster": "VasyaN"
+  },
+  {
+    "id": "90ee4437-3e0d-427f-8e37-7edc35bfd5aa",
+    "title": "Monowheel Gang",
+    "author": "LukesWayOfLooking (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "900",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/4020f9e4-6b15-4ffb-80c2-ed71441a70c6.jpg",
+    "images": [
+      "/uploads/4020f9e4-6b15-4ffb-80c2-ed71441a70c6.jpg"
+    ],
+    "cp": "75",
+    "recaster": "VasyaN"
+  },
+  {
+    "id": "cac96b6f-acfb-4ddf-9196-a086ee45c5df",
+    "title": "Da Road Boss",
+    "author": "MezGike (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "700",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/62afe0d5-d889-4231-adc6-8703ea4c0e42.jpg",
+    "images": [
+      "/uploads/62afe0d5-d889-4231-adc6-8703ea4c0e42.jpg"
+    ],
+    "cp": "115",
+    "recaster": "VasyaN"
+  },
+  {
+    "id": "dae2faf5-8bd3-468b-a675-5cc9dd924c4a",
+    "title": "Da Runt Gang",
+    "author": "MezGike (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "700",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/ba40cc8e-0c3e-4b91-9867-60dd37705aaf.jpg",
+    "images": [
+      "/uploads/ba40cc8e-0c3e-4b91-9867-60dd37705aaf.jpg"
+    ],
+    "cp": "75",
+    "recaster": "VasyaN"
+  },
+  {
+    "id": "580362c4-047b-448f-9458-f5a6b0c88dee",
+    "title": "Orc Biker Set A",
+    "author": "Puppetswar (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/75052af0-3226-4c23-8235-7cca59281718.jpg",
+    "images": [
+      "/uploads/75052af0-3226-4c23-8235-7cca59281718.jpg"
+    ],
+    "cp": "75",
+    "recaster": ""
+  },
+  {
+    "id": "25a37ca8-4d6f-4727-8569-85cd526f05dc",
+    "title": "Orc Biker Set B",
+    "author": "Puppetswar (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/0c680efa-95a7-41b8-854e-86ea24653041.jpg",
+    "images": [
+      "/uploads/0c680efa-95a7-41b8-854e-86ea24653041.jpg"
+    ],
+    "cp": "75",
+    "recaster": ""
+  },
+  {
+    "id": "207ac077-856d-4f6c-99d7-ba9ce502dad6",
+    "title": "Goblin Ladz Set A",
+    "author": "MrModulOrk (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/670cd3f8-0f54-4e51-9b62-5ad27fe04ad9.jpg",
+    "images": [
+      "/uploads/670cd3f8-0f54-4e51-9b62-5ad27fe04ad9.jpg"
+    ],
+    "cp": "15",
+    "recaster": ""
+  },
+  {
+    "id": "eb60583a-d287-4472-8936-9e68210c1e05",
+    "title": "Goblin Ladz Set B",
+    "author": "MrModulOrk (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/4511a2e3-7956-4b28-b9ce-6576bb8fd308.jpg",
+    "images": [
+      "/uploads/4511a2e3-7956-4b28-b9ce-6576bb8fd308.jpg"
+    ],
+    "cp": "15",
+    "recaster": ""
+  },
+  {
+    "id": "bf634e74-1083-4034-a53d-8a3db5cbed15",
+    "title": "Bika Gobz",
+    "author": "MrModulOrk (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/8eaf966e-05dc-4b6c-8ae8-e13b9ea73b0e.jpg",
+    "images": [
+      "/uploads/8eaf966e-05dc-4b6c-8ae8-e13b9ea73b0e.jpg"
+    ],
+    "cp": "75",
+    "recaster": ""
+  },
+  {
+    "id": "48d07f01-3c24-49e3-a331-d47a00447ca8",
+    "title": "Dirt Bikaz",
+    "author": "MrModulOrk (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/d566239a-5a0f-45ef-babc-7f245c27fda7.jpg",
+    "images": [
+      "/uploads/d566239a-5a0f-45ef-babc-7f245c27fda7.jpg"
+    ],
+    "cp": "75",
+    "recaster": ""
+  },
+  {
+    "id": "1f935de3-98b3-452b-8c72-46d2b2255f0c",
+    "title": "Speedkult Gobz",
+    "author": "MrModulOrk (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/9943dc3d-530d-4c4c-a8f4-f157c67344e8.jpg",
+    "images": [
+      "/uploads/9943dc3d-530d-4c4c-a8f4-f157c67344e8.jpg"
+    ],
+    "cp": "5",
+    "recaster": ""
+  },
+  {
+    "id": "be6ca2a8-c681-43e5-b78a-88b38645db72",
+    "title": "Runt Rockers",
+    "author": "Mezgike (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/009fd0be-6560-46c4-bf0a-0f0cf09d7953.jpg",
+    "images": [
+      "/uploads/009fd0be-6560-46c4-bf0a-0f0cf09d7953.jpg"
+    ],
+    "cp": "5",
+    "recaster": ""
+  },
+  {
+    "id": "bfecb2ea-46b7-4ece-a56f-172428f09a0a",
+    "title": "Ork Painboss",
+    "author": "orcskrazy (3d print)",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "650",
+    "status": "Painted",
+    "image": "/uploads/1aaa6cef-6cb4-44e9-b17c-d64fe5dc651d.jpg",
+    "images": [
+      "/uploads/1aaa6cef-6cb4-44e9-b17c-d64fe5dc651d.jpg"
+    ],
+    "cp": "80",
+    "recaster": ""
+  },
+  {
+    "id": "b410fa95-309c-482d-b30a-0592c33efe6b",
+    "title": "Road boys biker mob A",
+    "author": "MezGike",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/e54e14a2-bb34-483a-9df3-cb6a91c71d80.jpg",
+    "images": [
+      "/uploads/e54e14a2-bb34-483a-9df3-cb6a91c71d80.jpg"
+    ],
+    "cp": "75",
+    "recaster": ""
+  },
+  {
+    "id": "808e0be3-ba80-4a60-85af-82b330368753",
+    "title": "Runt mob B",
+    "author": "MezGike",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/d32960c1-9314-47d9-8c81-147aae894b61.jpg",
+    "images": [
+      "/uploads/d32960c1-9314-47d9-8c81-147aae894b61.jpg"
+    ],
+    "cp": "30",
+    "recaster": ""
+  },
+  {
+    "id": "e96b7f2d-5bed-4ef0-bb57-1170ba965227",
+    "title": "Runt mobA",
+    "author": "MezGike",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/611ee42e-0bca-4f78-b244-80215b7830b7.jpg",
+    "images": [
+      "/uploads/611ee42e-0bca-4f78-b244-80215b7830b7.jpg"
+    ],
+    "cp": "30",
+    "recaster": ""
+  },
+  {
+    "id": "1e4da62f-5d8e-425e-ab8b-31cbb360c31f",
+    "title": "Jetpack Gobz",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/b617c51f-faff-46e6-a245-2b85d3df8837.jpg",
+    "images": [
+      "/uploads/b617c51f-faff-46e6-a245-2b85d3df8837.jpg"
+    ],
+    "cp": "10",
+    "recaster": ""
+  },
+  {
+    "id": "4cd69012-ab9b-4704-a32a-dfc074d23132",
+    "title": "Orc Bike and Sidecar",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/66c0d4b9-f968-4555-a45c-331446366127.jpg",
+    "images": [
+      "/uploads/66c0d4b9-f968-4555-a45c-331446366127.jpg"
+    ],
+    "cp": "115",
+    "recaster": ""
+  },
+  {
+    "id": "f1c41063-e288-4fff-b572-31d4b683154b",
+    "title": "Snipa Gobz",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/0bd0ad33-1788-4010-a0b0-6bb6c74ad0e6.jpg",
+    "images": [
+      "/uploads/0bd0ad33-1788-4010-a0b0-6bb6c74ad0e6.jpg"
+    ],
+    "cp": "10",
+    "recaster": ""
+  },
+  {
+    "id": "cd7b4ad3-c8ce-469b-aaa1-aa1f8c0b2e1d",
+    "title": "Orc RoadHog Bikes (3)",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/17459617-b336-452c-97c8-86f4b786be9e.jpg",
+    "images": [
+      "/uploads/17459617-b336-452c-97c8-86f4b786be9e.jpg"
+    ],
+    "cp": "75",
+    "recaster": ""
+  },
+  {
+    "id": "6e43ffbd-443b-4a42-8c90-774033186b1d",
+    "title": "Orkz Hottruck",
+    "author": "EightLegsMiniatures",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "1500",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/d35b4b73-0fb6-4b98-826f-2c65f888b250.jpg",
+    "images": [
+      "/uploads/d35b4b73-0fb6-4b98-826f-2c65f888b250.jpg"
+    ],
+    "cp": "90",
+    "recaster": ""
+  },
+  {
+    "id": "7145b049-af9b-4ec5-ba56-681e13a14f02",
+    "title": "Orc RoadHog Bikes (3)",
+    "author": "EightLegsMiniatures",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "1500",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/93be0f8e-0458-4902-8916-c226675c75bf.jpg",
+    "images": [
+      "/uploads/93be0f8e-0458-4902-8916-c226675c75bf.jpg"
+    ],
+    "cp": "90",
+    "recaster": ""
+  },
+  {
+    "id": "2b139832-3486-4e89-a4a2-9c17d030aba9",
+    "title": "MuscleOrkzMachine",
+    "author": "EightLegsMiniatures",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "1500",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/45ca693f-e405-4971-ae45-130af0d56890.jpg",
+    "images": [
+      "/uploads/45ca693f-e405-4971-ae45-130af0d56890.jpg"
+    ],
+    "cp": "90",
+    "recaster": ""
+  },
+  {
+    "id": "a57b227d-edc8-4563-8603-c9d59c759ab0",
+    "title": "Grot with big Dakka",
+    "author": "orcskrazy",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "0",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/6bf944d6-8005-4de2-bc1a-714e1b5bcc84.jpg",
+    "images": [
+      "/uploads/6bf944d6-8005-4de2-bc1a-714e1b5bcc84.jpg"
+    ],
+    "cp": "0",
+    "recaster": ""
+  },
+  {
+    "id": "c7131bf8-e492-49b1-b030-8efa4a941c8c",
+    "title": "Wheeler Grot",
+    "author": "orcskrazy",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "0",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/6b31e6c0-c075-4e57-9d9f-b37a8a7022fc.jpg",
+    "images": [
+      "/uploads/6b31e6c0-c075-4e57-9d9f-b37a8a7022fc.jpg"
+    ],
+    "cp": "0",
+    "recaster": ""
+  },
+  {
+    "id": "04ce06ee-39a8-40bd-92f7-5302f4130b0f",
+    "title": "Gob Monsta Flyahz",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "750",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/a6891a5d-6062-494b-8e8a-b947ccab82ab.jpg",
+    "images": [
+      "/uploads/a6891a5d-6062-494b-8e8a-b947ccab82ab.jpg"
+    ],
+    "cp": "",
+    "recaster": ""
+  },
+  {
+    "id": "1f0d7ae0-a005-4396-82b9-4f85bc34998d",
+    "title": "Gob Monsta Ridaz",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "600",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/de411cfd-498a-4620-9bfb-7be45d9b856c.jpg",
+    "images": [
+      "/uploads/de411cfd-498a-4620-9bfb-7be45d9b856c.jpg"
+    ],
+    "cp": "",
+    "recaster": ""
+  },
+  {
+    "id": "3d8a7ecf-b197-4c94-a50c-b68f01421e4f",
+    "title": "Red Korpz Goblins",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "1000",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/ec3c27f5-94a5-4790-9b2d-6679d0cbbb58.jpg",
+    "images": [
+      "/uploads/ec3c27f5-94a5-4790-9b2d-6679d0cbbb58.jpg"
+    ],
+    "cp": "",
+    "recaster": ""
+  },
+  {
+    "id": "3331561b-326a-4515-911e-c4a42256be79",
+    "title": "Speedkult Rifle Orc Ladz",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "750",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/30d28b08-b4bd-4e22-9f81-6c202e4b65d8.jpg",
+    "images": [
+      "/uploads/30d28b08-b4bd-4e22-9f81-6c202e4b65d8.jpg"
+    ],
+    "cp": "",
+    "recaster": ""
+  },
+  {
+    "id": "c73e62c3-9db6-402f-a3ea-f88ebb6b815b",
+    "title": "Mak Fury Orc (+driver spare bits)",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "600",
+    "status": "Built",
+    "image": "/uploads/94783acc-6ccb-46fa-9096-1cfbaa582f60.jpg",
+    "images": [
+      "/uploads/94783acc-6ccb-46fa-9096-1cfbaa582f60.jpg"
+    ],
+    "cp": "",
+    "recaster": ""
+  },
+  {
+    "id": "2dd9452d-03ff-42e6-a8b5-a83e2d5ff692",
+    "title": "Da Stranga",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "300",
+    "status": "Built",
+    "image": "/uploads/ff0337a4-e695-44b1-8d7c-21264b4175f6.jpg",
+    "images": [
+      "/uploads/ff0337a4-e695-44b1-8d7c-21264b4175f6.jpg"
+    ],
+    "cp": "",
+    "recaster": ""
+  },
+  {
+    "id": "e1ac333e-8908-45ae-b7f4-f5c0937ba749",
+    "title": "Speedkultists - Set A",
+    "author": "MrModulOrk",
+    "section": "miniatures",
+    "category": "3d-printed-orks",
+    "price": "0",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/97380696-ed4c-4273-a1c8-7bc69206068e.jpg",
+    "images": [
+      "/uploads/97380696-ed4c-4273-a1c8-7bc69206068e.jpg"
+    ],
+    "cp": "",
+    "recaster": ""
   }
 ]
