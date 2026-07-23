@@ -9516,5 +9516,22 @@
     "status": "Built",
     "combatPoints": "",
     "version": 1
+  },
+  {
+    "id": "3c1e9709-854d-4215-a5a7-0fa37d27c0f6",
+    "section": "miniatures",
+    "category": "citadel-orks",
+    "title": "Wazdakka Gutsmek",
+    "author": "Games Workshop",
+    "price": 5500,
+    "recaster": "",
+    "combatPoints": "175",
+    "status": "Unbuilt / Boxed",
+    "version": 1,
+    "image": "/uploads/817e497f-5b97-4633-8189-2b40f0a98350.jpg",
+    "images": [
+      "/uploads/817e497f-5b97-4633-8189-2b40f0a98350.jpg"
+    ],
+    "createdAt": "2026-07-23T20:36:20.276Z"
   }
 ]
