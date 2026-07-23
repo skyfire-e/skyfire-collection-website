@@ -3,14 +3,17 @@
     "id": 1784583148282,
     "section": "dice",
     "category": "metal-dice",
-    "title": "Node Test",
+    "title": "Dragon (black-green)",
     "author": "(hollow)",
     "price": "40",
     "image": "/uploads/metal-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
       "/uploads/metal-dice-1.jpg"
-    ]
+    ],
+    "recaster": "",
+    "combatPoints": "",
+    "status": ""
   },
   {
     "id": 1784583148283,
