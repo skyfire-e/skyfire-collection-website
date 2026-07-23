@@ -16,7 +16,7 @@
 ## Working Tools
 - Все скрипты (парсинг, миграция, проверка данных, smoke-test) лежат в `gitignore/`
 - `gitignore/` в `.gitignore` — не попадает в репозиторий
-- Скрипты: `backup.js`, `check-data.js`, `smoke-test.js`, `quarantine-orphans.js`
+- Скрипты: `backup.js`, `check-data.js`, `smoke-test.js`, `quarantine-orphans.js`, `backfill-defaults.js`, `backfill-images.js`
 
 ## Auth
 - Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` — оба в `.env`
@@ -24,9 +24,9 @@
 - `.env` в `.gitignore`, не попадает в репозиторий
 
 ## Current Data State
-- `items.json` — ~440 items across Dice + Miniatures categories
-- `categories.json` — Dice (7 flat) + Miniatures (Skaven+SpaceOrks groups, ~14 leaf + other leaf categories)
-- `uploads/` — 1000+ image files
+- `items.json` — 609 items (Dice: 145, Miniatures: 464)
+- `categories.json` — Dice (7 flat) + Miniatures (2 groups × 13 leaf + 15 standalone leaf)
+- `uploads/` — 615 image files
 - `settings.json` — defaultImage, siteName, showSpreadsheet, showMiniaturesColumns, currencies
 
 ## Site Structure
@@ -43,9 +43,9 @@
 | `/health` | Health check endpoint |
 
 ## Navigation — Leaf Miniatures Categories
-Gloomspite Gitz, Adepta Sororitas, Orruk Warclans, Chaos Daemons, Soulblight Gravelords,
+Gloomspite Gitz, Adepta Sororitas, Orcs, Chaos Daemons, Soulblight Gravelords,
 Astra Militarum, Officio Assassinorum, Ogor Mawtribes, Maggotkin of Nurgle, Kharadron Overlords,
-Empire, High Elves, Stormcast Eternals, Terrain, Other
+Empire of Man, High Elves, Stormcast Eternals, Terrain, Other
 
 ## Project Structure
 ```
@@ -88,7 +88,7 @@ backups/               — backup archives (excluded from git)
 - `GET /api/spreadsheet/public` — public view
 
 ## Key Decisions
-- Price скрыта от публики (showPublicSpreadsheet в settings)
+- Price скрыта от публики (showPublicSpreadsheet в settings; сейчас включено)
 - Show/hide Spreadsheet button — в настройках
 - Если у item нет фото — показывается `/images/default.svg`
 - Удаление категории блокируется, если есть items (409 Conflict)
