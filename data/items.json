@@ -6945,5 +6945,649 @@
     ],
     "cp": "",
     "recaster": ""
+  },
+  {
+    "id": "a02e6262-8861-46d1-8afa-a65a4783492b",
+    "title": "Squig Herd",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "2800",
+    "status": "Built",
+    "image": "/uploads/2f724978-9668-4fb9-bfca-0d4a3be82c14.jpg",
+    "images": [
+      "/uploads/2f724978-9668-4fb9-bfca-0d4a3be82c14.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "d19b7bf4-288a-4f74-91c0-4c979fc278ca",
+    "title": "Skragrott the Loonking",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "2800",
+    "status": "Built",
+    "image": "/uploads/006d58cf-03de-4fc3-a4c1-15d3ef861b97.jpg",
+    "images": [
+      "/uploads/006d58cf-03de-4fc3-a4c1-15d3ef861b97.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "b8ef9932-ea5d-4b26-8b6a-7ec994644638",
+    "title": "Fungoid Cave-Shaman Snazzgar Stinkmullett",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "2011",
+    "status": "Built",
+    "image": "/uploads/cfe2d01e-e84f-429a-b37a-014d6f2df416.jpg",
+    "images": [
+      "/uploads/cfe2d01e-e84f-429a-b37a-014d6f2df416.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "c0138855-1d1a-4b73-89f7-3e19b2c81c39",
+    "title": "Grinkrak's Looncourt",
+    "author": "Games Workshop Underworlds (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1250",
+    "status": "Built",
+    "image": "/uploads/1bcc0bbe-9ee8-4aaa-9e01-bdabb9f61e11.jpg",
+    "images": [
+      "/uploads/1bcc0bbe-9ee8-4aaa-9e01-bdabb9f61e11.jpg"
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
+  },
+  {
+    "id": "cf42a114-7754-464b-80ea-8b387e01886e",
+    "title": "Zarbag's Gitz",
+    "author": "Games Workshop Underworlds (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1450",
+    "status": "Built",
+    "image": "/uploads/54245422-6132-4733-91be-57f851262c78.jpg",
+    "images": [
+      "/uploads/54245422-6132-4733-91be-57f851262c78.jpg"
+    ],
+    "recaster": "Литейка GreedIsGood"
+  },
+  {
+    "id": "20be5876-a0cb-486b-8b4c-2bbf62c05543",
+    "title": "Bad Moon Loonshrine",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "4200",
+    "status": "Built",
+    "image": "/uploads/ea92a0fa-052d-45c8-96f5-2789348542cd.jpg",
+    "images": [
+      "/uploads/ea92a0fa-052d-45c8-96f5-2789348542cd.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "31b578e3-7389-43d1-944a-3d208a74ba6f",
+    "title": "Squigboss with Gnasha-squig",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "2000",
+    "status": "Built",
+    "image": "/uploads/16bd5dfa-5514-4c7f-9508-bc607bc75817.jpg",
+    "images": [
+      "/uploads/16bd5dfa-5514-4c7f-9508-bc607bc75817.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "17835cb7-c93f-4bbb-bcce-0097d2d7372f",
+    "title": "Snarlfang Riders",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "4000",
+    "status": "Built",
+    "image": "/uploads/8d04501e-188e-43b2-9240-0230fdaded9c.jpg",
+    "images": [
+      "/uploads/8d04501e-188e-43b2-9240-0230fdaded9c.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "d5dd9aa4-478f-43bf-8c66-e99359db4598",
+    "title": "Sneaky Snufflers",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1400",
+    "status": "Built",
+    "image": "/uploads/dfbf90e7-ee15-4e9e-aa05-a215870530c4.jpg",
+    "images": [
+      "/uploads/dfbf90e7-ee15-4e9e-aa05-a215870530c4.jpg"
+    ],
+    "recaster": "Литейка LooneShroomFoundry"
+  },
+  {
+    "id": "69de41de-5310-482e-9ff3-9796ac1935b4",
+    "title": "Gobbapalooza",
+    "author": "The Scaremonger, The Spiker, The Brewgit, The Boggleye, The Shroomancer",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1750",
+    "status": "Built",
+    "image": "/uploads/297dcd20-30c4-47d6-b5f5-504d17b17a09.jpg",
+    "images": [
+      "/uploads/297dcd20-30c4-47d6-b5f5-504d17b17a09.jpg"
+    ],
+    "recaster": "Литейка LooneShroomFoundry"
+  },
+  {
+    "id": "ffe934ed-4d82-4ffa-8fa5-e46c82e98474",
+    "title": "Fanatics",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1450",
+    "status": "Built",
+    "image": "/uploads/3f0fe558-a78e-4985-ad81-1102e68d6997.jpg",
+    "images": [
+      "/uploads/3f0fe558-a78e-4985-ad81-1102e68d6997.jpg"
+    ],
+    "recaster": "Литейка LooneShroomFoundry"
+  },
+  {
+    "id": "25749af8-61d7-40be-b6ab-fe00391fdefa",
+    "title": "Doom Diver Catapult",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "900",
+    "status": "Painted",
+    "image": "/uploads/25b3e7ff-ac01-4398-a426-a40cf8cd4b05.jpg",
+    "images": [
+      "/uploads/25b3e7ff-ac01-4398-a426-a40cf8cd4b05.jpg"
+    ],
+    "recaster": "Литейка OldHammer Мастерская"
+  },
+  {
+    "id": "643d80fe-e78f-4dc1-8e72-63585ff375c1",
+    "title": "Git (3) (old) (sword, spear, shield)",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "750",
+    "status": "Built",
+    "image": "/uploads/ab0df57c-62c0-42c1-a00d-8646bba39a8c.jpg",
+    "images": [
+      "/uploads/ab0df57c-62c0-42c1-a00d-8646bba39a8c.jpg"
+    ],
+    "recaster": "Литейка https://vk.com/osfoundry"
+  },
+  {
+    "id": "a8e23044-55b9-4813-9e68-ccd1b6bdf8d8",
+    "title": "Shaman (3) (old)",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1050",
+    "status": "Built",
+    "image": "/uploads/279635ad-3ccf-4e5b-b1d2-0f9bdca2511c.jpg",
+    "images": [
+      "/uploads/279635ad-3ccf-4e5b-b1d2-0f9bdca2511c.jpg"
+    ],
+    "recaster": "Литейка https://vk.com/osfoundry"
+  },
+  {
+    "id": "03328f3c-10ef-4cea-84a3-4111158a5636",
+    "title": "Grot Mushroom Party",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "250",
+    "status": "Built",
+    "image": "/uploads/b055cac2-3116-4761-93dd-763004ff0a5d.jpg",
+    "images": [
+      "/uploads/b055cac2-3116-4761-93dd-763004ff0a5d.jpg"
+    ],
+    "recaster": "Литейка https://vk.com/osfoundry"
+  },
+  {
+    "id": "805c33ad-b4c9-4e24-b48c-aa04a816e197",
+    "title": "Rabble-Rowza",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "3600",
+    "status": "Built",
+    "image": "/uploads/7652443b-3dc3-42ac-b36b-ccb10cf379c9.jpg",
+    "images": [
+      "/uploads/7652443b-3dc3-42ac-b36b-ccb10cf379c9.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "e12cc930-fa20-44dd-a6f4-0348578badc6",
+    "title": "Goblin Batrider",
+    "author": "Loot Studios (3d print)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "100",
+    "status": "Painted",
+    "image": "/uploads/c75eef66-721b-4615-b06c-b5e89789946b.jpg",
+    "images": [
+      "/uploads/c75eef66-721b-4615-b06c-b5e89789946b.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "a095f7a7-1a75-4251-9567-7cf6bba55cea",
+    "title": "Goblins on bats (4)",
+    "author": "MOMminiatures (3d print)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "100",
+    "status": "Built",
+    "image": "/uploads/05573e61-9f60-43c4-b49c-8b43f74b0df3.jpg",
+    "images": [
+      "/uploads/05573e61-9f60-43c4-b49c-8b43f74b0df3.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "dc6d99b1-a616-48c4-9e74-c2e2ec006d34",
+    "title": "Endless Spells Gloomspite Gitz",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "4500",
+    "status": "Built",
+    "image": "/uploads/77417bf4-3b3d-4ee5-99c8-b3aa3d5c87b0.jpg",
+    "images": [
+      "/uploads/77417bf4-3b3d-4ee5-99c8-b3aa3d5c87b0.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "f3be3c46-3771-4ec4-9b45-38bf9214cdf0",
+    "title": "Goblin Warrior on Warg #1",
+    "author": "First Legion Miniatures (28030)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1100",
+    "status": "Built",
+    "image": "/uploads/f58a9415-e74c-4dab-98c7-9a2588640ba1.jpg",
+    "images": [
+      "/uploads/f58a9415-e74c-4dab-98c7-9a2588640ba1.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "8af2fe6e-2405-43e6-a6dd-d5d5dae9b99b",
+    "title": "Goblin Warrior on Warg #2",
+    "author": "First Legion Miniatures (28031)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1100",
+    "status": "Built",
+    "image": "/uploads/71a63e7f-3133-425e-bf11-823dc972f603.jpg",
+    "images": [
+      "/uploads/71a63e7f-3133-425e-bf11-823dc972f603.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "f1f2efb1-f100-4de0-847d-9efaf4494e3a",
+    "title": "Goblin Warrior on Warg #3",
+    "author": "First Legion Miniatures (28032)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "569",
+    "status": "Built",
+    "image": "/uploads/0fa6f2fa-c03d-4dbc-92b3-b23c06da83f4.jpg",
+    "images": [
+      "/uploads/0fa6f2fa-c03d-4dbc-92b3-b23c06da83f4.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "26431d4f-b913-4224-95eb-2cb0bac1e54c",
+    "title": "Goblin Warrior on Warg #4",
+    "author": "First Legion Miniatures (28034)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "619",
+    "status": "Built",
+    "image": "/uploads/08e76f83-d549-4823-a8e2-323f51d6764d.jpg",
+    "images": [
+      "/uploads/08e76f83-d549-4823-a8e2-323f51d6764d.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "0e9cd6da-295d-49c4-8882-bfe4e7684fab",
+    "title": "Goblin Warrior on Warg #5",
+    "author": "First Legion Miniatures (28033)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "589",
+    "status": "Built",
+    "image": "/uploads/0de248ea-346b-415c-a715-47b0b4e31768.jpg",
+    "images": [
+      "/uploads/0de248ea-346b-415c-a715-47b0b4e31768.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "d4d518e9-3dbc-4ff9-afbb-26f33b30a5b8",
+    "title": "Goblin Archers - 3 Different Goblins",
+    "author": "First Legion Miniatures (28GOB01)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "936",
+    "status": "Built",
+    "image": "/uploads/fda10e6b-e172-4239-9731-f91012eb69ec.jpg",
+    "images": [
+      "/uploads/fda10e6b-e172-4239-9731-f91012eb69ec.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "c22f19e4-8be7-47e2-b56c-393e6c243e31",
+    "title": "Goblin Warriors - 3 Different Goblins",
+    "author": "First Legion Miniatures (28GOB02)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "936",
+    "status": "Built",
+    "image": "/uploads/706d21c1-3972-4009-b821-e4ea7be9c23a.jpg",
+    "images": [
+      "/uploads/706d21c1-3972-4009-b821-e4ea7be9c23a.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "257cb882-d05a-463a-992f-dfa990bfbe77",
+    "title": "Goblin Archers - 3 Different Goblins",
+    "author": "First Legion Miniatures (28GOB03)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "936",
+    "status": "Built",
+    "image": "/uploads/ee5eabb8-17d6-48a0-b8c6-d4837b3aa73f.jpg",
+    "images": [
+      "/uploads/ee5eabb8-17d6-48a0-b8c6-d4837b3aa73f.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "5ad2ddf8-ef1f-4b08-8023-814c88235f61",
+    "title": "Goblin Warriors - 4 Different Goblins",
+    "author": "First Legion Miniatures (28GOB04)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "936",
+    "status": "Built",
+    "image": "/uploads/673179fa-29a0-4f0c-a780-49efe273c5d8.jpg",
+    "images": [
+      "/uploads/673179fa-29a0-4f0c-a780-49efe273c5d8.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "27b3c6e1-4ba8-44b2-a4c9-c95235d7ecd1",
+    "title": "Goblin Command Pack - Leader, Standard, Musician",
+    "author": "First Legion Miniatures (28GOB05)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "977",
+    "status": "Built",
+    "image": "/uploads/0185b4b0-e15e-44a2-8381-a4c4f40d78ba.jpg",
+    "images": [
+      "/uploads/0185b4b0-e15e-44a2-8381-a4c4f40d78ba.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "b52cf295-1343-449e-942f-5e4569f79b51",
+    "title": "Goblin Thief",
+    "author": "First Legion Miniatures (KSBB01R)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "569",
+    "status": "Built",
+    "image": "/uploads/69827cd8-3211-4f39-ac91-fcad2f295d6a.jpg",
+    "images": [
+      "/uploads/69827cd8-3211-4f39-ac91-fcad2f295d6a.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "487965fd-7e65-4185-bf9c-df71a7bd77fe",
+    "title": "Swamp Goblin Boss",
+    "author": "Highlands Miniatures",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "0",
+    "status": "Built",
+    "image": "/uploads/b951ddde-96ce-4319-a921-bc7a6e59cd32.jpg",
+    "images": [
+      "/uploads/b951ddde-96ce-4319-a921-bc7a6e59cd32.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "9ceeeddf-86f3-452e-8b22-e5f5a23361b2",
+    "title": "Goblin Gunslinger",
+    "author": "First Legion Miniatures (KSBB03R)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "397",
+    "status": "Built",
+    "image": "/uploads/79db15b0-8932-4c66-892b-92522620952e.jpg",
+    "images": [
+      "/uploads/79db15b0-8932-4c66-892b-92522620952e.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "e9471788-31f5-4026-ac47-a7eec6f2ce27",
+    "title": "Goblin Captain",
+    "author": "First Legion Miniatures (28297)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/f5e80d9f-b2cb-47bd-9dde-38710253c6f4.jpg",
+    "images": [
+      "/uploads/f5e80d9f-b2cb-47bd-9dde-38710253c6f4.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "9a858b18-c8d7-42ac-be8d-1f7af0d754c0",
+    "title": "Goblin Veteran Warrior",
+    "author": "First Legion Miniatures (28298)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/b1c7d34a-d516-4e07-a4ed-d82bb97baa8e.jpg",
+    "images": [
+      "/uploads/b1c7d34a-d516-4e07-a4ed-d82bb97baa8e.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "0ded8ae1-5949-44df-b8ea-816b0d16eb62",
+    "title": "Goblin Bearer",
+    "author": "First Legion Miniatures (28301)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/abd6f103-eb10-47fe-8dfe-27a29b0bc290.jpg",
+    "images": [
+      "/uploads/abd6f103-eb10-47fe-8dfe-27a29b0bc290.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "ce65f926-2d85-4155-855f-373c04c52d13",
+    "title": "Female Goblin Assassin",
+    "author": "First Legion Miniatures (28317)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/3f4ae938-0ce9-4be6-b70a-255820a51614.jpg",
+    "images": [
+      "/uploads/3f4ae938-0ce9-4be6-b70a-255820a51614.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "03b3607b-3c9d-46c6-8d6d-700c742fe526",
+    "title": "Goblin Herald",
+    "author": "First Legion Miniatures (28368)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/148850b7-e759-41ab-aa5d-44e9038d5331.jpg",
+    "images": [
+      "/uploads/148850b7-e759-41ab-aa5d-44e9038d5331.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "260c7fe8-2193-484e-924e-9085ac9817f0",
+    "title": "Goblin Sharp Rat",
+    "author": "First Legion Miniatures (28371)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/ad117ae9-45ca-4f8d-91e5-dce0e1f1cb40.jpg",
+    "images": [
+      "/uploads/ad117ae9-45ca-4f8d-91e5-dce0e1f1cb40.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "45418c27-6e16-4fb6-9bc3-3098ccd2598d",
+    "title": "Goblin Two Blades",
+    "author": "First Legion Miniatures (28372)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/a23d531b-1b71-4ba4-a341-99359e011e4a.jpg",
+    "images": [
+      "/uploads/a23d531b-1b71-4ba4-a341-99359e011e4a.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "8782dac2-892d-4afd-b3f4-a2507332439c",
+    "title": "Goblin Veteran",
+    "author": "First Legion Miniatures (28374)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/80454b17-62a5-4831-94d8-3b74e9686fff.jpg",
+    "images": [
+      "/uploads/80454b17-62a5-4831-94d8-3b74e9686fff.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "c9e03e4c-efe8-47f9-a9e5-84cc93ca7719",
+    "title": "Goblin with Flail",
+    "author": "First Legion Miniatures (28375)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/4ce3878c-11d8-40e3-8504-9838b50492a2.jpg",
+    "images": [
+      "/uploads/4ce3878c-11d8-40e3-8504-9838b50492a2.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "f33d8569-88e7-46cf-8a14-78216f34fa43",
+    "title": "Goblin Gun Shooter",
+    "author": "First Legion Miniatures (28413)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "650",
+    "status": "Built",
+    "image": "/uploads/4b03ef22-41d1-4e9c-9660-d61d0468a718.jpg",
+    "images": [
+      "/uploads/4b03ef22-41d1-4e9c-9660-d61d0468a718.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "48a1d9f2-d164-4f27-81c1-35282dc645ca",
+    "title": "Gitmob Army",
+    "author": "Games Workshop",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "14500",
+    "status": "Unbuilt / Boxed",
+    "image": "/uploads/c30d0b71-1c1f-4032-a758-94f4eca137f8.jpg",
+    "images": [
+      "/uploads/c30d0b71-1c1f-4032-a758-94f4eca137f8.jpg"
+    ],
+    "recaster": ""
+  },
+  {
+    "id": "0ab724a7-1d3c-4fb8-8db5-68d6f2880252",
+    "title": "Borgit's Beastgrabbaz",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "1000",
+    "status": "Built",
+    "image": "/uploads/1bef802d-085b-46b6-aeaa-86152d1a1011.jpg",
+    "images": [
+      "/uploads/1bef802d-085b-46b6-aeaa-86152d1a1011.jpg"
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
+  },
+  {
+    "id": "bde72349-aaaa-4546-a6e7-05d89c8d7dbb",
+    "title": "Night Goblin with Fanatic",
+    "author": "Games Workshop PR38 (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "800",
+    "status": "Built",
+    "image": "/uploads/cded9070-7921-415d-bf8a-0880c7b44e48.jpg",
+    "images": [
+      "/uploads/cded9070-7921-415d-bf8a-0880c7b44e48.jpg"
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
+  },
+  {
+    "id": "fbcab297-56a3-42fc-a396-8e672f6fa9cf",
+    "title": "Doom Diver Catapult 2025",
+    "author": "Games Workshop (re-cast)",
+    "section": "miniatures",
+    "category": "gloomspite-gitz",
+    "price": "2400",
+    "status": "Built",
+    "image": "/uploads/cb97c4a8-152d-4d1a-9735-2e6cb95c02ad.jpg",
+    "images": [
+      "/uploads/cb97c4a8-152d-4d1a-9735-2e6cb95c02ad.jpg"
+    ],
+    "recaster": "Литейка Defiler's Resin Casting"
   }
 ]
