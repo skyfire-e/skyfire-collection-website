@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const rateLimit = require('express-rate-limit');
+const sharp = require('sharp');
 
 require('dotenv').config();
 
@@ -12,6 +13,13 @@ if (!process.env.SESSION_SECRET || !process.env.ADMIN_PASSWORD) {
   console.error('Missing required env vars: SESSION_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD');
   console.error('Create a .env file in the project root with these values.');
   process.exit(1);
+}
+
+class ValidationError extends Error {
+  constructor(message, details) { super(message); this.name = 'ValidationError'; this.status = 400; this.details = details; }
+}
+class DataCorruptionError extends Error {
+  constructor(message) { super(message); this.name = 'DataCorruptionError'; this.status = 500; }
 }
 
 const app = express();
@@ -33,14 +41,19 @@ function readJSON(file) {
   } catch (e) {
     if (e.code === 'ENOENT') return null;
     console.error('Corrupted JSON in ' + file + ':', e.message);
-    throw e;
+    throw new DataCorruptionError(file);
   }
 }
 
 function writeJSONAtomic(file, data) {
   const tmp = file + '.' + process.pid + '.' + crypto.randomUUID() + '.tmp';
-  fs.writeFileSync(tmp, JSON.stringify(data, null, 2), 'utf8');
-  fs.renameSync(tmp, file);
+  try {
+    fs.writeFileSync(tmp, JSON.stringify(data, null, 2), 'utf8');
+    fs.renameSync(tmp, file);
+  } catch (error) {
+    try { fs.rmSync(tmp, { force: true }); } catch {}
+    throw error;
+  }
 }
 
 const UPLOADS_DIR = path.resolve(__dirname, 'uploads');
@@ -57,6 +70,24 @@ function cleanupUploadedFiles(files) {
   for (const f of Array.isArray(files) ? files : [files]) {
     try { fs.unlinkSync(f.path); } catch (e) { if (e.code !== 'ENOENT') console.error(e); }
   }
+}
+
+const TEMP_DIR = path.join(UPLOADS_DIR, '.tmp');
+if (!fs.existsSync(TEMP_DIR)) fs.mkdirSync(TEMP_DIR, { recursive: true });
+
+async function normalizeImage(file) {
+  const filename = crypto.randomUUID() + '.jpg';
+  const destination = path.join(UPLOADS_DIR, filename);
+  try {
+    await sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
+      .rotate()
+      .resize({ width: 3000, height: 3000, fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: 88, mozjpeg: true })
+      .toFile(destination);
+  } finally {
+    try { fs.unlinkSync(file.path); } catch {}
+  }
+  return '/uploads/' + filename;
 }
 
 function findCategory(subcategories, targetId) {
@@ -95,15 +126,19 @@ function validateItemInput(body, cats, partial) {
   return errors.length > 0 ? errors : null;
 }
 
-function validateFinalOrder(order, oldImages, uploadedFiles) {
+function validateFinalOrder(order, oldImages, uploadedFiles, removedIndexes) {
   if (!Array.isArray(order)) return 'finalOrder must be an array';
   if (!order.every(Number.isInteger)) return 'finalOrder must contain integers';
-  if (order.some(v => v < -1)) return 'Invalid finalOrder value';
+  if (order.some(v => v < -1)) return 'finalOrder contains an invalid value';
 
   const existingIndexes = order.filter(v => v >= 0);
   if (new Set(existingIndexes).size !== existingIndexes.length) return 'Duplicate image indexes are not allowed';
 
-  if (existingIndexes.some(idx => idx >= oldImages.length)) return 'Invalid existing image index';
+  if (existingIndexes.some(idx => idx >= oldImages.length)) return 'finalOrder references a missing image';
+
+  if (removedIndexes && existingIndexes.some(idx => removedIndexes.includes(idx))) {
+    return 'finalOrder references a removed image';
+  }
 
   const uploadSlots = order.filter(v => v === -1).length;
   if (uploadSlots !== uploadedFiles.length) return 'Uploaded files do not match finalOrder';
@@ -135,18 +170,25 @@ function parseJSONArray(value, fieldName) {
 // Single admin user from .env
 const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD, role: 'admin' }];
 
+function envBoolean(value, fallback = false) {
+  if (value === undefined) return fallback;
+  return ['1', 'true', 'yes', 'on'].includes(String(value).toLowerCase());
+}
+
+const secureCookies = envBoolean(process.env.COOKIE_SECURE, process.env.NODE_ENV === 'production');
+
 // --- Middleware ---
-app.set('trust proxy', 1);
+app.set('trust proxy', process.env.TRUST_PROXY === '1' ? 1 : false);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const isProduction = process.env.NODE_ENV === 'production';
 app.use(session({
+  name: 'skyfire.sid',
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: isProduction,
+    secure: secureCookies,
     sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000
   }
@@ -157,33 +199,33 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // --- File upload ---
-const ALLOWED_MIMES = new Map([
-  ['image/jpeg', '.jpg'],
-  ['image/png', '.png'],
-  ['image/webp', '.webp']
-]);
+const ALLOWED_MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, 'uploads')),
-  filename: (req, file, cb) => {
-    const ext = ALLOWED_MIMES.get(file.mimetype);
-    if (!ext) return cb(new Error('Unsupported image type'));
-    cb(null, crypto.randomUUID() + ext);
-  }
-});
 const upload = multer({
-  storage,
+  dest: TEMP_DIR,
   fileFilter: (req, file, cb) => {
     if (!ALLOWED_MIMES.has(file.mimetype)) return cb(new Error('Only JPEG, PNG and WebP are allowed'));
     cb(null, true);
   },
-  limits: { fileSize: 10 * 1024 * 1024, files: 10 }
+  limits: { fileSize: 10 * 1024 * 1024, files: 10, fields: 30 }
 });
 
 // --- Auth middleware ---
 function requireAdmin(req, res, next) {
   if (req.session && req.session.user?.role === 'admin') return next();
   res.status(401).json({ error: 'Unauthorized' });
+}
+
+function requireSameOrigin(req, res, next) {
+  if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
+  const origin = req.get('origin');
+  const referer = req.get('referer');
+  const source = origin || referer;
+  if (!source) return res.status(403).json({ error: 'Origin or Referer header is required' });
+  let originHost;
+  try { originHost = new URL(source).host; } catch { return res.status(403).json({ error: 'Invalid Origin header' }); }
+  if (originHost !== req.get('host')) return res.status(403).json({ error: 'Cross-origin request rejected' });
+  next();
 }
 
 const loginLimiter = rateLimit({
@@ -211,7 +253,7 @@ app.post('/api/auth/login', loginLimiter, (req, res) => {
 app.post('/api/auth/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) return res.status(500).json({ error: 'Logout error' });
-    res.clearCookie('connect.sid');
+    res.clearCookie('skyfire.sid', { httpOnly: true, secure: secureCookies, sameSite: 'lax' });
     res.json({ success: true });
   });
 });
@@ -227,7 +269,7 @@ app.get('/api/categories', (req, res) => {
   res.json(cats);
 });
 
-app.post('/api/categories', requireAdmin, (req, res) => {
+app.post('/api/categories', requireSameOrigin, requireAdmin, (req, res) => {
   const cats = readJSON(CATEGORIES_FILE);
   const { section, label, id, parentId } = req.body;
 
@@ -264,7 +306,7 @@ app.post('/api/categories', requireAdmin, (req, res) => {
   res.json(cats);
 });
 
-app.delete('/api/categories', requireAdmin, (req, res) => {
+app.delete('/api/categories', requireSameOrigin, requireAdmin, (req, res) => {
   const cats = readJSON(CATEGORIES_FILE);
   const items = readJSON(ITEMS_FILE) || [];
   const { section, id, parentId } = req.body;
@@ -335,153 +377,153 @@ app.get('/api/items', (req, res) => {
   res.json(items);
 });
 
-app.post('/api/items', requireAdmin, upload.array('images', 10), (req, res) => {
-  const items = readJSON(ITEMS_FILE) || [];
-  const cats = readJSON(CATEGORIES_FILE) || {};
-  const settings = readJSON(SETTINGS_FILE) || {};
-  const files = req.files || [];
-  const images = files.map(f => '/uploads/' + f.filename);
-
-  // Validation
-  const errors = validateItemInput(req.body, cats);
-  if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
-
-  const newItem = {
-    id: crypto.randomUUID(),
-    section: req.body.section,
-    category: req.body.category,
-    title: req.body.title || 'Untitled',
-    author: req.body.author || '',
-    price: req.body.price || '',
-    recaster: req.body.recaster || '',
-    combatPoints: req.body.combatPoints || '',
-    status: req.body.status || '',
-    image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
-    images: images,
-    createdAt: new Date().toISOString()
-  };
-  items.push(newItem);
+app.post('/api/items', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
   try {
-    writeJSONAtomic(ITEMS_FILE, items);
-  } catch (err) {
-    cleanupUploadedFiles(files);
-    console.error('Failed to save items.json:', err);
-    return res.status(500).json({ error: 'Failed to save data' });
-  }
-  res.status(201).json(newItem);
+    const items = readJSON(ITEMS_FILE) || [];
+    const cats = readJSON(CATEGORIES_FILE) || {};
+    const settings = readJSON(SETTINGS_FILE) || {};
+    const files = req.files || [];
+
+    const errors = validateItemInput(req.body, cats);
+    if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
+
+    const images = await Promise.all(files.map(normalizeImage));
+    const newItem = {
+      id: crypto.randomUUID(),
+      section: req.body.section,
+      category: req.body.category,
+      title: req.body.title || 'Untitled',
+      author: req.body.author || '',
+      price: req.body.price || '',
+      recaster: req.body.recaster || '',
+      combatPoints: req.body.combatPoints || '',
+      status: req.body.status || '',
+      image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
+      images: images,
+      createdAt: new Date().toISOString()
+    };
+    items.push(newItem);
+    try {
+      writeJSONAtomic(ITEMS_FILE, items);
+    } catch (err) {
+      cleanupUploadedFiles(files);
+      console.error('Failed to save items.json:', err);
+      return res.status(500).json({ error: 'Failed to save data' });
+    }
+    res.status(201).json(newItem);
+  } catch (err) { next(err); }
 });
 
-app.put('/api/items/:id', requireAdmin, upload.array('images', 10), (req, res) => {
-  const items = readJSON(ITEMS_FILE) || [];
-  const cats = readJSON(CATEGORIES_FILE) || {};
-  const files = req.files || [];
-  const idx = items.findIndex(i => i.id == req.params.id);
-  if (idx === -1) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
-
-  // Build candidate — validate final state, not just partial fields
-  const candidate = {
-    ...items[idx],
-    ...(req.body.title !== undefined && { title: String(req.body.title).trim() }),
-    ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
-    ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
-    ...(req.body.price !== undefined && { price: String(req.body.price).trim() })
-  };
-  const errors = validateItemInput(candidate, cats);
-  if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
-
-  if (req.body.title !== undefined) items[idx].title = candidate.title;
-  if (req.body.author !== undefined) items[idx].author = req.body.author;
-  if (req.body.price !== undefined) items[idx].price = candidate.price;
-  if (req.body.recaster !== undefined) items[idx].recaster = req.body.recaster;
-  if (req.body.combatPoints !== undefined) items[idx].combatPoints = req.body.combatPoints;
-  if (req.body.status !== undefined) items[idx].status = req.body.status;
-  if (req.body.section !== undefined) items[idx].section = candidate.section;
-  if (req.body.category !== undefined) items[idx].category = candidate.category;
-
-  if (!Array.isArray(items[idx].images)) items[idx].images = [];
-  const oldImages = [...items[idx].images];
-
-  let removeIdx = [];
-  let finalOrder = [];
+app.put('/api/items/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
   try {
-    removeIdx = parseJSONArray(req.body.imagesToRemove, 'imagesToRemove');
-    finalOrder = parseJSONArray(req.body.finalOrder, 'finalOrder');
-  } catch (e) {
-    cleanupUploadedFiles(files);
-    return res.status(400).json({ error: e.message });
-  }
+    const items = readJSON(ITEMS_FILE) || [];
+    const cats = readJSON(CATEGORIES_FILE) || {};
+    const files = req.files || [];
+    const idx = items.findIndex(i => i.id == req.params.id);
+    if (idx === -1) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
-  if (!Array.isArray(removeIdx) || !removeIdx.every(Number.isInteger) || removeIdx.some(v => v < 0)) {
-    cleanupUploadedFiles(files);
-    return res.status(400).json({ error: 'imagesToRemove must contain non-negative integers' });
-  }
+    const candidate = {
+      ...items[idx],
+      ...(req.body.title !== undefined && { title: String(req.body.title).trim() }),
+      ...(req.body.author !== undefined && { author: req.body.author }),
+      ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
+      ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
+      ...(req.body.price !== undefined && { price: String(req.body.price).trim() }),
+      ...(req.body.recaster !== undefined && { recaster: req.body.recaster }),
+      ...(req.body.combatPoints !== undefined && { combatPoints: req.body.combatPoints }),
+      ...(req.body.status !== undefined && { status: req.body.status })
+    };
+    const errors = validateItemInput(candidate, cats);
+    if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
 
-  if (finalOrder.length > 0) {
-    const validationError = validateFinalOrder(finalOrder, oldImages, files);
-    if (validationError) {
+    const newFilePaths = await Promise.all(files.map(normalizeImage));
+
+    if (!Array.isArray(candidate.images)) candidate.images = [];
+    const oldImages = [...candidate.images];
+
+    let removeIdx = [];
+    let finalOrder = [];
+    try {
+      removeIdx = parseJSONArray(req.body.imagesToRemove, 'imagesToRemove');
+      finalOrder = parseJSONArray(req.body.finalOrder, 'finalOrder');
+    } catch (e) {
       cleanupUploadedFiles(files);
-      return res.status(400).json({ error: validationError });
+      return res.status(400).json({ error: e.message });
     }
 
-    const removedSet = new Set(removeIdx);
-    const originalMap = {};
-    oldImages.forEach((img, i) => { if (!removedSet.has(i)) originalMap[Object.keys(originalMap).length] = img; });
+    if (!Array.isArray(removeIdx) || !removeIdx.every(Number.isInteger) || removeIdx.some(v => v < 0)) {
+      cleanupUploadedFiles(files);
+      return res.status(400).json({ error: 'imagesToRemove must contain non-negative integers' });
+    }
 
-    let fileIdx = 0;
-    const newImages = [];
-    for (const entry of finalOrder) {
-      if (entry >= 0 && originalMap[entry] !== undefined) {
-        newImages.push(originalMap[entry]);
-      } else if (entry === -1 && fileIdx < files.length) {
-        newImages.push('/uploads/' + files[fileIdx++].filename);
+    if (finalOrder.length > 0) {
+      const validationError = validateFinalOrder(finalOrder, oldImages, newFilePaths, removeIdx);
+      if (validationError) {
+        cleanupUploadedFiles(files);
+        return res.status(400).json({ error: validationError });
+      }
+
+      const removedSet = new Set(removeIdx);
+      const originalMap = {};
+      oldImages.forEach((img, i) => { if (!removedSet.has(i)) originalMap[Object.keys(originalMap).length] = img; });
+
+      let fileIdx = 0;
+      const newImages = [];
+      for (const entry of finalOrder) {
+        if (entry >= 0 && originalMap[entry] !== undefined) {
+          newImages.push(originalMap[entry]);
+        } else if (entry === -1 && fileIdx < newFilePaths.length) {
+          newImages.push(newFilePaths[fileIdx++]);
+        }
+      }
+      candidate.images = newImages;
+    } else if (removeIdx.length > 0) {
+      removeIdx.sort((a, b) => b - a).forEach(i => {
+        if (i >= 0 && i < oldImages.length) oldImages.splice(i, 1);
+      });
+      candidate.images = oldImages;
+      newFilePaths.forEach(p => candidate.images.push(p));
+    } else if (newFilePaths.length > 0) {
+      candidate.images = [...oldImages, ...newFilePaths];
+    }
+
+    if (candidate.images.length > 10) {
+      cleanupUploadedFiles(files);
+      return res.status(400).json({ error: 'Maximum 10 images per item' });
+    }
+
+    if (newFilePaths.length > 0 || removeIdx.length > 0 || finalOrder.length > 0) {
+      if (candidate.images.length > 0) {
+        candidate.image = candidate.images[0];
+      } else {
+        candidate.images = [];
+        candidate.image = readJSON(SETTINGS_FILE)?.defaultImage || '/images/default.svg';
       }
     }
-    items[idx].images = newImages;
-  } else if (removeIdx.length > 0) {
-    removeIdx.sort((a, b) => b - a).forEach(i => {
-      if (i >= 0 && i < oldImages.length) oldImages.splice(i, 1);
-    });
-    items[idx].images = oldImages;
-    files.forEach(f => items[idx].images.push('/uploads/' + f.filename));
-  } else if (files.length > 0) {
-    items[idx].images = [...oldImages, ...files.map(f => '/uploads/' + f.filename)];
-  }
 
-  if (items[idx].images.length > 10) {
-    cleanupUploadedFiles(files);
-    return res.status(400).json({ error: 'Maximum 10 images per item' });
-  }
+    items[idx] = candidate;
 
-  if (files.length > 0 || removeIdx.length > 0 || finalOrder.length > 0) {
-    if (items[idx].images && items[idx].images.length > 0) {
-      items[idx].image = items[idx].images[0];
-    } else {
-      items[idx].images = [];
-      items[idx].image = readJSON(SETTINGS_FILE)?.defaultImage || '/images/default.svg';
+    try {
+      writeJSONAtomic(ITEMS_FILE, items);
+    } catch (err) {
+      cleanupUploadedFiles(files);
+      console.error('Failed to save items.json:', err);
+      return res.status(500).json({ error: 'Failed to save data' });
     }
-  }
 
-  try {
-    writeJSONAtomic(ITEMS_FILE, items);
-  } catch (err) {
-    cleanupUploadedFiles(files);
-    console.error('Failed to save items.json:', err);
-    return res.status(500).json({ error: 'Failed to save data' });
-  }
-
-  // After successful save, delete old images no longer referenced
-  const newSet = new Set(items[idx].images);
-  for (const img of oldImages) {
-    if (!newSet.has(img)) {
-      const stillReferenced = items.some((other, oi) => oi !== idx && (other.image === img || other.images?.includes(img)));
-      if (!stillReferenced) safeUnlink(img);
+    const newSet = new Set(candidate.images);
+    for (const img of oldImages) {
+      if (!newSet.has(img)) {
+        const stillReferenced = items.some((other, oi) => oi !== idx && (other.image === img || other.images?.includes(img)));
+        if (!stillReferenced) safeUnlink(img);
+      }
     }
-  }
 
-  res.json(items[idx]);
+    res.json(candidate);
+  } catch (err) { next(err); }
 });
 
-app.delete('/api/items/:id', requireAdmin, (req, res) => {
+app.delete('/api/items/:id', requireSameOrigin, requireAdmin, (req, res) => {
   let items = readJSON(ITEMS_FILE) || [];
   const idx = items.findIndex(i => i.id == req.params.id);
   if (idx === -1) return res.status(404).json({ error: 'Not found' });
@@ -510,7 +552,7 @@ app.get('/api/settings', (req, res) => {
   res.json(readJSON(SETTINGS_FILE));
 });
 
-app.put('/api/settings', requireAdmin, (req, res) => {
+app.put('/api/settings', requireSameOrigin, requireAdmin, (req, res) => {
   const settings = readJSON(SETTINGS_FILE) || {};
   if (req.body.siteName !== undefined) {
     if (typeof req.body.siteName !== 'string') return res.status(400).json({ error: 'siteName must be a string' });
@@ -593,29 +635,31 @@ app.get('/api/spreadsheet/public', (req, res) => {
   res.json(result);
 });
 
-app.post('/api/upload/default', requireAdmin, upload.single('image'), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'No file' });
-  const settings = readJSON(SETTINGS_FILE) || {};
-  const oldDefault = settings.defaultImage;
-  settings.defaultImage = '/uploads/' + req.file.filename;
+app.post('/api/upload/default', requireSameOrigin, requireAdmin, upload.single('image'), async (req, res, next) => {
   try {
-    writeJSONAtomic(SETTINGS_FILE, settings);
-  } catch (err) {
-    cleanupUploadedFiles([req.file]);
-    console.error('Failed to save settings.json:', err);
-    return res.status(500).json({ error: 'Failed to save data' });
-  }
-  // Delete old default image if no items still reference it
-  if (oldDefault && oldDefault !== settings.defaultImage) {
-    const items = readJSON(ITEMS_FILE) || [];
-    const stillReferenced = items.some(i => i.image === oldDefault || i.images?.includes(oldDefault));
-    if (!stillReferenced) safeUnlink(oldDefault);
-  }
-  res.json(settings);
+    if (!req.file) return res.status(400).json({ error: 'No file' });
+    const imagePath = await normalizeImage(req.file);
+    const settings = readJSON(SETTINGS_FILE) || {};
+    const oldDefault = settings.defaultImage;
+    settings.defaultImage = imagePath;
+    try {
+      writeJSONAtomic(SETTINGS_FILE, settings);
+    } catch (err) {
+      cleanupUploadedFiles([req.file]);
+      console.error('Failed to save settings.json:', err);
+      return res.status(500).json({ error: 'Failed to save data' });
+    }
+    if (oldDefault && oldDefault !== settings.defaultImage) {
+      const items = readJSON(ITEMS_FILE) || [];
+      const stillReferenced = items.some(i => i.image === oldDefault || i.images?.includes(oldDefault));
+      if (!stillReferenced) safeUnlink(oldDefault);
+    }
+    res.json(settings);
+  } catch (err) { next(err); }
 });
 
 // Spreadsheet endpoint (admin only)
-app.get('/api/spreadsheet', requireAdmin, (req, res) => {
+app.get('/api/spreadsheet', requireSameOrigin, requireAdmin, (req, res) => {
   const items = readJSON(ITEMS_FILE) || [];
   res.json(items);
 });
@@ -623,6 +667,11 @@ app.get('/api/spreadsheet', requireAdmin, (req, res) => {
 // 404 for unknown API endpoints
 app.use('/api', (req, res) => {
   res.status(404).json({ error: 'API endpoint not found' });
+});
+
+// Health check (before dynamic route handlers)
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', uptime: process.uptime() });
 });
 
 // --- Page routes ---
@@ -668,7 +717,7 @@ app.get('/:section', (req, res, next) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 // Central error handler
@@ -677,12 +726,29 @@ app.use((error, req, res, next) => {
   if (error instanceof multer.MulterError) {
     return res.status(400).json({ error: 'Upload error', details: error.message });
   }
+  if (error instanceof ValidationError) {
+    return res.status(error.status).json({ error: error.message, details: error.details });
+  }
+  if (error instanceof DataCorruptionError) {
+    return res.status(error.status).json({ error: error.message });
+  }
   if (error.message === 'Unsupported image type' || error.message === 'Only JPEG, PNG and WebP are allowed') {
     return res.status(400).json({ error: error.message });
   }
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`skyf1re Collection running at http://localhost:${PORT}`);
 });
+
+function shutdown(signal) {
+  console.log(`${signal}: shutting down`);
+  server.close(error => {
+    if (error) { console.error(error); process.exit(1); }
+    process.exit(0);
+  });
+}
+
+process.on('SIGINT', () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));

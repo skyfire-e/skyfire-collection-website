@@ -51,7 +51,7 @@ async function initSubgroupPage() {
 
   if (titleEl) titleEl.textContent = group.label + ' - skyf1re Collection';
   if (titleEl2) titleEl2.textContent = group.label;
-  if (backLink) { backLink.href = '/' + sectionId; backLink.innerHTML = '&larr; Back to ' + section.label; }
+  if (backLink) { backLink.href = '/' + sectionId; backLink.textContent = '\u2190 Back to ' + section.label; }
 
   group.subcategories.forEach(c => {
     const a = document.createElement('a');

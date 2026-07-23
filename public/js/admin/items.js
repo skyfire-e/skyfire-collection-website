@@ -1,4 +1,4 @@
-import { API } from '../api.js';
+import { API, withPending } from '../api.js';
 import { openEdit, initImageEditor } from '../image-editor.js';
 
 let categoriesData = {};
@@ -217,7 +217,7 @@ async function loadSpreadsheet() {
         delBtn.textContent = '\ud83d\uddd1\ufe0f';
         delBtn.addEventListener('click', async () => {
           if (confirm('Delete "' + item.title + '"?')) {
-            await API.del('/api/items/' + item.id);
+            await withPending(delBtn, () => API.del('/api/items/' + item.id));
             loadSpreadsheet();
           }
         });

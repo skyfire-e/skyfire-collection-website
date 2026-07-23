@@ -21,9 +21,19 @@ async function renderCurrencySettings(currencies) {
     const row = document.createElement('div');
     row.className = 'currency-row';
     row.style.cssText = 'margin-bottom:6px;display:flex;align-items:center;gap:8px';
-    row.innerHTML = '<label style="min-width:100px;font-size:0.85rem">' + sec.label + '</label>' +
-      '<input type="text" id="cur_' + key + '" value="' + (currencies[key] || '') + '" placeholder="$" style="width:50px;padding:4px 8px">' +
-      '<span style="color:var(--text-muted);font-size:0.78rem">symbol</span>';
+    const labelEl = document.createElement('label');
+    labelEl.style.cssText = 'min-width:100px;font-size:0.85rem';
+    labelEl.textContent = sec.label;
+    const inputEl = document.createElement('input');
+    inputEl.type = 'text';
+    inputEl.id = 'cur_' + key;
+    inputEl.value = currencies[key] || '';
+    inputEl.placeholder = '$';
+    inputEl.style.cssText = 'width:50px;padding:4px 8px';
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--text-muted);font-size:0.78rem';
+    hint.textContent = 'symbol';
+    row.append(labelEl, inputEl, hint);
     container.appendChild(row);
   });
 }

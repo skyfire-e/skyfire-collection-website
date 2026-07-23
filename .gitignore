@@ -4,3 +4,7 @@ data/users.json
 
 # Non-site files (scrapers, temp, drafts)
 gitignore/
+
+# Upload working directories
+uploads/.tmp/
+uploads/.quarantine/
