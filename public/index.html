@@ -54,5 +54,10 @@
   </div>
 
   <script type="module" src="/js/auth.js"></script>
+  <script>
+    fetch('/api/settings').then(r => r.json()).then(s => {
+      if (s.siteName) { document.title = s.siteName; document.querySelector('h1').textContent = s.siteName; }
+    }).catch(() => {});
+  </script>
 </body>
 </html>
