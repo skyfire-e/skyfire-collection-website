@@ -41,6 +41,7 @@ export function openEdit(item, { onSave } = {}) {
   document.getElementById('editImage').value = '';
   renderEditImages();
   document.getElementById('editModal').classList.add('open');
+  document.addEventListener('keydown', onEscapeKey);
 }
 
 function renderEditImages() {
@@ -106,9 +107,10 @@ function renderEditImages() {
 function openCrop(imageSrc, ctx) {
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
   cropSrc = imageSrc;
-  cropQueue = ctx && ctx.newFilesQueue || [];
+  cropQueue = (ctx && ctx.fileQueue) || [];
   document.getElementById('cropImage').src = imageSrc;
   document.getElementById('cropModal').classList.add('open');
+  document.addEventListener('keydown', onEscapeKey);
   setTimeout(() => {
     if (cropper) cropper.destroy();
     cropper = new Cropper(document.getElementById('cropImage'), {
@@ -125,17 +127,26 @@ function closeCrop() {
   if (cropper) { cropper.destroy(); cropper = null; }
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
   cropSrc = null;
-  cropQueue.forEach(function (url) { if (isObjectURL(url)) URL.revokeObjectURL(url); });
-  cropQueue = [];
-  document.getElementById('cropModal').classList.remove('open');
   cropCtx = null;
+  document.getElementById('cropModal').classList.remove('open');
+  document.removeEventListener('keydown', onEscapeKey);
+}
+
+function loadNextFile() {
+  if (cropQueue.length === 0) return;
+  const nextFile = cropQueue.shift();
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    closeCrop();
+    openCrop(e.target.result, { fileQueue: cropQueue, slotIdx: undefined, currentFile: nextFile });
+  };
+  reader.readAsDataURL(nextFile);
 }
 
 function applyCrop() {
   if (!cropper || !cropCtx) return;
   const canvas = cropper.getCroppedCanvas({ imageSmoothingQuality: 'high' });
   const ctx = cropCtx;
-  const queue = ctx.newFilesQueue ? [...ctx.newFilesQueue] : null;
   const slotIdx = ctx.slotIdx;
 
   canvas.toBlob(blob => {
@@ -147,18 +158,14 @@ function applyCrop() {
       editSlots[slotIdx] = { type: 'replace', originalIdx: slot.originalIdx, file, src: URL.createObjectURL(blob) };
       renderEditImages();
       closeCrop();
+      loadNextFile();
       return;
     }
 
     editSlots.push({ type: 'new', originalIdx: null, file, src: URL.createObjectURL(blob) });
     renderEditImages();
-
-    if (queue && queue.length > 0) {
-      closeCrop();
-      openCrop(queue.shift(), { newFilesQueue: queue });
-    } else {
-      closeCrop();
-    }
+    closeCrop();
+    loadNextFile();
   }, 'image/jpeg', 0.92);
 }
 
@@ -205,8 +212,18 @@ async function saveEdit() {
   closeEdit();
 }
 
+function onEscapeKey(e) {
+  if (e.key === 'Escape') {
+    const editModal = document.getElementById('editModal');
+    const cropModal = document.getElementById('cropModal');
+    if (cropModal.classList.contains('open')) closeCrop();
+    else if (editModal.classList.contains('open')) closeEdit();
+  }
+}
+
 function closeEdit() {
   document.getElementById('editModal').classList.remove('open');
+  document.removeEventListener('keydown', onEscapeKey);
   editSlots.forEach(revokeSlot);
   editSlots = [];
   editCurrentItem = null;
@@ -225,12 +242,18 @@ export function initImageEditor() {
     const files = Array.from(this.files);
     if (files.length === 0) return;
     this.value = '';
+    const available = 10 - editSlots.length;
+    if (files.length > available) {
+      alert('Maximum 10 images total. You can add ' + available + ' more.');
+      return;
+    }
+    const fileQueue = files.slice(1);
+    const currentFile = files[0];
     const reader = new FileReader();
-    const remaining = files.slice(1).map(f => URL.createObjectURL(f));
     reader.onload = (e) => {
-      openCrop(e.target.result, { newFilesQueue: remaining });
+      openCrop(e.target.result, { fileQueue, slotIdx: undefined, currentFile });
     };
-    reader.readAsDataURL(files[0]);
+    reader.readAsDataURL(currentFile);
   });
 
   document.getElementById('addImagesBtn').addEventListener('click', () => {

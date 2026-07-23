@@ -1,17 +1,28 @@
 const { Router } = require('express');
+const argon2 = require('argon2');
 const { loginLimiter } = require('../middleware');
 const { secureCookies } = require('../helpers');
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD, role: 'admin' }];
+const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD_HASH || ADMIN_PASSWORD, role: 'admin' }];
 
 const router = Router();
 
-router.post('/login', loginLimiter, (req, res) => {
+router.post('/login', loginLimiter, async (req, res) => {
   const { username, password } = req.body;
-  const user = users.find(u => u.username === username && u.password === password);
+  const user = users.find(u => u.username === username);
   if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+  let valid;
+  if (ADMIN_PASSWORD_HASH) {
+    valid = await argon2.verify(user.password, password);
+  } else {
+    if (!ADMIN_PASSWORD) return res.status(500).json({ error: 'Server misconfigured' });
+    valid = user.password === password;
+    console.warn('WARNING: Using plain-text password. Set ADMIN_PASSWORD_HASH in .env');
+  }
+  if (!valid) return res.status(401).json({ error: 'Invalid credentials' });
   req.session.regenerate(err => {
     if (err) return res.status(500).json({ error: 'Session error' });
     req.session.user = { username: user.username, role: user.role };

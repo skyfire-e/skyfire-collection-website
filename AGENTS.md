@@ -19,14 +19,14 @@
 - Скрипты: `backup.js`, `check-data.js`, `smoke-test.js`, `quarantine-orphans.js`, `backfill-defaults.js`, `backfill-images.js`
 
 ## Auth
-- Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` — оба в `.env`
+- Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` или `ADMIN_PASSWORD_HASH` (argon2) — в `.env`
 - Session secret: `SESSION_SECRET` в `.env`
 - `.env` в `.gitignore`, не попадает в репозиторий
 
 ## Current Data State
 - `items.json` — 609 items (Dice: 145, Miniatures: 464)
 - `categories.json` — Dice (7 flat) + Miniatures (2 groups × 13 leaf + 15 standalone leaf)
-- `uploads/` — 615 image files
+- `uploads/` — 615 image files (в .gitignore, только .gitkeep)
 - `settings.json` — defaultImage, siteName, showSpreadsheet, showMiniaturesColumns, currencies
 
 ## Site Structure
@@ -88,7 +88,7 @@ backups/               — backup archives (excluded from git)
 - `GET /api/spreadsheet/public` — public view
 
 ## Key Decisions
-- Price скрыта от публики (showPublicSpreadsheet в settings; сейчас включено)
+- Price скрыта от публики (showPublicSpreadsheet в settings; сейчас включено — цены видны публично)
 - Show/hide Spreadsheet button — в настройках
 - Если у item нет фото — показывается `/images/default.svg`
 - Удаление категории блокируется, если есть items (409 Conflict)
@@ -133,19 +133,23 @@ backups/               — backup archives (excluded from git)
 - **P2**: `withPending` on addSection/addSubcat buttons
 - **P3**: server.js split into `src/` modules (routes, middleware, helpers, errors)
 
+### Iteration E — P0+P1 (Argon2 + Mutex + SQLite sessions + Deps)
+- **#8**: Argon2 password hashing (ADMIN_PASSWORD_HASH env var)
+- **#11**: Write mutex (withDataLock) for concurrent write serialization
+- **#13**: Empty category ID guard for non-Latin labels
+- **#30**: Backfill routes restored (admin-protected)
+- **#31**: File-based session store (persists across restarts)
+- **#36**: Runtime deps cleanup (jimp, playwright, puppeteer-core → devDependencies)
+- **#40**: uploads/* added to .gitignore
+
 ## Known Gaps (from code review)
 | Issue | Priority | Status |
 |-------|----------|--------|
-| Argon2 password hashing | Low | Not done (plain ===, .env защищён) |
-| Optimistic locking (versioning) | Low | Not done (один сервер, без race conditions) |
-| Cyrillic category → empty ID | Low | Not done (можно указать ID вручную) |
+| Optimistic locking (versioning) | Low | Not done (один сервер, write mutex добавлен) |
 | Recursive spreadsheet flatten | Low | Not done (работает для 2 уровней) |
-| Runtime deps cleanup (jimp, playwright) | Medium | Not done (в production deps) |
 | Multi-file crop (File[] queue) | Low | Partially done (cropQueue + revoke) |
-| uploads/ in Git (LFS or .gitkeep) | Medium | Not done (1000+ файлов в истории) |
 | README.md + CI | Medium | Not done |
-| MemoryStore → SQLite | Low | Not done (ок для одного сервера) |
-| Migration endpoints → npm scripts | Low | Not done (auth-защищены) |
+| Migration endpoints → npm scripts | Low | Not done (auth-защищены + ручной backfill) |
 
 ## Planned Features
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)

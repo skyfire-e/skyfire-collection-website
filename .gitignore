@@ -11,3 +11,7 @@ backups/
 # Upload working directories
 uploads/.tmp/
 uploads/.quarantine/
+
+# Ignore uploaded images (keep .gitkeep for dir tracking)
+uploads/*
+!uploads/.gitkeep

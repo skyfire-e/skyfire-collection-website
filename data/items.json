@@ -5,7 +5,7 @@
     "category": "metal-dice",
     "title": "Dragon (black-green)",
     "author": "(hollow)",
-    "price": "40",
+    "price": 40,
     "image": "/uploads/metal-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
@@ -21,7 +21,7 @@
     "category": "metal-dice",
     "title": "Dwarven",
     "author": "Q-workshop",
-    "price": "61",
+    "price": 61,
     "image": "/uploads/metal-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
@@ -34,7 +34,7 @@
     "category": "metal-dice",
     "title": "Edge Boss",
     "author": "EnvyDice",
-    "price": "71",
+    "price": 71,
     "image": "/uploads/metal-dice-3.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
@@ -47,7 +47,7 @@
     "category": "metal-dice",
     "title": "Ancient Dragon Gold",
     "author": "EasyRoller",
-    "price": "40",
+    "price": 40,
     "image": "/uploads/metal-dice-4.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
@@ -60,7 +60,7 @@
     "category": "metal-dice",
     "title": "Legendary Metals",
     "author": "gold, copper, bronze, silver",
-    "price": "35",
+    "price": 35,
     "image": "/uploads/metal-dice-5.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
@@ -73,7 +73,7 @@
     "category": "metal-dice",
     "title": "Assassin's Dice",
     "author": "DarkElfDice",
-    "price": "60",
+    "price": 60,
     "image": "/uploads/metal-dice-6.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
@@ -86,7 +86,7 @@
     "category": "metal-dice",
     "title": "Anodized Red",
     "author": "aluminum",
-    "price": "77",
+    "price": 77,
     "image": "/uploads/metal-dice-7.jpg",
     "createdAt": "2026-07-20T21:32:28.282Z",
     "images": [
@@ -99,7 +99,7 @@
     "category": "metal-dice",
     "title": "Skeletons Red",
     "author": "",
-    "price": "18",
+    "price": 18,
     "image": "/uploads/metal-dice-8.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -112,7 +112,7 @@
     "category": "metal-dice",
     "title": "Skeletons White",
     "author": "",
-    "price": "18",
+    "price": 18,
     "image": "/uploads/metal-dice-9.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -125,7 +125,7 @@
     "category": "metal-dice",
     "title": "Octopus-shaped",
     "author": "cusdie",
-    "price": "52",
+    "price": 52,
     "image": "/uploads/metal-dice-10.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -138,7 +138,7 @@
     "category": "metal-dice",
     "title": "Sword and Shield",
     "author": "cusdie",
-    "price": "52",
+    "price": 52,
     "image": "/uploads/metal-dice-11.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -151,7 +151,7 @@
     "category": "metal-dice",
     "title": "Spiders Web",
     "author": "(hollow)",
-    "price": "52",
+    "price": 52,
     "image": "/uploads/metal-dice-12.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -164,7 +164,7 @@
     "category": "metal-dice",
     "title": "Big d20 Edge Skulls",
     "author": "(hollow)",
-    "price": "80",
+    "price": 80,
     "image": "/uploads/metal-dice-13.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -177,7 +177,7 @@
     "category": "metal-dice",
     "title": "Cogs",
     "author": "(hollow)",
-    "price": "60",
+    "price": 60,
     "image": "/uploads/metal-dice-14.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -190,7 +190,7 @@
     "category": "metal-dice",
     "title": "Dagger Style",
     "author": "cusdie",
-    "price": "26",
+    "price": 26,
     "image": "/uploads/metal-dice-15.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -203,7 +203,7 @@
     "category": "metal-dice",
     "title": "Labyrinth",
     "author": "(hollow)",
-    "price": "40",
+    "price": 40,
     "image": "/uploads/metal-dice-16.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -216,7 +216,7 @@
     "category": "metal-dice",
     "title": "Silver Snowflakes",
     "author": "(hollow)",
-    "price": "50",
+    "price": 50,
     "image": "/uploads/metal-dice-17.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -229,7 +229,7 @@
     "category": "metal-dice",
     "title": "Edge Skulls",
     "author": "(hollow)",
-    "price": "35",
+    "price": 35,
     "image": "/uploads/metal-dice-18.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -242,7 +242,7 @@
     "category": "metal-dice",
     "title": "Dragon Scale",
     "author": "cusdie",
-    "price": "19",
+    "price": 19,
     "image": "/uploads/metal-dice-19.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -255,7 +255,7 @@
     "category": "metal-dice",
     "title": "Spiked Cogs",
     "author": "cusdie",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/metal-dice-20.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -268,7 +268,7 @@
     "category": "metal-dice",
     "title": "Skulls on edges",
     "author": "",
-    "price": "45",
+    "price": 45,
     "image": "/uploads/metal-dice-21.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -281,7 +281,7 @@
     "category": "metal-dice",
     "title": "Colorful Framed",
     "author": "",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/metal-dice-22.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -294,7 +294,7 @@
     "category": "metal-dice",
     "title": "Skeleton-shaped",
     "author": "cusdie",
-    "price": "35",
+    "price": 35,
     "image": "/uploads/metal-dice-23.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -307,7 +307,7 @@
     "category": "metal-dice",
     "title": "9d6",
     "author": "CyberDiceGames",
-    "price": "30",
+    "price": 30,
     "image": "/uploads/metal-dice-24.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -320,7 +320,7 @@
     "category": "metal-dice",
     "title": "Underwater",
     "author": "Bioshock, Ctulhu, Chaos",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/metal-dice-25.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -333,7 +333,7 @@
     "category": "metal-dice",
     "title": "Stone Stamps",
     "author": "cusdie",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/metal-dice-26.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -346,7 +346,7 @@
     "category": "metal-dice",
     "title": "Elven Ligature",
     "author": "cusdie",
-    "price": "35",
+    "price": 35,
     "image": "/uploads/metal-dice-27.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -359,7 +359,7 @@
     "category": "metal-dice",
     "title": "Flowers",
     "author": "cusdie",
-    "price": "35",
+    "price": 35,
     "image": "/uploads/metal-dice-28.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -372,7 +372,7 @@
     "category": "metal-dice",
     "title": "7d6",
     "author": "CyberDiceGames",
-    "price": "15",
+    "price": 15,
     "image": "/uploads/metal-dice-29.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -385,7 +385,7 @@
     "category": "metal-dice",
     "title": "3d6 18mm",
     "author": "Alchemy Gothic",
-    "price": "30",
+    "price": 30,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "recaster": "",
@@ -401,7 +401,7 @@
     "category": "resin-dice",
     "title": "Steampunk Cogs",
     "author": "",
-    "price": "18",
+    "price": 18,
     "image": "/uploads/resin-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -414,7 +414,7 @@
     "category": "resin-dice",
     "title": "Space Galaxy",
     "author": "sharp edge",
-    "price": "18",
+    "price": 18,
     "image": "/uploads/resin-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -427,7 +427,7 @@
     "category": "resin-dice",
     "title": "Skyfire",
     "author": "sharp edge",
-    "price": "24",
+    "price": 24,
     "image": "/uploads/resin-dice-3.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -440,7 +440,7 @@
     "category": "resin-dice",
     "title": "Watermelon",
     "author": "",
-    "price": "19",
+    "price": 19,
     "image": "/uploads/resin-dice-4.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -453,7 +453,7 @@
     "category": "resin-dice",
     "title": "Aquamarine-Black",
     "author": "sharp edge",
-    "price": "26",
+    "price": 26,
     "image": "/uploads/resin-dice-5.jpg",
     "createdAt": "2026-07-20T21:32:28.283Z",
     "images": [
@@ -466,7 +466,7 @@
     "category": "resin-dice",
     "title": "Fruits",
     "author": "Bescon",
-    "price": "14",
+    "price": 14,
     "image": "/uploads/resin-dice-6.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -479,7 +479,7 @@
     "category": "resin-dice",
     "title": "Blood Drops",
     "author": "sharp edge",
-    "price": "21",
+    "price": 21,
     "image": "/uploads/resin-dice-7.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -492,7 +492,7 @@
     "category": "resin-dice",
     "title": "Led Lighted",
     "author": "",
-    "price": "11",
+    "price": 11,
     "image": "/uploads/resin-dice-8.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -505,7 +505,7 @@
     "category": "resin-dice",
     "title": "Seabed",
     "author": "Bescon",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/resin-dice-9.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -518,7 +518,7 @@
     "category": "resin-dice",
     "title": "Led Lighted",
     "author": "rechargeable",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/resin-dice-10.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -531,7 +531,7 @@
     "category": "resin-dice",
     "title": "Purple Universe",
     "author": "Fantasy Miniatures",
-    "price": "25",
+    "price": 25,
     "image": "/uploads/resin-dice-11.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -544,7 +544,7 @@
     "category": "resin-dice",
     "title": "Cyan Crystal",
     "author": "Fantasy Miniatures",
-    "price": "25",
+    "price": 25,
     "image": "/uploads/resin-dice-12.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -557,7 +557,7 @@
     "category": "resin-dice",
     "title": "Liquid Core Eyes",
     "author": "cusdie",
-    "price": "50",
+    "price": 50,
     "image": "/uploads/resin-dice-13.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -570,7 +570,7 @@
     "category": "resin-dice",
     "title": "Purple Crystal",
     "author": "cusdie",
-    "price": "30",
+    "price": 30,
     "image": "/uploads/resin-dice-14.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -583,7 +583,7 @@
     "category": "resin-dice",
     "title": "Resin Prototype d6 Die",
     "author": "CyberDiceGames",
-    "price": "5",
+    "price": 5,
     "image": "/uploads/resin-dice-15.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -596,7 +596,7 @@
     "category": "resin-dice",
     "title": "Green Dragon Eye",
     "author": "Endless Charm",
-    "price": "25",
+    "price": 25,
     "image": "/uploads/resin-dice-16.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -609,7 +609,7 @@
     "category": "resin-dice",
     "title": "6d6 3d printed Orkish dice",
     "author": "",
-    "price": "7",
+    "price": 7,
     "image": "/uploads/resin-dice-17.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -622,7 +622,7 @@
     "category": "acrylic-dice",
     "title": "Andromeda",
     "author": "",
-    "price": "5",
+    "price": 5,
     "image": "/uploads/acrylic-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -635,7 +635,7 @@
     "category": "acrylic-dice",
     "title": "Dwarven",
     "author": "Q-Workshop",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/acrylic-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -648,7 +648,7 @@
     "category": "acrylic-dice",
     "title": "Celtic 2d4",
     "author": "Q-Workshop",
-    "price": "6",
+    "price": 6,
     "image": "/uploads/acrylic-dice-3.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -661,7 +661,7 @@
     "category": "acrylic-dice",
     "title": "Tricolor Marble",
     "author": "",
-    "price": "12",
+    "price": 12,
     "image": "/uploads/acrylic-dice-4.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -674,7 +674,7 @@
     "category": "acrylic-dice",
     "title": "Blood Splatter",
     "author": "",
-    "price": "12",
+    "price": 12,
     "image": "/uploads/acrylic-dice-5.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -687,7 +687,7 @@
     "category": "acrylic-dice",
     "title": "Transparent Blue-Red",
     "author": "Q-Workshop",
-    "price": "11",
+    "price": 11,
     "image": "/uploads/acrylic-dice-6.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -700,7 +700,7 @@
     "category": "acrylic-dice",
     "title": "White Pearl",
     "author": "Q-Workshop",
-    "price": "11",
+    "price": 11,
     "image": "/uploads/acrylic-dice-7.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -713,7 +713,7 @@
     "category": "acrylic-dice",
     "title": "Standard Black",
     "author": "",
-    "price": "5",
+    "price": 5,
     "image": "/uploads/acrylic-dice-8.jpg",
     "createdAt": "2026-07-20T21:32:28.284Z",
     "images": [
@@ -726,7 +726,7 @@
     "category": "acrylic-dice",
     "title": "Cyberpunk RED",
     "author": "Q-Workshop",
-    "price": "16",
+    "price": 16,
     "image": "/uploads/acrylic-dice-9.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -739,7 +739,7 @@
     "category": "acrylic-dice",
     "title": "Orange",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-10.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -752,7 +752,7 @@
     "category": "acrylic-dice",
     "title": "Green Blue",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-11.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -765,7 +765,7 @@
     "category": "acrylic-dice",
     "title": "Green Black",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-12.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -778,7 +778,7 @@
     "category": "acrylic-dice",
     "title": "Blue Dotted",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-13.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -791,7 +791,7 @@
     "category": "acrylic-dice",
     "title": "Blue-Black",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-14.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -804,7 +804,7 @@
     "category": "acrylic-dice",
     "title": "Blue-White",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-15.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -817,7 +817,7 @@
     "category": "acrylic-dice",
     "title": "Witcher Geralt",
     "author": "Q-Workshop",
-    "price": "29",
+    "price": 29,
     "image": "/uploads/acrylic-dice-16.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -830,7 +830,7 @@
     "category": "acrylic-dice",
     "title": "Witcher Yennefer",
     "author": "Q-Workshop",
-    "price": "29",
+    "price": 29,
     "image": "/uploads/acrylic-dice-17.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -843,7 +843,7 @@
     "category": "acrylic-dice",
     "title": "Bone Macabre",
     "author": "Q-Workshop",
-    "price": "27",
+    "price": 27,
     "image": "/uploads/acrylic-dice-18.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -856,7 +856,7 @@
     "category": "acrylic-dice",
     "title": "Dark Green",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-19.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -869,7 +869,7 @@
     "category": "acrylic-dice",
     "title": "Sicarius Smoke",
     "author": "DiceEnvy",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/acrylic-dice-20.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -882,7 +882,7 @@
     "category": "acrylic-dice",
     "title": "Reddish Honey",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-21.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -895,7 +895,7 @@
     "category": "acrylic-dice",
     "title": "Blue Marble",
     "author": "10d8",
-    "price": "4",
+    "price": 4,
     "image": "/uploads/acrylic-dice-22.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -908,7 +908,7 @@
     "category": "acrylic-dice",
     "title": "Acid Green",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-23.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -921,7 +921,7 @@
     "category": "acrylic-dice",
     "title": "Purple Green",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-24.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -934,7 +934,7 @@
     "category": "acrylic-dice",
     "title": "Coffee",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-25.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -947,7 +947,7 @@
     "category": "acrylic-dice",
     "title": "Green Marble",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-26.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -960,7 +960,7 @@
     "category": "acrylic-dice",
     "title": "Yellow Marble",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-27.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -973,7 +973,7 @@
     "category": "acrylic-dice",
     "title": "Classic small 50d6",
     "author": "8mm",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-28.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -986,7 +986,7 @@
     "category": "acrylic-dice",
     "title": "Nutella",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-29.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -999,7 +999,7 @@
     "category": "acrylic-dice",
     "title": "Turquoise Marble",
     "author": "",
-    "price": "3",
+    "price": 3,
     "image": "/uploads/acrylic-dice-30.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1012,7 +1012,7 @@
     "category": "acrylic-dice",
     "title": "Blue Marble",
     "author": "",
-    "price": "4",
+    "price": 4,
     "image": "/uploads/acrylic-dice-31.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1025,7 +1025,7 @@
     "category": "acrylic-dice",
     "title": "Honey Glitter",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-32.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1038,7 +1038,7 @@
     "category": "acrylic-dice",
     "title": "Bloody",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-33.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1051,7 +1051,7 @@
     "category": "acrylic-dice",
     "title": "Yellow Marble",
     "author": "10d8",
-    "price": "4",
+    "price": 4,
     "image": "/uploads/acrylic-dice-34.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1064,7 +1064,7 @@
     "category": "acrylic-dice",
     "title": "Barbie Pink",
     "author": "",
-    "price": "5",
+    "price": 5,
     "image": "/uploads/acrylic-dice-35.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1077,7 +1077,7 @@
     "category": "acrylic-dice",
     "title": "d100",
     "author": "",
-    "price": "6",
+    "price": 6,
     "image": "/uploads/acrylic-dice-36.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1090,7 +1090,7 @@
     "category": "acrylic-dice",
     "title": "Rainbow",
     "author": "",
-    "price": "10",
+    "price": 10,
     "image": "/uploads/acrylic-dice-37.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1103,7 +1103,7 @@
     "category": "acrylic-dice",
     "title": "Golden",
     "author": "",
-    "price": "15",
+    "price": 15,
     "image": "/uploads/acrylic-dice-38.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1116,7 +1116,7 @@
     "category": "acrylic-dice",
     "title": "Micro Dice",
     "author": "",
-    "price": "10",
+    "price": 10,
     "image": "/uploads/acrylic-dice-39.jpg",
     "createdAt": "2026-07-20T21:32:28.285Z",
     "images": [
@@ -1129,7 +1129,7 @@
     "category": "acrylic-dice",
     "title": "Dragon Eye",
     "author": "replica, 5d20",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/acrylic-dice-40.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1142,7 +1142,7 @@
     "category": "acrylic-dice",
     "title": "Witcher Cat School Composite",
     "author": "metal+plastic by Q-workshop",
-    "price": "40",
+    "price": 40,
     "image": "/uploads/acrylic-dice-41.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1155,7 +1155,7 @@
     "category": "acrylic-dice",
     "title": "Witcher Triss",
     "author": "Q-workshop",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/acrylic-dice-42.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1168,7 +1168,7 @@
     "category": "acrylic-dice",
     "title": "Orks 7 edition 20d6",
     "author": "Games Workshop",
-    "price": "60",
+    "price": 60,
     "image": "/uploads/acrylic-dice-43.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1181,7 +1181,7 @@
     "category": "acrylic-dice",
     "title": "Orks 9 edition 20d6",
     "author": "Games Workshop",
-    "price": "40",
+    "price": 40,
     "image": "/uploads/acrylic-dice-44.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1194,7 +1194,7 @@
     "category": "acrylic-dice",
     "title": "Orks Kill Team Dice 20d6",
     "author": "Games Workshop",
-    "price": "50",
+    "price": 50,
     "image": "/uploads/acrylic-dice-45.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1207,7 +1207,7 @@
     "category": "acrylic-dice",
     "title": "Various un-set",
     "author": "",
-    "price": "1",
+    "price": 1,
     "image": "/uploads/acrylic-dice-46.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1220,7 +1220,7 @@
     "category": "acrylic-dice",
     "title": "Classic 5d6",
     "author": "",
-    "price": "2",
+    "price": 2,
     "image": "/uploads/acrylic-dice-47.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1233,7 +1233,7 @@
     "category": "acrylic-dice",
     "title": "Skaven Dice 2019 20d6",
     "author": "Games Workshop",
-    "price": "150",
+    "price": 150,
     "image": "/uploads/acrylic-dice-48.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1246,7 +1246,7 @@
     "category": "acrylic-dice",
     "title": "Skaven Bloodbowl Dice Set",
     "author": "Games Workshop",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/acrylic-dice-49.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1259,7 +1259,7 @@
     "category": "acrylic-dice",
     "title": "Death Guard Dice 20d6",
     "author": "Games Workshop",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/acrylic-dice-50.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1272,7 +1272,7 @@
     "category": "acrylic-dice",
     "title": "Gloomspite Gitz Squig Dice 20d6",
     "author": "Games Workshop",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/acrylic-dice-51.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1285,7 +1285,7 @@
     "category": "acrylic-dice",
     "title": "Necrons Dice 20d6",
     "author": "Games Workshop",
-    "price": "80",
+    "price": 80,
     "image": "/uploads/acrylic-dice-52.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1298,7 +1298,7 @@
     "category": "acrylic-dice",
     "title": "End Times Skaven Dice 10d6",
     "author": "Games Workshop",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/acrylic-dice-53.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1311,7 +1311,7 @@
     "category": "acrylic-dice",
     "title": "Ork Flyboyz Dice 20d6",
     "author": "Games Workshop",
-    "price": "60",
+    "price": 60,
     "image": "/uploads/acrylic-dice-54.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1324,7 +1324,7 @@
     "category": "acrylic-dice",
     "title": "Skaven Bloodbowl Warpstone Green",
     "author": "Games Workshop",
-    "price": "60",
+    "price": 60,
     "image": "/uploads/acrylic-dice-55.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1337,7 +1337,7 @@
     "category": "acrylic-dice",
     "title": "Snotling Bloodbowl Dice Set",
     "author": "Games Workshop",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/acrylic-dice-56.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1350,7 +1350,7 @@
     "category": "acrylic-dice",
     "title": "Huge Witcher d6",
     "author": "Q-workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/acrylic-dice-57.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1363,7 +1363,7 @@
     "category": "acrylic-dice",
     "title": "Standard d6",
     "author": "",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/acrylic-dice-58.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1376,7 +1376,7 @@
     "category": "acrylic-dice",
     "title": "Gloomspite Gitz Dice 20d6",
     "author": "Games Workshop",
-    "price": "60",
+    "price": 60,
     "image": "/uploads/acrylic-dice-59.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1389,7 +1389,7 @@
     "category": "acrylic-dice",
     "title": "Helloween",
     "author": "cusdie",
-    "price": "10",
+    "price": 10,
     "image": "/uploads/acrylic-dice-60.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1402,7 +1402,7 @@
     "category": "wooden-dice",
     "title": "Brown Wood",
     "author": "cusdie",
-    "price": "44",
+    "price": 44,
     "image": "/uploads/wooden-dice-1.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1415,7 +1415,7 @@
     "category": "wooden-dice",
     "title": "Witcher Composite Dice",
     "author": "Q-workshop (plastic+wood)",
-    "price": "70",
+    "price": 70,
     "image": "/uploads/wooden-dice-2.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1428,7 +1428,7 @@
     "category": "acrylic-figurines",
     "title": "Wizard Hat d20",
     "author": "PolyHero Parchment",
-    "price": "15",
+    "price": 15,
     "image": "/uploads/acrylic-figurines-1.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1441,7 +1441,7 @@
     "category": "acrylic-figurines",
     "title": "Wizard Shadow with Demon's Eye Orb d20",
     "author": "PolyHero",
-    "price": "15",
+    "price": 15,
     "image": "/uploads/acrylic-figurines-2.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1454,7 +1454,7 @@
     "category": "acrylic-figurines",
     "title": "5d6 Poison Vials",
     "author": "PolyHero Vicious Venom",
-    "price": "35",
+    "price": 35,
     "image": "/uploads/acrylic-figurines-3.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1467,7 +1467,7 @@
     "category": "acrylic-figurines",
     "title": "Rogue Set",
     "author": "PolyHero Nightshade",
-    "price": "48",
+    "price": 48,
     "image": "/uploads/acrylic-figurines-4.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1480,7 +1480,7 @@
     "category": "acrylic-figurines",
     "title": "Grappling Hook, Rope, Skeleton Key",
     "author": "PolyHero Burglar's Bundle",
-    "price": "25",
+    "price": 25,
     "image": "/uploads/acrylic-figurines-5.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1493,7 +1493,7 @@
     "category": "acrylic-figurines",
     "title": "d20 Lock & Pick",
     "author": "PolyHero Cold Iron",
-    "price": "25",
+    "price": 25,
     "image": "/uploads/acrylic-figurines-6.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1506,7 +1506,7 @@
     "category": "acrylic-figurines",
     "title": "Rejuventaion Potion Set",
     "author": "",
-    "price": "25",
+    "price": 25,
     "image": "/uploads/acrylic-figurines-7.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1519,7 +1519,7 @@
     "category": "acrylic-figurines",
     "title": "Shadow Kingdom Crown Set",
     "author": "",
-    "price": "35",
+    "price": 35,
     "image": "/uploads/acrylic-figurines-8.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1532,7 +1532,7 @@
     "category": "acrylic-figurines",
     "title": "Cleric Set",
     "author": "PolyHero Celestial Ivory",
-    "price": "19",
+    "price": 19,
     "image": "/uploads/acrylic-figurines-9.jpg",
     "createdAt": "2026-07-20T21:32:28.286Z",
     "images": [
@@ -1545,7 +1545,7 @@
     "category": "acrylic-figurines",
     "title": "Warrior Reforged Set",
     "author": "PolyHero Steel Grey",
-    "price": "19",
+    "price": 19,
     "image": "/uploads/acrylic-figurines-10.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1558,7 +1558,7 @@
     "category": "acrylic-figurines",
     "title": "Wizard Set",
     "author": "PolyHero Dragonfire",
-    "price": "19",
+    "price": 19,
     "image": "/uploads/acrylic-figurines-11.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1571,7 +1571,7 @@
     "category": "acrylic-figurines",
     "title": "7d4 Bless Die",
     "author": "PolyHero",
-    "price": "9",
+    "price": 9,
     "image": "/uploads/acrylic-figurines-12.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1584,7 +1584,7 @@
     "category": "acrylic-figurines",
     "title": "5d4 Hallowed Hand Grenade",
     "author": "PolyHero",
-    "price": "9",
+    "price": 9,
     "image": "/uploads/acrylic-figurines-13.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1597,7 +1597,7 @@
     "category": "acrylic-figurines",
     "title": "3d20 Gems",
     "author": "PolyHero",
-    "price": "9",
+    "price": 9,
     "image": "/uploads/acrylic-figurines-14.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1610,7 +1610,7 @@
     "category": "acrylic-figurines",
     "title": "Wizard Hat & Spellbook",
     "author": "PolyHero Wizardstone",
-    "price": "9",
+    "price": 9,
     "image": "/uploads/acrylic-figurines-15.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1623,7 +1623,7 @@
     "category": "metal-figurines",
     "title": "Necromancer set",
     "author": "CyberDiceGames",
-    "price": "102",
+    "price": 102,
     "image": "/uploads/metal-figurines-1.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1636,7 +1636,7 @@
     "category": "metal-figurines",
     "title": "Vortex Bronze",
     "author": "",
-    "price": "175",
+    "price": 175,
     "image": "/uploads/metal-figurines-2.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1649,7 +1649,7 @@
     "category": "metal-figurines",
     "title": "Floating Bronze",
     "author": "",
-    "price": "200",
+    "price": 200,
     "image": "/uploads/metal-figurines-3.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1662,7 +1662,7 @@
     "category": "metal-figurines",
     "title": "Silver d100",
     "author": "(hollow)",
-    "price": "40",
+    "price": 40,
     "image": "/uploads/metal-figurines-4.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1675,7 +1675,7 @@
     "category": "metal-figurines",
     "title": "Ancient Golden d100",
     "author": "",
-    "price": "30",
+    "price": 30,
     "image": "/uploads/metal-figurines-5.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1688,7 +1688,7 @@
     "category": "metal-figurines",
     "title": "Dragon Scale d60",
     "author": "",
-    "price": "26",
+    "price": 26,
     "image": "/uploads/metal-figurines-6.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1701,7 +1701,7 @@
     "category": "metal-figurines",
     "title": "Aztec Gods",
     "author": "CyberDiceGames",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/metal-figurines-7.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1714,7 +1714,7 @@
     "category": "metal-figurines",
     "title": "Arcanum set copy",
     "author": "aliexpress",
-    "price": "20",
+    "price": 20,
     "image": "/uploads/metal-figurines-8.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1727,7 +1727,7 @@
     "category": "metal-figurines",
     "title": "Dice Sword",
     "author": "",
-    "price": "10",
+    "price": 10,
     "image": "/uploads/metal-figurines-9.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1740,7 +1740,7 @@
     "category": "metal-figurines",
     "title": "DnD Class Coins",
     "author": "4",
-    "price": "10",
+    "price": 10,
     "image": "/uploads/metal-figurines-10.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1753,7 +1753,7 @@
     "category": "metal-figurines",
     "title": "Red Steampunk Spheres",
     "author": "",
-    "price": "60",
+    "price": 60,
     "image": "/uploads/metal-figurines-11.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1766,7 +1766,7 @@
     "category": "metal-figurines",
     "title": "Golden Atoms",
     "author": "",
-    "price": "80",
+    "price": 80,
     "image": "/uploads/metal-figurines-12.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1779,7 +1779,7 @@
     "category": "metal-figurines",
     "title": "Spiky Dragon-themed",
     "author": "cusdie",
-    "price": "25",
+    "price": 25,
     "image": "/uploads/metal-figurines-13.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1792,7 +1792,7 @@
     "category": "citadel-skaven",
     "title": "Clanrats",
     "author": "Games Workshop",
-    "price": "2625",
+    "price": 2625,
     "image": "/uploads/citadel-skaven-1.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1807,7 +1807,7 @@
     "category": "citadel-skaven",
     "title": "Rattachak Doom Coven",
     "author": "Games Workshop (Stormfiends, Warlock Bombardier, Warp Lightning Cannon) (Broken Realms)",
-    "price": "5775",
+    "price": 5775,
     "image": "/uploads/citadel-skaven-2.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1822,7 +1822,7 @@
     "category": "citadel-skaven",
     "title": "Warbringer (2018)",
     "author": "Games Workshop (Lord Skreech Verminking, Verminlord Corruptor, Verminlord Deceiver, Verminlord Warpseer)",
-    "price": "6100",
+    "price": 6100,
     "image": "/uploads/citadel-skaven-3.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1837,7 +1837,7 @@
     "category": "citadel-skaven",
     "title": "Start Collecting! Skaven Pestilence",
     "author": "Games Workshop (20 Plague Monks, Plague Furnace, Plague Claw)",
-    "price": "4909",
+    "price": 4909,
     "image": "/uploads/citadel-skaven-4.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1852,7 +1852,7 @@
     "category": "citadel-skaven",
     "title": "Thanquol and Boneripper",
     "author": "Games Workshop",
-    "price": "6080",
+    "price": 6080,
     "image": "/uploads/citadel-skaven-5.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1867,7 +1867,7 @@
     "category": "citadel-skaven",
     "title": "Hell Pit Abomination",
     "author": "Games Workshop",
-    "price": "4560",
+    "price": 4560,
     "image": "/uploads/citadel-skaven-6.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1882,7 +1882,7 @@
     "category": "citadel-skaven",
     "title": "Stormvermin",
     "author": "Games Workshop",
-    "price": "4180",
+    "price": 4180,
     "image": "/uploads/citadel-skaven-7.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1897,7 +1897,7 @@
     "category": "citadel-skaven",
     "title": "Doomwheel",
     "author": "Games Workshop",
-    "price": "2660",
+    "price": 2660,
     "image": "/uploads/citadel-skaven-8.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1912,7 +1912,7 @@
     "category": "citadel-skaven",
     "title": "Skaven Verminus Spiteclaw's Swarm (2018)",
     "author": "Games Workshop",
-    "price": "1900",
+    "price": 1900,
     "image": "/uploads/citadel-skaven-9.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1927,7 +1927,7 @@
     "category": "citadel-skaven",
     "title": "Skaven Deathmaster Snikch",
     "author": "Games Workshop (Finecast)",
-    "price": "1463",
+    "price": 1463,
     "image": "/uploads/citadel-skaven-10.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1942,7 +1942,7 @@
     "category": "citadel-skaven",
     "title": "Clawlord (Queek Headtaker)",
     "author": "Games Workshop",
-    "price": "1463",
+    "price": 1463,
     "image": "/uploads/citadel-skaven-11.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1957,7 +1957,7 @@
     "category": "citadel-skaven",
     "title": "Doom-Flayer (Weapon Team)",
     "author": "Games Workshop",
-    "price": "2280",
+    "price": 2280,
     "image": "/uploads/citadel-skaven-12.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1972,7 +1972,7 @@
     "category": "citadel-skaven",
     "title": "Warlock Engineers",
     "author": "Games Workshop",
-    "price": "1900",
+    "price": 1900,
     "image": "/uploads/citadel-skaven-13.jpg",
     "createdAt": "2026-07-20T21:32:28.287Z",
     "images": [
@@ -1987,7 +1987,7 @@
     "category": "citadel-skaven",
     "title": "Warp-Grinder (Weapon Team)",
     "author": "Games Workshop",
-    "price": "1140",
+    "price": 1140,
     "image": "/uploads/citadel-skaven-14.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2002,7 +2002,7 @@
     "category": "citadel-skaven",
     "title": "Rat Ogors, Giant Rats and Packmasters",
     "author": "Games Workshop",
-    "price": "3040",
+    "price": 3040,
     "image": "/uploads/citadel-skaven-15.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2017,7 +2017,7 @@
     "category": "citadel-skaven",
     "title": "Warplock Jezzails",
     "author": "Games Workshop",
-    "price": "4180",
+    "price": 4180,
     "image": "/uploads/citadel-skaven-16.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2032,7 +2032,7 @@
     "category": "citadel-skaven",
     "title": "Master Moulder (Packmaster)",
     "author": "Games Workshop",
-    "price": "1140",
+    "price": 1140,
     "image": "/uploads/citadel-skaven-17.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2047,7 +2047,7 @@
     "category": "citadel-skaven",
     "title": "Skryre Acolytes (Poison Wind Globadier)",
     "author": "Games Workshop",
-    "price": "1140",
+    "price": 1140,
     "image": "/uploads/citadel-skaven-18.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2062,7 +2062,7 @@
     "category": "citadel-skaven",
     "title": "Ratling Gun (Weapon Team)",
     "author": "Games Workshop",
-    "price": "1140",
+    "price": 1140,
     "image": "/uploads/citadel-skaven-19.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2077,7 +2077,7 @@
     "category": "citadel-skaven",
     "title": "Rat Swarms",
     "author": "Games Workshop",
-    "price": "1368",
+    "price": 1368,
     "image": "/uploads/citadel-skaven-20.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2092,7 +2092,7 @@
     "category": "citadel-skaven",
     "title": "Arch-Warlock Ikit Claw",
     "author": "Games Workshop",
-    "price": "1368",
+    "price": 1368,
     "image": "/uploads/citadel-skaven-21.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2107,7 +2107,7 @@
     "category": "citadel-skaven",
     "title": "Warpfire Thrower (2019)",
     "author": "Games Workshop",
-    "price": "1368",
+    "price": 1368,
     "image": "/uploads/citadel-skaven-22.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2122,7 +2122,7 @@
     "category": "citadel-skaven",
     "title": "Clawlord (Warlord 2014)",
     "author": "Games Workshop",
-    "price": "1900",
+    "price": 1900,
     "image": "/uploads/citadel-skaven-23.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2137,7 +2137,7 @@
     "category": "citadel-skaven",
     "title": "Gutter Runners",
     "author": "Games Workshop (Metal)",
-    "price": "1140",
+    "price": 1140,
     "image": "/uploads/citadel-skaven-24.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2152,7 +2152,7 @@
     "category": "citadel-skaven",
     "title": "Plague Censer Bearers",
     "author": "Games Workshop",
-    "price": "2660",
+    "price": 2660,
     "image": "/uploads/citadel-skaven-25.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2167,7 +2167,7 @@
     "category": "citadel-skaven",
     "title": "Grey Seer (2014)",
     "author": "Games Workshop",
-    "price": "1900",
+    "price": 1900,
     "image": "/uploads/citadel-skaven-26.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2182,7 +2182,7 @@
     "category": "citadel-skaven",
     "title": "Night Runners",
     "author": "Games Workshop",
-    "price": "2660",
+    "price": 2660,
     "image": "/uploads/citadel-skaven-27.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2197,7 +2197,7 @@
     "category": "citadel-skaven",
     "title": "Plague Priest Skrolk",
     "author": "Games Workshop",
-    "price": "1140",
+    "price": 1140,
     "image": "/uploads/citadel-skaven-28.jpg",
     "createdAt": "2026-07-20T21:32:28.288Z",
     "images": [
@@ -2212,7 +2212,7 @@
     "category": "citadel-skaven",
     "title": "Warlord Spinetail",
     "author": "Games Workshop (re-cast)",
-    "price": "400",
+    "price": 400,
     "image": "/uploads/citadel-skaven-29.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2228,7 +2228,7 @@
     "category": "citadel-skaven",
     "title": "Poisoned Wind Mortar",
     "author": "Games Workshop (re-cast)",
-    "price": "550",
+    "price": 550,
     "image": "/uploads/citadel-skaven-30.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2243,7 +2243,7 @@
     "category": "citadel-skaven",
     "title": "Skaven Deathmaster (2022)",
     "author": "Games Workshop (re-cast)",
-    "price": "600",
+    "price": 600,
     "image": "/uploads/citadel-skaven-31.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2258,7 +2258,7 @@
     "category": "citadel-skaven",
     "title": "Skittershank's Clawpack",
     "author": "Games Workshop (re-cast) (Underworlds)",
-    "price": "1250",
+    "price": 1250,
     "image": "/uploads/citadel-skaven-32.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2273,7 +2273,7 @@
     "category": "citadel-skaven",
     "title": "Skaven Gnawholes",
     "author": "Games Workshop",
-    "price": "4800",
+    "price": 4800,
     "image": "/uploads/citadel-skaven-33.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2288,7 +2288,7 @@
     "category": "citadel-skaven",
     "title": "Endless Spells: Skaven",
     "author": "Games Workshop",
-    "price": "3200",
+    "price": 3200,
     "image": "/uploads/citadel-skaven-34.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2303,7 +2303,7 @@
     "category": "citadel-skaven",
     "title": "Screaming Bell",
     "author": "Games Workshop",
-    "price": "2000",
+    "price": 2000,
     "image": "/uploads/citadel-skaven-35.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2318,7 +2318,7 @@
     "category": "citadel-skaven",
     "title": "Clanrats",
     "author": "Games Workshop",
-    "price": "3300",
+    "price": 3300,
     "image": "/uploads/citadel-skaven-36.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2333,7 +2333,7 @@
     "category": "citadel-skaven",
     "title": "Skabbik's Plaguepack",
     "author": "Games Workshop",
-    "price": "4862",
+    "price": 4862,
     "image": "/uploads/citadel-skaven-37.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2348,7 +2348,7 @@
     "category": "citadel-skaven",
     "title": "Island of Blood",
     "author": "warlord, warlock engineer, 40 clan rats, packmaster, 2 rat ogres, warpfire thrower, poison wind mortar",
-    "price": "20000",
+    "price": 20000,
     "image": "/uploads/citadel-skaven-38.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2364,7 +2364,7 @@
     "category": "citadel-skaven",
     "title": "Skaventide",
     "author": "Clawlord on Gnaw-Beast, Grey Seer 2024my, Warlock Engineer 2024my, Ratling Warpblaster, 3 Rat Ogors 2024my, 3 Warplock Jezzails 2024my, 40 Clanrats 2024my, terrain",
-    "price": "11000",
+    "price": 11000,
     "image": "/uploads/citadel-skaven-39.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2379,7 +2379,7 @@
     "category": "citadel-skaven",
     "title": "Skaventide",
     "author": "Clawlord on Gnaw-Beast, Grey Seer 2024my, Warlock Engineer 2024my, Ratling Warpblaster, 3 Rat Ogors 2024my, 3 Warplock Jezzails 2024my, 40 Clanrats 2024my, terrain",
-    "price": "21000",
+    "price": 21000,
     "image": "/uploads/citadel-skaven-40.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2394,7 +2394,7 @@
     "category": "citadel-skaven",
     "title": "Stormvermin",
     "author": "Games Workshop 2024",
-    "price": "7000",
+    "price": 7000,
     "image": "/uploads/citadel-skaven-41.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2409,7 +2409,7 @@
     "category": "citadel-skaven",
     "title": "Vizzik Skour, Prophet of the Horned Rat",
     "author": "Games Workshop 2024",
-    "price": "12500",
+    "price": 12500,
     "image": "/uploads/citadel-skaven-42.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2424,7 +2424,7 @@
     "category": "citadel-skaven",
     "title": "Kettek Throatbite",
     "author": "Games Workshop Commemorative 2025",
-    "price": "6500",
+    "price": 6500,
     "image": "/uploads/citadel-skaven-43.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2439,7 +2439,7 @@
     "category": "citadel-skaven",
     "title": "Brood Horror",
     "author": "Games Workshop 2024",
-    "price": "5865",
+    "price": 5865,
     "image": "/uploads/citadel-skaven-44.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2454,7 +2454,7 @@
     "category": "citadel-skaven",
     "title": "Doom-Flayers",
     "author": "Games Workshop 2024",
-    "price": "4902",
+    "price": 4902,
     "image": "/uploads/citadel-skaven-45.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2469,7 +2469,7 @@
     "category": "citadel-skaven",
     "title": "Krittok Foulblade",
     "author": "Games Workshop 2024",
-    "price": "4150",
+    "price": 4150,
     "image": "/uploads/citadel-skaven-46.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2484,7 +2484,7 @@
     "category": "citadel-skaven",
     "title": "Arch-Warlock",
     "author": "Games Workshop 2024",
-    "price": "4000",
+    "price": 4000,
     "image": "/uploads/citadel-skaven-47.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2499,7 +2499,7 @@
     "category": "citadel-skaven",
     "title": "Warlock Galvaneer",
     "author": "Games Workshop 2024",
-    "price": "3450",
+    "price": 3450,
     "image": "/uploads/citadel-skaven-48.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2514,7 +2514,7 @@
     "category": "citadel-skaven",
     "title": "Master Moulder",
     "author": "Games Workshop 2024",
-    "price": "3450",
+    "price": 3450,
     "image": "/uploads/citadel-skaven-49.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2529,7 +2529,7 @@
     "category": "citadel-skaven",
     "title": "Warpspark Weapon Battery",
     "author": "Games Workshop 2024",
-    "price": "5000",
+    "price": 5000,
     "image": "/uploads/citadel-skaven-50.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2544,7 +2544,7 @@
     "category": "citadel-skaven",
     "title": "Warp-Grinder",
     "author": "Games Workshop 2024",
-    "price": "4650",
+    "price": 4650,
     "image": "/uploads/citadel-skaven-51.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2559,7 +2559,7 @@
     "category": "citadel-skaven",
     "title": "Acolyte Globadiers",
     "author": "Games Workshop 2024",
-    "price": "5400",
+    "price": 5400,
     "image": "/uploads/citadel-skaven-52.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2574,7 +2574,7 @@
     "category": "citadel-skaven",
     "title": "Zikkit's Tunnelpack",
     "author": "Games Workshop 2024 (re-cast)",
-    "price": "1000",
+    "price": 1000,
     "image": "/uploads/citadel-skaven-53.jpg",
     "createdAt": "2026-07-20T21:32:28.289Z",
     "images": [
@@ -2589,7 +2589,7 @@
     "category": "stone-dice",
     "title": "Moon Style",
     "author": "Aquamarine Zircon",
-    "price": "90",
+    "price": 90,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2607,7 +2607,7 @@
     "category": "stone-dice",
     "title": "Anubis",
     "author": "",
-    "price": "90",
+    "price": 90,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2625,7 +2625,7 @@
     "category": "stone-dice",
     "title": "Blood Red",
     "author": "Garnet Zircon",
-    "price": "89",
+    "price": 89,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2643,7 +2643,7 @@
     "category": "stone-dice",
     "title": "Black",
     "author": "Raised Obsidian",
-    "price": "50",
+    "price": 50,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2661,7 +2661,7 @@
     "category": "stone-dice",
     "title": "Cat Style",
     "author": "Dichroic Glass",
-    "price": "99",
+    "price": 99,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2680,7 +2680,7 @@
     "category": "stone-dice",
     "title": "Micro dice",
     "author": "Semiprecious stones",
-    "price": "14",
+    "price": 14,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2698,7 +2698,7 @@
     "category": "metal-figurines",
     "title": "Pioneer Martial Dice",
     "author": "",
-    "price": "144",
+    "price": 144,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2715,7 +2715,7 @@
     "category": "resin-dice",
     "title": "Sperm",
     "author": "liquid core",
-    "price": "115",
+    "price": 115,
     "recaster": "",
     "combatPoints": "",
     "status": "",
@@ -2732,7 +2732,7 @@
     "category": "old-citadel-skaven",
     "title": "Assasssin Master (1999)",
     "author": "Games Workshop (Mordheim) (Metal) Sealed",
-    "price": "4000",
+    "price": 4000,
     "image": "/uploads/38684092-55ad-4315-869b-1290100ce6dc.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2750,7 +2750,7 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Slaves (1986)",
     "author": "Games Workshop (3-rd edition) (Metal) [2 pcs] Sealed",
-    "price": "7000",
+    "price": 7000,
     "image": "/uploads/48c9aad3-dca7-4aa5-a30b-5da10e4d8535.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2768,7 +2768,7 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Warriors (1987)",
     "author": "Games Workshop (4-th edition) (Metal) [5 pcs] Sealed",
-    "price": "6000",
+    "price": 6000,
     "image": "/uploads/f366c5d7-7880-4b3d-861c-353458bf8675.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2786,7 +2786,7 @@
     "category": "old-citadel-skaven",
     "title": "Master Moulder",
     "author": "Games Workshop (5-th edition) (Metal) [5 pcs] Sealed",
-    "price": "10000",
+    "price": 10000,
     "image": "/uploads/ea5ce692-6ee3-4a68-8d8d-be813f40e6fb.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2803,7 +2803,7 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Slaves (1988)",
     "author": "Games Workshop (3-th edition) (Metal) [5 pcs] Sealed",
-    "price": "4500",
+    "price": 4500,
     "image": "/uploads/67277be5-5970-48ec-a202-78347f4f99a3.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2820,7 +2820,7 @@
     "category": "old-citadel-skaven",
     "title": "Thanquol and Boneripper (olden)",
     "author": "Games Workshop (re-cast)",
-    "price": "950",
+    "price": 950,
     "image": "/uploads/0078ddb7-1ebe-4248-adcb-c2ee792c4b01.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2836,7 +2836,7 @@
     "category": "old-citadel-skaven",
     "title": "Warlord (olden)",
     "author": "Games Workshop (re-cast)",
-    "price": "300",
+    "price": 300,
     "image": "/uploads/564c72fe-b1de-4b42-b89e-836190717b5c.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2852,7 +2852,7 @@
     "category": "old-citadel-skaven",
     "title": "Mordheim Warband",
     "author": "Games Workshop (2 assassin adepts, sorcerer, 2 black skaven, 2 night runner, rat ogre, Veskit) (re-cast)",
-    "price": "2600",
+    "price": 2600,
     "image": "/uploads/cb207b7e-c9c5-4f25-8e3c-cba36f3d146c.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2868,7 +2868,7 @@
     "category": "old-citadel-skaven",
     "title": "Olden Jezzail Team (3)",
     "author": "Games Workshop (re-cast)",
-    "price": "2000",
+    "price": 2000,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -2883,7 +2883,7 @@
     "category": "old-citadel-skaven",
     "title": "Stormvermin FCG (10) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "2625",
+    "price": 2625,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -2898,7 +2898,7 @@
     "category": "old-citadel-skaven",
     "title": "Stormvermin FCG (10) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "2625",
+    "price": 2625,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -2913,7 +2913,7 @@
     "category": "old-citadel-skaven",
     "title": "Warp Lightning Cannon (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "2000",
+    "price": 2000,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -2928,7 +2928,7 @@
     "category": "old-citadel-skaven",
     "title": "Lord Nurglich (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "1100",
+    "price": 1100,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -2943,7 +2943,7 @@
     "category": "old-citadel-skaven",
     "title": "Standard Bearer Warlord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "500",
+    "price": 500,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -2958,7 +2958,7 @@
     "category": "old-citadel-skaven",
     "title": "Verminlord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "800",
+    "price": 800,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -2973,7 +2973,7 @@
     "category": "old-citadel-skaven",
     "title": "Warlord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "400",
+    "price": 400,
     "image": "/uploads/2606bd49-0e46-4298-ad4a-131f59147752.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -2989,7 +2989,7 @@
     "category": "old-citadel-skaven",
     "title": "Plague Lord (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "400",
+    "price": 400,
     "image": "/uploads/2443dd1e-f5a1-4b98-a717-f9843bedba05.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3005,7 +3005,7 @@
     "category": "old-citadel-skaven",
     "title": "Packmaster Greel (old Master Moulder)",
     "author": "Games Workshop (re-cast)",
-    "price": "450",
+    "price": 450,
     "image": "/uploads/20ace8de-0e55-4d38-b762-86f8ccd4232b.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3021,7 +3021,7 @@
     "category": "old-citadel-skaven",
     "title": "Warplock Engineer Ratchitt (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "400",
+    "price": 400,
     "image": "/uploads/5614f642-04e8-4e34-a3fd-5d2930024825.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3037,7 +3037,7 @@
     "category": "old-citadel-skaven",
     "title": "Throt the Unclean (2001)",
     "author": "Games Workshop (re-cast)",
-    "price": "400",
+    "price": 400,
     "image": "/uploads/ae00893c-695b-4a9d-ac42-e1ce0ac9ec6c.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3053,7 +3053,7 @@
     "category": "old-citadel-skaven",
     "title": "Augmented Rat Ogre",
     "author": "Games Workshop (by Phil Kelly) (re-cast)",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/7a0e5a6a-bfa7-4fcd-acee-a3a714083bf8.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3069,7 +3069,7 @@
     "category": "old-citadel-skaven",
     "title": "Rat Ogre olden",
     "author": "Games Workshop (re-cast)",
-    "price": "450",
+    "price": 450,
     "image": "/uploads/06fe63f2-1824-404f-aabe-f60dc9ededa8.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3085,7 +3085,7 @@
     "category": "old-citadel-skaven",
     "title": "Standart Bearers olden",
     "author": "Games Workshop (re-cast)",
-    "price": "300",
+    "price": 300,
     "image": "/uploads/7a68f41f-5144-4470-b025-97480965a696.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3101,7 +3101,7 @@
     "category": "old-citadel-skaven",
     "title": "Tretch Craventail",
     "author": "Games Workshop (re-cast)",
-    "price": "350",
+    "price": 350,
     "image": "/uploads/4fdcbe5c-bf1f-407b-a959-abcdca15ecb1.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3117,7 +3117,7 @@
     "category": "old-citadel-skaven",
     "title": "Warlord (Golden Demon 2011 limited)",
     "author": "Games Workshop (re-cast)",
-    "price": "350",
+    "price": 350,
     "image": "/uploads/a3bf177d-fd3e-42cb-a8f4-55df9868f6a2.webp",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [
@@ -3133,7 +3133,7 @@
     "category": "old-citadel-skaven",
     "title": "Screaming Bell (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "2500",
+    "price": 2500,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3148,7 +3148,7 @@
     "category": "old-citadel-skaven",
     "title": "Death Master Snikch (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "350",
+    "price": 350,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3163,7 +3163,7 @@
     "category": "old-citadel-skaven",
     "title": "Ikit Claw (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "450",
+    "price": 450,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3178,7 +3178,7 @@
     "category": "old-citadel-skaven",
     "title": "Master Moulder (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "300",
+    "price": 300,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3193,7 +3193,7 @@
     "category": "old-citadel-skaven",
     "title": "Giant Rats (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "500",
+    "price": 500,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3208,7 +3208,7 @@
     "category": "old-citadel-skaven",
     "title": "Giant Rats (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "500",
+    "price": 500,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3223,7 +3223,7 @@
     "category": "old-citadel-skaven",
     "title": "Rat Swarms (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "450",
+    "price": 450,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3238,7 +3238,7 @@
     "category": "old-citadel-skaven",
     "title": "Skaven Slaves (5) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "1250",
+    "price": 1250,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3253,7 +3253,7 @@
     "category": "old-citadel-skaven",
     "title": "Ratling Gun (2) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "1000",
+    "price": 1000,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3268,7 +3268,7 @@
     "category": "old-citadel-skaven",
     "title": "Warpfire Thrower (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "500",
+    "price": 500,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3283,7 +3283,7 @@
     "category": "old-citadel-skaven",
     "title": "Clanrats (5) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "1350",
+    "price": 1350,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3298,7 +3298,7 @@
     "category": "old-citadel-skaven",
     "title": "Skryre Acolytes (3) (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "900",
+    "price": 900,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3313,7 +3313,7 @@
     "category": "old-citadel-skaven",
     "title": "Boneripper (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "750",
+    "price": 750,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3328,7 +3328,7 @@
     "category": "old-citadel-skaven",
     "title": "Queek Headtaker (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "400",
+    "price": 400,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3343,7 +3343,7 @@
     "category": "old-citadel-skaven",
     "title": "Warlords (3) (olden)",
     "author": "Games Workshop (re-cast)",
-    "price": "950",
+    "price": 950,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3358,7 +3358,7 @@
     "category": "old-citadel-skaven",
     "title": "Assassin (old)",
     "author": "Games Workshop (re-cast)",
-    "price": "250",
+    "price": 250,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3373,7 +3373,7 @@
     "category": "old-citadel-skaven",
     "title": "Rat Ogre (oldest)",
     "author": "Games Workshop (re-cast)",
-    "price": "750",
+    "price": 750,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T15:48:41.508Z",
     "images": [],
@@ -3388,7 +3388,7 @@
     "category": "blood-bowl-skaven",
     "title": "Bloodbowl Skaven Team - Skavenblight Scramblers",
     "author": "Games Workshop (Assembled, primed)",
-    "price": "2700",
+    "price": 2700,
     "image": "/uploads/6798c323-2a1c-45b4-a716-22a9dcaac9d5.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3403,7 +3403,7 @@
     "category": "blood-bowl-skaven",
     "title": "Skaven Team Booster",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "1050",
+    "price": 1050,
     "image": "/uploads/b894695f-d310-46c5-a21a-15a309a69fe9.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3418,7 +3418,7 @@
     "category": "blood-bowl-skaven",
     "title": "Rat Ogre 2022",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "850",
+    "price": 850,
     "image": "/uploads/fd347ba2-ea15-4582-be02-000a1effa915.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3433,7 +3433,7 @@
     "category": "blood-bowl-skaven",
     "title": "Rat Ogre 2017",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "850",
+    "price": 850,
     "image": "/uploads/4991c301-9840-4708-983f-8f296fe77461.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3448,7 +3448,7 @@
     "category": "blood-bowl-skaven",
     "title": "Glart Smashrip",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "600",
+    "price": 600,
     "image": "/uploads/0e8ccd3b-40a2-4180-a91a-72060abf7a20.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3463,7 +3463,7 @@
     "category": "blood-bowl-skaven",
     "title": "Hakflem Skuttlespike",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "550",
+    "price": 550,
     "image": "/uploads/fb09324b-bc56-41ef-a4a0-6f18fa038e20.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3478,7 +3478,7 @@
     "category": "blood-bowl-skaven",
     "title": "Kreek ‘the Verminator’ Rustgouger",
     "author": "Forgeworld Blood Bowl (re-cast)",
-    "price": "900",
+    "price": 900,
     "image": "/uploads/e16451d0-ad36-4feb-93f7-35c41627ae22.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3493,7 +3493,7 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Apothecary",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/012ac266-398f-4aee-a0bc-98da9e2a5c7a.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3508,7 +3508,7 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Fan Opossum",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/0d3f7687-1e1b-4bc8-b7e3-9768229dbd9b.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3523,7 +3523,7 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Rat Referee (Coach)",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/f5ae9bdd-ab3d-4b2b-9f34-5a039107b6a7.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3538,7 +3538,7 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Rat Food Seller",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/54da2532-9c50-4651-b43c-2dddeda1943f.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3553,7 +3553,7 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Tavern Girl",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/291ffa81-9fa8-47c7-8a82-357f86a52f6e.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3568,7 +3568,7 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Goblin Water Boy",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/989a8d97-07a6-41b0-b83b-5018544bc10b.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3583,7 +3583,7 @@
     "category": "blood-bowl-skaven",
     "title": "Blood Bowl Cheerleaders (6)",
     "author": "Punga Miniatures Pi'Rates Support (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/230f5d3a-de96-473b-a4d4-37c1a1ed77ca.webp",
     "createdAt": "2026-07-22T16:32:18.872Z",
     "images": [
@@ -3599,7 +3599,7 @@
     "category": "forgeworld-skaven",
     "title": "Warpgnaw Verminlord (Exalted Verminlord)",
     "author": "Forgeworld (re-cast)",
-    "price": "2250",
+    "price": 2250,
     "image": "/uploads/0fcf0e89-218e-4285-a469-dc3b94c340cf.webp",
     "createdAt": "2026-07-22T16:42:28.890Z",
     "images": [
@@ -3614,7 +3614,7 @@
     "category": "forgeworld-skaven",
     "title": "Clawlord on Brood Horror",
     "author": "Forgeworld (re-cast)",
-    "price": "2300",
+    "price": 2300,
     "image": "/uploads/522d597b-1f4d-4ba5-8098-450254c21689.webp",
     "createdAt": "2026-07-22T16:42:28.890Z",
     "images": [
@@ -3629,7 +3629,7 @@
     "category": "forgeworld-skaven",
     "title": "Wolf Rats",
     "author": "Forgeworld (re-cast)",
-    "price": "1800",
+    "price": 1800,
     "image": "/uploads/422e5893-4ac0-43b3-80b8-42b7dcd03ceb.webp",
     "createdAt": "2026-07-22T16:42:28.890Z",
     "images": [
@@ -3644,7 +3644,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Plague Doctor",
     "author": "Punga Miniatures",
-    "price": "700",
+    "price": 700,
     "image": "/uploads/fd83b2fd-3dbd-41a8-8216-7848c31c3301.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3659,7 +3659,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Ratman Mortar Team / Globe Launcher",
     "author": "Punga Miniatures",
-    "price": "850",
+    "price": 850,
     "image": "/uploads/0298ebf5-3cce-4c8d-917b-7437c62f56ae.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3674,7 +3674,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Elite Ratman Guard War Litter / Vermin Guard Litter",
     "author": "Punga Miniatures",
-    "price": "850",
+    "price": 850,
     "image": "/uploads/f64e5b8b-7e78-4240-a6d3-fa7e178002c9.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3689,7 +3689,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Teethbreaker Gun",
     "author": "Punga Miniatures",
-    "price": "750",
+    "price": 750,
     "image": "/uploads/ffdc02cd-b2f5-415f-8ac5-6389536c8a53.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3704,7 +3704,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Rat Ogre with War Litter",
     "author": "Punga Miniatures",
-    "price": "1100",
+    "price": 1100,
     "image": "/uploads/c4e2cb83-18f9-4cb0-a5f1-d383a4803d19.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3719,7 +3719,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Plague Prophet",
     "author": "Punga Miniatures",
-    "price": "750",
+    "price": 750,
     "image": "/uploads/174c91c2-fb54-4bde-ada0-7c49c4ff41f7.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3734,7 +3734,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Rat Cavalry",
     "author": "Punga Miniatures",
-    "price": "3400",
+    "price": 3400,
     "image": "/uploads/6de56e2d-bf54-47c4-ae41-4428d9731964.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3749,7 +3749,7 @@
     "category": "3d-prints-skaven",
     "title": "Rat Snipers",
     "author": "Eman G (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/9c65644f-bda8-499b-b71b-0e3446f0f24f.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3764,7 +3764,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Deadly Runners (5)",
     "author": "Punga Miniatures",
-    "price": "1650",
+    "price": 1650,
     "image": "/uploads/0d432cf6-62c5-49df-94c1-fe93d666b464.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3779,7 +3779,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Plague Monk Musician",
     "author": "Punga Miniatures",
-    "price": "650",
+    "price": 650,
     "image": "/uploads/f193ab4c-b28a-4579-860b-1267ba2839c9.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3794,7 +3794,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Globe Throwers (5)",
     "author": "Punga Miniatures",
-    "price": "1700",
+    "price": 1700,
     "image": "/uploads/4793604c-ccf2-4824-a5ff-a69a2873ab4b.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3809,7 +3809,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Flamethrowers",
     "author": "Punga Miniatures",
-    "price": "800",
+    "price": 800,
     "image": "/uploads/493e11f7-f3b1-4236-b49e-3f9985ccbbce.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3824,7 +3824,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Teethbreaker Gun Crew",
     "author": "Punga Miniatures",
-    "price": "850",
+    "price": 850,
     "image": "/uploads/e611fbd1-8d28-4d37-a02c-6014208153f5.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3839,7 +3839,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Gutter Blades (with alternative heads)",
     "author": "Punga Miniatures",
-    "price": "2400",
+    "price": 2400,
     "image": "/uploads/7f6a58aa-1191-48a8-b8a2-834511368a89.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3854,7 +3854,7 @@
     "category": "punga-miniatures-skaven",
     "title": "Giant Rat 4",
     "author": "Punga Miniatures",
-    "price": "300",
+    "price": 300,
     "image": "/uploads/f3ac0e37-f303-4ccf-a085-13d4bb0c8988.webp",
     "createdAt": "2026-07-22T16:47:21.428Z",
     "images": [
@@ -3869,7 +3869,7 @@
     "category": "3d-prints-skaven",
     "title": "Heskit One-Eye",
     "author": "One Page Rules Engineer + WesternCossack Steam Tank (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/563aefb2-9f1f-42f7-965d-79a411f25468.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -3884,7 +3884,7 @@
     "category": "3d-prints-skaven",
     "title": "Heavy Weapons Rat",
     "author": "Eman G (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [],
@@ -3898,7 +3898,7 @@
     "category": "3d-prints-skaven",
     "title": "Sawyer Phantom Crossbow",
     "author": "Sewers of Thamarya (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [],
@@ -3912,7 +3912,7 @@
     "category": "3d-prints-skaven",
     "title": "Sawyer Phantom Crossbows Assassin",
     "author": "Sewers of Thamarya (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [],
@@ -3926,7 +3926,7 @@
     "category": "3d-prints-skaven",
     "title": "Rat Brothers Grimm",
     "author": "Tails from the Garden vol.2 (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [],
@@ -3940,7 +3940,7 @@
     "category": "3d-prints-skaven",
     "title": "Rattling Gun Weapon Teams (3)",
     "author": "Eman G (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [],
@@ -3954,7 +3954,7 @@
     "category": "3d-prints-skaven",
     "title": "Shootman Ratmen Set 1",
     "author": "vinciminiatures (3d print)",
-    "price": "1000",
+    "price": 1000,
     "image": "/uploads/6bf75f03-c444-475a-ade4-efa05ef5f8d2.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -3969,7 +3969,7 @@
     "category": "3d-prints-skaven",
     "title": "Shootman Ratmen Set 2",
     "author": "vinciminiatures (3d print)",
-    "price": "1000",
+    "price": 1000,
     "image": "/uploads/e009dbe1-54df-40a7-a897-35c819f48059.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -3984,7 +3984,7 @@
     "category": "3d-prints-skaven",
     "title": "Rat Walker 1",
     "author": "vinciminiatures (3d print)",
-    "price": "700",
+    "price": 700,
     "image": "/uploads/0ed3c38b-8b9d-4a74-a0ab-834dd9e4cf7a.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -3999,7 +3999,7 @@
     "category": "3d-prints-skaven",
     "title": "Gunner Ratmen Set 1",
     "author": "vinciminiatures (3d print)",
-    "price": "1000",
+    "price": 1000,
     "image": "/uploads/bd19d6cf-dca8-47fb-81cc-04ca74282f58.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4014,7 +4014,7 @@
     "category": "3d-prints-skaven",
     "title": "Engineer with a Rocket-Glaive",
     "author": "Eman G (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/231feaac-59c8-406a-84b0-384ac13987ec.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4029,7 +4029,7 @@
     "category": "3d-prints-skaven",
     "title": "Bombardier with a DoomRocket-Launcher",
     "author": "Eman G (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/9e85f655-aac5-4c9f-a211-2b292465fe68.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4044,7 +4044,7 @@
     "category": "3d-prints-skaven",
     "title": "Adeptus-Rodenticus with a Rocket-Glaive",
     "author": "Eman G (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/7e659810-ac37-4f7f-96ac-f88a84285c82.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4059,7 +4059,7 @@
     "category": "3d-prints-skaven",
     "title": "The Black Paw (5)",
     "author": "Eman G (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/e45fdb1e-568a-480b-a034-5daa2bd6be6b.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4074,7 +4074,7 @@
     "category": "3d-prints-skaven",
     "title": "Rat Walker 2",
     "author": "vinciminiatures (3d print)",
-    "price": "700",
+    "price": 700,
     "image": "/uploads/f8db5f2a-3736-4b5a-b222-a6d50cbadd2e.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4089,7 +4089,7 @@
     "category": "3d-prints-skaven",
     "title": "Rat Walker 3",
     "author": "vinciminiatures (3d print)",
-    "price": "700",
+    "price": 700,
     "image": "/uploads/91f1e36e-8725-4ca3-b882-074d0760f778.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4104,7 +4104,7 @@
     "category": "3d-prints-skaven",
     "title": "Ratmen Engineers (3)",
     "author": "One Page Rules (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/80659031-c68a-49f7-a493-02dfd99370de.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4119,7 +4119,7 @@
     "category": "3d-prints-skaven",
     "title": "Ratfolk Chainguns (2)",
     "author": "Duncan Shadow (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/4dab098b-c489-4da1-99cd-7883c2022438.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4134,7 +4134,7 @@
     "category": "3d-prints-skaven",
     "title": "Ratfolk Assassin",
     "author": "Manuel_Boria (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/9f00dc28-5b9d-484b-8481-fc9816e0d44a.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4149,7 +4149,7 @@
     "category": "3d-prints-skaven",
     "title": "Rat Drummer",
     "author": "CrossLances (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/a9a29f1d-fc8b-4390-99be-f3fed59f53ce.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4164,7 +4164,7 @@
     "category": "3d-prints-skaven",
     "title": "Ratfolk Sniper",
     "author": "Duncan Shadow (3d print)",
-    "price": "100",
+    "price": 100,
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/fe783b10-b041-4a15-b3e6-ca06d5b91e13.jpg"
@@ -4180,7 +4180,7 @@
     "category": "3d-prints-skaven",
     "title": "Bomber Ratmen Set 1",
     "author": "vinciminiatures (3d print)",
-    "price": "700",
+    "price": 700,
     "image": "/uploads/08e04357-f474-4ab1-8619-09da5e64bc0b.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4195,7 +4195,7 @@
     "category": "3d-prints-skaven",
     "title": "Sniper Engineer",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/b3662856-7554-4f1b-8d3b-bc92059ba2c9.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4210,7 +4210,7 @@
     "category": "3d-prints-skaven",
     "title": "Warlock",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/6a9b0de7-011d-4177-ad0d-b7ca2aae229b.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4225,7 +4225,7 @@
     "category": "3d-prints-skaven",
     "title": "Snipers 1",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/88261b88-f43c-4774-a668-b697f7f66c77.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4240,7 +4240,7 @@
     "category": "3d-prints-skaven",
     "title": "Snipers 2",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/e02d9580-efe1-49f1-bd19-5e033795ae50.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4255,7 +4255,7 @@
     "category": "3d-prints-skaven",
     "title": "Snipers 3",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/c1a719e8-33f3-4db5-84d0-ee6c2d6be5af.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4270,7 +4270,7 @@
     "category": "3d-prints-skaven",
     "title": "Grenadiers",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/1c327b54-6f07-4fcf-a155-4afa69230cb1.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4285,7 +4285,7 @@
     "category": "3d-prints-skaven",
     "title": "Giant Swarm",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/b809d93f-2c0f-40b1-8c0a-a205aa68756a.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4300,7 +4300,7 @@
     "category": "3d-prints-skaven",
     "title": "Assassin",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/c1ff1d2c-8201-4c3a-8956-4c6d6c258e84.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4315,7 +4315,7 @@
     "category": "3d-prints-skaven",
     "title": "Scouts",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
       "/uploads/52695c8c-dcc4-4ea0-8f86-4f2dcebbd1fd.jpg"
@@ -4331,7 +4331,7 @@
     "category": "3d-prints-skaven",
     "title": "Weapon Team Grinder",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/485a748e-6eab-4e5d-b259-a2ec4fa432af.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4346,7 +4346,7 @@
     "category": "3d-prints-skaven",
     "title": "Weapon Team Ratling Gun",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/93efdd96-cf99-41b0-97f2-1535f0e6a27c.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4361,7 +4361,7 @@
     "category": "3d-prints-skaven",
     "title": "Weapon Team Warpfire Thrower",
     "author": "One Page Rules",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/3bbdaf00-3609-4a6a-915b-e0b4159409e8.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4376,7 +4376,7 @@
     "category": "3d-prints-skaven",
     "title": "Rat Ogre",
     "author": "Manuel_Boria",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/7e022618-08fd-44d5-9122-f2a1f84446aa.webp",
     "createdAt": "2026-07-22T16:56:26.329Z",
     "images": [
@@ -4391,7 +4391,7 @@
     "author": "Games Workshop (painted)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3150",
+    "price": 3150,
     "status": "Painted",
     "image": "/uploads/d746adc2-2638-44a2-a3fa-1bc1a8a7ec01.jpg",
     "images": [
@@ -4412,7 +4412,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3300",
+    "price": 3300,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/73ce376e-9193-4de3-b337-8d52c1da3aae.jpg",
     "images": [
@@ -4427,7 +4427,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3300",
+    "price": 3300,
     "status": "Built",
     "image": "/uploads/d1f9953c-60c6-4c3d-a57e-3c9fc1851c04.jpg",
     "images": [
@@ -4442,7 +4442,7 @@
     "author": "Games Workshop (Warboss in Mega Armour, 20 Ork Boyz (2018 4th ed), 3 Deffkoptas, Deff Dread)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "8900",
+    "price": 8900,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/c7905f5c-2d83-4f80-a052-212f76f91196.jpg",
     "images": [
@@ -4457,7 +4457,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "4800",
+    "price": 4800,
     "status": "Built",
     "image": "/uploads/32113cdb-dc0d-4487-9415-2a06e0aec991.jpg",
     "images": [
@@ -4472,7 +4472,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "9000",
+    "price": 9000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/b1b5e2c9-30c8-4397-8b5f-f83f84048adf.jpg",
     "images": [
@@ -4487,7 +4487,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "2800",
+    "price": 2800,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/32393bde-04df-4e95-9255-e1e896bdc099.jpg",
     "images": [
@@ -4502,7 +4502,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3150",
+    "price": 3150,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/5d70af13-e425-46d5-ad55-781f8323e2a9.jpg",
     "images": [
@@ -4517,7 +4517,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "7900",
+    "price": 7900,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/7cf8d99b-2acc-4b1e-8b60-5be1daee854a.jpg",
     "images": [
@@ -4532,7 +4532,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1800",
+    "price": 1800,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/d795d641-f92d-4127-9c25-80826f78758e.jpg",
     "images": [
@@ -4547,7 +4547,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3400",
+    "price": 3400,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/4fa30727-edd4-4584-9f8b-73a27be8ce73.jpg",
     "images": [
@@ -4562,7 +4562,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "2100",
+    "price": 2100,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/de617c8e-8bce-46a1-8f3b-9ab8115f429c.jpg",
     "images": [
@@ -4577,7 +4577,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "2100",
+    "price": 2100,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/07eb02aa-0e2e-46a9-88e1-00a7377a0c51.jpg",
     "images": [
@@ -4592,7 +4592,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "4400",
+    "price": 4400,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/6ac8355e-7d4e-4c4f-9204-c5d53fa3aa8d.jpg",
     "images": [
@@ -4607,7 +4607,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3050",
+    "price": 3050,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/6b7e50c4-7890-4a24-a023-55d3854447f4.jpg",
     "images": [
@@ -4622,7 +4622,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3870",
+    "price": 3870,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/6c604481-c0cb-4b5b-81cb-b8a760ae9006.jpg",
     "images": [
@@ -4637,7 +4637,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3050",
+    "price": 3050,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/0875133e-ca72-44ac-98be-1c3695f75e04.jpg",
     "images": [
@@ -4652,7 +4652,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3050",
+    "price": 3050,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/25bcf966-2077-4aed-a072-e6a6bfc26457.jpg",
     "images": [
@@ -4667,7 +4667,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "2470",
+    "price": 2470,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/966b26ed-ff8c-4d81-a701-e9135597c7f1.jpg",
     "images": [
@@ -4682,7 +4682,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3415",
+    "price": 3415,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/e24c7fed-2fc6-4331-a11d-bcb85ade9283.jpg",
     "images": [
@@ -4697,7 +4697,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1850",
+    "price": 1850,
     "status": "Built",
     "image": "/uploads/3b2edbc8-6f2d-435c-ac57-eb568c810ecb.jpg",
     "images": [
@@ -4712,7 +4712,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "9250",
+    "price": 9250,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/fd2cc047-5b55-4186-8fc7-52cd2697cc2c.jpg",
     "images": [
@@ -4727,7 +4727,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1450",
+    "price": 1450,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/f829f8de-cc75-4a2c-ab69-29be9610d58e.jpg",
     "images": [
@@ -4742,7 +4742,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1650",
+    "price": 1650,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/3dfd840e-a590-4e78-8392-ddd47649b69a.jpg",
     "images": [
@@ -4757,7 +4757,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1850",
+    "price": 1850,
     "status": "Built",
     "image": "/uploads/96b62c34-e9e0-483f-9f00-33a23ebd9489.jpg",
     "images": [
@@ -4772,7 +4772,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3350",
+    "price": 3350,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/a05d8a26-afc9-4700-866d-d3f4742820a9.jpg",
     "images": [
@@ -4787,7 +4787,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1650",
+    "price": 1650,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/89d14c33-c199-4d4d-bb1d-5626fd3ed2b4.jpg",
     "images": [
@@ -4802,7 +4802,7 @@
     "author": "Games Workshop (Big Mek With Shokk Attack Gun, Deffkilla Wartrike, Dakkajet (4-in-1), Gretchin Runtherd, 20 Ork Boyz (2022 9th ed), 5 Ork Nobz w/Ammo Grot)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "15500",
+    "price": 15500,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/a927889e-8c31-4346-b6b2-4d0f43dbedeb.jpg",
     "images": [
@@ -4817,7 +4817,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3000",
+    "price": 3000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/69b4d712-49f5-4b97-a08d-53181b83d847.jpg",
     "images": [
@@ -4832,7 +4832,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3600",
+    "price": 3600,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/0582b3dc-faf4-410a-befb-3f680a9b164d.jpg",
     "images": [
@@ -4847,7 +4847,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "4875",
+    "price": 4875,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/9a1e012b-f73b-41af-9def-01534607fe07.jpg",
     "images": [
@@ -4862,7 +4862,7 @@
     "author": "Games Workshop (Zodgrod Wortsnagga, Nob on Smasha Squig, 3 Squighog Boyz, Bomb Squig, 20 Beast Snagga Boyz)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "13125",
+    "price": 13125,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/0aecf9c0-15aa-413b-a3cb-1a9e3fcc7239.jpg",
     "images": [
@@ -4877,7 +4877,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3000",
+    "price": 3000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/c3f9ae56-b79a-4038-b7f3-de37ca03f952.jpg",
     "images": [
@@ -4892,7 +4892,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "5250",
+    "price": 5250,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/0f2a0c4d-4218-4981-a839-1f3fc49d8eef.jpg",
     "images": [
@@ -4907,7 +4907,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "400",
+    "price": 400,
     "status": "Built",
     "image": "/uploads/e4d0b1a8-ff6a-45f4-b5de-7a7d1c3f5094.jpg",
     "images": [
@@ -4922,7 +4922,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/1b7863c9-052f-4217-afa0-687795429710.jpg",
     "images": [
@@ -4937,7 +4937,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "800",
+    "price": 800,
     "status": "Built",
     "image": "/uploads/f2a75f22-4016-44f6-983e-662c8cd31f23.jpg",
     "images": [
@@ -4952,7 +4952,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "725",
+    "price": 725,
     "status": "Built",
     "image": "/uploads/6d71e7e2-9ba0-426f-bf46-b6a2c5a57c3b.jpg",
     "images": [
@@ -4967,7 +4967,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "500",
+    "price": 500,
     "status": "Built",
     "image": "/uploads/ffa03ff7-3b71-4848-af25-e111af4f1a6d.jpg",
     "images": [
@@ -4982,7 +4982,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "200",
+    "price": 200,
     "status": "Built",
     "image": "/uploads/3d80cd18-4cf8-4a30-b8de-60d67e914c38.jpg",
     "images": [
@@ -4997,7 +4997,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/6eabae90-5c17-4695-86f3-d5d933bdd19b.jpg",
     "images": [
@@ -5012,7 +5012,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "666",
+    "price": 666,
     "status": "Built",
     "image": "/uploads/84754fe1-954e-43f5-9be2-90dce9520049.jpg",
     "images": [
@@ -5027,7 +5027,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/cfe45659-69fd-47d1-96b9-dfa1c7b9df87.jpg",
     "images": [
@@ -5042,7 +5042,7 @@
     "author": "Games Workshop (re-cast) (metal)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "600",
+    "price": 600,
     "status": "Built",
     "image": "/uploads/2087c866-c493-43cc-b647-f6c8038fde7e.jpg",
     "images": [
@@ -5057,7 +5057,7 @@
     "author": "Games Workshop (re-cast) (metal)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "170",
+    "price": 170,
     "status": "Built",
     "image": "/uploads/6d022e1d-5327-411c-8366-b6586350f3e4.jpg",
     "images": [
@@ -5072,7 +5072,7 @@
     "author": "Games Workshop (re-cast) (duplicate)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/a20e4ec1-c7d3-43c9-8299-544ed936c582.jpg",
     "images": [
@@ -5087,7 +5087,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "350",
+    "price": 350,
     "status": "Built",
     "image": "/uploads/48f224d3-26a3-4fd3-b18b-ff54360f1cce.jpg",
     "images": [
@@ -5102,7 +5102,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "400",
+    "price": 400,
     "status": "Built",
     "image": "/uploads/70c9f85b-27af-4560-a014-06f04f4f80d5.jpg",
     "images": [
@@ -5117,7 +5117,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "400",
+    "price": 400,
     "status": "Built",
     "image": "/uploads/87ecb561-070e-4fbb-9f47-3b3b073e70ae.jpg",
     "images": [
@@ -5132,7 +5132,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1790",
+    "price": 1790,
     "status": "Built",
     "image": "/uploads/b524f08c-daa8-4ca2-bd83-1b11b2a7666f.jpg",
     "images": [
@@ -5147,7 +5147,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "520",
+    "price": 520,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/8ed50a16-b81c-4955-b03b-4342a137a57a.jpg",
     "images": [
@@ -5162,7 +5162,7 @@
     "author": "Games Workshop (re-cast) (duplicate)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "460",
+    "price": 460,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/9aaf6a62-1c8a-46e1-909b-db472e73a146.jpg",
     "images": [
@@ -5177,7 +5177,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "1628",
+    "price": 1628,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/84ae39ae-f790-4dc5-bd08-b2a3fc406b80.jpg",
     "images": [
@@ -5192,7 +5192,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "484",
+    "price": 484,
     "status": "Painted",
     "image": "/uploads/1050dc4e-7621-4242-bfe9-fbbeb8647833.jpg",
     "images": [
@@ -5208,7 +5208,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "2100",
+    "price": 2100,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/48b5a2ae-0013-4091-b750-f3b7b8abf7c6.jpg",
     "images": [
@@ -5223,7 +5223,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "500",
+    "price": 500,
     "status": "Built",
     "image": "/uploads/220ba3d0-4301-4677-9320-ce44329b742d.jpg",
     "images": [
@@ -5238,7 +5238,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "3600",
+    "price": 3600,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/b9fb683c-b50d-48d2-96ca-d46381cd70c5.jpg",
     "images": [
@@ -5253,7 +5253,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "7400",
+    "price": 7400,
     "status": "Built",
     "image": "/uploads/af1f339f-5343-41ed-a591-6435066502e0.jpg",
     "images": [
@@ -5268,7 +5268,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "4000",
+    "price": 4000,
     "status": "Rare",
     "image": "/uploads/ee4819d5-8bb5-4c5e-bc7c-87f16503bdf8.jpg",
     "images": [
@@ -5283,7 +5283,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "4000",
+    "price": 4000,
     "status": "Rare",
     "image": "/uploads/5d51d40a-3f98-452a-b277-392c1e91a0f1.jpg",
     "images": [
@@ -5298,7 +5298,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "4500",
+    "price": 4500,
     "status": "Rare",
     "image": "/uploads/deb0ae26-fa6f-4650-8051-15de764c15e9.jpg",
     "images": [
@@ -5313,7 +5313,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "citadel-orks",
-    "price": "5300",
+    "price": 5300,
     "status": "Rare",
     "image": "/uploads/32b98ee6-6569-489e-b93d-29329b7e312b.jpg",
     "images": [
@@ -5328,7 +5328,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "16000",
+    "price": 16000,
     "status": "Built",
     "image": "/uploads/6e786b1a-4289-4896-9065-b8b0a399e7e3.jpg",
     "images": [
@@ -5349,7 +5349,7 @@
     "author": "Forge World",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "5500",
+    "price": 5500,
     "status": "Built",
     "image": "/uploads/53b72e7e-aa3b-4561-808c-f1c53ac415ee.jpg",
     "images": [
@@ -5364,7 +5364,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/d0e0b534-92f3-4977-b5d5-c2c427bac930.jpg",
     "images": [
@@ -5379,7 +5379,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "800",
+    "price": 800,
     "status": "Built",
     "image": "/uploads/fbcf1f34-a9c5-42fc-beed-5820b3fa6361.jpg",
     "images": [
@@ -5394,7 +5394,7 @@
     "author": "Forgeworld (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "2100",
+    "price": 2100,
     "status": "Built",
     "image": "/uploads/31101709-e278-4019-b016-53ba332cc570.jpg",
     "images": [
@@ -5409,7 +5409,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/f404cebd-3b3a-418b-83c8-44fa34464c1c.jpg",
     "images": [
@@ -5424,7 +5424,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "4500",
+    "price": 4500,
     "status": "Built",
     "image": "/uploads/894174df-110e-4324-b547-2fca7004e7f7.jpg",
     "images": [
@@ -5441,7 +5441,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "2750",
+    "price": 2750,
     "status": "Built",
     "image": "/uploads/dcf30a04-5b85-43b5-ae39-eec87accaa6f.jpg",
     "images": [
@@ -5456,7 +5456,7 @@
     "author": "Forgeworld (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "3500",
+    "price": 3500,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/0d82b753-f4fd-4232-b2bc-89d2d3380020.jpg",
     "images": [
@@ -5471,7 +5471,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "2850",
+    "price": 2850,
     "status": "Built",
     "image": "/uploads/fa15b43b-8a18-4a56-b454-722012a67318.jpg",
     "images": [
@@ -5486,7 +5486,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "2350",
+    "price": 2350,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/5670e47f-2382-4d0e-8d73-9c386c546320.jpg",
     "images": [
@@ -5501,7 +5501,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "2250",
+    "price": 2250,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/904141a2-2f73-49a7-b38a-0bae25222d51.jpg",
     "images": [
@@ -5516,7 +5516,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "850",
+    "price": 850,
     "status": "Built",
     "image": "/uploads/447f12ea-71ac-4bea-aa6f-b7239140dfbb.jpg",
     "images": [
@@ -5531,7 +5531,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "990",
+    "price": 990,
     "status": "Built",
     "image": "/uploads/7e0993bd-e5ae-4e4f-bcda-f1b06b54d7f5.jpg",
     "images": [
@@ -5546,7 +5546,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "3000",
+    "price": 3000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/6bd1bb83-e220-4fc0-9148-3e365d171d5c.jpg",
     "images": [
@@ -5561,7 +5561,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "1000",
+    "price": 1000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/7763be12-7b25-406d-9d10-756bd9aca573.jpg",
     "images": [
@@ -5576,7 +5576,7 @@
     "author": "Forge World (re-cast)",
     "section": "miniatures",
     "category": "forgeworld-orks",
-    "price": "1250",
+    "price": 1250,
     "status": "Built",
     "image": "/uploads/e5184fb1-f2e8-49b4-9136-0ecd3441987a.jpg",
     "images": [
@@ -5591,7 +5591,7 @@
     "author": "Games Workshop Golden Demon Gamesday 2007 (Citadel) (sealed)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "7000",
+    "price": 7000,
     "status": "Rare (sealed)",
     "image": "/uploads/46a30b11-1186-4e7a-bce1-ed53504740b8.jpg",
     "images": [
@@ -5606,7 +5606,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "900",
+    "price": 900,
     "status": "Built",
     "image": "/uploads/050b8585-e43e-4fe0-b468-903e6287c6a6.jpg",
     "images": [
@@ -5621,7 +5621,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/ceb22d12-ec8d-4e68-bb6c-a8b7cc42d9c3.jpg",
     "images": [
@@ -5636,7 +5636,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "400",
+    "price": 400,
     "status": "Built",
     "image": "/uploads/f3e643b7-f9ee-4d2b-8536-07fba7d3caeb.jpg",
     "images": [
@@ -5651,7 +5651,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/95df1953-60cd-4f9c-8ce5-eb9bdaf27c0f.jpg",
     "images": [
@@ -5666,7 +5666,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/7d13adc6-ab38-49d9-8a33-3d30741e110e.jpg",
     "images": [
@@ -5681,7 +5681,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "500",
+    "price": 500,
     "status": "Built",
     "image": "/uploads/575b7875-b60b-4534-8a9f-e848497a212e.jpg",
     "images": [
@@ -5696,7 +5696,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/40ab58f2-0c59-47ab-9d6c-a3a9e8a9bd06.jpg",
     "images": [
@@ -5711,7 +5711,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "550",
+    "price": 550,
     "status": "Built",
     "image": "/uploads/84edb01b-03f1-4ec9-a0e1-df43a88c5a23.jpg",
     "images": [
@@ -5726,7 +5726,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "0",
+    "price": 0,
     "status": "Built",
     "image": "/uploads/a54dd949-b3f8-49b6-9d06-2621eb570b9c.jpg",
     "images": [
@@ -5741,7 +5741,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "350",
+    "price": 350,
     "status": "Built",
     "image": "/uploads/2ea790ef-3bc4-4134-bde0-f8d366341e97.jpg",
     "images": [
@@ -5756,7 +5756,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "350",
+    "price": 350,
     "status": "Built",
     "image": "/uploads/5b984cf9-ac52-4507-abda-d2a1b5895ac4.jpg",
     "images": [
@@ -5771,7 +5771,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "150",
+    "price": 150,
     "status": "Built",
     "image": "/uploads/4293c40f-aebb-4869-9520-aa495c4e4bcd.jpg",
     "images": [
@@ -5786,7 +5786,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "325",
+    "price": 325,
     "status": "Built",
     "image": "/uploads/ac6289d3-c30d-4d9c-a7df-ba99d3261e79.jpg",
     "images": [
@@ -5801,7 +5801,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "0",
+    "price": 0,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -5815,7 +5815,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -5829,7 +5829,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -5843,7 +5843,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "550",
+    "price": 550,
     "status": "Built",
     "image": "/uploads/b83b8495-467e-4209-9066-fa9d4f6cd3d3.jpg",
     "images": [
@@ -5858,7 +5858,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "550",
+    "price": 550,
     "status": "Built",
     "image": "/uploads/d513ea3c-bdec-413f-967b-0d65606aaa0e.jpg",
     "images": [
@@ -5873,7 +5873,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "500",
+    "price": 500,
     "status": "Built",
     "image": "/uploads/73f0d7fe-83f3-4719-86bd-90ce8f2efc08.jpg",
     "images": [
@@ -5888,7 +5888,7 @@
     "author": "Games Workshop (sealed)",
     "section": "miniatures",
     "category": "old-citadel-orks-oldhammer",
-    "price": "5000",
+    "price": 5000,
     "status": "Rare",
     "image": "/uploads/759ca2f8-52b0-495f-ab60-d944fe35b1b3.jpg",
     "images": [
@@ -5903,7 +5903,7 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "4500",
+    "price": 4500,
     "status": "Built",
     "image": "/uploads/1b83e3de-42ac-4c79-adc1-34326c23ca6c.jpg",
     "images": [
@@ -5918,7 +5918,7 @@
     "author": "Artel W (Tekk Shzaman, Medikk (with Nurz), Mekkanik (with 2 Matez: Kurdan, da Inventur, Skruw, da Fettlar ) )",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "3750",
+    "price": 3750,
     "status": "Built",
     "image": "/uploads/4a66f262-bd48-4c5f-85c1-453f638f9ffc.jpg",
     "images": [
@@ -5934,7 +5934,7 @@
     "author": "Artel W (Brunzh red fist ov da Revolushun, Tuczhan Rider ov da Revolushun, Shtrugg Gobbfalonier ov da Revolushun)",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "1650",
+    "price": 1650,
     "status": "Built",
     "image": "/uploads/5f07e905-757c-4cfe-b6a0-111b01d1ead5.jpg",
     "images": [
@@ -5950,7 +5950,7 @@
     "author": "Artel W (Butz Hordinzon, Skrima Spikead, Lash Udzon, Wuzh Arzon, Bzhum Krusha)",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "2500",
+    "price": 2500,
     "status": "Built",
     "image": "/uploads/332eea4f-fd33-4236-8247-3c507471f98c.jpg",
     "images": [
@@ -5965,7 +5965,7 @@
     "author": "(+ Butz Hordinzon on platform)",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "3500",
+    "price": 3500,
     "status": "Built",
     "image": "/uploads/76dd726f-ecbb-414f-8701-a998b14afab9.jpg",
     "images": [
@@ -5981,7 +5981,7 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "3000",
+    "price": 3000,
     "status": "Built",
     "image": "/uploads/19857113-1612-4c43-b09f-db4cf5e71228.jpg",
     "images": [
@@ -5996,7 +5996,7 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "850",
+    "price": 850,
     "status": "Built",
     "image": "/uploads/43ad8d47-fb2f-4a2b-92e3-0f57295ec47b.jpg",
     "images": [
@@ -6011,7 +6011,7 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "2400",
+    "price": 2400,
     "status": "Built",
     "image": "/uploads/aae93022-6e69-41ac-be4e-08257b9c7d80.jpg",
     "images": [
@@ -6026,7 +6026,7 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "2400",
+    "price": 2400,
     "status": "Built",
     "image": "/uploads/ffc3cef3-ff6e-41c2-ad58-478c71fb2280.jpg",
     "images": [
@@ -6041,7 +6041,7 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "4350",
+    "price": 4350,
     "status": "Built",
     "image": "/uploads/2fadc440-22d6-4ddf-bac0-dd36f3692ce6.jpg",
     "images": [
@@ -6056,7 +6056,7 @@
     "author": "",
     "section": "miniatures",
     "category": "artel-w",
-    "price": "4350",
+    "price": 4350,
     "status": "Built",
     "image": "/uploads/b6526911-d069-4ae3-8a2d-29a55bd8770d.jpg",
     "images": [
@@ -6071,7 +6071,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "450",
+    "price": 450,
     "status": "Built",
     "image": "/uploads/54f1060d-2349-4f80-b5e7-3ebe9ff05114.jpg",
     "images": [
@@ -6086,7 +6086,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "500",
+    "price": 500,
     "status": "Built",
     "image": "/uploads/606e6a81-e013-46a7-b223-edd0eb052d13.jpg",
     "images": [
@@ -6101,7 +6101,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/03a3a1e4-cad5-49e5-b5a3-ca33770f3fa4.jpg",
     "images": [
@@ -6116,7 +6116,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/becd98a5-69ff-43b4-b034-2877edf20a59.jpg",
     "images": [
@@ -6131,7 +6131,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/11aac59d-b49c-493b-bfe8-76cb73a249f8.jpg",
     "images": [
@@ -6146,7 +6146,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "1030",
+    "price": 1030,
     "status": "Built",
     "image": "/uploads/b0fe4b21-8d7d-4ef1-b2f0-4804ee171813.jpg",
     "images": [
@@ -6161,7 +6161,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "3000",
+    "price": 3000,
     "status": "Built",
     "image": "/uploads/23682d79-b3f5-430d-a3e2-61f4ecf1b48c.jpg",
     "images": [
@@ -6176,7 +6176,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "1500",
+    "price": 1500,
     "status": "Built",
     "image": "/uploads/545b6658-a9b3-4932-b753-1392846091b2.jpg",
     "images": [
@@ -6191,7 +6191,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/649a4d54-fcd6-445d-8fb7-7b4320aeb2cc.jpg",
     "images": [
@@ -6206,7 +6206,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "760",
+    "price": 760,
     "status": "Painted",
     "image": "/uploads/ab1aa015-ada6-43d6-a9c6-a4a126da1688.jpg",
     "images": [
@@ -6225,7 +6225,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "240",
+    "price": 240,
     "status": "Built",
     "image": "/uploads/548fa71e-e434-4275-947a-f9547039f852.jpg",
     "images": [
@@ -6240,7 +6240,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "250",
+    "price": 250,
     "status": "Built",
     "image": "/uploads/255f6589-0fd0-4e55-8c74-b2d6bb1aa565.jpg",
     "images": [
@@ -6255,7 +6255,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "1010",
+    "price": 1010,
     "status": "Built",
     "image": "/uploads/5775716d-adfb-4989-bc34-7da2c86d1d5c.jpg",
     "images": [
@@ -6270,7 +6270,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "760",
+    "price": 760,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/b57ee1f7-8263-4dfd-ae0e-82d37c17ae77.jpg",
     "images": [
@@ -6285,7 +6285,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "760",
+    "price": 760,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/38a866c3-bba3-4bfb-821c-f83e6ccb29e8.jpg",
     "images": [
@@ -6300,7 +6300,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "300",
+    "price": 300,
     "status": "Built",
     "image": "/uploads/4df41b70-e660-429e-a6c8-3e561215335d.jpg",
     "images": [
@@ -6315,7 +6315,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "400",
+    "price": 400,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/e068306f-b5e6-4f51-8a70-218bb80a9694.jpg",
     "images": [
@@ -6330,7 +6330,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "264",
+    "price": 264,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/6a5503f9-939e-4ca6-bbbe-69f21d900162.jpg",
     "images": [
@@ -6345,7 +6345,7 @@
     "author": "Kromlech (re-cast)",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "792",
+    "price": 792,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/cbc49429-a662-4548-8bfb-b3faca07d695.jpg",
     "images": [
@@ -6360,7 +6360,7 @@
     "author": "Kromlech",
     "section": "miniatures",
     "category": "kromlech",
-    "price": "2500",
+    "price": 2500,
     "status": "Built",
     "image": "/uploads/259311dc-2b2f-4d48-a297-5278135c3371.jpg",
     "images": [
@@ -6375,7 +6375,7 @@
     "author": "Raging Heroes (re-cast)",
     "section": "miniatures",
     "category": "various-studios",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/c393116c-2e68-4cdb-a795-71c7920e2b93.jpg",
     "images": [
@@ -6390,7 +6390,7 @@
     "author": "Wargame Exclusive (re-cast)",
     "section": "miniatures",
     "category": "various-studios",
-    "price": "1040",
+    "price": 1040,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/eb5a58fb-2f8e-44ec-bf98-59dbe3b97908.jpg",
     "images": [
@@ -6405,7 +6405,7 @@
     "author": "MaxMini (re-cast)",
     "section": "miniatures",
     "category": "various-studios",
-    "price": "810",
+    "price": 810,
     "status": "Built",
     "image": "/uploads/f5d8eeeb-fad4-4a04-b8d2-0e728b5bc74c.jpg",
     "images": [
@@ -6420,7 +6420,7 @@
     "author": "MaxMini (re-cast) [2]",
     "section": "miniatures",
     "category": "various-studios",
-    "price": "1400",
+    "price": 1400,
     "status": "Built",
     "image": "/uploads/dd575280-d15e-4ef7-9c2d-8f6462b62a6b.jpg",
     "images": [
@@ -6435,7 +6435,7 @@
     "author": "Scibor Miniatures (re-cast)",
     "section": "miniatures",
     "category": "various-studios",
-    "price": "400",
+    "price": 400,
     "status": "Built",
     "image": "/uploads/854830ad-9917-4750-8bd6-c9128fcfa223.jpg",
     "images": [
@@ -6450,7 +6450,7 @@
     "author": "The Portal of Moro (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "1500",
+    "price": 1500,
     "status": "Built",
     "image": "/uploads/0739cda2-1d9b-4cc2-85c4-cba6b0d5e83a.jpg",
     "images": [
@@ -6465,7 +6465,7 @@
     "author": "LukesWayOfLooking (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "900",
+    "price": 900,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/4020f9e4-6b15-4ffb-80c2-ed71441a70c6.jpg",
     "images": [
@@ -6480,7 +6480,7 @@
     "author": "MezGike (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "700",
+    "price": 700,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/62afe0d5-d889-4231-adc6-8703ea4c0e42.jpg",
     "images": [
@@ -6495,7 +6495,7 @@
     "author": "MezGike (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "700",
+    "price": 700,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/ba40cc8e-0c3e-4b91-9867-60dd37705aaf.jpg",
     "images": [
@@ -6510,7 +6510,7 @@
     "author": "Puppetswar (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/75052af0-3226-4c23-8235-7cca59281718.jpg",
     "images": [
@@ -6525,7 +6525,7 @@
     "author": "Puppetswar (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/0c680efa-95a7-41b8-854e-86ea24653041.jpg",
     "images": [
@@ -6540,7 +6540,7 @@
     "author": "MrModulOrk (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/670cd3f8-0f54-4e51-9b62-5ad27fe04ad9.jpg",
     "images": [
@@ -6555,7 +6555,7 @@
     "author": "MrModulOrk (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/4511a2e3-7956-4b28-b9ce-6576bb8fd308.jpg",
     "images": [
@@ -6570,7 +6570,7 @@
     "author": "MrModulOrk (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/8eaf966e-05dc-4b6c-8ae8-e13b9ea73b0e.jpg",
     "images": [
@@ -6585,7 +6585,7 @@
     "author": "MrModulOrk (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/d566239a-5a0f-45ef-babc-7f245c27fda7.jpg",
     "images": [
@@ -6600,7 +6600,7 @@
     "author": "MrModulOrk (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/9943dc3d-530d-4c4c-a8f4-f157c67344e8.jpg",
     "images": [
@@ -6615,7 +6615,7 @@
     "author": "Mezgike (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/009fd0be-6560-46c4-bf0a-0f0cf09d7953.jpg",
     "images": [
@@ -6630,7 +6630,7 @@
     "author": "orcskrazy (3d print)",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "650",
+    "price": 650,
     "status": "Painted",
     "image": "/uploads/1aaa6cef-6cb4-44e9-b17c-d64fe5dc651d.jpg",
     "images": [
@@ -6645,7 +6645,7 @@
     "author": "MezGike",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/e54e14a2-bb34-483a-9df3-cb6a91c71d80.jpg",
     "images": [
@@ -6660,7 +6660,7 @@
     "author": "MezGike",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/d32960c1-9314-47d9-8c81-147aae894b61.jpg",
     "images": [
@@ -6675,7 +6675,7 @@
     "author": "MezGike",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/611ee42e-0bca-4f78-b244-80215b7830b7.jpg",
     "images": [
@@ -6690,7 +6690,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/b617c51f-faff-46e6-a245-2b85d3df8837.jpg",
     "images": [
@@ -6705,7 +6705,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/66c0d4b9-f968-4555-a45c-331446366127.jpg",
     "images": [
@@ -6720,7 +6720,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/0bd0ad33-1788-4010-a0b0-6bb6c74ad0e6.jpg",
     "images": [
@@ -6735,7 +6735,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/17459617-b336-452c-97c8-86f4b786be9e.jpg",
     "images": [
@@ -6750,7 +6750,7 @@
     "author": "EightLegsMiniatures",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "1500",
+    "price": 1500,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/d35b4b73-0fb6-4b98-826f-2c65f888b250.jpg",
     "images": [
@@ -6765,7 +6765,7 @@
     "author": "EightLegsMiniatures",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "1500",
+    "price": 1500,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/93be0f8e-0458-4902-8916-c226675c75bf.jpg",
     "images": [
@@ -6781,7 +6781,7 @@
     "author": "EightLegsMiniatures",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "1500",
+    "price": 1500,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/45ca693f-e405-4971-ae45-130af0d56890.jpg",
     "images": [
@@ -6796,7 +6796,7 @@
     "author": "orcskrazy",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "0",
+    "price": 0,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/6bf944d6-8005-4de2-bc1a-714e1b5bcc84.jpg",
     "images": [
@@ -6811,7 +6811,7 @@
     "author": "orcskrazy",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "0",
+    "price": 0,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/6b31e6c0-c075-4e57-9d9f-b37a8a7022fc.jpg",
     "images": [
@@ -6826,7 +6826,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "750",
+    "price": 750,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/a6891a5d-6062-494b-8e8a-b947ccab82ab.jpg",
     "images": [
@@ -6841,7 +6841,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "600",
+    "price": 600,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/de411cfd-498a-4620-9bfb-7be45d9b856c.jpg",
     "images": [
@@ -6856,7 +6856,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "1000",
+    "price": 1000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/ec3c27f5-94a5-4790-9b2d-6679d0cbbb58.jpg",
     "images": [
@@ -6871,7 +6871,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "750",
+    "price": 750,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/30d28b08-b4bd-4e22-9f81-6c202e4b65d8.jpg",
     "images": [
@@ -6886,7 +6886,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "600",
+    "price": 600,
     "status": "Built",
     "image": "/uploads/94783acc-6ccb-46fa-9096-1cfbaa582f60.jpg",
     "images": [
@@ -6901,7 +6901,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "300",
+    "price": 300,
     "status": "Built",
     "image": "/uploads/ff0337a4-e695-44b1-8d7c-21264b4175f6.jpg",
     "images": [
@@ -6916,7 +6916,7 @@
     "author": "MrModulOrk",
     "section": "miniatures",
     "category": "3d-printed-orks",
-    "price": "0",
+    "price": 0,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/97380696-ed4c-4273-a1c8-7bc69206068e.jpg",
     "images": [
@@ -6931,7 +6931,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "2800",
+    "price": 2800,
     "status": "Built",
     "image": "/uploads/2f724978-9668-4fb9-bfca-0d4a3be82c14.jpg",
     "images": [
@@ -6945,7 +6945,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "2800",
+    "price": 2800,
     "status": "Built",
     "image": "/uploads/006d58cf-03de-4fc3-a4c1-15d3ef861b97.jpg",
     "images": [
@@ -6959,7 +6959,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "2011",
+    "price": 2011,
     "status": "Built",
     "image": "/uploads/cfe2d01e-e84f-429a-b37a-014d6f2df416.jpg",
     "images": [
@@ -6973,7 +6973,7 @@
     "author": "Games Workshop Underworlds (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1250",
+    "price": 1250,
     "status": "Built",
     "image": "/uploads/1bcc0bbe-9ee8-4aaa-9e01-bdabb9f61e11.jpg",
     "images": [
@@ -6987,7 +6987,7 @@
     "author": "Games Workshop Underworlds (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1450",
+    "price": 1450,
     "status": "Built",
     "image": "/uploads/54245422-6132-4733-91be-57f851262c78.jpg",
     "images": [
@@ -7001,7 +7001,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "4200",
+    "price": 4200,
     "status": "Built",
     "image": "/uploads/ea92a0fa-052d-45c8-96f5-2789348542cd.jpg",
     "images": [
@@ -7015,7 +7015,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "2000",
+    "price": 2000,
     "status": "Built",
     "image": "/uploads/16bd5dfa-5514-4c7f-9508-bc607bc75817.jpg",
     "images": [
@@ -7029,7 +7029,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "4000",
+    "price": 4000,
     "status": "Built",
     "image": "/uploads/8d04501e-188e-43b2-9240-0230fdaded9c.jpg",
     "images": [
@@ -7043,7 +7043,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1400",
+    "price": 1400,
     "status": "Built",
     "image": "/uploads/dfbf90e7-ee15-4e9e-aa05-a215870530c4.jpg",
     "images": [
@@ -7057,7 +7057,7 @@
     "author": "The Scaremonger, The Spiker, The Brewgit, The Boggleye, The Shroomancer",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1750",
+    "price": 1750,
     "status": "Built",
     "image": "/uploads/297dcd20-30c4-47d6-b5f5-504d17b17a09.jpg",
     "images": [
@@ -7071,7 +7071,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1450",
+    "price": 1450,
     "status": "Built",
     "image": "/uploads/3f0fe558-a78e-4985-ad81-1102e68d6997.jpg",
     "images": [
@@ -7085,7 +7085,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "900",
+    "price": 900,
     "status": "Painted",
     "image": "/uploads/25b3e7ff-ac01-4398-a426-a40cf8cd4b05.jpg",
     "images": [
@@ -7099,7 +7099,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "750",
+    "price": 750,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7112,7 +7112,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1050",
+    "price": 1050,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7125,7 +7125,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "250",
+    "price": 250,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7138,7 +7138,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "3600",
+    "price": 3600,
     "status": "Built",
     "image": "/uploads/7652443b-3dc3-42ac-b36b-ccb10cf379c9.jpg",
     "images": [
@@ -7152,7 +7152,7 @@
     "author": "Loot Studios (3d print)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "100",
+    "price": 100,
     "status": "Painted",
     "image": "/uploads/c75eef66-721b-4615-b06c-b5e89789946b.jpg",
     "images": [
@@ -7166,7 +7166,7 @@
     "author": "MOMminiatures (3d print)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "100",
+    "price": 100,
     "status": "Built",
     "image": "/uploads/05573e61-9f60-43c4-b49c-8b43f74b0df3.jpg",
     "images": [
@@ -7180,7 +7180,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "4500",
+    "price": 4500,
     "status": "Built",
     "image": "/uploads/77417bf4-3b3d-4ee5-99c8-b3aa3d5c87b0.jpg",
     "images": [
@@ -7194,7 +7194,7 @@
     "author": "First Legion Miniatures (28030)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1100",
+    "price": 1100,
     "status": "Built",
     "image": "/uploads/f58a9415-e74c-4dab-98c7-9a2588640ba1.jpg",
     "images": [
@@ -7208,7 +7208,7 @@
     "author": "First Legion Miniatures (28031)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1100",
+    "price": 1100,
     "status": "Built",
     "image": "/uploads/71a63e7f-3133-425e-bf11-823dc972f603.jpg",
     "images": [
@@ -7222,7 +7222,7 @@
     "author": "First Legion Miniatures (28032)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "569",
+    "price": 569,
     "status": "Built",
     "image": "/uploads/0fa6f2fa-c03d-4dbc-92b3-b23c06da83f4.jpg",
     "images": [
@@ -7236,7 +7236,7 @@
     "author": "First Legion Miniatures (28034)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "619",
+    "price": 619,
     "status": "Built",
     "image": "/uploads/08e76f83-d549-4823-a8e2-323f51d6764d.jpg",
     "images": [
@@ -7250,7 +7250,7 @@
     "author": "First Legion Miniatures (28033)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "589",
+    "price": 589,
     "status": "Built",
     "image": "/uploads/0de248ea-346b-415c-a715-47b0b4e31768.jpg",
     "images": [
@@ -7264,7 +7264,7 @@
     "author": "First Legion Miniatures (28GOB01)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "936",
+    "price": 936,
     "status": "Built",
     "image": "/uploads/fda10e6b-e172-4239-9731-f91012eb69ec.jpg",
     "images": [
@@ -7278,7 +7278,7 @@
     "author": "First Legion Miniatures (28GOB02)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "936",
+    "price": 936,
     "status": "Built",
     "image": "/uploads/706d21c1-3972-4009-b821-e4ea7be9c23a.jpg",
     "images": [
@@ -7292,7 +7292,7 @@
     "author": "First Legion Miniatures (28GOB03)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "936",
+    "price": 936,
     "status": "Built",
     "image": "/uploads/ee5eabb8-17d6-48a0-b8c6-d4837b3aa73f.jpg",
     "images": [
@@ -7306,7 +7306,7 @@
     "author": "First Legion Miniatures (28GOB04)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "936",
+    "price": 936,
     "status": "Built",
     "image": "/uploads/673179fa-29a0-4f0c-a780-49efe273c5d8.jpg",
     "images": [
@@ -7320,7 +7320,7 @@
     "author": "First Legion Miniatures (28GOB05)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "977",
+    "price": 977,
     "status": "Built",
     "image": "/uploads/0185b4b0-e15e-44a2-8381-a4c4f40d78ba.jpg",
     "images": [
@@ -7334,7 +7334,7 @@
     "author": "First Legion Miniatures (KSBB01R)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "569",
+    "price": 569,
     "status": "Built",
     "image": "/uploads/69827cd8-3211-4f39-ac91-fcad2f295d6a.jpg",
     "images": [
@@ -7348,7 +7348,7 @@
     "author": "Highlands Miniatures",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "0",
+    "price": 0,
     "status": "Built",
     "image": "/uploads/b951ddde-96ce-4319-a921-bc7a6e59cd32.jpg",
     "images": [
@@ -7362,7 +7362,7 @@
     "author": "First Legion Miniatures (KSBB03R)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "397",
+    "price": 397,
     "status": "Built",
     "image": "/uploads/79db15b0-8932-4c66-892b-92522620952e.jpg",
     "images": [
@@ -7376,7 +7376,7 @@
     "author": "First Legion Miniatures (28297)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/f5e80d9f-b2cb-47bd-9dde-38710253c6f4.jpg",
     "images": [
@@ -7390,7 +7390,7 @@
     "author": "First Legion Miniatures (28298)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/b1c7d34a-d516-4e07-a4ed-d82bb97baa8e.jpg",
     "images": [
@@ -7404,7 +7404,7 @@
     "author": "First Legion Miniatures (28301)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/abd6f103-eb10-47fe-8dfe-27a29b0bc290.jpg",
     "images": [
@@ -7418,7 +7418,7 @@
     "author": "First Legion Miniatures (28317)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/3f4ae938-0ce9-4be6-b70a-255820a51614.jpg",
     "images": [
@@ -7432,7 +7432,7 @@
     "author": "First Legion Miniatures (28368)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/148850b7-e759-41ab-aa5d-44e9038d5331.jpg",
     "images": [
@@ -7446,7 +7446,7 @@
     "author": "First Legion Miniatures (28371)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/ad117ae9-45ca-4f8d-91e5-dce0e1f1cb40.jpg",
     "images": [
@@ -7460,7 +7460,7 @@
     "author": "First Legion Miniatures (28372)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/a23d531b-1b71-4ba4-a341-99359e011e4a.jpg",
     "images": [
@@ -7474,7 +7474,7 @@
     "author": "First Legion Miniatures (28374)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/80454b17-62a5-4831-94d8-3b74e9686fff.jpg",
     "images": [
@@ -7488,7 +7488,7 @@
     "author": "First Legion Miniatures (28375)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/4ce3878c-11d8-40e3-8504-9838b50492a2.jpg",
     "images": [
@@ -7502,7 +7502,7 @@
     "author": "First Legion Miniatures (28413)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "650",
+    "price": 650,
     "status": "Built",
     "image": "/uploads/4b03ef22-41d1-4e9c-9660-d61d0468a718.jpg",
     "images": [
@@ -7516,7 +7516,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "14500",
+    "price": 14500,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/c30d0b71-1c1f-4032-a758-94f4eca137f8.jpg",
     "images": [
@@ -7530,7 +7530,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "1000",
+    "price": 1000,
     "status": "Built",
     "image": "/uploads/1bef802d-085b-46b6-aeaa-86152d1a1011.jpg",
     "images": [
@@ -7544,7 +7544,7 @@
     "author": "Games Workshop PR38 (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "800",
+    "price": 800,
     "status": "Built",
     "image": "/uploads/cded9070-7921-415d-bf8a-0880c7b44e48.jpg",
     "images": [
@@ -7558,7 +7558,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "gloomspite-gitz",
-    "price": "2400",
+    "price": 2400,
     "status": "Built",
     "image": "/uploads/cb97c4a8-152d-4d1a-9735-2e6cb95c02ad.jpg",
     "images": [
@@ -7572,7 +7572,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "adepta-sororitas",
-    "price": "3150",
+    "price": 3150,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/4b0e0db2-02dd-43d4-9c3a-da10315e2b73.jpg",
     "images": [
@@ -7586,7 +7586,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "adepta-sororitas",
-    "price": "1050",
+    "price": 1050,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7599,7 +7599,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "adepta-sororitas",
-    "price": "800",
+    "price": 800,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7612,7 +7612,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "adepta-sororitas",
-    "price": "850",
+    "price": 850,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7625,7 +7625,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "adepta-sororitas",
-    "price": "400",
+    "price": 400,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7638,7 +7638,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "2000",
+    "price": 2000,
     "status": "Painted",
     "image": "/uploads/223deae1-6490-4596-aac3-90a52350380d.jpg",
     "images": [
@@ -7653,7 +7653,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "4000",
+    "price": 4000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/14faab2b-62e6-40a3-843a-b763303e3e41.jpg",
     "images": [
@@ -7667,7 +7667,7 @@
     "author": "Games Workshop",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "1000",
+    "price": 1000,
     "status": "Unbuilt / Boxed",
     "image": "/uploads/3a647a89-983a-42fd-9980-6b5c21b8fcf5.jpg",
     "images": [
@@ -7681,7 +7681,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "900",
+    "price": 900,
     "status": "Built",
     "image": "/uploads/0ac8091c-3d54-4f60-894d-0654eb453c91.jpg",
     "images": [
@@ -7695,7 +7695,7 @@
     "author": "Games Workshop (re-cast)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "5850",
+    "price": 5850,
     "status": "Built",
     "image": "/uploads/1784672989417-images.jpg",
     "images": [],
@@ -7708,7 +7708,7 @@
     "author": "Punga Miniatures",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "1100",
+    "price": 1100,
     "status": "Built",
     "image": "/uploads/b35d32b2-3171-4bd2-9d16-ec2ba7ac85a2.jpg",
     "images": [
@@ -7722,7 +7722,7 @@
     "author": "Citadel (Warhammer Age of Reckoning Collectors Edition 2008)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "2100",
+    "price": 2100,
     "status": "Built",
     "image": "/uploads/99871b6a-bc9f-429e-8e13-272bfd5b72dc.jpg",
     "images": [
@@ -7736,7 +7736,7 @@
     "author": "Citadel (Underworlds)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "3600",
+    "price": 3600,
     "status": "Built",
     "image": "/uploads/c6e10209-9139-4a16-8af7-2cdc28dcc6d3.jpg",
     "images": [
@@ -7750,7 +7750,7 @@
     "author": "First Legion Miniatures (28001)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "456",
+    "price": 456,
     "status": "Built",
     "image": "/uploads/b50107bd-ae63-443f-ab03-cef8169f5f32.jpg",
     "images": [
@@ -7764,7 +7764,7 @@
     "author": "First Legion Miniatures (28003)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "456",
+    "price": 456,
     "status": "Built",
     "image": "/uploads/39f287f1-69bc-499d-a2b8-d6647ff0c03f.jpg",
     "images": [
@@ -7778,7 +7778,7 @@
     "author": "First Legion Miniatures (28004)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "476",
+    "price": 476,
     "status": "Built",
     "image": "/uploads/184573d5-7c76-4d5c-9526-a0bb67aeb44f.jpg",
     "images": [
@@ -7792,7 +7792,7 @@
     "author": "First Legion Miniatures (28005)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "461",
+    "price": 461,
     "status": "Built",
     "image": "/uploads/33e514fb-8464-4993-aeba-2fb3bda4179f.jpg",
     "images": [
@@ -7806,7 +7806,7 @@
     "author": "First Legion Miniatures (28006)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "461",
+    "price": 461,
     "status": "Built",
     "image": "/uploads/5a158002-abc2-42e7-9fce-4fd1d312d0f7.jpg",
     "images": [
@@ -7820,7 +7820,7 @@
     "author": "First Legion Miniatures (28007)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "461",
+    "price": 461,
     "status": "Built",
     "image": "/uploads/7ba5ccf9-1271-4225-9d4e-1856d72d47a4.jpg",
     "images": [
@@ -7834,7 +7834,7 @@
     "author": "First Legion Miniatures (28008)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "461",
+    "price": 461,
     "status": "Built",
     "image": "/uploads/510da773-6696-4305-aa66-3324552fe582.jpg",
     "images": [
@@ -7848,7 +7848,7 @@
     "author": "First Legion Miniatures (28009)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "461",
+    "price": 461,
     "status": "Built",
     "image": "/uploads/e589a5fe-9d9c-4545-b8ad-64c0c1ebfa19.jpg",
     "images": [
@@ -7862,7 +7862,7 @@
     "author": "First Legion Miniatures (28012)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "506",
+    "price": 506,
     "status": "Built",
     "image": "/uploads/2741cea6-7588-48a0-8226-ceb9cb4ffd45.jpg",
     "images": [
@@ -7876,7 +7876,7 @@
     "author": "First Legion Miniatures (28106)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "529",
+    "price": 529,
     "status": "Built",
     "image": "/uploads/678ca3bf-9149-473a-b214-098f55a373de.jpg",
     "images": [
@@ -7890,7 +7890,7 @@
     "author": "First Legion Miniatures (28107)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "515",
+    "price": 515,
     "status": "Built",
     "image": "/uploads/7df8f13f-bcbd-45a5-a981-dce4b1436b85.jpg",
     "images": [
@@ -7904,7 +7904,7 @@
     "author": "First Legion Miniatures (28108)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "570",
+    "price": 570,
     "status": "Built",
     "image": "/uploads/21169755-4e3e-4558-b028-b9448c380ade.jpg",
     "images": [
@@ -7918,7 +7918,7 @@
     "author": "First Legion Miniatures (28178)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "506",
+    "price": 506,
     "status": "Built",
     "image": "/uploads/6f3f242f-edaf-49af-9098-6e0581c3261c.jpg",
     "images": [
@@ -7932,7 +7932,7 @@
     "author": "First Legion Miniatures (28197)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "900",
+    "price": 900,
     "status": "Built",
     "image": "/uploads/eef1263f-b875-480e-93ce-d8be0838dd14.jpg",
     "images": [
@@ -7946,7 +7946,7 @@
     "author": "First Legion Miniatures (28198)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "900",
+    "price": 900,
     "status": "Built",
     "image": "/uploads/c7663006-d013-455a-b3b8-e4d947a3694d.jpg",
     "images": [
@@ -7960,7 +7960,7 @@
     "author": "First Legion Miniatures (28415)",
     "section": "miniatures",
     "category": "orruk-warclans",
-    "price": "900",
+    "price": 900,
     "status": "Built",
     "image": "/uploads/b8695408-76ca-4898-a156-51003acb695a.jpg",
     "images": [
@@ -7974,7 +7974,7 @@
     "category": "chaos-daemons",
     "title": "Be'lakor",
     "author": "Games Workshop",
-    "price": "16000",
+    "price": 16000,
     "image": "/uploads/1b9b782d-ce60-480e-8268-acf54d02f559.jpg",
     "createdAt": "2026-07-23T11:43:43.623Z",
     "images": [
@@ -7988,7 +7988,7 @@
     "category": "soulblight-gravelords",
     "title": "Kritza, The Rat Prince",
     "author": "Games Workshop",
-    "price": "1900",
+    "price": 1900,
     "image": "/uploads/62bd2b55-aae0-4827-b099-96f85f0fc885.jpg",
     "createdAt": "2026-07-23T11:43:53.639Z",
     "images": [
@@ -8002,7 +8002,7 @@
     "category": "astra-militarum",
     "title": "Death Korps of Krieg Veteran Guardsmen",
     "author": "Games Workshop",
-    "price": "3000",
+    "price": 3000,
     "image": "/uploads/a16e4b1e-0eab-4266-8fe8-763425ec7368.jpg",
     "createdAt": "2026-07-23T11:44:03.499Z",
     "images": [
@@ -8016,7 +8016,7 @@
     "category": "astra-militarum",
     "title": "Cadian Shock Troops",
     "author": "Games Workshop (re-cast)",
-    "price": "1600",
+    "price": 1600,
     "image": "/uploads/6bd3e93c-43d0-4c3e-b9d0-25bfe4e7f8e4.jpg",
     "createdAt": "2026-07-23T11:44:03.554Z",
     "images": [
@@ -8031,7 +8031,7 @@
     "category": "officio-assassinorum",
     "title": "Vindicare Assassin Operative Umbral-six",
     "author": "Games Workshop (re-cast)",
-    "price": "900",
+    "price": 900,
     "image": "/uploads/b8e02eda-a82b-4055-997a-38de875378b2.jpg",
     "createdAt": "2026-07-23T11:44:13.309Z",
     "images": [
@@ -8046,7 +8046,7 @@
     "category": "officio-assassinorum",
     "title": "Death Cult Assassin",
     "author": "Games Workshop (re-cast)",
-    "price": "300",
+    "price": 300,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-23T11:44:13.386Z",
     "images": [],
@@ -8060,7 +8060,7 @@
     "category": "ogor-mawtribes",
     "title": "Bloodpelt Hunter",
     "author": "Games Workshop (re-cast)",
-    "price": "815",
+    "price": 815,
     "image": "/uploads/3697101b-0c3d-4ac1-9a8c-4490ef84a001.jpg",
     "createdAt": "2026-07-23T11:44:23.122Z",
     "images": [
@@ -8075,7 +8075,7 @@
     "category": "ogor-mawtribes",
     "title": "Giant with Cow",
     "author": "STL Miniatures (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/359caace-9f92-462b-9182-8e6782400b9b.jpg",
     "createdAt": "2026-07-23T11:44:23.181Z",
     "images": [
@@ -8089,7 +8089,7 @@
     "category": "maggotkin-of-nurgle",
     "title": "Mushroom loving Nurgling",
     "author": "McAngry Minis (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/ce625301-5844-46fb-b72b-20cb99f0b760.jpg",
     "createdAt": "2026-07-23T11:44:32.846Z",
     "images": [
@@ -8103,7 +8103,7 @@
     "category": "kharadron-overlords",
     "title": "Endrinmaster",
     "author": "Citadel Kharadron Overlords (re-cast)",
-    "price": "540",
+    "price": 540,
     "image": "/uploads/9a06bada-ef24-420f-8272-78f5b5767fc0.jpg",
     "createdAt": "2026-07-23T11:44:42.568Z",
     "images": [
@@ -8118,7 +8118,7 @@
     "category": "empire",
     "title": "Hexbane's Hunters",
     "author": "Games Workshop (re-cast)",
-    "price": "1250",
+    "price": 1250,
     "image": "/uploads/aa388d05-7abc-4c1b-8e53-55f73a55236a.jpg",
     "createdAt": "2026-07-23T11:44:52.288Z",
     "images": [
@@ -8133,7 +8133,7 @@
     "category": "empire",
     "title": "Galen and Doralia ven Denst",
     "author": "Games Workshop (re-cast)",
-    "price": "700",
+    "price": 700,
     "image": "/uploads/177b0022-6507-4a70-b7a5-a757313f1f4d.jpg",
     "createdAt": "2026-07-23T11:44:52.355Z",
     "images": [
@@ -8148,7 +8148,7 @@
     "category": "empire",
     "title": "Jelsen Darrock",
     "author": "Games Workshop (re-cast)",
-    "price": "350",
+    "price": 350,
     "image": "/uploads/6c0d0ea5-cf77-4c74-b23c-de6b413bf17d.jpg",
     "createdAt": "2026-07-23T11:44:52.418Z",
     "images": [
@@ -8163,7 +8163,7 @@
     "category": "high-elves",
     "title": "Island of Blood",
     "author": "Games Workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/d89cff2d-1645-40c7-8470-6e9910ec1f7b.jpg",
     "createdAt": "2026-07-23T11:45:02.237Z",
     "images": [
@@ -8177,7 +8177,7 @@
     "category": "stormcast-eternals",
     "title": "Skaventide",
     "author": "Games Workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/df46bce1-12ce-4ae5-94e1-8bcfdf6fbb2f.jpg",
     "createdAt": "2026-07-23T11:45:11.983Z",
     "images": [
@@ -8191,7 +8191,7 @@
     "category": "terrain",
     "title": "Mekboy Workshop",
     "author": "Games Workshop",
-    "price": "3400",
+    "price": 3400,
     "image": "/uploads/a482c496-53db-4ec8-8e72-8e3ed84dfb2c.jpg",
     "createdAt": "2026-07-23T11:45:23.177Z",
     "images": [
@@ -8207,7 +8207,7 @@
     "category": "terrain",
     "title": "Octarius",
     "author": "Games Workshop",
-    "price": "3500",
+    "price": 3500,
     "image": "/uploads/e7ed9aa6-e57c-4abe-a1dd-9f95543187fa.jpg",
     "createdAt": "2026-07-23T11:45:25.631Z",
     "images": [
@@ -8225,7 +8225,7 @@
     "category": "terrain",
     "title": "Galvanic Servohaulers (Krogskull's Boyz box)",
     "author": "Games Workshop",
-    "price": "1000",
+    "price": 1000,
     "image": "/uploads/e45138de-c068-4944-9baf-08e7da01738f.jpg",
     "createdAt": "2026-07-23T11:45:25.690Z",
     "images": [
@@ -8239,7 +8239,7 @@
     "category": "terrain",
     "title": "Munitorum Armoured Container",
     "author": "Games Workshop",
-    "price": "1900",
+    "price": 1900,
     "image": "/uploads/3d2921e0-acd5-48fc-ade6-001ee32d4c8d.jpg",
     "createdAt": "2026-07-23T11:45:25.745Z",
     "images": [
@@ -8253,7 +8253,7 @@
     "category": "terrain",
     "title": "Orks Big'ed Bossbunka",
     "author": "Games Workshop",
-    "price": "4200",
+    "price": 4200,
     "image": "/uploads/f12cf31b-de78-4a5a-8277-7620dc70a7ed.jpg",
     "createdAt": "2026-07-23T11:45:25.801Z",
     "images": [
@@ -8267,7 +8267,7 @@
     "category": "terrain",
     "title": "Orks barricades (2008)",
     "author": "Games Workshop",
-    "price": "2200",
+    "price": 2200,
     "image": "/uploads/1712ba99-8bfc-4be1-88f6-cb2a0a0b8167.jpg",
     "createdAt": "2026-07-23T11:45:25.854Z",
     "images": [
@@ -8281,7 +8281,7 @@
     "category": "terrain",
     "title": "Задворки Джанктауна",
     "author": "Ultraterrain",
-    "price": "450",
+    "price": 450,
     "image": "/uploads/13b940a0-4f90-4abd-96b9-f0914807872e.jpg",
     "createdAt": "2026-07-23T11:45:25.902Z",
     "images": [
@@ -8295,7 +8295,7 @@
     "category": "terrain",
     "title": "Мусорные баррикады",
     "author": "Ultraterrain",
-    "price": "450",
+    "price": 450,
     "image": "/uploads/d4d6f64f-ee23-4987-9887-124190ee494a.jpg",
     "createdAt": "2026-07-23T11:45:25.955Z",
     "images": [
@@ -8309,7 +8309,7 @@
     "category": "terrain",
     "title": "Стены ДжанкТауна",
     "author": "Ultraterrain",
-    "price": "600",
+    "price": 600,
     "image": "/uploads/eb939225-8229-4c48-9db4-5c927bdae568.jpg",
     "createdAt": "2026-07-23T11:45:26.007Z",
     "images": [
@@ -8323,7 +8323,7 @@
     "category": "terrain",
     "title": "Набор баррикад \"Складской мусор\"",
     "author": "Ultraterrain",
-    "price": "360",
+    "price": 360,
     "image": "/uploads/45e87a0e-ce44-47b9-9629-daec5751e76f.jpg",
     "createdAt": "2026-07-23T11:45:26.056Z",
     "images": [
@@ -8337,7 +8337,7 @@
     "category": "terrain",
     "title": "Автосервис",
     "author": "Ultraterrain",
-    "price": "900",
+    "price": 900,
     "image": "/uploads/fb017e71-c205-4fc1-aaee-9a1bcc1c22d5.jpg",
     "createdAt": "2026-07-23T11:45:26.108Z",
     "images": [
@@ -8351,7 +8351,7 @@
     "category": "terrain",
     "title": "Телега Пустошей",
     "author": "Ultraterrain",
-    "price": "450",
+    "price": 450,
     "image": "/uploads/b7d76afa-b03e-4269-8d2d-ebd585bd46fc.jpg",
     "createdAt": "2026-07-23T11:45:26.155Z",
     "images": [
@@ -8365,7 +8365,7 @@
     "category": "terrain",
     "title": "Skaven Gnawholes",
     "author": "Games Workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/b50ba6e4-f60e-4133-b837-b30d395e43ec.jpg",
     "createdAt": "2026-07-23T11:45:26.213Z",
     "images": [
@@ -8379,7 +8379,7 @@
     "category": "terrain",
     "title": "Endless Spells: Skaven",
     "author": "Games Workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/9f20f8fa-b09a-469f-8ab8-2cca65d8994e.jpg",
     "createdAt": "2026-07-23T11:45:26.271Z",
     "images": [
@@ -8393,7 +8393,7 @@
     "category": "terrain",
     "title": "Surgical Operating Table",
     "author": "Afterlife (re-cast)",
-    "price": "200",
+    "price": 200,
     "image": "/uploads/c5b537ed-0abb-4b61-acd5-6cd004c9c58a.jpg",
     "createdAt": "2026-07-23T11:45:26.317Z",
     "images": [
@@ -8408,7 +8408,7 @@
     "category": "terrain",
     "title": "Bad Moon Loonshrine",
     "author": "Games Workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/7c14057d-10e1-4439-a375-6d6007976e04.jpg",
     "createdAt": "2026-07-23T11:45:26.374Z",
     "images": [
@@ -8422,7 +8422,7 @@
     "category": "terrain",
     "title": "Endless Spells Gloomspite Gitz",
     "author": "Games Workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/86630887-06c8-4e2a-a0cc-1123f7a739fd.jpg",
     "createdAt": "2026-07-23T11:45:26.433Z",
     "images": [
@@ -8436,7 +8436,7 @@
     "category": "terrain",
     "title": "Skaventide terrain",
     "author": "Games Workshop",
-    "price": "0",
+    "price": 0,
     "image": "/uploads/4512541c-77a5-4244-bf2b-3182a28ccc06.jpg",
     "createdAt": "2026-07-23T11:45:26.487Z",
     "images": [
@@ -8450,7 +8450,7 @@
     "category": "other",
     "title": "Murmillo (Gladiator)",
     "author": "Alexandros Models (re-cast)",
-    "price": "1430",
+    "price": 1430,
     "image": "/uploads/e1ba89ff-89de-4cae-9e02-b495ced62caf.jpg",
     "createdAt": "2026-07-23T11:45:37.300Z",
     "images": [
@@ -8466,7 +8466,7 @@
     "category": "other",
     "title": "Vukodlak Fighters",
     "author": "Clay Cyanide Miniatures (3d print)",
-    "price": "510",
+    "price": 510,
     "image": "/uploads/dbbf863b-6e8b-4210-98d2-40f1ffd8d490.jpg",
     "createdAt": "2026-07-23T11:45:39.052Z",
     "images": [
@@ -8483,7 +8483,7 @@
     "category": "other",
     "title": "High Roller",
     "author": "Reaper miniatures",
-    "price": "2500",
+    "price": 2500,
     "image": "/uploads/af940cb0-4d01-4b91-9f5b-2883a5c32a84.jpg",
     "createdAt": "2026-07-23T11:45:39.249Z",
     "images": [
@@ -8497,7 +8497,7 @@
     "category": "other",
     "title": "Mice and Mystics",
     "author": "",
-    "price": "2000",
+    "price": 2000,
     "image": "/uploads/bd488e83-befd-4f0d-8d9e-27e751ceca14.jpg",
     "createdAt": "2026-07-23T11:45:39.323Z",
     "images": [
@@ -8511,7 +8511,7 @@
     "category": "other",
     "title": "Druze Hacker",
     "author": "Infinity Shock Teams (re-cast)",
-    "price": "350",
+    "price": 350,
     "image": "/uploads/93345c8a-67f9-4ab3-ad41-50b6365d42c4.jpg",
     "createdAt": "2026-07-23T11:45:39.370Z",
     "images": [
@@ -8526,7 +8526,7 @@
     "category": "other",
     "title": "Mavericks, 9th Motorized Recon Bat",
     "author": "Infinity Ariadna (re-cast)",
-    "price": "1900",
+    "price": 1900,
     "image": "/uploads/c1d6fc78-8604-4c94-b3dc-74c9cf31c069.jpg",
     "createdAt": "2026-07-23T11:45:39.426Z",
     "images": [
@@ -8541,7 +8541,7 @@
     "category": "other",
     "title": "Laedria the Necromancer",
     "author": "White Werewolf Tavern (3d print)",
-    "price": "100",
+    "price": 100,
     "image": "/uploads/453688d5-1818-4408-8637-c554e53627b5.jpg",
     "createdAt": "2026-07-23T11:45:39.485Z",
     "images": [
@@ -8555,7 +8555,7 @@
     "category": "other",
     "title": "Vanamoto Musashi | Shiba Inu Samurai",
     "author": "Blood Carrot Knights",
-    "price": "1400",
+    "price": 1400,
     "image": "/uploads/d90a9c14-0af2-469f-95f7-bb851272b730.jpg",
     "createdAt": "2026-07-23T11:45:39.536Z",
     "images": [
@@ -8569,7 +8569,7 @@
     "category": "other",
     "title": "Gurrts | Guts Berserk",
     "author": "Blood Carrot Knights",
-    "price": "1400",
+    "price": 1400,
     "image": "/uploads/065d708e-fd74-4d05-aac6-79f7f9c8e02d.jpg",
     "createdAt": "2026-07-23T11:45:39.606Z",
     "images": [
@@ -8583,7 +8583,7 @@
     "category": "other",
     "title": "William Taillace | Cat Knight",
     "author": "Blood Carrot Knights",
-    "price": "1400",
+    "price": 1400,
     "image": "/uploads/5dbdda73-a69a-4749-ba54-284aa82db525.jpg",
     "createdAt": "2026-07-23T11:45:39.667Z",
     "images": [
@@ -8597,7 +8597,7 @@
     "category": "other",
     "title": "Sir Kittingham | Cat Knight",
     "author": "Blood Carrot Knights",
-    "price": "1400",
+    "price": 1400,
     "image": "/uploads/6b7195c0-6126-4dfe-8c4b-3b2d7849820b.jpg",
     "createdAt": "2026-07-23T11:45:39.727Z",
     "images": [
@@ -8611,7 +8611,7 @@
     "category": "other",
     "title": "Meowromancer | Cat Knight",
     "author": "Blood Carrot Knights",
-    "price": "1400",
+    "price": 1400,
     "image": "/uploads/7d7dff74-bab9-4747-a7b0-5ff321f03248.jpg",
     "createdAt": "2026-07-23T11:45:39.787Z",
     "images": [
@@ -8625,7 +8625,7 @@
     "category": "other",
     "title": "Ginger Rogue | Fox Rogue",
     "author": "Blood Carrot Knights",
-    "price": "1400",
+    "price": 1400,
     "image": "/uploads/70f97879-996e-4505-a406-07e1ca7b2215.jpg",
     "createdAt": "2026-07-23T11:45:39.843Z",
     "images": [
@@ -8639,7 +8639,7 @@
     "category": "other",
     "title": "Tricky Ricky | Fantasy Raccoon Trader",
     "author": "Blood Carrot Knights",
-    "price": "1400",
+    "price": 1400,
     "image": "/uploads/04e0e87a-1942-457e-a177-8b36a7204404.jpg",
     "createdAt": "2026-07-23T11:45:39.891Z",
     "images": [
@@ -8653,7 +8653,7 @@
     "category": "other",
     "title": "Blood Bowl Biased Referee",
     "author": "Games Workshop (re-cast)",
-    "price": "600",
+    "price": 600,
     "image": "/uploads/208c429b-c322-4a7a-8d60-94b0d1985752.jpg",
     "createdAt": "2026-07-23T11:45:39.943Z",
     "images": [
@@ -8668,7 +8668,7 @@
     "category": "other",
     "title": "Blood Bowl Bribed Referee",
     "author": "Games Workshop (re-cast)",
-    "price": "600",
+    "price": 600,
     "image": "/uploads/c30f2ecf-773b-4bee-82b4-550d5f14f4e1.jpg",
     "createdAt": "2026-07-23T11:45:39.995Z",
     "images": [
@@ -8683,7 +8683,7 @@
     "category": "other",
     "title": "Dyadjooshka Ork",
     "author": "Ork Workshop",
-    "price": "693",
+    "price": 693,
     "image": "/uploads/e72b92fd-20ec-4784-8463-8d354206031c.jpg",
     "createdAt": "2026-07-23T11:45:41.055Z",
     "images": [
@@ -8698,7 +8698,7 @@
     "category": "other",
     "title": "Magnetic Heroes Dungeon Master + Mega Options",
     "author": "Artel W",
-    "price": "14000",
+    "price": 14000,
     "image": "/uploads/b09c9e00-5061-464f-b99b-74ca870a8cae.jpg",
     "createdAt": "2026-07-23T11:45:41.117Z",
     "images": [
@@ -8712,7 +8712,7 @@
     "category": "other",
     "title": "Supreme Gladiatress M'evia",
     "author": "Artel W",
-    "price": "1000",
+    "price": 1000,
     "image": "/uploads/f760396f-bdf5-4e0d-a01b-222c81aad0c2.jpg",
     "createdAt": "2026-07-23T11:45:41.172Z",
     "images": [
@@ -8726,7 +8726,7 @@
     "category": "other",
     "title": "Goblin Riders June 2020",
     "author": "Warploque Miniatuers",
-    "price": "600",
+    "price": 600,
     "image": "/uploads/9e8604e6-27cf-492a-b4fe-a5f11e030ac7.jpg",
     "createdAt": "2026-07-23T11:45:41.355Z",
     "images": [
@@ -8741,7 +8741,7 @@
     "category": "other",
     "title": "Goblin Squad May 2020",
     "author": "Warploque Miniatuers",
-    "price": "600",
+    "price": 600,
     "image": "/uploads/b9582ff1-f25c-442b-b7b8-5e11e915854c.jpg",
     "createdAt": "2026-07-23T11:45:41.428Z",
     "images": [
@@ -8756,7 +8756,7 @@
     "category": "other",
     "title": "Frog Prince + Bullywugs September 2020",
     "author": "Warploque Miniatuers",
-    "price": "1100",
+    "price": 1100,
     "image": "/uploads/06e5d209-d949-40a0-99b5-b61374447599.jpg",
     "createdAt": "2026-07-23T11:45:41.610Z",
     "images": [
@@ -8771,7 +8771,7 @@
     "category": "other",
     "title": "Bullywug Beetle Riders",
     "author": "Warploque Miniatuers",
-    "price": "500",
+    "price": 500,
     "image": "/uploads/3899c491-8f80-4bf1-8820-923472530944.jpg",
     "createdAt": "2026-07-23T11:45:41.759Z",
     "images": [
@@ -8786,7 +8786,7 @@
     "category": "other",
     "title": "Thief in the Shadows",
     "author": "Fantasy Legion Miniatures (28213)",
-    "price": "451",
+    "price": 451,
     "image": "/uploads/99b29a2e-b9c3-453f-a4cc-1bdb676cba8d.jpg",
     "createdAt": "2026-07-23T11:45:41.822Z",
     "images": [
@@ -8800,7 +8800,7 @@
     "category": "officio-assassinorum",
     "title": "Vindicare Assassin",
     "author": "Games Workshop (re-cast)",
-    "price": "300",
+    "price": 300,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-23T11:49:43.315Z",
     "images": [],
@@ -8814,7 +8814,7 @@
     "category": "officio-assassinorum",
     "title": "Vindicare Assassin",
     "author": "Games Workshop (re-cast)",
-    "price": "300",
+    "price": 300,
     "image": "/uploads/1784672989417-images.jpg",
     "createdAt": "2026-07-23T11:49:43.315Z",
     "images": [],

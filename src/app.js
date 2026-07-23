@@ -1,15 +1,19 @@
 const express = require('express');
 const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 const path = require('path');
+const fs = require('fs');
 const multer = require('multer');
 const { ValidationError, DataCorruptionError } = require('./errors');
 const { readJSON, writeJSONAtomic, secureCookies, DATA_DIR, ITEMS_FILE, ROOT } = require('./helpers');
 
-// Init data files
+// Init data files and session storage
 ['items.json'].forEach(f => {
   const fp = path.join(DATA_DIR, f);
   if (!require('fs').existsSync(fp)) writeJSONAtomic(fp, []);
 });
+const SESSION_DIR = path.join(DATA_DIR, 'sessions');
+if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
 
 const app = express();
 
@@ -21,6 +25,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  store: new FileStore({ path: SESSION_DIR, ttl: 86400, reapInterval: 3600 }),
   cookie: {
     httpOnly: true,
     secure: secureCookies,
@@ -40,6 +45,7 @@ app.use('/api/items', require('./routes/items'));
 app.use('/api/settings', require('./routes/settings'));
 app.use('/api/spreadsheet', require('./routes/spreadsheet'));
 app.use('/api/upload', require('./routes/upload'));
+app.use('/api', require('./routes/backfill'));
 
 // 404 for unknown API endpoints
 app.use('/api', (req, res) => {

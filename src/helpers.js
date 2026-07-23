@@ -81,10 +81,25 @@ function findCategory(subcategories, targetId) {
   return null;
 }
 
+function flattenCategories(subcategories, ancestors = []) {
+  return (subcategories || []).flatMap(cat => {
+    const path = [...ancestors, cat.label];
+    if (cat.type === 'group' && cat.subcategories?.length) {
+      return flattenCategories(cat.subcategories, path);
+    }
+    return [{
+      id: cat.id,
+      label: cat.label,
+      path,
+      groupLabel: ancestors.length > 0 ? ancestors.join(' → ') : null
+    }];
+  });
+}
+
 function validateItemInput(body, cats, partial) {
-  const errors = [];
   const schema = partial ? itemInputPartialSchema : itemInputSchema;
   const result = schema.safeParse(body);
+  const errors = [];
 
   if (!result.success) {
     for (const issue of result.error.issues) {
@@ -104,7 +119,8 @@ function validateItemInput(body, cats, partial) {
     }
   }
 
-  return errors.length > 0 ? errors : null;
+  if (errors.length > 0) return { errors, data: null };
+  return { errors: null, data: result.data };
 }
 
 function validateFinalOrder(order, oldImages, uploadedFiles, removedIndexes) {
@@ -142,11 +158,20 @@ function parseJSONArray(value, fieldName) {
   }
 }
 
+let writeQueue = Promise.resolve();
+
+function withDataLock(operation) {
+  const result = writeQueue.then(operation, operation);
+  writeQueue = result.catch(() => {});
+  return result;
+}
+
 module.exports = {
   ROOT, DATA_DIR, ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE, UPLOADS_DIR, TEMP_DIR,
   envBoolean, secureCookies,
   readJSON, writeJSONAtomic,
   safeUnlink, cleanupUploadedFiles,
-  normalizeImage, findCategory,
-  validateItemInput, validateFinalOrder, parseJSONArray
+  normalizeImage, findCategory, flattenCategories,
+  validateItemInput, validateFinalOrder, parseJSONArray,
+  withDataLock
 };

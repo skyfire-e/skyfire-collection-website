@@ -9,7 +9,7 @@
     "status": true
   },
   "currencies": {
-    "dice": "$",
+    "dice": "USD",
     "miniatures": "RUB"
   }
 }

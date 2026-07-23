@@ -4,6 +4,7 @@ const { requireAdmin, requireSameOrigin, upload } = require('../middleware');
 const {
   readJSON, writeJSONAtomic, safeUnlink, cleanupUploadedFiles,
   normalizeImage, findCategory, validateItemInput, validateFinalOrder, parseJSONArray,
+  withDataLock,
   ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE
 } = require('../helpers');
 
@@ -19,62 +20,70 @@ router.get('/', (req, res) => {
 
 router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
   try {
-    const items = readJSON(ITEMS_FILE) || [];
     const cats = readJSON(CATEGORIES_FILE) || {};
-    const settings = readJSON(SETTINGS_FILE) || {};
     const files = req.files || [];
 
-    const errors = validateItemInput(req.body, cats);
-    if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
+    const validation = validateItemInput(req.body, cats);
+    if (validation.errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: validation.errors }); }
 
+    const { data } = validation;
     const images = await Promise.all(files.map(normalizeImage));
-    const newItem = {
-      id: crypto.randomUUID(),
-      section: req.body.section,
-      category: req.body.category,
-      title: req.body.title || 'Untitled',
-      author: req.body.author || '',
-      price: req.body.price || '',
-      recaster: req.body.recaster || '',
-      combatPoints: req.body.combatPoints || '',
-      status: req.body.status || '',
-      image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
-      images: images,
-      createdAt: new Date().toISOString()
-    };
-    items.push(newItem);
-    try {
-      writeJSONAtomic(ITEMS_FILE, items);
-    } catch (err) {
-      cleanupUploadedFiles(files);
-      console.error('Failed to save items.json:', err);
-      return res.status(500).json({ error: 'Failed to save data' });
-    }
+
+    const newItem = await withDataLock(() => {
+      const items = readJSON(ITEMS_FILE) || [];
+      const settings = readJSON(SETTINGS_FILE) || {};
+      const item = {
+        id: crypto.randomUUID(),
+        section: data.section,
+        category: data.category,
+        title: data.title || 'Untitled',
+        author: data.author || '',
+        price: data.price ?? 0,
+        recaster: data.recaster || '',
+        combatPoints: data.combatPoints || '',
+        status: data.status || '',
+        image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
+        images: images,
+        createdAt: new Date().toISOString()
+      };
+      items.push(item);
+      try {
+        writeJSONAtomic(ITEMS_FILE, items);
+      } catch (err) {
+        cleanupUploadedFiles(files);
+        throw err;
+      }
+      return item;
+    });
     res.status(201).json(newItem);
   } catch (err) { next(err); }
 });
 
 router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
   try {
-    const items = readJSON(ITEMS_FILE) || [];
     const cats = readJSON(CATEGORIES_FILE) || {};
     const files = req.files || [];
-    const idx = items.findIndex(i => i.id == req.params.id);
-    if (idx === -1) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
+
+    // Validate before any write
+    const currentItem = readJSON(ITEMS_FILE)?.find(i => i.id == req.params.id);
+    if (!currentItem) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
     const candidate = {
-      ...items[idx],
+      ...currentItem,
       ...(req.body.title !== undefined && { title: String(req.body.title).trim() }),
       ...(req.body.author !== undefined && { author: req.body.author }),
       ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
       ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
-      ...(req.body.price !== undefined && { price: String(req.body.price).trim() }),
+      ...(req.body.price !== undefined && {}),
       ...(req.body.recaster !== undefined && { recaster: req.body.recaster }),
       ...(req.body.combatPoints !== undefined && { combatPoints: req.body.combatPoints }),
       ...(req.body.status !== undefined && { status: req.body.status })
     };
-    const errors = validateItemInput(candidate, cats);
-    if (errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: errors }); }
+    const validation = validateItemInput(candidate, cats);
+    if (validation.errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: validation.errors }); }
+    if (validation.data && req.body.price !== undefined) {
+      candidate.price = validation.data.price;
+    }
 
     const newFilePaths = await Promise.all(files.map(normalizeImage));
 
@@ -141,20 +150,26 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       }
     }
 
-    items[idx] = candidate;
+    const oldImagesForCleanup = [...(currentItem.images || [])];
 
-    try {
-      writeJSONAtomic(ITEMS_FILE, items);
-    } catch (err) {
-      cleanupUploadedFiles(files);
-      console.error('Failed to save items.json:', err);
-      return res.status(500).json({ error: 'Failed to save data' });
-    }
+    await withDataLock(() => {
+      const items = readJSON(ITEMS_FILE) || [];
+      const idx = items.findIndex(i => i.id == req.params.id);
+      if (idx === -1) return;
+      items[idx] = candidate;
+      try {
+        writeJSONAtomic(ITEMS_FILE, items);
+      } catch (err) {
+        cleanupUploadedFiles(files);
+        throw err;
+      }
+    });
 
     const newSet = new Set(candidate.images);
-    for (const img of oldImages) {
+    for (const img of oldImagesForCleanup) {
       if (!newSet.has(img)) {
-        const stillReferenced = items.some((other, oi) => oi !== idx && (other.image === img || other.images?.includes(img)));
+        const items = readJSON(ITEMS_FILE) || [];
+        const stillReferenced = items.some((other, oi) => oi.id !== candidate.id && (other.image === img || other.images?.includes(img)));
         if (!stillReferenced) safeUnlink(img);
       }
     }
@@ -163,28 +178,26 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
   } catch (err) { next(err); }
 });
 
-router.delete('/:id', requireSameOrigin, requireAdmin, (req, res) => {
-  let items = readJSON(ITEMS_FILE) || [];
-  const idx = items.findIndex(i => i.id == req.params.id);
-  if (idx === -1) return res.status(404).json({ error: 'Not found' });
-  const deletedItem = items[idx];
-  const imagesToRemove = [deletedItem.image, ...(deletedItem.images || [])];
-  items.splice(idx, 1);
-
+router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) => {
   try {
-    writeJSONAtomic(ITEMS_FILE, items);
-  } catch (err) {
-    console.error('Failed to save items.json:', err);
-    return res.status(500).json({ error: 'Failed to save data' });
-  }
-
-  const uniquePaths = [...new Set(imagesToRemove.filter(Boolean))];
-  for (const img of uniquePaths) {
-    const stillReferenced = items.some(other => other.image === img || other.images?.includes(img));
-    if (!stillReferenced) safeUnlink(img);
-  }
-
-  res.json({ success: true });
+    let deletedItem, uniquePaths;
+    await withDataLock(() => {
+      const items = readJSON(ITEMS_FILE) || [];
+      const idx = items.findIndex(i => i.id == req.params.id);
+      if (idx === -1) return;
+      deletedItem = items[idx];
+      uniquePaths = [...new Set([deletedItem.image, ...(deletedItem.images || [])].filter(Boolean))];
+      items.splice(idx, 1);
+      writeJSONAtomic(ITEMS_FILE, items);
+    });
+    if (!deletedItem) return res.status(404).json({ error: 'Not found' });
+    const currentItems = readJSON(ITEMS_FILE) || [];
+    for (const img of uniquePaths) {
+      const stillReferenced = currentItems.some(other => other.image === img || other.images?.includes(img));
+      if (!stillReferenced) safeUnlink(img);
+    }
+    res.json({ success: true });
+  } catch (err) { next(err); }
 });
 
 module.exports = router;
