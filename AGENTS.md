@@ -143,9 +143,9 @@
 | `migrate-kromlech.js` | Google Sites → Kromlech | `kromlech` | + sanitizeAuthor (painted) |
 | `migrate-various.js` | Google Sites → Various Studios | `various-studios` | full template |
 
-## Known Issues & Fixes Applied
-- **Backfill bug**: у 190 items было `images: []` при наличии `image`. Исправлено: `POST /api/backfill-images` скопировал `image` → `images[0]`. Авто-backfill убран. Модалка теперь показывает `image` если `images` пуст.
-- **PUT handler**: не затирает `image` дефолткой, если фото не менялись.
+## Project Modules
+- `lib/validate.js` — Zod schemas for settings/category/item validation
+- `server.js` — Express app (all routes + middleware, to be split in P3)
 
 ## API Endpoints
 - `GET /api/items?section=&category=` — items filter
@@ -166,52 +166,38 @@
   - Нужен токен от @BotFather
   - Пакет `node-telegram-bot-api`
 
-## Prioritized Fix Queue (from code review Jul 2026)
+## Implemented Iterations
 
-Execute in order, 3 per iteration, test between iterations.
+### Iteration A — P0 Security (Sharp + CSRF + XSS)
+- Sharp upload pipeline (normalizeImage, EXIF strip, mozjpeg 88%, max 3000px)
+- API wrapper (`response.ok`) в `api.js`
+- CSRF same-origin middleware (`requireSameOrigin`)
+- XSS fix: settings.js innerHTML → createElement/textContent
 
-### Iteration 1 — Security & Data Integrity
-1. **PUT /api/items/:id — валидация + UUID filenames**
-   - multer filename: `Date.now()` → `crypto.randomUUID()`
-   - PUT: валидировать title (required, non-empty), section (exists), category (exists в секции)
-   - Вынести общую валидацию в `validateItemInput(body, cats)`
+### Iteration B — P0 Stability (Atomic writes + Cookie)
+- `readJSON` throws `DataCorruptionError` on corrupted files
+- Strict `finalOrder` validation (checks `removedIndexes`)
+- Candidate-based PUT with full replacement validation
+- `writeJSONAtomic` cleans up `.tmp` on error
+- `envBoolean()` helper for COOKIE_SECURE/TRUST_PROXY
+- Cookie renamed to `skyfire.sid`, logout `clearCookie` with same options
 
-2. **DELETE /api/categories — проверка items на сервере**
-   - Перед удалением категории считать items с этой category/section
-   - Рекурсивно собирать все дочерние ID для групп
-   - Возвращать `409 Conflict` если есть привязанные items
+### Iteration C — P0 Operations (Health + Graceful shutdown + Diagnostics)
+- `GET /health` endpoint (before page routes)
+- Graceful shutdown on SIGINT/SIGTERM
+- `public/404.html` with status 404
+- `gitignore/check-data.js` — 7965 integrity checks
+- `withPending` helper in `api.js` + delete button
+- Smoke test fixes (CSRF Origin + valid JPEG via sharp)
+- Quarantine: 886 orphaned files to `uploads/.quarantine/`
 
-3. **innerHTML → textContent / createElement (XSS)**
-   - `gallery-page.js`: `renderItems` переписать на createElement, `textContent` для title/author
-   - `admin/items.js`: spreadsheet rows — createElement вместо innerHTML
-
-### Iteration 2 — File Handling & API Cleanup
-4. **writeJSON → atomic (temp + rename)**
-   - Писать во временный файл, затем `fs.renameSync`
-   - `writeJSONAtomic(file, data)`
-
-5. **cleanupUploadedFiles при ошибке валидации**
-   - Удалять `req.files` если POST/PUT вернул 400/404
-   - Helper `function cleanupUploadedFiles(files)`
-
-6. **Удаление старых фото после успешной записи JSON**
-   - В PUT: сохранить JSON → потом удалять старые файлы
-
-### Iteration 3 — Auth Hardening & Routing
-7. **404 для неизвестных `/api/*`**
-   - Перед catch-all `app.use('/api', (req, res) => res.status(404).json(...))`
-
-8. **Rate limit на `/api/auth/login`**
-   - Пакет `express-rate-limit`, 10 попыток за 15 мин
-
-9. **Session regeneration на login + logout callback**
-   - `req.session.regenerate()` при логине
-   - `req.session.destroy(callback)` при логауте
-
-### Iteration 4 — Housekeeping
-10. **Удалить `style.css`** — дубликат `base.css`
-11. **Cookie → `secure: true` conditional** — проверять `req.headers['x-forwarded-proto']`
-12. **Price validation в POST/PUT** — `/^\d+(\.\d{1,2})?$/`, reject невалидные
+### Iteration D — P1+P2 (Backup + Validation + UI hardening)
+- **P1**: `gitignore/backup.js` (tar data/ + uploads/, excludes .tmp/.quarantine)
+- **P1**: `npm i zod`, `lib/validate.js` — Zod schemas for settings/category/item
+- **P2**: `image-editor.js` — innerHTML → createElement (eliminates stored XSS vector)
+- **P2**: `revokeObjectURL` cleanup on crop/close/save (no blob: leaks)
+- **P2**: Section dropdown populated from `/api/categories` (no hardcoded dice/miniatures)
+- **P2**: `withPending` on addSection/addSubcat buttons
 
 ## How to Restart Server
 ```powershell
