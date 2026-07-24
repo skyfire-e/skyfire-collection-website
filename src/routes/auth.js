@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const argon2 = require('argon2');
-const { loginLimiter } = require('../middleware');
+const { loginLimiter, requireSameOrigin } = require('../middleware');
 const { secureCookies } = require('../helpers');
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
@@ -30,7 +30,7 @@ router.post('/login', loginLimiter, async (req, res) => {
   });
 });
 
-router.post('/logout', (req, res) => {
+router.post('/logout', requireSameOrigin, (req, res) => {
   req.session.destroy(err => {
     if (err) return res.status(500).json({ error: 'Logout error' });
     res.clearCookie('skyfire.sid', { httpOnly: true, secure: secureCookies, sameSite: 'lax' });

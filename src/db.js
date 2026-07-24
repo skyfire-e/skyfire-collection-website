@@ -84,6 +84,10 @@ if (currentVersion < 2) {
 // Future migrations: add blocks here
 // if (currentVersion < 3) { ... db.pragma('user_version = 3'); }
 
+function safeJsonParse(value, fallback) {
+  try { return JSON.parse(value); } catch { return fallback; }
+}
+
 // --- Items ---
 function getItems(section, category) {
   let query = 'SELECT * FROM items';
@@ -160,7 +164,7 @@ function rowToItem(row) {
     combatPoints: row.combatPoints,
     status: row.status,
     image: row.image,
-    images: JSON.parse(row.images || '[]'),
+    images: safeJsonParse(row.images, []),
     version: row.version,
     createdAt: row.createdAt
   };
@@ -171,7 +175,7 @@ function getCategories() {
   const rows = db.prepare('SELECT * FROM categories').all();
   const result = {};
   for (const row of rows) {
-    result[row.section_id] = JSON.parse(row.data);
+    result[row.section_id] = safeJsonParse(row.data, { label: row.section_label, subcategories: [] });
   }
   return result;
 }
@@ -193,7 +197,7 @@ function getSettings() {
   const rows = db.prepare('SELECT * FROM settings').all();
   const result = {};
   for (const row of rows) {
-    result[row.key] = JSON.parse(row.value);
+    result[row.key] = safeJsonParse(row.value, null);
   }
   return result;
 }
@@ -230,7 +234,7 @@ function getSession(sid) {
     db.prepare('DELETE FROM sessions WHERE sid = ?').run(sid);
     return null;
   }
-  try { return JSON.parse(row.data); } catch { return null; }
+  try { return safeJsonParse(row.data, null); } catch { return null; }
 }
 
 function setSession(sid, data, maxAge) {

@@ -6,7 +6,18 @@ if (!process.env.SESSION_SECRET || (!process.env.ADMIN_PASSWORD && !process.env.
   process.exit(1);
 }
 
+if (process.env.SESSION_SECRET.length < 32) {
+  console.error('SESSION_SECRET must be at least 32 characters long.');
+  process.exit(1);
+}
+
+if (process.env.NODE_ENV === 'production' && !process.env.ADMIN_PASSWORD_HASH) {
+  console.error('ADMIN_PASSWORD_HASH is required in production. ADMIN_PASSWORD (plaintext) is only allowed in development.');
+  process.exit(1);
+}
+
 const app = require('./src/app');
+const db = require('./src/db');
 const PORT = process.env.PORT || 3000;
 
 const server = app.listen(PORT, () => {
@@ -16,6 +27,12 @@ const server = app.listen(PORT, () => {
 function shutdown(signal) {
   console.log(signal + ': shutting down');
   server.close(error => {
+    try {
+      db.db.pragma('wal_checkpoint(TRUNCATE)');
+      db.db.close();
+    } catch (e) {
+      console.error('DB close error:', e.message);
+    }
     if (error) { console.error(error); process.exit(1); }
     process.exit(0);
   });
