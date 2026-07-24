@@ -64,11 +64,25 @@ db.exec(`
   );
 `);
 
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 const currentVersion = db.pragma('user_version', { simple: true });
-if (currentVersion < SCHEMA_VERSION) {
-  db.pragma('user_version = ' + SCHEMA_VERSION);
+
+if (currentVersion < 1) {
+  db.pragma('user_version = 1');
 }
+if (currentVersion < 2) {
+  const hasExtraFields = db.prepare('SELECT 1 FROM settings WHERE key = ?').get('sectionsWithExtraFields');
+  if (!hasExtraFields) {
+    db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)').run(
+      'sectionsWithExtraFields',
+      JSON.stringify(['miniatures'])
+    );
+  }
+  db.pragma('user_version = 2');
+}
+
+// Future migrations: add blocks here
+// if (currentVersion < 3) { ... db.pragma('user_version = 3'); }
 
 // --- Items ---
 function getItems(section, category) {

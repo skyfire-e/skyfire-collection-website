@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
 router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
   try {
-    const { section, label, id, parentId } = req.body;
+    const { section, label, id, parentId, isGroup } = req.body;
 
     if (!label) return res.status(400).json({ error: 'Label is required' });
 
@@ -31,7 +31,8 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
           if (findCategory(cats[section].subcategories, catId)) {
             throw Object.assign(new Error('Category ID "' + catId + '" already exists'), { status: 409 });
           }
-          parent.subcategories.push({ id: catId, label });
+          const newCat = isGroup ? { id: catId, label, type: 'group', subcategories: [] } : { id: catId, label };
+          parent.subcategories.push(newCat);
         } else {
           throw Object.assign(new Error('Parent not found or not a group'), { status: 400 });
         }
@@ -39,7 +40,8 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
         if (findCategory(cats[section].subcategories, catId)) {
           throw Object.assign(new Error('Category ID "' + catId + '" already exists'), { status: 409 });
         }
-        cats[section].subcategories.push({ id: catId, label });
+        const newCat = isGroup ? { id: catId, label, type: 'group', subcategories: [] } : { id: catId, label };
+        cats[section].subcategories.push(newCat);
       } else {
         throw Object.assign(new Error('Invalid target'), { status: 400 });
       }

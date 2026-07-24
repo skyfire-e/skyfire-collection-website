@@ -132,9 +132,11 @@ export async function initAdminItems() {
       if (!section) return alert('Select a section');
       if (!label) return alert('Enter a category label');
       const id = document.getElementById('catId').value.trim() || undefined;
-      await API.post('/api/categories', { section, label, id, parentId: parentId || undefined });
+      const isGroup = document.getElementById('catIsGroup').checked;
+      await API.post('/api/categories', { section, label, id, parentId: parentId || undefined, isGroup });
       document.getElementById('catLabel').value = '';
       document.getElementById('catId').value = '';
+      document.getElementById('catIsGroup').checked = false;
       categoriesData = await API.get('/api/categories');
       populateCatSectionDropdown(categoriesData);
       populateAddSectionDropdown(categoriesData);
