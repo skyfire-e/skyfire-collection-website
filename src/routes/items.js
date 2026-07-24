@@ -41,7 +41,8 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
       version: 1,
       image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
       images: images,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
     db.insertItem(item);
     res.status(201).json(item);
