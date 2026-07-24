@@ -39,7 +39,7 @@ jobs:
           node --check src/routes/pages.js
 
       - name: Module load check
-        run: node -e "require('./src/errors'); require('./lib/validate'); require('./src/helpers'); console.log('Modules OK')"
+        run: node -e "require('./src/errors'); require('./lib/validate'); require('./src/helpers'); require('./src/db'); console.log('Modules OK')"
 
       - name: Run tests
         run: node --test

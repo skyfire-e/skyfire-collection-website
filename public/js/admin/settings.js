@@ -28,11 +28,12 @@ async function renderCurrencySettings(currencies) {
     inputEl.type = 'text';
     inputEl.id = 'cur_' + key;
     inputEl.value = currencies[key] || '';
-    inputEl.placeholder = '$';
-    inputEl.style.cssText = 'width:50px;padding:4px 8px';
+    inputEl.placeholder = 'USD';
+    inputEl.style.cssText = 'width:60px;padding:4px 8px';
+    inputEl.maxLength = 3;
     const hint = document.createElement('span');
     hint.style.cssText = 'color:var(--text-muted);font-size:0.78rem';
-    hint.textContent = 'symbol';
+    hint.textContent = 'ISO 4217';
     row.append(labelEl, inputEl, hint);
     container.appendChild(row);
   });

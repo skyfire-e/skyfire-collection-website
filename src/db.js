@@ -2,14 +2,19 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
+const TEST_DB = process.env.NODE_TEST_DB === '1';
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
-const DB_FILE = path.join(DATA_DIR, 'collection.db');
 
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-
-const db = new Database(DB_FILE);
-db.pragma('journal_mode = WAL');
+let db;
+if (TEST_DB) {
+  db = new Database(':memory:');
+} else {
+  const DB_FILE = path.join(DATA_DIR, 'collection.db');
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  db = new Database(DB_FILE);
+  db.pragma('journal_mode = WAL');
+}
 db.pragma('foreign_keys = ON');
 
 db.exec(`
@@ -58,6 +63,12 @@ db.exec(`
     expires INTEGER
   );
 `);
+
+const SCHEMA_VERSION = 1;
+const currentVersion = db.pragma('user_version', { simple: true });
+if (currentVersion < SCHEMA_VERSION) {
+  db.pragma('user_version = ' + SCHEMA_VERSION);
+}
 
 // --- Items ---
 function getItems(section, category) {
@@ -175,8 +186,10 @@ function getSettings() {
 
 function updateSettings(partial) {
   const insert = db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (@key, @value)');
+  const del = db.prepare('DELETE FROM settings WHERE key = ?');
   const tx = db.transaction(() => {
     for (const [key, value] of Object.entries(partial)) {
+      if (value === null) { del.run(key); continue; }
       insert.run({ key, value: JSON.stringify(value) });
     }
   });
@@ -184,12 +197,15 @@ function updateSettings(partial) {
 }
 
 // --- Audit ---
+const AUDIT_MAX_ROWS = 1000;
+
 function appendAudit(entry) {
   db.prepare('INSERT INTO audit (timestamp, action, data) VALUES (?, ?, ?)').run(
     new Date().toISOString(),
     entry.action || 'unknown',
     JSON.stringify(entry)
   );
+  db.prepare('DELETE FROM audit WHERE id NOT IN (SELECT id FROM audit ORDER BY id DESC LIMIT ?)').run(AUDIT_MAX_ROWS);
 }
 
 // --- Sessions ---

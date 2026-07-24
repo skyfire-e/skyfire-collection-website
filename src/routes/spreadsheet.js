@@ -3,15 +3,6 @@ const { requireAdmin } = require('../middleware');
 const { flattenCategories } = require('../helpers');
 const db = require('../db');
 
-function formatPrice(amount, currencyCode) {
-  if (amount == null || amount === 0) return '';
-  try {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyCode, minimumFractionDigits: 0 }).format(amount);
-  } catch {
-    return String(amount);
-  }
-}
-
 const router = Router();
 
 router.get('/public', (req, res) => {
@@ -41,13 +32,11 @@ router.get('/public', (req, res) => {
           title: i.title,
           author: i.author,
           price: showPrices ? (Number(i.price) || 0) : undefined,
-          priceFormatted: showPrices ? formatPrice(Number(i.price) || 0, currencyCode) : undefined,
           recaster: showColumns.recaster ? i.recaster : undefined,
           combatPoints: showColumns.combatPoints ? i.combatPoints : undefined,
           status: showColumns.status ? i.status : undefined,
         })),
         sum: subSum,
-        sumFormatted: showPrices ? formatPrice(subSum, currencyCode) : undefined,
       });
       sectionData.sum += subSum;
       sectionData.totalItems += subItems.length;

@@ -45,17 +45,29 @@ export async function initGalleryPage() {
     });
   }
 
+  let lbFocusTrap = null;
+
   function openLightbox(item) {
     lbCurrentImages = item.images && item.images.length > 0 ? item.images : [item.image];
     lbCurrentImgIdx = 0;
     updateLightbox(item);
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
+    const focusable = lightbox.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length > 0) focusable[0].focus();
+    lbFocusTrap = function(e) {
+      if (e.key !== 'Tab' || focusable.length === 0) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    lightbox.addEventListener('keydown', lbFocusTrap);
   }
 
   function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
+    if (lbFocusTrap) { lightbox.removeEventListener('keydown', lbFocusTrap); lbFocusTrap = null; }
   }
 
   function updateLightbox(item) {
@@ -170,9 +182,12 @@ export async function initGalleryPage() {
 
         delBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
-          if (confirm('Delete "' + item.title + '"?')) {
+          if (!confirm('Delete "' + item.title + '"?')) return;
+          try {
             await API.del('/api/items/' + item.id);
             loadItems();
+          } catch (err) {
+            alert('Delete failed: ' + (err.message || 'Unknown error'));
           }
         });
         editBtn.addEventListener('click', (e) => {

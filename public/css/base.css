@@ -390,8 +390,8 @@ a:hover { text-decoration: underline; }
   z-index: 10;
 }
 .lightbox-nav:hover { background: rgba(0,0,0,0.8); }
-.lightbox-prev { left: -80px; }
-.lightbox-next { right: -80px; }
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
 
 .lightbox-close {
   position: fixed;
@@ -464,11 +464,6 @@ a:hover { text-decoration: underline; }
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.edit-img-item.removing {
-  opacity: 0.4;
-  border-color: var(--danger);
 }
 
 .edit-img-del {

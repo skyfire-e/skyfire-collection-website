@@ -1,6 +1,6 @@
 import { API, checkAuth, isAdmin } from './api.js';
 
-export async function initAuth() {
+async function initAuth() {
   const adminBtn = document.getElementById('adminBtn');
   const authModal = document.getElementById('authModal');
   const loginBtn = document.getElementById('loginBtn');
@@ -17,19 +17,25 @@ export async function initAuth() {
   loginBtn.addEventListener('click', async () => {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
-    const res = await API.post('/api/auth/login', { username, password });
-    if (res.success) {
-      authModal.classList.remove('open');
-      await checkAuth();
-      updateUI();
-    } else {
-      authError.textContent = 'Invalid credentials';
+    authError.textContent = '';
+    try {
+      const res = await API.post('/api/auth/login', { username, password });
+      if (res.success) {
+        authModal.classList.remove('open');
+        await checkAuth();
+        updateUI();
+      } else {
+        authError.textContent = 'Invalid credentials';
+      }
+    } catch (err) {
+      authError.textContent = err.message || 'Login failed';
     }
   });
 
   logoutBtn.addEventListener('click', async () => {
-    await API.post('/api/auth/logout');
+    try { await API.post('/api/auth/logout'); } catch {}
     authModal.classList.remove('open');
+    await checkAuth();
     updateUI();
   });
 

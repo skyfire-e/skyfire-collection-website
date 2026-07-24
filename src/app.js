@@ -4,12 +4,16 @@ const session = require('express-session');
 const path = require('path');
 const multer = require('multer');
 const rateLimit = require('express-rate-limit');
+const compression = require('compression');
+const morgan = require('morgan');
 const { ValidationError, VersionConflictError } = require('./errors');
 const { secureCookies, ROOT } = require('./helpers');
 
 const app = express();
 
 app.set('trust proxy', process.env.TRUST_PROXY === '1' ? 1 : false);
+app.use(compression());
+app.use(morgan('tiny'));
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -17,7 +21,7 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
       scriptSrcAttr: null,
       styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
-      imgSrc: ["'self'", "data:"],
+      imgSrc: ["'self'", "data:", "blob:"],
       fontSrc: ["'self'", "https:", "data:"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
@@ -30,12 +34,13 @@ app.use(helmet({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting on mutation endpoints
+// Rate limiting on mutation endpoints (skip GET/HEAD/OPTIONS)
 const writeLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 60,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => ['GET', 'HEAD', 'OPTIONS'].includes(req.method),
   message: { error: 'Too many requests, try again later' }
 });
 app.use('/api/items', writeLimiter);
@@ -66,8 +71,11 @@ SQLiteStore.prototype.get = function(sid, cb) {
   const data = getSession(sid);
   cb(null, data);
 };
+const SESSION_MAX_AGE = 24 * 60 * 60 * 1000;
+
 SQLiteStore.prototype.set = function(sid, sessionData, cb) {
-  setSession(sid, sessionData, this.maxAge);
+  const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+  setSession(sid, sessionData, maxAge);
   cb(null);
 };
 SQLiteStore.prototype.destroy = function(sid, cb) {
@@ -75,7 +83,8 @@ SQLiteStore.prototype.destroy = function(sid, cb) {
   cb(null);
 };
 SQLiteStore.prototype.touch = function(sid, sessionData, cb) {
-  setSession(sid, sessionData, this.maxAge);
+  const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+  setSession(sid, sessionData, maxAge);
   cb(null);
 };
 
@@ -95,7 +104,10 @@ app.use(session({
 
 // Static files
 app.use(express.static(path.join(ROOT, 'public')));
-app.use('/uploads', express.static(path.join(ROOT, 'uploads')));
+app.use('/uploads', express.static(path.join(ROOT, 'uploads'), {
+  maxAge: '1y',
+  immutable: true
+}));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));

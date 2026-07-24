@@ -66,9 +66,13 @@ export async function initAdminItems() {
     fd.append('status', document.getElementById('addStatus').value);
     const fileInput = document.getElementById('addImage');
     for (const file of fileInput.files) fd.append('images', file);
-    await API.post('/api/items', fd);
-    document.getElementById('addForm').reset();
-    alert('Item added!');
+    try {
+      await API.post('/api/items', fd);
+      document.getElementById('addForm').reset();
+      alert('Item added!');
+    } catch (err) {
+      alert('Error adding item: ' + (err.message || 'Unknown error'));
+    }
   });
 
   // Hash-based tab navigation
@@ -264,17 +268,23 @@ function populateCatSectionDropdown(cats) {
 async function deleteCat(section, id, parentId) {
   if (!confirm('Delete "' + (parentId ? 'nested ' : '') + 'category"?')) return;
   const params = new URLSearchParams({ section, ...(id && { id }), ...(parentId && { parentId }) });
-  const res = await API.del('/api/categories?' + params.toString());
-  if (res.error) return alert(res.error);
-  loadCatList();
+  try {
+    await API.del('/api/categories?' + params.toString());
+    loadCatList();
+  } catch (err) {
+    alert(err.message || 'Delete failed');
+  }
 }
 
 async function deleteSection(key) {
   if (!confirm('Delete entire section "' + key + '" and all its subcategories?')) return;
   const params = new URLSearchParams({ section: key });
-  const res = await API.del('/api/categories?' + params.toString());
-  if (res.error) return alert(res.error);
-  loadCatList();
+  try {
+    await API.del('/api/categories?' + params.toString());
+    loadCatList();
+  } catch (err) {
+    alert(err.message || 'Delete failed');
+  }
 }
 
 async function loadCatList() {

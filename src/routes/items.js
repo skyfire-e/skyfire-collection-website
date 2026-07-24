@@ -102,7 +102,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
 
       const removedSet = new Set(removeIdx);
       const originalMap = {};
-      oldImages.forEach((img, i) => { if (!removedSet.has(i)) originalMap[Object.keys(originalMap).length] = img; });
+      oldImages.forEach((img, i) => { if (!removedSet.has(i)) originalMap[i] = img; });
 
       let fileIdx = 0;
       const newImages = [];

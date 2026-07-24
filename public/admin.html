@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/admin.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
-<body>
+<body style="display:none">
   <div class="admin-page">
     <a href="/" class="back-link" style="color:var(--text-muted)">← Back to Home</a>
     <h1>Admin Panel</h1>
@@ -46,7 +46,7 @@
         </div>
         <div class="form-group">
           <label>Price</label>
-          <input type="text" id="addPrice" placeholder="e.g. $50">
+          <input type="number" id="addPrice" placeholder="0" min="0" step="0.01">
         </div>
         <div class="form-group mini-field">
           <label>Recaster</label>
@@ -209,7 +209,7 @@
       <input type="hidden" id="editId">
       <div class="form-group"><label>Title</label><input type="text" id="editTitle"></div>
       <div class="form-group"><label>Author / Origin</label><input type="text" id="editAuthor"></div>
-      <div class="form-group"><label>Price</label><input type="text" id="editPrice"></div>
+      <div class="form-group"><label>Price</label><input type="number" id="editPrice" min="0" step="0.01"></div>
       <div class="form-group mini-field"><label>Recaster</label><input type="text" id="editRecaster"></div>
       <div class="form-group mini-field"><label>Command Points</label><input type="text" id="editCombatPoints"></div>
       <div class="form-group mini-field"><label>Status</label><input type="text" id="editStatus"></div>
@@ -251,6 +251,7 @@
         location.href = '/';
         return;
       }
+      document.body.style.display = '';
       initAdminSettings();
       initAdminItems();
     });

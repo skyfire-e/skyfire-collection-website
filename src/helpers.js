@@ -43,16 +43,18 @@ async function normalizeImage(file) {
   const destination = path.join(UPLOADS_DIR, filename);
   const thumbDestination = path.join(UPLOADS_DIR, thumbFilename);
   try {
-    await sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
-      .rotate()
-      .resize({ width: 3000, height: 3000, fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 88, mozjpeg: true })
-      .toFile(destination);
-    await sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
-      .rotate()
-      .resize({ width: 400, height: 400, fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 80, mozjpeg: true })
-      .toFile(thumbDestination);
+    const pipeline = sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
+      .rotate();
+    await Promise.all([
+      pipeline.clone()
+        .resize({ width: 3000, height: 3000, fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 88, mozjpeg: true })
+        .toFile(destination),
+      pipeline.clone()
+        .resize({ width: 400, height: 400, fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 80, mozjpeg: true })
+        .toFile(thumbDestination)
+    ]);
   } finally {
     try { fs.unlinkSync(file.path); } catch {}
   }

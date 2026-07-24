@@ -1,5 +1,11 @@
 import { API } from './api.js';
 
+function thumbUrl(imgPath) {
+  if (!imgPath || !imgPath.startsWith('/uploads/') || imgPath.startsWith('blob:')) return imgPath;
+  const basename = imgPath.split('/').pop();
+  return '/uploads/thumb-' + basename;
+}
+
 let editSlots = [];
 let editingId = null;
 let editCurrentItem = null;
@@ -99,9 +105,9 @@ function renderEditImages() {
     wrapper.className = 'edit-img-item';
 
     const img = document.createElement('img');
-    img.src = slot.src;
+    img.src = thumbUrl(slot.src);
     img.alt = '';
-    img.onerror = function () { this.src = '/images/default.svg'; };
+    img.onerror = function () { if (this.src !== slot.src) { this.src = slot.src; } else { this.src = '/images/default.svg'; } };
     wrapper.appendChild(img);
 
     const leftBtn = document.createElement('button');
@@ -177,9 +183,11 @@ function closeCrop() {
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
   releaseTrap(document.getElementById('cropModal'));
   cropSrc = null;
+  const hadQueue = cropQueue && cropQueue.length > 0;
   cropCtx = null;
   document.getElementById('cropModal').classList.remove('open');
   document.removeEventListener('keydown', onEscapeKey);
+  if (hadQueue) loadNextFile();
 }
 
 function loadNextFile() {
