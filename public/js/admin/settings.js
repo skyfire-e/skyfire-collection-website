@@ -3,6 +3,7 @@ import { API } from '../api.js';
 export async function loadSettings() {
   const settings = await API.get('/api/settings');
   document.getElementById('setSiteName').value = settings.siteName || '';
+  document.getElementById('setDefaultTheme').value = settings.defaultTheme || 'dark';
   document.getElementById('currentDefaultImg').textContent = settings.defaultImage || 'not set';
   document.getElementById('setShowSpreadsheet').checked = settings.showSpreadsheet !== false;
   document.getElementById('setShowPublicSpreadsheet').checked = settings.showPublicSpreadsheet !== false;
@@ -71,6 +72,7 @@ export function initAdminSettings() {
     });
     await API.put('/api/settings', {
       siteName: document.getElementById('setSiteName').value,
+      defaultTheme: document.getElementById('setDefaultTheme').value,
       showSpreadsheet: document.getElementById('setShowSpreadsheet').checked,
       showPublicSpreadsheet: document.getElementById('setShowPublicSpreadsheet').checked,
       showMiniaturesColumns: {

@@ -4,13 +4,52 @@
   --bg: #1a1a1a;
   --bg-card: #252525;
   --bg-nav: #1e1e1e;
+  --bg-img: #111;
+  --bg-crop: #222;
   --text: #e0e0e0;
   --text-muted: #999;
+  --text-inverse: #fff;
   --accent: #4fc3f7;
   --accent-dark: #226e93;
+  --accent-group-grad: #1a3040;
   --border: #333;
   --danger: #ef5350;
   --success: #66bb6a;
+  --overlay: rgba(0,0,0,0.7);
+  --overlay-heavy: rgba(0,0,0,0.9);
+  --overlay-light: rgba(0,0,0,0.5);
+  --overlay-btn: rgba(0,0,0,0.7);
+  --shadow: rgba(0,0,0,0.4);
+  --dot-idle: #555;
+  --dot-hover: #888;
+  --table-hover: rgba(255,255,255,0.03);
+  --table-border: rgba(255,255,255,0.04);
+}
+
+[data-theme="light"] {
+  --bg: #f5f5f5;
+  --bg-card: #fff;
+  --bg-nav: #eaeaea;
+  --bg-img: #e0e0e0;
+  --bg-crop: #d0d0d0;
+  --text: #1a1a1a;
+  --text-muted: #666;
+  --text-inverse: #1a1a1a;
+  --accent: #0288d1;
+  --accent-dark: #01579b;
+  --accent-group-grad: #b3d9f0;
+  --border: #ddd;
+  --danger: #d32f2f;
+  --success: #2e7d32;
+  --overlay: rgba(0,0,0,0.5);
+  --overlay-heavy: rgba(0,0,0,0.7);
+  --overlay-light: rgba(255,255,255,0.8);
+  --overlay-btn: rgba(255,255,255,0.8);
+  --shadow: rgba(0,0,0,0.15);
+  --dot-idle: #bbb;
+  --dot-hover: #999;
+  --table-hover: rgba(0,0,0,0.04);
+  --table-border: rgba(0,0,0,0.06);
 }
 
 body {
@@ -67,7 +106,7 @@ a:hover { text-decoration: underline; }
 }
 .home-btn:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 60px var(--shadow);
   border-color: var(--accent);
   text-decoration: none;
 }
@@ -79,6 +118,9 @@ a:hover { text-decoration: underline; }
   bottom: 24px;
   right: 24px;
   z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 .admin-corner button {
   width: 48px;
@@ -194,7 +236,7 @@ a:hover { text-decoration: underline; }
 }
 .category-group {
   border-color: var(--accent-dark);
-  background: linear-gradient(135deg, var(--bg-card) 0%, #1a3040 100%);
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-group-grad) 100%);
 }
 .category-group::after {
   content: ' →';
@@ -206,7 +248,7 @@ a:hover { text-decoration: underline; }
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
+  background: var(--overlay);
   z-index: 200;
   display: none;
   align-items: center;
@@ -259,7 +301,7 @@ a:hover { text-decoration: underline; }
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--accent-dark);
-  color: #fff;
+  color: var(--text-inverse);
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s;
@@ -341,7 +383,7 @@ a:hover { text-decoration: underline; }
 .lightbox-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.9);
+  background: var(--overlay-heavy);
   z-index: 300;
   display: none;
   align-items: center;
@@ -375,8 +417,8 @@ a:hover { text-decoration: underline; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: #fff;
+  background: var(--overlay-light);
+  color: var(--text-inverse);
   border: none;
   font-size: 3rem;
   width: 72px;
@@ -389,7 +431,7 @@ a:hover { text-decoration: underline; }
   justify-content: center;
   z-index: 10;
 }
-.lightbox-nav:hover { background: rgba(0,0,0,0.8); }
+.lightbox-nav:hover { background: var(--overlay-heavy); }
 .lightbox-prev { left: 10px; }
 .lightbox-next { right: 10px; }
 
@@ -399,7 +441,7 @@ a:hover { text-decoration: underline; }
   right: 24px;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--text-inverse);
   font-size: 2.5rem;
   cursor: pointer;
   z-index: 310;
@@ -411,7 +453,7 @@ a:hover { text-decoration: underline; }
 .lightbox-info {
   text-align: center;
   margin-top: 12px;
-  color: #ccc;
+  color: var(--text-muted);
 }
 
 .lightbox-title {
@@ -473,8 +515,8 @@ a:hover { text-decoration: underline; }
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
+  background: var(--overlay-btn);
+  color: var(--text-inverse);
   border: none;
   font-size: 0.9rem;
   cursor: pointer;
@@ -493,8 +535,8 @@ a:hover { text-decoration: underline; }
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
+  background: var(--overlay-btn);
+  color: var(--text-inverse);
   border: none;
   font-size: 0.8rem;
   cursor: pointer;
@@ -514,8 +556,8 @@ a:hover { text-decoration: underline; }
   width: 18px;
   height: 24px;
   border: none;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
+  background: var(--overlay-light);
+  color: var(--text-inverse);
   font-size: 0.9rem;
   cursor: pointer;
   display: flex;
@@ -539,7 +581,7 @@ a:hover { text-decoration: underline; }
 .crop-container {
   max-height: 60vh;
   overflow: hidden;
-  background: #222;
+  background: var(--bg-crop);
   border-radius: 8px;
 }
 .crop-container img { max-width: 100%; }
@@ -549,8 +591,8 @@ a:hover { text-decoration: underline; }
   bottom: 2px;
   left: 2px;
   font-size: 0.65rem;
-  background: rgba(0,0,0,0.6);
-  color: #ccc;
+  background: var(--overlay-btn);
+  color: var(--text-muted);
   padding: 1px 5px;
   border-radius: 3px;
 }
@@ -559,20 +601,20 @@ a:hover { text-decoration: underline; }
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #555;
+  background: var(--dot-idle);
   cursor: pointer;
   transition: background 0.2s;
 }
 .lightbox-dot.active { background: var(--accent); }
-.lightbox-dot:hover { background: #888; }
+.lightbox-dot:hover { background: var(--dot-hover); }
 
 /* Multi-image badge on cards */
 .img-count-badge {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
+  background: var(--overlay-btn);
+  color: var(--text-inverse);
   font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: 4px;
@@ -617,9 +659,9 @@ a:hover { text-decoration: underline; }
 }
 .ps-table td {
   padding: 5px 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--table-border);
 }
-.ps-table tr:hover td { background: rgba(255,255,255,0.02); }
+.ps-table tr:hover td { background: var(--table-hover); }
 .ps-price-col { text-align: right; width: 100px; }
 .ps-author-col { color: var(--text-muted); font-size: 0.85rem; }
 .ps-subcat-sum {

@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
 <body style="display:none">
+  <div class="admin-corner">
+    <button id="themeBtn" title="Toggle theme">☀️</button>
+  </div>
   <div class="admin-page">
     <a href="/" class="back-link" style="color:var(--text-muted)">← Back to Home</a>
     <h1>Admin Panel</h1>
@@ -156,6 +159,13 @@
         <div class="form-group">
           <label>Site Name</label>
           <input type="text" id="setSiteName">
+        </div>
+        <div class="form-group">
+          <label>Default Theme (for new visitors)</label>
+          <select id="setDefaultTheme">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Default Image</label>

@@ -33,14 +33,14 @@
 
 .gallery-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 32px var(--shadow);
 }
 
 .gallery-card .img-wrap {
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
-  background: #111;
+  background: var(--bg-img);
 }
 .gallery-card .img-wrap img {
   width: 100%;
