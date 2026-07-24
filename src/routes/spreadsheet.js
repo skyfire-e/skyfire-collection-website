@@ -12,11 +12,13 @@ router.get('/public', (req, res) => {
   const showPrices = settings.showPublicSpreadsheet !== false;
   const currencies = settings.currencies || {};
 
+  const showColumns = settings.showMiniaturesColumns || {};
+  const extraFieldsSections = settings.sectionsWithExtraFields || [];
+
   const result = [];
   for (const [sectionId, section] of Object.entries(cats)) {
     const currencyCode = currencies[sectionId] || 'USD';
     const sectionData = { id: sectionId, label: section.label, subcategories: [], sum: 0, totalItems: 0, currency: currencyCode };
-    const showColumns = settings.showMiniaturesColumns || {};
 
     const flatSubs = flattenCategories(section.subcategories);
 
@@ -43,7 +45,7 @@ router.get('/public', (req, res) => {
     });
 
     sectionData.showPrices = showPrices;
-    if (sectionId === 'miniatures') sectionData.showColumns = showColumns;
+    if (extraFieldsSections.includes(sectionId)) sectionData.showColumns = showColumns;
     result.push(sectionData);
   }
   res.json(result);

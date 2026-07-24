@@ -2,9 +2,14 @@ import { API, withPending } from '../api.js';
 import { openEdit, initImageEditor } from '../image-editor.js';
 
 let categoriesData = {};
+let extraFieldsSections = ['miniatures'];
 
 export async function initAdminItems() {
   categoriesData = await API.get('/api/categories');
+  try {
+    const settings = await API.get('/api/settings');
+    if (settings.sectionsWithExtraFields) extraFieldsSections = settings.sectionsWithExtraFields;
+  } catch {}
   populateCatSectionDropdown(categoriesData);
   populateAddSectionDropdown(categoriesData);
   loadCatList();
@@ -26,7 +31,7 @@ export async function initAdminItems() {
   // Section -> Category cascade
   document.getElementById('addSection').addEventListener('change', function() {
     document.querySelectorAll('.mini-field').forEach(el => {
-      el.style.display = this.value === 'miniatures' ? 'block' : 'none';
+      el.style.display = extraFieldsSections.includes(this.value) ? 'block' : 'none';
     });
     const catSelect = document.getElementById('addCategory');
     catSelect.innerHTML = '<option value="">Select category...</option>';

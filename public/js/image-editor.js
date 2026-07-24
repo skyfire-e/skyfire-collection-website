@@ -1,5 +1,15 @@
 import { API } from './api.js';
 
+let extraFieldsSections = ['miniatures'];
+
+async function loadExtraFields() {
+  try {
+    const settings = await API.get('/api/settings');
+    if (settings.sectionsWithExtraFields) extraFieldsSections = settings.sectionsWithExtraFields;
+  } catch {}
+}
+loadExtraFields();
+
 function thumbUrl(imgPath) {
   if (!imgPath || !imgPath.startsWith('/uploads/') || imgPath.startsWith('blob:')) return imgPath;
   const basename = imgPath.split('/').pop();
@@ -86,7 +96,7 @@ export function openEdit(item, { onSave } = {}) {
   document.getElementById('editStatus').value = item.status || '';
 
   document.querySelectorAll('#editModal .mini-field').forEach(el => {
-    el.style.display = item.section === 'miniatures' ? 'block' : 'none';
+    el.style.display = extraFieldsSections.includes(item.section) ? 'block' : 'none';
   });
 
   document.getElementById('editImage').value = '';
