@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>skyf1re collection</title>
+  <meta name="description" content="Personal collection of dice and miniatures — photo gallery with lightbox, spreadsheet, and admin panel.">
+  <meta property="og:title" content="skyf1re collection">
+  <meta property="og:description" content="Personal collection of dice and miniatures.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
@@ -22,16 +26,17 @@
   </div>
 
   <div class="spreadsheet-bar">
-    <button class="ss-public-btn" onclick="location.href='/spreadsheet'">📊 Spreadsheet</button>
+    <button class="ss-public-btn" data-href="/spreadsheet">📊 Spreadsheet</button>
   </div>
 
   <div class="admin-corner">
+    <button id="themeBtn" title="Toggle theme">☀️</button>
     <button id="adminBtn" title="Admin">🔐</button>
   </div>
 
   <div class="admin-actions" id="adminActions" style="display:none">
-    <button onclick="location.href='/admin#add'">+ Add</button>
-    <button onclick="location.href='/admin#spreadsheet'">📊 Admin spreadsheet</button>
+    <button data-href="/admin#add">+ Add</button>
+    <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
   </div>
 
   <div class="modal-overlay" id="authModal">
@@ -53,11 +58,7 @@
     </div>
   </div>
 
+  <script type="module" src="/js/nav.js"></script>
   <script type="module" src="/js/auth.js"></script>
-  <script>
-    fetch('/api/settings').then(r => r.json()).then(s => {
-      if (s.siteName) { document.title = s.siteName; document.querySelector('h1').textContent = s.siteName; }
-    }).catch(() => {});
-  </script>
 </body>
 </html>

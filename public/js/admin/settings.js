@@ -3,6 +3,7 @@ import { API } from '../api.js';
 export async function loadSettings() {
   const settings = await API.get('/api/settings');
   document.getElementById('setSiteName').value = settings.siteName || '';
+  document.getElementById('setDefaultTheme').value = settings.defaultTheme || 'dark';
   document.getElementById('currentDefaultImg').textContent = settings.defaultImage || 'not set';
   document.getElementById('setShowSpreadsheet').checked = settings.showSpreadsheet !== false;
   document.getElementById('setShowPublicSpreadsheet').checked = settings.showPublicSpreadsheet !== false;
@@ -28,11 +29,12 @@ async function renderCurrencySettings(currencies) {
     inputEl.type = 'text';
     inputEl.id = 'cur_' + key;
     inputEl.value = currencies[key] || '';
-    inputEl.placeholder = '$';
-    inputEl.style.cssText = 'width:50px;padding:4px 8px';
+    inputEl.placeholder = 'USD';
+    inputEl.style.cssText = 'width:60px;padding:4px 8px';
+    inputEl.maxLength = 3;
     const hint = document.createElement('span');
     hint.style.cssText = 'color:var(--text-muted);font-size:0.78rem';
-    hint.textContent = 'symbol';
+    hint.textContent = 'ISO 4217';
     row.append(labelEl, inputEl, hint);
     container.appendChild(row);
   });
@@ -42,6 +44,16 @@ export function initAdminSettings() {
   document.getElementById('backfillBtn').addEventListener('click', async () => {
     const res = await API.post('/api/backfill-defaults');
     alert('Updated ' + res.updated + ' items with default image: ' + res.defaultImage);
+  });
+
+  document.getElementById('backfillImagesBtn').addEventListener('click', async () => {
+    const res = await API.post('/api/backfill-images');
+    alert('Updated ' + res.updated + ' items: image → images[0]');
+  });
+
+  document.getElementById('backfillPricesBtn').addEventListener('click', async () => {
+    const res = await API.post('/api/backfill-prices');
+    alert('Updated ' + res.updated + ' items: price normalized to number');
   });
 
   document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
@@ -60,6 +72,7 @@ export function initAdminSettings() {
     });
     await API.put('/api/settings', {
       siteName: document.getElementById('setSiteName').value,
+      defaultTheme: document.getElementById('setDefaultTheme').value,
       showSpreadsheet: document.getElementById('setShowSpreadsheet').checked,
       showPublicSpreadsheet: document.getElementById('setShowPublicSpreadsheet').checked,
       showMiniaturesColumns: {

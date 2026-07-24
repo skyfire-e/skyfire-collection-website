@@ -1,33 +1,27 @@
 const express = require('express');
 const helmet = require('helmet');
 const session = require('express-session');
-const FileStore = require('session-file-store')(session);
 const path = require('path');
-const fs = require('fs');
 const multer = require('multer');
 const rateLimit = require('express-rate-limit');
-const { ValidationError, DataCorruptionError, VersionConflictError } = require('./errors');
-const { readJSON, writeJSONAtomic, secureCookies, DATA_DIR, ITEMS_FILE, ROOT } = require('./helpers');
-
-// Init data files and session storage
-['items.json'].forEach(f => {
-  const fp = path.join(DATA_DIR, f);
-  if (!require('fs').existsSync(fp)) writeJSONAtomic(fp, []);
-});
-const SESSION_DIR = path.join(DATA_DIR, 'sessions');
-if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
+const compression = require('compression');
+const morgan = require('morgan');
+const { ValidationError, VersionConflictError } = require('./errors');
+const { secureCookies, ROOT } = require('./helpers');
 
 const app = express();
 
 app.set('trust proxy', process.env.TRUST_PROXY === '1' ? 1 : false);
+app.use(compression());
+app.use(morgan('tiny'));
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+      scriptSrc: ["'self'", "https://cdnjs.cloudflare.com"],
       scriptSrcAttr: null,
       styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
-      imgSrc: ["'self'", "data:"],
+      imgSrc: ["'self'", "data:", "blob:"],
       fontSrc: ["'self'", "https:", "data:"],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
@@ -40,12 +34,13 @@ app.use(helmet({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting on mutation endpoints
+// Rate limiting on mutation endpoints (skip GET/HEAD/OPTIONS)
 const writeLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 60,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => ['GET', 'HEAD', 'OPTIONS'].includes(req.method),
   message: { error: 'Too many requests, try again later' }
 });
 app.use('/api/items', writeLimiter);
@@ -54,13 +49,51 @@ app.use('/api/settings', writeLimiter);
 app.use('/api/upload', writeLimiter);
 app.use('/api/backfill-defaults', writeLimiter);
 app.use('/api/backfill-images', writeLimiter);
+app.use('/api/backfill-prices', writeLimiter);
+
+// Rate limiting on public read endpoints
+const readLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, try again later' }
+});
+app.use('/api/auth/me', readLimiter);
+app.use('/api/spreadsheet/public', readLimiter);
+
+// SQLite session store
+const { getSession, setSession, destroySession } = require('./db');
+
+const SQLiteStore = function() {};
+SQLiteStore.prototype.__proto__ = session.Store.prototype;
+SQLiteStore.prototype.get = function(sid, cb) {
+  const data = getSession(sid);
+  cb(null, data);
+};
+const SESSION_MAX_AGE = 24 * 60 * 60 * 1000;
+
+SQLiteStore.prototype.set = function(sid, sessionData, cb) {
+  const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+  setSession(sid, sessionData, maxAge);
+  cb(null);
+};
+SQLiteStore.prototype.destroy = function(sid, cb) {
+  destroySession(sid);
+  cb(null);
+};
+SQLiteStore.prototype.touch = function(sid, sessionData, cb) {
+  const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+  setSession(sid, sessionData, maxAge);
+  cb(null);
+};
 
 app.use(session({
   name: 'skyfire.sid',
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: new FileStore({ path: SESSION_DIR, ttl: 86400, reapInterval: 3600 }),
+  store: new SQLiteStore(),
   cookie: {
     httpOnly: true,
     secure: secureCookies,
@@ -71,7 +104,10 @@ app.use(session({
 
 // Static files
 app.use(express.static(path.join(ROOT, 'public')));
-app.use('/uploads', express.static(path.join(ROOT, 'uploads')));
+app.use('/uploads', express.static(path.join(ROOT, 'uploads'), {
+  maxAge: '1y',
+  immutable: true
+}));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));
@@ -98,9 +134,6 @@ app.use((error, req, res, next) => {
   }
   if (error instanceof ValidationError) {
     return res.status(error.status).json({ error: error.message, details: error.details });
-  }
-  if (error instanceof DataCorruptionError) {
-    return res.status(error.status).json({ error: error.message });
   }
   if (error instanceof VersionConflictError) {
     return res.status(error.status).json({ error: error.message });

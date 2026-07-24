@@ -2,15 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const sharp = require('sharp');
-const { ValidationError, DataCorruptionError, VersionConflictError } = require('./errors');
+const { VersionConflictError } = require('./errors');
 const { itemInputSchema, itemInputPartialSchema } = require('../lib/validate');
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
-const ITEMS_FILE = path.join(DATA_DIR, 'items.json');
-const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
-const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
-const AUDIT_FILE = path.join(DATA_DIR, 'audit.json');
 const UPLOADS_DIR = path.resolve(ROOT, 'uploads');
 const TEMP_DIR = path.join(UPLOADS_DIR, '.tmp');
 
@@ -23,32 +19,14 @@ function envBoolean(value, fallback = false) {
 
 const secureCookies = envBoolean(process.env.COOKIE_SECURE, process.env.NODE_ENV === 'production');
 
-function readJSON(file) {
-  try {
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
-  } catch (e) {
-    if (e.code === 'ENOENT') return null;
-    console.error('Corrupted JSON in ' + file + ':', e.message);
-    throw new DataCorruptionError(file);
-  }
-}
-
-function writeJSONAtomic(file, data) {
-  const tmp = file + '.' + process.pid + '.' + crypto.randomUUID() + '.tmp';
-  try {
-    fs.writeFileSync(tmp, JSON.stringify(data, null, 2), 'utf8');
-    fs.renameSync(tmp, file);
-  } catch (error) {
-    try { fs.rmSync(tmp, { force: true }); } catch {}
-    throw error;
-  }
-}
-
 function safeUnlink(imgPath) {
   if (!imgPath || !imgPath.startsWith('/uploads/')) return;
-  const target = path.resolve(UPLOADS_DIR, path.basename(imgPath));
+  const basename = path.basename(imgPath);
+  const target = path.resolve(UPLOADS_DIR, basename);
   if (!target.startsWith(UPLOADS_DIR + path.sep)) return;
   try { fs.unlinkSync(target); } catch (e) { if (e.code !== 'ENOENT') console.error(e); }
+  const thumb = path.join(UPLOADS_DIR, 'thumb-' + basename);
+  try { fs.unlinkSync(thumb); } catch (e) { if (e.code !== 'ENOENT') console.error(e); }
 }
 
 function cleanupUploadedFiles(files) {
@@ -59,14 +37,24 @@ function cleanupUploadedFiles(files) {
 }
 
 async function normalizeImage(file) {
-  const filename = crypto.randomUUID() + '.jpg';
+  const id = crypto.randomUUID();
+  const filename = id + '.jpg';
+  const thumbFilename = 'thumb-' + id + '.jpg';
   const destination = path.join(UPLOADS_DIR, filename);
+  const thumbDestination = path.join(UPLOADS_DIR, thumbFilename);
   try {
-    await sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
-      .rotate()
-      .resize({ width: 3000, height: 3000, fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 88, mozjpeg: true })
-      .toFile(destination);
+    const pipeline = sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
+      .rotate();
+    await Promise.all([
+      pipeline.clone()
+        .resize({ width: 3000, height: 3000, fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 88, mozjpeg: true })
+        .toFile(destination),
+      pipeline.clone()
+        .resize({ width: 400, height: 400, fit: 'inside', withoutEnlargement: true })
+        .jpeg({ quality: 80, mozjpeg: true })
+        .toFile(thumbDestination)
+    ]);
   } finally {
     try { fs.unlinkSync(file.path); } catch {}
   }
@@ -84,14 +72,14 @@ function findCategory(subcategories, targetId) {
 
 function flattenCategories(subcategories, ancestors = []) {
   return (subcategories || []).flatMap(cat => {
-    const path = [...ancestors, cat.label];
+    const p = [...ancestors, cat.label];
     if (cat.type === 'group' && cat.subcategories?.length) {
-      return flattenCategories(cat.subcategories, path);
+      return flattenCategories(cat.subcategories, p);
     }
     return [{
       id: cat.id,
       label: cat.label,
-      path,
+      path: p,
       groupLabel: ancestors.length > 0 ? ancestors.join(' → ') : null
     }];
   });
@@ -131,7 +119,6 @@ function validateFinalOrder(order, oldImages, uploadedFiles, removedIndexes) {
 
   const existingIndexes = order.filter(v => v >= 0);
   if (new Set(existingIndexes).size !== existingIndexes.length) return 'Duplicate image indexes are not allowed';
-
   if (existingIndexes.some(idx => idx >= oldImages.length)) return 'finalOrder references a missing image';
 
   if (removedIndexes && existingIndexes.some(idx => removedIndexes.includes(idx))) {
@@ -165,27 +152,11 @@ function validateVersion(item, clientVersion) {
   }
 }
 
-function appendAudit(entry) {
-  const logs = (() => { try { return JSON.parse(require('fs').readFileSync(AUDIT_FILE, 'utf8')); } catch { return []; } })();
-  logs.push({ timestamp: new Date().toISOString(), ...entry });
-  try { require('fs').writeFileSync(AUDIT_FILE, JSON.stringify(logs, null, 2), 'utf8'); } catch (e) { console.error('Audit write failed:', e.message); }
-}
-
-let writeQueue = Promise.resolve();
-
-function withDataLock(operation) {
-  const result = writeQueue.then(operation, operation);
-  writeQueue = result.catch(() => {});
-  return result;
-}
-
 module.exports = {
-  ROOT, DATA_DIR, ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE, AUDIT_FILE, UPLOADS_DIR, TEMP_DIR,
+  ROOT, UPLOADS_DIR, TEMP_DIR,
   envBoolean, secureCookies,
-  readJSON, writeJSONAtomic,
   safeUnlink, cleanupUploadedFiles,
   normalizeImage, findCategory, flattenCategories,
   validateItemInput, validateFinalOrder, parseJSONArray,
-  validateVersion, appendAudit,
-  withDataLock
+  validateVersion
 };

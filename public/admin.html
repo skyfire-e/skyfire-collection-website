@@ -8,14 +8,17 @@
   <link rel="stylesheet" href="/css/admin.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
-<body>
+<body style="display:none">
+  <div class="admin-corner">
+    <button id="themeBtn" title="Toggle theme">☀️</button>
+  </div>
   <div class="admin-page">
     <a href="/" class="back-link" style="color:var(--text-muted)">← Back to Home</a>
     <h1>Admin Panel</h1>
 
     <div class="admin-tabs">
       <button class="active" data-tab="add">+ Add Item</button>
-      <button data-tab="spreadsheet">📊 Spreadsheet</button>
+      <button data-tab="spreadsheet">📊 CommanderHQ</button>
       <button data-tab="categories">📁 Categories</button>
       <button data-tab="settings">⚙️ Settings</button>
     </div>
@@ -46,7 +49,7 @@
         </div>
         <div class="form-group">
           <label>Price</label>
-          <input type="text" id="addPrice" placeholder="e.g. $50">
+          <input type="number" id="addPrice" placeholder="0" min="0" step="0.01">
         </div>
         <div class="form-group mini-field">
           <label>Recaster</label>
@@ -71,9 +74,9 @@
       </form>
     </div>
 
-    <!-- Spreadsheet Tab -->
+    <!-- CommanderHQ Tab -->
     <div class="tab-content" id="tab-spreadsheet">
-      <h2 style="font-weight:300;margin-bottom:16px;font-size:1.3rem">Spreadsheet</h2>
+      <h2 style="font-weight:300;margin-bottom:16px;font-size:1.3rem">CommanderHQ</h2>
       <div style="overflow-x:auto">
         <table class="spreadsheet-table">
           <thead>
@@ -134,6 +137,12 @@
           <label>ID (optional)</label>
           <input type="text" id="catId" placeholder="e.g. pokemon-booster">
         </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="catIsGroup" style="width:auto;margin-right:8px">
+            Create as group (can contain subcategories)
+          </label>
+        </div>
         <button class="btn btn-success" id="addSubcatBtn">Add Subcategory</button>
 
         <div style="margin-top:24px">
@@ -150,6 +159,13 @@
         <div class="form-group">
           <label>Site Name</label>
           <input type="text" id="setSiteName">
+        </div>
+        <div class="form-group">
+          <label>Default Theme (for new visitors)</label>
+          <select id="setDefaultTheme">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Default Image</label>
@@ -196,6 +212,8 @@
         </div>
         <button class="btn" id="saveSettingsBtn">Save Settings</button>
         <button class="btn" id="backfillBtn" style="margin-left:8px;background:var(--accent)">Backfill Default Image</button>
+        <button class="btn" id="backfillImagesBtn" style="margin-left:8px;background:var(--accent)">Backfill Images</button>
+        <button class="btn" id="backfillPricesBtn" style="margin-left:8px;background:var(--accent)">Backfill Prices</button>
       </div>
     </div>
   </div>
@@ -207,7 +225,7 @@
       <input type="hidden" id="editId">
       <div class="form-group"><label>Title</label><input type="text" id="editTitle"></div>
       <div class="form-group"><label>Author / Origin</label><input type="text" id="editAuthor"></div>
-      <div class="form-group"><label>Price</label><input type="text" id="editPrice"></div>
+      <div class="form-group"><label>Price</label><input type="number" id="editPrice" min="0" step="0.01"></div>
       <div class="form-group mini-field"><label>Recaster</label><input type="text" id="editRecaster"></div>
       <div class="form-group mini-field"><label>Command Points</label><input type="text" id="editCombatPoints"></div>
       <div class="form-group mini-field"><label>Status</label><input type="text" id="editStatus"></div>
@@ -249,6 +267,7 @@
         location.href = '/';
         return;
       }
+      document.body.style.display = '';
       initAdminSettings();
       initAdminItems();
     });

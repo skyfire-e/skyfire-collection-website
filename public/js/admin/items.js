@@ -2,9 +2,14 @@ import { API, withPending } from '../api.js';
 import { openEdit, initImageEditor } from '../image-editor.js';
 
 let categoriesData = {};
+let extraFieldsSections = ['miniatures'];
 
 export async function initAdminItems() {
   categoriesData = await API.get('/api/categories');
+  try {
+    const settings = await API.get('/api/settings');
+    if (settings.sectionsWithExtraFields) extraFieldsSections = settings.sectionsWithExtraFields;
+  } catch {}
   populateCatSectionDropdown(categoriesData);
   populateAddSectionDropdown(categoriesData);
   loadCatList();
@@ -26,7 +31,7 @@ export async function initAdminItems() {
   // Section -> Category cascade
   document.getElementById('addSection').addEventListener('change', function() {
     document.querySelectorAll('.mini-field').forEach(el => {
-      el.style.display = this.value === 'miniatures' ? 'block' : 'none';
+      el.style.display = extraFieldsSections.includes(this.value) ? 'block' : 'none';
     });
     const catSelect = document.getElementById('addCategory');
     catSelect.innerHTML = '<option value="">Select category...</option>';
@@ -66,9 +71,13 @@ export async function initAdminItems() {
     fd.append('status', document.getElementById('addStatus').value);
     const fileInput = document.getElementById('addImage');
     for (const file of fileInput.files) fd.append('images', file);
-    await API.post('/api/items', fd);
-    document.getElementById('addForm').reset();
-    alert('Item added!');
+    try {
+      await API.post('/api/items', fd);
+      document.getElementById('addForm').reset();
+      alert('Item added!');
+    } catch (err) {
+      alert('Error adding item: ' + (err.message || 'Unknown error'));
+    }
   });
 
   // Hash-based tab navigation
@@ -123,9 +132,11 @@ export async function initAdminItems() {
       if (!section) return alert('Select a section');
       if (!label) return alert('Enter a category label');
       const id = document.getElementById('catId').value.trim() || undefined;
-      await API.post('/api/categories', { section, label, id, parentId: parentId || undefined });
+      const isGroup = document.getElementById('catIsGroup').checked;
+      await API.post('/api/categories', { section, label, id, parentId: parentId || undefined, isGroup });
       document.getElementById('catLabel').value = '';
       document.getElementById('catId').value = '';
+      document.getElementById('catIsGroup').checked = false;
       categoriesData = await API.get('/api/categories');
       populateCatSectionDropdown(categoriesData);
       populateAddSectionDropdown(categoriesData);
@@ -264,17 +275,23 @@ function populateCatSectionDropdown(cats) {
 async function deleteCat(section, id, parentId) {
   if (!confirm('Delete "' + (parentId ? 'nested ' : '') + 'category"?')) return;
   const params = new URLSearchParams({ section, ...(id && { id }), ...(parentId && { parentId }) });
-  const res = await API.del('/api/categories?' + params.toString());
-  if (res.error) return alert(res.error);
-  loadCatList();
+  try {
+    await API.del('/api/categories?' + params.toString());
+    loadCatList();
+  } catch (err) {
+    alert(err.message || 'Delete failed');
+  }
 }
 
 async function deleteSection(key) {
   if (!confirm('Delete entire section "' + key + '" and all its subcategories?')) return;
   const params = new URLSearchParams({ section: key });
-  const res = await API.del('/api/categories?' + params.toString());
-  if (res.error) return alert(res.error);
-  loadCatList();
+  try {
+    await API.del('/api/categories?' + params.toString());
+    loadCatList();
+  } catch (err) {
+    alert(err.message || 'Delete failed');
+  }
 }
 
 async function loadCatList() {

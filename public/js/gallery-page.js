@@ -1,6 +1,12 @@
 import { API, checkAuth, isAdmin } from './api.js';
 import { openEdit, initImageEditor } from './image-editor.js';
 
+function thumbUrl(imgPath) {
+  if (!imgPath || !imgPath.startsWith('/uploads/')) return imgPath;
+  const basename = imgPath.split('/').pop();
+  return '/uploads/thumb-' + basename;
+}
+
 export async function initGalleryPage() {
   const params = new URLSearchParams(location.search);
   const section = params.get('section');
@@ -39,17 +45,29 @@ export async function initGalleryPage() {
     });
   }
 
+  let lbFocusTrap = null;
+
   function openLightbox(item) {
     lbCurrentImages = item.images && item.images.length > 0 ? item.images : [item.image];
     lbCurrentImgIdx = 0;
     updateLightbox(item);
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
+    const focusable = lightbox.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length > 0) focusable[0].focus();
+    lbFocusTrap = function(e) {
+      if (e.key !== 'Tab' || focusable.length === 0) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    lightbox.addEventListener('keydown', lbFocusTrap);
   }
 
   function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
+    if (lbFocusTrap) { lightbox.removeEventListener('keydown', lbFocusTrap); lbFocusTrap = null; }
   }
 
   function updateLightbox(item) {
@@ -111,10 +129,13 @@ export async function initGalleryPage() {
       imgWrap.className = 'img-wrap' + (imgCount > 1 ? ' multi-img' : '');
 
       const img = document.createElement('img');
-      img.src = item.image;
+      img.src = thumbUrl(item.image);
       img.alt = item.title || '';
       img.loading = 'lazy';
-      img.addEventListener('error', () => handleImgError(img));
+      img.addEventListener('error', function() {
+        if (this.src !== item.image) { this.src = item.image; }
+        else { handleImgError(this); }
+      });
       imgWrap.appendChild(img);
 
       if (imgCount > 1) {
@@ -161,9 +182,12 @@ export async function initGalleryPage() {
 
         delBtn.addEventListener('click', async (e) => {
           e.stopPropagation();
-          if (confirm('Delete "' + item.title + '"?')) {
+          if (!confirm('Delete "' + item.title + '"?')) return;
+          try {
             await API.del('/api/items/' + item.id);
             loadItems();
+          } catch (err) {
+            alert('Delete failed: ' + (err.message || 'Unknown error'));
           }
         });
         editBtn.addEventListener('click', (e) => {

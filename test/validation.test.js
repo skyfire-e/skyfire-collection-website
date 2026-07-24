@@ -1,36 +1,11 @@
-const { describe, it } = require('node:test');
+const { describe, it, after } = require('node:test');
 const assert = require('node:assert');
-const path = require('path');
-const fs = require('fs');
-const os = require('os');
 
-// Test helpers in isolation
-function findCategory(subcategories, targetId) {
-  for (const cat of subcategories || []) {
-    if (cat.id === targetId) return cat;
-    const nested = findCategory(cat.subcategories, targetId);
-    if (nested) return nested;
-  }
-  return null;
-}
+process.env.NODE_TEST_DB = '1';
 
-function flattenCategories(subcategories, ancestors = []) {
-  return (subcategories || []).flatMap(cat => {
-    const p = [...ancestors, cat.label];
-    if (cat.type === 'group' && cat.subcategories?.length) {
-      return flattenCategories(cat.subcategories, p);
-    }
-    return [{
-      id: cat.id, label: cat.label, path: p,
-      groupLabel: ancestors.length > 0 ? ancestors.join(' → ') : null
-    }];
-  });
-}
-
-function envBoolean(value, fallback = false) {
-  if (value === undefined) return fallback;
-  return ['1', 'true', 'yes', 'on'].includes(String(value).toLowerCase());
-}
+const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray, safeUnlink, validateVersion, validateItemInput } = require('../src/helpers');
+const { VersionConflictError } = require('../src/errors');
+const db = require('../src/db');
 
 describe('envBoolean', () => {
   it('returns fallback for undefined', () => {
@@ -118,22 +93,6 @@ describe('flattenCategories', () => {
 });
 
 describe('validateFinalOrder', () => {
-  function validateFinalOrder(order, oldImages, uploadedFiles, removedIndexes) {
-    if (!Array.isArray(order)) return 'finalOrder must be an array';
-    if (!order.every(Number.isInteger)) return 'finalOrder must contain integers';
-    if (order.some(v => v < -1)) return 'finalOrder contains an invalid value';
-    const existing = order.filter(v => v >= 0);
-    if (new Set(existing).size !== existing.length) return 'Duplicate image indexes are not allowed';
-    if (existing.some(idx => idx >= oldImages.length)) return 'finalOrder references a missing image';
-    if (removedIndexes && existing.some(idx => removedIndexes.includes(idx))) {
-      return 'finalOrder references a removed image';
-    }
-    const uploadSlots = order.filter(v => v === -1).length;
-    if (uploadSlots !== uploadedFiles.length) return 'Uploaded files do not match finalOrder';
-    if (order.length > 10) return 'Maximum 10 images allowed';
-    return null;
-  }
-
   const oldImages = ['/img/1.jpg', '/img/2.jpg', '/img/3.jpg'];
 
   it('accepts valid finalOrder', () => {
@@ -173,13 +132,6 @@ describe('validateFinalOrder', () => {
 });
 
 describe('parseJSONArray', () => {
-  function parseJSONArray(value, fieldName) {
-    if (value === undefined) return [];
-    const parsed = JSON.parse(value);
-    if (!Array.isArray(parsed)) throw new Error(fieldName + ' must be an array');
-    return parsed;
-  }
-
   it('parses valid JSON array', () => {
     assert.deepStrictEqual(parseJSONArray('[1,2,3]', 'test'), [1, 2, 3]);
   });
@@ -191,5 +143,146 @@ describe('parseJSONArray', () => {
   });
   it('throws for invalid JSON', () => {
     assert.throws(() => parseJSONArray('{bad json}', 'test'), /JSON/);
+  });
+});
+
+describe('SQLite database (in-memory)', () => {
+  it('starts empty', () => {
+    assert.strictEqual(db.allItems().length, 0);
+  });
+  it('can insert and delete item', () => {
+    const testId = 'test-' + Date.now();
+    db.insertItem({
+      id: testId, section: 'dice', category: 'metal-dice',
+      title: 'Test', author: '', price: 0, recaster: '',
+      combatPoints: '', status: '', image: '', images: [],
+      version: 1, createdAt: new Date().toISOString()
+    });
+    assert.ok(db.getItem(testId));
+    db.deleteItem(testId);
+    assert.strictEqual(db.getItem(testId), null);
+  });
+  it('can filter items by section', () => {
+    db.insertItem({
+      id: 'test-dice', section: 'dice', category: 'metal-dice',
+      title: 'Dice', author: '', price: 0, recaster: '',
+      combatPoints: '', status: '', image: '', images: [],
+      version: 1, createdAt: ''
+    });
+    db.insertItem({
+      id: 'test-mini', section: 'miniatures', category: 'skaven',
+      title: 'Mini', author: '', price: 0, recaster: '',
+      combatPoints: '', status: '', image: '', images: [],
+      version: 1, createdAt: ''
+    });
+    const dice = db.getItems('dice');
+    assert.strictEqual(dice.length, 1);
+    assert.strictEqual(dice[0].section, 'dice');
+    db.deleteItem('test-dice');
+    db.deleteItem('test-mini');
+  });
+  it('can save and get categories', () => {
+    db.saveCategories({ dice: { label: 'Dice', subcategories: [] } });
+    const cats = db.getCategories();
+    assert.ok(cats.dice);
+    assert.strictEqual(cats.dice.label, 'Dice');
+  });
+  it('can update settings (null = delete)', () => {
+    db.updateSettings({ siteName: 'TestSite' });
+    assert.strictEqual(db.getSettings().siteName, 'TestSite');
+    db.updateSettings({ siteName: null });
+    assert.strictEqual(db.getSettings().siteName, undefined);
+  });
+  it('can manage sessions', () => {
+    db.setSession('test-sid', { user: { role: 'admin' } }, 60000);
+    const session = db.getSession('test-sid');
+    assert.ok(session);
+    assert.strictEqual(session.user.role, 'admin');
+    db.destroySession('test-sid');
+    assert.strictEqual(db.getSession('test-sid'), null);
+  });
+  it('expired sessions are cleaned up', () => {
+    db.setSession('expired-sid', { user: {} }, -1);
+    assert.strictEqual(db.getSession('expired-sid'), null);
+  });
+  it('audit log works', () => {
+    db.appendAudit({ action: 'test.action', id: '123' });
+    const count = db.db.prepare('SELECT COUNT(*) as c FROM audit').get().c;
+    assert.strictEqual(count, 1);
+  });
+});
+
+describe('safeUnlink', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const { UPLOADS_DIR } = require('../src/helpers');
+
+  it('deletes a file in uploads', () => {
+    const name = 'safeunlink-test-' + Date.now() + '.jpg';
+    const file = path.join(UPLOADS_DIR, name);
+    fs.writeFileSync(file, 'x');
+    safeUnlink('/uploads/' + name);
+    assert.ok(!fs.existsSync(file));
+  });
+  it('removes thumbnail alongside full-size', () => {
+    const name = 'safeunlink-thumb-test-' + Date.now() + '.jpg';
+    const full = path.join(UPLOADS_DIR, name);
+    const thumb = path.join(UPLOADS_DIR, 'thumb-' + name);
+    fs.writeFileSync(full, 'x');
+    fs.writeFileSync(thumb, 'x');
+    safeUnlink('/uploads/' + name);
+    assert.ok(!fs.existsSync(full));
+    assert.ok(!fs.existsSync(thumb));
+  });
+  it('ignores non-uploads paths', () => {
+    safeUnlink('/etc/passwd');
+    safeUnlink('http://example.com/img.jpg');
+  });
+  it('ignores empty/null', () => {
+    safeUnlink(null);
+    safeUnlink('');
+    safeUnlink(undefined);
+  });
+});
+
+describe('validateVersion', () => {
+  it('passes when clientVersion is undefined', () => {
+    assert.doesNotThrow(() => validateVersion({ version: 1 }, undefined));
+  });
+  it('passes when item.version is undefined', () => {
+    assert.doesNotThrow(() => validateVersion({}, 1));
+  });
+  it('passes when versions match', () => {
+    assert.doesNotThrow(() => validateVersion({ version: 2 }, 2));
+  });
+  it('throws VersionConflictError on mismatch', () => {
+    assert.throws(() => validateVersion({ version: 3 }, 2), VersionConflictError);
+  });
+});
+
+describe('validateItemInput', () => {
+  const cats = {
+    dice: { label: 'Dice', subcategories: [{ id: 'metal-dice', label: 'Metal Dice' }] }
+  };
+  it('accepts valid input', () => {
+    const result = validateItemInput({ title: 'Test', section: 'dice', category: 'metal-dice', price: 10 }, cats);
+    assert.strictEqual(result.errors, null);
+    assert.strictEqual(result.data.title, 'Test');
+  });
+  it('rejects missing title', () => {
+    const result = validateItemInput({ section: 'dice', category: 'metal-dice' }, cats);
+    assert.ok(result.errors);
+  });
+  it('rejects invalid section', () => {
+    const result = validateItemInput({ title: 'X', section: 'nope', category: 'metal-dice' }, cats);
+    assert.ok(result.errors);
+  });
+  it('rejects invalid category', () => {
+    const result = validateItemInput({ title: 'X', section: 'dice', category: 'nope' }, cats);
+    assert.ok(result.errors);
+  });
+  it('accepts partial update', () => {
+    const result = validateItemInput({ title: 'Updated' }, cats, true);
+    assert.strictEqual(result.errors, null);
   });
 });

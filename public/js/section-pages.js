@@ -38,7 +38,7 @@ async function initSectionPage() {
 async function initSubgroupPage() {
   const parts = location.pathname.replace(/\/$/g, '').split('/').filter(Boolean);
   const sectionId = parts[0];
-  const groupId = parts.length === 3 ? parts[2] : parts[1];
+  const groupId = parts[1];
   const titleEl = document.getElementById('pageTitle');
   const titleEl2 = document.getElementById('pageTitle2');
   const backLink = document.getElementById('backLink');
