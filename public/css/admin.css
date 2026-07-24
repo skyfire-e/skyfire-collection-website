@@ -50,13 +50,13 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.spreadsheet-table tr:hover td { background: rgba(255,255,255,0.03); }
+.spreadsheet-table tr:hover td { background: var(--table-hover); }
 .spreadsheet-table .actions-cell { display: flex; gap: 6px; }
 .mini-col { font-size: 0.82rem; color: var(--text-muted); }
 .mini-field { display: block; }
 .spr-section-divider td {
   background: var(--accent-dark);
-  color: #fff;
+  color: var(--text-inverse);
   font-weight: 500;
   font-size: 0.9rem;
   padding: 8px 12px;

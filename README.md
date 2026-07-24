@@ -8,8 +8,9 @@ Personal collection website for dice and miniatures — photo gallery with light
 - Category browsing (Dice, Miniatures + subgroups)
 - Public spreadsheet (configurable columns)
 - Admin panel (CRUD items, categories, settings)
-- Image upload with sharp pipeline (EXIF strip, resize, mozjpeg)
-- Argon2 password hashing, CSRF protection, file-based sessions
+- Image upload with sharp pipeline (EXIF strip, resize, mozjpeg, thumbnails)
+- Argon2 password hashing, CSRF protection, SQLite sessions
+- CommanderHQ — admin spreadsheet tab
 
 ## Tech Stack
 
@@ -17,10 +18,10 @@ Personal collection website for dice and miniatures — photo gallery with light
 |---|---|
 | Backend | Node.js, Express |
 | Frontend | Vanilla JS, CSS |
-| Storage | JSON files (`data/`) |
-| Images | sharp (upload), Cropper.js (crop) |
-| Validation | Zod (`lib/validate.js`) |
-| Auth | Argon2, express-session + FileStore |
+| Storage | SQLite (`data/collection.db`, better-sqlite3) |
+| Images | sharp (upload + thumbnails), Cropper.js (crop) |
+| Validation | Zod (`lib/validate.js`, strict) |
+| Auth | Argon2, express-session + SQLite store |
 
 ## Quick Start
 
@@ -64,9 +65,9 @@ node -e "require('argon2').hash('your-password').then(h => console.log(h))"
 |---|---|
 | `npm start` | Production start |
 | `npm run dev` | Dev mode with `--watch` |
-| `npm run backup` | Backup data/ + uploads/ |
-
-Working tools (excluded from git) live in `gitignore/`.
+| `npm run backup` | Backup data/ + uploads/ (WAL checkpoint before tar) |
+| `npm test` | Run tests (in-memory SQLite) |
+| `npm run check` | Syntax check all source files |
 
 ## Project Structure
 
@@ -74,16 +75,17 @@ Working tools (excluded from git) live in `gitignore/`.
 server.js              — Entry point (env guard, listen, graceful shutdown)
 src/
   app.js               — Express app (middleware → routes → error handler)
-  errors.js            — Custom error classes
-  helpers.js           — JSON I/O, image processing, validation
+  db.js                — SQLite database (schema, CRUD, sessions, audit)
+  errors.js            — ValidationError, VersionConflictError
+  helpers.js           — Image processing, validation, file cleanup
   middleware.js         — Auth, CSRF, upload, rate limiting
-  routes/              — auth, items, categories, settings, spreadsheet, pages
+  routes/              — auth, items, categories, settings, spreadsheet, upload, backfill, pages
 lib/
-  validate.js          — Zod schemas
-data/                  — JSON storage (items, categories, settings)
-uploads/               — Image files (gitignored)
+  validate.js          — Zod schemas (strict)
+data/collection.db     — SQLite database (items, categories, settings, sessions, audit)
+uploads/               — Image files + thumbnails (tracked in git)
 public/                — Static frontend (HTML, CSS, JS)
-gitignore/             — Working tools (excluded from git)
+backups/               — Backup archives (gitignored)
 ```
 
 ## API Overview
@@ -111,12 +113,12 @@ gitignore/             — Working tools (excluded from git)
 
 ## Data Safety
 
-- Atomic writes with temp file + rename
-- Write mutex serializes concurrent mutations
-- Data integrity checks via `gitignore/check-data.js`
-- Automatic backups via `gitignore/backup.js`
+- SQLite WAL mode for concurrent reads
+- Prepared statements (no SQL injection)
+- Backup runs `wal_checkpoint(TRUNCATE)` for consistent snapshot
 - Version field for optimistic conflict detection
 - Audit log for all mutations
+- In-memory DB for tests (no production data pollution)
 
 ## License
 

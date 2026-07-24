@@ -1,5 +1,21 @@
 import { API } from './api.js';
 
+let extraFieldsSections = ['miniatures'];
+
+async function loadExtraFields() {
+  try {
+    const settings = await API.get('/api/settings');
+    if (settings.sectionsWithExtraFields) extraFieldsSections = settings.sectionsWithExtraFields;
+  } catch {}
+}
+loadExtraFields();
+
+function thumbUrl(imgPath) {
+  if (!imgPath || !imgPath.startsWith('/uploads/') || imgPath.startsWith('blob:')) return imgPath;
+  const basename = imgPath.split('/').pop();
+  return '/uploads/thumb-' + basename;
+}
+
 let editSlots = [];
 let editingId = null;
 let editCurrentItem = null;
@@ -80,7 +96,7 @@ export function openEdit(item, { onSave } = {}) {
   document.getElementById('editStatus').value = item.status || '';
 
   document.querySelectorAll('#editModal .mini-field').forEach(el => {
-    el.style.display = item.section === 'miniatures' ? 'block' : 'none';
+    el.style.display = extraFieldsSections.includes(item.section) ? 'block' : 'none';
   });
 
   document.getElementById('editImage').value = '';
@@ -99,9 +115,9 @@ function renderEditImages() {
     wrapper.className = 'edit-img-item';
 
     const img = document.createElement('img');
-    img.src = slot.src;
+    img.src = thumbUrl(slot.src);
     img.alt = '';
-    img.onerror = function () { this.src = '/images/default.svg'; };
+    img.onerror = function () { if (this.src !== slot.src) { this.src = slot.src; } else { this.src = '/images/default.svg'; } };
     wrapper.appendChild(img);
 
     const leftBtn = document.createElement('button');
@@ -177,9 +193,11 @@ function closeCrop() {
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
   releaseTrap(document.getElementById('cropModal'));
   cropSrc = null;
+  const hadQueue = cropQueue && cropQueue.length > 0;
   cropCtx = null;
   document.getElementById('cropModal').classList.remove('open');
   document.removeEventListener('keydown', onEscapeKey);
+  if (hadQueue) loadNextFile();
 }
 
 function loadNextFile() {
@@ -188,7 +206,7 @@ function loadNextFile() {
   const reader = new FileReader();
   reader.onload = (e) => {
     closeCrop();
-    openCrop(e.target.result, { fileQueue: cropQueue, slotIdx: undefined, currentFile: nextFile });
+    openCrop(e.target.result, { fileQueue: cropQueue, slotIdx: undefined });
   };
   reader.readAsDataURL(nextFile);
 }
@@ -315,7 +333,7 @@ export function initImageEditor() {
     const currentFile = files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-      openCrop(e.target.result, { fileQueue, slotIdx: undefined, currentFile });
+      openCrop(e.target.result, { fileQueue, slotIdx: undefined });
     };
     reader.readAsDataURL(currentFile);
   });

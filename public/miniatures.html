@@ -13,11 +13,16 @@
     <div class="category-grid" id="categoryGrid"></div>
   </div>
 
-  <div class="admin-actions" id="adminActions" style="display:none">
-    <button onclick="location.href='/admin#add'">+ Add</button>
-    <button onclick="location.href='/admin#spreadsheet'">📊 Spreadsheet</button>
+  <div class="admin-corner">
+    <button id="themeBtn" title="Toggle theme">☀️</button>
   </div>
 
+  <div class="admin-actions" id="adminActions" style="display:none">
+    <button data-href="/admin#add">+ Add</button>
+    <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
+  </div>
+
+  <script type="module" src="/js/nav.js"></script>
   <script type="module" src="/js/section-pages.js"></script>
 </body>
 </html>

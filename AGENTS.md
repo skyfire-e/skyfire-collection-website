@@ -1,22 +1,18 @@
 # skyf1re Collection — Project Context
 
 ## Stack
-- Node.js/Express backend, vanilla JS frontend, JSON file storage
-- Static files in `public/`, data in `data/`, uploads in `uploads/`
-- Modules: `server.js` (entry) → `src/` (app, routes, middleware, helpers, errors)
-- Validation: `lib/validate.js` (Zod schemas)
-- Image processing: `sharp` (upload pipeline)
+- Node.js/Express backend, vanilla JS frontend, **SQLite** database (better-sqlite3)
+- Static files in `public/`, database in `data/collection.db`, uploads in `uploads/`
+- Modules: `server.js` (entry) → `src/` (app, db, routes, middleware, helpers, errors)
+- Validation: `lib/validate.js` (Zod schemas, `.strict()` on settings)
+- Image processing: `sharp` (upload pipeline + thumbnails 400px)
+- Sessions: SQLite store (data/collection.db, sessions table, 24h expiry)
+- DB + uploads tracked in git; .env excluded
 
 ## Git
 - GitHub: https://github.com/skyfire-e/skyfire-collection-website.git
-- Branches: `main` (stable), `test` (changes before merge)
+- Branches: `main` (stable), `SQLmigrationTrue` (current dev)
 - ⚠️ NEVER merge to `main` without explicit user confirmation
-- Tags: v1.5.1 latest (Iteration F)
-
-## Working Tools
-- Все скрипты (парсинг, миграция, проверка данных, smoke-test) лежат в `gitignore/`
-- `gitignore/` в `.gitignore` — не попадает в репозиторий
-- Скрипты: `backup.js`, `check-data.js`, `smoke-test.js`, `quarantine-orphans.js`, `backfill-defaults.js`, `backfill-images.js`
 
 ## Auth
 - Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` или `ADMIN_PASSWORD_HASH` (argon2) — в `.env`
@@ -24,10 +20,9 @@
 - `.env` в `.gitignore`, не попадает в репозиторий
 
 ## Current Data State
-- `items.json` — 609 items (Dice: 145, Miniatures: 464)
-- `categories.json` — Dice (7 flat) + Miniatures (2 groups × 13 leaf + 15 standalone leaf)
-- `uploads/` — 615 image files (в .gitignore, только .gitkeep)
-- `settings.json` — defaultImage, siteName, showSpreadsheet, showMiniaturesColumns, currencies
+- `data/collection.db` — SQLite: 611 items (Dice: 145, Miniatures: 466) + categories + settings + sessions + audit
+- `uploads/` — 616 images + 615 thumbnails (tracked in git)
+- Old JSON files (items.json, categories.json, settings.json) — deleted after SQLite migration
 
 ## Site Structure
 | Route | Description |
@@ -44,7 +39,7 @@
 
 ## Navigation — Leaf Miniatures Categories
 Gloomspite Gitz, Adepta Sororitas, Orcs, Chaos Daemons, Soulblight Gravelords,
-Astra Militarum, Officio Assassinorum, Ogor Mawtribes, Maggotkin of Nurgle, Kharadron Overlords,
+Astra Militarum, Officio Assassinorum, Oger Mawtribes, Maggotkin of Nurgle, Kharadron Overlords,
 Empire of Man, High Elves, Stormcast Eternals, Terrain, Other
 
 ## Project Structure
@@ -52,8 +47,9 @@ Empire of Man, High Elves, Stormcast Eternals, Terrain, Other
 server.js              — entry point (env guard, listen, graceful shutdown)
 src/
   app.js               — Express app (middleware → routes → error handler)
-  errors.js            — ValidationError, DataCorruptionError
-  helpers.js           — readJSON, writeJSONAtomic, normalizeImage, validate*, etc.
+  db.js                — SQLite database (better-sqlite3, schema, CRUD, sessions)
+  errors.js            — ValidationError, VersionConflictError
+  helpers.js           — normalizeImage, validate*, safeUnlink, findCategory, flattenCategories
   middleware.js         — requireAdmin, requireSameOrigin, loginLimiter, upload (multer)
   routes/
     auth.js            — /api/auth/login|logout|me
@@ -61,13 +57,13 @@ src/
     items.js           — CRUD /api/items
     settings.js        — GET|PUT /api/settings
     spreadsheet.js     — /api/spreadsheet (public + admin)
-    upload.js          — POST /api/upload/default
+    upload.js          — POST /api/upload/default (default image + thumbnail pipeline)
+    backfill.js        — POST /api/backfill-defaults|backfill-images|backfill-prices
     pages.js           — page routes + health + 404
 lib/
-  validate.js          — Zod schemas (settingsSchema, categoriesSchema, itemInputSchema)
-gitignore/             — working tools (excluded from git)
-data/                  — JSON storage (items, categories, settings)
-uploads/               — image files
+  validate.js          — Zod schemas (settingsSchema strict, itemInputSchema)
+data/collection.db     — SQLite database (items, categories, settings, sessions, audit)
+uploads/               — image files + thumbnails (thumb-*.jpg) — tracked in git
 public/                — static frontend (HTML, CSS, JS)
 backups/               — backup archives (excluded from git)
 ```
@@ -80,10 +76,11 @@ backups/               — backup archives (excluded from git)
 - `GET/POST/DELETE /api/categories` — CRUD categories
 - `POST /api/auth/login|logout` — auth
 - `GET /api/auth/me` — session check
-- `GET /api/settings`, `PUT /api/settings` — settings (Zod-validated)
+- `GET /api/settings`, `PUT /api/settings` — settings (Zod-validated, strict)
 - `POST /api/upload/default` — upload default image
 - `POST /api/backfill-defaults` — apply default image to items without photos
 - `POST /api/backfill-images` — copy `image` → `images[0]` for items with empty images
+- `POST /api/backfill-prices` — normalize price to number
 - `GET /api/spreadsheet` — admin full data
 - `GET /api/spreadsheet/public` — public view
 
@@ -92,12 +89,14 @@ backups/               — backup archives (excluded from git)
 - Show/hide Spreadsheet button — в настройках
 - Если у item нет фото — показывается `/images/default.svg`
 - Удаление категории блокируется, если есть items (409 Conflict)
-- Backfill только ручной (кнопка "Backfill Default Image")
+- Backfill только ручной (кнопки "Backfill Default Image", "Backfill Images", "Backfill Prices" в Settings)
 - Все items имеют `images[]`; `image` = cover (первый элемент)
-- Categories JSON: группы `type:"group"` + `subcategories[]`, листовые `{id, label}`
+- Categories: группы `type:"group"` + `subcategories[]`, листовые `{id, label}` — хранятся в SQLite (table: categories, column: data JSON)
 - Cookie: `skyfire.sid`, httpOnly, sameSite:'lax', secure conditional
 - CSRF: проверка Origin/Referer на mutation endpoints
-- Session: regenerate на login, destroy на logout
+- Session: regenerate на login, destroy на logout; SQLite session store (24h expiry)
+- CommanderHQ — название админского spreadsheet-таба
+- Rate limiting: write (60 req/15min, skip GET), read (200 req/15min)
 
 ## Implemented Iterations
 
@@ -108,10 +107,8 @@ backups/               — backup archives (excluded from git)
 - XSS fix: settings.js innerHTML → createElement/textContent
 
 ### Iteration B — P0 Stability (Atomic writes + Cookie)
-- `readJSON` throws `DataCorruptionError` on corrupted files
 - Strict `finalOrder` validation (checks `removedIndexes`)
 - Candidate-based PUT with full replacement validation
-- `writeJSONAtomic` cleans up `.tmp` on error
 - `envBoolean()` helper for COOKIE_SECURE/TRUST_PROXY
 - Cookie renamed to `skyfire.sid`, logout `clearCookie` with same options
 
@@ -119,43 +116,79 @@ backups/               — backup archives (excluded from git)
 - `GET /health` endpoint
 - Graceful shutdown on SIGINT/SIGTERM
 - `public/404.html` with status 404
-- `gitignore/check-data.js` — 7965 integrity checks
 - `withPending` helper in `api.js`
-- Smoke test fixes (CSRF Origin + valid JPEG via sharp)
-- Quarantine: 886 orphaned files to `uploads/.quarantine/`
 
 ### Iteration D — P1+P2+P3 (Backup + Validation + UI + Split)
-- **P1**: `gitignore/backup.js` (tar data/ + uploads/, excludes .tmp/.quarantine)
-- **P1**: `npm i zod`, `lib/validate.js` — Zod schemas for settings/category/item
-- **P2**: `image-editor.js` — innerHTML→createElement (eliminates stored XSS vector)
-- **P2**: `revokeObjectURL` cleanup on crop/close/save (no blob: leaks)
-- **P2**: Section dropdown populated from `/api/categories` (no hardcoded dice/miniatures)
-- **P2**: `withPending` on addSection/addSubcat buttons
-- **P3**: server.js split into `src/` modules (routes, middleware, helpers, errors)
+- `backup.js` (tar data/ + uploads/, excludes .tmp/.quarantine)
+- `npm i zod`, `lib/validate.js` — Zod schemas for settings/category/item
+- `image-editor.js` — innerHTML→createElement (eliminates stored XSS vector)
+- `revokeObjectURL` cleanup on crop/close/save (no blob: leaks)
+- Section dropdown populated from `/api/categories` (no hardcoded dice/miniatures)
+- server.js split into `src/` modules (routes, middleware, helpers, errors)
 
-### Iteration E — P0+P1 (Argon2 + Mutex + SQLite sessions + Deps)
-- **#8**: Argon2 password hashing (ADMIN_PASSWORD_HASH env var)
-- **#11**: Write mutex (withDataLock) for concurrent write serialization
-- **#13**: Empty category ID guard for non-Latin labels
-- **#30**: Backfill routes restored (admin-protected)
-- **#31**: File-based session store (persists across restarts)
-- **#36**: Runtime deps cleanup (jimp, playwright, puppeteer-core → devDependencies)
-- **#40**: uploads/* added to .gitignore
+### Iteration E — P0+P1 (Argon2 + Mutex + Sessions + Deps)
+- Argon2 password hashing (ADMIN_PASSWORD_HASH env var)
+- Empty category ID guard for non-Latin labels
+- Backfill routes restored (admin-protected)
 
 ### Iteration F — P0+P1+P2 (Security hardening + Quality)
-- **server.js**: env guard accepts ADMIN_PASSWORD_HASH without ADMIN_PASSWORD
-- **P1**: Security headers via `helmet` (CSP, HSTS, XFO, X-Content-Type-Options)
-- **P2**: Rate limiting on mutation endpoints (60 req / 15 min)
-- **P2**: SRI integrity hashes for Cropper.js CDN assets
-- **P2**: README.md with setup and deployment instructions
-- **P2**: CI (GitHub Actions — lint, test, check)
-- **P2**: AGENTS.md synced to actual code state
+- Security headers via `helmet` (CSP, HSTS, XFO, X-Content-Type-Options)
+- Rate limiting on mutation endpoints (60 req / 15 min)
+- SRI integrity hashes for Cropper.js CDN assets (admin.html + gallery.html)
+- README.md with setup and deployment instructions
+- CI (GitHub Actions — syntax check, module load, tests)
 
-## Known Gaps (from code review)
+### Iteration G — Cleanup + Thumbnails + Hardening
+- Removed unused exports: `booleanString`, `categoriesSchema`, `subcategorySchema`, `AUDIT_FILE`
+- Removed duplicate route `POST /api/settings/upload/default`
+- SRI integrity hashes added to `gallery.html` for Cropper.js CDN
+- Rate limiting added for public GET endpoints (`/api/auth/me`, `/api/spreadsheet/public` — 200 req/15 min)
+- Thumbnail pipeline: `normalizeImage` generates `thumb-*.jpg` (400px) alongside full-size image
+- `safeUnlink` deletes both full-size and thumbnail on image removal
+- Gallery frontend uses thumbnails for cards, falls back to full-size on error
+
+### Iteration H — SQLite Migration
+- `better-sqlite3`, `src/db.js` with full schema (items, categories, settings, audit, sessions)
+- Migrated all data from JSON → SQLite on first run (610 items, 2 sections, 6 settings)
+- All routes rewritten to use SQLite instead of JSON files
+- Sessions moved from `session-file-store` to SQLite store (sessions table)
+- Old JSON files deleted; DB + uploads tracked in git
+- Backfill buttons added to admin UI (Backfill Images, Backfill Prices)
+- `session-file-store` dependency removed
+
+### Iteration I — Critical Bug Fixes + Hardening
+- **#1**: Fixed image loss in PUT /api/items — `originalMap` now uses original indices
+- **#2**: CSP allows `blob:` in `imgSrc` (crop preview works)
+- **#3**: Rate limiter skips GET/HEAD/OPTIONS (public browsing not throttled)
+- **#4**: Sessions now expire after 24h (`cookie.maxAge` instead of `this.maxAge`)
+- **#5**: Login error shown to user (try/catch in auth.js)
+- **#6**: Tests use in-memory DB (`NODE_TEST_DB=1`), `settingsSchema.strict()`, `null = DELETE`
+- **#7**: Backup runs `wal_checkpoint(TRUNCATE)` before tar (consistent snapshot)
+- **#8**: Logout resets currentUser via checkAuth
+- **#9**: Currency inputs: placeholder `USD`, hint `ISO 4217`, maxLength 3
+- **#10**: Price inputs: `type="number"` (add + edit + admin)
+- **#11**: Cancel crop loads next file in queue
+- **#12**: Frontend try/catch on add/delete item, delete category
+- **#13**: `javascript:history.back()` → `/`
+- **#14**: Lightbox nav buttons moved inside viewport (left:10px/right:10px)
+- **#16**: `settingsSchema.passthrough()` → `.strict()` (no testKey leak)
+- **#17**: Admin page hidden until auth check passes (no flash)
+- **#20**: CI module load check includes `src/db.js`
+- `backups/` added to `.gitignore`
+- `engines: { node: ">=20" }`, `license: MIT`, `allowScripts` removed
+- Version → `1.6.0`
+
+## Known Gaps
 | Issue | Priority | Status |
 |-------|----------|--------|
-| Thumbnail pipeline (large/thumb) | Low | Not done (planned for P3) |
-| SQLite migration | Low | Not done (planned for P3) |
+| inline onclick + 'unsafe-inline' in CSP (needs nonce) | Medium | Planned for Iteration J |
+| No compression (gzip/brotli) | Low | Planned |
+| No SEO meta/OG/robots/sitemap | Low | Planned |
+| No a11y (lightbox role/focus-trap, aria-label) | Low | Planned |
+| No morgan request logging | Low | Planned |
+| No DB schema versioning | Low | Planned |
+| audit table grows infinitely | Low | Planned |
+| Test coverage: safeUnlink, normalizeImage, validateVersion | Low | Planned |
 
 ## Planned Features
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)
@@ -163,12 +196,9 @@ backups/               — backup archives (excluded from git)
   - Пакет `node-telegram-bot-api`
 
 ## How to Restart Server
-```powershell
-Stop-Process -Name node -Force -ErrorAction SilentlyContinue
-$psi = New-Object System.Diagnostics.ProcessStartInfo
-$psi.FileName = "C:\Program Files\nodejs\node.exe"
-$psi.Arguments = "server.js"
-$psi.WorkingDirectory = "C:\Users\Skyfire_e\Documents\OpenCode_Agent\mySite"
-$psi.UseShellExecute = $true
-$p = [System.Diagnostics.Process]::Start($psi)
+```bash
+# macOS / Linux
+kill $(lsof -t -i:3000) 2>/dev/null
+cd /Users/skyfire/Documents/mySiteR
+node server.js
 ```
