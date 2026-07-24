@@ -1,6 +1,12 @@
 import { API, checkAuth, isAdmin } from './api.js';
 import { openEdit, initImageEditor } from './image-editor.js';
 
+function thumbUrl(imgPath) {
+  if (!imgPath || !imgPath.startsWith('/uploads/')) return imgPath;
+  const basename = imgPath.split('/').pop();
+  return '/uploads/thumb-' + basename;
+}
+
 export async function initGalleryPage() {
   const params = new URLSearchParams(location.search);
   const section = params.get('section');
@@ -111,10 +117,13 @@ export async function initGalleryPage() {
       imgWrap.className = 'img-wrap' + (imgCount > 1 ? ' multi-img' : '');
 
       const img = document.createElement('img');
-      img.src = item.image;
+      img.src = thumbUrl(item.image);
       img.alt = item.title || '';
       img.loading = 'lazy';
-      img.addEventListener('error', () => handleImgError(img));
+      img.addEventListener('error', function() {
+        if (this.src !== item.image) { this.src = item.image; }
+        else { handleImgError(this); }
+      });
       imgWrap.appendChild(img);
 
       if (imgCount > 1) {

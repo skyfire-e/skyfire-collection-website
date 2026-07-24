@@ -1,63 +1,57 @@
 const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
-const {
-  readJSON, writeJSONAtomic, withDataLock, appendAudit,
-  SETTINGS_FILE, ITEMS_FILE
-} = require('../helpers');
+const db = require('../db');
 
 const router = Router();
 
-router.post('/backfill-defaults', requireSameOrigin, requireAdmin, (req, res, next) => {
-  withDataLock(() => {
-    const items = readJSON(ITEMS_FILE) || [];
-    const settings = readJSON(SETTINGS_FILE) || {};
+router.post('/backfill-defaults', requireSameOrigin, requireAdmin, (req, res) => {
+  try {
+    const items = db.allItems();
+    const settings = db.getSettings();
     const defaultImage = settings.defaultImage || '/images/default.svg';
     let updated = 0;
-    items.forEach(item => {
+    for (const item of items) {
       if (!item.image || item.image === '/images/default.svg') {
-        item.image = defaultImage;
+        db.updateItem(item.id, { image: defaultImage });
         updated++;
       }
-    });
-    writeJSONAtomic(ITEMS_FILE, items);
-    return { updated, defaultImage };
-  }).then(result => { appendAudit({ action: 'backfill.defaults', updated: result.updated }); res.json(result); })
-    .catch(err => { console.error('Backfill failed:', err); res.status(500).json({ error: 'Backfill failed' }); });
+    }
+    db.appendAudit({ action: 'backfill.defaults', updated });
+    res.json({ updated, defaultImage });
+  } catch (err) { console.error('Backfill failed:', err); res.status(500).json({ error: 'Backfill failed' }); }
 });
 
 router.post('/backfill-images', requireSameOrigin, requireAdmin, (req, res) => {
-  withDataLock(() => {
-    const items = readJSON(ITEMS_FILE) || [];
+  try {
+    const items = db.allItems();
     let updated = 0;
-    items.forEach(item => {
+    for (const item of items) {
       if (item.image && (!item.images || item.images.length === 0)) {
-        item.images = [item.image];
+        db.updateItem(item.id, { images: [item.image] });
         updated++;
       }
-    });
-    writeJSONAtomic(ITEMS_FILE, items);
-    return { updated };
-  }).then(result => { appendAudit({ action: 'backfill.images', updated: result.updated }); res.json(result); })
-    .catch(err => { console.error('Backfill images failed:', err); res.status(500).json({ error: 'Backfill images failed' }); });
+    }
+    db.appendAudit({ action: 'backfill.images', updated });
+    res.json({ updated });
+  } catch (err) { console.error('Backfill images failed:', err); res.status(500).json({ error: 'Backfill images failed' }); }
 });
 
 router.post('/backfill-prices', requireSameOrigin, requireAdmin, (req, res) => {
-  withDataLock(() => {
-    const items = readJSON(ITEMS_FILE) || [];
+  try {
+    const items = db.allItems();
     let updated = 0;
-    items.forEach(item => {
+    for (const item of items) {
       if (typeof item.price === 'string' && item.price !== '') {
-        item.price = parseFloat(item.price) || 0;
+        db.updateItem(item.id, { price: parseFloat(item.price) || 0 });
         updated++;
       } else if (item.price === undefined || item.price === null) {
-        item.price = 0;
+        db.updateItem(item.id, { price: 0 });
         updated++;
       }
-    });
-    writeJSONAtomic(ITEMS_FILE, items);
-    return { updated };
-  }).then(result => { appendAudit({ action: 'backfill.prices', updated: result.updated }); res.json(result); })
-    .catch(err => { console.error('Backfill prices failed:', err); res.status(500).json({ error: 'Backfill prices failed' }); });
+    }
+    db.appendAudit({ action: 'backfill.prices', updated });
+    res.json({ updated });
+  } catch (err) { console.error('Backfill prices failed:', err); res.status(500).json({ error: 'Backfill prices failed' }); }
 });
 
 module.exports = router;

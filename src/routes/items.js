@@ -2,26 +2,23 @@ const { Router } = require('express');
 const crypto = require('crypto');
 const { requireAdmin, requireSameOrigin, upload } = require('../middleware');
 const {
-  readJSON, writeJSONAtomic, safeUnlink, cleanupUploadedFiles,
-  normalizeImage, findCategory, validateItemInput, validateFinalOrder, parseJSONArray,
-  validateVersion, appendAudit,
-  withDataLock,
-  ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE
+  safeUnlink, cleanupUploadedFiles,
+  normalizeImage, validateItemInput, validateFinalOrder, parseJSONArray,
+  validateVersion,
 } = require('../helpers');
+const db = require('../db');
 
 const router = Router();
 
 router.get('/', (req, res) => {
-  let items = readJSON(ITEMS_FILE) || [];
   const { section, category } = req.query;
-  if (section) items = items.filter(i => i.section === section);
-  if (category) items = items.filter(i => i.category === category);
+  const items = db.getItems(section, category);
   res.json(items);
 });
 
 router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
   try {
-    const cats = readJSON(CATEGORIES_FILE) || {};
+    const cats = db.getCategories();
     const files = req.files || [];
 
     const validation = validateItemInput(req.body, cats);
@@ -29,45 +26,34 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
 
     const { data } = validation;
     const images = await Promise.all(files.map(normalizeImage));
+    const settings = db.getSettings();
 
-    const newItem = await withDataLock(() => {
-      const items = readJSON(ITEMS_FILE) || [];
-      const settings = readJSON(SETTINGS_FILE) || {};
-      const item = {
-        id: crypto.randomUUID(),
-        section: data.section,
-        category: data.category,
-        title: data.title || 'Untitled',
-        author: data.author || '',
-        price: data.price ?? 0,
-        recaster: data.recaster || '',
-        combatPoints: data.combatPoints || '',
-        status: data.status || '',
-        version: 1,
-        image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
-        images: images,
-        createdAt: new Date().toISOString()
-      };
-      items.push(item);
-      try {
-        writeJSONAtomic(ITEMS_FILE, items);
-      } catch (err) {
-        cleanupUploadedFiles(files);
-        throw err;
-      }
-      return item;
-    });
-    res.status(201).json(newItem);
+    const item = {
+      id: crypto.randomUUID(),
+      section: data.section,
+      category: data.category,
+      title: data.title || 'Untitled',
+      author: data.author || '',
+      price: data.price ?? 0,
+      recaster: data.recaster || '',
+      combatPoints: data.combatPoints || '',
+      status: data.status || '',
+      version: 1,
+      image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
+      images: images,
+      createdAt: new Date().toISOString()
+    };
+    db.insertItem(item);
+    res.status(201).json(item);
   } catch (err) { next(err); }
 });
 
 router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
   try {
-    const cats = readJSON(CATEGORIES_FILE) || {};
+    const cats = db.getCategories();
     const files = req.files || [];
 
-    // Validate before any write
-    const currentItem = readJSON(ITEMS_FILE)?.find(i => i.id == req.params.id);
+    const currentItem = db.getItem(req.params.id);
     if (!currentItem) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
     const candidate = {
@@ -148,58 +134,42 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
         candidate.image = candidate.images[0];
       } else {
         candidate.images = [];
-        candidate.image = readJSON(SETTINGS_FILE)?.defaultImage || '/images/default.svg';
+        candidate.image = db.getSettings().defaultImage || '/images/default.svg';
       }
     }
 
     validateVersion(currentItem, req.body.version);
-
     candidate.version = (currentItem.version || 0) + 1;
 
     const oldImagesForCleanup = [...(currentItem.images || [])];
 
-    await withDataLock(() => {
-      const items = readJSON(ITEMS_FILE) || [];
-      const idx = items.findIndex(i => i.id == req.params.id);
-      if (idx === -1) return;
-      items[idx] = candidate;
-      try {
-        writeJSONAtomic(ITEMS_FILE, items);
-      } catch (err) {
-        cleanupUploadedFiles(files);
-        throw err;
-      }
-    });
+    db.updateItem(currentItem.id, candidate);
 
     const newSet = new Set(candidate.images);
     for (const img of oldImagesForCleanup) {
       if (!newSet.has(img)) {
-        const items = readJSON(ITEMS_FILE) || [];
-        const stillReferenced = items.some((other, oi) => oi.id !== candidate.id && (other.image === img || other.images?.includes(img)));
+        const items = db.allItems();
+        const stillReferenced = items.some(other => other.id !== candidate.id && (other.image === img || other.images?.includes(img)));
         if (!stillReferenced) safeUnlink(img);
       }
     }
 
-    appendAudit({ action: 'item.update', entityId: candidate.id, title: candidate.title });
+    db.appendAudit({ action: 'item.update', entityId: candidate.id, title: candidate.title });
     res.json(candidate);
   } catch (err) { next(err); }
 });
 
 router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) => {
   try {
-    let deletedItem, uniquePaths;
-    await withDataLock(() => {
-      const items = readJSON(ITEMS_FILE) || [];
-      const idx = items.findIndex(i => i.id == req.params.id);
-      if (idx === -1) return;
-      deletedItem = items[idx];
-      uniquePaths = [...new Set([deletedItem.image, ...(deletedItem.images || [])].filter(Boolean))];
-      items.splice(idx, 1);
-      writeJSONAtomic(ITEMS_FILE, items);
-    });
+    const deletedItem = db.getItem(req.params.id);
     if (!deletedItem) return res.status(404).json({ error: 'Not found' });
-    appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
-    const currentItems = readJSON(ITEMS_FILE) || [];
+
+    const uniquePaths = [...new Set([deletedItem.image, ...(deletedItem.images || [])].filter(Boolean))];
+
+    db.deleteItem(req.params.id);
+    db.appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
+
+    const currentItems = db.allItems();
     for (const img of uniquePaths) {
       const stillReferenced = currentItems.some(other => other.image === img || other.images?.includes(img));
       if (!stillReferenced) safeUnlink(img);

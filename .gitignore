@@ -1,23 +1,13 @@
 node_modules/
 .env
-data/users.json
 
 # Non-site files (scrapers, temp, drafts)
 gitignore/
 
-# Session store
-data/sessions/
-
-# Audit log (runtime generated)
-data/audit.json
-
-# Backup artifacts
-backups/
-
-# Upload working directories
+# Upload working directories (thumbnails and images ARE tracked in git)
 uploads/.tmp/
 uploads/.quarantine/
 
-# Ignore uploaded images (keep .gitkeep for dir tracking)
-uploads/*
-!uploads/.gitkeep
+# SQLite WAL/SHM temp files (not needed in git)
+data/*.db-wal
+data/*.db-shm

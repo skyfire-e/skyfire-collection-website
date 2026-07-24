@@ -1,6 +1,7 @@
 const { Router } = require('express');
-const { requireAdmin, requireSameOrigin } = require('../middleware');
-const { readJSON, flattenCategories, ITEMS_FILE, CATEGORIES_FILE, SETTINGS_FILE } = require('../helpers');
+const { requireAdmin } = require('../middleware');
+const { flattenCategories } = require('../helpers');
+const db = require('../db');
 
 function formatPrice(amount, currencyCode) {
   if (amount == null || amount === 0) return '';
@@ -14,9 +15,9 @@ function formatPrice(amount, currencyCode) {
 const router = Router();
 
 router.get('/public', (req, res) => {
-  const items = readJSON(ITEMS_FILE) || [];
-  const cats = readJSON(CATEGORIES_FILE) || {};
-  const settings = readJSON(SETTINGS_FILE) || {};
+  const items = db.allItems();
+  const cats = db.getCategories();
+  const settings = db.getSettings();
   const showPrices = settings.showPublicSpreadsheet !== false;
   const currencies = settings.currencies || {};
 
@@ -59,9 +60,8 @@ router.get('/public', (req, res) => {
   res.json(result);
 });
 
-router.get('/', requireSameOrigin, requireAdmin, (req, res) => {
-  const items = readJSON(ITEMS_FILE) || [];
-  res.json(items);
+router.get('/', requireAdmin, (req, res) => {
+  res.json(db.allItems());
 });
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import { API, checkAuth, isAdmin, getCurrentUser } from './api.js';
+import { API, checkAuth, isAdmin } from './api.js';
 
 export async function initAuth() {
   const adminBtn = document.getElementById('adminBtn');

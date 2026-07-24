@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const path = require('path');
-const { readJSON, CATEGORIES_FILE, ROOT } = require('../helpers');
+const { ROOT } = require('../helpers');
+const db = require('../db');
 
 const router = Router();
 
 const PUB = path.join(ROOT, 'public');
 
-// Health check
 router.get('/health', (req, res) => {
   res.json({ status: 'ok', uptime: process.uptime() });
 });
@@ -29,22 +29,20 @@ router.get('/miniatures/:group', (req, res) => {
   res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
 });
 
-// Dynamic subgroup page for any section group
 router.get('/:section/:groupId', (req, res, next) => {
   const known = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
   if (known.includes(req.params.section) || req.params.section.startsWith('api')) return next();
-  const cats = readJSON(CATEGORIES_FILE);
+  const cats = db.getCategories();
   if (cats[req.params.section]) {
     return res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
   }
   next();
 });
 
-// Dynamic section page for any top-level category
 router.get('/:section', (req, res, next) => {
   const known = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
   if (known.includes(req.params.section) || req.params.section.startsWith('api')) return next();
-  const cats = readJSON(CATEGORIES_FILE);
+  const cats = db.getCategories();
   if (cats[req.params.section]) {
     return res.sendFile(path.join(PUB, 'section-page.html'));
   }

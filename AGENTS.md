@@ -1,11 +1,13 @@
 # skyf1re Collection — Project Context
 
 ## Stack
-- Node.js/Express backend, vanilla JS frontend, JSON file storage
-- Static files in `public/`, data in `data/`, uploads in `uploads/`
-- Modules: `server.js` (entry) → `src/` (app, routes, middleware, helpers, errors)
+- Node.js/Express backend, vanilla JS frontend, **SQLite** database (better-sqlite3)
+- Static files in `public/`, database in `data/collection.db`, uploads in `uploads/`
+- Modules: `server.js` (entry) → `src/` (app, db, routes, middleware, helpers, errors)
 - Validation: `lib/validate.js` (Zod schemas)
-- Image processing: `sharp` (upload pipeline)
+- Image processing: `sharp` (upload pipeline + thumbnails)
+- Sessions: SQLite store (data/collection.db, sessions table)
+- DB + uploads tracked in git; .env excluded
 
 ## Git
 - GitHub: https://github.com/skyfire-e/skyfire-collection-website.git
@@ -24,10 +26,9 @@
 - `.env` в `.gitignore`, не попадает в репозиторий
 
 ## Current Data State
-- `items.json` — 609 items (Dice: 145, Miniatures: 464)
-- `categories.json` — Dice (7 flat) + Miniatures (2 groups × 13 leaf + 15 standalone leaf)
-- `uploads/` — 615 image files (в .gitignore, только .gitkeep)
-- `settings.json` — defaultImage, siteName, showSpreadsheet, showMiniaturesColumns, currencies
+- `data/collection.db` — SQLite: 610 items (Dice: 145, Miniatures: 465) + categories + settings + sessions + audit
+- `uploads/` — 616 images + 615 thumbnails (tracked in git)
+- Old JSON files (items.json, categories.json, settings.json) — deleted after SQLite migration
 
 ## Site Structure
 | Route | Description |
@@ -52,8 +53,9 @@ Empire of Man, High Elves, Stormcast Eternals, Terrain, Other
 server.js              — entry point (env guard, listen, graceful shutdown)
 src/
   app.js               — Express app (middleware → routes → error handler)
-  errors.js            — ValidationError, DataCorruptionError
-  helpers.js           — readJSON, writeJSONAtomic, normalizeImage, validate*, etc.
+  db.js                — SQLite database (better-sqlite3, schema, migration, CRUD)
+  errors.js            — ValidationError, DataCorruptionError, VersionConflictError
+  helpers.js           — normalizeImage, validate*, safeUnlink, findCategory, flattenCategories
   middleware.js         — requireAdmin, requireSameOrigin, loginLimiter, upload (multer)
   routes/
     auth.js            — /api/auth/login|logout|me
@@ -61,13 +63,14 @@ src/
     items.js           — CRUD /api/items
     settings.js        — GET|PUT /api/settings
     spreadsheet.js     — /api/spreadsheet (public + admin)
-    upload.js          — POST /api/upload/default
+    upload.js          — POST /api/upload/default (default image + thumbnail pipeline)
+    backfill.js        — POST /api/backfill-defaults|backfill-images|backfill-prices
     pages.js           — page routes + health + 404
 lib/
-  validate.js          — Zod schemas (settingsSchema, categoriesSchema, itemInputSchema)
+  validate.js          — Zod schemas (settingsSchema, itemInputSchema)
 gitignore/             — working tools (excluded from git)
-data/                  — JSON storage (items, categories, settings)
-uploads/               — image files
+data/collection.db     — SQLite database (items, categories, settings, sessions, audit)
+uploads/               — image files + thumbnails (thumb-*.jpg) — tracked in git
 public/                — static frontend (HTML, CSS, JS)
 backups/               — backup archives (excluded from git)
 ```
@@ -92,12 +95,12 @@ backups/               — backup archives (excluded from git)
 - Show/hide Spreadsheet button — в настройках
 - Если у item нет фото — показывается `/images/default.svg`
 - Удаление категории блокируется, если есть items (409 Conflict)
-- Backfill только ручной (кнопка "Backfill Default Image")
+- Backfill только ручной (кнопки "Backfill Default Image", "Backfill Images", "Backfill Prices" в Settings)
 - Все items имеют `images[]`; `image` = cover (первый элемент)
-- Categories JSON: группы `type:"group"` + `subcategories[]`, листовые `{id, label}`
+- Categories: группы `type:"group"` + `subcategories[]`, листовые `{id, label}` — хранятся в SQLite (table: categories, column: data JSON)
 - Cookie: `skyfire.sid`, httpOnly, sameSite:'lax', secure conditional
 - CSRF: проверка Origin/Referer на mutation endpoints
-- Session: regenerate на login, destroy на logout
+- Session: regenerate на login, destroy на logout; SQLite session store
 
 ## Implemented Iterations
 
@@ -146,16 +149,42 @@ backups/               — backup archives (excluded from git)
 - **server.js**: env guard accepts ADMIN_PASSWORD_HASH without ADMIN_PASSWORD
 - **P1**: Security headers via `helmet` (CSP, HSTS, XFO, X-Content-Type-Options)
 - **P2**: Rate limiting on mutation endpoints (60 req / 15 min)
-- **P2**: SRI integrity hashes for Cropper.js CDN assets
+- **P2**: SRI integrity hashes for Cropper.js CDN assets (admin.html + gallery.html)
 - **P2**: README.md with setup and deployment instructions
 - **P2**: CI (GitHub Actions — lint, test, check)
 - **P2**: AGENTS.md synced to actual code state
 
+### Iteration G — Cleanup + Thumbnails + Hardening
+- Removed unused exports: `booleanString`, `categoriesSchema`, `subcategorySchema`, `AUDIT_FILE`
+- Removed duplicate route `POST /api/settings/upload/default` (kept `POST /api/upload/default`)
+- Removed stale `data/users.json` from `.gitignore`
+- `appendAudit` now uses `writeJSONAtomic` (was raw `writeFileSync`)
+- SRI integrity hashes added to `gallery.html` for Cropper.js CDN
+- Rate limiting added for public GET endpoints (`/api/auth/me`, `/api/spreadsheet/public` — 200 req/15 min)
+- Thumbnail pipeline: `normalizeImage` generates `thumb-*.jpg` (400px) alongside full-size image
+- `safeUnlink` now deletes both full-size and thumbnail on image removal
+- Gallery frontend uses thumbnails for cards, falls back to full-size on error
+- Tests import from `src/helpers.js` instead of duplicating functions
+- CI: added `src/helpers.js` to syntax check + module load check, removed redundant step
+- `git rm --cached` for 615 uploaded images (no longer in git), `uploads/.gitkeep` added
+
+### Iteration H — SQLite Migration
+- Installed `better-sqlite3`, created `src/db.js` with full schema (items, categories, settings, audit, sessions)
+- Migrated all data from JSON → SQLite on first run (610 items, 2 sections, 6 settings)
+- All routes rewritten to use SQLite instead of JSON files
+- Sessions moved from `session-file-store` to SQLite store (sessions table)
+- `helpers.js` cleaned: removed `readJSON`, `writeJSONAtomic`, `withDataLock`, `appendAudit` (all in db.js now)
+- Old JSON files (items.json, categories.json, settings.json) deleted
+- DB (`data/collection.db`) + uploads tracked in git; WAL/SHM temp files excluded
+- Backfill buttons added to admin UI (Backfill Images, Backfill Prices)
+- Tests rewritten: SQLite integration tests added (insert/delete/filter/settings/sessions)
+- `session-file-store` dependency removed
+- CI updated: `src/db.js` added to syntax check
+
 ## Known Gaps (from code review)
 | Issue | Priority | Status |
 |-------|----------|--------|
-| Thumbnail pipeline (large/thumb) | Low | Not done (planned for P3) |
-| SQLite migration | Low | Not done (planned for P3) |
+| None | — | All major gaps resolved |
 
 ## Planned Features
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)
@@ -163,12 +192,9 @@ backups/               — backup archives (excluded from git)
   - Пакет `node-telegram-bot-api`
 
 ## How to Restart Server
-```powershell
-Stop-Process -Name node -Force -ErrorAction SilentlyContinue
-$psi = New-Object System.Diagnostics.ProcessStartInfo
-$psi.FileName = "C:\Program Files\nodejs\node.exe"
-$psi.Arguments = "server.js"
-$psi.WorkingDirectory = "C:\Users\Skyfire_e\Documents\OpenCode_Agent\mySite"
-$psi.UseShellExecute = $true
-$p = [System.Diagnostics.Process]::Start($psi)
+```bash
+# macOS / Linux
+kill $(lsof -t -i:3000) 2>/dev/null
+cd /Users/skyfire/Documents/mySiteR
+node server.js
 ```

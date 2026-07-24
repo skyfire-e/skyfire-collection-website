@@ -1,21 +1,11 @@
 const express = require('express');
 const helmet = require('helmet');
 const session = require('express-session');
-const FileStore = require('session-file-store')(session);
 const path = require('path');
-const fs = require('fs');
 const multer = require('multer');
 const rateLimit = require('express-rate-limit');
-const { ValidationError, DataCorruptionError, VersionConflictError } = require('./errors');
-const { readJSON, writeJSONAtomic, secureCookies, DATA_DIR, ITEMS_FILE, ROOT } = require('./helpers');
-
-// Init data files and session storage
-['items.json'].forEach(f => {
-  const fp = path.join(DATA_DIR, f);
-  if (!require('fs').existsSync(fp)) writeJSONAtomic(fp, []);
-});
-const SESSION_DIR = path.join(DATA_DIR, 'sessions');
-if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
+const { ValidationError, VersionConflictError } = require('./errors');
+const { secureCookies, ROOT } = require('./helpers');
 
 const app = express();
 
@@ -54,13 +44,47 @@ app.use('/api/settings', writeLimiter);
 app.use('/api/upload', writeLimiter);
 app.use('/api/backfill-defaults', writeLimiter);
 app.use('/api/backfill-images', writeLimiter);
+app.use('/api/backfill-prices', writeLimiter);
+
+// Rate limiting on public read endpoints
+const readLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, try again later' }
+});
+app.use('/api/auth/me', readLimiter);
+app.use('/api/spreadsheet/public', readLimiter);
+
+// SQLite session store
+const { getSession, setSession, destroySession } = require('./db');
+
+const SQLiteStore = function() {};
+SQLiteStore.prototype.__proto__ = session.Store.prototype;
+SQLiteStore.prototype.get = function(sid, cb) {
+  const data = getSession(sid);
+  cb(null, data);
+};
+SQLiteStore.prototype.set = function(sid, sessionData, cb) {
+  setSession(sid, sessionData, this.maxAge);
+  cb(null);
+};
+SQLiteStore.prototype.destroy = function(sid, cb) {
+  destroySession(sid);
+  cb(null);
+};
+SQLiteStore.prototype.touch = function(sid, sessionData, cb) {
+  setSession(sid, sessionData, this.maxAge);
+  cb(null);
+};
 
 app.use(session({
   name: 'skyfire.sid',
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: new FileStore({ path: SESSION_DIR, ttl: 86400, reapInterval: 3600 }),
+  store: new SQLiteStore(),
   cookie: {
     httpOnly: true,
     secure: secureCookies,
@@ -98,9 +122,6 @@ app.use((error, req, res, next) => {
   }
   if (error instanceof ValidationError) {
     return res.status(error.status).json({ error: error.message, details: error.details });
-  }
-  if (error instanceof DataCorruptionError) {
-    return res.status(error.status).json({ error: error.message });
   }
   if (error instanceof VersionConflictError) {
     return res.status(error.status).json({ error: error.message });

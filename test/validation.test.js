@@ -1,36 +1,8 @@
 const { describe, it } = require('node:test');
 const assert = require('node:assert');
-const path = require('path');
-const fs = require('fs');
-const os = require('os');
 
-// Test helpers in isolation
-function findCategory(subcategories, targetId) {
-  for (const cat of subcategories || []) {
-    if (cat.id === targetId) return cat;
-    const nested = findCategory(cat.subcategories, targetId);
-    if (nested) return nested;
-  }
-  return null;
-}
-
-function flattenCategories(subcategories, ancestors = []) {
-  return (subcategories || []).flatMap(cat => {
-    const p = [...ancestors, cat.label];
-    if (cat.type === 'group' && cat.subcategories?.length) {
-      return flattenCategories(cat.subcategories, p);
-    }
-    return [{
-      id: cat.id, label: cat.label, path: p,
-      groupLabel: ancestors.length > 0 ? ancestors.join(' → ') : null
-    }];
-  });
-}
-
-function envBoolean(value, fallback = false) {
-  if (value === undefined) return fallback;
-  return ['1', 'true', 'yes', 'on'].includes(String(value).toLowerCase());
-}
+const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray } = require('../src/helpers');
+const db = require('../src/db');
 
 describe('envBoolean', () => {
   it('returns fallback for undefined', () => {
@@ -118,22 +90,6 @@ describe('flattenCategories', () => {
 });
 
 describe('validateFinalOrder', () => {
-  function validateFinalOrder(order, oldImages, uploadedFiles, removedIndexes) {
-    if (!Array.isArray(order)) return 'finalOrder must be an array';
-    if (!order.every(Number.isInteger)) return 'finalOrder must contain integers';
-    if (order.some(v => v < -1)) return 'finalOrder contains an invalid value';
-    const existing = order.filter(v => v >= 0);
-    if (new Set(existing).size !== existing.length) return 'Duplicate image indexes are not allowed';
-    if (existing.some(idx => idx >= oldImages.length)) return 'finalOrder references a missing image';
-    if (removedIndexes && existing.some(idx => removedIndexes.includes(idx))) {
-      return 'finalOrder references a removed image';
-    }
-    const uploadSlots = order.filter(v => v === -1).length;
-    if (uploadSlots !== uploadedFiles.length) return 'Uploaded files do not match finalOrder';
-    if (order.length > 10) return 'Maximum 10 images allowed';
-    return null;
-  }
-
   const oldImages = ['/img/1.jpg', '/img/2.jpg', '/img/3.jpg'];
 
   it('accepts valid finalOrder', () => {
@@ -173,13 +129,6 @@ describe('validateFinalOrder', () => {
 });
 
 describe('parseJSONArray', () => {
-  function parseJSONArray(value, fieldName) {
-    if (value === undefined) return [];
-    const parsed = JSON.parse(value);
-    if (!Array.isArray(parsed)) throw new Error(fieldName + ' must be an array');
-    return parsed;
-  }
-
   it('parses valid JSON array', () => {
     assert.deepStrictEqual(parseJSONArray('[1,2,3]', 'test'), [1, 2, 3]);
   });
@@ -191,5 +140,54 @@ describe('parseJSONArray', () => {
   });
   it('throws for invalid JSON', () => {
     assert.throws(() => parseJSONArray('{bad json}', 'test'), /JSON/);
+  });
+});
+
+describe('SQLite database', () => {
+  it('has migrated items', () => {
+    const items = db.allItems();
+    assert.ok(items.length > 600);
+  });
+  it('has categories', () => {
+    const cats = db.getCategories();
+    assert.ok(cats.dice);
+    assert.ok(cats.miniatures);
+    assert.strictEqual(cats.dice.label, 'Dice');
+  });
+  it('has settings', () => {
+    const settings = db.getSettings();
+    assert.ok(settings.siteName);
+    assert.ok(settings.defaultImage);
+  });
+  it('can filter items by section', () => {
+    const dice = db.getItems('dice');
+    assert.ok(dice.length > 0);
+    assert.ok(dice.every(i => i.section === 'dice'));
+  });
+  it('can insert and delete item', () => {
+    const testId = 'test-' + Date.now();
+    db.insertItem({
+      id: testId, section: 'dice', category: 'metal-dice',
+      title: 'Test', author: '', price: 0, recaster: '',
+      combatPoints: '', status: '', image: '', images: [],
+      version: 1, createdAt: new Date().toISOString()
+    });
+    assert.ok(db.getItem(testId));
+    db.deleteItem(testId);
+    assert.strictEqual(db.getItem(testId), null);
+  });
+  it('can update settings', () => {
+    db.updateSettings({ testKey: 'testValue' });
+    const settings = db.getSettings();
+    assert.strictEqual(settings.testKey, 'testValue');
+    db.updateSettings({ testKey: null });
+  });
+  it('can manage sessions', () => {
+    db.setSession('test-sid', { user: { role: 'admin' } }, 60000);
+    const session = db.getSession('test-sid');
+    assert.ok(session);
+    assert.strictEqual(session.user.role, 'admin');
+    db.destroySession('test-sid');
+    assert.strictEqual(db.getSession('test-sid'), null);
   });
 });

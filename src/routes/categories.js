@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
-const { readJSON, writeJSONAtomic, findCategory, withDataLock, appendAudit, CATEGORIES_FILE, ITEMS_FILE } = require('../helpers');
+const { findCategory } = require('../helpers');
+const db = require('../db');
 
 const router = Router();
 
 router.get('/', (req, res) => {
-  res.json(readJSON(CATEGORIES_FILE));
+  res.json(db.getCategories());
 });
 
 router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
@@ -18,8 +19,8 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
 
     if (!catId) return res.status(400).json({ error: 'Could not generate category ID. Specify an ID for non-Latin labels.' });
 
-    const result = await withDataLock(() => {
-      const cats = readJSON(CATEGORIES_FILE);
+    try {
+      const cats = db.getCategories();
 
       if (parentId === '__new_section__') {
         if (cats[catId]) throw Object.assign(new Error('Section already exists'), { status: 400 });
@@ -43,12 +44,11 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
         throw Object.assign(new Error('Invalid target'), { status: 400 });
       }
 
-      writeJSONAtomic(CATEGORIES_FILE, cats);
-      return cats;
-    });
-    appendAudit({ action: 'category.create', section, categoryId: catId, label, parentId });
-    res.json(result);
-  } catch (err) { if (err.status) return res.status(err.status).json({ error: err.message }); next(err); }
+      db.saveCategories(cats);
+      db.appendAudit({ action: 'category.create', section, categoryId: catId, label, parentId });
+      res.json(cats);
+    } catch (err) { if (err.status) return res.status(err.status).json({ error: err.message }); throw err; }
+  } catch (err) { next(err); }
 });
 
 router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
@@ -57,9 +57,9 @@ router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
 
     if (!section) return res.status(400).json({ error: 'Invalid section' });
 
-    const result = await withDataLock(() => {
-      const cats = readJSON(CATEGORIES_FILE);
-      const items = readJSON(ITEMS_FILE) || [];
+    try {
+      const cats = db.getCategories();
+      const items = db.allItems();
 
       if (!cats[section]) throw Object.assign(new Error('Invalid section'), { status: 400 });
 
@@ -107,12 +107,11 @@ router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
         cats[section].subcategories = cats[section].subcategories.filter(c => c.id !== id);
       }
 
-      writeJSONAtomic(CATEGORIES_FILE, cats);
-      return cats;
-    });
-    appendAudit({ action: 'category.delete', section, categoryId: id || section, parentId });
-    res.json(result);
-  } catch (err) { if (err.status) return res.status(err.status).json({ error: err.message }); next(err); }
+      db.saveCategories(cats);
+      db.appendAudit({ action: 'category.delete', section, categoryId: id || section, parentId });
+      res.json(cats);
+    } catch (err) { if (err.status) return res.status(err.status).json({ error: err.message }); throw err; }
+  } catch (err) { next(err); }
 });
 
 module.exports = router;

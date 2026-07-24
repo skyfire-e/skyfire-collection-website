@@ -44,6 +44,16 @@ export function initAdminSettings() {
     alert('Updated ' + res.updated + ' items with default image: ' + res.defaultImage);
   });
 
+  document.getElementById('backfillImagesBtn').addEventListener('click', async () => {
+    const res = await API.post('/api/backfill-images');
+    alert('Updated ' + res.updated + ' items: image → images[0]');
+  });
+
+  document.getElementById('backfillPricesBtn').addEventListener('click', async () => {
+    const res = await API.post('/api/backfill-prices');
+    alert('Updated ' + res.updated + ' items: price normalized to number');
+  });
+
   document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
     const fileInput = document.getElementById('setDefaultImage');
     if (fileInput.files[0]) {

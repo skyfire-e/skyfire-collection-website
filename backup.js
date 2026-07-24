@@ -23,7 +23,6 @@ const opts = [
   '"' + backupFile + '"',
   '--exclude "uploads/.tmp/*"',
   '--exclude "uploads/.quarantine/*"',
-  '--exclude "data/sessions/*"',
   '-C',
   '"' + ROOT + '"',
   'data',

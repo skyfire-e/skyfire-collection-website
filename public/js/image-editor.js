@@ -188,7 +188,7 @@ function loadNextFile() {
   const reader = new FileReader();
   reader.onload = (e) => {
     closeCrop();
-    openCrop(e.target.result, { fileQueue: cropQueue, slotIdx: undefined, currentFile: nextFile });
+    openCrop(e.target.result, { fileQueue: cropQueue, slotIdx: undefined });
   };
   reader.readAsDataURL(nextFile);
 }
@@ -315,7 +315,7 @@ export function initImageEditor() {
     const currentFile = files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-      openCrop(e.target.result, { fileQueue, slotIdx: undefined, currentFile });
+      openCrop(e.target.result, { fileQueue, slotIdx: undefined });
     };
     reader.readAsDataURL(currentFile);
   });
