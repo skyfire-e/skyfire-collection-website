@@ -114,3 +114,15 @@
   gap: 12px;
   z-index: 100;
 }
+
+.reorder-mode .gallery-card {
+  cursor: grab;
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}
+.reorder-mode .gallery-card:active {
+  cursor: grabbing;
+}
+.reorder-mode .gallery-card:hover {
+  outline-color: var(--success);
+}

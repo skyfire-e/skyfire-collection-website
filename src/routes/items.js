@@ -192,4 +192,13 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
   } catch (err) { next(err); }
 });
 
+router.post('/reorder', requireSameOrigin, requireAdmin, (req, res, next) => {
+  try {
+    const { section, category, items } = req.body;
+    if (!Array.isArray(items) || items.length === 0) return res.status(400).json({ error: 'Items array required' });
+    db.reorderItems(section, category, items);
+    res.json({ success: true, count: items.length });
+  } catch (err) { next(err); }
+});
+
 module.exports = router;

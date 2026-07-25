@@ -154,8 +154,13 @@ if (currentVersion < 3) {
   db.pragma('user_version = 3');
 }
 
-// Future migrations: add blocks here
-// if (currentVersion < 4) { ... db.pragma('user_version = 4'); }
+if (currentVersion < 4) {
+  const hasSortOrder = db.prepare('PRAGMA table_info(items)').all().some(c => c.name === 'sort_order');
+  if (!hasSortOrder) {
+    db.prepare('ALTER TABLE items ADD COLUMN sort_order INTEGER DEFAULT 0').run();
+  }
+  db.pragma('user_version = 4');
+}
 
 // --- Items ---
 function getItems(section, category, limit, offset) {
@@ -163,6 +168,7 @@ function getItems(section, category, limit, offset) {
   const params = [];
   if (section) { query += ' WHERE section = ?'; params.push(section); }
   if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
+  query += ' ORDER BY sort_order ASC, rowid ASC';
   if (limit) {
     query += ' LIMIT ?';
     params.push(limit);
@@ -170,6 +176,15 @@ function getItems(section, category, limit, offset) {
   }
   const rows = db.prepare(query).all(...params);
   return rows.map(rowToItem);
+}
+
+function reorderItems(section, category, orderedIds) {
+  const update = db.prepare('UPDATE items SET sort_order = ? WHERE id = ?');
+  const tx = db.transaction(() => {
+    orderedIds.forEach((id, i) => update.run(i, String(id)));
+  });
+  tx();
+  db.appendAudit({ action: 'item.reorder', section, category, count: orderedIds.length });
 }
 
 function searchItems(query, limit) {
@@ -386,7 +401,7 @@ cleanupTimer.unref();
 
 module.exports = {
   db,
-  getItems, getItemCount, searchItems, getItem, insertItem, updateItem, deleteItem, allItems,
+  getItems, getItemCount, searchItems, reorderItems, getItem, insertItem, updateItem, deleteItem, allItems,
   getCategories, saveCategories,
   getSettings, updateSettings,
   appendAudit, getAuditLog,

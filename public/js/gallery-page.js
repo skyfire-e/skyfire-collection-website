@@ -266,6 +266,17 @@ export async function initGalleryPage() {
 
   await checkAuth();
   if (isAdmin()) document.getElementById('adminActions').classList.remove('hidden');
+  if (isAdmin()) {
+    const reorderBtn = document.createElement('button');
+    reorderBtn.className = 'btn btn-sm';
+    reorderBtn.id = 'reorderBtn';
+    reorderBtn.textContent = '🔀 Re-arrange';
+    reorderBtn.classList.add('admin-corner');
+    reorderBtn.style.cssText = 'position:fixed;bottom:24px;left:24px;z-index:100';
+    document.body.appendChild(reorderBtn);
+    reorderBtn.addEventListener('click', toggleReorder);
+  }
+
   await loadItems();
 
   if (location.hash.startsWith('#item-')) {
@@ -278,6 +289,90 @@ export async function initGalleryPage() {
         setTimeout(() => card.classList.remove('highlighted'), 5000);
       }
     }, 500);
+  }
+}
+
+let reorderMode = false;
+
+async function toggleReorder() {
+  reorderMode = !reorderMode;
+  const btn = document.getElementById('reorderBtn');
+  const grid = document.getElementById('galleryGrid');
+  if (reorderMode) {
+    btn.textContent = '✓ Done';
+    btn.classList.add('btn-success');
+    grid.classList.add('reorder-mode');
+    enableDragAndDrop(grid);
+  } else {
+    btn.textContent = '🔀 Re-arrange';
+    btn.classList.remove('btn-success');
+    grid.classList.remove('reorder-mode');
+    disableDragAndDrop(grid);
+    await saveReorder();
+  }
+}
+
+let dragSrc = null;
+
+function enableDragAndDrop(grid) {
+  grid.querySelectorAll('.gallery-card').forEach(card => {
+    card.draggable = true;
+    card.addEventListener('dragstart', onDragStart);
+    card.addEventListener('dragover', onDragOver);
+    card.addEventListener('drop', onDrop);
+    card.addEventListener('dragend', onDragEnd);
+  });
+}
+
+function disableDragAndDrop(grid) {
+  grid.querySelectorAll('.gallery-card').forEach(card => {
+    card.draggable = false;
+    card.removeEventListener('dragstart', onDragStart);
+    card.removeEventListener('dragover', onDragOver);
+    card.removeEventListener('drop', onDrop);
+    card.removeEventListener('dragend', onDragEnd);
+  });
+}
+
+function onDragStart(e) {
+  dragSrc = this;
+  this.style.opacity = '0.4';
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  if (this !== dragSrc) {
+    const grid = this.parentNode;
+    const children = [...grid.children];
+    const srcIdx = children.indexOf(dragSrc);
+    const tgtIdx = children.indexOf(this);
+    if (srcIdx < tgtIdx) this.parentNode.insertBefore(dragSrc, this.nextSibling);
+    else this.parentNode.insertBefore(dragSrc, this);
+  }
+}
+
+function onDrop(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function onDragEnd() {
+  this.style.opacity = '';
+  dragSrc = null;
+  document.querySelectorAll('.gallery-card').forEach(c => c.style.opacity = '');
+}
+
+async function saveReorder() {
+  const grid = document.getElementById('galleryGrid');
+  const cards = [...grid.querySelectorAll('.gallery-card')];
+  const itemIds = cards.map(c => c.dataset.itemId);
+  if (itemIds.length === 0) return;
+  try {
+    await API.post('/api/items/reorder', { section, category, items: itemIds });
+  } catch (err) {
+    alert('Failed to save order: ' + (err.message || 'Unknown error'));
   }
 }
 
