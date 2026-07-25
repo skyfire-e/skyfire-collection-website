@@ -163,7 +163,6 @@ function getItems(section, category, limit, offset) {
   const params = [];
   if (section) { query += ' WHERE section = ?'; params.push(section); }
   if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
-  query += ' ORDER BY createdAt DESC';
   if (limit) {
     query += ' LIMIT ?';
     params.push(limit);
