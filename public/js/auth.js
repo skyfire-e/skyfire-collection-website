@@ -8,7 +8,8 @@ async function initAuth() {
   const authError = document.getElementById('authError');
   const adminActions = document.getElementById('adminActions');
 
-  adminBtn.addEventListener('click', () => authModal.classList.add('open'));
+  if (adminBtn) adminBtn.addEventListener('click', () => { if (authModal) authModal.classList.add('open'); });
+  if (!authModal) return;
 
   authModal.addEventListener('click', (e) => {
     if (e.target === authModal) authModal.classList.remove('open');
