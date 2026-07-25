@@ -9,9 +9,9 @@
   --text: #e0e0e0;
   --text-muted: #999;
   --text-inverse: #fff;
-  --accent: #4fc3f7;
-  --accent-dark: #226e93;
-  --accent-group-grad: #1a3040;
+  --accent: #6db58c;
+  --accent-dark: #3d7a5a;
+  --accent-group-grad: #1a3025;
   --border: #333;
   --danger: #ef5350;
   --success: #66bb6a;
@@ -35,9 +35,9 @@
   --text: #1a1a1a;
   --text-muted: #666;
   --text-inverse: #1a1a1a;
-  --accent: #0288d1;
-  --accent-dark: #01579b;
-  --accent-group-grad: #b3d9f0;
+  --accent: #4a8c6a;
+  --accent-dark: #2d5f44;
+  --accent-group-grad: #b8d4c4;
   --border: #ddd;
   --danger: #d32f2f;
   --success: #2e7d32;
@@ -138,7 +138,7 @@ body {
 .nav-drawer .nav-sub { padding-left: 40px; font-size: 0.88rem; color: var(--text-muted); }
 .nav-drawer .nav-sub-sub { padding-left: 60px; font-size: 0.82rem; color: var(--text-muted); }
 .nav-drawer .nav-divider { border-top: 1px solid var(--border); margin: 8px 0; }
-.nav-drawer .nav-current { background: rgba(79,195,247,0.1); border-left: 3px solid var(--accent); }
+.nav-drawer .nav-current { background: rgba(109,181,140,0.1); border-left: 3px solid var(--accent); }
 .nav-drawer-close {
   position: absolute;
   top: 12px;
