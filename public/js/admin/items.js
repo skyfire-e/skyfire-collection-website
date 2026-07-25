@@ -25,6 +25,7 @@ export async function initAdminItems() {
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       if (btn.dataset.tab === 'spreadsheet') loadSpreadsheet();
       if (btn.dataset.tab === 'settings') import('./settings.js').then(m => m.loadSettings());
+      if (btn.dataset.tab === 'activity') loadActivity();
     });
   });
 
@@ -360,4 +361,37 @@ async function loadCatList() {
     });
     div.appendChild(ul);
   });
+}
+
+async function loadActivity() {
+  const tbody = document.getElementById('activityBody');
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Loading...</td></tr>';
+  try {
+    const logs = await API.get('/api/audit');
+    if (logs.length === 0) { tbody.innerHTML = '<tr><td colspan="3" class="empty-state">No activity yet</td></tr>'; return; }
+    tbody.innerHTML = '';
+    logs.forEach(log => {
+      const tr = document.createElement('tr');
+      const time = document.createElement('td');
+      time.textContent = new Date(log.timestamp).toLocaleString();
+      tr.appendChild(time);
+      const action = document.createElement('td');
+      action.textContent = log.action || 'unknown';
+      tr.appendChild(action);
+      const details = document.createElement('td');
+      const detailParts = [];
+      if (log.title) detailParts.push('title: ' + log.title);
+      if (log.entityId) detailParts.push('id: ' + log.entityId);
+      if (log.updated !== undefined) detailParts.push('updated: ' + log.updated);
+      if (log.section) detailParts.push('section: ' + log.section);
+      if (log.categoryId) detailParts.push('category: ' + log.categoryId);
+      details.textContent = detailParts.join(', ') || '-';
+      details.className = 'mini-col';
+      tr.appendChild(details);
+      tbody.appendChild(tr);
+    });
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Failed to load activity log</td></tr>';
+  }
 }

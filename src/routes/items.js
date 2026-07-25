@@ -11,7 +11,13 @@ const db = require('../db');
 const router = Router();
 
 router.get('/', (req, res) => {
-  const { section, category, limit, offset } = req.query;
+  const { section, category, limit, offset, q } = req.query;
+
+  if (q) {
+    const items = db.searchItems(q, limit ? Math.min(parseInt(limit, 10), 100) : 20);
+    return res.json(items);
+  }
+
   const parsedLimit = limit ? Math.min(Math.max(parseInt(limit, 10) || 0, 1), 100) : undefined;
   const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
   const items = db.getItems(section, category, parsedLimit, parsedOffset);

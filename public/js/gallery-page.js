@@ -122,6 +122,8 @@ export async function initGalleryPage() {
     items.forEach(item => {
       const card = document.createElement('div');
       card.className = 'gallery-card';
+      card.id = 'item-' + item.id;
+      card.dataset.itemId = item.id;
 
       const imgCount = item.images && item.images.length > 0 ? item.images.length : 1;
 
@@ -264,7 +266,19 @@ export async function initGalleryPage() {
 
   await checkAuth();
   if (isAdmin()) document.getElementById('adminActions').classList.remove('hidden');
-  loadItems();
+  await loadItems();
+
+  if (location.hash.startsWith('#item-')) {
+    const itemId = location.hash.slice(1);
+    setTimeout(() => {
+      const card = document.getElementById(itemId);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('highlighted');
+        setTimeout(() => card.classList.remove('highlighted'), 5000);
+      }
+    }, 500);
+  }
 }
 
 initGalleryPage();

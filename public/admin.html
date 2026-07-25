@@ -21,6 +21,7 @@
       <button data-tab="spreadsheet">📊 CommanderHQ</button>
       <button data-tab="categories">📁 Categories</button>
       <button data-tab="settings">⚙️ Settings</button>
+      <button data-tab="activity">📋 Activity</button>
     </div>
 
     <!-- Add Item Tab -->
@@ -148,9 +149,26 @@
         <div class="section-spaced">
           <h3 class="section-heading-wide">Current Categories</h3>
           <div id="catList"></div>
-        </div>
       </div>
     </div>
+
+    <!-- Activity Tab -->
+    <div class="tab-content" id="tab-activity">
+      <h2 class="tab-heading">Activity Log</h2>
+      <div class="scroll-x">
+        <table class="spreadsheet-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Action</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="activityBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
     <!-- Settings Tab -->
     <div class="tab-content" id="tab-settings">

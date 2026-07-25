@@ -5,7 +5,45 @@
   }
 })();
 
+function injectTopbar() {
+  const topbar = document.createElement('div');
+  topbar.className = 'topbar';
+  topbar.innerHTML = `
+    <button class="topbar-btn" id="menuBtn" title="Navigation">☰</button>
+    <button class="topbar-btn" id="searchBtn" title="Search">🔍</button>
+    <div class="topbar-spacer"></div>
+    <a href="/" class="topbar-btn" title="Home">🏠</a>
+  `;
+  document.body.prepend(topbar);
+
+  const drawer = document.createElement('div');
+  drawer.className = 'nav-drawer';
+  drawer.id = 'navDrawer';
+  document.body.appendChild(drawer);
+
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-drawer-overlay';
+  overlay.id = 'navDrawerOverlay';
+  document.body.appendChild(overlay);
+
+  const searchModal = document.createElement('div');
+  searchModal.className = 'search-modal';
+  searchModal.id = 'searchModal';
+  searchModal.innerHTML = `
+    <div class="search-box">
+      <div class="btn-row" style="justify-content:space-between;margin-top:0">
+        <input type="text" id="searchInput" placeholder="Search items...">
+        <button class="topbar-btn" id="searchClose">×</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  `;
+  document.body.appendChild(searchModal);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  injectTopbar();
+
   document.querySelectorAll('[data-href]').forEach(btn => {
     btn.addEventListener('click', () => { location.href = btn.dataset.href; });
   });
@@ -19,8 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (s.siteName) {
       document.title = s.siteName;
       const h1 = document.querySelector('h1');
-      if (h1 && h1.classList.contains('home-page') === false && h1.closest('.home-page')) h1.textContent = s.siteName;
-      else if (h1) h1.textContent = s.siteName;
+      if (h1 && h1.closest('.home-page')) h1.textContent = s.siteName;
     }
   }).catch(() => {});
 
@@ -43,4 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (location.hash === '#login' && document.getElementById('authModal')) {
     document.getElementById('authModal').classList.add('open');
   }
+
+  import('./topbar.js').then(m => m.initTopbar());
 });

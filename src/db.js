@@ -172,6 +172,12 @@ function getItems(section, category, limit, offset) {
   return rows.map(rowToItem);
 }
 
+function searchItems(query, limit) {
+  const pattern = '%' + query + '%';
+  const rows = db.prepare('SELECT * FROM items WHERE title LIKE ? OR author LIKE ? LIMIT ?').all(pattern, pattern, limit || 20);
+  return rows.map(rowToItem);
+}
+
 function getItemCount(section, category) {
   let query = 'SELECT COUNT(*) as c FROM items';
   const params = [];
@@ -347,6 +353,10 @@ function appendAudit(entry) {
   db.prepare('DELETE FROM audit WHERE id NOT IN (SELECT id FROM audit ORDER BY id DESC LIMIT ?)').run(AUDIT_MAX_ROWS);
 }
 
+function getAuditLog(limit) {
+  return db.prepare('SELECT * FROM audit ORDER BY id DESC LIMIT ?').all(limit || 100);
+}
+
 // --- Sessions ---
 function getSession(sid) {
   const row = db.prepare('SELECT * FROM sessions WHERE sid = ?').get(sid);
@@ -376,9 +386,9 @@ cleanupTimer.unref();
 
 module.exports = {
   db,
-  getItems, getItemCount, getItem, insertItem, updateItem, deleteItem, allItems,
+  getItems, getItemCount, searchItems, getItem, insertItem, updateItem, deleteItem, allItems,
   getCategories, saveCategories,
   getSettings, updateSettings,
-  appendAudit,
+  appendAudit, getAuditLog,
   getSession, setSession, destroySession
 };
