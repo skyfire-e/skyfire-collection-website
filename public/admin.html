@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin - skyf1re Collection</title>
-  <link rel="stylesheet" href="/css/base.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"><link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/admin.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
@@ -21,6 +21,7 @@
       <button data-tab="spreadsheet">📊 CommanderHQ</button>
       <button data-tab="categories">📁 Categories</button>
       <button data-tab="settings">⚙️ Settings</button>
+      <button data-tab="activity">📋 Activity</button>
     </div>
 
     <!-- Add Item Tab -->
@@ -148,7 +149,23 @@
         <div class="section-spaced">
           <h3 class="section-heading-wide">Current Categories</h3>
           <div id="catList"></div>
-        </div>
+      </div>
+    </div>
+
+    <!-- Activity Tab -->
+    <div class="tab-content" id="tab-activity">
+      <h2 class="tab-heading">Activity Log</h2>
+      <div class="scroll-x">
+        <table class="spreadsheet-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Action</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="activityBody"></tbody>
+        </table>
       </div>
     </div>
 
@@ -215,6 +232,7 @@
         <button class="btn btn-accent" id="backfillImagesBtn">Backfill Images</button>
         <button class="btn btn-accent" id="backfillPricesBtn">Backfill Prices</button>
       </div>
+    </div>
     </div>
   </div>
 

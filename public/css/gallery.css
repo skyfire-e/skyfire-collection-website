@@ -4,12 +4,15 @@
   margin: 0 auto;
   padding: 40px 20px;
 }
-.gallery-page .back-link {
-  display: inline-block;
+.gallery-page .back-link,
+.gallery-back-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 40px;
   color: var(--text-muted);
-  margin-bottom: 20px;
 }
-.gallery-page .back-link:hover { color: var(--accent); }
+.gallery-page .back-link:hover,
+.gallery-back-link:hover { color: var(--accent); }
 .gallery-page h1 {
   text-align: center;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -113,4 +116,16 @@
   display: flex;
   gap: 12px;
   z-index: 100;
+}
+
+.reorder-mode .gallery-card {
+  cursor: grab;
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}
+.reorder-mode .gallery-card:active {
+  cursor: grabbing;
+}
+.reorder-mode .gallery-card:hover {
+  outline-color: var(--success);
 }

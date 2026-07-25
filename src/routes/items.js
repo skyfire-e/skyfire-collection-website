@@ -11,7 +11,13 @@ const db = require('../db');
 const router = Router();
 
 router.get('/', (req, res) => {
-  const { section, category, limit, offset } = req.query;
+  const { section, category, limit, offset, q } = req.query;
+
+  if (q) {
+    const items = db.searchItems(q, limit ? Math.min(parseInt(limit, 10), 100) : 20);
+    return res.json(items);
+  }
+
   const parsedLimit = limit ? Math.min(Math.max(parseInt(limit, 10) || 0, 1), 100) : undefined;
   const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
   const items = db.getItems(section, category, parsedLimit, parsedOffset);
@@ -154,13 +160,15 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     db.updateItem(currentItem.id, candidate);
 
     const newSet = new Set(candidate.images);
+    const toDelete = [];
     for (const img of oldImagesForCleanup) {
       if (!newSet.has(img)) {
         const items = db.allItems();
         const stillReferenced = items.some(other => other.id !== candidate.id && (other.image === img || other.images?.includes(img)));
-        if (!stillReferenced) safeUnlink(img);
+        if (!stillReferenced) toDelete.push(img);
       }
     }
+    toDelete.forEach(img => safeUnlink(img));
 
     db.appendAudit({ action: 'item.update', entityId: candidate.id, title: candidate.title });
     res.json(candidate);
@@ -178,11 +186,22 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
     db.appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
 
     const currentItems = db.allItems();
+    const toDelete = [];
     for (const img of uniquePaths) {
       const stillReferenced = currentItems.some(other => other.image === img || other.images?.includes(img));
-      if (!stillReferenced) safeUnlink(img);
+      if (!stillReferenced) toDelete.push(img);
     }
+    toDelete.forEach(img => safeUnlink(img));
     res.json({ success: true });
+  } catch (err) { next(err); }
+});
+
+router.post('/reorder', requireSameOrigin, requireAdmin, (req, res, next) => {
+  try {
+    const { section, category, items } = req.body;
+    if (!Array.isArray(items) || items.length === 0) return res.status(400).json({ error: 'Items array required' });
+    db.reorderItems(section, category, items);
+    res.json({ success: true, count: items.length });
   } catch (err) { next(err); }
 });
 

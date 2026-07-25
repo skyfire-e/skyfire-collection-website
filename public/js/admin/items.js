@@ -25,33 +25,13 @@ export async function initAdminItems() {
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       if (btn.dataset.tab === 'spreadsheet') loadSpreadsheet();
       if (btn.dataset.tab === 'settings') import('./settings.js').then(m => m.loadSettings());
+      if (btn.dataset.tab === 'activity') loadActivity();
     });
   });
-
-  // Section -> Category cascade
-  document.getElementById('addSection').addEventListener('change', function() {
-    document.querySelectorAll('.mini-field').forEach(el => {
-      if (extraFieldsSections.includes(this.value)) el.classList.remove('hidden');
-      else el.classList.add('hidden');
-    });
-    const catSelect = document.getElementById('addCategory');
-    catSelect.innerHTML = '<option value="">Select category...</option>';
-    const section = this.value;
-    if (!section || !categoriesData[section]) return;
-    categoriesData[section].subcategories.forEach(c => {
-      if (c.type === 'group' && c.subcategories) {
-        c.subcategories.forEach(sc => {
-          const opt = document.createElement('option');
-          opt.value = sc.id;
-          opt.textContent = c.label + ' \u2192 ' + sc.label;
-          catSelect.appendChild(opt);
-        });
-      } else {
-        const opt = document.createElement('option');
-        opt.value = c.id;
-        opt.textContent = c.label;
-        catSelect.appendChild(opt);
-      }
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">Failed to load spreadsheet</td></tr>';
+  }
+}
     });
   });
 
@@ -172,9 +152,11 @@ function createCell(text, className) {
 }
 
 async function loadSpreadsheet() {
-  const items = await API.get('/api/spreadsheet');
   const tbody = document.getElementById('spreadsheetBody');
-  tbody.innerHTML = '';
+  if (!tbody) return;
+  try {
+    const items = await API.get('/api/spreadsheet');
+    tbody.innerHTML = '';
 
   const sprCols = 9;
 
@@ -236,9 +218,12 @@ async function loadSpreadsheet() {
         delBtn.className = 'btn btn-sm btn-danger del-spr-btn';
         delBtn.textContent = '\ud83d\uddd1\ufe0f';
         delBtn.addEventListener('click', async () => {
-          if (confirm('Delete "' + item.title + '"?')) {
+          if (!confirm('Delete "' + item.title + '"?')) return;
+          try {
             await withPending(delBtn, () => API.del('/api/items/' + item.id));
             loadSpreadsheet();
+          } catch (err) {
+            alert('Delete failed: ' + (err.message || 'Unknown error'));
           }
         });
         actionsTd.appendChild(delBtn);
@@ -360,4 +345,37 @@ async function loadCatList() {
     });
     div.appendChild(ul);
   });
+}
+
+async function loadActivity() {
+  const tbody = document.getElementById('activityBody');
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Loading...</td></tr>';
+  try {
+    const logs = await API.get('/api/audit');
+    if (logs.length === 0) { tbody.innerHTML = '<tr><td colspan="3" class="empty-state">No activity yet</td></tr>'; return; }
+    tbody.innerHTML = '';
+    logs.forEach(log => {
+      const tr = document.createElement('tr');
+      const time = document.createElement('td');
+      time.textContent = new Date(log.timestamp).toLocaleString();
+      tr.appendChild(time);
+      const action = document.createElement('td');
+      action.textContent = log.action || 'unknown';
+      tr.appendChild(action);
+      const details = document.createElement('td');
+      const detailParts = [];
+      if (log.title) detailParts.push('title: ' + log.title);
+      if (log.entityId) detailParts.push('id: ' + log.entityId);
+      if (log.updated !== undefined) detailParts.push('updated: ' + log.updated);
+      if (log.section) detailParts.push('section: ' + log.section);
+      if (log.categoryId) detailParts.push('category: ' + log.categoryId);
+      details.textContent = detailParts.join(', ') || '-';
+      details.className = 'mini-col';
+      tr.appendChild(details);
+      tbody.appendChild(tr);
+    });
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Failed to load activity log</td></tr>';
+  }
 }

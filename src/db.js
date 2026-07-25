@@ -154,8 +154,13 @@ if (currentVersion < 3) {
   db.pragma('user_version = 3');
 }
 
-// Future migrations: add blocks here
-// if (currentVersion < 4) { ... db.pragma('user_version = 4'); }
+if (currentVersion < 4) {
+  const hasSortOrder = db.prepare('PRAGMA table_info(items)').all().some(c => c.name === 'sort_order');
+  if (!hasSortOrder) {
+    db.prepare('ALTER TABLE items ADD COLUMN sort_order INTEGER DEFAULT 0').run();
+  }
+  db.pragma('user_version = 4');
+}
 
 // --- Items ---
 function getItems(section, category, limit, offset) {
@@ -163,13 +168,29 @@ function getItems(section, category, limit, offset) {
   const params = [];
   if (section) { query += ' WHERE section = ?'; params.push(section); }
   if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
-  query += ' ORDER BY createdAt DESC';
+  query += ' ORDER BY sort_order ASC, rowid ASC';
   if (limit) {
     query += ' LIMIT ?';
     params.push(limit);
     if (offset) { query += ' OFFSET ?'; params.push(offset); }
   }
   const rows = db.prepare(query).all(...params);
+  return rows.map(rowToItem);
+}
+
+function reorderItems(section, category, orderedIds) {
+  const update = db.prepare('UPDATE items SET sort_order = ? WHERE id = ? AND section = ? AND category = ?');
+  const tx = db.transaction(() => {
+    orderedIds.forEach((id, i) => update.run(i, String(id), section, category));
+  });
+  tx();
+  db.appendAudit({ action: 'item.reorder', section, category, count: orderedIds.length });
+}
+
+function searchItems(query, limit) {
+  const escaped = query.replace(/[%_\\]/g, c => '\\' + c);
+  const pattern = '%' + escaped + '%';
+  const rows = db.prepare('SELECT * FROM items WHERE title LIKE ? ESCAPE ? OR author LIKE ? ESCAPE ? LIMIT ?').all(pattern, '\\', pattern, '\\', limit || 20);
   return rows.map(rowToItem);
 }
 
@@ -348,6 +369,10 @@ function appendAudit(entry) {
   db.prepare('DELETE FROM audit WHERE id NOT IN (SELECT id FROM audit ORDER BY id DESC LIMIT ?)').run(AUDIT_MAX_ROWS);
 }
 
+function getAuditLog(limit) {
+  return db.prepare('SELECT * FROM audit ORDER BY id DESC LIMIT ?').all(limit || 100);
+}
+
 // --- Sessions ---
 function getSession(sid) {
   const row = db.prepare('SELECT * FROM sessions WHERE sid = ?').get(sid);
@@ -377,9 +402,9 @@ cleanupTimer.unref();
 
 module.exports = {
   db,
-  getItems, getItemCount, getItem, insertItem, updateItem, deleteItem, allItems,
+  getItems, getItemCount, searchItems, reorderItems, getItem, insertItem, updateItem, deleteItem, allItems,
   getCategories, saveCategories,
   getSettings, updateSettings,
-  appendAudit,
+  appendAudit, getAuditLog,
   getSession, setSession, destroySession
 };

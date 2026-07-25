@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title id="pageTitle">Miniatures - skyf1re Collection</title>
-  <link rel="stylesheet" href="/css/base.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"><link rel="stylesheet" href="/css/base.css">
 </head>
 <body data-page-type="section">
   <div class="section-page">
@@ -15,6 +15,7 @@
 
   <div class="admin-corner">
     <button id="themeBtn" title="Toggle theme">☀️</button>
+    <button id="adminBtn" title="Admin">🔐</button>
   </div>
 
   <div class="admin-actions hidden" id="adminActions">
@@ -22,7 +23,27 @@
     <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
   </div>
 
+  <div class="modal-overlay" id="authModal">
+    <div class="modal">
+      <h2 id="authTitle">Admin Login</h2>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="loginUsername" placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Password">
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="loginBtn">Login</button>
+        <button class="btn btn-danger hidden" id="logoutBtn">Logout</button>
+      </div>
+      <p id="authError" class="danger-text"></p>
+    </div>
+  </div>
+
   <script type="module" src="/js/nav.js"></script>
+  <script type="module" src="/js/auth.js"></script>
   <script type="module" src="/js/section-pages.js"></script>
 </body>
 </html>

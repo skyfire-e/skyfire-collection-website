@@ -10,7 +10,7 @@ const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD_HASH || ADMI
 
 const router = Router();
 
-router.post('/login', loginLimiter, async (req, res) => {
+router.post('/login', requireSameOrigin, loginLimiter, async (req, res) => {
   const { username, password } = req.body;
   const user = users.find(u => u.username === username);
   if (!user) return res.status(401).json({ error: 'Invalid credentials' });

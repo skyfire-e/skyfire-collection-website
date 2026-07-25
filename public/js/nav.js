@@ -5,7 +5,51 @@
   }
 })();
 
+function injectNav() {
+  const navBtns = document.createElement('div');
+  navBtns.className = 'nav-corner';
+  navBtns.innerHTML = `
+    <button class="nav-corner-btn" id="menuBtn" title="Navigation">
+      <img src="/images/compass.svg" alt="Nav" width="28" height="28">
+    </button>
+  `;
+  document.body.appendChild(navBtns);
+
+  const searchBtn = document.createElement('button');
+  searchBtn.className = 'nav-corner-btn search-corner-btn';
+  searchBtn.id = 'searchBtn';
+  searchBtn.title = 'Search';
+  searchBtn.textContent = '🔍';
+  document.body.appendChild(searchBtn);
+
+  const drawer = document.createElement('div');
+  drawer.className = 'nav-drawer';
+  drawer.id = 'navDrawer';
+  document.body.appendChild(drawer);
+
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-drawer-overlay';
+  overlay.id = 'navDrawerOverlay';
+  document.body.appendChild(overlay);
+
+  const searchModal = document.createElement('div');
+  searchModal.className = 'search-modal';
+  searchModal.id = 'searchModal';
+  searchModal.innerHTML = `
+    <div class="search-box">
+      <div class="search-header">
+        <input type="text" id="searchInput" placeholder="Search items...">
+        <button class="nav-corner-btn" id="searchClose">×</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  `;
+  document.body.appendChild(searchModal);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  injectNav();
+
   document.querySelectorAll('[data-href]').forEach(btn => {
     btn.addEventListener('click', () => { location.href = btn.dataset.href; });
   });
@@ -19,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (s.siteName) {
       document.title = s.siteName;
       const h1 = document.querySelector('h1');
-      if (h1) h1.textContent = s.siteName;
+      if (h1 && h1.closest('.home-page')) h1.textContent = s.siteName;
     }
   }).catch(() => {});
 
@@ -33,4 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
       themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
     });
   }
+
+  const adminBtn = document.getElementById('adminBtn');
+  if (adminBtn && !document.getElementById('authModal')) {
+    adminBtn.addEventListener('click', () => { location.href = '/#login'; });
+  }
+
+  if (location.hash === '#login' && document.getElementById('authModal')) {
+    document.getElementById('authModal').classList.add('open');
+  }
+
+  import('./topbar.js').then(m => m.initTopbar());
 });

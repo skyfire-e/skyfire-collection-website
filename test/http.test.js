@@ -42,7 +42,8 @@ describe('Auth', () => {
   it('POST /api/auth/login — wrong password returns 401', async () => {
     const res = await supertest(app)
       .post('/api/auth/login')
-      .set('Origin', 'localhost:3000')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
       .send({ username: 'admin', password: 'wrong' });
     assert.strictEqual(res.status, 401);
   });
@@ -50,7 +51,8 @@ describe('Auth', () => {
   it('POST /api/auth/login — correct password returns success', async () => {
     const res = await supertest(app)
       .post('/api/auth/login')
-      .set('Origin', 'localhost:3000')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
       .send({ username: 'admin', password: 'admin123' });
     assert.strictEqual(res.status, 200);
     assert.strictEqual(res.body.success, true);

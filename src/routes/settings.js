@@ -13,7 +13,7 @@ router.put('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
   try {
     const result = settingsSchema.partial().safeParse(req.body);
     if (!result.success) {
-      return res.status(400).json({ error: result.error.issues[0].message });
+      return res.status(400).json({ error: 'Validation failed', details: result.error.issues.map(i => i.message) });
     }
     db.updateSettings(result.data);
     res.json(db.getSettings());
