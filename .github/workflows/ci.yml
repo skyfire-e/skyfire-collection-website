@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, test]
+    branches: ['**']
   pull_request:
     branches: [main]
 
@@ -21,25 +21,13 @@ jobs:
       - run: npm ci
 
       - name: Syntax check
-        run: |
-          node --check server.js && \
-          node --check src/app.js && \
-          node --check src/middleware.js && \
-          node --check src/helpers.js && \
-          node --check src/db.js && \
-          node --check src/errors.js && \
-          node --check lib/validate.js && \
-          node --check src/routes/auth.js && \
-          node --check src/routes/categories.js && \
-          node --check src/routes/items.js && \
-          node --check src/routes/settings.js && \
-          node --check src/routes/spreadsheet.js && \
-          node --check src/routes/upload.js && \
-          node --check src/routes/backfill.js && \
-          node --check src/routes/pages.js
+        run: npm run check
 
       - name: Module load check
         run: node -e "require('./src/errors'); require('./lib/validate'); require('./src/helpers'); require('./src/db'); console.log('Modules OK')"
 
+      - name: Lint
+        run: npm run lint
+
       - name: Run tests
-        run: node --test
+        run: npm test

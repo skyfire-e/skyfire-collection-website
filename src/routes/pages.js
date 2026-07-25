@@ -8,7 +8,12 @@ const router = Router();
 const PUB = path.join(ROOT, 'public');
 
 router.get('/health', (req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
+  try {
+    db.db.prepare('SELECT 1').get();
+    res.json({ status: 'ok', uptime: process.uptime(), db: 'ok' });
+  } catch (e) {
+    res.status(503).json({ status: 'error', db: 'unavailable', error: e.message });
+  }
 });
 
 const pages = {

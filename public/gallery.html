@@ -19,7 +19,7 @@
     <button id="themeBtn" title="Toggle theme">☀️</button>
   </div>
 
-  <div class="admin-actions" id="adminActions" style="display:none">
+  <div class="admin-actions hidden" id="adminActions">
     <button data-href="/admin#add">+ Add</button>
     <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
   </div>
@@ -56,12 +56,12 @@
       <div class="form-group">
         <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit)</span></label>
         <div class="edit-image-grid" id="editImageGrid"></div>
-        <div style="margin-top:8px">
+        <div class="margin-top-sm">
           <button type="button" class="btn btn-sm" id="addImagesBtn">+ Add Images</button>
-          <input type="file" id="editImage" accept="image/*" multiple style="display:none">
+          <input type="file" id="editImage" accept="image/*" multiple class="hidden">
         </div>
       </div>
-      <div style="display:flex;gap:12px;margin-top:20px">
+      <div class="btn-row">
         <button class="btn" id="saveEditBtn">Save</button>
         <button class="btn btn-danger" id="cancelEditBtn">Cancel</button>
       </div>
@@ -75,7 +75,7 @@
       <div class="crop-container" id="cropContainer">
         <img id="cropImage" src="" alt="">
       </div>
-      <div style="display:flex;gap:12px;margin-top:16px;justify-content:flex-end">
+      <div class="btn-row-end">
         <button class="btn btn-success" id="cropApplyBtn">Apply Crop</button>
         <button class="btn btn-danger" id="cropCancelBtn">Cancel</button>
       </div>

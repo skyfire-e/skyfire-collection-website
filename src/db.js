@@ -30,20 +30,33 @@ db.exec(`
     status TEXT DEFAULT '',
     image TEXT DEFAULT '',
     images TEXT DEFAULT '[]',
-    version INTEGER DEFAULT 1,
-    createdAt TEXT DEFAULT ''
+    version INTEGER NOT NULL DEFAULT 1 CHECK (version > 0),
+    createdAt TEXT DEFAULT '',
+    updatedAt TEXT DEFAULT ''
   );
 
   CREATE INDEX IF NOT EXISTS idx_items_section ON items(section);
   CREATE INDEX IF NOT EXISTS idx_items_category ON items(category);
   CREATE INDEX IF NOT EXISTS idx_items_section_category ON items(section, category);
 
-  CREATE TABLE IF NOT EXISTS categories (
-    section_id TEXT NOT NULL,
-    section_label TEXT NOT NULL,
-    data TEXT NOT NULL,
-    PRIMARY KEY (section_id)
+  CREATE TABLE IF NOT EXISTS sections (
+    id TEXT PRIMARY KEY,
+    label TEXT NOT NULL,
+    sort_order INTEGER DEFAULT 0
   );
+
+  CREATE TABLE IF NOT EXISTS categories (
+    id TEXT NOT NULL,
+    section_id TEXT NOT NULL,
+    parent_id TEXT,
+    label TEXT NOT NULL,
+    type TEXT DEFAULT 'leaf',
+    sort_order INTEGER DEFAULT 0,
+    PRIMARY KEY (section_id, id),
+    FOREIGN KEY (section_id) REFERENCES sections(id) ON DELETE CASCADE
+  );
+
+  CREATE INDEX IF NOT EXISTS idx_categories_section ON categories(section_id);
 
   CREATE TABLE IF NOT EXISTS settings (
     key TEXT PRIMARY KEY,
@@ -64,7 +77,11 @@ db.exec(`
   );
 `);
 
-const SCHEMA_VERSION = 2;
+// --- Migrations ---
+function safeJsonParse(value, fallback) {
+  try { return JSON.parse(value); } catch { return fallback; }
+}
+
 const currentVersion = db.pragma('user_version', { simple: true });
 
 if (currentVersion < 1) {
@@ -80,18 +97,88 @@ if (currentVersion < 2) {
   }
   db.pragma('user_version = 2');
 }
+if (currentVersion < 3) {
+  // v3: add updatedAt column to items
+  const hasUpdatedAt = db.prepare('PRAGMA table_info(items)').all().some(c => c.name === 'updatedAt');
+  if (!hasUpdatedAt) {
+    db.prepare('ALTER TABLE items ADD COLUMN updatedAt TEXT DEFAULT \'\'').run();
+  }
+  db.prepare('UPDATE items SET updatedAt = createdAt WHERE updatedAt = \'\' OR updatedAt IS NULL').run();
+  db.exec('CREATE INDEX IF NOT EXISTS idx_items_updatedAt ON items(updatedAt)');
+
+  // v3: normalize categories — migrate from old JSON `categories` table to normalized `sections` + `categories`
+  const oldTableExists = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='categories' AND sql LIKE '%data%'").get();
+  if (oldTableExists) {
+    // Create new normalized categories table
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS categories_new (
+        id TEXT NOT NULL,
+        section_id TEXT NOT NULL,
+        parent_id TEXT,
+        label TEXT NOT NULL,
+        type TEXT DEFAULT 'leaf',
+        sort_order INTEGER DEFAULT 0,
+        PRIMARY KEY (section_id, id),
+        FOREIGN KEY (section_id) REFERENCES sections(id) ON DELETE CASCADE
+      );
+    `);
+
+    const oldCats = db.prepare('SELECT section_id, section_label, data FROM categories').all();
+    const insertSection = db.prepare('INSERT OR IGNORE INTO sections (id, label, sort_order) VALUES (?, ?, ?)');
+    const insertCat = db.prepare('INSERT OR IGNORE INTO categories_new (id, section_id, parent_id, label, type, sort_order) VALUES (?, ?, ?, ?, ?, ?)');
+
+    let order = 0;
+    for (const row of oldCats) {
+      insertSection.run(row.section_id, row.section_label || row.section_id, order++);
+      const data = safeJsonParse(row.data, { label: row.section_label, subcategories: [] });
+      let catOrder = 0;
+      for (const cat of (data.subcategories || [])) {
+        if (cat.type === 'group' && cat.subcategories) {
+          insertCat.run(cat.id, row.section_id, null, cat.label, 'group', catOrder++);
+          for (const sc of cat.subcategories) {
+            insertCat.run(sc.id, row.section_id, cat.id, sc.label, 'leaf', catOrder++);
+          }
+        } else {
+          insertCat.run(cat.id, row.section_id, null, cat.label, 'leaf', catOrder++);
+        }
+      }
+    }
+
+    // Replace old table
+    db.prepare('DROP TABLE categories').run();
+    db.exec('ALTER TABLE categories_new RENAME TO categories');
+    db.exec('CREATE INDEX IF NOT EXISTS idx_categories_section ON categories(section_id)');
+    db.exec('CREATE INDEX IF NOT EXISTS idx_categories_parent ON categories(parent_id)');
+  }
+
+  db.pragma('user_version = 3');
+}
 
 // Future migrations: add blocks here
-// if (currentVersion < 3) { ... db.pragma('user_version = 3'); }
+// if (currentVersion < 4) { ... db.pragma('user_version = 4'); }
 
 // --- Items ---
-function getItems(section, category) {
+function getItems(section, category, limit, offset) {
   let query = 'SELECT * FROM items';
   const params = [];
   if (section) { query += ' WHERE section = ?'; params.push(section); }
   if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
+  query += ' ORDER BY createdAt DESC';
+  if (limit) {
+    query += ' LIMIT ?';
+    params.push(limit);
+    if (offset) { query += ' OFFSET ?'; params.push(offset); }
+  }
   const rows = db.prepare(query).all(...params);
   return rows.map(rowToItem);
+}
+
+function getItemCount(section, category) {
+  let query = 'SELECT COUNT(*) as c FROM items';
+  const params = [];
+  if (section) { query += ' WHERE section = ?'; params.push(section); }
+  if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
+  return db.prepare(query).get(...params).c;
 }
 
 function getItem(id) {
@@ -100,7 +187,8 @@ function getItem(id) {
 }
 
 function insertItem(item) {
-  db.prepare('INSERT INTO items (id, section, category, title, author, price, recaster, combatPoints, status, image, images, version, createdAt) VALUES (@id, @section, @category, @title, @author, @price, @recaster, @combatPoints, @status, @image, @images, @version, @createdAt)').run({
+  const now = new Date().toISOString();
+  db.prepare('INSERT INTO items (id, section, category, title, author, price, recaster, combatPoints, status, image, images, version, createdAt, updatedAt) VALUES (@id, @section, @category, @title, @author, @price, @recaster, @combatPoints, @status, @image, @images, @version, @createdAt, @updatedAt)').run({
     id: String(item.id),
     section: item.section,
     category: item.category,
@@ -113,7 +201,8 @@ function insertItem(item) {
     image: item.image || '',
     images: JSON.stringify(item.images || []),
     version: item.version || 1,
-    createdAt: item.createdAt || ''
+    createdAt: item.createdAt || now,
+    updatedAt: now
   });
 }
 
@@ -136,6 +225,8 @@ function updateItem(id, fields) {
     }
   }
   if (sets.length === 0) return;
+  sets.push('updatedAt = @updatedAt');
+  params.updatedAt = new Date().toISOString();
   params.id = String(id);
   db.prepare('UPDATE items SET ' + sets.join(', ') + ' WHERE id = @id').run(params);
 }
@@ -160,29 +251,64 @@ function rowToItem(row) {
     combatPoints: row.combatPoints,
     status: row.status,
     image: row.image,
-    images: JSON.parse(row.images || '[]'),
+    images: safeJsonParse(row.images, []),
     version: row.version,
-    createdAt: row.createdAt
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt || row.createdAt
   };
 }
 
-// --- Categories ---
+// --- Categories (normalized: sections + categories tables, assembled to tree) ---
 function getCategories() {
-  const rows = db.prepare('SELECT * FROM categories').all();
+  const sections = db.prepare('SELECT * FROM sections ORDER BY sort_order').all();
+  const cats = db.prepare('SELECT * FROM categories ORDER BY sort_order').all();
   const result = {};
-  for (const row of rows) {
-    result[row.section_id] = JSON.parse(row.data);
+  for (const sec of sections) {
+    result[sec.id] = { label: sec.label, subcategories: [] };
+  }
+  for (const cat of cats) {
+    const sec = result[cat.section_id];
+    if (!sec) continue;
+    if (cat.parent_id) {
+      const parent = sec.subcategories.find(c => c.id === cat.parent_id);
+      if (parent) {
+        if (!parent.subcategories) parent.subcategories = [];
+        parent.subcategories.push({ id: cat.id, label: cat.label });
+      }
+    } else {
+      if (cat.type === 'group') {
+        sec.subcategories.push({ id: cat.id, label: cat.label, type: 'group', subcategories: [] });
+      } else {
+        sec.subcategories.push({ id: cat.id, label: cat.label });
+      }
+    }
   }
   return result;
 }
 
 function saveCategories(cats) {
-  const del = db.prepare('DELETE FROM categories');
-  const insert = db.prepare('INSERT INTO categories (section_id, section_label, data) VALUES (@section_id, @section_label, @data)');
+  const delCats = db.prepare('DELETE FROM categories');
+  const delSections = db.prepare('DELETE FROM sections');
+  const insertSection = db.prepare('INSERT INTO sections (id, label, sort_order) VALUES (?, ?, ?)');
+  const insertCat = db.prepare('INSERT INTO categories (id, section_id, parent_id, label, type, sort_order) VALUES (?, ?, ?, ?, ?, ?)');
+
   const tx = db.transaction(() => {
-    del.run();
+    delCats.run();
+    delSections.run();
+    let secOrder = 0;
     for (const [sectionId, section] of Object.entries(cats)) {
-      insert.run({ section_id: sectionId, section_label: section.label || sectionId, data: JSON.stringify(section) });
+      insertSection.run(sectionId, section.label || sectionId, secOrder++);
+      let catOrder = 0;
+      for (const cat of (section.subcategories || [])) {
+        if (cat.type === 'group' && cat.subcategories) {
+          insertCat.run(cat.id, sectionId, null, cat.label, 'group', catOrder++);
+          for (const sc of cat.subcategories) {
+            insertCat.run(sc.id, sectionId, cat.id, sc.label, 'leaf', catOrder++);
+          }
+        } else {
+          insertCat.run(cat.id, sectionId, null, cat.label, 'leaf', catOrder++);
+        }
+      }
     }
   });
   tx();
@@ -193,7 +319,7 @@ function getSettings() {
   const rows = db.prepare('SELECT * FROM settings').all();
   const result = {};
   for (const row of rows) {
-    result[row.key] = JSON.parse(row.value);
+    result[row.key] = safeJsonParse(row.value, null);
   }
   return result;
 }
@@ -230,7 +356,7 @@ function getSession(sid) {
     db.prepare('DELETE FROM sessions WHERE sid = ?').run(sid);
     return null;
   }
-  try { return JSON.parse(row.data); } catch { return null; }
+  try { return safeJsonParse(row.data, null); } catch { return null; }
 }
 
 function setSession(sid, data, maxAge) {
@@ -251,7 +377,7 @@ cleanupTimer.unref();
 
 module.exports = {
   db,
-  getItems, getItem, insertItem, updateItem, deleteItem, allItems,
+  getItems, getItemCount, getItem, insertItem, updateItem, deleteItem, allItems,
   getCategories, saveCategories,
   getSettings, updateSettings,
   appendAudit,

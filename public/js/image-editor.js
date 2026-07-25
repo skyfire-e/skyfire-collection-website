@@ -95,9 +95,10 @@ export function openEdit(item, { onSave } = {}) {
   document.getElementById('editCombatPoints').value = item.combatPoints || '';
   document.getElementById('editStatus').value = item.status || '';
 
-  document.querySelectorAll('#editModal .mini-field').forEach(el => {
-    el.style.display = extraFieldsSections.includes(item.section) ? 'block' : 'none';
-  });
+    document.querySelectorAll('#editModal .mini-field').forEach(el => {
+      if (extraFieldsSections.includes(item.section)) el.classList.remove('hidden');
+      else el.classList.add('hidden');
+    });
 
   document.getElementById('editImage').value = '';
   renderEditImages();

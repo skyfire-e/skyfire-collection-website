@@ -34,7 +34,7 @@
     <button id="adminBtn" title="Admin">🔐</button>
   </div>
 
-  <div class="admin-actions" id="adminActions" style="display:none">
+  <div class="admin-actions hidden" id="adminActions">
     <button data-href="/admin#add">+ Add</button>
     <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
   </div>
@@ -50,11 +50,11 @@
         <label>Password</label>
         <input type="password" id="loginPassword" placeholder="admin123">
       </div>
-      <div style="display:flex;gap:12px;margin-top:20px">
+      <div class="btn-row">
         <button class="btn" id="loginBtn">Login</button>
-        <button class="btn" id="logoutBtn" style="display:none;background:var(--danger)">Logout</button>
+        <button class="btn btn-danger hidden" id="logoutBtn">Logout</button>
       </div>
-      <p id="authError" style="color:var(--danger);margin-top:12px;font-size:0.85rem"></p>
+      <p id="authError" class="danger-text"></p>
     </div>
   </div>
 

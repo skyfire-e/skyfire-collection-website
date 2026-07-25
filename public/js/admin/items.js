@@ -31,7 +31,8 @@ export async function initAdminItems() {
   // Section -> Category cascade
   document.getElementById('addSection').addEventListener('change', function() {
     document.querySelectorAll('.mini-field').forEach(el => {
-      el.style.display = extraFieldsSections.includes(this.value) ? 'block' : 'none';
+      if (extraFieldsSections.includes(this.value)) el.classList.remove('hidden');
+      else el.classList.add('hidden');
     });
     const catSelect = document.getElementById('addCategory');
     catSelect.innerHTML = '<option value="">Select category...</option>';
@@ -55,7 +56,7 @@ export async function initAdminItems() {
   });
 
   // Hide mini-fields by default in add form
-  document.querySelectorAll('#tab-add .mini-field').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('#tab-add .mini-field').forEach(el => el.classList.add('hidden'));
 
   // Add item
   document.getElementById('addForm').addEventListener('submit', async (e) => {

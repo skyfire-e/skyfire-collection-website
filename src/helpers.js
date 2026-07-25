@@ -6,7 +6,6 @@ const { VersionConflictError } = require('./errors');
 const { itemInputSchema, itemInputPartialSchema } = require('../lib/validate');
 
 const ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = path.join(ROOT, 'data');
 const UPLOADS_DIR = path.resolve(ROOT, 'uploads');
 const TEMP_DIR = path.join(UPLOADS_DIR, '.tmp');
 

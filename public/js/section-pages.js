@@ -66,6 +66,6 @@ async function showAdminActions() {
   await checkAuth();
   if (isAdmin()) {
     const el = document.getElementById('adminActions');
-    if (el) el.style.display = 'flex';
+    if (el) el.classList.remove('hidden');
   }
 }

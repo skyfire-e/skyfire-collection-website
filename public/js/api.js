@@ -39,10 +39,6 @@ export function isAdmin() {
   return currentUser && currentUser.role === 'admin';
 }
 
-export function getCurrentUser() {
-  return currentUser;
-}
-
 export async function withPending(button, operation) {
   const prev = button.textContent;
   button.disabled = true;

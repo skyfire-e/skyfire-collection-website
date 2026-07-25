@@ -11,9 +11,16 @@ const db = require('../db');
 const router = Router();
 
 router.get('/', (req, res) => {
-  const { section, category } = req.query;
-  const items = db.getItems(section, category);
-  res.json(items);
+  const { section, category, limit, offset } = req.query;
+  const parsedLimit = limit ? Math.min(Math.max(parseInt(limit, 10) || 0, 1), 100) : undefined;
+  const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
+  const items = db.getItems(section, category, parsedLimit, parsedOffset);
+  const total = db.getItemCount(section, category);
+  if (parsedLimit) {
+    res.json({ items, total, limit: parsedLimit, offset: parsedOffset || 0 });
+  } else {
+    res.json(items);
+  }
 });
 
 router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
@@ -41,7 +48,8 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
       version: 1,
       image: images.length > 0 ? images[0] : (settings.defaultImage || '/images/default.svg'),
       images: images,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
     db.insertItem(item);
     res.status(201).json(item);
