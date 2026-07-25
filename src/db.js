@@ -158,14 +158,27 @@ if (currentVersion < 3) {
 // if (currentVersion < 4) { ... db.pragma('user_version = 4'); }
 
 // --- Items ---
-function getItems(section, category) {
+function getItems(section, category, limit, offset) {
   let query = 'SELECT * FROM items';
   const params = [];
   if (section) { query += ' WHERE section = ?'; params.push(section); }
   if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
   query += ' ORDER BY createdAt DESC';
+  if (limit) {
+    query += ' LIMIT ?';
+    params.push(limit);
+    if (offset) { query += ' OFFSET ?'; params.push(offset); }
+  }
   const rows = db.prepare(query).all(...params);
   return rows.map(rowToItem);
+}
+
+function getItemCount(section, category) {
+  let query = 'SELECT COUNT(*) as c FROM items';
+  const params = [];
+  if (section) { query += ' WHERE section = ?'; params.push(section); }
+  if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
+  return db.prepare(query).get(...params).c;
 }
 
 function getItem(id) {
@@ -364,7 +377,7 @@ cleanupTimer.unref();
 
 module.exports = {
   db,
-  getItems, getItem, insertItem, updateItem, deleteItem, allItems,
+  getItems, getItemCount, getItem, insertItem, updateItem, deleteItem, allItems,
   getCategories, saveCategories,
   getSettings, updateSettings,
   appendAudit,

@@ -1,9 +1,6 @@
 node_modules/
 .env
 
-# Non-site files (scrapers, temp, drafts)
-gitignore/
-
 # Upload working directories (thumbnails and images ARE tracked in git)
 uploads/.tmp/
 uploads/.quarantine/

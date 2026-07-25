@@ -26,5 +26,8 @@ jobs:
       - name: Module load check
         run: node -e "require('./src/errors'); require('./lib/validate'); require('./src/helpers'); require('./src/db'); console.log('Modules OK')"
 
+      - name: Lint
+        run: npm run lint
+
       - name: Run tests
         run: npm test

@@ -1,6 +1,6 @@
 {
   "name": "skyf1re-collection",
-  "version": "1.6.0",
+  "version": "1.7.2",
   "description": "skyf1re Collection - Dice & Miniatures gallery",
   "main": "server.js",
   "scripts": {
@@ -11,7 +11,9 @@
     "gc:dry": "node gc-uploads.js --dry-run",
     "gc:quarantine": "node gc-uploads.js --quarantine",
     "test": "node --test",
-    "check": "node --check server.js && node --check src/app.js && node --check src/middleware.js && node --check src/helpers.js && node --check src/db.js && node --check src/errors.js && node --check lib/validate.js && node --check src/routes/auth.js && node --check src/routes/categories.js && node --check src/routes/items.js && node --check src/routes/settings.js && node --check src/routes/spreadsheet.js && node --check src/routes/upload.js && node --check src/routes/backfill.js && node --check src/routes/pages.js"
+    "lint": "eslint server.js src/ lib/ backup.js gc-uploads.js",
+    "format": "prettier --write 'src/**/*.js' 'public/js/**/*.js' 'lib/**/*.js' '*.js'",
+    "check": "node --check server.js && node --check src/app.js && node --check src/middleware.js && node --check src/helpers.js && node --check src/db.js && node --check src/errors.js && node --check lib/validate.js && node --check src/routes/auth.js && node --check src/routes/categories.js && node --check src/routes/items.js && node --check src/routes/settings.js && node --check src/routes/spreadsheet.js && node --check src/routes/upload.js && node --check src/routes/backfill.js && node --check src/routes/pages.js && node --check backup.js && node --check gc-uploads.js"
   },
   "engines": {
     "node": ">=20"
@@ -32,6 +34,9 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "eslint": "^10.8.0",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.6",
     "supertest": "^7.2.2"
   }
 }

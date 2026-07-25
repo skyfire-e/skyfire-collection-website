@@ -59,6 +59,13 @@ body {
   min-height: 100vh;
 }
 
+/* Shared utility classes */
+.hidden { display: none !important; }
+.btn-row { display: flex; gap: 12px; margin-top: 20px; }
+.btn-row-end { display: flex; gap: 12px; margin-top: 16px; justify-content: flex-end; }
+.margin-top-sm { margin-top: 8px; }
+.danger-text { color: var(--danger); margin-top: 12px; font-size: 0.85rem; }
+
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 

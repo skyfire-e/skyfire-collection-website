@@ -254,7 +254,7 @@ export async function initGalleryPage() {
   initImageEditor();
 
   await checkAuth();
-  if (isAdmin()) document.getElementById('adminActions').style.display = 'flex';
+  if (isAdmin()) document.getElementById('adminActions').classList.remove('hidden');
   loadItems();
 }
 

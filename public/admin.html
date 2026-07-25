@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="/css/admin.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
-<body style="display:none">
+<body class="hidden">
   <div class="admin-corner">
     <button id="themeBtn" title="Toggle theme">☀️</button>
   </div>
   <div class="admin-page">
-    <a href="/" class="back-link" style="color:var(--text-muted)">← Back to Home</a>
+    <a href="/" class="back-link text-muted-link">← Back to Home</a>
     <h1>Admin Panel</h1>
 
     <div class="admin-tabs">
@@ -25,8 +25,8 @@
 
     <!-- Add Item Tab -->
     <div class="tab-content active" id="tab-add">
-      <h2 style="font-weight:300;margin-bottom:16px;font-size:1.3rem">Add New Item</h2>
-      <form id="addForm" style="max-width:500px">
+      <h2 class="tab-heading">Add New Item</h2>
+      <form id="addForm" class="form-narrow">
         <div class="form-group">
           <label>Section</label>
           <select id="addSection" required>
@@ -68,7 +68,7 @@
           <div class="file-input-wrap">
             <input type="file" id="addImage" accept="image/*" multiple>
           </div>
-          <p style="color:var(--text-muted);font-size:0.78rem;margin-top:4px">Select one or more photos. First = cover.</p>
+          <p class="hint-text">Select one or more photos. First = cover.</p>
         </div>
         <button type="submit" class="btn btn-success">Add Item</button>
       </form>
@@ -76,8 +76,8 @@
 
     <!-- CommanderHQ Tab -->
     <div class="tab-content" id="tab-spreadsheet">
-      <h2 style="font-weight:300;margin-bottom:16px;font-size:1.3rem">CommanderHQ</h2>
-      <div style="overflow-x:auto">
+      <h2 class="tab-heading">CommanderHQ</h2>
+      <div class="scroll-x">
         <table class="spreadsheet-table">
           <thead>
             <tr id="sprHeader">
@@ -99,24 +99,24 @@
 
     <!-- Categories Tab -->
     <div class="tab-content" id="tab-categories">
-      <h2 style="font-weight:300;margin-bottom:16px;font-size:1.3rem">Manage Categories</h2>
-      <div style="max-width:500px">
-        <div style="margin-bottom:24px">
-          <h3 style="font-weight:300;font-size:1rem;margin-bottom:8px">Add New Section</h3>
-          <div class="form-group" style="margin-bottom:8px">
+      <h2 class="tab-heading">Manage Categories</h2>
+      <div class="form-narrow">
+        <div class="section-block">
+          <h3 class="section-heading">Add New Section</h3>
+          <div class="form-group compact">
             <label>Section Name</label>
             <input type="text" id="newSectionLabel" placeholder="e.g. Trading Cards">
           </div>
-          <div class="form-group" style="margin-bottom:8px">
+          <div class="form-group compact">
             <label>ID (optional — auto-generated if empty)</label>
             <input type="text" id="newSectionId" placeholder="e.g. trading-cards">
           </div>
           <button class="btn btn-success" id="addSectionBtn">Add Section</button>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--border);margin:20px 0">
+        <hr class="divider">
 
-        <h3 style="font-weight:300;font-size:1rem;margin-bottom:8px">Add Subcategory</h3>
+        <h3 class="section-heading">Add Subcategory</h3>
         <div class="form-group">
           <label>Section</label>
           <select id="catSection">
@@ -139,14 +139,14 @@
         </div>
         <div class="form-group">
           <label>
-            <input type="checkbox" id="catIsGroup" style="width:auto;margin-right:8px">
+            <input type="checkbox" id="catIsGroup" class="checkbox-auto">
             Create as group (can contain subcategories)
           </label>
         </div>
         <button class="btn btn-success" id="addSubcatBtn">Add Subcategory</button>
 
-        <div style="margin-top:24px">
-          <h3 style="font-weight:300;font-size:1rem;margin-bottom:12px">Current Categories</h3>
+        <div class="section-spaced">
+          <h3 class="section-heading-wide">Current Categories</h3>
           <div id="catList"></div>
         </div>
       </div>
@@ -154,8 +154,8 @@
 
     <!-- Settings Tab -->
     <div class="tab-content" id="tab-settings">
-      <h2 style="font-weight:300;margin-bottom:16px;font-size:1.3rem">Settings</h2>
-      <div style="max-width:500px">
+      <h2 class="tab-heading">Settings</h2>
+      <div class="form-narrow">
         <div class="form-group">
           <label>Site Name</label>
           <input type="text" id="setSiteName">
@@ -172,48 +172,48 @@
           <div class="file-input-wrap">
             <input type="file" id="setDefaultImage" accept="image/*">
           </div>
-          <p style="color:var(--text-muted);font-size:0.78rem;margin-top:4px">
-            Current: <span id="currentDefaultImg" style="color:var(--accent)"></span>
+          <p class="hint-text">
+            Current: <span id="currentDefaultImg" class="accent-text"></span>
           </p>
         </div>
         <div class="form-group">
           <label>
-            <input type="checkbox" id="setShowSpreadsheet" style="width:auto;margin-right:8px">
+            <input type="checkbox" id="setShowSpreadsheet" class="checkbox-auto">
             Show Spreadsheet button on homepage
           </label>
         </div>
-        <div style="margin-top:16px">
-          <h3 style="font-weight:300;font-size:1rem;margin-bottom:8px">Public Spreadsheet</h3>
-          <div class="form-group" style="margin-bottom:8px">
+        <div class="section-spaced-sm">
+          <h3 class="section-heading">Public Spreadsheet</h3>
+          <div class="form-group compact">
             <label>
-              <input type="checkbox" id="setShowPublicSpreadsheet" style="width:auto;margin-right:8px">
+              <input type="checkbox" id="setShowPublicSpreadsheet" class="checkbox-auto">
               👁️ Show prices on public spreadsheet
             </label>
           </div>
-          <div style="margin-top:8px;margin-bottom:8px">
-            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:4px">Miniatures columns on public spreadsheet:</p>
-            <label style="display:block;margin-bottom:4px;font-size:0.85rem">
-              <input type="checkbox" id="setShowRecaster" style="width:auto;margin-right:6px">
+          <div class="section-spaced-xs-mb">
+            <p class="hint-text-wide">Miniatures columns on public spreadsheet:</p>
+            <label class="label-block">
+              <input type="checkbox" id="setShowRecaster" class="checkbox-auto-sm">
               Show Recaster
             </label>
-            <label style="display:block;margin-bottom:4px;font-size:0.85rem">
-              <input type="checkbox" id="setShowCombatPoints" style="width:auto;margin-right:6px">
+            <label class="label-block">
+              <input type="checkbox" id="setShowCombatPoints" class="checkbox-auto-sm">
               Show Command Points
             </label>
-            <label style="display:block;margin-bottom:4px;font-size:0.85rem">
-              <input type="checkbox" id="setShowStatus" style="width:auto;margin-right:6px">
+            <label class="label-block">
+              <input type="checkbox" id="setShowStatus" class="checkbox-auto-sm">
               Show Status
             </label>
           </div>
-          <div style="margin-top:8px">
-            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:6px">Currency symbols per section:</p>
+          <div class="section-spaced-xs">
+            <p class="hint-text-wide-mb">Currency symbols per section:</p>
             <div id="currencySettings"></div>
           </div>
         </div>
         <button class="btn" id="saveSettingsBtn">Save Settings</button>
-        <button class="btn" id="backfillBtn" style="margin-left:8px;background:var(--accent)">Backfill Default Image</button>
-        <button class="btn" id="backfillImagesBtn" style="margin-left:8px;background:var(--accent)">Backfill Images</button>
-        <button class="btn" id="backfillPricesBtn" style="margin-left:8px;background:var(--accent)">Backfill Prices</button>
+        <button class="btn btn-accent" id="backfillBtn">Backfill Default Image</button>
+        <button class="btn btn-accent" id="backfillImagesBtn">Backfill Images</button>
+        <button class="btn btn-accent" id="backfillPricesBtn">Backfill Prices</button>
       </div>
     </div>
   </div>
@@ -232,12 +232,12 @@
       <div class="form-group">
         <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit, arrows to reorder)</span></label>
         <div class="edit-image-grid" id="editImageGrid"></div>
-        <div style="margin-top:8px">
+        <div class="margin-top-sm">
           <button type="button" class="btn btn-sm" id="addImagesBtn">+ Add Images</button>
-          <input type="file" id="editImage" accept="image/*" multiple style="display:none">
+          <input type="file" id="editImage" accept="image/*" multiple class="hidden">
         </div>
       </div>
-      <div style="display:flex;gap:12px;margin-top:20px">
+      <div class="btn-row">
         <button class="btn" id="saveEditBtn">Save</button>
         <button class="btn btn-danger" id="cancelEditBtn">Cancel</button>
       </div>
@@ -249,7 +249,7 @@
     <div class="modal modal-crop">
       <h2>Crop Image</h2>
       <div class="crop-container"><img id="cropImage" src="" alt=""></div>
-      <div style="display:flex;gap:12px;margin-top:16px;justify-content:flex-end">
+      <div class="btn-row-end">
         <button class="btn btn-success" id="cropApplyBtn">Apply Crop</button>
         <button class="btn btn-danger" id="cropCancelBtn">Cancel</button>
       </div>
@@ -257,20 +257,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js" integrity="sha384-jzwsV9ieM/KUDMeo+d8dc+jm0GEl7ywPNwg10alB5BodVuC/Kx9RpEnyrl2Om9zH" crossorigin="anonymous"></script>
-  <script type="module">
-    import { checkAuth, isAdmin } from './js/api.js';
-    import { initAdminItems } from './js/admin/items.js';
-    import { initAdminSettings } from './js/admin/settings.js';
-
-    checkAuth().then(() => {
-      if (!isAdmin()) {
-        location.href = '/';
-        return;
-      }
-      document.body.style.display = '';
-      initAdminSettings();
-      initAdminItems();
-    });
-  </script>
+  <script type="module" src="/js/nav.js"></script>
+  <script type="module" src="/js/admin/main.js"></script>
 </body>
 </html>

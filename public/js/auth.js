@@ -41,18 +41,21 @@ async function initAuth() {
 
   function updateUI() {
     if (isAdmin()) {
-      adminActions.style.display = 'flex';
-      loginBtn.style.display = 'none';
-      logoutBtn.style.display = 'inline-block';
+      adminActions.classList.remove('hidden');
+      loginBtn.classList.add('hidden');
+      logoutBtn.classList.remove('hidden');
       document.getElementById('authTitle').textContent = 'Admin Panel';
       API.get('/api/settings').then(s => {
         const spreadsheetBtn = adminActions.querySelector('button:last-child');
-        if (spreadsheetBtn) spreadsheetBtn.style.display = s.showSpreadsheet !== false ? '' : 'none';
+        if (spreadsheetBtn) {
+          if (s.showSpreadsheet !== false) spreadsheetBtn.classList.remove('hidden');
+          else spreadsheetBtn.classList.add('hidden');
+        }
       });
     } else {
-      adminActions.style.display = 'none';
-      loginBtn.style.display = 'inline-block';
-      logoutBtn.style.display = 'none';
+      adminActions.classList.add('hidden');
+      loginBtn.classList.remove('hidden');
+      logoutBtn.classList.add('hidden');
       document.getElementById('authTitle').textContent = 'Admin Login';
     }
   }

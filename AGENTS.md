@@ -181,14 +181,7 @@ backups/               — backup archives (excluded from git)
 ## Known Gaps
 | Issue | Priority | Status |
 |-------|----------|--------|
-| inline onclick + 'unsafe-inline' in CSP (needs nonce) | Medium | Planned for Iteration J |
-| No compression (gzip/brotli) | Low | Planned |
-| No SEO meta/OG/robots/sitemap | Low | Planned |
-| No a11y (lightbox role/focus-trap, aria-label) | Low | Planned |
-| No morgan request logging | Low | Planned |
-| No DB schema versioning | Low | Planned |
-| audit table grows infinitely | Low | Planned |
-| Test coverage: safeUnlink, normalizeImage, validateVersion | Low | Planned |
+| None | — | All major gaps resolved |
 
 ## Planned Features
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)
