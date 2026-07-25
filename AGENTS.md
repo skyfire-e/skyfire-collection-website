@@ -241,6 +241,50 @@ backups/               — backup archives (excluded from git)
   - Нужен токен от @BotFather
   - Пакет `node-telegram-bot-api`
 
+## Remote Fresh Deploy (с нуля на удалённом сервере)
+
+Подробная процедура — в `README.md` → "Fresh Deployment (Remote Server)". Краткая выжимка для агента:
+
+### Последовательность
+1. **Prerequisites**: Node 20+, git, npm. (опционально: build-essential, python3 — для сборки sharp/better-sqlite3)
+2. **Clone**: `git clone https://github.com/skyfire-e/skyfire-collection-website.git && cd skyfire-collection-website && git checkout test`
+   - БД (`data/collection.db`, 610 items) и `uploads/` (616 файлов) уже в git — **копировать вручную ничего не нужно**
+3. **Install**: `npm install` (postinstall сам symlink'нет pre-commit hook)
+4. **`.env`**: `cp .env.example .env`, заполнить:
+   - `SESSION_SECRET` (≥32 chars, сгенерить: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
+   - `ADMIN_PASSWORD_HASH` (Argon2, обязательно в production — plaintext запрещён: `node -e "require('argon2').hash('pass').then(h=>console.log(h))"`)
+   - `NODE_ENV=production`, `TRUST_PROXY=1` (за nginx), `PORT=3000`
+5. **Verify** (опционально):
+   - `node -e "..."` — проверить `user_version: 4`, `items: 610`, `categories: 37`, `sections: 2`
+   - `npm run check`, `npm test` (in-memory, не трогает прод-БД)
+6. **Smoke test**: `node server.js` → проверить `/`, `/health` (`{"status":"ok"}`), `/admin`. `Ctrl+C`
+7. **Service**:
+   - pm2: `pm2 start server.js --name skyfire-collection && pm2 save && pm2 startup`
+   - systemd: юнит в `/etc/systemd/system/skyfire-collection.service` с `EnvironmentFile=.env`, `Restart=on-failure`
+8. **Reverse proxy** (nginx): `proxy_pass http://127.0.0.1:3000` + заголовки + `TRUST_PROXY=1` в `.env`. HTTPS через certbot.
+9. **First backup**: `npm run backup`. Cron: `0 3 * * * cd /path && npm run backup`
+
+### Post-deploy checklist
+- [ ] `/health` → `{"status":"ok"}`
+- [ ] `/` грузится, 2 секции (Dice, Miniatures)
+- [ ] `/gallery?section=dice` — фото отображаются (uploads/ на месте)
+- [ ] `/admin` — логин работает, admin-UI скрыт до авторизации
+- [ ] Логи сервиса без ошибок
+- [ ] `.env` в `.gitignore` (уже), `data/*.db-wal`/`*.db-shm` в `.gitignore` (уже)
+
+### Update existing deployment
+```bash
+git pull origin test   # или: npm run pull
+npm install           # если сменились зависимости
+pm2 restart skyfire-collection   # или: sudo systemctl restart skyfire-collection
+```
+
+### Важно
+- В production **plaintext `ADMIN_PASSWORD` запрещён** — только `ADMIN_PASSWORD_HASH` (проверка в `server.js:14`)
+- `SESSION_SECRET` < 32 chars → `process.exit(1)` (проверка в `server.js:9`)
+- DB и uploads в git — после `git clone` данные уже на месте, миграций не требуется
+- `data/collection.db-wal` и `-shm` в `.gitignore`, **не коммитить** — pre-commit hook сам делает `wal_checkpoint(TRUNCATE)` если WAL непустой
+
 ## How to Restart Server
 ```bash
 # macOS / Linux

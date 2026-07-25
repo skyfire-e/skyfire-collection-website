@@ -1,6 +1,6 @@
 {
   "name": "skyf1re-collection",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "skyf1re Collection - Dice & Miniatures gallery",
   "main": "server.js",
   "scripts": {
