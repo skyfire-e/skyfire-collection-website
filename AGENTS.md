@@ -11,8 +11,10 @@
 
 ## Git
 - GitHub: https://github.com/skyfire-e/skyfire-collection-website.git
-- Branches: `main` (stable), `SQLmigrationTrue` (current dev)
+- Branches: `main` (stable, merge commit `956a7a1`), `test` (current dev, `c8499f9`), `SQLmigrationTrue` (old, synced)
 - ⚠️ NEVER merge to `main` without explicit user confirmation
+- Deploy: `npm run deploy` (checkpoint → git add → commit → push to `test`)
+- Pull: `npm run pull` (sync from GitHub, safe for shallow clones)
 
 ## Auth
 - Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` или `ADMIN_PASSWORD_HASH` (argon2) — в `.env`
@@ -20,9 +22,11 @@
 - `.env` в `.gitignore`, не попадает в репозиторий
 
 ## Current Data State
-- `data/collection.db` — SQLite: 611 items (Dice: 145, Miniatures: 466) + categories + settings + sessions + audit
+- `data/collection.db` — SQLite: 610 items (Dice: 145, Miniatures: 465) + categories + settings + sessions + audit
 - `uploads/` — 616 images + 615 thumbnails (tracked in git)
 - Old JSON files (items.json, categories.json, settings.json) — deleted after SQLite migration
+- **All 465 miniatures have Command Points** (77 exact from Wahapedia AoS4/40K10, 388 estimated by analogy)
+- DB schema version: `user_version = 4`
 
 ## Site Structure
 | Route | Description |
@@ -177,6 +181,55 @@ backups/               — backup archives (excluded from git)
 - `backups/` added to `.gitignore`
 - `engines: { node: ">=20" }`, `license: MIT`, `allowScripts` removed
 - Version → `1.6.0`
+
+### Iteration J — Normalized Schema + Sorting + Search + UI
+- DB migration v3: normalized `sections(id,label,sort_order)` + `categories(id,section_id,parent_id,label,type,sort_order)` with FK CASCADE
+- DB migration v4: `sort_order` column on items for drag-and-drop reordering
+- `reorderItems` with section/category scope (`WHERE section=? AND category=?`)
+- `searchItems` with LIKE escaping (`%`, `_`, `\`)
+- `getItemCount` for pagination metadata
+- Pagination API: with limit → `{items,total,limit,offset}`, without → array (backward compatible)
+- Dark/light theme toggle with `localStorage` + `defaultTheme` setting
+- Compass SVG icon + nav drawer (site tree) + search modal with teleport + highlight animation
+- Loading dots (ripple animation) in gallery and spreadsheet
+- CSV export on spreadsheet page
+- Activity log: admin tab, `GET /api/audit` (rotation max 1000)
+- Drag-and-drop reordering: `POST /api/items/reorder`, `sort_order` in DB
+- Orphan GC: `gc-uploads.js` (`npm run gc:dry`, `gc:quarantine`, `gc`)
+- ESLint (flat config v9+) + Prettier, `npm run lint`, CI lint step
+- 59 tests (unit + HTTP via supertest)
+- `deploy.js`: one-step deploy (`execFileSync`, no shell injection)
+- `pull.js`: GitHub sync (shallow-clamp safe), auto `npm install` on dep change
+- `npm run checkpoint`: WAL checkpoint + session purge
+- Favicon SVG, compass SVG icon
+- SEO: meta description, OG tags, `robots.txt`, `sitemap.xml`
+- Accessibility: role=dialog, focus-trap, aria-labels in lightbox/modal
+- Compression (gzip) + logging (morgan)
+- Cache-Control `max-age=1y, immutable` on `/uploads`
+- Rate limiter skips GET/HEAD/OPTIONS
+- `requireSameOrigin` on login + logout
+- `settingsSchema.strict()` (no key leak)
+- SESSION_SECRET length check on startup (>= 32)
+- Plaintext password rejected in production (`NODE_ENV=production`)
+- Graceful shutdown: `wal_checkpoint(TRUNCATE)` + `db.close()`
+- Health endpoint: `SELECT 1` DB check
+- All inline styles → CSS classes (56 styles → `base.css`/`admin.css`)
+- CSP: `scriptSrc 'self'` (no unsafe-inline), `styleSrc 'self'` (no unsafe-inline), `imgSrc 'self' data: blob:`
+- Unicode slug for category IDs (Cyrillic → Latin)
+- Custom extra fields via `sectionsWithExtraFields`
+- Category group creation via admin UI (`isGroup` flag)
+- DB migration runner (`PRAGMA user_version`)
+- Audit table rotation (max 1000)
+- Removed: `getCurrentUser`, `DATA_DIR`, `gitignore/`, `DataCorruptionError`, `readJSON`, `writeJSONAtomic`, `withDataLock`, `migrateFromJSON`, `saveSettings`, `session-file-store`, `jimp`, `playwright`, `puppeteer`, `allowScripts`
+- Version → `1.7.2`
+
+### Iteration K — Command Points (all miniatures)
+- 77 exact CP from Wahapedia AoS4/40K10 (Citadel Skaven, Gloomspite Gitz, Orruk Warclans, Astra Militarum, Adepta Sororitas, Officio Assassinorum, Chaos Daemons, Kharadron Overlords, Ogor Mawtribes, Empire)
+- 388 estimated CP by analogy (Legends Skaven, Old Citadel Skaven, Forgeworld Skaven, 3D prints Skaven, Blood Bowl Skaven, Punga Miniatures, Other, Terrain=0)
+- **All 465 miniatures now have Command Points** — 0 remaining without CP
+- Blood Bowl Skaven: gold cost → points analogy (e.g. Rat Ogre 150K → 150 pts)
+- Non-GW models (3D prints, Punga, First Legion): estimated by closest Citadel analogues
+- Estimated CP not marked as estimated in DB (per user request)
 
 ## Known Gaps
 | Issue | Priority | Status |
