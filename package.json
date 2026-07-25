@@ -7,6 +7,7 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "backup": "node backup.js",
+    "checkpoint": "node -e \"const db=require('better-sqlite3')('data/collection.db'); db.prepare('DELETE FROM sessions').run(); db.pragma('wal_checkpoint(TRUNCATE)'); db.close(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
     "gc": "node gc-uploads.js",
     "gc:dry": "node gc-uploads.js --dry-run",
     "gc:quarantine": "node gc-uploads.js --quarantine",
