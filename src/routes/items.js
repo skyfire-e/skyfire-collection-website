@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   const { section, category, limit, offset, q } = req.query;
 
   if (q) {
-    const items = db.searchItems(q, limit ? Math.min(parseInt(limit, 10), 100) : 20);
+    const items = db.searchItems(q, limit ? Math.min(parseInt(limit, 10), 200) : 50);
     return res.json(items);
   }
 
@@ -71,10 +71,10 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     if (!currentItem) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
     validateVersion(currentItem, req.body.version);
-    candidate.version = (currentItem.version || 0) + 1;
 
     const candidate = {
       ...currentItem,
+      version: (currentItem.version || 0) + 1,
       ...(req.body.title !== undefined && { title: String(req.body.title).trim() }),
       ...(req.body.author !== undefined && { author: req.body.author }),
       ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),

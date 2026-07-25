@@ -11,3 +11,6 @@ data/*.db-shm
 
 # Backup artifacts
 backups/
+
+# Fix plan document
+ToFix1.md

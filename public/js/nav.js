@@ -1,7 +1,11 @@
 (function() {
-  const stored = localStorage.getItem('theme');
-  if (stored) {
-    document.documentElement.setAttribute('data-theme', stored);
+  const theme = localStorage.getItem('theme');
+  if (theme) document.documentElement.setAttribute('data-theme', theme);
+  const name = localStorage.getItem('siteName');
+  if (name) {
+    document.title = name;
+    const h1 = document.querySelector('h1');
+    if (h1 && h1.closest('.home-page')) h1.textContent = name;
   }
 })();
 
@@ -19,7 +23,7 @@ function injectNav() {
   searchBtn.className = 'nav-corner-btn search-corner-btn';
   searchBtn.id = 'searchBtn';
   searchBtn.title = 'Search';
-  searchBtn.textContent = '🔍';
+  searchBtn.innerHTML = '<img src="/images/search.svg" alt="Search" width="28" height="28">';
   document.body.appendChild(searchBtn);
 
   const drawer = document.createElement('div');
@@ -61,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeBtn = document.getElementById('themeBtn');
     if (themeBtn) themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
     if (s.siteName) {
+      localStorage.setItem('siteName', s.siteName);
       document.title = s.siteName;
       const h1 = document.querySelector('h1');
       if (h1 && h1.closest('.home-page')) h1.textContent = s.siteName;

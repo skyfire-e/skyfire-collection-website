@@ -29,11 +29,6 @@ function renderNavDrawer() {
     const tree = buildNavTree(cats);
     const currentPath = location.pathname + location.search;
     drawer.innerHTML = '';
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'nav-drawer-close';
-    closeBtn.id = 'navDrawerClose';
-    closeBtn.textContent = '×';
-    drawer.appendChild(closeBtn);
     for (const item of tree) {
       if (item.divider) {
         const div = document.createElement('div');
@@ -49,8 +44,6 @@ function renderNavDrawer() {
       a.textContent = (item.icon ? item.icon + ' ' : '') + item.label;
       drawer.appendChild(a);
     }
-
-    document.getElementById('navDrawerClose').addEventListener('click', closeNavDrawer);
   }).catch(() => {});
 }
 
@@ -79,10 +72,14 @@ function doSearch(query) {
   if (!query.trim()) { document.getElementById('searchResults').innerHTML = ''; return; }
   searchTimer = setTimeout(async () => {
     try {
-      const items = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=20');
+      const items = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=50');
       const container = document.getElementById('searchResults');
       if (items.length === 0) { container.innerHTML = '<p class="empty-state" style="padding:20px">No results</p>'; return; }
       container.innerHTML = '';
+      const countInfo = document.createElement('div');
+      countInfo.style.cssText = 'font-size:0.78rem;color:var(--text-muted);padding:6px 8px 2px;border-bottom:1px solid var(--border);';
+      countInfo.textContent = items.length + ' result' + (items.length !== 1 ? 's' : '');
+      container.appendChild(countInfo);
       items.forEach(item => {
         const div = document.createElement('div');
         div.className = 'search-result';

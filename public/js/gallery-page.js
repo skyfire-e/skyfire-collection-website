@@ -13,7 +13,7 @@ export async function initGalleryPage() {
   const category = params.get('category');
   const grid = document.getElementById('galleryGrid');
   const title = document.getElementById('pageTitle');
-  const backLink = document.querySelector('.gallery-back-link');
+  const backLink = document.getElementById('galleryBackLink');
 
   // Set dynamic back link
   if (backLink && section) {
@@ -24,10 +24,10 @@ export async function initGalleryPage() {
       const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
       if (parentGroup) {
         backLink.href = '/' + section + '/' + parentGroup.id;
-        backLink.textContent = '← Back to ' + parentGroup.label;
+        backLink.innerHTML = '<span class="back-arrow">←</span> <span class="back-text">Back to ' + parentGroup.label + '</span>';
       } else {
         backLink.href = '/' + section;
-        backLink.textContent = '← Back to ' + sec.label;
+        backLink.innerHTML = '<span class="back-arrow">←</span> <span class="back-text">Back to ' + sec.label + '</span>';
       }
     }
   }
@@ -65,10 +65,26 @@ export async function initGalleryPage() {
 
   let lbFocusTrap = null;
 
+  function loadLightboxImage(url, then) {
+    lbImg.src = '';
+    const preloader = new Image();
+    preloader.onload = preloader.onerror = () => {
+      lbImg.src = url;
+      if (then) then();
+    };
+    if (url) preloader.src = url;
+    else if (then) then();
+  }
+
   function openLightbox(item) {
     lbCurrentImages = item.images && item.images.length > 0 ? item.images : [item.image];
     lbCurrentImgIdx = 0;
+    for (let i = 1; i < lbCurrentImages.length; i++) {
+      const p = new Image();
+      p.src = lbCurrentImages[i];
+    }
     updateLightbox(item);
+    loadLightboxImage(lbCurrentImages[0]);
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
     const focusable = lightbox.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
@@ -89,10 +105,19 @@ export async function initGalleryPage() {
   }
 
   function updateLightbox(item) {
-    lbImg.src = lbCurrentImages[lbCurrentImgIdx];
     lbImg.alt = item.title || '';
     lbTitle.textContent = item.title;
     lbAuthor.textContent = item.author;
+
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    if (lbCurrentImages.length <= 1) {
+      lbPrev.classList.add('hidden-nav');
+      lbNext.classList.add('hidden-nav');
+    } else {
+      lbPrev.classList.remove('hidden-nav');
+      lbNext.classList.remove('hidden-nav');
+    }
 
     lbDots.innerHTML = '';
     if (lbCurrentImages.length > 1) {
@@ -104,7 +129,7 @@ export async function initGalleryPage() {
         dot.setAttribute('aria-label', 'Image ' + (i + 1) + ' of ' + lbCurrentImages.length);
         dot.addEventListener('click', () => {
           lbCurrentImgIdx = i;
-          lbImg.src = lbCurrentImages[i];
+          loadLightboxImage(lbCurrentImages[i]);
           lbDots.querySelectorAll('.lightbox-dot').forEach(d => d.classList.remove('active'));
           dot.classList.add('active');
         });
@@ -261,15 +286,13 @@ export async function initGalleryPage() {
   document.getElementById('lbPrev').addEventListener('click', () => {
     if (lbCurrentImages.length === 0) return;
     lbCurrentImgIdx = lbCurrentImgIdx > 0 ? lbCurrentImgIdx - 1 : lbCurrentImages.length - 1;
-    lbImg.src = lbCurrentImages[lbCurrentImgIdx];
-    updateDots();
+    loadLightboxImage(lbCurrentImages[lbCurrentImgIdx], updateDots);
   });
 
   document.getElementById('lbNext').addEventListener('click', () => {
     if (lbCurrentImages.length === 0) return;
     lbCurrentImgIdx = lbCurrentImgIdx < lbCurrentImages.length - 1 ? lbCurrentImgIdx + 1 : 0;
-    lbImg.src = lbCurrentImages[lbCurrentImgIdx];
-    updateDots();
+    loadLightboxImage(lbCurrentImages[lbCurrentImgIdx], updateDots);
   });
 
   // Touch swipe for lightbox

@@ -10,7 +10,10 @@
 </head>
 <body>
   <div class="gallery-page">
-    <a href="/" class="back-link gallery-back-link">← Back to Home</a>
+    <div class="back-nav">
+      <a href="/" class="back-link"><span class="back-arrow">←</span> <span class="back-text">Back to Home</span></a>
+      <a class="back-link" id="galleryBackLink"><span class="back-arrow">←</span> <span class="back-text">Back</span></a>
+    </div>
     <h1 id="pageTitle">Gallery</h1>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
@@ -87,9 +90,11 @@
   <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
     <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
     <div class="lightbox-content">
-      <div class="lightbox-image-wrap">
-        <img id="lbImg" src="" alt="">
+      <div class="lightbox-main">
         <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous image">&#10094;</button>
+        <div class="lightbox-image-wrap">
+          <img id="lbImg" src="" alt="">
+        </div>
         <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next image">&#10095;</button>
       </div>
       <div class="lightbox-info">

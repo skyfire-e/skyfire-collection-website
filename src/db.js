@@ -190,7 +190,25 @@ function reorderItems(section, category, orderedIds) {
 function searchItems(query, limit) {
   const escaped = query.replace(/[%_\\]/g, c => '\\' + c);
   const pattern = '%' + escaped + '%';
-  const rows = db.prepare('SELECT * FROM items WHERE title LIKE ? ESCAPE ? OR author LIKE ? ESCAPE ? LIMIT ?').all(pattern, '\\', pattern, '\\', limit || 20);
+  const params = [];
+  for (let i = 0; i < 9; i++) { params.push(pattern, '\\'); }
+  params.push(limit || 50);
+  const rows = db.prepare(`
+    SELECT DISTINCT items.* FROM items
+    LEFT JOIN categories c ON items.section = c.section_id AND items.category = c.id
+    LEFT JOIN categories pc ON c.section_id = pc.section_id AND c.parent_id = pc.id
+    WHERE items.title LIKE ? ESCAPE ?
+       OR items.author LIKE ? ESCAPE ?
+       OR items.recaster LIKE ? ESCAPE ?
+       OR items.status LIKE ? ESCAPE ?
+       OR items.combatPoints LIKE ? ESCAPE ?
+       OR items.section LIKE ? ESCAPE ?
+       OR items.category LIKE ? ESCAPE ?
+       OR c.label LIKE ? ESCAPE ?
+       OR pc.label LIKE ? ESCAPE ?
+    ORDER BY items.sort_order ASC, items.rowid ASC
+    LIMIT ?
+  `).all(...params);
   return rows.map(rowToItem);
 }
 

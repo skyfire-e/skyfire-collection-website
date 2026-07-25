@@ -92,12 +92,12 @@ body {
   border-color: var(--accent);
   color: var(--accent);
 }
-/* Search button (bottom-right, left of admin) */
+/* Search button (top-left, right of nav) */
 .search-corner-btn {
   position: fixed;
-  bottom: 24px;
-  right: 80px;
-  z-index: 100;
+  top: 16px;
+  left: 72px;
+  z-index: 150;
 }
 /* Reorder button (bottom-right, left of search) */
 .reorder-corner-btn {
@@ -146,16 +146,13 @@ body {
 .nav-drawer .nav-sub-sub { padding-left: 60px; font-size: 0.82rem; color: var(--text-muted); }
 .nav-drawer .nav-divider { border-top: 1px solid var(--border); margin: 8px 0; }
 .nav-drawer .nav-current { background: rgba(109,181,140,0.1); border-left: 3px solid var(--accent); }
-.nav-drawer-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
+
+/* Nav drawer scrollbar */
+.nav-drawer::-webkit-scrollbar { width: 6px; }
+.nav-drawer::-webkit-scrollbar-track { background: transparent; }
+.nav-drawer::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 3px; }
+.nav-drawer::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+.nav-drawer { scrollbar-width: thin; scrollbar-color: var(--accent-dark) transparent; }
 
 /* Search modal */
 .search-modal {
@@ -194,9 +191,14 @@ body {
 .search-box input:focus { outline: none; border-color: var(--accent); }
 .search-results {
   margin-top: 12px;
-  max-height: 400px;
+  max-height: 50vh;
   overflow-y: auto;
 }
+.search-results::-webkit-scrollbar { width: 6px; }
+.search-results::-webkit-scrollbar-track { background: transparent; }
+.search-results::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 3px; }
+.search-results::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+.search-results { scrollbar-width: thin; scrollbar-color: var(--accent-dark) transparent; }
 .search-result {
   display: flex;
   align-items: center;
@@ -251,6 +253,10 @@ body {
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+.back-link { text-decoration: none; }
+.back-link:hover { text-decoration: none; }
+.back-link:hover .back-text { text-decoration: underline; }
+.back-arrow { display: inline-block; text-decoration: none; }
 
 /* === Homepage === */
 .home-page {
@@ -268,6 +274,7 @@ a:hover { text-decoration: underline; }
   font-weight: 300;
   letter-spacing: 2px;
   margin-bottom: 8px;
+  transform: translateY(-140px);
 }
 
 .home-buttons {
@@ -392,6 +399,21 @@ a:hover { text-decoration: underline; }
   margin-bottom: 40px;
   color: var(--text-muted);
 }
+.back-nav {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.back-nav .back-link {
+  display: block;
+  margin: 0;
+  color: var(--text-muted);
+}
+.back-nav .back-link + .back-link {
+  margin-top: 6px;
+}
+.back-nav .back-link:hover {
+  color: var(--accent);
+}
 
 .category-grid {
   display: grid;
@@ -510,6 +532,7 @@ a:hover { text-decoration: underline; }
   }
   .home-btn .icon { font-size: 2.8rem; }
   .home-buttons { gap: 20px; }
+  .home-page h1 { transform: translateY(-100px); }
 
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -589,24 +612,29 @@ a:hover { text-decoration: underline; }
   max-height: 90vh;
 }
 
+.lightbox-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
 .lightbox-image-wrap {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .lightbox-image-wrap img {
-  max-width: 90vw;
+  max-width: 75vw;
   max-height: 75vh;
   object-fit: contain;
   border-radius: 8px;
 }
 
 .lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: static;
+  transform: none;
   background: var(--overlay-light);
   color: var(--text-inverse);
   border: none;
@@ -619,11 +647,10 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  flex-shrink: 0;
 }
 .lightbox-nav:hover { background: var(--overlay-heavy); }
-.lightbox-prev { left: 10px; }
-.lightbox-next { right: 10px; }
+.lightbox-nav.hidden-nav { display: none; }
 
 .lightbox-close {
   position: fixed;
