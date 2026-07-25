@@ -28,11 +28,8 @@ export async function initAdminItems() {
       if (btn.dataset.tab === 'activity') loadActivity();
     });
   });
-  } catch (err) {
-    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">Failed to load spreadsheet</td></tr>';
-  }
-}
-  });
+
+  // Hash-based tab navigation
 
   // Hash-based tab navigation
   const hash = location.hash.slice(1);
@@ -206,6 +203,9 @@ async function loadSpreadsheet() {
       });
     });
   });
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">Failed to load spreadsheet</td></tr>';
+  }
 }
 
 function populateAddSectionDropdown(cats) {
