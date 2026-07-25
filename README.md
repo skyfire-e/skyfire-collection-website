@@ -67,6 +67,7 @@ node -e "require('argon2').hash('your-password').then(h => console.log(h))"
 | `npm run dev` | Dev mode with `--watch` |
 | `npm run backup` | Backup data/ + uploads/ (WAL checkpoint before tar) |
 | `npm run checkpoint` | WAL checkpoint + clear sessions (run before git commit) |
+| `npm run deploy` | One-command deploy: checkpoint → git add → commit → push |
 | `npm run gc:dry` | Find orphan files in uploads (dry run, no deletion) |
 | `npm run gc:quarantine` | Move orphan files to uploads/.quarantine/ |
 | `npm run gc` | Delete orphan files not referenced in DB |
