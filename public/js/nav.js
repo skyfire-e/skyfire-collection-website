@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (s.siteName) {
       document.title = s.siteName;
       const h1 = document.querySelector('h1');
-      if (h1) h1.textContent = s.siteName;
+      if (h1 && h1.classList.contains('home-page') === false && h1.closest('.home-page')) h1.textContent = s.siteName;
+      else if (h1) h1.textContent = s.siteName;
     }
   }).catch(() => {});
 
@@ -32,5 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('theme', next);
       themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
     });
+  }
+
+  const adminBtn = document.getElementById('adminBtn');
+  if (adminBtn && !document.getElementById('authModal')) {
+    adminBtn.addEventListener('click', () => { location.href = '/#login'; });
+  }
+
+  if (location.hash === '#login' && document.getElementById('authModal')) {
+    document.getElementById('authModal').classList.add('open');
   }
 });

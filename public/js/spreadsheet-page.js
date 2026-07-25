@@ -1,13 +1,40 @@
 import { API } from './api.js';
 
+function exportCSV() {
+  API.get('/api/spreadsheet/public').then(sections => {
+    let csv = 'Section,Category,Title,Author,Price,Recaster,Command Points,Status\n';
+    for (const sec of sections) {
+      for (const sub of sec.subcategories) {
+        for (const item of sub.items) {
+          const row = [
+            sec.label, sub.groupLabel ? sub.groupLabel + ' - ' + sub.label : sub.label,
+            item.title || '', item.author || '', item.price || '',
+            item.recaster || '', item.combatPoints || '', item.status || ''
+          ].map(f => '"' + String(f).replace(/"/g, '""') + '"').join(',');
+          csv += row + '\n';
+        }
+      }
+    }
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'skyfire-collection.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+}
+
 export async function initSpreadsheetPage() {
   const container = document.getElementById('spreadsheetContainer');
+  container.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
 
-  const sections = await API.get('/api/spreadsheet/public');
-  if (!sections || sections.length === 0) {
-    container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px">No items yet</p>';
-    return;
-  }
+  try {
+    const sections = await API.get('/api/spreadsheet/public');
+    if (!sections || sections.length === 0) {
+      container.innerHTML = '<p class="empty-state">No items yet</p>';
+      return;
+    }
+    container.innerHTML = '';
 
   sections.forEach(section => {
     const sectionDiv = document.createElement('div');
@@ -133,6 +160,11 @@ export async function initSpreadsheetPage() {
     sectionDiv.appendChild(document.createElement('hr'));
     container.appendChild(sectionDiv);
   });
+  } catch (err) {
+    container.innerHTML = '<p class="empty-state">Failed to load spreadsheet. Please try again.</p>';
+  }
 }
 
 initSpreadsheetPage();
+
+document.getElementById('csvBtn').addEventListener('click', exportCSV);

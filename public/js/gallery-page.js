@@ -205,12 +205,21 @@ export async function initGalleryPage() {
     });
   }
 
+  function showLoading() {
+    grid.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+  }
+
   async function loadItems() {
+    showLoading();
     let url = '/api/items';
     if (section) url += '?section=' + section;
     if (category) url += (section ? '&' : '?') + 'category=' + category;
-    const items = await API.get(url);
-    renderItems(items);
+    try {
+      const items = await API.get(url);
+      renderItems(items);
+    } catch (err) {
+      grid.innerHTML = '<p class="empty-state">Failed to load items. Please try again.</p>';
+    }
   }
 
   // Lightbox controls
