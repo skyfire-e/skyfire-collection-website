@@ -13,6 +13,24 @@ export async function initGalleryPage() {
   const category = params.get('category');
   const grid = document.getElementById('galleryGrid');
   const title = document.getElementById('pageTitle');
+  const backLink = document.querySelector('.gallery-back-link');
+
+  // Set dynamic back link
+  if (backLink && section) {
+    const cats = await API.get('/api/categories');
+    const sec = cats[section];
+    if (sec) {
+      const cat = sec.subcategories.find(c => c.id === category);
+      const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
+      if (parentGroup) {
+        backLink.href = '/' + section + '/' + parentGroup.id;
+        backLink.textContent = '← Back to ' + parentGroup.label;
+      } else {
+        backLink.href = '/' + section;
+        backLink.textContent = '← Back to ' + sec.label;
+      }
+    }
+  }
 
   // Lightbox state
   const lightbox = document.getElementById('lightbox');
