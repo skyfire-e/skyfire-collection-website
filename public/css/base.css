@@ -65,6 +65,7 @@ body {
 .btn-row-end { display: flex; gap: 12px; margin-top: 16px; justify-content: flex-end; }
 .margin-top-sm { margin-top: 8px; }
 .danger-text { color: var(--danger); margin-top: 12px; font-size: 0.85rem; }
+.csv-export-bar { text-align: center; margin-bottom: 16px; }
 
 /* Loading dots */
 .loading-dots {
