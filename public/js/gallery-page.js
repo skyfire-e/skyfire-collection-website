@@ -286,11 +286,10 @@ export async function initGalleryPage() {
   if (isAdmin()) document.getElementById('adminActions').classList.remove('hidden');
   if (isAdmin()) {
     const reorderBtn = document.createElement('button');
-    reorderBtn.className = 'btn btn-sm';
+    reorderBtn.className = 'nav-corner-btn reorder-corner-btn';
     reorderBtn.id = 'reorderBtn';
-    reorderBtn.textContent = '🔀 Re-arrange';
-    reorderBtn.classList.add('admin-corner');
-    reorderBtn.style.cssText = 'position:fixed;bottom:24px;left:24px;z-index:100';
+    reorderBtn.title = 'Re-arrange';
+    reorderBtn.textContent = '🔀';
     document.body.appendChild(reorderBtn);
     reorderBtn.addEventListener('click', toggleReorder);
   }

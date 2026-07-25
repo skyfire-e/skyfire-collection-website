@@ -28,38 +28,8 @@ export async function initAdminItems() {
       if (btn.dataset.tab === 'activity') loadActivity();
     });
   });
-  } catch (err) {
-    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">Failed to load spreadsheet</td></tr>';
-  }
-}
-    });
-  });
 
-  // Hide mini-fields by default in add form
-  document.querySelectorAll('#tab-add .mini-field').forEach(el => el.classList.add('hidden'));
-
-  // Add item
-  document.getElementById('addForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const fd = new FormData();
-    fd.append('section', document.getElementById('addSection').value);
-    fd.append('category', document.getElementById('addCategory').value);
-    fd.append('title', document.getElementById('addTitle').value);
-    fd.append('author', document.getElementById('addAuthor').value);
-    fd.append('price', document.getElementById('addPrice').value);
-    fd.append('recaster', document.getElementById('addRecaster').value);
-    fd.append('combatPoints', document.getElementById('addCombatPoints').value);
-    fd.append('status', document.getElementById('addStatus').value);
-    const fileInput = document.getElementById('addImage');
-    for (const file of fileInput.files) fd.append('images', file);
-    try {
-      await API.post('/api/items', fd);
-      document.getElementById('addForm').reset();
-      alert('Item added!');
-    } catch (err) {
-      alert('Error adding item: ' + (err.message || 'Unknown error'));
-    }
-  });
+  // Hash-based tab navigation
 
   // Hash-based tab navigation
   const hash = location.hash.slice(1);
@@ -233,6 +203,9 @@ async function loadSpreadsheet() {
       });
     });
   });
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">Failed to load spreadsheet</td></tr>';
+  }
 }
 
 function populateAddSectionDropdown(cats) {
