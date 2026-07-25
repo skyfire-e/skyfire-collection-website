@@ -15,6 +15,7 @@
 - ⚠️ NEVER merge to `main` without explicit user confirmation
 - Deploy: `npm run deploy` (checkpoint → git add → commit → push to `test`)
 - Pull: `npm run pull` (sync from GitHub, safe for shallow clones)
+- ⚠️ `data/collection.db` меняется при каждом добавлении/редактировании/удалении позиций — это нормально. **НЕ возвращать** файл БД к состоянию из git и **НЕ игнорировать** его изменения. DB-файл коммитится и пушится как есть, вместе с остальными изменениями.
 
 ## Auth
 - Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` или `ADMIN_PASSWORD_HASH` (argon2) — в `.env`

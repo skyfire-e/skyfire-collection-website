@@ -332,6 +332,7 @@ pm2 restart skyfire-collection   # или: sudo systemctl restart skyfire-collec
 - Version field for optimistic conflict detection
 - Audit log for all mutations
 - In-memory DB for tests (no production data pollution)
+- ⚠️ `data/collection.db` меняется при каждом изменении коллекции через админку. Файл БД отслеживается в git, коммитится и пушится вместе с остальными изменениями. **Не возвращать** БД к состоянию из репозитория и не игнорировать её изменения — это рабочие данные, которые должны синхронизироваться как есть.
 
 ## License
 
