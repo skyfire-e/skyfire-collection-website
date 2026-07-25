@@ -99,6 +99,13 @@ body {
   right: 80px;
   z-index: 100;
 }
+/* Reorder button (bottom-right, left of search) */
+.reorder-corner-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 136px;
+  z-index: 100;
+}
 
 /* Nav drawer */
 .nav-drawer {
