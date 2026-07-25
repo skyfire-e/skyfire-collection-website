@@ -28,31 +28,10 @@ export async function initAdminItems() {
       if (btn.dataset.tab === 'activity') loadActivity();
     });
   });
-
-  // Section -> Category cascade
-  document.getElementById('addSection').addEventListener('change', function() {
-    document.querySelectorAll('.mini-field').forEach(el => {
-      if (extraFieldsSections.includes(this.value)) el.classList.remove('hidden');
-      else el.classList.add('hidden');
-    });
-    const catSelect = document.getElementById('addCategory');
-    catSelect.innerHTML = '<option value="">Select category...</option>';
-    const section = this.value;
-    if (!section || !categoriesData[section]) return;
-    categoriesData[section].subcategories.forEach(c => {
-      if (c.type === 'group' && c.subcategories) {
-        c.subcategories.forEach(sc => {
-          const opt = document.createElement('option');
-          opt.value = sc.id;
-          opt.textContent = c.label + ' \u2192 ' + sc.label;
-          catSelect.appendChild(opt);
-        });
-      } else {
-        const opt = document.createElement('option');
-        opt.value = c.id;
-        opt.textContent = c.label;
-        catSelect.appendChild(opt);
-      }
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="9" class="empty-state">Failed to load spreadsheet</td></tr>';
+  }
+}
     });
   });
 
@@ -173,9 +152,11 @@ function createCell(text, className) {
 }
 
 async function loadSpreadsheet() {
-  const items = await API.get('/api/spreadsheet');
   const tbody = document.getElementById('spreadsheetBody');
-  tbody.innerHTML = '';
+  if (!tbody) return;
+  try {
+    const items = await API.get('/api/spreadsheet');
+    tbody.innerHTML = '';
 
   const sprCols = 9;
 
@@ -237,9 +218,12 @@ async function loadSpreadsheet() {
         delBtn.className = 'btn btn-sm btn-danger del-spr-btn';
         delBtn.textContent = '\ud83d\uddd1\ufe0f';
         delBtn.addEventListener('click', async () => {
-          if (confirm('Delete "' + item.title + '"?')) {
+          if (!confirm('Delete "' + item.title + '"?')) return;
+          try {
             await withPending(delBtn, () => API.del('/api/items/' + item.id));
             loadSpreadsheet();
+          } catch (err) {
+            alert('Delete failed: ' + (err.message || 'Unknown error'));
           }
         });
         actionsTd.appendChild(delBtn);

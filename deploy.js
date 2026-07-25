@@ -33,9 +33,10 @@ if (!status) {
 }
 
 // 3. Commit
+const { execFileSync } = require('child_process');
 const msg = process.argv[2] || 'Auto-deploy: ' + new Date().toISOString().replace('T', ' ').slice(0, 19);
 console.log('💾 Committing: "' + msg + '"');
-execSync('git commit -m "' + msg + '"', { cwd: ROOT, stdio: 'pipe' });
+execFileSync('git', ['commit', '-m', msg], { cwd: ROOT, stdio: 'pipe' });
 
 // 4. Push
 console.log('🚀 Pushing to origin...');

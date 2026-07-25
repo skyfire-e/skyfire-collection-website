@@ -54,6 +54,10 @@ async function normalizeImage(file) {
         .jpeg({ quality: 80, mozjpeg: true })
         .toFile(thumbDestination)
     ]);
+  } catch (err) {
+    try { fs.unlinkSync(destination); } catch {}
+    try { fs.unlinkSync(thumbDestination); } catch {}
+    throw err;
   } finally {
     try { fs.unlinkSync(file.path); } catch {}
   }

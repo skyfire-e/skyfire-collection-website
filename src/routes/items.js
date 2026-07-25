@@ -160,13 +160,15 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     db.updateItem(currentItem.id, candidate);
 
     const newSet = new Set(candidate.images);
+    const toDelete = [];
     for (const img of oldImagesForCleanup) {
       if (!newSet.has(img)) {
         const items = db.allItems();
         const stillReferenced = items.some(other => other.id !== candidate.id && (other.image === img || other.images?.includes(img)));
-        if (!stillReferenced) safeUnlink(img);
+        if (!stillReferenced) toDelete.push(img);
       }
     }
+    toDelete.forEach(img => safeUnlink(img));
 
     db.appendAudit({ action: 'item.update', entityId: candidate.id, title: candidate.title });
     res.json(candidate);
@@ -184,10 +186,12 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
     db.appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
 
     const currentItems = db.allItems();
+    const toDelete = [];
     for (const img of uniquePaths) {
       const stillReferenced = currentItems.some(other => other.image === img || other.images?.includes(img));
-      if (!stillReferenced) safeUnlink(img);
+      if (!stillReferenced) toDelete.push(img);
     }
+    toDelete.forEach(img => safeUnlink(img));
     res.json({ success: true });
   } catch (err) { next(err); }
 });

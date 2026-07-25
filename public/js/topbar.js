@@ -28,14 +28,27 @@ function renderNavDrawer() {
   API.get('/api/categories').then(cats => {
     const tree = buildNavTree(cats);
     const currentPath = location.pathname + location.search;
-    let html = '<button class="nav-drawer-close" id="navDrawerClose">×</button>';
+    drawer.innerHTML = '';
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'nav-drawer-close';
+    closeBtn.id = 'navDrawerClose';
+    closeBtn.textContent = '×';
+    drawer.appendChild(closeBtn);
     for (const item of tree) {
-      if (item.divider) { html += '<div class="nav-divider"></div>'; continue; }
+      if (item.divider) {
+        const div = document.createElement('div');
+        div.className = 'nav-divider';
+        drawer.appendChild(div);
+        continue;
+      }
+      const a = document.createElement('a');
+      a.href = item.href;
       const cls = [item.section ? 'nav-section' : '', item.sub ? 'nav-sub' : '', item.subSub ? 'nav-sub-sub' : ''].filter(Boolean).join(' ');
-      const isCurrent = item.href === '/' && currentPath === '/' || item.href !== '/' && currentPath.startsWith(item.href);
-      html += '<a href="' + item.href + '" class="' + cls + (isCurrent ? ' nav-current' : '') + '">' + (item.icon ? item.icon + ' ' : '') + item.label + '</a>';
+      const isCurrent = (item.href === '/' && currentPath === '/') || (item.href !== '/' && currentPath.startsWith(item.href));
+      a.className = cls + (isCurrent ? ' nav-current' : '');
+      a.textContent = (item.icon ? item.icon + ' ' : '') + item.label;
+      drawer.appendChild(a);
     }
-    drawer.innerHTML = html;
 
     document.getElementById('navDrawerClose').addEventListener('click', closeNavDrawer);
   }).catch(() => {});

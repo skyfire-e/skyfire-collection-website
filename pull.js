@@ -30,18 +30,23 @@ try {
   process.exit(1);
 }
 
-// Check if package-lock.json changed
-const lockChanged = execSync('git diff HEAD~1 --name-only', { cwd: ROOT, encoding: 'utf8' })
-  .split('\n').some(f => f.includes('package-lock.json') || f.includes('package.json'));
+// Check what changed (safe for shallow clones)
+function getChangedFiles() {
+  try {
+    return execSync('git diff HEAD~1 --name-only', { cwd: ROOT, encoding: 'utf8' }).split('\n');
+  } catch {
+    return [];
+  }
+}
+const changedFiles = getChangedFiles();
+const lockChanged = changedFiles.some(f => f.includes('package-lock.json') || f.includes('package.json'));
 
 if (lockChanged) {
   console.log('📦 Dependencies changed, running npm install...');
   execSync('npm install', { cwd: ROOT, stdio: 'inherit' });
 }
 
-// Check if DB file changed
-const dbChanged = execSync('git diff HEAD~1 --name-only', { cwd: ROOT, encoding: 'utf8' })
-  .split('\n').some(f => f.includes('collection.db'));
+const dbChanged = changedFiles.some(f => f.includes('collection.db'));
 
 if (dbChanged) {
   console.log('💾 Database updated from remote');

@@ -9,6 +9,7 @@ router.get('/public', (req, res) => {
   const items = db.allItems();
   const cats = db.getCategories();
   const settings = db.getSettings();
+  if (settings.showSpreadsheet === false) return res.status(404).json({ error: 'Spreadsheet is disabled' });
   const showPrices = settings.showPublicSpreadsheet !== false;
   const currencies = settings.currencies || {};
 

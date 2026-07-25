@@ -179,17 +179,18 @@ function getItems(section, category, limit, offset) {
 }
 
 function reorderItems(section, category, orderedIds) {
-  const update = db.prepare('UPDATE items SET sort_order = ? WHERE id = ?');
+  const update = db.prepare('UPDATE items SET sort_order = ? WHERE id = ? AND section = ? AND category = ?');
   const tx = db.transaction(() => {
-    orderedIds.forEach((id, i) => update.run(i, String(id)));
+    orderedIds.forEach((id, i) => update.run(i, String(id), section, category));
   });
   tx();
   db.appendAudit({ action: 'item.reorder', section, category, count: orderedIds.length });
 }
 
 function searchItems(query, limit) {
-  const pattern = '%' + query + '%';
-  const rows = db.prepare('SELECT * FROM items WHERE title LIKE ? OR author LIKE ? LIMIT ?').all(pattern, pattern, limit || 20);
+  const escaped = query.replace(/[%_\\]/g, c => '\\' + c);
+  const pattern = '%' + escaped + '%';
+  const rows = db.prepare('SELECT * FROM items WHERE title LIKE ? ESCAPE ? OR author LIKE ? ESCAPE ? LIMIT ?').all(pattern, '\\', pattern, '\\', limit || 20);
   return rows.map(rowToItem);
 }
 
