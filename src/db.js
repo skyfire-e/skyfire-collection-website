@@ -406,5 +406,6 @@ module.exports = {
   getCategories, saveCategories,
   getSettings, updateSettings,
   appendAudit, getAuditLog,
-  getSession, setSession, destroySession
+  getSession, setSession, destroySession,
+  safeJsonParse
 };

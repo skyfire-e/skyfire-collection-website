@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     return res.json(items);
   }
 
-  const parsedLimit = limit ? Math.min(Math.max(parseInt(limit, 10) || 0, 1), 100) : undefined;
+  const parsedLimit = limit !== undefined ? Math.min(Math.max(parseInt(limit, 10) || 0, 1), 100) : undefined;
   const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
   const items = db.getItems(section, category, parsedLimit, parsedOffset);
   const total = db.getItemCount(section, category);
@@ -45,9 +45,9 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
       id: crypto.randomUUID(),
       section: data.section,
       category: data.category,
-      title: data.title || 'Untitled',
+      title: data.title,
       author: data.author || '',
-      price: data.price ?? 0,
+      price: data.price,
       recaster: data.recaster || '',
       combatPoints: data.combatPoints || '',
       status: data.status || '',
@@ -70,22 +70,22 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     const currentItem = db.getItem(req.params.id);
     if (!currentItem) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
+    validateVersion(currentItem, req.body.version);
+    candidate.version = (currentItem.version || 0) + 1;
+
     const candidate = {
       ...currentItem,
       ...(req.body.title !== undefined && { title: String(req.body.title).trim() }),
       ...(req.body.author !== undefined && { author: req.body.author }),
       ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
       ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
-      ...(req.body.price !== undefined && {}),
+      ...(req.body.price !== undefined && { price: Number(req.body.price) }),
       ...(req.body.recaster !== undefined && { recaster: req.body.recaster }),
       ...(req.body.combatPoints !== undefined && { combatPoints: req.body.combatPoints }),
       ...(req.body.status !== undefined && { status: req.body.status })
     };
     const validation = validateItemInput(candidate, cats);
     if (validation.errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: validation.errors }); }
-    if (validation.data && req.body.price !== undefined) {
-      candidate.price = validation.data.price;
-    }
 
     const newFilePaths = await Promise.all(files.map(normalizeImage));
 
@@ -151,9 +151,6 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
         candidate.image = db.getSettings().defaultImage || '/images/default.svg';
       }
     }
-
-    validateVersion(currentItem, req.body.version);
-    candidate.version = (currentItem.version || 0) + 1;
 
     const oldImagesForCleanup = [...(currentItem.images || [])];
 

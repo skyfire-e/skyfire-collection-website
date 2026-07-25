@@ -907,6 +907,11 @@ a:hover { text-decoration: underline; }
 .ps-cat-content { transition: max-height 0.3s ease; }
 .ps-cat-content.collapsed { display: none; }
 
+.error-page { text-align: center; padding: 80px 20px; }
+.error-page h1 { font-size: 3rem; margin: 0 0 10px; }
+.error-page p { color: var(--text-muted); margin: 0 0 30px; }
+.error-page a { color: var(--accent); }
+
 @media (max-width: 600px) {
   .ps-subcategory { margin-left: 8px; }
   .ps-table { font-size: 0.82rem; }

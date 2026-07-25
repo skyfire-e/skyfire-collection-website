@@ -16,7 +16,11 @@ router.post('/login', requireSameOrigin, loginLimiter, async (req, res) => {
   if (!user) return res.status(401).json({ error: 'Invalid credentials' });
   let valid;
   if (ADMIN_PASSWORD_HASH) {
-    valid = await argon2.verify(user.password, password);
+    try {
+      valid = await argon2.verify(user.password, password);
+    } catch {
+      return res.status(500).json({ error: 'Authentication error' });
+    }
   } else {
     if (!ADMIN_PASSWORD) return res.status(500).json({ error: 'Server misconfigured' });
     valid = user.password === password;

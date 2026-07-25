@@ -7,11 +7,11 @@ const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const morgan = require('morgan');
 const { ValidationError, VersionConflictError } = require('./errors');
-const { secureCookies, ROOT } = require('./helpers');
+const { secureCookies, envBoolean, ROOT } = require('./helpers');
 
 const app = express();
 
-app.set('trust proxy', process.env.TRUST_PROXY === '1' ? 1 : false);
+app.set('trust proxy', envBoolean(process.env.TRUST_PROXY) ? 1 : false);
 app.use(compression());
 app.use(morgan('tiny'));
 app.use(helmet({

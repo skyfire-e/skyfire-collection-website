@@ -90,6 +90,7 @@ export async function initGalleryPage() {
 
   function updateLightbox(item) {
     lbImg.src = lbCurrentImages[lbCurrentImgIdx];
+    lbImg.alt = item.title || '';
     lbTitle.textContent = item.title;
     lbAuthor.textContent = item.author;
 
@@ -98,11 +99,20 @@ export async function initGalleryPage() {
       lbCurrentImages.forEach((_, i) => {
         const dot = document.createElement('span');
         dot.className = 'lightbox-dot' + (i === lbCurrentImgIdx ? ' active' : '');
+        dot.role = 'button';
+        dot.tabIndex = 0;
+        dot.setAttribute('aria-label', 'Image ' + (i + 1) + ' of ' + lbCurrentImages.length);
         dot.addEventListener('click', () => {
           lbCurrentImgIdx = i;
           lbImg.src = lbCurrentImages[i];
           lbDots.querySelectorAll('.lightbox-dot').forEach(d => d.classList.remove('active'));
           dot.classList.add('active');
+        });
+        dot.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            dot.click();
+          }
         });
         lbDots.appendChild(dot);
       });

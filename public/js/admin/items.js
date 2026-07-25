@@ -16,6 +16,46 @@ export async function initAdminItems() {
 
   initImageEditor();
 
+  // Add Item form submit
+  document.getElementById('addForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const section = document.getElementById('addSection').value;
+    const category = document.getElementById('addCategory').value;
+    const title = document.getElementById('addTitle').value.trim();
+    const author = document.getElementById('addAuthor').value.trim();
+    const price = document.getElementById('addPrice').value;
+    const recaster = document.getElementById('addRecaster').value.trim();
+    const combatPoints = document.getElementById('addCombatPoints').value.trim();
+    const status = document.getElementById('addStatus').value.trim();
+    const fileInput = document.getElementById('addImage');
+    const files = fileInput.files;
+
+    if (!section) return alert('Select a section');
+    if (!category) return alert('Select a category');
+    if (!title) return alert('Enter a title');
+
+    const fd = new FormData();
+    fd.append('section', section);
+    fd.append('category', category);
+    fd.append('title', title);
+    fd.append('author', author);
+    fd.append('price', price);
+    fd.append('recaster', recaster);
+    fd.append('combatPoints', combatPoints);
+    fd.append('status', status);
+    for (const f of files) fd.append('images', f);
+
+    const btn = e.target.querySelector('button[type="submit"]');
+    try {
+      await withPending(btn, () => API.post('/api/items', fd));
+      e.target.reset();
+      document.getElementById('addCategory').innerHTML = '<option value="">Select section first</option>';
+      alert('Item added');
+    } catch (err) {
+      alert('Failed to add item: ' + (err.message || 'Unknown error'));
+    }
+  });
+
   // Tab switching
   document.querySelectorAll('.admin-tabs button').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -37,6 +77,11 @@ export async function initAdminItems() {
     const tab = document.querySelector(`[data-tab="${hash}"]`);
     if (tab) tab.click();
   }
+
+  // Add Item section → category handler
+  document.getElementById('addSection').addEventListener('change', function() {
+    populateCategoryDropdown(this.value);
+  });
 
   // Add Subcategory section handler
   document.getElementById('catSection').addEventListener('change', function() {
@@ -228,6 +273,32 @@ function populateCatSectionDropdown(cats) {
     opt.value = key;
     opt.textContent = sec.label;
     sel.appendChild(opt);
+  });
+}
+
+function populateCategoryDropdown(section) {
+  const sel = document.getElementById('addCategory');
+  sel.innerHTML = '<option value="">Select section first</option>';
+  if (!section || !categoriesData[section]) return;
+  sel.innerHTML = '<option value="">Select category...</option>';
+  categoriesData[section].subcategories.forEach(c => {
+    if (c.type === 'group' && c.subcategories) {
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.label + ' (group)';
+      sel.appendChild(opt);
+      c.subcategories.forEach(sc => {
+        const opt2 = document.createElement('option');
+        opt2.value = sc.id;
+        opt2.textContent = '  \u21B3 ' + sc.label;
+        sel.appendChild(opt2);
+      });
+    } else {
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.label;
+      sel.appendChild(opt);
+    }
   });
 }
 

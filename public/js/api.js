@@ -1,7 +1,12 @@
 async function request(url, options = {}) {
   const response = await fetch(url, options);
   const contentType = response.headers.get('content-type') || '';
-  const data = contentType.includes('application/json') ? await response.json() : await response.text();
+  let data;
+  try {
+    data = contentType.includes('application/json') ? await response.json() : await response.text();
+  } catch {
+    data = null;
+  }
   if (!response.ok) {
     const error = new Error(data?.error || `Request failed with HTTP ${response.status}`);
     error.status = response.status;

@@ -2,10 +2,6 @@ const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
 const db = require('../db');
 
-function safeJsonParse(value, fallback) {
-  try { return JSON.parse(value); } catch { return fallback; }
-}
-
 const router = Router();
 
 router.post('/backfill-defaults', requireSameOrigin, requireAdmin, (req, res) => {
@@ -60,7 +56,8 @@ router.post('/backfill-prices', requireSameOrigin, requireAdmin, (req, res) => {
 
 router.get('/audit', requireAdmin, (req, res) => {
   const logs = db.getAuditLog(100);
-  res.json(logs.map(l => ({ id: l.id, timestamp: l.timestamp, ...safeJsonParse(l.data, { action: l.action }) })));
+  const dbModule = require('../db');
+  res.json(logs.map(l => ({ id: l.id, timestamp: l.timestamp, ...dbModule.safeJsonParse(l.data, { action: l.action }) })));
 });
 
 module.exports = router;

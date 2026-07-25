@@ -287,7 +287,8 @@ async function saveEdit() {
       closeEdit();
       return;
     }
-    throw err;
+    alert('Save failed: ' + (err.message || 'Unknown error'));
+    return;
   }
   if (onSaveCallback) onSaveCallback();
   closeEdit();
@@ -343,7 +344,13 @@ export function initImageEditor() {
     document.getElementById('editImage').click();
   });
 
-  document.getElementById('saveEditBtn').addEventListener('click', saveEdit);
+  document.getElementById('saveEditBtn').addEventListener('click', async () => {
+    try {
+      await saveEdit();
+    } catch (err) {
+      alert('Save failed: ' + (err.message || 'Unknown error'));
+    }
+  });
 
   document.getElementById('cancelEditBtn').addEventListener('click', closeEdit);
 
