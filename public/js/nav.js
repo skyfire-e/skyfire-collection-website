@@ -5,16 +5,14 @@
   }
 })();
 
-function injectTopbar() {
-  const topbar = document.createElement('div');
-  topbar.className = 'topbar';
-  topbar.innerHTML = `
-    <button class="topbar-btn" id="menuBtn" title="Navigation">☰</button>
-    <button class="topbar-btn" id="searchBtn" title="Search">🔍</button>
-    <div class="topbar-spacer"></div>
-    <a href="/" class="topbar-btn" title="Home">🏠</a>
+function injectNav() {
+  const navBtns = document.createElement('div');
+  navBtns.className = 'nav-corner';
+  navBtns.innerHTML = `
+    <button class="nav-corner-btn" id="menuBtn" title="Navigation">🧭</button>
+    <button class="nav-corner-btn" id="searchBtn" title="Search">🔍</button>
   `;
-  document.body.prepend(topbar);
+  document.body.appendChild(navBtns);
 
   const drawer = document.createElement('div');
   drawer.className = 'nav-drawer';
@@ -31,9 +29,9 @@ function injectTopbar() {
   searchModal.id = 'searchModal';
   searchModal.innerHTML = `
     <div class="search-box">
-      <div class="btn-row" style="justify-content:space-between;margin-top:0">
+      <div class="search-header">
         <input type="text" id="searchInput" placeholder="Search items...">
-        <button class="topbar-btn" id="searchClose">×</button>
+        <button class="nav-corner-btn" id="searchClose">×</button>
       </div>
       <div class="search-results" id="searchResults"></div>
     </div>
@@ -42,7 +40,7 @@ function injectTopbar() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  injectTopbar();
+  injectNav();
 
   document.querySelectorAll('[data-href]').forEach(btn => {
     btn.addEventListener('click', () => { location.href = btn.dataset.href; });
