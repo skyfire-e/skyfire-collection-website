@@ -9,6 +9,13 @@
   color: var(--text-muted);
   margin-bottom: 20px;
 }
+.gallery-back-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-muted);
+}
+.gallery-back-link:hover { color: var(--accent); }
 .gallery-page .back-link:hover { color: var(--accent); }
 .gallery-page h1 {
   text-align: center;

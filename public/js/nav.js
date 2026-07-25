@@ -9,10 +9,18 @@ function injectNav() {
   const navBtns = document.createElement('div');
   navBtns.className = 'nav-corner';
   navBtns.innerHTML = `
-    <button class="nav-corner-btn" id="menuBtn" title="Navigation">🧭</button>
-    <button class="nav-corner-btn" id="searchBtn" title="Search">🔍</button>
+    <button class="nav-corner-btn" id="menuBtn" title="Navigation">
+      <img src="/images/compass.svg" alt="Nav" width="28" height="28">
+    </button>
   `;
   document.body.appendChild(navBtns);
+
+  const searchBtn = document.createElement('button');
+  searchBtn.className = 'nav-corner-btn search-corner-btn';
+  searchBtn.id = 'searchBtn';
+  searchBtn.title = 'Search';
+  searchBtn.textContent = '🔍';
+  document.body.appendChild(searchBtn);
 
   const drawer = document.createElement('div');
   drawer.className = 'nav-drawer';

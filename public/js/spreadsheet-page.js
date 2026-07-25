@@ -57,7 +57,7 @@ export async function initSpreadsheetPage() {
 
       const sectionToggle = document.createElement('span');
       sectionToggle.className = 'cat-toggle';
-      sectionToggle.textContent = '▼';
+      sectionToggle.textContent = '▶';
       sectionHeader.appendChild(sectionToggle);
 
       const sectionTitle = document.createElement('h2');
@@ -77,7 +77,7 @@ export async function initSpreadsheetPage() {
       sectionDiv.appendChild(sectionHeader);
 
       const sectionContent = document.createElement('div');
-      sectionContent.className = 'ps-cat-content';
+      sectionContent.className = 'ps-cat-content collapsed';
 
       sectionHeader.addEventListener('click', () => toggleCategory(sectionHeader));
 
@@ -89,7 +89,7 @@ export async function initSpreadsheetPage() {
 
         const subToggle = document.createElement('span');
         subToggle.className = 'cat-toggle';
-        subToggle.textContent = '▼';
+        subToggle.textContent = '▶';
         subHeader.appendChild(subToggle);
 
         const subTitle = document.createElement('h3');
@@ -109,7 +109,7 @@ export async function initSpreadsheetPage() {
         sectionContent.appendChild(subHeader);
 
         const subContent = document.createElement('div');
-        subContent.className = 'ps-cat-content';
+        subContent.className = 'ps-cat-content collapsed';
 
         subHeader.addEventListener('click', () => toggleCategory(subHeader));
 
