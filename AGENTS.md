@@ -11,7 +11,7 @@
 
 ## Git
 - GitHub: https://github.com/skyfire-e/skyfire-collection-website.git
-- Branches: `main` (stable, merge commit `956a7a1`), `test` (current dev, `c8499f9`), `SQLmigrationTrue` (old, synced)
+- Branches: `main` (stable), `test` (current dev), `SQLmigrationTrue` (old, synced)
 - ⚠️ NEVER merge to `main` without explicit user confirmation
 - Deploy: `npm run deploy` (checkpoint → git add → commit → push to `test`)
 - Pull: `npm run pull` (sync from GitHub, safe for shallow clones)
@@ -21,13 +21,6 @@
 - Username: `ADMIN_USERNAME` (default `admin`), Password: `ADMIN_PASSWORD` или `ADMIN_PASSWORD_HASH` (argon2) — в `.env`
 - Session secret: `SESSION_SECRET` в `.env`
 - `.env` в `.gitignore`, не попадает в репозиторий
-
-## Current Data State
-- `data/collection.db` — SQLite: 610 items (Dice: 145, Miniatures: 465) + categories + settings + sessions + audit
-- `uploads/` — 616 images + 615 thumbnails (tracked in git)
-- Old JSON files (items.json, categories.json, settings.json) — deleted after SQLite migration
-- **All 465 miniatures have Command Points** (77 exact from Wahapedia AoS4/40K10, 388 estimated by analogy)
-- DB schema version: `user_version = 4`
 
 ## Site Structure
 | Route | Description |
@@ -154,7 +147,7 @@ backups/               — backup archives (excluded from git)
 
 ### Iteration H — SQLite Migration
 - `better-sqlite3`, `src/db.js` with full schema (items, categories, settings, audit, sessions)
-- Migrated all data from JSON → SQLite on first run (610 items, 2 sections, 6 settings)
+- Migrated all data from JSON → SQLite on first run
 - All routes rewritten to use SQLite instead of JSON files
 - Sessions moved from `session-file-store` to SQLite store (sessions table)
 - Old JSON files deleted; DB + uploads tracked in git
@@ -198,7 +191,7 @@ backups/               — backup archives (excluded from git)
 - Drag-and-drop reordering: `POST /api/items/reorder`, `sort_order` in DB
 - Orphan GC: `gc-uploads.js` (`npm run gc:dry`, `gc:quarantine`, `gc`)
 - ESLint (flat config v9+) + Prettier, `npm run lint`, CI lint step
-- 59 tests (unit + HTTP via supertest)
+- Tests (unit + HTTP via supertest)
 - `deploy.js`: one-step deploy (`execFileSync`, no shell injection)
 - `pull.js`: GitHub sync (shallow-clamp safe), auto `npm install` on dep change
 - `npm run checkpoint`: WAL checkpoint + session purge
@@ -224,19 +217,6 @@ backups/               — backup archives (excluded from git)
 - Removed: `getCurrentUser`, `DATA_DIR`, `gitignore/`, `DataCorruptionError`, `readJSON`, `writeJSONAtomic`, `withDataLock`, `migrateFromJSON`, `saveSettings`, `session-file-store`, `jimp`, `playwright`, `puppeteer`, `allowScripts`
 - Version → `1.7.2`
 
-### Iteration K — Command Points (all miniatures)
-- 77 exact CP from Wahapedia AoS4/40K10 (Citadel Skaven, Gloomspite Gitz, Orruk Warclans, Astra Militarum, Adepta Sororitas, Officio Assassinorum, Chaos Daemons, Kharadron Overlords, Ogor Mawtribes, Empire)
-- 388 estimated CP by analogy (Legends Skaven, Old Citadel Skaven, Forgeworld Skaven, 3D prints Skaven, Blood Bowl Skaven, Punga Miniatures, Other, Terrain=0)
-- **All 465 miniatures now have Command Points** — 0 remaining without CP
-- Blood Bowl Skaven: gold cost → points analogy (e.g. Rat Ogre 150K → 150 pts)
-- Non-GW models (3D prints, Punga, First Legion): estimated by closest Citadel analogues
-- Estimated CP not marked as estimated in DB (per user request)
-
-## Known Gaps
-| Issue | Priority | Status |
-|-------|----------|--------|
-| None | — | All major gaps resolved |
-
 ## Planned Features
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)
   - Нужен токен от @BotFather
@@ -249,14 +229,14 @@ backups/               — backup archives (excluded from git)
 ### Последовательность
 1. **Prerequisites**: Node 20+, git, npm. (опционально: build-essential, python3 — для сборки sharp/better-sqlite3)
 2. **Clone**: `git clone https://github.com/skyfire-e/skyfire-collection-website.git && cd skyfire-collection-website && git checkout test`
-   - БД (`data/collection.db`, 610 items) и `uploads/` (616 файлов) уже в git — **копировать вручную ничего не нужно**
+   - БД (`data/collection.db`) и `uploads/` уже в git — **копировать вручную ничего не нужно**
 3. **Install**: `npm install` (postinstall сам symlink'нет pre-commit hook)
 4. **`.env`**: `cp .env.example .env`, заполнить:
    - `SESSION_SECRET` (≥32 chars, сгенерить: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
    - `ADMIN_PASSWORD_HASH` (Argon2, обязательно в production — plaintext запрещён: `node -e "require('argon2').hash('pass').then(h=>console.log(h))"`)
    - `NODE_ENV=production`, `TRUST_PROXY=1` (за nginx), `PORT=3000`
 5. **Verify** (опционально):
-   - `node -e "..."` — проверить `user_version: 4`, `items: 610`, `categories: 37`, `sections: 2`
+   - `node -e "..."` — проверить структуру БД
    - `npm run check`, `npm test` (in-memory, не трогает прод-БД)
 6. **Smoke test**: `node server.js` → проверить `/`, `/health` (`{"status":"ok"}`), `/admin`. `Ctrl+C`
 7. **Service**:
@@ -290,6 +270,5 @@ pm2 restart skyfire-collection   # или: sudo systemctl restart skyfire-collec
 ```bash
 # macOS / Linux
 kill $(lsof -t -i:3000) 2>/dev/null
-cd /Users/skyfire/Documents/mySiteR
 node server.js
 ```

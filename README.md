@@ -71,7 +71,7 @@ node -e "require('argon2').hash('your-password').then(h => console.log(h))"
 | `npm run gc:dry` | Find orphan files in uploads (dry run, no deletion) |
 | `npm run gc:quarantine` | Move orphan files to uploads/.quarantine/ |
 | `npm run gc` | Delete orphan files not referenced in DB |
-| `npm test` | Run tests (in-memory SQLite, 59 tests) |
+| `npm test` | Run tests (in-memory SQLite) |
 | `npm run lint` | ESLint check |
 | `npm run check` | Syntax check all source files |
 
@@ -141,7 +141,7 @@ cd skyfire-collection-website
 git checkout test   # dev-ветка (main — стабильная, но сейчас синхронизированы)
 ```
 
-> БД (`data/collection.db`, 610 items) и все изображения (`uploads/`, 616 файлов) уже в репозитории — ничего вручную копировать не нужно.
+> БД (`data/collection.db`) и все изображения (`uploads/`) уже в репозитории — ничего вручную копировать не нужно.
 
 ### 3. Install dependencies
 
@@ -194,31 +194,11 @@ SESSION_SECRET=abc123def456...min32chars
 TRUST_PROXY=1
 ```
 
-### 5. Verify data integrity (опционально, но рекомендуется)
-
-```bash
-# Проверить, что БД открылась и данные на месте
-node -e "
-  const db = require('better-sqlite3')('data/collection.db');
-  console.log('user_version:', db.pragma('user_version')[0].user_version);
-  console.log('items:', db.prepare('SELECT COUNT(*) c FROM items').get().c);
-  console.log('categories:', db.prepare('SELECT COUNT(*) c FROM categories').get().c);
-  console.log('sections:', db.prepare('SELECT COUNT(*) c FROM sections').get().c);
-  db.close();
-"
-```
-Ожидание: `user_version: 4`, `items: 610`, `categories: 37`, `sections: 2`.
-
-```bash
-# Сверить количество файлов в uploads с ожидаемым
-ls uploads/ | grep -v thumb- | grep -v '\.tmp' | wc -l   # ~616 файлов (без thumb-)
-```
-
-### 6. Smoke test перед запуском как сервис
+### 5. Smoke test перед запуском как сервис
 
 ```bash
 npm run check        # syntax check всех исходников
-npm test            # 59 тестов (in-memory DB, не трогает data/collection.db)
+npm test            # тесты (in-memory DB, не трогает data/collection.db)
 node server.js      # вручную, проверить http://<server-ip>:3000
 ```
 
@@ -229,7 +209,7 @@ node server.js      # вручную, проверить http://<server-ip>:3000
 
 Если всё ок — `Ctrl+C`, запускать как сервис.
 
-### 7. Run as a service
+### 6. Run as a service
 
 **Вариант A — pm2 (проще):**
 ```bash
@@ -264,7 +244,7 @@ sudo systemctl enable --now skyfire-collection
 sudo systemctl status skyfire-collection
 ```
 
-### 8. Reverse proxy (nginx) — для HTTPS и домена
+### 7. Reverse proxy (nginx) — для HTTPS и домена
 
 ```nginx
 server {
@@ -288,7 +268,7 @@ sudo certbot --nginx -d your-domain.tld
 
 При наличии nginx — `TRUST_PROXY=1` в `.env` (для корректных IP в rate-limit и логах).
 
-### 9. First backup
+### 8. First backup
 
 ```bash
 npm run backup   # архив в backups/skyfire-collection-YYYY-MM-DD.tar.gz
@@ -299,7 +279,7 @@ npm run backup   # архив в backups/skyfire-collection-YYYY-MM-DD.tar.gz
 0 3 * * * cd /path/to/skyfire-collection-website && npm run backup >> backups/cron.log 2>&1
 ```
 
-### 10. Post-deploy checklist
+### 9. Post-deploy checklist
 
 - [ ] `http://<server-ip>:3000/health` → `{"status":"ok"}`
 - [ ] `/` грузится, 2 секции (Dice, Miniatures)
