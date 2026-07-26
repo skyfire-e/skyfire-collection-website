@@ -276,6 +276,7 @@ export async function initGalleryPage() {
     try {
       const items = await API.get(url);
       renderItems(items);
+      if (reorderMode) enableDragAndDrop(document.getElementById('galleryGrid'));
     } catch (err) {
       grid.innerHTML = '<p class="empty-state">Failed to load items. Please try again.</p>';
     }

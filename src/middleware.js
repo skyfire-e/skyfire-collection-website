@@ -14,8 +14,9 @@ const upload = multer({
 });
 
 function requireAdmin(req, res, next) {
-  if (req.session && req.session.user?.role === 'admin') return next();
-  res.status(401).json({ error: 'Unauthorized' });
+  if (!req.session || !req.session.user) return res.status(401).json({ error: 'Not authenticated' });
+  if (req.session.user.role !== 'admin') return res.status(403).json({ error: 'Forbidden' });
+  next();
 }
 
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);

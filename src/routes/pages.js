@@ -45,7 +45,7 @@ function generateSitemap(baseUrl) {
 }
 
 router.get('/sitemap.xml', (req, res) => {
-  const baseUrl = process.env.SITE_URL || 'http://' + req.headers.host;
+  const baseUrl = process.env.SITE_URL || 'https://' + req.hostname;
   res.set('Content-Type', 'application/xml');
   res.send(generateSitemap(baseUrl.replace(/\/$/, '')));
 });

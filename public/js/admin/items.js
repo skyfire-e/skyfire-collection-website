@@ -300,10 +300,6 @@ function populateCategoryDropdown(section) {
   sel.innerHTML = '<option value="">Select category...</option>';
   categoriesData[section].subcategories.forEach(c => {
     if (c.type === 'group' && c.subcategories) {
-      const opt = document.createElement('option');
-      opt.value = c.id;
-      opt.textContent = c.label + ' (group)';
-      sel.appendChild(opt);
       c.subcategories.forEach(sc => {
         const opt2 = document.createElement('option');
         opt2.value = sc.id;

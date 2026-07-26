@@ -3,7 +3,7 @@ const assert = require('node:assert');
 
 process.env.NODE_TEST_DB = '1';
 
-const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray, safeUnlink, validateVersion, validateItemInput } = require('../src/helpers');
+const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray, safeUnlink, validateVersion, validateItemInput, checkImageMagicBytes } = require('../src/helpers');
 const { VersionConflictError } = require('../src/errors');
 const db = require('../src/db');
 
@@ -324,6 +324,31 @@ describe('validateVersion', () => {
   });
   it('throws VersionConflictError on mismatch', () => {
     assert.throws(() => validateVersion({ version: 3 }, 2), VersionConflictError);
+  });
+});
+
+describe('checkImageMagicBytes', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const os = require('os');
+
+  it('accepts a valid JPEG', () => {
+    const f = path.join(os.tmpdir(), 'test-jpg-' + Date.now() + '.jpg');
+    fs.writeFileSync(f, Buffer.from([0xFF, 0xD8, 0xFF, 0xE0]));
+    assert.doesNotThrow(() => checkImageMagicBytes(f));
+    fs.unlinkSync(f);
+  });
+  it('accepts a valid PNG', () => {
+    const f = path.join(os.tmpdir(), 'test-png-' + Date.now() + '.png');
+    fs.writeFileSync(f, Buffer.from([0x89, 0x50, 0x4E, 0x47]));
+    assert.doesNotThrow(() => checkImageMagicBytes(f));
+    fs.unlinkSync(f);
+  });
+  it('rejects non-image bytes', () => {
+    const f = path.join(os.tmpdir(), 'test-txt-' + Date.now() + '.txt');
+    fs.writeFileSync(f, 'not an image');
+    assert.throws(() => checkImageMagicBytes(f), /magic bytes/);
+    fs.unlinkSync(f);
   });
 });
 

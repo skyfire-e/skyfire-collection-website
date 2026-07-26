@@ -16,10 +16,7 @@ router.get('/', (req, res) => {
   if (q) {
     const parsedLimit = limit ? Math.min(parseInt(limit, 10), 200) : 50;
     const result = db.searchItems(q, parsedLimit);
-    if (limit !== undefined) {
-      return res.json({ items: result.items, total: result.total, limit: parsedLimit, offset: 0 });
-    }
-    return res.json(result.items);
+    return res.json({ items: result.items, total: result.total, limit: parsedLimit, offset: 0 });
   }
 
   let parsedLimit;

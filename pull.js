@@ -59,7 +59,13 @@ if (dbChanged) {
 
 console.log('');
 console.log('✅ Pull complete. Restart the server:');
-console.log('   kill $(lsof -t -i:3000) 2>/dev/null; node server.js');
+if (process.platform === 'win32') {
+  console.log('   netstat -ano | findstr :3000');
+  console.log('   taskkill /PID <PID> /F');
+  console.log('   node server.js');
+} else {
+  console.log('   kill $(lsof -t -i:3000) 2>/dev/null; node server.js');
+}
 console.log('');
 console.log('   Or if using pm2:');
 console.log('   pm2 restart skyfire');

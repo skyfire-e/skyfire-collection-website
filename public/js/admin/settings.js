@@ -22,7 +22,8 @@ export async function loadSettings() {
 }
 
 async function renderCurrencySettings(currencies) {
-  const cats = await API.get('/api/categories');
+  let cats;
+  try { cats = await API.get('/api/categories'); } catch { cats = {}; }
   const container = document.getElementById('currencySettings');
   container.innerHTML = '';
   Object.entries(cats).forEach(([key, sec]) => {

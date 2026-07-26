@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const sharp = require('sharp');
-const { VersionConflictError } = require('./errors');
+const { VersionConflictError, ValidationError } = require('./errors');
 const { itemInputSchema, itemInputPartialSchema } = require('../lib/validate');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -37,6 +37,24 @@ function cleanupUploadedFiles(files) {
   }
 }
 
+const IMAGE_MAGIC_BYTES = {
+  jpeg: [[0xFF, 0xD8, 0xFF]],
+  png: [[0x89, 0x50, 0x4E, 0x47]],
+  webp: [[0x52, 0x49, 0x46, 0x46]]
+};
+
+function checkImageMagicBytes(filePath) {
+  const fd = fs.openSync(filePath, 'r');
+  const buf = Buffer.alloc(4);
+  try { fs.readSync(fd, buf, 0, 4, 0); } finally { fs.closeSync(fd); }
+  for (const sigs of Object.values(IMAGE_MAGIC_BYTES)) {
+    for (const sig of sigs) {
+      if (buf.slice(0, sig.length).equals(Buffer.from(sig))) return;
+    }
+  }
+  throw new Error('File does not appear to be a valid image (magic bytes mismatch)');
+}
+
 async function normalizeImage(file) {
   const id = crypto.randomUUID();
   const filename = id + '.jpg';
@@ -44,6 +62,7 @@ async function normalizeImage(file) {
   const destination = path.join(UPLOADS_DIR, filename);
   const thumbDestination = path.join(UPLOADS_DIR, thumbFilename);
   try {
+    checkImageMagicBytes(file.path);
     const pipeline = sharp(file.path, { failOn: 'error', limitInputPixels: 25_000_000 })
       .rotate();
     await Promise.all([
@@ -154,7 +173,6 @@ function parseJSONArray(value, fieldName) {
     if (!Array.isArray(parsed)) throw new Error(fieldName + ' must be an array');
     return parsed;
   } catch (e) {
-    const { ValidationError } = require('./errors');
     throw new ValidationError(e.message || 'Invalid JSON for ' + fieldName);
   }
 }
@@ -184,5 +202,6 @@ module.exports = {
   normalizeImage, findCategory, flattenCategories,
   validateItemInput, validateFinalOrder, parseJSONArray,
   validateVersion,
-  toNumber
+  toNumber,
+  checkImageMagicBytes
 };

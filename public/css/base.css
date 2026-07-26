@@ -550,6 +550,8 @@ a:hover { text-decoration: underline; }
     gap: 8px;
   }
   .admin-actions button { padding: 8px 16px; font-size: 0.8rem; }
+  .admin-corner { bottom: 80px; right: 16px; gap: 6px; }
+  .admin-corner button { width: 40px; height: 40px; font-size: 1rem; }
   .spreadsheet-bar { bottom: 72px; }
   .spreadsheet-bar button { font-size: 1rem; padding: 10px 20px; border-radius: 10px; }
 
@@ -956,7 +958,6 @@ a:hover { text-decoration: underline; }
   color: var(--accent);
   font-weight: 500;
 }
-.ps-cat-content { transition: max-height 0.3s ease; }
 .ps-cat-content.collapsed { display: none; }
 
 .error-page { text-align: center; padding: 80px 20px; }

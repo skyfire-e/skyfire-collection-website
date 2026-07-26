@@ -208,7 +208,9 @@ function closeCrop() {
   cropSrc = null;
   cropCtx = null;
   document.getElementById('cropModal').classList.remove('open');
-  document.removeEventListener('keydown', onEscapeKey);
+  if (!document.getElementById('editModal')?.classList.contains('open')) {
+    document.removeEventListener('keydown', onEscapeKey);
+  }
 }
 
 function loadNextFile() {
@@ -318,7 +320,9 @@ function closeEdit() {
   unlockScroll();
   releaseTrap(document.getElementById('editModal'));
   document.getElementById('editModal').classList.remove('open');
-  document.removeEventListener('keydown', onEscapeKey);
+  if (!document.getElementById('cropModal')?.classList.contains('open')) {
+    document.removeEventListener('keydown', onEscapeKey);
+  }
   editSlots.forEach(revokeSlot);
   editSlots = [];
   editCurrentItem = null;

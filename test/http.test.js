@@ -308,6 +308,14 @@ describe('Backfill', () => {
     assert.strictEqual(res.status, 200);
     assert.ok(res.body.updated >= 0);
   });
+
+  it('POST /api/backfill-defaults — applies default images', async () => {
+    const res = await agent.post('/api/backfill-defaults')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.body.updated >= 0);
+  });
 });
 
 describe('CRUD (authenticated)', () => {
@@ -380,6 +388,32 @@ describe('CRUD (authenticated)', () => {
     assert.strictEqual(db.getItem(created.body.id), null);
   });
 
+  it('POST /api/settings — rejects unknown keys (strict mode)', async () => {
+    const res = await agent
+      .put('/api/settings')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ siteName: 'OK', unknownKey: 'leaked' });
+    assert.strictEqual(res.status, 400);
+    assert.ok(res.body.error);
+  });
+
+  it('POST /api/settings — accepts valid settings', async () => {
+    const res = await agent
+      .put('/api/settings')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ siteName: 'UpdatedName' });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.siteName, 'UpdatedName');
+    // restore
+    await agent
+      .put('/api/settings')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ siteName: 'TestSite' });
+  });
+
   it('POST /api/auth/logout — logs out', async () => {
     const res = await agent
       .post('/api/auth/logout')
@@ -393,5 +427,83 @@ describe('CRUD (authenticated)', () => {
       .set('Origin', 'http://127.0.0.1:3000')
       .set('Host', '127.0.0.1:3000')
       .send({ username: 'admin', password: 'admin123' });
+  });
+});
+
+describe('Sitemap', () => {
+  it('GET /sitemap.xml — returns XML', async () => {
+    const res = await supertest(app).get('/sitemap.xml');
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.text.includes('<?xml'));
+    assert.ok(res.text.includes('dice'));
+  });
+});
+
+describe('Audit', () => {
+  let agent;
+  before(async () => {
+    agent = supertest.agent(app);
+    await agent
+      .post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+  });
+
+  it('GET /api/audit — returns audit log', async () => {
+    const res = await agent
+      .get('/api/audit')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.ok(Array.isArray(res.body));
+  });
+});
+
+describe('Checkpoint', () => {
+  let agent;
+  before(async () => {
+    agent = supertest.agent(app);
+    await agent
+      .post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+  });
+
+  it('POST /api/checkpoint — runs checkpoint', async () => {
+    const res = await agent
+      .post('/api/checkpoint')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.success, true);
+  });
+});
+
+describe('Spreadsheet admin', () => {
+  let agent;
+  before(async () => {
+    agent = supertest.agent(app);
+    await agent
+      .post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+  });
+
+  it('GET /api/spreadsheet — admin returns all items', async () => {
+    const res = await agent
+      .get('/api/spreadsheet')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.ok(Array.isArray(res.body));
+    assert.ok(res.body.length > 0);
+  });
+
+  it('GET /api/spreadsheet — requires admin', async () => {
+    const res = await supertest(app).get('/api/spreadsheet');
+    assert.strictEqual(res.status, 401);
   });
 });
