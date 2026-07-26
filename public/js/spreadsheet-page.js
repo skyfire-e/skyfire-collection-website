@@ -231,7 +231,8 @@ export async function initSpreadsheetPage() {
   }
 }
 
-initSpreadsheetPage();
-
-const csvBtn = document.getElementById('csvBtn');
-if (csvBtn) csvBtn.addEventListener('click', exportCSV);
+document.addEventListener('DOMContentLoaded', () => {
+  initSpreadsheetPage();
+  const csvBtn = document.getElementById('csvBtn');
+  if (csvBtn) csvBtn.addEventListener('click', exportCSV);
+});

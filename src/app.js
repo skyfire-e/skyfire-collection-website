@@ -18,9 +18,9 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ['\'self\''],
-      scriptSrc: ['\'self\'', 'https://cdnjs.cloudflare.com'],
+      scriptSrc: ['\'self\''],
       scriptSrcAttr: null,
-      styleSrc: ['\'self\'', 'https://cdnjs.cloudflare.com'],
+      styleSrc: ['\'self\''],
       imgSrc: ['\'self\'', 'data:', 'blob:'],
       fontSrc: ['\'self\'', 'https:', 'data:'],
       objectSrc: ['\'none\''],
@@ -55,13 +55,12 @@ app.use('/api/backfill-images', writeLimiter);
 app.use('/api/backfill-prices', writeLimiter);
 app.use('/api/checkpoint', writeLimiter);
 
-// Rate limiting on public read endpoints (skip GET/HEAD/OPTIONS)
+// Rate limiting on public read endpoints
 const readLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 200,
   standardHeaders: true,
   legacyHeaders: false,
-  skip: (req) => ['GET', 'HEAD', 'OPTIONS'].includes(req.method),
   message: { error: 'Too many requests, try again later' }
 });
 app.use('/api/auth/me', readLimiter);

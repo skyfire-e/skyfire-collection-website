@@ -7,9 +7,14 @@
   <title>Admin - skyf1re Collection</title>
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"><link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/admin.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
+  <link rel="stylesheet" href="/vendor/cropper.min.css">
 </head>
-<body class="hidden">
+<body>
+  <div id="authLoader" class="auth-loader">
+    <div class="spinner"></div>
+    <p>Loading admin panel...</p>
+  </div>
+  <div id="adminContent" class="hidden">
   <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="admin-corner">
     <button id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☀️</button>
@@ -282,7 +287,9 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js" integrity="sha384-jzwsV9ieM/KUDMeo+d8dc+jm0GEl7ywPNwg10alB5BodVuC/Kx9RpEnyrl2Om9zH" crossorigin="anonymous"></script>
+  </div><!-- /adminContent -->
+
+  <script src="/vendor/cropper.min.js"></script>
   <script type="module" src="/js/nav.js"></script>
   <script type="module" src="/js/auth.js"></script>
   <script type="module" src="/js/admin/main.js"></script>

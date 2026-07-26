@@ -70,11 +70,9 @@ export async function initAdminItems() {
   });
 
   // Hash-based tab navigation
-
-  // Hash-based tab navigation
   const hash = location.hash.slice(1);
   if (hash) {
-    const tab = document.querySelector(`[data-tab="${hash}"]`);
+    const tab = document.querySelector(`[data-tab="${CSS.escape(hash)}"]`);
     if (tab) tab.click();
   }
 

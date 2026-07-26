@@ -3,7 +3,7 @@ import globals from 'globals';
 export default [
   {
     files: ['**/*.js'],
-    ignores: ['node_modules/', 'uploads/', 'data/', 'public/js/admin/main.js', 'test/**/*.js'],
+    ignores: ['node_modules/', 'uploads/', 'data/', 'test/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'commonjs',

@@ -142,6 +142,174 @@ describe('CSRF protection', () => {
   });
 });
 
+describe('Search and pagination', () => {
+  it('GET /api/items?q=Dragon — searches items by title', async () => {
+    const res = await supertest(app).get('/api/items?q=Dragon');
+    assert.strictEqual(res.status, 200);
+    const items = res.body.items || res.body;
+    assert.ok(items.length >= 1);
+    assert.ok(items.some(i => i.title.includes('Dragon')));
+  });
+
+  it('GET /api/items?q=zzz_nonexistent — returns empty', async () => {
+    const res = await supertest(app).get('/api/items?q=zzz_nonexistent');
+    assert.strictEqual(res.status, 200);
+    const items = res.body.items || res.body;
+    assert.strictEqual(items.length, 0);
+  });
+
+  it('GET /api/items?limit=1 — paginates results', async () => {
+    const res = await supertest(app).get('/api/items?limit=1');
+    assert.strictEqual(res.status, 200);
+    assert.ok(Array.isArray(res.body.items));
+    assert.strictEqual(res.body.items.length, 1);
+    assert.ok(res.body.total >= 1);
+    assert.strictEqual(res.body.limit, 1);
+  });
+
+  it('GET /api/items?limit=foo — returns 400', async () => {
+    const res = await supertest(app).get('/api/items?limit=foo');
+    assert.strictEqual(res.status, 400);
+  });
+});
+
+describe('Reorder', () => {
+  let agent;
+  let itemA, itemB;
+
+  before(async () => {
+    agent = supertest.agent(app);
+    await agent.post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+    itemA = await agent.post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'Reorder A');
+    itemB = await agent.post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'Reorder B');
+  });
+
+  it('POST /api/items/reorder — reorders items', async () => {
+    const res = await agent.post('/api/items/reorder')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'dice', category: 'metal-dice', items: [itemB.body.id, itemA.body.id] });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.success, true);
+    const items = await supertest(app).get('/api/items?section=dice&category=metal-dice');
+    const reordered = items.body.filter(i => i.id === itemA.body.id || i.id === itemB.body.id);
+    assert.strictEqual(reordered[0].id, itemB.body.id);
+    assert.strictEqual(reordered[1].id, itemA.body.id);
+  });
+
+  it('POST /api/items/reorder — rejects missing params', async () => {
+    const res = await agent.post('/api/items/reorder')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({});
+    assert.strictEqual(res.status, 400);
+  });
+});
+
+describe('Categories CRUD', () => {
+  let agent;
+
+  before(async () => {
+    agent = supertest.agent(app);
+    await agent.post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+  });
+
+  it('POST /api/categories — creates a new leaf category', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'dice', label: 'Plastic Dice', id: 'plastic-dice' });
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.body.dice.subcategories.some(c => c.id === 'plastic-dice'));
+  });
+
+  it('POST /api/categories — creates a group category', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'dice', label: 'Special', id: 'special', isGroup: true });
+    assert.strictEqual(res.status, 200);
+    const group = res.body.dice.subcategories.find(c => c.id === 'special');
+    assert.ok(group);
+    assert.strictEqual(group.type, 'group');
+  });
+
+  it('POST /api/categories — rejects duplicate ID', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'dice', label: 'Plastic Again', id: 'plastic-dice' });
+    assert.strictEqual(res.status, 409);
+  });
+
+  it('DELETE /api/categories — deletes a leaf category', async () => {
+    const res = await agent.delete('/api/categories?section=dice&id=plastic-dice')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    const cats = await supertest(app).get('/api/categories');
+    assert.ok(!cats.body.dice.subcategories.some(c => c.id === 'plastic-dice'));
+  });
+
+  it('DELETE /api/categories — 409 when section has items', async () => {
+    const res = await agent.delete('/api/categories?section=dice')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 409);
+  });
+
+  it('DELETE /api/categories — 404 for missing category', async () => {
+    const res = await agent.delete('/api/categories?section=dice&id=nonexistent')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 404);
+  });
+});
+
+describe('Backfill', () => {
+  let agent;
+
+  before(async () => {
+    agent = supertest.agent(app);
+    await agent.post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+  });
+
+  it('POST /api/backfill-images — copies image to images[0]', async () => {
+    const res = await agent.post('/api/backfill-images')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.body.updated >= 0);
+  });
+
+  it('POST /api/backfill-prices — normalizes prices', async () => {
+    const res = await agent.post('/api/backfill-prices')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.body.updated >= 0);
+  });
+});
+
 describe('CRUD (authenticated)', () => {
   let agent;
 

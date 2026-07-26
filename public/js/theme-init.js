@@ -1,1 +1,6 @@
-(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+(function() {
+  var theme = localStorage.getItem('theme');
+  if (theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+})();

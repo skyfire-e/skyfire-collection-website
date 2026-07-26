@@ -93,6 +93,9 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     const currentItem = db.getItem(req.params.id);
     if (!currentItem) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
+    if (req.body.version === undefined) {
+      return res.status(400).json({ error: 'Version is required for updates. Current version: ' + currentItem.version });
+    }
     validateVersion(currentItem, req.body.version);
 
     const candidate = {

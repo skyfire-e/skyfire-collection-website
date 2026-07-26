@@ -12,7 +12,7 @@ function injectNav() {
   navBtns.className = 'nav-corner';
   navBtns.innerHTML = `
     <button class="nav-corner-btn" id="menuBtn" title="Navigation">
-      <img src="/images/compass.svg" alt="Nav" width="28" height="28">
+      <img src="/images/compass.svg" alt="Navigation menu" width="28" height="28">
     </button>
   `;
   document.body.appendChild(navBtns);
@@ -20,8 +20,8 @@ function injectNav() {
   const searchBtn = document.createElement('button');
   searchBtn.className = 'nav-corner-btn search-corner-btn';
   searchBtn.id = 'searchBtn';
-  searchBtn.title = 'Search';
-  searchBtn.innerHTML = '<img src="/images/search.svg" alt="Search" width="28" height="28">';
+  searchBtn.title = 'Search items';
+  searchBtn.innerHTML = '<img src="/images/search.svg" alt="Search items" width="28" height="28">';
   document.body.appendChild(searchBtn);
 
   const drawer = document.createElement('div');

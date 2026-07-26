@@ -98,6 +98,16 @@ describe('validateFinalOrder', () => {
   it('accepts valid finalOrder', () => {
     assert.strictEqual(validateFinalOrder([0, 1, 2], oldImages, [], []), null);
   });
+  it('accepts order with new image + all old', () => {
+    assert.strictEqual(validateFinalOrder([-1, 0, 1, 2], oldImages, ['/img/new.jpg'], []), null);
+  });
+  it('rejects order that silently drops old images', () => {
+    assert.strictEqual(validateFinalOrder([-1], oldImages, ['/img/new.jpg'], []),
+      'All existing images must be accounted for in finalOrder or removedIndexes');
+  });
+  it('accepts order that removes all old and adds new', () => {
+    assert.strictEqual(validateFinalOrder([-1], oldImages, ['/img/new.jpg'], [0, 1, 2]), null);
+  });
   it('rejects duplicate indexes', () => {
     assert.strictEqual(validateFinalOrder([0, 0, 1], oldImages, [], []), 'Duplicate image indexes are not allowed');
   });
@@ -111,9 +121,9 @@ describe('validateFinalOrder', () => {
     assert.strictEqual(validateFinalOrder([0, -2], oldImages, [], []), 'finalOrder contains an invalid value');
   });
   it('validates upload slot count matches files', () => {
-    assert.strictEqual(validateFinalOrder([0, -1, 1], oldImages, ['/img/new.jpg'], []), null);
-    assert.strictEqual(validateFinalOrder([0, -1, 1], oldImages, [], []), 'Uploaded files do not match finalOrder');
-    assert.strictEqual(validateFinalOrder([0, -1, 1], oldImages, ['/img/a.jpg', '/img/b.jpg'], []), 'Uploaded files do not match finalOrder');
+    assert.strictEqual(validateFinalOrder([0, -1, 1, 2], oldImages, ['/img/new.jpg'], []), null);
+    assert.strictEqual(validateFinalOrder([0, -1, 1, 2], oldImages, [], []), 'Uploaded files do not match finalOrder');
+    assert.strictEqual(validateFinalOrder([0, -1, 1, 2], oldImages, ['/img/a.jpg', '/img/b.jpg'], []), 'Uploaded files do not match finalOrder');
   });
   it('rejects more than 10 total images', () => {
     const manyImages = Array.from({ length: 15 }, (_, i) => '/img/' + i + '.jpg');
@@ -123,8 +133,8 @@ describe('validateFinalOrder', () => {
   it('rejects order referencing removed images', () => {
     assert.strictEqual(validateFinalOrder([0, 1], oldImages, [], [1]), 'finalOrder references a removed image');
   });
-  it('handles empty order with uploads', () => {
-    assert.strictEqual(validateFinalOrder([-1], oldImages, ['/img/new.jpg'], []), null);
+  it('handles order replacing all with new', () => {
+    assert.strictEqual(validateFinalOrder([-1], oldImages, ['/img/new.jpg'], [0, 1, 2]), null);
   });
   it('rejects non-array input', () => {
     assert.strictEqual(validateFinalOrder('not-array', oldImages, [], []), 'finalOrder must be an array');

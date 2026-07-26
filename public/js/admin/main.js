@@ -8,12 +8,18 @@ function showLogin() {
   else location.href = '/#login';
 }
 
+function showContent() {
+  document.getElementById('authLoader')?.classList.add('hidden');
+  document.getElementById('adminContent')?.classList.remove('hidden');
+}
+
 checkAuth().then(() => {
   if (!isAdmin()) {
+    showContent();
     showLogin();
     return;
   }
-  document.body.classList.remove('hidden');
+  showContent();
   initAdminSettings();
   initAdminItems();
 });

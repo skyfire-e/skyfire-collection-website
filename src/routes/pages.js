@@ -17,6 +17,37 @@ router.get('/health', (req, res) => {
   }
 });
 
+function generateSitemap() {
+  const cats = db.getCategories();
+  const entries = [
+    { loc: '/', priority: '1.0' },
+    { loc: '/gallery', priority: '0.6' },
+    { loc: '/spreadsheet', priority: '0.5' }
+  ];
+  for (const [id, section] of Object.entries(cats)) {
+    entries.push({ loc: '/' + id, priority: '0.8' });
+    for (const cat of (section.subcategories || [])) {
+      if (cat.type === 'group' && cat.subcategories) {
+        entries.push({ loc: '/' + id + '/' + cat.id, priority: '0.7' });
+        for (const sc of cat.subcategories) {
+          entries.push({ loc: '/gallery?section=' + encodeURIComponent(id) + '&category=' + encodeURIComponent(sc.id), priority: '0.6' });
+        }
+      } else {
+        entries.push({ loc: '/gallery?section=' + encodeURIComponent(id) + '&category=' + encodeURIComponent(cat.id), priority: '0.6' });
+      }
+    }
+  }
+  const urls = entries.map(e =>
+    '  <url><loc>' + e.loc + '</loc><changefreq>weekly</changefreq><priority>' + e.priority + '</priority></url>'
+  ).join('\n');
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>';
+}
+
+router.get('/sitemap.xml', (req, res) => {
+  res.set('Content-Type', 'application/xml');
+  res.send(generateSitemap());
+});
+
 const pages = {
   '/': 'index.html',
   '/dice': 'dice.html',

@@ -126,7 +126,8 @@ function validateFinalOrder(order, oldImages, uploadedFiles, removedIndexes) {
   if (new Set(existingIndexes).size !== existingIndexes.length) return 'Duplicate image indexes are not allowed';
   if (existingIndexes.some(idx => idx >= oldImages.length)) return 'finalOrder references a missing image';
 
-  if (removedIndexes && existingIndexes.some(idx => removedIndexes.includes(idx))) {
+  const removed = removedIndexes || [];
+  if (existingIndexes.some(idx => removed.includes(idx))) {
     return 'finalOrder references a removed image';
   }
 
@@ -134,6 +135,14 @@ function validateFinalOrder(order, oldImages, uploadedFiles, removedIndexes) {
   if (uploadSlots !== uploadedFiles.length) return 'Uploaded files do not match finalOrder';
 
   if (order.length > 10) return 'Maximum 10 images allowed';
+
+  const allOldIndexes = new Set(oldImages.keys());
+  const accounted = new Set([...existingIndexes, ...removed]);
+  if (allOldIndexes.size !== accounted.size ||
+      [...allOldIndexes].some(idx => !accounted.has(idx))) {
+    return 'All existing images must be accounted for in finalOrder or removedIndexes';
+  }
+
   return null;
 }
 

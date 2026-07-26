@@ -1,13 +1,16 @@
 import { API, checkAuth, isAdmin } from './api.js';
 
-const PAGE_TYPE = document.body.dataset.pageType;
-const grid = document.getElementById('categoryGrid');
+let grid;
 
-if (PAGE_TYPE === 'section') {
-  initSectionPage();
-} else if (PAGE_TYPE === 'subgroup') {
-  initSubgroupPage();
-}
+document.addEventListener('DOMContentLoaded', () => {
+  grid = document.getElementById('categoryGrid');
+  const pageType = document.body.dataset.pageType;
+  if (pageType === 'section') {
+    initSectionPage();
+  } else if (pageType === 'subgroup') {
+    initSubgroupPage();
+  }
+});
 
 async function initSectionPage() {
   const sectionId = location.pathname.replace(/^\/|\/$/g, '');

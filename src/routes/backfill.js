@@ -12,7 +12,7 @@ router.post('/backfill-defaults', requireSameOrigin, requireAdmin, (req, res) =>
     let updated = 0;
     for (const item of items) {
       if (!item.image || item.image === '/images/default.svg') {
-        db.updateItem(item.id, { image: defaultImage });
+        db.updateItem(item.id, { image: defaultImage, version: (item.version || 0) + 1 }, item.version);
         updated++;
       }
     }
@@ -27,7 +27,7 @@ router.post('/backfill-images', requireSameOrigin, requireAdmin, (req, res) => {
     let updated = 0;
     for (const item of items) {
       if (item.image && (!item.images || item.images.length === 0)) {
-        db.updateItem(item.id, { images: [item.image] });
+        db.updateItem(item.id, { images: [item.image], version: (item.version || 0) + 1 }, item.version);
         updated++;
       }
     }
@@ -42,7 +42,7 @@ router.post('/backfill-prices', requireSameOrigin, requireAdmin, (req, res) => {
     let updated = 0;
     for (const item of items) {
       if (typeof item.price === 'string' && item.price !== '') {
-        db.updateItem(item.id, { price: parseFloat(item.price) || 0 });
+        db.updateItem(item.id, { price: parseFloat(item.price) || 0, version: (item.version || 0) + 1 }, item.version);
         updated++;
       }
     }
