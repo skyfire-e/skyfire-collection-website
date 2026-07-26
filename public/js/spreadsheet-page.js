@@ -1,4 +1,5 @@
 import { API, checkAuth, isAdmin } from './api.js';
+import { showToast } from './toast.js';
 
 function buildCSV(sections) {
   let csv = 'Section,Category,Title,Author,Price,Recaster,Combat Points,Status\n';
@@ -7,7 +8,7 @@ function buildCSV(sections) {
       for (const item of sub.items) {
         const row = [
           sec.label, sub.groupLabel ? sub.groupLabel + ' - ' + sub.label : sub.label,
-          item.title || '', item.author || '', item.price || '',
+          item.title || '', item.author || '', item.price != null ? item.price : '',
           item.recaster || '', item.combatPoints || '', item.status || ''
         ].map(f => {
           const cell = String(f);
@@ -52,7 +53,7 @@ function exportCSV() {
     URL.revokeObjectURL(a.href);
   }).catch(err => {
     console.error('Export failed:', err);
-    alert('Failed to export CSV');
+    showToast('Failed to export CSV', 'error');
   });
 }
 
@@ -213,7 +214,7 @@ export async function initSpreadsheetPage() {
           if (section.showPrices) {
             const td3 = document.createElement('td');
             td3.className = 'ps-price-col';
-            td3.textContent = item.price ? section.currency + ' ' + item.price : '';
+            td3.textContent = item.price != null ? section.currency + ' ' + item.price : '';
             tr.appendChild(td3);
           }
           tbody.appendChild(tr);

@@ -1,4 +1,5 @@
 import { API } from '../api.js';
+import { showToast } from '../toast.js';
 
 export async function loadSettings() {
   let settings;
@@ -6,7 +7,7 @@ export async function loadSettings() {
     settings = await API.get('/api/settings');
   } catch (err) {
     console.error('Failed to load settings:', err);
-    alert('Failed to load settings');
+    showToast('Failed to load settings', 'error');
     return;
   }
   document.getElementById('setSiteName').value = settings.siteName || '';
@@ -51,40 +52,40 @@ export function initAdminSettings() {
   document.getElementById('backfillBtn').addEventListener('click', async () => {
     try {
       const res = await API.post('/api/backfill-defaults');
-      alert('Updated ' + res.updated + ' items with default image: ' + res.defaultImage);
+      showToast('Updated ' + res.updated + ' items with default image: ' + res.defaultImage, 'success');
     } catch (err) {
       console.error('Backfill failed:', err);
-      alert('Backfill failed: ' + (err.message || 'Unknown error'));
+      showToast('Backfill failed: ' + (err.message || 'Unknown error'), 'error');
     }
   });
 
   document.getElementById('backfillImagesBtn').addEventListener('click', async () => {
     try {
       const res = await API.post('/api/backfill-images');
-      alert('Updated ' + res.updated + ' items: image → images[0]');
+      showToast('Updated ' + res.updated + ' items: image → images[0]', 'success');
     } catch (err) {
       console.error('Backfill images failed:', err);
-      alert('Backfill failed: ' + (err.message || 'Unknown error'));
+      showToast('Backfill failed: ' + (err.message || 'Unknown error'), 'error');
     }
   });
 
   document.getElementById('backfillPricesBtn').addEventListener('click', async () => {
     try {
       const res = await API.post('/api/backfill-prices');
-      alert('Updated ' + res.updated + ' items: price normalized to number');
+      showToast('Updated ' + res.updated + ' items: price normalized to number', 'success');
     } catch (err) {
       console.error('Backfill prices failed:', err);
-      alert('Backfill failed: ' + (err.message || 'Unknown error'));
+      showToast('Backfill failed: ' + (err.message || 'Unknown error'), 'error');
     }
   });
 
   document.getElementById('checkpointBtn').addEventListener('click', async () => {
     try {
       await API.post('/api/checkpoint');
-      alert('WAL checkpoint done — DB is ready for commit');
+      showToast('WAL checkpoint done — DB is ready for commit', 'success');
     } catch (err) {
       console.error('Checkpoint failed:', err);
-      alert('Checkpoint failed: ' + (err.message || 'Unknown error'));
+      showToast('Checkpoint failed: ' + (err.message || 'Unknown error'), 'error');
     }
   });
 
@@ -115,11 +116,11 @@ export function initAdminSettings() {
         },
         currencies: currencies,
       });
-      alert('Settings saved!');
+      showToast('Settings saved!', 'success');
       loadSettings();
     } catch (err) {
       console.error('Save settings failed:', err);
-      alert('Save settings failed: ' + (err.message || 'Unknown error'));
+      showToast('Save settings failed: ' + (err.message || 'Unknown error'), 'error');
     }
   });
 }

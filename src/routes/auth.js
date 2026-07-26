@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const crypto = require('crypto');
 const argon2 = require('argon2');
 const { loginLimiter, requireSameOrigin } = require('../middleware');
 const { getSecureCookies } = require('../helpers');
@@ -15,10 +16,13 @@ router.post('/login', requireSameOrigin, loginLimiter, async (req, res) => {
     let passwordValid = false;
     try {
       passwordValid = await argon2.verify(process.env.ADMIN_PASSWORD_HASH, password || '');
-    } catch { /* invalid hash format */ }
+    } catch (e) { console.error('Argon2 verify error:', e.message); }
     valid = (username === ADMIN_USERNAME) && passwordValid;
   } else if (process.env.ADMIN_PASSWORD) {
-    valid = (username === ADMIN_USERNAME) && (process.env.ADMIN_PASSWORD === password);
+    const pw = process.env.ADMIN_PASSWORD;
+    valid = (username === ADMIN_USERNAME) &&
+      (pw.length === password.length) &&
+      crypto.timingSafeEqual(Buffer.from(pw), Buffer.from(password));
     console.warn('WARNING: Using plain-text password. Set ADMIN_PASSWORD_HASH in .env');
   } else {
     return res.status(500).json({ error: 'Server misconfigured' });

@@ -12,8 +12,8 @@ function injectNav() {
   const navBtns = document.createElement('div');
   navBtns.className = 'nav-corner';
   navBtns.innerHTML = `
-    <button class="nav-corner-btn" id="menuBtn" title="Navigation" role="link">
-      <img src="/images/compass.svg" alt="Navigation menu" width="28" height="28">
+    <button class="nav-corner-btn" id="menuBtn" title="Navigation" aria-label="Open navigation menu">
+      <img src="/images/compass.svg" alt="" width="28" height="28" aria-hidden="true">
     </button>
   `;
   document.body.appendChild(navBtns);
@@ -22,8 +22,8 @@ function injectNav() {
   searchBtn.className = 'nav-corner-btn search-corner-btn';
   searchBtn.id = 'searchBtn';
   searchBtn.title = 'Search items';
-  searchBtn.setAttribute('role', 'link');
-  searchBtn.innerHTML = '<img src="/images/search.svg" alt="Search items" width="28" height="28">';
+  searchBtn.setAttribute('aria-label', 'Open search');
+  searchBtn.innerHTML = '<img src="/images/search.svg" alt="" width="28" height="28" aria-hidden="true">';
   document.body.appendChild(searchBtn);
 
   const drawer = document.createElement('div');
@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('/api/settings').then(r => { if (!r.ok) throw new Error('Settings fetch failed'); return r.json(); }).then(s => {
     const stored = localStorage.getItem('theme');
     const theme = stored || s.defaultTheme || 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
+    if (!document.documentElement.hasAttribute('data-theme') || !stored) {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
     const themeBtn = document.getElementById('themeBtn');
     if (themeBtn) themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
     if (s.siteName) {

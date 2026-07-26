@@ -1,4 +1,6 @@
-import { API, checkAuth, isAdmin, thumbUrl, createFocusTrap } from './api.js';
+import { API, checkAuth, isAdmin } from './api.js';
+import { showToast } from './toast.js';
+import { thumbUrl, createFocusTrap } from './utils.js';
 import { openEdit, initImageEditor } from './image-editor.js';
 
 export async function initGalleryPage() {
@@ -67,6 +69,7 @@ export async function initGalleryPage() {
   }
 
   let lbFocusTrap = null;
+  let lbTriggerElement = null;
 
   function loadLightboxImage(url, then) {
     lbImg.src = '';
@@ -83,7 +86,7 @@ export async function initGalleryPage() {
     lbCurrentImages = item.images && item.images.length > 0 ? item.images : [item.image];
     lbCurrentImgIdx = 0;
     lbImg.alt = item.title || 'Image preview';
-    lbPreloaders.forEach(p => { p.src = ''; });
+    for (const p of lbPreloaders) { p.src = ''; p.onload = p.onerror = null; }
     lbPreloaders = [];
     for (let i = 1; i < lbCurrentImages.length; i++) {
       const p = new Image();
@@ -104,8 +107,9 @@ export async function initGalleryPage() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
     if (lbFocusTrap) { lightbox.removeEventListener('keydown', lbFocusTrap); lbFocusTrap = null; }
-    lbPreloaders.forEach(p => { p.src = ''; });
+    for (const p of lbPreloaders) { p.src = ''; p.onload = p.onerror = null; }
     lbPreloaders = [];
+    if (lbTriggerElement) { lbTriggerElement.focus(); lbTriggerElement = null; }
   }
 
   function updateLightbox(item) {
@@ -246,7 +250,7 @@ export async function initGalleryPage() {
             await API.del('/api/items/' + item.id);
             loadItems();
           } catch (err) {
-            alert('Delete failed: ' + (err.message || 'Unknown error'));
+            showToast('Delete failed: ' + (err.message || 'Unknown error'), 'error');
           }
         });
         editBtn.addEventListener('click', (e) => {
@@ -259,6 +263,7 @@ export async function initGalleryPage() {
 
       card.addEventListener('click', (e) => {
         if (e.target.closest('.card-actions')) return;
+        lbTriggerElement = card;
         openLightbox(item);
       });
     });
@@ -274,7 +279,8 @@ export async function initGalleryPage() {
     if (section) url += '?section=' + encodeURIComponent(section);
     if (category) url += (section ? '&' : '?') + 'category=' + encodeURIComponent(category);
     try {
-      const items = await API.get(url);
+      const data = await API.get(url);
+      const items = Array.isArray(data) ? data : data.items;
       renderItems(items);
       if (reorderMode) enableDragAndDrop(document.getElementById('galleryGrid'));
     } catch (err) {
@@ -350,6 +356,8 @@ export async function initGalleryPage() {
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         card.classList.add('highlighted');
         setTimeout(() => card.classList.remove('highlighted'), 5000);
+      } else {
+        console.warn('Item card not found for hash:', itemId);
       }
     }, 500);
   }
@@ -364,7 +372,7 @@ async function toggleReorder() {
     try {
       await saveReorder();
     } catch (err) {
-      alert('Failed to save order: ' + (err.message || 'Unknown error'));
+      showToast('Failed to save order: ' + (err.message || 'Unknown error'), 'error');
       return;
     }
     btn.textContent = '🔀 Re-arrange';
@@ -393,7 +401,7 @@ function enableDragAndDrop(grid) {
     card.addEventListener('dragend', onDragEnd);
     card.addEventListener('touchstart', onTouchStart, { passive: true });
     card.addEventListener('touchmove', onTouchMove, { passive: false });
-    card.addEventListener('touchend', onTouchEnd);
+    card.addEventListener('touchend', onTouchEnd, { passive: true });
   });
 }
 
@@ -454,9 +462,7 @@ function onTouchMove(e) {
     e.preventDefault();
     const grid = this.parentNode;
     const children = [...grid.querySelectorAll('.gallery-card')];
-    const idx = children.indexOf(this);
-    const rect = this.getBoundingClientRect();
-    const midY = rect.top + rect.height / 2;
+    const thisRect = this.getBoundingClientRect();
     let target = null;
     for (const child of children) {
       if (child === this) continue;
@@ -486,7 +492,7 @@ async function saveReorder() {
   try {
     await API.post('/api/items/reorder', { section, category, items: itemIds });
   } catch (err) {
-    alert('Failed to save order: ' + (err.message || 'Unknown error'));
+    showToast('Failed to save order: ' + (err.message || 'Unknown error'), 'error');
   }
 }
 

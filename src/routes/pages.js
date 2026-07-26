@@ -1,12 +1,11 @@
 const { Router } = require('express');
 const path = require('path');
-const { ROOT } = require('../helpers');
+const { ROOT, STATIC_ROUTES } = require('../helpers');
 const db = require('../db');
 
 const router = Router();
 
 const PUB = path.join(ROOT, 'public');
-const STATIC_ROUTES = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
 
 router.get('/health', (req, res) => {
   try {
@@ -45,9 +44,14 @@ function generateSitemap(baseUrl) {
 }
 
 router.get('/sitemap.xml', (req, res) => {
-  const baseUrl = process.env.SITE_URL || 'https://' + req.hostname;
-  res.set('Content-Type', 'application/xml');
-  res.send(generateSitemap(baseUrl.replace(/\/$/, '')));
+  try {
+    const baseUrl = process.env.SITE_URL || 'https://' + req.hostname;
+    res.set('Content-Type', 'application/xml');
+    res.send(generateSitemap(baseUrl.replace(/\/$/, '')));
+  } catch (err) {
+    console.error('Sitemap generation failed:', err.message);
+    res.status(503).json({ error: 'Database unavailable' });
+  }
 });
 
 const pages = {
@@ -81,7 +85,7 @@ router.get('/:section', (req, res, next) => {
   if (STATIC_ROUTES.includes(req.params.section) || req.params.section.startsWith('api')) return next();
   const cats = db.getCategories();
   if (!cats[req.params.section]) return next();
-  if (cats[req.params.section].subcategories.length === 0) return next();
+  // Если подкатегорий нет — всё равно рендерим страницу (пустой список)
   res.sendFile(path.join(PUB, 'section-page.html'));
 });
 

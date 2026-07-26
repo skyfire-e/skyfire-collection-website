@@ -1,4 +1,6 @@
-import { API, thumbUrl } from './api.js';
+import { API } from './api.js';
+import { thumbUrl } from './utils.js';
+import { showToast } from './toast.js';
 
 const MAX_IMAGES_PER_ITEM = 10;
 let extraFieldsSections = null;
@@ -23,6 +25,7 @@ let editSlots = [];
 let editingId = null;
 let editCurrentItem = null;
 let onSaveCallback = null;
+let editTriggerElement = null;
 
 let cropper = null;
 let cropCtx = null;
@@ -86,7 +89,7 @@ export async function openEdit(item, { onSave } = {}) {
   document.getElementById('editId').value = item.id;
   document.getElementById('editTitle').value = item.title;
   document.getElementById('editAuthor').value = item.author || '';
-  document.getElementById('editPrice').value = item.price || '';
+  document.getElementById('editPrice').value = item.price != null ? item.price : '';
   document.getElementById('editRecaster').value = item.recaster || '';
   document.getElementById('editCombatPoints').value = item.combatPoints || '';
   document.getElementById('editStatus').value = item.status || '';
@@ -103,6 +106,7 @@ export async function openEdit(item, { onSave } = {}) {
   document.getElementById('editModal').classList.add('open');
   trapFocus(document.getElementById('editModal'));
   document.addEventListener('keydown', onEscapeKey);
+  editTriggerElement = document.activeElement;
 }
 
 function renderEditImages() {
@@ -296,11 +300,11 @@ async function saveEdit() {
     await API.put('/api/items/' + editingId, fd);
   } catch (err) {
     if (err.status === 409) {
-      alert('Item was modified in another session. Please reload and try again.');
+      showToast('Item was modified in another session. Please reload and try again.', 'error');
       closeEdit();
       return;
     }
-    alert('Save failed: ' + (err.message || 'Unknown error'));
+    showToast('Save failed: ' + (err.message || 'Unknown error'), 'error');
     return;
   }
   if (onSaveCallback) onSaveCallback();
@@ -328,6 +332,7 @@ function closeEdit() {
   editCurrentItem = null;
   editingId = null;
   onSaveCallback = null;
+  if (editTriggerElement) { editTriggerElement.focus(); editTriggerElement = null; }
 }
 
 export function initImageEditor() {
@@ -343,7 +348,7 @@ export function initImageEditor() {
     this.value = '';
     const available = MAX_IMAGES_PER_ITEM - editSlots.length;
     if (files.length > available) {
-      alert('Maximum ' + MAX_IMAGES_PER_ITEM + ' images total. You can add ' + available + ' more.');
+      showToast('Maximum ' + MAX_IMAGES_PER_ITEM + ' images total. You can add ' + available + ' more.', 'error');
       return;
     }
     const fileQueue = files.slice(1);
@@ -363,7 +368,7 @@ export function initImageEditor() {
     try {
       await saveEdit();
     } catch (err) {
-      alert('Save failed: ' + (err.message || 'Unknown error'));
+      showToast('Save failed: ' + (err.message || 'Unknown error'), 'error');
     }
   });
 

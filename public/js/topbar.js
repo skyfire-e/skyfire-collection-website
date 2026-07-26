@@ -1,4 +1,5 @@
-import { API, thumbUrl } from './api.js';
+import { API } from './api.js';
+import { thumbUrl } from './utils.js';
 
 function buildNavTree(cats) {
   const tree = [{ label: 'Home', href: '/', icon: '🏠' }];

@@ -34,7 +34,7 @@ router.get('/public', (req, res) => {
         items: subItems.map(i => ({
           title: i.title,
           author: i.author,
-          price: showPrices ? (Number(i.price) || 0) : undefined,
+          price: showPrices ? (i.price != null ? Number(i.price) : null) : undefined,
           recaster: showColumns.recaster ? i.recaster : undefined,
           combatPoints: showColumns.combatPoints ? i.combatPoints : undefined,
           status: showColumns.status ? i.status : undefined,

@@ -6,7 +6,7 @@ if (!process.env.SESSION_SECRET) {
   process.exit(1);
 }
 
-if (process.env.ADMIN_PASSWORD === '') {
+if ((process.env.ADMIN_PASSWORD || '').trim() === '') {
   console.error('ADMIN_PASSWORD cannot be empty. Use ADMIN_PASSWORD_HASH instead.');
   process.exit(1);
 }
@@ -55,6 +55,10 @@ function shutdown(signal) {
     clearTimeout(forceExit);
     try {
       db.db.pragma('wal_checkpoint(TRUNCATE)');
+    } catch (e) {
+      console.error('WAL checkpoint error on shutdown:', e.message);
+    }
+    try {
       db.db.close();
     } catch (e) {
       console.error('DB close error:', e.message);

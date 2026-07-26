@@ -40,15 +40,17 @@ function cleanupUploadedFiles(files) {
 const IMAGE_MAGIC_BYTES = {
   jpeg: [[0xFF, 0xD8, 0xFF]],
   png: [[0x89, 0x50, 0x4E, 0x47]],
-  webp: [[0x52, 0x49, 0x46, 0x46]]
+  webp: [[0x52, 0x49, 0x46, 0x46, 0x57, 0x45, 0x42, 0x50]]
 };
 
 function checkImageMagicBytes(filePath) {
   const fd = fs.openSync(filePath, 'r');
-  const buf = Buffer.alloc(4);
-  try { fs.readSync(fd, buf, 0, 4, 0); } finally { fs.closeSync(fd); }
-  for (const sigs of Object.values(IMAGE_MAGIC_BYTES)) {
-    for (const sig of sigs) {
+  const sigs = Object.values(IMAGE_MAGIC_BYTES);
+  const maxLen = Math.max(...sigs.flat().map(s => s.length));
+  const buf = Buffer.alloc(maxLen);
+  try { fs.readSync(fd, buf, 0, maxLen, 0); } finally { fs.closeSync(fd); }
+  for (const sigsList of sigs) {
+    for (const sig of sigsList) {
       if (buf.slice(0, sig.length).equals(Buffer.from(sig))) return;
     }
   }
@@ -189,11 +191,17 @@ function validateVersion(item, clientVersion) {
  * @param {*} value
  * @returns {number}
  */
+function safeJsonParse(value, fallback) {
+  try { return JSON.parse(value); } catch { return fallback; }
+}
+
 function toNumber(value) {
   if (value === null || value === undefined || value === '') return 0;
   const n = Number(value);
-  return isNaN(n) ? 0 : n;
+  return Number.isNaN(n) ? NaN : n;
 }
+
+const STATIC_ROUTES = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
 
 module.exports = {
   ROOT, UPLOADS_DIR, TEMP_DIR,
@@ -203,5 +211,7 @@ module.exports = {
   validateItemInput, validateFinalOrder, parseJSONArray,
   validateVersion,
   toNumber,
-  checkImageMagicBytes
+  checkImageMagicBytes,
+  STATIC_ROUTES,
+  safeJsonParse
 };

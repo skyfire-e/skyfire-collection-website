@@ -31,7 +31,7 @@ function requireSameOrigin(req, res, next) {
   try { originHost = new URL(source).hostname; } catch { return res.status(403).json({ error: 'Invalid Origin header' }); }
   if (ALLOWED_ORIGINS.length > 0) {
     if (!ALLOWED_ORIGINS.includes(originHost)) return res.status(403).json({ error: 'Cross-origin request rejected' });
-  } else if (originHost !== req.hostname) {
+  } else if (originHost !== req.hostname && originHost !== req.get('host')?.split(':')[0]) {
     return res.status(403).json({ error: 'Cross-origin request rejected' });
   }
   next();

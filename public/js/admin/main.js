@@ -15,7 +15,6 @@ function showContent() {
 
 checkAuth().then(() => {
   if (!isAdmin()) {
-    showContent();
     showLogin();
     return;
   }

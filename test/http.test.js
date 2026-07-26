@@ -64,19 +64,19 @@ describe('Items', () => {
   it('GET /api/items — returns items', async () => {
     const res = await supertest(app).get('/api/items');
     assert.strictEqual(res.status, 200);
-    assert.ok(res.body.length > 0);
+    assert.ok(res.body.items.length > 0);
   });
 
   it('GET /api/items?section=dice — filters by section', async () => {
     const res = await supertest(app).get('/api/items?section=dice');
     assert.strictEqual(res.status, 200);
-    assert.ok(res.body.every(i => i.section === 'dice'));
+    assert.ok(res.body.items.every(i => i.section === 'dice'));
   });
 
   it('GET /api/items?section=dice&category=metal-dice — filters by section+category', async () => {
     const res = await supertest(app).get('/api/items?section=dice&category=metal-dice');
     assert.strictEqual(res.status, 200);
-    assert.ok(res.body.every(i => i.section === 'dice' && i.category === 'metal-dice'));
+    assert.ok(res.body.items.every(i => i.section === 'dice' && i.category === 'metal-dice'));
   });
 });
 
@@ -205,7 +205,7 @@ describe('Reorder', () => {
     assert.strictEqual(res.status, 200);
     assert.strictEqual(res.body.success, true);
     const items = await supertest(app).get('/api/items?section=dice&category=metal-dice');
-    const reordered = items.body.filter(i => i.id === itemA.body.id || i.id === itemB.body.id);
+    const reordered = items.body.items.filter(i => i.id === itemA.body.id || i.id === itemB.body.id);
     assert.strictEqual(reordered[0].id, itemB.body.id);
     assert.strictEqual(reordered[1].id, itemA.body.id);
   });

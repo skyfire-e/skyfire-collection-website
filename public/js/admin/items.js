@@ -1,4 +1,6 @@
-import { API, withPending } from '../api.js';
+import { API } from '../api.js';
+import { withPending } from '../utils.js';
+import { showToast } from '../toast.js';
 import { openEdit, initImageEditor } from '../image-editor.js';
 
 let categoriesData = {};
@@ -9,7 +11,7 @@ export async function initAdminItems() {
     categoriesData = await API.get('/api/categories');
   } catch (e) {
     console.error('Failed to load categories:', e);
-    alert('Failed to load categories. Please refresh the page.');
+    showToast('Failed to load categories. Please refresh the page.', 'error');
   }
   try {
     const settings = await API.get('/api/settings');
@@ -35,9 +37,9 @@ export async function initAdminItems() {
     const fileInput = document.getElementById('addImage');
     const files = fileInput.files;
 
-    if (!section) return alert('Select a section');
-    if (!category) return alert('Select a category');
-    if (!title) return alert('Enter a title');
+    if (!section) return showToast('Select a section', 'error');
+    if (!category) return showToast('Select a category', 'error');
+    if (!title) return showToast('Enter a title', 'error');
 
     const fd = new FormData();
     fd.append('section', section);
@@ -55,9 +57,9 @@ export async function initAdminItems() {
       await withPending(btn, () => API.post('/api/items', fd));
       e.target.reset();
       document.getElementById('addCategory').innerHTML = '<option value="">Select section first</option>';
-      alert('Item added');
+      showToast('Item added', 'success');
     } catch (err) {
-      alert('Failed to add item: ' + (err.message || 'Unknown error'));
+      showToast('Failed to add item: ' + (err.message || 'Unknown error'), 'error');
     }
   });
 
@@ -107,7 +109,7 @@ export async function initAdminItems() {
     try {
     await withPending(document.getElementById('addSectionBtn'), async () => {
       const label = document.getElementById('newSectionLabel').value.trim();
-      if (!label) return alert('Enter a section name');
+      if (!label) return showToast('Enter a section name', 'error');
       const id = document.getElementById('newSectionId').value.trim() || undefined;
       await API.post('/api/categories', { label, id, parentId: '__new_section__' });
       document.getElementById('newSectionLabel').value = '';
@@ -123,7 +125,7 @@ export async function initAdminItems() {
     });
     } catch (err) {
       console.error('Failed to add section:', err);
-      alert('Failed to add section');
+      showToast('Failed to add section', 'error');
     }
   });
 
@@ -134,8 +136,8 @@ export async function initAdminItems() {
       const section = document.getElementById('catSection').value;
       const parentId = document.getElementById('catParent').value;
       const label = document.getElementById('catLabel').value.trim();
-      if (!section) return alert('Select a section');
-      if (!label) return alert('Enter a category label');
+      if (!section) return showToast('Select a section', 'error');
+      if (!label) return showToast('Enter a category label', 'error');
       const id = document.getElementById('catId').value.trim() || undefined;
       const isGroup = document.getElementById('catIsGroup').checked;
       await API.post('/api/categories', { section, label, id, parentId: parentId || undefined, isGroup });
@@ -153,7 +155,7 @@ export async function initAdminItems() {
     });
     } catch (err) {
       console.error('Failed to add subcategory:', err);
-      alert('Failed to add subcategory');
+      showToast('Failed to add subcategory', 'error');
     }
   });
 }
@@ -178,7 +180,7 @@ function getCategoryLabel(sectionId, catId) {
 function createCell(text, className) {
   const td = document.createElement('td');
   if (className) td.className = className;
-  td.textContent = text || '';
+  td.textContent = text != null ? text : '';
   return td;
 }
 
@@ -255,7 +257,7 @@ async function loadSpreadsheet() {
             await withPending(delBtn, () => API.del('/api/items/' + item.id));
             loadSpreadsheet();
           } catch (err) {
-            alert('Delete failed: ' + (err.message || 'Unknown error'));
+            showToast('Delete failed: ' + (err.message || 'Unknown error'), 'error');
           }
         });
         actionsTd.appendChild(delBtn);
@@ -273,8 +275,7 @@ async function loadSpreadsheet() {
 function populateAddSectionDropdown(cats) {
   const sel = document.getElementById('addSection');
   sel.innerHTML = '<option value="">Select section...</option>';
-  Object.entries(cats).forEach(function (_ref) {
-    const key = _ref[0], sec = _ref[1];
+  Object.entries(cats).forEach(([key, sec]) => {
     const opt = document.createElement('option');
     opt.value = key;
     opt.textContent = sec.label;
@@ -322,7 +323,7 @@ async function deleteCat(section, id, parentId) {
     await API.del('/api/categories?' + params.toString());
     loadCatList();
   } catch (err) {
-    alert(err.message || 'Delete failed');
+    showToast(err.message || 'Delete failed', 'error');
   }
 }
 
@@ -333,7 +334,7 @@ async function deleteSection(key) {
     await API.del('/api/categories?' + params.toString());
     loadCatList();
   } catch (err) {
-    alert(err.message || 'Delete failed');
+    showToast(err.message || 'Delete failed', 'error');
   }
 }
 

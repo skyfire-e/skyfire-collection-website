@@ -12,6 +12,11 @@ const { getSecureCookies, envBoolean, ROOT } = require('./helpers');
 
 const app = express();
 
+// Warn if a file shadows an API route (startup only)
+if (fs.existsSync(path.join(ROOT, 'public', 'api'))) {
+  console.warn('WARNING: public/api directory exists — this shadows API routes, bypassing auth!');
+}
+
 app.set('trust proxy', envBoolean(process.env.TRUST_PROXY) ? 1 : false);
 app.use(compression());
 app.use(morgan('tiny'));
@@ -39,6 +44,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Rate limiting on mutation endpoints (skip GET/HEAD/OPTIONS)
+// writeLimiter (~60 req/15min) applies to POST/PUT/DELETE, skips GET
+// readLimiter (~200 req/15min) applies to GET on shared paths
+// GET /api/items is counted only by readLimiter (writeLimiter skips it)
 const writeLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 60,
@@ -66,41 +74,45 @@ const readLimiter = rateLimit({
 });
 app.use('/api/auth/me', readLimiter);
 app.use('/api/spreadsheet/public', readLimiter);
+app.use('/api/items', readLimiter);
+app.use('/api/categories', readLimiter);
+app.use('/api/settings', readLimiter);
+app.use('/api/spreadsheet', readLimiter);
 
 // SQLite session store
 const { getSession, setSession, destroySession, db: dbInstance } = require('./db');
 
-const SQLiteStore = function() {};
-SQLiteStore.prototype.__proto__ = session.Store.prototype;
-SQLiteStore.prototype.get = function(sid, cb) {
-  try {
-    const data = getSession(sid);
-    cb(null, data);
-  } catch (err) { cb(err); }
-};
 const SESSION_MAX_AGE = parseInt(process.env.SESSION_MAX_AGE, 10) || 24 * 60 * 60 * 1000;
 
-SQLiteStore.prototype.set = function(sid, sessionData, cb) {
-  try {
-    const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
-    setSession(sid, sessionData, maxAge);
-    cb(null);
-  } catch (err) { cb(err); }
-};
-SQLiteStore.prototype.destroy = function(sid, cb) {
-  try {
-    destroySession(sid);
-    cb(null);
-  } catch (err) { cb(err); }
-};
-SQLiteStore.prototype.touch = function(sid, sessionData, cb) {
-  try {
-    const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
-    dbInstance.prepare('UPDATE sessions SET data = ?, expires = ? WHERE sid = ?')
-      .run(JSON.stringify(sessionData), Date.now() + maxAge, sid);
-    cb(null);
-  } catch (err) { cb(err); }
-};
+class SQLiteStore extends session.Store {
+  get(sid, cb) {
+    try {
+      const data = getSession(sid);
+      cb(null, data);
+    } catch (err) { cb(err); }
+  }
+  set(sid, sessionData, cb) {
+    try {
+      const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+      setSession(sid, sessionData, maxAge);
+      cb(null);
+    } catch (err) { cb(err); }
+  }
+  destroy(sid, cb) {
+    try {
+      destroySession(sid);
+      cb(null);
+    } catch (err) { cb(err); }
+  }
+  touch(sid, sessionData, cb) {
+    try {
+      const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+      dbInstance.prepare('UPDATE sessions SET data = ?, expires = ? WHERE sid = ?')
+        .run(JSON.stringify(sessionData), Date.now() + maxAge, sid);
+      cb(null);
+    } catch (err) { cb(err); }
+  }
+}
 
 app.use(session({
   name: 'skyfire.sid',
@@ -122,11 +134,6 @@ app.use('/uploads', express.static(path.join(ROOT, 'uploads'), {
   maxAge: '1y',
   immutable: true
 }));
-
-// Warn if a file shadows an API route
-if (fs.existsSync(path.join(ROOT, 'public', 'api'))) {
-  console.warn('WARNING: public/api directory exists — this shadows API routes, bypassing auth!');
-}
 
 // API routes
 app.use('/api', (req, res, next) => {
@@ -158,6 +165,9 @@ app.use(require('./routes/pages'));
 app.use((error, req, res, next) => {
   if (res.headersSent) { return next(error); }
   console.error(error);
+  if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
+    return res.status(400).json({ error: 'Invalid JSON in request body' });
+  }
   if (error instanceof multer.MulterError) {
     return res.status(400).json({ error: 'Upload error', details: error.message });
   }
@@ -167,7 +177,7 @@ app.use((error, req, res, next) => {
   if (error instanceof VersionConflictError) {
     return res.status(error.status).json({ error: error.message });
   }
-  if (error.message === 'Unsupported image type' || error.message === 'Only JPEG, PNG and WebP are allowed') {
+  if (error.message === 'Only JPEG, PNG and WebP are allowed') {
     return res.status(400).json({ error: error.message });
   }
   res.status(500).json({ error: 'Internal server error' });

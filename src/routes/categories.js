@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
-const { findCategory } = require('../helpers');
+const { findCategory, STATIC_ROUTES } = require('../helpers');
+const { slugify } = require('../slugify');
 const { categoryInputSchema } = require('../../lib/validate');
 const db = require('../db');
 
@@ -11,13 +12,6 @@ const router = Router();
 router.get('/', (req, res) => {
   res.json(db.getCategories());
 });
-
-const SLUG_MAP = { 'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'h','ц':'ts','ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya' };
-
-function slugify(label) {
-  return label.toLowerCase().split('').map(c => SLUG_MAP[c] || c).join('')
-    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-}
 
 router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
   try {
@@ -43,6 +37,7 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
       if (parentId === NEW_SECTION_MAGIC) {
         catId = id || slugify(label);
         if (!catId) return res.status(400).json({ error: 'Could not generate category ID. Specify an ID manually.' });
+        if (STATIC_ROUTES.includes(catId)) throw Object.assign(new Error('Section ID "' + catId + '" is reserved'), { status: 400 });
         if (cats[catId]) throw Object.assign(new Error('Section already exists'), { status: 400 });
         cats[catId] = { label, subcategories: [] };
       } else if (parentId && section && cats[section]) {

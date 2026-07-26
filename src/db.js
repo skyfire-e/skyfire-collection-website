@@ -1,7 +1,7 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
-const { toNumber } = require('./helpers');
+const { safeJsonParse } = require('./helpers');
 const { VersionConflictError } = require('./errors');
 
 const TEST_DB = process.env.NODE_TEST_DB === '1';
@@ -86,10 +86,6 @@ db.exec(`
 `);
 
 // --- Migrations ---
-function safeJsonParse(value, fallback) {
-  try { return JSON.parse(value); } catch { return fallback; }
-}
-
 const currentVersion = db.pragma('user_version', { simple: true });
 
 if (currentVersion < 1) {
@@ -266,7 +262,7 @@ function insertItem(item) {
     category: item.category,
     title: item.title,
     author: item.author || '',
-    price: toNumber(item.price),
+    price: item.price != null ? item.price : null,
     recaster: item.recaster || '',
     combatPoints: item.combatPoints || '',
     status: item.status || '',
@@ -289,7 +285,7 @@ function updateItem(id, fields, expectedVersion) {
       params.images = JSON.stringify(v);
     } else if (k === 'price') {
       sets.push('price = @price');
-      params.price = toNumber(v);
+      params.price = v;
     } else if (k === 'version') {
       sets.push('version = @version');
       params.version = v;
@@ -302,10 +298,9 @@ function updateItem(id, fields, expectedVersion) {
   sets.push('updatedAt = @updatedAt');
   params.updatedAt = new Date().toISOString();
   params.id = String(id);
-  const fallbackVersion = typeof fields.version === 'number' ? fields.version - 1 : undefined;
   const result = db.prepare('UPDATE items SET ' + sets.join(', ') + ' WHERE id = @id AND version = @expectedVersion').run({
     ...params,
-    expectedVersion: expectedVersion !== undefined ? expectedVersion : fallbackVersion
+    expectedVersion: expectedVersion
   });
   if (result.changes === 0) {
     const current = getItem(id);
@@ -340,7 +335,7 @@ function rowToItem(row) {
     category: row.category,
     title: row.title,
     author: row.author,
-    price: row.price ?? 0,
+    price: row.price,
     recaster: row.recaster,
     combatPoints: row.combatPoints,
     status: row.status,
