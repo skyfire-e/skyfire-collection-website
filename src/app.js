@@ -50,6 +50,7 @@ app.use('/api/upload', writeLimiter);
 app.use('/api/backfill-defaults', writeLimiter);
 app.use('/api/backfill-images', writeLimiter);
 app.use('/api/backfill-prices', writeLimiter);
+app.use('/api/checkpoint', writeLimiter);
 
 // Rate limiting on public read endpoints
 const readLimiter = rateLimit({
@@ -129,6 +130,9 @@ app.use('/api', require('./routes/backfill'));
 app.use('/api', (req, res) => {
   res.status(404).json({ error: 'API endpoint not found' });
 });
+
+// Checkpoint
+app.use('/api/checkpoint', require('./routes/checkpoint'));
 
 // Page routes
 app.use(require('./routes/pages'));

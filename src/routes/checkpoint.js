@@ -1,0 +1,12 @@
+const { Router } = require('express');
+const { requireAdmin, requireSameOrigin } = require('../middleware');
+const db = require('../db');
+
+const router = Router();
+
+router.post('/', requireSameOrigin, requireAdmin, (req, res) => {
+  db.db.pragma('wal_checkpoint(TRUNCATE)');
+  res.json({ success: true });
+});
+
+module.exports = router;
