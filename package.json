@@ -9,7 +9,7 @@
     "backup": "node backup.js",
     "checkpoint": "node -e \"const db=require('better-sqlite3')('data/collection.db'); db.prepare('DELETE FROM sessions').run(); db.pragma('wal_checkpoint(TRUNCATE)'); db.close(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
     "deploy": "node deploy.js",
-    "postinstall": "ln -sf ../../scripts/pre-commit .git/hooks/pre-commit 2>/dev/null || true",
+    "postinstall": "node -e \"var f='.git/hooks/pre-commit';try{require('fs').symlinkSync('../../scripts/pre-commit',f)}catch(e){try{require('fs').copyFileSync('scripts/pre-commit',f)}catch(e2){}}\"",
     "pull": "node pull.js",
     "gc": "node gc-uploads.js",
     "gc:dry": "node gc-uploads.js --dry-run",

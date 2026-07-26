@@ -56,6 +56,11 @@ export function initAdminSettings() {
     alert('Updated ' + res.updated + ' items: price normalized to number');
   });
 
+  document.getElementById('checkpointBtn').addEventListener('click', async () => {
+    await API.post('/api/checkpoint');
+    alert('WAL checkpoint done — DB is ready for commit');
+  });
+
   document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
     const fileInput = document.getElementById('setDefaultImage');
     if (fileInput.files[0]) {

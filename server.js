@@ -26,7 +26,9 @@ const server = app.listen(PORT, () => {
 
 function shutdown(signal) {
   console.log(signal + ': shutting down');
+  const forceExit = setTimeout(() => process.exit(1), 5000);
   server.close(error => {
+    clearTimeout(forceExit);
     try {
       db.db.pragma('wal_checkpoint(TRUNCATE)');
       db.db.close();

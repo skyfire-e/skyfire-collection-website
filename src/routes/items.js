@@ -72,6 +72,7 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
       updatedAt: new Date().toISOString()
     };
     db.insertItem(item);
+    db.appendAudit({ action: 'item.create', entityId: item.id, title: item.title });
     res.status(201).json(item);
   } catch (err) {
     cleanupUploadedFiles(files);
