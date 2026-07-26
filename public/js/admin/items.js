@@ -5,7 +5,12 @@ let categoriesData = {};
 let extraFieldsSections = ['miniatures'];
 
 export async function initAdminItems() {
-  categoriesData = await API.get('/api/categories');
+  try {
+    categoriesData = await API.get('/api/categories');
+  } catch (e) {
+    console.error('Failed to load categories:', e);
+    alert('Failed to load categories. Please refresh the page.');
+  }
   try {
     const settings = await API.get('/api/settings');
     if (settings.sectionsWithExtraFields) extraFieldsSections = settings.sectionsWithExtraFields;
@@ -409,6 +414,7 @@ async function loadActivity() {
   tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Loading...</td></tr>';
   try {
     const logs = await API.get('/api/audit');
+    if (!Array.isArray(logs)) { tbody.innerHTML = '<tr><td colspan="3" class="empty-state">Invalid response</td></tr>'; return; }
     if (logs.length === 0) { tbody.innerHTML = '<tr><td colspan="3" class="empty-state">No activity yet</td></tr>'; return; }
     tbody.innerHTML = '';
     logs.forEach(log => {

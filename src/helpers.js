@@ -44,7 +44,7 @@ async function normalizeImage(file) {
   const destination = path.join(UPLOADS_DIR, filename);
   const thumbDestination = path.join(UPLOADS_DIR, thumbFilename);
   try {
-    const pipeline = sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
+    const pipeline = sharp(file.path, { failOn: 'error', limitInputPixels: 25_000_000 })
       .rotate();
     await Promise.all([
       pipeline.clone()
@@ -78,7 +78,8 @@ function findCategory(subcategories, targetId) {
 function flattenCategories(subcategories, ancestors = []) {
   return (subcategories || []).flatMap(cat => {
     const p = [...ancestors, cat.label];
-    if (cat.type === 'group' && cat.subcategories?.length) {
+    if (cat.type === 'group') {
+      if (!cat.subcategories?.length) return [];
       return flattenCategories(cat.subcategories, p);
     }
     return [{
@@ -153,8 +154,8 @@ function parseJSONArray(value, fieldName) {
     if (!Array.isArray(parsed)) throw new Error(fieldName + ' must be an array');
     return parsed;
   } catch (e) {
-    const err = new Error(e.message || 'Invalid JSON for ' + fieldName);
-    throw err;
+    const { ValidationError } = require('./errors');
+    throw new ValidationError(e.message || 'Invalid JSON for ' + fieldName);
   }
 }
 
@@ -164,6 +165,12 @@ function validateVersion(item, clientVersion) {
   }
 }
 
+/**
+ * Convert a value to a number. Returns 0 for null, undefined, or empty string.
+ * Does not distinguish between "" and 0 — both return 0.
+ * @param {*} value
+ * @returns {number}
+ */
 function toNumber(value) {
   if (value === null || value === undefined || value === '') return 0;
   const n = Number(value);

@@ -24,10 +24,11 @@
     "check": "node --check server.js && node --check src/app.js && node --check src/middleware.js && node --check src/helpers.js && node --check src/db.js && node --check src/errors.js && node -e \"require('fs').readdirSync('src/routes').filter(f=>f.endsWith('.js')).forEach(f=>{const r=require('child_process').execFileSync('node',['--check','src/routes/'+f],{stdio:'inherit',encoding:'utf8'});console.log('src/routes/'+f+': OK')})\" && node --check lib/validate.js && node --check backup.js && node --check gc-uploads.js && node --check deploy.js && node --check pull.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "license": "MIT",
   "dependencies": {
+    "archiver": "^8.0.0",
     "argon2": "^0.45.1",
     "better-sqlite3": "^13.0.1",
     "compression": "^1.8.1",
@@ -43,7 +44,6 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "archiver": "^8.0.0",
     "eslint": "^10.8.0",
     "globals": "^17.7.0",
     "prettier": "^3.9.6",

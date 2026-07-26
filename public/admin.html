@@ -8,6 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"><link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/admin.css">
   <link rel="stylesheet" href="/vendor/cropper.min.css">
+  <script src="/js/theme-init.js" defer></script>
 </head>
 <body>
   <div id="authLoader" class="auth-loader">
@@ -65,7 +66,7 @@
           <input type="text" id="addRecaster" placeholder="e.g. Black Market" maxlength="100">
         </div>
         <div class="form-group mini-field">
-          <label for="addCombatPoints">Command Points</label>
+          <label for="addCombatPoints">Combat Points</label>
           <input type="text" id="addCombatPoints" placeholder="e.g. 150" maxlength="20">
         </div>
         <div class="form-group mini-field">
@@ -94,7 +95,7 @@
               <th>Author / Origin</th>
               <th>Price</th>
               <th>Recaster</th>
-              <th>Command Points</th>
+              <th>Combat Points</th>
               <th>Status</th>
               <th>Section</th>
               <th>Category</th>
@@ -224,7 +225,7 @@
             </label>
             <label class="label-block">
               <input type="checkbox" id="setShowCombatPoints" class="checkbox-auto-sm">
-              Show Command Points
+              Show Combat Points
             </label>
             <label class="label-block">
               <input type="checkbox" id="setShowStatus" class="checkbox-auto-sm">
@@ -257,7 +258,7 @@
       <div class="form-group"><label for="editAuthor">Author / Origin</label><input type="text" id="editAuthor" maxlength="100"></div>
       <div class="form-group"><label for="editPrice">Price</label><input type="number" id="editPrice" min="0" step="0.01"></div>
       <div class="form-group mini-field"><label for="editRecaster">Recaster</label><input type="text" id="editRecaster" maxlength="100"></div>
-      <div class="form-group mini-field"><label for="editCombatPoints">Command Points</label><input type="text" id="editCombatPoints" maxlength="20"></div>
+      <div class="form-group mini-field"><label for="editCombatPoints">Combat Points</label><input type="text" id="editCombatPoints" maxlength="20"></div>
       <div class="form-group mini-field"><label for="editStatus">Status</label><input type="text" id="editStatus" maxlength="50"></div>
       <div class="form-group">
         <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit, arrows to reorder)</span>
@@ -288,6 +289,25 @@
   </div>
 
   </div><!-- /adminContent -->
+
+  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-label="Admin login">
+    <div class="modal">
+      <h2 id="authTitle">Admin Login</h2>
+      <div class="form-group">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Password">
+      </div>
+      <div class="btn-row">
+        <button class="btn" id="loginBtn">Login</button>
+        <button class="btn btn-danger hidden" id="logoutBtn">Logout</button>
+      </div>
+      <p id="authError" class="danger-text" role="alert" aria-live="polite"></p>
+    </div>
+  </div>
 
   <script src="/vendor/cropper.min.js"></script>
   <script type="module" src="/js/nav.js"></script>

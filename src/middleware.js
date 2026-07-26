@@ -10,13 +10,15 @@ const upload = multer({
     if (!ALLOWED_MIMES.has(file.mimetype)) return cb(new Error('Only JPEG, PNG and WebP are allowed'));
     cb(null, true);
   },
-  limits: { fileSize: 10 * 1024 * 1024, files: 10, fields: 30 }
+  limits: { fileSize: parseInt(process.env.UPLOAD_FILE_SIZE, 10) || 10 * 1024 * 1024, files: parseInt(process.env.UPLOAD_MAX_FILES, 10) || 10, fields: parseInt(process.env.UPLOAD_MAX_FIELDS, 10) || 30 }
 });
 
 function requireAdmin(req, res, next) {
   if (req.session && req.session.user?.role === 'admin') return next();
   res.status(401).json({ error: 'Unauthorized' });
 }
+
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
 
 function requireSameOrigin(req, res, next) {
   if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
@@ -26,7 +28,11 @@ function requireSameOrigin(req, res, next) {
   if (!source) return res.status(403).json({ error: 'Origin or Referer header is required' });
   let originHost;
   try { originHost = new URL(source).hostname; } catch { return res.status(403).json({ error: 'Invalid Origin header' }); }
-  if (originHost !== req.hostname) return res.status(403).json({ error: 'Cross-origin request rejected' });
+  if (ALLOWED_ORIGINS.length > 0) {
+    if (!ALLOWED_ORIGINS.includes(originHost)) return res.status(403).json({ error: 'Cross-origin request rejected' });
+  } else if (originHost !== req.hostname) {
+    return res.status(403).json({ error: 'Cross-origin request rejected' });
+  }
   next();
 }
 

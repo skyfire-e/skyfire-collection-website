@@ -1,7 +1,7 @@
 import { API, checkAuth, isAdmin } from './api.js';
 
 function buildCSV(sections) {
-  let csv = 'Section,Category,Title,Author,Price,Recaster,Command Points,Status\n';
+  let csv = 'Section,Category,Title,Author,Price,Recaster,Combat Points,Status\n';
   for (const sec of sections) {
     for (const sub of sec.subcategories) {
       for (const item of sub.items) {
@@ -71,6 +71,7 @@ function toggleCategory(header) {
 export async function initSpreadsheetPage() {
   await checkAuth();
   const container = document.getElementById('spreadsheetContainer');
+  if (!container) { console.error('Spreadsheet container not found'); return; }
   container.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
 
   try {
@@ -167,7 +168,7 @@ export async function initSpreadsheetPage() {
         }
         if (section.showColumns && section.showColumns.combatPoints) {
           const th = document.createElement('th');
-          th.textContent = 'Command Points';
+          th.textContent = 'Combat Points';
           headerRow.appendChild(th);
         }
         if (section.showColumns && section.showColumns.status) {

@@ -115,9 +115,9 @@ function renderEditImages() {
     wrapper.className = 'edit-img-item';
 
     const img = document.createElement('img');
-    img.src = thumbUrl(slot.src);
+    img.src = thumbUrl(slot.src) || '/images/default.svg';
     img.alt = 'Image ' + (i + 1) + ' of item';
-    img.onerror = function () { if (this.src !== slot.src) { this.src = slot.src; } else { this.src = '/images/default.svg'; } };
+    img.onerror = function () { if (slot.src && this.src !== slot.src) { this.src = slot.src; } else { this.src = '/images/default.svg'; } };
     wrapper.appendChild(img);
 
     const leftBtn = document.createElement('button');
@@ -214,10 +214,11 @@ function closeCrop() {
 function loadNextFile() {
   if (cropQueue.length === 0) return;
   const nextFile = cropQueue.shift();
+  const queue = cropQueue.slice();
   const reader = new FileReader();
   reader.onload = (e) => {
     closeCrop();
-    openCrop(e.target.result, { fileQueue: cropQueue, slotIdx: undefined });
+    openCrop(e.target.result, { fileQueue: queue, slotIdx: undefined });
   };
   reader.readAsDataURL(nextFile);
 }

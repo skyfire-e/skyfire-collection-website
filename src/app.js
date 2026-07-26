@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const session = require('express-session');
 const path = require('path');
+const fs = require('fs');
 const multer = require('multer');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -22,7 +23,7 @@ app.use(helmet({
       scriptSrcAttr: null,
       styleSrc: ['\'self\''],
       imgSrc: ['\'self\'', 'data:', 'blob:'],
-      fontSrc: ['\'self\'', 'https:', 'data:'],
+      fontSrc: ['\'self\'', 'data:'],
       objectSrc: ['\'none\''],
       baseUri: ['\'self\''],
       formAction: ['\'self\''],
@@ -77,7 +78,7 @@ SQLiteStore.prototype.get = function(sid, cb) {
     cb(null, data);
   } catch (err) { cb(err); }
 };
-const SESSION_MAX_AGE = 24 * 60 * 60 * 1000;
+const SESSION_MAX_AGE = parseInt(process.env.SESSION_MAX_AGE, 10) || 24 * 60 * 60 * 1000;
 
 SQLiteStore.prototype.set = function(sid, sessionData, cb) {
   try {
@@ -94,7 +95,9 @@ SQLiteStore.prototype.destroy = function(sid, cb) {
 };
 SQLiteStore.prototype.touch = function(sid, sessionData, cb) {
   try {
-    dbInstance.prepare('UPDATE sessions SET data = ? WHERE sid = ?').run(JSON.stringify(sessionData), sid);
+    const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+    dbInstance.prepare('UPDATE sessions SET data = ?, expires = ? WHERE sid = ?')
+      .run(JSON.stringify(sessionData), Date.now() + maxAge, sid);
     cb(null);
   } catch (err) { cb(err); }
 };
@@ -109,7 +112,7 @@ app.use(session({
     httpOnly: true,
     secure: getSecureCookies(),
     sameSite: 'lax',
-    maxAge: 24 * 60 * 60 * 1000
+    maxAge: SESSION_MAX_AGE
   }
 }));
 
@@ -119,6 +122,11 @@ app.use('/uploads', express.static(path.join(ROOT, 'uploads'), {
   maxAge: '1y',
   immutable: true
 }));
+
+// Warn if a file shadows an API route
+if (fs.existsSync(path.join(ROOT, 'public', 'api'))) {
+  console.warn('WARNING: public/api directory exists — this shadows API routes, bypassing auth!');
+}
 
 // API routes
 app.use('/api', (req, res, next) => {
@@ -148,6 +156,7 @@ app.use(require('./routes/pages'));
 
 // Central error handler
 app.use((error, req, res, next) => {
+  if (res.headersSent) { return next(error); }
   console.error(error);
   if (error instanceof multer.MulterError) {
     return res.status(400).json({ error: 'Upload error', details: error.message });

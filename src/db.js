@@ -192,7 +192,7 @@ function getItems(section, category, limit, offset) {
   if (limit !== undefined && limit !== null) {
     query += ' LIMIT ?';
     params.push(limit);
-    if (offset) { query += ' OFFSET ?'; params.push(offset); }
+    if (offset !== undefined && offset !== null) { query += ' OFFSET ?'; params.push(offset); }
   }
   const rows = db.prepare(query).all(...params);
   return rows.map(row => ({
@@ -302,9 +302,10 @@ function updateItem(id, fields, expectedVersion) {
   sets.push('updatedAt = @updatedAt');
   params.updatedAt = new Date().toISOString();
   params.id = String(id);
+  const fallbackVersion = typeof fields.version === 'number' ? fields.version - 1 : undefined;
   const result = db.prepare('UPDATE items SET ' + sets.join(', ') + ' WHERE id = @id AND version = @expectedVersion').run({
     ...params,
-    expectedVersion: expectedVersion !== undefined ? expectedVersion : fields.version - 1
+    expectedVersion: expectedVersion !== undefined ? expectedVersion : fallbackVersion
   });
   if (result.changes === 0) {
     const current = getItem(id);
@@ -359,23 +360,38 @@ function getCategories() {
   for (const sec of sections) {
     result[sec.id] = { label: sec.label, subcategories: [] };
   }
+
+  // First pass: build a lookup map — guarantees every category exists before linking
+  const catMap = {};
   for (const cat of cats) {
     const sec = result[cat.section_id];
     if (!sec) continue;
-    if (cat.parent_id) {
-      const parent = sec.subcategories.find(c => c.id === cat.parent_id);
-      if (parent) {
-        if (!parent.subcategories) parent.subcategories = [];
-        parent.subcategories.push({ id: cat.id, label: cat.label });
-      }
+    if (!catMap[cat.section_id]) catMap[cat.section_id] = {};
+    if (cat.type === 'group') {
+      catMap[cat.section_id][cat.id] = { id: cat.id, label: cat.label, type: 'group', subcategories: [] };
     } else {
-      if (cat.type === 'group') {
-        sec.subcategories.push({ id: cat.id, label: cat.label, type: 'group', subcategories: [] });
-      } else {
-        sec.subcategories.push({ id: cat.id, label: cat.label });
-      }
+      catMap[cat.section_id][cat.id] = { id: cat.id, label: cat.label };
     }
   }
+
+  // Second pass: link children to parents, add top-level to section
+  for (const cat of cats) {
+    const sec = result[cat.section_id];
+    if (!sec) continue;
+    const entry = catMap[cat.section_id]?.[cat.id];
+    if (!entry) continue;
+
+    if (cat.parent_id) {
+      const parent = catMap[cat.section_id]?.[cat.parent_id];
+      if (parent) {
+        if (!parent.subcategories) parent.subcategories = [];
+        parent.subcategories.push(entry);
+      }
+    } else {
+      sec.subcategories.push(entry);
+    }
+  }
+
   return result;
 }
 

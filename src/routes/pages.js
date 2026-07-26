@@ -17,23 +17,24 @@ router.get('/health', (req, res) => {
   }
 });
 
-function generateSitemap() {
+function generateSitemap(baseUrl) {
   const cats = db.getCategories();
+  const loc = (path) => baseUrl + path;
   const entries = [
-    { loc: '/', priority: '1.0' },
-    { loc: '/gallery', priority: '0.6' },
-    { loc: '/spreadsheet', priority: '0.5' }
+    { loc: loc('/'), priority: '1.0' },
+    { loc: loc('/gallery'), priority: '0.6' },
+    { loc: loc('/spreadsheet'), priority: '0.5' }
   ];
   for (const [id, section] of Object.entries(cats)) {
-    entries.push({ loc: '/' + id, priority: '0.8' });
+    entries.push({ loc: loc('/' + id), priority: '0.8' });
     for (const cat of (section.subcategories || [])) {
       if (cat.type === 'group' && cat.subcategories) {
-        entries.push({ loc: '/' + id + '/' + cat.id, priority: '0.7' });
+        entries.push({ loc: loc('/' + id + '/' + cat.id), priority: '0.7' });
         for (const sc of cat.subcategories) {
-          entries.push({ loc: '/gallery?section=' + encodeURIComponent(id) + '&category=' + encodeURIComponent(sc.id), priority: '0.6' });
+          entries.push({ loc: loc('/gallery?section=' + encodeURIComponent(id) + '&category=' + encodeURIComponent(sc.id)), priority: '0.6' });
         }
       } else {
-        entries.push({ loc: '/gallery?section=' + encodeURIComponent(id) + '&category=' + encodeURIComponent(cat.id), priority: '0.6' });
+        entries.push({ loc: loc('/gallery?section=' + encodeURIComponent(id) + '&category=' + encodeURIComponent(cat.id)), priority: '0.6' });
       }
     }
   }
@@ -44,8 +45,9 @@ function generateSitemap() {
 }
 
 router.get('/sitemap.xml', (req, res) => {
+  const baseUrl = process.env.SITE_URL || 'http://' + req.headers.host;
   res.set('Content-Type', 'application/xml');
-  res.send(generateSitemap());
+  res.send(generateSitemap(baseUrl.replace(/\/$/, '')));
 });
 
 const pages = {

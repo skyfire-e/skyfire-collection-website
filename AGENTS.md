@@ -11,7 +11,7 @@
 
 ## Git
 - GitHub: https://github.com/skyfire-e/skyfire-collection-website.git
-- Branches: `main` (stable), `test` (current dev), `SQLmigrationTrue` (old, synced)
+- Branches: `main` (stable), `test` (current dev)
 - ⚠️ NEVER merge to `main` without explicit user confirmation
 - Deploy: `npm run deploy` (checkpoint → git add → commit → push to `test`)
 - Pull: `npm run pull` (sync from GitHub, safe for shallow clones)
@@ -26,19 +26,25 @@
 | Route | Description |
 |-------|-------------|
 | `/` | Homepage — Dice / Miniatures buttons |
-| `/dice` | Category grid → `/gallery?section=dice&category=...` |
-| `/miniatures` | Category grid (groups→subgroup pages, leaf→gallery) |
-| `/miniatures/skaven` | Skaven subgroup page (6 leaf categories) |
-| `/miniatures/space-orks` | Space Orks subgroup page (7 leaf categories) |
-| `/gallery` | Photo grid with lightbox + carousel |
-| `/admin` | Admin panel (add/edit/delete items, categories, settings) |
-| `/spreadsheet` | Public spreadsheet (show/hide per settings) |
-| `/health` | Health check endpoint |
+| `/:section` | Section category grid (dynamic from DB) → `/gallery?section=&category=` for leaf, `/:section/:groupId` for groups |
+| `/:section/:groupId` | Subgroup page (dynamic from DB, leaf categories → `/gallery?section=&category=`) |
+| `/gallery` | Photo grid with lightbox + carousel, drag-and-drop reorder (admin), search highlight |
+| `/admin` | Admin panel (CRUD items, categories, settings, spreadsheet, activity log) |
+| `/spreadsheet` | Public spreadsheet with collapsible sections, CSV export |
+| `/health` | Health check endpoint (DB + uptime) |
+| `/sitemap.xml` | Dynamic XML sitemap |
 
-## Navigation — Leaf Miniatures Categories
-Gloomspite Gitz, Adepta Sororitas, Orcs, Chaos Daemons, Soulblight Gravelords,
-Astra Militarum, Officio Assassinorum, Oger Mawtribes, Maggotkin of Nurgle, Kharadron Overlords,
-Empire of Man, High Elves, Stormcast Eternals, Terrain, Other
+## Features
+- **Gallery**: lightbox with carousel, touch swipe, keyboard nav, dot indicators, lazy thumbnails
+- **Search**: modal with real-time search across title/author/recaster/status/section/category, highlight animation
+- **Nav drawer**: compass icon, site tree from DB, current page highlight
+- **Theme**: dark/light toggle, persisted in localStorage, configurable default
+- **Categories**: dynamic tree (sections → groups → leaf), managed via admin UI
+- **Items**: pagination, sorting via drag-and-drop reorder, version-based optimistic locking, extra fields (recaster/combatPoints/status) per section
+- **Spreadsheet**: public view with collapsible categories, per-section currency, configurable columns, CSV export
+- **Admin**: tabs (add item, categories, spreadsheet, settings, activity log), image editor with crop, multi-image reorder
+- **Security**: Argon2 password hashing, CSRF via Origin/Referer check, Helmet CSP, rate limiting (write 60/15min, login 10/15min, read 200/15min), SRI for CDN assets
+- **Operations**: WAL checkpoint, backup (tar.gz, rotation), orphan file GC (dry-run/quarantine/delete), health endpoint, graceful shutdown
 
 ## Project Structure
 ```
@@ -52,14 +58,15 @@ src/
   routes/
     auth.js            — /api/auth/login|logout|me
     categories.js      — CRUD /api/categories
-    items.js           — CRUD /api/items
+    items.js           — CRUD /api/items, search, pagination, reorder
     settings.js        — GET|PUT /api/settings
     spreadsheet.js     — /api/spreadsheet (public + admin)
     upload.js          — POST /api/upload/default (default image + thumbnail pipeline)
-    backfill.js        — POST /api/backfill-defaults|backfill-images|backfill-prices
-    pages.js           — page routes + health + 404
+    backfill.js        — POST /api/backfill-defaults|backfill-images|backfill-prices + GET /api/audit
+    checkpoint.js      — POST /api/checkpoint
+    pages.js           — page routes + health + sitemap + 404
 lib/
-  validate.js          — Zod schemas (settingsSchema strict, itemInputSchema)
+  validate.js          — Zod schemas (settingsSchema strict, itemInputSchema, categoryInputSchema)
 data/collection.db     — SQLite database (items, categories, settings, sessions, audit)
 uploads/               — image files + thumbnails (thumb-*.jpg) — tracked in git
 public/                — static frontend (HTML, CSS, JS)
@@ -67,12 +74,13 @@ backups/               — backup archives (excluded from git)
 ```
 
 ## API Endpoints
-- `GET /api/items?section=&category=` — items filter
+- `GET /api/items?section=&category=&limit=&offset=&q=` — items filter with search/pagination
 - `POST /api/items` — create (multipart with images[])
-- `PUT /api/items/:id` — update (multipart with images[])
+- `PUT /api/items/:id` — update (multipart with images[], version required)
 - `DELETE /api/items/:id` — delete + clean up files
-- `GET/POST/DELETE /api/categories` — CRUD categories
-- `POST /api/auth/login|logout` — auth
+- `POST /api/items/reorder` — drag-and-drop reorder (requires section, category, items[])
+- `GET/POST/DELETE /api/categories` — CRUD categories (tree, groups, sections)
+- `POST /api/auth/login|logout` — auth with same-origin CSRF
 - `GET /api/auth/me` — session check
 - `GET /api/settings`, `PUT /api/settings` — settings (Zod-validated, strict)
 - `POST /api/upload/default` — upload default image
@@ -80,10 +88,11 @@ backups/               — backup archives (excluded from git)
 - `POST /api/backfill-images` — copy `image` → `images[0]` for items with empty images
 - `POST /api/backfill-prices` — normalize price to number
 - `GET /api/spreadsheet` — admin full data
-- `GET /api/spreadsheet/public` — public view
-- `POST /api/items/reorder` — drag-and-drop reorder
+- `GET /api/spreadsheet/public` — public view (respects showSpreadsheet/showPublicSpreadsheet)
 - `GET /api/audit` — activity log (admin, max 100)
 - `POST /api/checkpoint` — WAL checkpoint + session purge
+- `GET /health` — health check (status + uptime + db)
+- `GET /sitemap.xml` — dynamic XML sitemap
 
 ## Key Decisions
 - Price скрыта от публики (showPublicSpreadsheet в settings; сейчас включено — цены видны публично)
@@ -94,211 +103,52 @@ backups/               — backup archives (excluded from git)
 - Все items имеют `images[]`; `image` = cover (первый элемент)
 - Categories: нормализованные таблицы `sections(id,label,sort_order)` + `categories(id,section_id,parent_id,label,type,sort_order)` с FK CASCADE. Итоговое дерево собирается в `getCategories()`
 - Cookie: `skyfire.sid`, httpOnly, sameSite:'lax', secure conditional
-- CSRF: проверка Origin/Referer на mutation endpoints
+- CSRF: проверка Origin/Referer на mutation endpoints (включая login/logout)
 - Session: regenerate на login, destroy на logout; SQLite session store (24h expiry)
 - CommanderHQ — название админского spreadsheet-таба
-- Rate limiting: write (60 req/15min, skip GET), read (200 req/15min)
+- Rate limiting: write (60 req/15min, skip GET), login (10 req/15min), read (200 req/15min)
+- PUT /api/items требует поле version (optimistic locking)
+- Темы: dark/light, сохраняется в localStorage, defaultTheme в settings
 
-## Implemented Iterations
+## Scripts
+| Command | Description |
+|---------|-------------|
+| `npm start` | Production start |
+| `npm run dev` | Dev mode with `--watch` |
+| `npm run backup` | Backup data/ + uploads/ (WAL checkpoint before tar, rotation 10) |
+| `npm run checkpoint` | WAL checkpoint + clear sessions |
+| `npm run deploy` | One-command deploy: checkpoint → git add → commit → push |
+| `npm run pull` | Git pull + auto npm install on dep change |
+| `npm run gc:dry` | Find orphan files in uploads (dry run) |
+| `npm run gc:quarantine` | Move orphan files to uploads/.quarantine/ |
+| `npm run gc` | Delete orphan files not referenced in DB |
+| `npm test` | Run tests (in-memory SQLite) |
+| `npm run test:coverage` | Run tests with coverage report |
+| `npm run lint` | ESLint check |
+| `npm run lint:fix` | ESLint auto-fix |
+| `npm run format` | Prettier formatting |
+| `npm run check` | Syntax check all source files |
+| `npm run ci` | Lint + test |
 
-### Iteration A — P0 Security (Sharp + CSRF + XSS)
-- Sharp upload pipeline (normalizeImage, EXIF strip, mozjpeg 88%, max 3000px)
-- API wrapper (`response.ok`) в `api.js`
-- CSRF same-origin middleware (`requireSameOrigin`)
-- XSS fix: settings.js innerHTML → createElement/textContent
-
-### Iteration B — P0 Stability (Atomic writes + Cookie)
-- Strict `finalOrder` validation (checks `removedIndexes`)
-- Candidate-based PUT with full replacement validation
-- `envBoolean()` helper for COOKIE_SECURE/TRUST_PROXY
-- Cookie renamed to `skyfire.sid`, logout `clearCookie` with same options
-
-### Iteration C — P0 Operations (Health + Graceful shutdown + Diagnostics)
-- `GET /health` endpoint
-- Graceful shutdown on SIGINT/SIGTERM
-- `public/404.html` with status 404
-- `withPending` helper in `api.js`
-
-### Iteration D — P1+P2+P3 (Backup + Validation + UI + Split)
-- `backup.js` (tar data/ + uploads/, excludes .tmp/.quarantine)
-- `npm i zod`, `lib/validate.js` — Zod schemas for settings/category/item
-- `image-editor.js` — innerHTML→createElement (eliminates stored XSS vector)
-- `revokeObjectURL` cleanup on crop/close/save (no blob: leaks)
-- Section dropdown populated from `/api/categories` (no hardcoded dice/miniatures)
-- server.js split into `src/` modules (routes, middleware, helpers, errors)
-
-### Iteration E — P0+P1 (Argon2 + Mutex + Sessions + Deps)
-- Argon2 password hashing (ADMIN_PASSWORD_HASH env var)
-- Empty category ID guard for non-Latin labels
-- Backfill routes restored (admin-protected)
-
-### Iteration F — P0+P1+P2 (Security hardening + Quality)
-- Security headers via `helmet` (CSP, HSTS, XFO, X-Content-Type-Options)
-- Rate limiting on mutation endpoints (60 req / 15 min)
-- SRI integrity hashes for Cropper.js CDN assets (admin.html + gallery.html)
-- README.md with setup and deployment instructions
-- CI (GitHub Actions — syntax check, module load, tests)
-
-### Iteration G — Cleanup + Thumbnails + Hardening
-- Removed unused exports: `booleanString`, `categoriesSchema`, `subcategorySchema`, `AUDIT_FILE`
-- Removed duplicate route `POST /api/settings/upload/default`
-- SRI integrity hashes added to `gallery.html` for Cropper.js CDN
-- Rate limiting added for public GET endpoints (`/api/auth/me`, `/api/spreadsheet/public` — 200 req/15 min)
-- Thumbnail pipeline: `normalizeImage` generates `thumb-*.jpg` (400px) alongside full-size image
-- `safeUnlink` deletes both full-size and thumbnail on image removal
-- Gallery frontend uses thumbnails for cards, falls back to full-size on error
-
-### Iteration H — SQLite Migration
-- `better-sqlite3`, `src/db.js` with full schema (items, categories, settings, audit, sessions)
-- Migrated all data from JSON → SQLite on first run
-- All routes rewritten to use SQLite instead of JSON files
-- Sessions moved from `session-file-store` to SQLite store (sessions table)
-- Old JSON files deleted; DB + uploads tracked in git
-- Backfill buttons added to admin UI (Backfill Images, Backfill Prices)
-- `session-file-store` dependency removed
-
-### Iteration I — Critical Bug Fixes + Hardening
-- **#1**: Fixed image loss in PUT /api/items — `originalMap` now uses original indices
-- **#2**: CSP allows `blob:` in `imgSrc` (crop preview works)
-- **#3**: Rate limiter skips GET/HEAD/OPTIONS (public browsing not throttled)
-- **#4**: Sessions now expire after 24h (`cookie.maxAge` instead of `this.maxAge`)
-- **#5**: Login error shown to user (try/catch in auth.js)
-- **#6**: Tests use in-memory DB (`NODE_TEST_DB=1`), `settingsSchema.strict()`, `null = DELETE`
-- **#7**: Backup runs `wal_checkpoint(TRUNCATE)` before tar (consistent snapshot)
-- **#8**: Logout resets currentUser via checkAuth
-- **#9**: Currency inputs: placeholder `USD`, hint `ISO 4217`, maxLength 3
-- **#10**: Price inputs: `type="number"` (add + edit + admin)
-- **#11**: Cancel crop loads next file in queue
-- **#12**: Frontend try/catch on add/delete item, delete category
-- **#13**: `javascript:history.back()` → `/`
-- **#14**: Lightbox nav buttons moved inside viewport (left:10px/right:10px)
-- **#16**: `settingsSchema.passthrough()` → `.strict()` (no testKey leak)
-- **#17**: Admin page hidden until auth check passes (no flash)
-- **#20**: CI module load check includes `src/db.js`
-- `backups/` added to `.gitignore`
-- `engines: { node: ">=20" }`, `license: MIT`, `allowScripts` removed
-- Version → `1.6.0`
-
-### Iteration J — Normalized Schema + Sorting + Search + UI
-- DB migration v3: normalized `sections(id,label,sort_order)` + `categories(id,section_id,parent_id,label,type,sort_order)` with FK CASCADE
-- DB migration v4: `sort_order` column on items for drag-and-drop reordering
-- `reorderItems` with section/category scope (`WHERE section=? AND category=?`)
-- `searchItems` with LIKE escaping (`%`, `_`, `\`)
-- `getItemCount` for pagination metadata
-- Pagination API: with limit → `{items,total,limit,offset}`, without → array (backward compatible)
-- Dark/light theme toggle with `localStorage` + `defaultTheme` setting
-- Compass SVG icon + nav drawer (site tree) + search modal with teleport + highlight animation
-- Loading dots (ripple animation) in gallery and spreadsheet
-- CSV export on spreadsheet page
-- Activity log: admin tab, `GET /api/audit` (rotation max 1000)
-- Drag-and-drop reordering: `POST /api/items/reorder`, `sort_order` in DB
-- Orphan GC: `gc-uploads.js` (`npm run gc:dry`, `gc:quarantine`, `gc`)
-- ESLint (flat config v9+) + Prettier, `npm run lint`, CI lint step
-- Tests (unit + HTTP via supertest)
-- `deploy.js`: one-step deploy (`execFileSync`, no shell injection)
-- `pull.js`: GitHub sync (shallow-clamp safe), auto `npm install` on dep change
-- `npm run checkpoint`: WAL checkpoint + session purge
-- Favicon SVG, compass SVG icon
-- SEO: meta description, OG tags, `robots.txt`, `sitemap.xml`
-- Accessibility: role=dialog, focus-trap, aria-labels in lightbox/modal
-- Compression (gzip) + logging (morgan)
-- Cache-Control `max-age=1y, immutable` on `/uploads`
-- Rate limiter skips GET/HEAD/OPTIONS
-- `requireSameOrigin` on login + logout
-- `settingsSchema.strict()` (no key leak)
-- SESSION_SECRET length check on startup (>= 32)
-- Plaintext password rejected in production (`NODE_ENV=production`)
-- Graceful shutdown: `wal_checkpoint(TRUNCATE)` + `db.close()`
-- Health endpoint: `SELECT 1` DB check
-- All inline styles → CSS classes (56 styles → `base.css`/`admin.css`)
-- CSP: `scriptSrc 'self'` (no unsafe-inline), `styleSrc 'self'` (no unsafe-inline), `imgSrc 'self' data: blob:`
-- Unicode slug for category IDs (Cyrillic → Latin)
-- Custom extra fields via `sectionsWithExtraFields`
-- Category group creation via admin UI (`isGroup` flag)
-- DB migration runner (`PRAGMA user_version`)
-- Audit table rotation (max 1000)
-- Removed: `getCurrentUser`, `DATA_DIR`, `gitignore/`, `DataCorruptionError`, `readJSON`, `writeJSONAtomic`, `withDataLock`, `migrateFromJSON`, `saveSettings`, `session-file-store`, `jimp`, `playwright`, `puppeteer`, `allowScripts`
-- Version → `1.7.2`
-
-### Iteration K — Audit Fixes (Code Quality + Bugfixes)
-- **pull.js**: инвертирована логика `git status` — скрипт теперь выполняет `git pull`, а не выходит при чистом working tree
-- **gc-uploads.js**: удалено второе неиспользуемое соединение с БД, добавлено закрытие соединения
-- **src/db.js**: `appendAudit` обёрнут в транзакцию (INSERT + DELETE атомарны)
-- **src/helpers.js**: удалён мёртвый код (`err.statusCode`, `err.field`) из `parseJSONArray`
-- **src/routes/backfill.js**: удалена недостижимая ветка `item.price === null` (rowToItem уже конвертит null → 0)
-- **src/routes/pages.js**: дублированный массив `known` вынесен в константу модуля `STATIC_ROUTES`
-- **deploy.js**: устранён дублирующий импорт `execFileSync`
-- **api.js**: `checkAuth()` обёрнут в try/catch — больше нет unhandled promise rejections
-- **image-editor.js**: `openCrop`/`openEdit` теперь закрывают модалку перед повторным открытием — нет утечки focus-trap слушателей
-- **eslint.config.mjs**: `sourceType: module` → `commonjs` (весь код на CJS), добавлена конфигурация для тестов
-- **package.json**: `check` скрипт авто-обнаруживает роуты в `src/routes/`; `lint`/`format` теперь включают `test/`
-- **`.gitignore`**: добавлены `.DS_Store`, `Thumbs.db`, `.vscode/`, `.idea/`, `*.log`, `coverage/`
-- **`.env.example`**: добавлен комментарий про `NODE_ENV=production`
-- **`.github/workflows/ci.yml`: матрица Node 20+22, timeout, permissions, upload coverage отчёта
-- **HTML (admin, gallery, index, dice, miniatures)**: `aria-label` на кнопки темы/админки; `for` атрибуты на всех form labels
-- **AGENTS.md**: синхронизирована версия (1.8.0), исправлено описание схемы категорий, добавлены пропущенные API endpoints
-- Version → `1.8.0`
-
-## Known Issues (Post-Audit)
-- `PUT /api/items` version check optional — `validateVersion` пропускает проверку, если `version` не отправлен. Конкурентные редактирования могут перезаписывать друг друга
+## Known Issues
 - CSP допускает `cdnjs.cloudflare.com` (Cropper.js) — риск компрометации CDN, смягчено SRI-хешами
-- `unhandledRejection` handler в server.js подавляет аварийный выход — процесс может остаться в неконсистентном состоянии
-- Admin rate limiter (60 req/15min) может блокировать батч-операции
-- Нет тестов для: pagination, search, reorder, upload, backfill, categories CRUD, version conflicts, rate limiting
 - Нет лицензионного файла LICENSE в репозитории (в package.json заявлен MIT)
+- Нет тестов для: upload pipeline, rate limiting
 
-## Planned Features
-- Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)
-  - Нужен токен от @BotFather
-  - Пакет `node-telegram-bot-api`
+## Remote Fresh Deploy
 
-## Remote Fresh Deploy (с нуля на удалённом сервере)
-
-Подробная процедура — в `README.md` → "Fresh Deployment (Remote Server)". Краткая выжимка для агента:
-
-### Последовательность
-1. **Prerequisites**: Node 20+, git, npm. (опционально: build-essential, python3 — для сборки sharp/better-sqlite3)
+Подробная процедура — в `README.md`. Краткая выжимка для агента:
+1. **Prerequisites**: Node 20+, git, npm
 2. **Clone**: `git clone https://github.com/skyfire-e/skyfire-collection-website.git && cd skyfire-collection-website && git checkout test`
-   - БД (`data/collection.db`) и `uploads/` уже в git — **копировать вручную ничего не нужно**
-3. **Install**: `npm install` (postinstall сам symlink'нет pre-commit hook)
-4. **`.env`**: `cp .env.example .env`, заполнить:
-   - `SESSION_SECRET` (≥32 chars, сгенерить: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
-   - `ADMIN_PASSWORD_HASH` (Argon2, обязательно в production — plaintext запрещён: `node -e "require('argon2').hash('pass').then(h=>console.log(h))"`)
-   - `NODE_ENV=production`, `TRUST_PROXY=1` (за nginx), `PORT=3000`
-5. **Verify** (опционально):
-   - `node -e "..."` — проверить структуру БД
-   - `npm run check`, `npm test` (in-memory, не трогает прод-БД)
-6. **Smoke test**: `node server.js` → проверить `/`, `/health` (`{"status":"ok"}`), `/admin`. `Ctrl+C`
-7. **Service**:
-   - pm2: `pm2 start server.js --name skyfire-collection && pm2 save && pm2 startup`
-   - systemd: юнит в `/etc/systemd/system/skyfire-collection.service` с `EnvironmentFile=.env`, `Restart=on-failure`
-8. **Reverse proxy** (nginx): `proxy_pass http://127.0.0.1:3000` + заголовки + `TRUST_PROXY=1` в `.env`. HTTPS через certbot.
-9. **First backup**: `npm run backup`. Cron: `0 3 * * * cd /path && npm run backup`
-
-### Post-deploy checklist
-- [ ] `/health` → `{"status":"ok"}`
-- [ ] `/` грузится, 2 секции (Dice, Miniatures)
-- [ ] `/gallery?section=dice` — фото отображаются (uploads/ на месте)
-- [ ] `/admin` — логин работает, admin-UI скрыт до авторизации
-- [ ] Логи сервиса без ошибок
-- [ ] `.env` в `.gitignore` (уже), `data/*.db-wal`/`*.db-shm` в `.gitignore` (уже)
-
-### Update existing deployment
-```bash
-git pull origin test   # или: npm run pull
-npm install           # если сменились зависимости
-pm2 restart skyfire-collection   # или: sudo systemctl restart skyfire-collection
-```
+3. **Install**: `npm install`
+4. **`.env`**: `cp .env.example .env`, заполнить `SESSION_SECRET` (≥32 chars), `ADMIN_PASSWORD_HASH` (argon2, обязателен в production), `NODE_ENV=production`
+5. **Smoke test**: `node server.js` → проверить `/`, `/health`, `/admin`. `Ctrl+C`
+6. **Service**: pm2 (`pm2 start server.js --name skyfire-collection`) или systemd
+7. **Reverse proxy** (nginx): `proxy_pass http://127.0.0.1:3000` + HTTPS через certbot
+8. **Backup**: `npm run backup`, cron: `0 3 * * * cd /path && npm run backup`
 
 ### Важно
 - В production **plaintext `ADMIN_PASSWORD` запрещён** — только `ADMIN_PASSWORD_HASH` (проверка в `server.js:14`)
 - `SESSION_SECRET` < 32 chars → `process.exit(1)` (проверка в `server.js:9`)
 - DB и uploads в git — после `git clone` данные уже на месте, миграций не требуется
 - `data/collection.db-wal` и `-shm` в `.gitignore`, **не коммитить** — pre-commit hook сам делает `wal_checkpoint(TRUNCATE)` если WAL непустой
-
-## How to Restart Server
-```bash
-# macOS / Linux
-kill $(lsof -t -i:3000) 2>/dev/null
-node server.js
-```

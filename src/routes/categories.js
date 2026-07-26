@@ -28,6 +28,15 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
     const { section, label, id, parentId, isGroup } = result.data;
 
     let catId;
+
+    const DANGEROUS_IDS = ['__proto__', 'constructor', 'prototype'];
+    if (id && DANGEROUS_IDS.includes(id)) {
+      return res.status(400).json({ error: 'Invalid category ID' });
+    }
+    if (section && DANGEROUS_IDS.includes(section)) {
+      return res.status(400).json({ error: 'Invalid section' });
+    }
+
     try {
       const cats = db.getCategories();
 
@@ -73,6 +82,10 @@ router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
     const { section, id, parentId } = req.query;
 
     if (!section) return res.status(400).json({ error: 'Invalid section' });
+    const DANGEROUS = ['__proto__', 'constructor', 'prototype'];
+    if (DANGEROUS.includes(section) || (id && DANGEROUS.includes(id))) {
+      return res.status(400).json({ error: 'Invalid section or category ID' });
+    }
 
     try {
       const cats = db.getCategories();

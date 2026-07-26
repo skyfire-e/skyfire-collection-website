@@ -8,15 +8,17 @@
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"><link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/gallery.css">
   <link rel="stylesheet" href="/vendor/cropper.min.css">
+  <script src="/js/theme-init.js" defer></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <main id="main-content" role="main">
   <div class="gallery-page">
     <div class="back-nav">
-      <a href="/" class="back-link" id="galleryBackLink"><span class="back-arrow">←</span> <span class="back-text">Back to Home</span></a>
+      <a href="/" class="back-link"><span class="back-arrow">&larr;</span> <span class="back-text">Back to Home</span></a>
+      <a id="galleryBackLink" href="/" class="back-link"><span class="back-arrow">&larr;</span> <span class="back-text">Back</span></a>
     </div>
-    <h1 id="pageTitle">Gallery</h1>
+    <h1 id="pageTitle"></h1>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
   </main>
@@ -27,8 +29,8 @@
   </div>
 
   <div class="admin-actions hidden" id="adminActions">
-    <button data-href="/admin#add">+ Add</button>
-    <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
+    <button data-href="/admin#add" role="link">+ Add</button>
+    <button data-href="/admin#spreadsheet" data-btn="spreadsheet" role="link">📊 CommanderHQ</button>
   </div>
   <div class="reorder-actions hidden" id="reorderActions"></div>
 
@@ -54,7 +56,7 @@
         <input type="text" id="editRecaster" maxlength="100">
       </div>
       <div class="form-group mini-field">
-        <label for="editCombatPoints">Command Points</label>
+        <label for="editCombatPoints">Combat Points</label>
         <input type="text" id="editCombatPoints" maxlength="20">
       </div>
       <div class="form-group mini-field">

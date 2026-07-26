@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse miniatures subcategory — detailed collection view with photos.">
   <title id="pageTitle">Category - skyf1re Collection</title>
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
   <link rel="stylesheet" href="/css/base.css">
@@ -13,6 +14,7 @@
   <main id="main-content" role="main">
   <div class="section-page">
     <div class="back-nav">
+      <a href="/" class="back-link"><span class="back-arrow">&larr;</span> <span class="back-text">Back to Home</span></a>
       <a id="backLink" href="/" class="back-link"><span class="back-arrow">&larr;</span> <span class="back-text">Back</span></a>
     </div>
     <h1 id="pageTitle2"></h1>
@@ -26,8 +28,8 @@
   </div>
 
   <div class="admin-actions hidden" id="adminActions">
-    <button data-href="/admin#add">+ Add</button>
-    <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
+    <button data-href="/admin#add" role="link">+ Add</button>
+    <button data-href="/admin#spreadsheet" data-btn="spreadsheet" role="link">📊 CommanderHQ</button>
   </div>
 
   <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-label="Admin login">

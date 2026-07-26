@@ -51,7 +51,7 @@ async function initAuth() {
       logoutBtn.classList.remove('hidden');
       document.getElementById('authTitle').textContent = 'Admin Panel';
       (settingsCache ? Promise.resolve(settingsCache) : API.get('/api/settings').then(s => { settingsCache = s; return s; })).then(s => {
-        const spreadsheetBtn = adminActions ? adminActions.querySelector('button:last-child') : null;
+        const spreadsheetBtn = adminActions ? adminActions.querySelector('[data-btn="spreadsheet"]') : null;
         if (spreadsheetBtn) {
           if (s.showSpreadsheet !== false) spreadsheetBtn.classList.remove('hidden');
           else spreadsheetBtn.classList.add('hidden');

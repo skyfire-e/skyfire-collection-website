@@ -282,18 +282,21 @@ export async function initGalleryPage() {
   }
 
   // Lightbox controls
-  document.getElementById('lbClose').addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => {
+  const $ = (id) => document.getElementById(id);
+  const el = (id) => { const e = $(id); if (!e) console.warn('#' + id + ' not found in DOM'); return e; };
+
+  el('lbClose')?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
 
-  document.getElementById('lbPrev').addEventListener('click', () => {
+  el('lbPrev')?.addEventListener('click', () => {
     if (lbCurrentImages.length === 0) return;
     lbCurrentImgIdx = lbCurrentImgIdx > 0 ? lbCurrentImgIdx - 1 : lbCurrentImages.length - 1;
     loadLightboxImage(lbCurrentImages[lbCurrentImgIdx], updateDots);
   });
 
-  document.getElementById('lbNext').addEventListener('click', () => {
+  el('lbNext')?.addEventListener('click', () => {
     if (lbCurrentImages.length === 0) return;
     lbCurrentImgIdx = lbCurrentImgIdx < lbCurrentImages.length - 1 ? lbCurrentImgIdx + 1 : 0;
     loadLightboxImage(lbCurrentImages[lbCurrentImgIdx], updateDots);
@@ -301,20 +304,20 @@ export async function initGalleryPage() {
 
   // Touch swipe for lightbox
   let touchStartX = 0;
-  lbImg.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  lbImg.addEventListener('touchend', (e) => {
+  lbImg?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lbImg?.addEventListener('touchend', (e) => {
     const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) {
-      if (diff > 0) document.getElementById('lbNext').click();
-      else document.getElementById('lbPrev').click();
+      if (diff > 0) el('lbNext')?.click();
+      else el('lbPrev')?.click();
     }
   }, { passive: true });
 
   function onLightboxKeydown(e) {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
-    if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+    if (e.key === 'ArrowLeft') document.getElementById('lbPrev')?.click();
+    if (e.key === 'ArrowRight') document.getElementById('lbNext')?.click();
   }
   document.addEventListener('keydown', onLightboxKeydown);
 
@@ -322,7 +325,7 @@ export async function initGalleryPage() {
 
   await checkAuth();
   if (isAdmin()) {
-    document.getElementById('adminActions').classList.remove('hidden');
+    el('adminActions')?.classList.remove('hidden');
     const reorderContainer = document.getElementById('reorderActions');
     if (reorderContainer) {
       reorderContainer.classList.remove('hidden');
@@ -470,7 +473,12 @@ function onTouchEnd() {
 }
 
 async function saveReorder() {
+  if (!section || !category) {
+    console.warn('Reorder requires section and category');
+    return;
+  }
   const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
   const cards = [...grid.querySelectorAll('.gallery-card')];
   const itemIds = cards.map(c => c.dataset.itemId);
   if (itemIds.length === 0) return;

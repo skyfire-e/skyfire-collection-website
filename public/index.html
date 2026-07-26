@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>skyf1re collection</title>
+  <title>skyfire collection</title>
   <meta name="description" content="Personal collection of dice and miniatures — photo gallery with lightbox, spreadsheet, and admin panel.">
-  <meta property="og:title" content="skyf1re collection">
+  <meta property="og:title" content="skyfire collection">
   <meta property="og:description" content="Personal collection of dice and miniatures.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"><link rel="stylesheet" href="/css/base.css">
+  <script src="/js/theme-init.js" defer></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <main id="main-content" role="main">
   <div class="home-page">
-    <h1>skyf1re collection</h1>
+    <h1>skyfire collection</h1>
     <div class="home-buttons">
       <a href="/dice" class="home-btn">
         <span class="icon">🎲</span>
@@ -29,7 +30,7 @@
   </main>
 
   <div class="spreadsheet-bar">
-    <button class="ss-public-btn" data-href="/spreadsheet">📊 Spreadsheet</button>
+    <button class="ss-public-btn" data-href="/spreadsheet" role="link">📊 Spreadsheet</button>
   </div>
 
   <div class="admin-corner">
@@ -38,8 +39,8 @@
   </div>
 
   <div class="admin-actions hidden" id="adminActions">
-    <button data-href="/admin#add">+ Add</button>
-    <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
+    <button data-href="/admin#add" role="link">+ Add</button>
+    <button data-href="/admin#spreadsheet" data-btn="spreadsheet" role="link">📊 CommanderHQ</button>
   </div>
 
   <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-label="Admin login">

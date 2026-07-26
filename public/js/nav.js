@@ -1,5 +1,6 @@
 (function() {
-  const name = localStorage.getItem('siteName');
+  let name;
+  try { name = localStorage.getItem('siteName'); } catch (e) { name = null; }
   if (name) {
     document.title = name;
     const h1 = document.querySelector('h1');
@@ -11,7 +12,7 @@ function injectNav() {
   const navBtns = document.createElement('div');
   navBtns.className = 'nav-corner';
   navBtns.innerHTML = `
-    <button class="nav-corner-btn" id="menuBtn" title="Navigation">
+    <button class="nav-corner-btn" id="menuBtn" title="Navigation" role="link">
       <img src="/images/compass.svg" alt="Navigation menu" width="28" height="28">
     </button>
   `;
@@ -21,6 +22,7 @@ function injectNav() {
   searchBtn.className = 'nav-corner-btn search-corner-btn';
   searchBtn.id = 'searchBtn';
   searchBtn.title = 'Search items';
+  searchBtn.setAttribute('role', 'link');
   searchBtn.innerHTML = '<img src="/images/search.svg" alt="Search items" width="28" height="28">';
   document.body.appendChild(searchBtn);
 
