@@ -7,10 +7,11 @@ const router = Router();
 router.post('/checkpoint', requireSameOrigin, requireAdmin, (req, res) => {
   try {
     db.db.pragma('wal_checkpoint(TRUNCATE)');
+    res.json({ success: true });
   } catch (err) {
     console.error('WAL checkpoint failed:', err.message);
+    res.status(500).json({ error: 'Checkpoint failed', details: err.message });
   }
-  res.json({ success: true });
 });
 
 module.exports = router;

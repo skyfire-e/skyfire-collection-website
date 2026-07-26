@@ -479,6 +479,21 @@ describe('Checkpoint', () => {
     assert.strictEqual(res.status, 200);
     assert.strictEqual(res.body.success, true);
   });
+
+  it('POST /api/checkpoint — returns 500 on DB error', async () => {
+    const originalPragma = db.db.pragma;
+    db.db.pragma = () => { throw new Error('DB is locked'); };
+    try {
+      const res = await agent
+        .post('/api/checkpoint')
+        .set('Origin', 'http://127.0.0.1:3000')
+        .set('Host', '127.0.0.1:3000');
+      assert.strictEqual(res.status, 500);
+      assert.ok(res.body.error);
+    } finally {
+      db.db.pragma = originalPragma;
+    }
+  });
 });
 
 describe('Spreadsheet admin', () => {
