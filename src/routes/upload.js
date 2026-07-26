@@ -8,9 +8,11 @@ const db = require('../db');
 const router = Router();
 
 router.post('/default', requireSameOrigin, requireAdmin, upload.single('image'), async (req, res, next) => {
+  const file = req.file;
+  let imagePath = null;
   try {
-    if (!req.file) return res.status(400).json({ error: 'No file' });
-    const imagePath = await normalizeImage(req.file);
+    if (!file) return res.status(400).json({ error: 'No file' });
+    imagePath = await normalizeImage(file);
     const settings = db.getSettings();
     const oldDefault = settings.defaultImage;
     db.updateSettings({ defaultImage: imagePath });
@@ -20,7 +22,8 @@ router.post('/default', requireSameOrigin, requireAdmin, upload.single('image'),
     }
     res.json(db.getSettings());
   } catch (err) {
-    cleanupUploadedFiles([req.file]);
+    cleanupUploadedFiles([file]);
+    if (imagePath) safeUnlink(imagePath);
     next(err);
   }
 });

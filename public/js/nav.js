@@ -1,6 +1,4 @@
 (function() {
-  const theme = localStorage.getItem('theme');
-  if (theme) document.documentElement.setAttribute('data-theme', theme);
   const name = localStorage.getItem('siteName');
   if (name) {
     document.title = name;

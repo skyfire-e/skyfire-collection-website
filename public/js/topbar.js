@@ -2,7 +2,8 @@ import { API } from './api.js';
 
 function thumbUrl(imgPath) {
   if (!imgPath || !imgPath.startsWith('/uploads/')) return imgPath;
-  return '/uploads/thumb-' + imgPath.split('/').pop();
+  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
+  return '/uploads/thumb-' + name;
 }
 
 function buildNavTree(cats) {
@@ -77,7 +78,8 @@ function doSearch(query) {
   if (!query.trim()) { document.getElementById('searchResults').innerHTML = ''; return; }
   searchTimer = setTimeout(async () => {
     try {
-      const items = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=50');
+      const data = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=50');
+      const items = data.items || data;
       const container = document.getElementById('searchResults');
       if (items.length === 0) { container.innerHTML = '<p class="empty-state" style="padding:20px">No results</p>'; return; }
       container.innerHTML = '';

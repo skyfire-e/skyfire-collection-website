@@ -63,7 +63,7 @@ app.use('/api/auth/me', readLimiter);
 app.use('/api/spreadsheet/public', readLimiter);
 
 // SQLite session store
-const { getSession, setSession, destroySession } = require('./db');
+const { getSession, setSession, destroySession, db: dbInstance } = require('./db');
 
 const SQLiteStore = function() {};
 SQLiteStore.prototype.__proto__ = session.Store.prototype;
@@ -90,8 +90,7 @@ SQLiteStore.prototype.destroy = function(sid, cb) {
 };
 SQLiteStore.prototype.touch = function(sid, sessionData, cb) {
   try {
-    const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
-    setSession(sid, sessionData, maxAge);
+    dbInstance.prepare('UPDATE sessions SET data = ? WHERE sid = ?').run(JSON.stringify(sessionData), sid);
     cb(null);
   } catch (err) { cb(err); }
 };

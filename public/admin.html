@@ -44,11 +44,11 @@
         </div>
         <div class="form-group">
           <label>Title</label>
-          <input type="text" id="addTitle" required placeholder="Item name">
+          <input type="text" id="addTitle" required placeholder="Item name" maxlength="200">
         </div>
         <div class="form-group">
           <label>Author / Origin</label>
-          <input type="text" id="addAuthor" placeholder="e.g. Games Workshop, Original">
+          <input type="text" id="addAuthor" placeholder="e.g. Games Workshop, Original" maxlength="100">
         </div>
         <div class="form-group">
           <label>Price</label>
@@ -56,15 +56,15 @@
         </div>
         <div class="form-group mini-field">
           <label>Recaster</label>
-          <input type="text" id="addRecaster" placeholder="e.g. Black Market">
+          <input type="text" id="addRecaster" placeholder="e.g. Black Market" maxlength="100">
         </div>
         <div class="form-group mini-field">
           <label>Command Points</label>
-          <input type="text" id="addCombatPoints" placeholder="e.g. 150">
+          <input type="text" id="addCombatPoints" placeholder="e.g. 150" maxlength="20">
         </div>
         <div class="form-group mini-field">
           <label>Status</label>
-          <input type="text" id="addStatus" placeholder="e.g. Painted, Assembled">
+          <input type="text" id="addStatus" placeholder="e.g. Painted, Assembled" maxlength="50">
         </div>
         <div class="form-group">
           <label>Images</label>
@@ -245,12 +245,12 @@
     <div class="modal modal-wide">
       <h2>Edit Item</h2>
       <input type="hidden" id="editId">
-      <div class="form-group"><label>Title</label><input type="text" id="editTitle"></div>
-      <div class="form-group"><label>Author / Origin</label><input type="text" id="editAuthor"></div>
+      <div class="form-group"><label>Title</label><input type="text" id="editTitle" maxlength="200"></div>
+      <div class="form-group"><label>Author / Origin</label><input type="text" id="editAuthor" maxlength="100"></div>
       <div class="form-group"><label>Price</label><input type="number" id="editPrice" min="0" step="0.01"></div>
-      <div class="form-group mini-field"><label>Recaster</label><input type="text" id="editRecaster"></div>
-      <div class="form-group mini-field"><label>Command Points</label><input type="text" id="editCombatPoints"></div>
-      <div class="form-group mini-field"><label>Status</label><input type="text" id="editStatus"></div>
+      <div class="form-group mini-field"><label>Recaster</label><input type="text" id="editRecaster" maxlength="100"></div>
+      <div class="form-group mini-field"><label>Command Points</label><input type="text" id="editCombatPoints" maxlength="20"></div>
+      <div class="form-group mini-field"><label>Status</label><input type="text" id="editStatus" maxlength="50"></div>
       <div class="form-group">
         <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit, arrows to reorder)</span>
           <span class="edit-img-counter" id="editImageCounter">0 / 10</span></label>

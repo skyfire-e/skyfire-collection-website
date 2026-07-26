@@ -3,8 +3,8 @@ import { openEdit, initImageEditor } from './image-editor.js';
 
 function thumbUrl(imgPath) {
   if (!imgPath || !imgPath.startsWith('/uploads/')) return imgPath;
-  const basename = imgPath.split('/').pop();
-  return '/uploads/thumb-' + basename;
+  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
+  return '/uploads/thumb-' + name;
 }
 
 export async function initGalleryPage() {
@@ -22,13 +22,17 @@ export async function initGalleryPage() {
     if (sec) {
       const cat = sec.subcategories.find(c => c.id === category);
       const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
-      if (parentGroup) {
-        backLink.href = '/' + section + '/' + parentGroup.id;
-        backLink.innerHTML = '<span class="back-arrow">←</span> <span class="back-text">Back to ' + parentGroup.label + '</span>';
-      } else {
-        backLink.href = '/' + section;
-        backLink.innerHTML = '<span class="back-arrow">←</span> <span class="back-text">Back to ' + sec.label + '</span>';
-      }
+      const label = parentGroup ? parentGroup.label : sec.label;
+      backLink.href = parentGroup ? '/' + section + '/' + parentGroup.id : '/' + section;
+      backLink.textContent = '';
+      const arrow = document.createElement('span');
+      arrow.className = 'back-arrow';
+      arrow.textContent = '\u2190';
+      const text = document.createElement('span');
+      text.className = 'back-text';
+      text.textContent = 'Back to ' + label;
+      backLink.appendChild(arrow);
+      backLink.appendChild(text);
     }
   }
 
@@ -40,6 +44,7 @@ export async function initGalleryPage() {
   const lbDots = document.getElementById('lbDots');
   let lbCurrentImages = [];
   let lbCurrentImgIdx = 0;
+  let lbPreloaders = [];
 
   function setPageTitle(label) {
     title.textContent = label;
@@ -80,9 +85,12 @@ export async function initGalleryPage() {
     lbCurrentImages = item.images && item.images.length > 0 ? item.images : [item.image];
     lbCurrentImgIdx = 0;
     lbImg.alt = item.title || 'Image preview';
+    lbPreloaders.forEach(p => { p.src = ''; });
+    lbPreloaders = [];
     for (let i = 1; i < lbCurrentImages.length; i++) {
       const p = new Image();
       p.src = lbCurrentImages[i];
+      lbPreloaders.push(p);
     }
     updateLightbox(item);
     loadLightboxImage(lbCurrentImages[0]);
@@ -104,6 +112,8 @@ export async function initGalleryPage() {
     document.body.style.overflow = '';
     if (lbFocusTrap) { lightbox.removeEventListener('keydown', lbFocusTrap); lbFocusTrap = null; }
     document.removeEventListener('keydown', onLightboxKeydown);
+    lbPreloaders.forEach(p => { p.src = ''; });
+    lbPreloaders = [];
   }
 
   function updateLightbox(item) {
@@ -319,15 +329,19 @@ export async function initGalleryPage() {
   initImageEditor();
 
   await checkAuth();
-  if (isAdmin()) document.getElementById('adminActions').classList.remove('hidden');
   if (isAdmin()) {
-    const reorderBtn = document.createElement('button');
-    reorderBtn.className = 'nav-corner-btn reorder-corner-btn';
-    reorderBtn.id = 'reorderBtn';
-    reorderBtn.title = 'Re-arrange';
-    reorderBtn.textContent = '🔀';
-    document.body.appendChild(reorderBtn);
-    reorderBtn.addEventListener('click', toggleReorder);
+    document.getElementById('adminActions').classList.remove('hidden');
+    const reorderContainer = document.getElementById('reorderActions');
+    if (reorderContainer) {
+      reorderContainer.classList.remove('hidden');
+      const reorderBtn = document.createElement('button');
+      reorderBtn.className = 'nav-corner-btn reorder-corner-btn';
+      reorderBtn.id = 'reorderBtn';
+      reorderBtn.title = 'Re-arrange';
+      reorderBtn.textContent = '🔀';
+      reorderContainer.appendChild(reorderBtn);
+      reorderBtn.addEventListener('click', toggleReorder);
+    }
   }
 
   await loadItems();

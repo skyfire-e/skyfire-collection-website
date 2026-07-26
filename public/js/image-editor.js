@@ -21,8 +21,8 @@ async function getExtraFieldsSections() {
 
 function thumbUrl(imgPath) {
   if (!imgPath || !imgPath.startsWith('/uploads/') || imgPath.startsWith('blob:')) return imgPath;
-  const basename = imgPath.split('/').pop();
-  return '/uploads/thumb-' + basename;
+  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
+  return '/uploads/thumb-' + name;
 }
 
 let editSlots = [];
@@ -177,18 +177,23 @@ function openCrop(imageSrc, ctx) {
   const cropImg = document.getElementById('cropImage');
   cropImg.onload = () => {
     if (cropper) cropper.destroy();
-    cropper = new Cropper(cropImg, {
-      aspectRatio: NaN,
-      viewMode: 1,
-      autoCropArea: 0.9,
-      background: false,
-    });
+    try {
+      cropper = new Cropper(cropImg, {
+        aspectRatio: NaN,
+        viewMode: 1,
+        autoCropArea: 0.9,
+        background: false,
+      });
+    } catch (e) {
+      closeCrop();
+      return;
+    }
+    trapFocus(document.getElementById('cropModal'));
     cropImg.onload = null;
   };
   cropImg.src = imageSrc;
   lockScroll();
   document.getElementById('cropModal').classList.add('open');
-  trapFocus(document.getElementById('cropModal'));
   document.addEventListener('keydown', onEscapeKey);
   cropCtx = ctx;
 }
@@ -196,13 +201,13 @@ function openCrop(imageSrc, ctx) {
 function closeCrop() {
   if (cropper) { cropper.destroy(); cropper = null; }
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
+  cropQueue.forEach(url => { if (isObjectURL(url)) URL.revokeObjectURL(url); });
+  cropQueue = [];
   releaseTrap(document.getElementById('cropModal'));
   cropSrc = null;
-  const hadQueue = cropQueue && cropQueue.length > 0;
   cropCtx = null;
   document.getElementById('cropModal').classList.remove('open');
   document.removeEventListener('keydown', onEscapeKey);
-  if (hadQueue) loadNextFile();
 }
 
 function loadNextFile() {

@@ -75,8 +75,17 @@ router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
       if (!cats[section]) throw Object.assign(new Error('Invalid section'), { status: 400 });
 
       function collectIds(cat) {
-        const ids = [cat.id];
-        if (cat.subcategories) cat.subcategories.forEach(sc => ids.push(...collectIds(sc)));
+        const ids = [];
+        const stack = [cat];
+        while (stack.length > 0) {
+          const current = stack.pop();
+          ids.push(current.id);
+          if (current.subcategories) {
+            for (const sc of current.subcategories) {
+              stack.push(sc);
+            }
+          }
+        }
         return ids;
       }
 

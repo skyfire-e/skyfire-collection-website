@@ -38,20 +38,19 @@ router.get('/:section/:groupId', (req, res, next) => {
   const known = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
   if (known.includes(req.params.section) || req.params.section.startsWith('api')) return next();
   const cats = db.getCategories();
-  if (cats[req.params.section]) {
-    return res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
-  }
-  next();
+  if (!cats[req.params.section]) return next();
+  const group = cats[req.params.section].subcategories.find(c => c.id === req.params.groupId);
+  if (!group || group.type !== 'group') return next();
+  res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
 });
 
 router.get('/:section', (req, res, next) => {
   const known = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
   if (known.includes(req.params.section) || req.params.section.startsWith('api')) return next();
   const cats = db.getCategories();
-  if (cats[req.params.section]) {
-    return res.sendFile(path.join(PUB, 'section-page.html'));
-  }
-  next();
+  if (!cats[req.params.section]) return next();
+  if (cats[req.params.section].subcategories.length === 0) return next();
+  res.sendFile(path.join(PUB, 'section-page.html'));
 });
 
 router.get('*', (req, res) => {

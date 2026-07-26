@@ -170,18 +170,28 @@ if (currentVersion < 4) {
 
 // --- Items ---
 function getItems(section, category, limit, offset) {
-  let query = 'SELECT * FROM items';
+  let query = `
+    SELECT items.*, COALESCE(c.label, items.category) AS categoryLabel,
+           COALESCE(s.label, items.section) AS sectionLabel
+    FROM items
+    LEFT JOIN categories c ON items.section = c.section_id AND items.category = c.id
+    LEFT JOIN sections s ON items.section = s.id
+  `;
   const params = [];
-  if (section) { query += ' WHERE section = ?'; params.push(section); }
-  if (category) { query += (section ? ' AND' : ' WHERE') + ' category = ?'; params.push(category); }
-  query += ' ORDER BY sort_order ASC, rowid ASC';
+  if (section) { query += ' WHERE items.section = ?'; params.push(section); }
+  if (category) { query += (section ? ' AND' : ' WHERE') + ' items.category = ?'; params.push(category); }
+  query += ' ORDER BY items.sort_order ASC, items.rowid ASC';
   if (limit) {
     query += ' LIMIT ?';
     params.push(limit);
     if (offset) { query += ' OFFSET ?'; params.push(offset); }
   }
   const rows = db.prepare(query).all(...params);
-  return rows.map(rowToItem);
+  return rows.map(row => ({
+    ...rowToItem(row),
+    sectionLabel: row.sectionLabel,
+    categoryLabel: row.categoryLabel
+  }));
 }
 
 function reorderItems(section, category, orderedIds) {
@@ -198,7 +208,7 @@ function searchItems(query, limit) {
   const pattern = '%' + escaped + '%';
   const likeClauses = ['items.title', 'items.author', 'items.recaster', 'items.status', 'items.combatPoints', 'items.section', 'items.category', 'c.label', 'pc.label'];
   const params = [];
-  for (let i = 0; i < likeClauses.length; i++) { params.push(pattern, '\\'); }
+  for (let i = 0; i < likeClauses.length; i++) { params.push(pattern); }
   params.push(limit || 50);
   const rows = db.prepare(`
     SELECT items.*, COALESCE(c.label, items.category) AS categoryLabel, COALESCE(s.label, items.section) AS sectionLabel
@@ -206,7 +216,7 @@ function searchItems(query, limit) {
     LEFT JOIN categories c ON items.section = c.section_id AND items.category = c.id
     LEFT JOIN categories pc ON c.section_id = pc.section_id AND c.parent_id = pc.id
     LEFT JOIN sections s ON items.section = s.id
-    WHERE ${likeClauses.map(col => col + ' LIKE ? ESCAPE ?').join(' OR ')}
+    WHERE ${likeClauses.map(col => col + ' LIKE ? ESCAPE \'\\\'').join(' OR ')}
     ORDER BY items.sort_order ASC, items.rowid ASC
     LIMIT ?
   `).all(...params);
@@ -284,7 +294,9 @@ function deleteItem(id) {
 
 function countImageReferences(imgPath, excludeId) {
   if (!imgPath) return 0;
-  const row = db.prepare('SELECT COUNT(*) as c FROM items WHERE id != ? AND (image = ? OR images LIKE ?)').get(String(excludeId || ''), imgPath, '%"' + imgPath + '"%');
+  const escaped = imgPath.replace(/[%_\\]/g, c => '\\' + c);
+  const pattern = '%"' + escaped + '"%';
+  const row = db.prepare('SELECT COUNT(*) as c FROM items WHERE id != ? AND (image = ? OR images LIKE ? ESCAPE \'\\\')').get(String(excludeId || ''), imgPath, pattern);
   return row.c;
 }
 
