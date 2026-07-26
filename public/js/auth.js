@@ -52,7 +52,7 @@ async function initAuth() {
           if (s.showSpreadsheet !== false) spreadsheetBtn.classList.remove('hidden');
           else spreadsheetBtn.classList.add('hidden');
         }
-      });
+      }).catch(e => console.warn('Settings load failed:', e));
     } else {
       if (adminActions) adminActions.classList.add('hidden');
       loginBtn.classList.remove('hidden');

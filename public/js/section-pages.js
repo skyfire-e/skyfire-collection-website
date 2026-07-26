@@ -24,9 +24,9 @@ async function initSectionPage() {
     section.subcategories.forEach(c => {
       const a = document.createElement('a');
       if (c.type === 'group') {
-        a.href = '/' + sectionId + '/' + c.id;
+        a.href = '/' + encodeURIComponent(sectionId) + '/' + encodeURIComponent(c.id);
       } else {
-        a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
+        a.href = '/gallery?section=' + encodeURIComponent(sectionId) + '&category=' + encodeURIComponent(c.id);
       }
       a.className = 'category-btn' + (c.type === 'group' ? ' category-group' : '');
       a.textContent = c.label;
@@ -57,7 +57,7 @@ async function initSubgroupPage() {
     if (titleEl) titleEl.textContent = group.label + ' - skyf1re Collection';
     if (titleEl2) titleEl2.textContent = group.label;
     if (backLink) {
-      backLink.href = '/' + sectionId;
+      backLink.href = '/' + encodeURIComponent(sectionId);
       backLink.textContent = '';
       const arrow = document.createElement('span');
       arrow.className = 'back-arrow';
@@ -71,7 +71,7 @@ async function initSubgroupPage() {
 
     group.subcategories.forEach(c => {
       const a = document.createElement('a');
-      a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
+      a.href = '/gallery?section=' + encodeURIComponent(sectionId) + '&category=' + encodeURIComponent(c.id);
       a.className = 'category-btn';
       a.textContent = c.label;
       grid.appendChild(a);

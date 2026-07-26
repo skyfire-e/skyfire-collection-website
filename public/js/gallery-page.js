@@ -23,7 +23,7 @@ export async function initGalleryPage() {
       const cat = sec.subcategories.find(c => c.id === category);
       const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
       const label = parentGroup ? parentGroup.label : sec.label;
-      backLink.href = parentGroup ? '/' + section + '/' + parentGroup.id : '/' + section;
+      backLink.href = parentGroup ? '/' + encodeURIComponent(section) + '/' + encodeURIComponent(parentGroup.id) : '/' + encodeURIComponent(section);
       backLink.textContent = '';
       const arrow = document.createElement('span');
       arrow.className = 'back-arrow';
@@ -65,7 +65,7 @@ export async function initGalleryPage() {
           }
         }
       }
-    });
+    }).catch(err => console.error('Failed to load categories:', err));
   }
 
   let lbFocusTrap = null;
@@ -279,8 +279,8 @@ export async function initGalleryPage() {
   async function loadItems() {
     showLoading();
     let url = '/api/items';
-    if (section) url += '?section=' + section;
-    if (category) url += (section ? '&' : '?') + 'category=' + category;
+    if (section) url += '?section=' + encodeURIComponent(section);
+    if (category) url += (section ? '&' : '?') + 'category=' + encodeURIComponent(category);
     try {
       const items = await API.get(url);
       renderItems(items);
@@ -362,20 +362,26 @@ export async function initGalleryPage() {
 let reorderMode = false;
 
 async function toggleReorder() {
-  reorderMode = !reorderMode;
   const btn = document.getElementById('reorderBtn');
   const grid = document.getElementById('galleryGrid');
   if (reorderMode) {
-    btn.textContent = '✓ Done';
-    btn.classList.add('btn-success');
-    grid.classList.add('reorder-mode');
-    enableDragAndDrop(grid);
-  } else {
+    try {
+      await saveReorder();
+    } catch (err) {
+      alert('Failed to save order: ' + (err.message || 'Unknown error'));
+      return;
+    }
     btn.textContent = '🔀 Re-arrange';
     btn.classList.remove('btn-success');
     grid.classList.remove('reorder-mode');
     disableDragAndDrop(grid);
-    await saveReorder();
+    reorderMode = false;
+  } else {
+    reorderMode = true;
+    btn.textContent = '✓ Done';
+    btn.classList.add('btn-success');
+    grid.classList.add('reorder-mode');
+    enableDragAndDrop(grid);
   }
 }
 
@@ -390,7 +396,7 @@ function enableDragAndDrop(grid) {
     card.addEventListener('drop', onDrop);
     card.addEventListener('dragend', onDragEnd);
     card.addEventListener('touchstart', onTouchStart, { passive: true });
-    card.addEventListener('touchmove', onTouchMove, { passive: true });
+    card.addEventListener('touchmove', onTouchMove, { passive: false });
     card.addEventListener('touchend', onTouchEnd);
   });
 }

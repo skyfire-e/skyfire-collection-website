@@ -9,6 +9,12 @@ const { execSync } = require('child_process');
 const Database = require('better-sqlite3');
 const path = require('path');
 
+const nodeMajor = parseInt(process.versions.node.split('.')[0], 10);
+if (nodeMajor < 20) {
+  console.error('Node.js >= 20 required, current: ' + process.version);
+  process.exit(1);
+}
+
 const ROOT = path.resolve(__dirname);
 const DB_FILE = path.join(ROOT, 'data', 'collection.db');
 
@@ -42,10 +48,10 @@ execFileSync('git', ['commit', '-m', msg], { cwd: ROOT, stdio: 'pipe' });
 console.log('🚀 Pushing to origin...');
 try {
   const branch = execSync('git branch --show-current', { cwd: ROOT, encoding: 'utf8' }).trim();
-  execSync('git push origin ' + branch, { cwd: ROOT, stdio: 'inherit' });
+  execFileSync('git', ['push', 'origin', branch], { cwd: ROOT, stdio: 'inherit' });
   console.log('✅ Deploy complete: ' + itemCount + ' items pushed to origin/' + branch);
 } catch {
-  console.error('❌ Push failed. Run manually: git push origin ' + 
-    execSync('git branch --show-current', { cwd: ROOT, encoding: 'utf8' }).trim());
+  const fallbackBranch = execFileSync('git', ['branch', '--show-current'], { cwd: ROOT, encoding: 'utf8' }).trim();
+  console.error('❌ Push failed. Run manually: git push origin ' + fallbackBranch);
   process.exit(1);
 }

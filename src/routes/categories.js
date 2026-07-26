@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
 const { findCategory } = require('../helpers');
+const { categoryInputSchema } = require('../../lib/validate');
 const db = require('../db');
 
 const NEW_SECTION_MAGIC = '__new_section__';
@@ -20,9 +21,11 @@ function slugify(label) {
 
 router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
   try {
-    const { section, label, id, parentId, isGroup } = req.body;
-
-    if (!label) return res.status(400).json({ error: 'Label is required' });
+    const result = categoryInputSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ error: 'Validation failed', details: result.error.issues.map(i => i.message) });
+    }
+    const { section, label, id, parentId, isGroup } = result.data;
 
     const catId = id || slugify(label);
 

@@ -14,10 +14,10 @@ function buildNavTree(cats) {
       if (cat.type === 'group' && cat.subcategories) {
         tree.push({ label: cat.label, href: '/' + sectionId + '/' + cat.id, sub: true, section: true });
         for (const sc of cat.subcategories) {
-          tree.push({ label: sc.label, href: '/gallery?section=' + sectionId + '&category=' + sc.id, subSub: true });
+          tree.push({ label: sc.label, href: '/gallery?section=' + encodeURIComponent(sectionId) + '&category=' + encodeURIComponent(sc.id), subSub: true });
         }
       } else {
-        tree.push({ label: cat.label, href: '/gallery?section=' + sectionId + '&category=' + cat.id, sub: true });
+        tree.push({ label: cat.label, href: '/gallery?section=' + encodeURIComponent(sectionId) + '&category=' + encodeURIComponent(cat.id), sub: true });
       }
     }
   }
@@ -108,7 +108,7 @@ function doSearch(query) {
         info.appendChild(cat);
         div.appendChild(info);
         div.addEventListener('click', () => {
-          location.href = '/gallery?section=' + item.section + '&category=' + item.category + '#item-' + item.id;
+          location.href = '/gallery?section=' + encodeURIComponent(item.section) + '&category=' + encodeURIComponent(item.category) + '#item-' + item.id;
         });
         container.appendChild(div);
       });

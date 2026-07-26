@@ -9,7 +9,12 @@ function buildCSV(sections) {
           sec.label, sub.groupLabel ? sub.groupLabel + ' - ' + sub.label : sub.label,
           item.title || '', item.author || '', item.price || '',
           item.recaster || '', item.combatPoints || '', item.status || ''
-        ].map(f => '"' + String(f).replace(/"/g, '""') + '"').join(',');
+        ].map(f => {
+          const cell = String(f);
+          const escaped = cell.replace(/"/g, '""');
+          const sanitized = /^[=+\-@\t\r]/.test(cell) ? "'" + escaped : escaped;
+          return '"' + sanitized + '"';
+        }).join(',');
         csv += row + '\n';
       }
     }
@@ -22,8 +27,19 @@ function exportCSV() {
   API.get(url).then(data => {
     let sections;
     if (isAdmin()) {
-      // /api/spreadsheet returns flat items array — wrap for CSV
-      sections = [{ label: 'All', subcategories: [{ label: 'All', items: data }] }];
+      // Group flat items by section+category for structured CSV
+      const sectionMap = {};
+      for (const item of data) {
+        const key = item.section || 'Unknown';
+        if (!sectionMap[key]) sectionMap[key] = { label: key, subcategories: {} };
+        const subKey = item.category || 'Unknown';
+        if (!sectionMap[key].subcategories[subKey]) sectionMap[key].subcategories[subKey] = { label: subKey, items: [] };
+        sectionMap[key].subcategories[subKey].items.push(item);
+      }
+      sections = Object.values(sectionMap).map(sec => ({
+        ...sec,
+        subcategories: Object.values(sec.subcategories)
+      }));
     } else {
       sections = data;
     }
@@ -34,6 +50,9 @@ function exportCSV() {
     a.download = 'skyfire-collection.csv';
     a.click();
     URL.revokeObjectURL(a.href);
+  }).catch(err => {
+    console.error('Export failed:', err);
+    alert('Failed to export CSV');
   });
 }
 

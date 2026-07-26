@@ -7,7 +7,7 @@ const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const morgan = require('morgan');
 const { ValidationError, VersionConflictError } = require('./errors');
-const { secureCookies, envBoolean, ROOT } = require('./helpers');
+const { getSecureCookies, envBoolean, ROOT } = require('./helpers');
 
 const app = express();
 
@@ -29,7 +29,10 @@ app.use(helmet({
       frameAncestors: ['\'self\''],
       upgradeInsecureRequests: []
     }
-  }
+  },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  crossOriginOpenerPolicy: { policy: 'same-origin' },
+  crossOriginEmbedderPolicy: false
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -104,7 +107,7 @@ app.use(session({
   store: new SQLiteStore(),
   cookie: {
     httpOnly: true,
-    secure: secureCookies,
+    secure: getSecureCookies(),
     sameSite: 'lax',
     maxAge: 24 * 60 * 60 * 1000
   }
@@ -118,6 +121,12 @@ app.use('/uploads', express.static(path.join(ROOT, 'uploads'), {
 }));
 
 // API routes
+app.use('/api', (req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/items', require('./routes/items'));

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const argon2 = require('argon2');
 const { loginLimiter, requireSameOrigin } = require('../middleware');
-const { secureCookies } = require('../helpers');
+const { getSecureCookies } = require('../helpers');
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 const ADMIN_ROLE = 'admin';
@@ -10,16 +10,15 @@ const router = Router();
 
 router.post('/login', requireSameOrigin, loginLimiter, async (req, res) => {
   const { username, password } = req.body;
-  if (username !== ADMIN_USERNAME) return res.status(401).json({ error: 'Invalid credentials' });
   let valid = false;
   if (process.env.ADMIN_PASSWORD_HASH) {
+    let passwordValid = false;
     try {
-      valid = await argon2.verify(process.env.ADMIN_PASSWORD_HASH, password);
-    } catch {
-      return res.status(500).json({ error: 'Authentication error' });
-    }
+      passwordValid = await argon2.verify(process.env.ADMIN_PASSWORD_HASH, password || '');
+    } catch { /* invalid hash format */ }
+    valid = (username === ADMIN_USERNAME) && passwordValid;
   } else if (process.env.ADMIN_PASSWORD) {
-    valid = process.env.ADMIN_PASSWORD === password;
+    valid = (username === ADMIN_USERNAME) && (process.env.ADMIN_PASSWORD === password);
     console.warn('WARNING: Using plain-text password. Set ADMIN_PASSWORD_HASH in .env');
   } else {
     return res.status(500).json({ error: 'Server misconfigured' });
@@ -35,7 +34,7 @@ router.post('/login', requireSameOrigin, loginLimiter, async (req, res) => {
 router.post('/logout', requireSameOrigin, (req, res) => {
   req.session.destroy(err => {
     if (err) return res.status(500).json({ error: 'Logout error' });
-    res.clearCookie('skyfire.sid', { httpOnly: true, secure: secureCookies, sameSite: 'lax' });
+    res.clearCookie('skyfire.sid', { httpOnly: true, secure: getSecureCookies(), sameSite: 'lax' });
     res.json({ success: true });
   });
 });

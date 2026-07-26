@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const Database = require('better-sqlite3');
@@ -21,6 +21,7 @@ do {
 
 const dbPath = path.join(ROOT, 'data', 'collection.db');
 const db = new Database(dbPath);
+db.pragma('busy_timeout = 5000');
 db.pragma('wal_checkpoint(TRUNCATE)');
 db.close();
 
@@ -34,7 +35,7 @@ const opts = [
   'uploads'
 ];
 
-execSync('tar ' + opts.map(o => '"' + o + '"').join(' '), { stdio: 'inherit' });
+execFileSync('tar', opts, { stdio: 'inherit' });
 console.log('Backup: ' + backupFile);
 
 const MAX_BACKUPS = 10;

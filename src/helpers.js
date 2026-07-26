@@ -16,7 +16,9 @@ function envBoolean(value, fallback = false) {
   return ['1', 'true', 'yes', 'on'].includes(String(value).toLowerCase());
 }
 
-const secureCookies = envBoolean(process.env.COOKIE_SECURE, process.env.NODE_ENV === 'production');
+function getSecureCookies() {
+  return envBoolean(process.env.COOKIE_SECURE, process.env.NODE_ENV === 'production');
+}
 
 function safeUnlink(imgPath) {
   if (!imgPath || !imgPath.startsWith('/uploads/')) return;
@@ -163,7 +165,7 @@ function toNumber(value) {
 
 module.exports = {
   ROOT, UPLOADS_DIR, TEMP_DIR,
-  envBoolean, secureCookies,
+  envBoolean, getSecureCookies,
   safeUnlink, cleanupUploadedFiles,
   normalizeImage, findCategory, flattenCategories,
   validateItemInput, validateFinalOrder, parseJSONArray,

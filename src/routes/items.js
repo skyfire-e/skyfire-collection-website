@@ -110,10 +110,16 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     const validation = validateItemInput(candidate, cats);
     if (validation.errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: validation.errors }); }
 
+    const merged = {
+      ...currentItem,
+      version: (currentItem.version || 0) + 1,
+      ...validation.data
+    };
+
     newFilePaths = await Promise.all(files.map(normalizeImage));
 
-    if (!Array.isArray(candidate.images)) candidate.images = [];
-    const oldImages = [...candidate.images];
+    if (!Array.isArray(merged.images)) merged.images = [];
+    const oldImages = [...merged.images];
 
     let removeIdx = [];
     let finalOrder = [];
@@ -153,48 +159,48 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
           newImages.push(newFilePaths[fileIdx++]);
         }
       }
-      candidate.images = newImages;
+      merged.images = newImages;
     } else if (removeIdx.length > 0) {
       removeIdx.sort((a, b) => b - a).forEach(i => {
         if (i >= 0 && i < oldImages.length) oldImages.splice(i, 1);
       });
-      candidate.images = oldImages;
-      newFilePaths.forEach(p => candidate.images.push(p));
+      merged.images = oldImages;
+      newFilePaths.forEach(p => merged.images.push(p));
     } else if (newFilePaths.length > 0) {
-      candidate.images = [...oldImages, ...newFilePaths];
+      merged.images = [...oldImages, ...newFilePaths];
     }
 
-    if (candidate.images.length > 10) {
+    if (merged.images.length > 10) {
       cleanupUploadedFiles(files);
       newFilePaths.forEach(p => safeUnlink(p));
       return res.status(400).json({ error: 'Maximum 10 images per item' });
     }
 
     if (newFilePaths.length > 0 || removeIdx.length > 0 || finalOrder.length > 0) {
-      if (candidate.images.length > 0) {
-        candidate.image = candidate.images[0];
+      if (merged.images.length > 0) {
+        merged.image = merged.images[0];
       } else {
-        candidate.images = [];
-        candidate.image = db.getSettings().defaultImage || '/images/default.svg';
+        merged.images = [];
+        merged.image = db.getSettings().defaultImage || '/images/default.svg';
       }
     }
 
     const oldImagesForCleanup = [...(currentItem.images || [])];
 
-    db.updateItem(currentItem.id, candidate);
+    db.updateItem(currentItem.id, merged);
 
-    const newSet = new Set(candidate.images);
+    const newSet = new Set(merged.images);
     const toDelete = [];
     for (const img of oldImagesForCleanup) {
       if (!newSet.has(img)) {
-        const stillReferenced = db.countImageReferences(img, candidate.id) > 0;
+        const stillReferenced = db.countImageReferences(img, merged.id) > 0;
         if (!stillReferenced) toDelete.push(img);
       }
     }
     toDelete.forEach(img => safeUnlink(img));
 
-    db.appendAudit({ action: 'item.update', entityId: candidate.id, title: candidate.title });
-    res.json(candidate);
+    db.appendAudit({ action: 'item.update', entityId: merged.id, title: merged.title });
+    res.json(merged);
   } catch (err) {
     cleanupUploadedFiles(files);
     newFilePaths.forEach(p => safeUnlink(p));

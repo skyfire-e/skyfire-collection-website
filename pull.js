@@ -4,8 +4,14 @@
  * Usage: node pull.js
  * Run this on the remote server after pushing from another machine.
  */
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const path = require('path');
+
+const nodeMajor = parseInt(process.versions.node.split('.')[0], 10);
+if (nodeMajor < 20) {
+  console.error('Node.js >= 20 required, current: ' + process.version);
+  process.exit(1);
+}
 
 const ROOT = path.resolve(__dirname);
 
@@ -23,7 +29,7 @@ if (!status) {
 
 console.log('📥 Pulling...');
 try {
-  execSync('git pull origin ' + branch, { cwd: ROOT, stdio: 'inherit' });
+  execFileSync('git', ['pull', 'origin', branch], { cwd: ROOT, stdio: 'inherit' });
 } catch (err) {
   console.error('❌ Pull failed. Check for conflicts:');
   console.error(err.stderr || err.message);

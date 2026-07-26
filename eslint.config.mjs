@@ -22,6 +22,6 @@ export default [
       'semi': ['error', 'always'],
       'quotes': ['warn', 'single', { allowTemplateLiterals: true }]
     },
-    ignores: ['node_modules/', 'uploads/', 'data/', 'public/js/admin/main.js', 'test/']
+    ignores: ['node_modules/', 'uploads/', 'data/', 'public/js/admin/main.js']
   }
 ];

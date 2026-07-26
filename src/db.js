@@ -1,6 +1,7 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
+const { toNumber } = require('./helpers');
 
 const TEST_DB = process.env.NODE_TEST_DB === '1';
 const ROOT = path.resolve(__dirname, '..');
@@ -453,12 +454,6 @@ function cleanupSessions() {
 const cleanupTimer = setInterval(cleanupSessions, 3600000);
 cleanupTimer.unref();
 
-function toNumber(value) {
-  if (value === null || value === undefined || value === '') return 0;
-  const n = Number(value);
-  return isNaN(n) ? 0 : n;
-}
-
 module.exports = {
   db,
   getItems, getItemCount, searchItems, reorderItems, getItem, insertItem, updateItem, deleteItem, allItems, countImageReferences,
@@ -466,5 +461,5 @@ module.exports = {
   getSettings, updateSettings,
   appendAudit, getAuditLog,
   getSession, setSession, destroySession,
-  safeJsonParse, toNumber
+  safeJsonParse
 };

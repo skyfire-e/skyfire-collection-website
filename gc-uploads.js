@@ -6,7 +6,7 @@
 require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
-const db = require('./src/db');
+const Database = require('better-sqlite3');
 
 const UPLOADS_DIR = path.resolve(__dirname, 'uploads');
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -17,8 +17,12 @@ if (QUARANTINE && !fs.existsSync(QUARANTINE_DIR)) {
   fs.mkdirSync(QUARANTINE_DIR, { recursive: true });
 }
 
-const items = db.allItems();
-const settings = db.getSettings();
+const db = new Database(path.join(__dirname, 'data', 'collection.db'));
+db.pragma('busy_timeout = 5000');
+db.pragma('query_only = true');
+const dbModule = require('./src/db');
+const items = dbModule.allItems();
+const settings = dbModule.getSettings();
 
 const referenced = new Set();
 for (const item of items) {

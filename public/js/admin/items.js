@@ -100,8 +100,9 @@ export async function initAdminItems() {
   });
 
   // Add New Section
-  document.getElementById('addSectionBtn').addEventListener('click', () => {
-    withPending(document.getElementById('addSectionBtn'), async () => {
+  document.getElementById('addSectionBtn').addEventListener('click', async () => {
+    try {
+    await withPending(document.getElementById('addSectionBtn'), async () => {
       const label = document.getElementById('newSectionLabel').value.trim();
       if (!label) return alert('Enter a section name');
       const id = document.getElementById('newSectionId').value.trim() || undefined;
@@ -117,11 +118,16 @@ export async function initAdminItems() {
         document.getElementById('addSection').dispatchEvent(new Event('change'));
       }
     });
+    } catch (err) {
+      console.error('Failed to add section:', err);
+      alert('Failed to add section');
+    }
   });
 
   // Add Subcategory
-  document.getElementById('addSubcatBtn').addEventListener('click', () => {
-    withPending(document.getElementById('addSubcatBtn'), async () => {
+  document.getElementById('addSubcatBtn').addEventListener('click', async () => {
+    try {
+    await withPending(document.getElementById('addSubcatBtn'), async () => {
       const section = document.getElementById('catSection').value;
       const parentId = document.getElementById('catParent').value;
       const label = document.getElementById('catLabel').value.trim();
@@ -142,12 +148,19 @@ export async function initAdminItems() {
         document.getElementById('addSection').dispatchEvent(new Event('change'));
       }
     });
+    } catch (err) {
+      console.error('Failed to add subcategory:', err);
+      alert('Failed to add subcategory');
+    }
   });
 }
 
 function getCategoryLabel(sectionId, catId) {
   const sec = categoriesData[sectionId];
-  if (!sec) return catId;
+  if (!sec) {
+    console.warn('Section not found in categoriesData:', sectionId);
+    return catId;
+  }
   for (const c of sec.subcategories) {
     if (c.id === catId) return c.label;
     if (c.type === 'group' && c.subcategories) {
