@@ -1,4 +1,4 @@
-const { describe, it, after, beforeEach } = require('node:test');
+const { describe, it, beforeEach } = require('node:test');
 const assert = require('node:assert');
 
 process.env.NODE_TEST_DB = '1';
@@ -223,23 +223,24 @@ describe('SQLite database (in-memory)', () => {
   it('searches items by title', () => {
     db.saveCategories({ dice: { label: 'Dice', subcategories: [{ id: 'metal-dice', label: 'Metal Dice' }] } });
     db.insertItem({ id: 'search-1', section: 'dice', category: 'metal-dice', title: 'Dragon Sword', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
-    const results = db.searchItems('Dragon', 10);
-    assert.strictEqual(results.length, 1);
-    assert.strictEqual(results[0].title, 'Dragon Sword');
+    const result = db.searchItems('Dragon', 10);
+    assert.strictEqual(result.total, 1);
+    assert.strictEqual(result.items[0].title, 'Dragon Sword');
   });
 
   it('search returns empty for no match', () => {
-    const results = db.searchItems('zzz_nonexistent_zzz', 10);
-    assert.strictEqual(results.length, 0);
+    const result = db.searchItems('zzz_nonexistent_zzz', 10);
+    assert.strictEqual(result.total, 0);
+    assert.strictEqual(result.items.length, 0);
   });
 
   it('search returns sectionLabel and categoryLabel', () => {
     db.saveCategories({ dice: { label: 'Dice', subcategories: [{ id: 'metal-dice', label: 'Metal Dice' }] } });
     db.insertItem({ id: 'search-label', section: 'dice', category: 'metal-dice', title: 'Label Test', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
-    const results = db.searchItems('Label', 10);
-    assert.strictEqual(results.length, 1);
-    assert.strictEqual(results[0].sectionLabel, 'Dice');
-    assert.strictEqual(results[0].categoryLabel, 'Metal Dice');
+    const result = db.searchItems('Label', 10);
+    assert.strictEqual(result.total, 1);
+    assert.strictEqual(result.items[0].sectionLabel, 'Dice');
+    assert.strictEqual(result.items[0].categoryLabel, 'Metal Dice');
   });
 
   it('reorderItems updates sort_order', () => {

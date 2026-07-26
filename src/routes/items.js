@@ -15,19 +15,19 @@ router.get('/', (req, res) => {
 
   if (q) {
     const parsedLimit = limit ? Math.min(parseInt(limit, 10), 200) : 50;
-    const items = db.searchItems(q, parsedLimit);
+    const result = db.searchItems(q, parsedLimit);
     if (limit !== undefined) {
-      return res.json({ items, total: items.length, limit: parsedLimit, offset: 0 });
+      return res.json({ items: result.items, total: result.total, limit: parsedLimit, offset: 0 });
     }
-    return res.json(items);
+    return res.json(result.items);
   }
 
   let parsedLimit;
   let hasLimit = false;
   if (limit !== undefined) {
     const n = parseInt(limit, 10);
-    if (isNaN(n) || n < 0) return res.status(400).json({ error: 'limit must be a non-negative integer' });
-    parsedLimit = n === 0 ? 0 : Math.min(n, 100);
+    if (isNaN(n) || n < 1) return res.status(400).json({ error: 'limit must be a positive integer' });
+    parsedLimit = Math.min(n, 100);
     hasLimit = true;
   }
   const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
@@ -187,7 +187,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
 
     const oldImagesForCleanup = [...(currentItem.images || [])];
 
-    db.updateItem(currentItem.id, merged);
+    db.updateItem(currentItem.id, merged, currentItem.version);
 
     const newSet = new Set(merged.images);
     const toDelete = [];

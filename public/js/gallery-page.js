@@ -1,11 +1,5 @@
-import { API, checkAuth, isAdmin } from './api.js';
+import { API, checkAuth, isAdmin, thumbUrl, createFocusTrap } from './api.js';
 import { openEdit, initImageEditor } from './image-editor.js';
-
-function thumbUrl(imgPath) {
-  if (!imgPath || !imgPath.startsWith('/uploads/')) return imgPath;
-  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
-  return '/uploads/thumb-' + name;
-}
 
 export async function initGalleryPage() {
   const params = new URLSearchParams(location.search);
@@ -55,21 +49,21 @@ export async function initGalleryPage() {
     document.title = label + ' - skyf1re Collection';
   }
 
-  if (category) {
-    API.get('/api/categories').then(data => {
-      for (const section of Object.values(data)) {
-        for (const cat of section.subcategories) {
-          if (cat.id === category) {
-            setPageTitle(cat.label);
-            return;
-          }
-          if (cat.subcategories) {
-            const found = cat.subcategories.find(s => s.id === category);
-            if (found) { setPageTitle(found.label); return; }
+  if (category && backLink) {
+    (async () => {
+      try {
+        const data = await API.get('/api/categories');
+        for (const sec of Object.values(data)) {
+          for (const cat of sec.subcategories) {
+            if (cat.id === category) { setPageTitle(cat.label); return; }
+            if (cat.subcategories) {
+              const found = cat.subcategories.find(s => s.id === category);
+              if (found) { setPageTitle(found.label); return; }
+            }
           }
         }
-      }
-    }).catch(err => console.error('Failed to load categories:', err));
+      } catch {}
+    })();
   }
 
   let lbFocusTrap = null;
@@ -102,20 +96,14 @@ export async function initGalleryPage() {
     document.body.style.overflow = 'hidden';
     const focusable = lightbox.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
     if (focusable.length > 0) focusable[0].focus();
-    lbFocusTrap = function(e) {
-      if (e.key !== 'Tab' || focusable.length === 0) return;
-      const first = focusable[0], last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    };
-    lightbox.addEventListener('keydown', lbFocusTrap);
+    lbFocusTrap = createFocusTrap(lightbox);
+    if (lbFocusTrap) lightbox.addEventListener('keydown', lbFocusTrap);
   }
 
   function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
     if (lbFocusTrap) { lightbox.removeEventListener('keydown', lbFocusTrap); lbFocusTrap = null; }
-    document.removeEventListener('keydown', onLightboxKeydown);
     lbPreloaders.forEach(p => { p.src = ''; });
     lbPreloaders = [];
   }
@@ -123,7 +111,7 @@ export async function initGalleryPage() {
   function updateLightbox(item) {
     lbImg.alt = item.title || '';
     lbTitle.textContent = item.title;
-    lbAuthor.textContent = item.author;
+    lbAuthor.textContent = item.author || '';
 
     const lbPrev = document.getElementById('lbPrev');
     const lbNext = document.getElementById('lbNext');
@@ -228,7 +216,7 @@ export async function initGalleryPage() {
 
       const authorDiv = document.createElement('div');
       authorDiv.className = 'author';
-      authorDiv.textContent = item.author;
+      authorDiv.textContent = item.author || '';
       cardBody.appendChild(authorDiv);
 
       card.appendChild(cardBody);

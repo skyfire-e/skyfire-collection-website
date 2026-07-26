@@ -55,12 +55,13 @@ app.use('/api/backfill-images', writeLimiter);
 app.use('/api/backfill-prices', writeLimiter);
 app.use('/api/checkpoint', writeLimiter);
 
-// Rate limiting on public read endpoints
+// Rate limiting on public read endpoints (skip GET/HEAD/OPTIONS)
 const readLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 200,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => ['GET', 'HEAD', 'OPTIONS'].includes(req.method),
   message: { error: 'Too many requests, try again later' }
 });
 app.use('/api/auth/me', readLimiter);

@@ -22,9 +22,8 @@ const branch = execSync('git branch --show-current', { cwd: ROOT, encoding: 'utf
 console.log('📍 Current branch: ' + branch);
 
 const status = execSync('git status --porcelain -uno', { cwd: ROOT, encoding: 'utf8' }).trim();
-if (!status) {
-  console.log('✅ Already up to date');
-  process.exit(0);
+if (status) {
+  console.log('⚠️  Local uncommitted changes detected — pulling may cause conflicts');
 }
 
 console.log('📥 Pulling...');
@@ -39,7 +38,7 @@ try {
 // Check what changed (safe for shallow clones)
 function getChangedFiles() {
   try {
-    return execSync('git diff HEAD~1 --name-only', { cwd: ROOT, encoding: 'utf8' }).split('\n');
+    return execSync('git diff ORIG_HEAD HEAD --name-only', { cwd: ROOT, encoding: 'utf8' }).split('\n');
   } catch {
     return [];
   }

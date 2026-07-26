@@ -44,9 +44,6 @@ router.post('/backfill-prices', requireSameOrigin, requireAdmin, (req, res) => {
       if (typeof item.price === 'string' && item.price !== '') {
         db.updateItem(item.id, { price: parseFloat(item.price) || 0 });
         updated++;
-      } else if (item.price === undefined || item.price === null) {
-        db.updateItem(item.id, { price: 0 });
-        updated++;
       }
     }
     db.appendAudit({ action: 'backfill.prices', updated });
@@ -57,7 +54,7 @@ router.post('/backfill-prices', requireSameOrigin, requireAdmin, (req, res) => {
 router.get('/audit', requireAdmin, (req, res, next) => {
   try {
     const logs = db.getAuditLog(100);
-    res.json(logs.map(l => ({ id: l.id, timestamp: l.timestamp, ...db.safeJsonParse(l.data, { action: l.action }) })));
+    res.json(logs.map(l => ({ ...db.safeJsonParse(l.data, {}), id: l.id, timestamp: l.timestamp, action: l.action })));
   } catch (err) { next(err); }
 });
 

@@ -1,5 +1,7 @@
 import { API, checkAuth, isAdmin } from './api.js';
 
+let settingsCache = null;
+
 async function initAuth() {
   const adminBtn = document.getElementById('adminBtn');
   const authModal = document.getElementById('authModal');
@@ -22,6 +24,7 @@ async function initAuth() {
     try {
       const res = await API.post('/api/auth/login', { username, password });
       if (res.success) {
+        settingsCache = null;
         authModal.classList.remove('open');
         await checkAuth();
         updateUI();
@@ -42,11 +45,12 @@ async function initAuth() {
 
   function updateUI() {
     if (isAdmin()) {
+      document.body.classList.remove('hidden');
       if (adminActions) adminActions.classList.remove('hidden');
       loginBtn.classList.add('hidden');
       logoutBtn.classList.remove('hidden');
       document.getElementById('authTitle').textContent = 'Admin Panel';
-      API.get('/api/settings').then(s => {
+      (settingsCache ? Promise.resolve(settingsCache) : API.get('/api/settings').then(s => { settingsCache = s; return s; })).then(s => {
         const spreadsheetBtn = adminActions ? adminActions.querySelector('button:last-child') : null;
         if (spreadsheetBtn) {
           if (s.showSpreadsheet !== false) spreadsheetBtn.classList.remove('hidden');

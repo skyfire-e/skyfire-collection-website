@@ -18,8 +18,8 @@
   </main>
 
   <div class="admin-corner">
-    <button id="themeBtn" title="Toggle theme">☀️</button>
-    <button id="adminBtn" title="Admin">🔐</button>
+    <button id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☀️</button>
+    <button id="adminBtn" title="Admin" aria-label="Admin login">🔐</button>
   </div>
 
   <div class="admin-actions hidden" id="adminActions">
@@ -42,7 +42,7 @@
         <button class="btn" id="loginBtn">Login</button>
         <button class="btn btn-danger hidden" id="logoutBtn">Logout</button>
       </div>
-      <p id="authError" class="danger-text"></p>
+      <p id="authError" class="danger-text" role="alert" aria-live="polite"></p>
     </div>
   </div>
 

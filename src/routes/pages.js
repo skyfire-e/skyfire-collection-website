@@ -6,6 +6,7 @@ const db = require('../db');
 const router = Router();
 
 const PUB = path.join(ROOT, 'public');
+const STATIC_ROUTES = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
 
 router.get('/health', (req, res) => {
   try {
@@ -35,8 +36,7 @@ router.get('/miniatures/:group', (req, res) => {
 });
 
 router.get('/:section/:groupId', (req, res, next) => {
-  const known = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
-  if (known.includes(req.params.section) || req.params.section.startsWith('api')) return next();
+  if (STATIC_ROUTES.includes(req.params.section) || req.params.section.startsWith('api')) return next();
   const cats = db.getCategories();
   if (!cats[req.params.section]) return next();
   const group = cats[req.params.section].subcategories.find(c => c.id === req.params.groupId);
@@ -45,8 +45,7 @@ router.get('/:section/:groupId', (req, res, next) => {
 });
 
 router.get('/:section', (req, res, next) => {
-  const known = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
-  if (known.includes(req.params.section) || req.params.section.startsWith('api')) return next();
+  if (STATIC_ROUTES.includes(req.params.section) || req.params.section.startsWith('api')) return next();
   const cats = db.getCategories();
   if (!cats[req.params.section]) return next();
   if (cats[req.params.section].subcategories.length === 0) return next();

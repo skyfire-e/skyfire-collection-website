@@ -16,4 +16,4 @@ checkAuth().then(() => {
   document.body.classList.remove('hidden');
   initAdminSettings();
   initAdminItems();
-}).catch(() => showLogin());
+});

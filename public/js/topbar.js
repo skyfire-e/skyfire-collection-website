@@ -1,10 +1,4 @@
-import { API } from './api.js';
-
-function thumbUrl(imgPath) {
-  if (!imgPath || !imgPath.startsWith('/uploads/')) return imgPath;
-  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
-  return '/uploads/thumb-' + name;
-}
+import { API, thumbUrl } from './api.js';
 
 function buildNavTree(cats) {
   const tree = [{ label: 'Home', href: '/', icon: '🏠' }];

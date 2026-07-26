@@ -6,7 +6,6 @@
 require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
-const Database = require('better-sqlite3');
 
 const UPLOADS_DIR = path.resolve(__dirname, 'uploads');
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -17,12 +16,9 @@ if (QUARANTINE && !fs.existsSync(QUARANTINE_DIR)) {
   fs.mkdirSync(QUARANTINE_DIR, { recursive: true });
 }
 
-const db = new Database(path.join(__dirname, 'data', 'collection.db'));
-db.pragma('busy_timeout = 5000');
-db.pragma('query_only = true');
-const dbModule = require('./src/db');
-const items = dbModule.allItems();
-const settings = dbModule.getSettings();
+const appDb = require('./src/db');
+const items = appDb.allItems();
+const settings = appDb.getSettings();
 
 const referenced = new Set();
 for (const item of items) {
@@ -87,3 +83,4 @@ console.log('\n' + (DRY_RUN ? '[DRY RUN] ' : '') + 'Orphans found: ' + orphans +
 if (!DRY_RUN && orphans > 0) {
   console.log(QUARANTINE ? 'Moved to quarantine.' : 'Deleted.');
 }
+appDb.db.close();

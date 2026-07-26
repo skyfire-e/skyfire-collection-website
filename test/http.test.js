@@ -1,4 +1,4 @@
-const { describe, it, before, after } = require('node:test');
+const { describe, it, before } = require('node:test');
 const assert = require('node:assert');
 
 process.env.NODE_TEST_DB = '1';

@@ -6,16 +6,24 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        node-version: [20, 22]
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
           cache: npm
 
       - run: npm ci
@@ -23,11 +31,17 @@ jobs:
       - name: Syntax check
         run: npm run check
 
-      - name: Module load check
-        run: node -e "require('./src/errors'); require('./lib/validate'); require('./src/helpers'); require('./src/db'); console.log('Modules OK')"
-
       - name: Lint
         run: npm run lint
 
       - name: Run tests
         run: npm test
+
+      - name: Test coverage
+        run: npm run test:coverage
+
+      - uses: actions/upload-artifact@v4
+        if: always() && matrix.node-version == 22
+        with:
+          name: coverage-report
+          path: coverage/

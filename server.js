@@ -27,6 +27,7 @@ const server = app.listen(PORT, () => {
 function shutdown(signal) {
   console.log(signal + ': shutting down');
   const forceExit = setTimeout(() => process.exit(1), 5000);
+  server.closeIdleConnections();
   server.close(error => {
     clearTimeout(forceExit);
     try {

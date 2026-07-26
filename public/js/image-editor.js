@@ -1,4 +1,4 @@
-import { API } from './api.js';
+import { API, thumbUrl } from './api.js';
 
 const MAX_IMAGES_PER_ITEM = 10;
 let extraFieldsSections = null;
@@ -17,12 +17,6 @@ async function getExtraFieldsSections() {
     return extraFieldsSections;
   })();
   return extraFieldsPromise;
-}
-
-function thumbUrl(imgPath) {
-  if (!imgPath || !imgPath.startsWith('/uploads/') || imgPath.startsWith('blob:')) return imgPath;
-  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
-  return '/uploads/thumb-' + name;
 }
 
 let editSlots = [];
@@ -79,6 +73,9 @@ function releaseTrap(modal) {
 }
 
 export async function openEdit(item, { onSave } = {}) {
+  if (document.getElementById('editModal').classList.contains('open')) {
+    closeEdit();
+  }
   editingId = item.id;
   editCurrentItem = item;
   onSaveCallback = onSave || null;
@@ -171,6 +168,9 @@ function renderEditImages() {
 
 // --- Crop Modal ---
 function openCrop(imageSrc, ctx) {
+  if (document.getElementById('cropModal').classList.contains('open')) {
+    closeCrop();
+  }
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
   cropSrc = imageSrc;
   cropQueue = (ctx && ctx.fileQueue) || [];
@@ -191,6 +191,7 @@ function openCrop(imageSrc, ctx) {
     trapFocus(document.getElementById('cropModal'));
     cropImg.onload = null;
   };
+  cropImg.src = '';
   cropImg.src = imageSrc;
   lockScroll();
   document.getElementById('cropModal').classList.add('open');

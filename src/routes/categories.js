@@ -27,19 +27,20 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
     }
     const { section, label, id, parentId, isGroup } = result.data;
 
-    const catId = id || slugify(label);
-
-    if (!catId) return res.status(400).json({ error: 'Could not generate category ID. Specify an ID manually.' });
-
+    let catId;
     try {
       const cats = db.getCategories();
 
       if (parentId === NEW_SECTION_MAGIC) {
+        catId = id || slugify(label);
+        if (!catId) return res.status(400).json({ error: 'Could not generate category ID. Specify an ID manually.' });
         if (cats[catId]) throw Object.assign(new Error('Section already exists'), { status: 400 });
         cats[catId] = { label, subcategories: [] };
       } else if (parentId && section && cats[section]) {
         const parent = cats[section].subcategories.find(c => c.id === parentId);
         if (parent && parent.subcategories) {
+          catId = id || slugify(label);
+          if (!catId) return res.status(400).json({ error: 'Could not generate category ID. Specify an ID manually.' });
           if (findCategory(cats[section].subcategories, catId)) {
             throw Object.assign(new Error('Category ID "' + catId + '" already exists'), { status: 409 });
           }
@@ -49,6 +50,8 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
           throw Object.assign(new Error('Parent not found or not a group'), { status: 400 });
         }
       } else if (section && cats[section]) {
+        catId = id || slugify(label);
+        if (!catId) return res.status(400).json({ error: 'Could not generate category ID. Specify an ID manually.' });
         if (findCategory(cats[section].subcategories, catId)) {
           throw Object.assign(new Error('Category ID "' + catId + '" already exists'), { status: 409 });
         }

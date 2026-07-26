@@ -81,6 +81,9 @@ backups/               — backup archives (excluded from git)
 - `POST /api/backfill-prices` — normalize price to number
 - `GET /api/spreadsheet` — admin full data
 - `GET /api/spreadsheet/public` — public view
+- `POST /api/items/reorder` — drag-and-drop reorder
+- `GET /api/audit` — activity log (admin, max 100)
+- `POST /api/checkpoint` — WAL checkpoint + session purge
 
 ## Key Decisions
 - Price скрыта от публики (showPublicSpreadsheet в settings; сейчас включено — цены видны публично)
@@ -89,7 +92,7 @@ backups/               — backup archives (excluded from git)
 - Удаление категории блокируется, если есть items (409 Conflict)
 - Backfill только ручной (кнопки "Backfill Default Image", "Backfill Images", "Backfill Prices" в Settings)
 - Все items имеют `images[]`; `image` = cover (первый элемент)
-- Categories: группы `type:"group"` + `subcategories[]`, листовые `{id, label}` — хранятся в SQLite (table: categories, column: data JSON)
+- Categories: нормализованные таблицы `sections(id,label,sort_order)` + `categories(id,section_id,parent_id,label,type,sort_order)` с FK CASCADE. Итоговое дерево собирается в `getCategories()`
 - Cookie: `skyfire.sid`, httpOnly, sameSite:'lax', secure conditional
 - CSRF: проверка Origin/Referer на mutation endpoints
 - Session: regenerate на login, destroy на logout; SQLite session store (24h expiry)
@@ -216,6 +219,33 @@ backups/               — backup archives (excluded from git)
 - Audit table rotation (max 1000)
 - Removed: `getCurrentUser`, `DATA_DIR`, `gitignore/`, `DataCorruptionError`, `readJSON`, `writeJSONAtomic`, `withDataLock`, `migrateFromJSON`, `saveSettings`, `session-file-store`, `jimp`, `playwright`, `puppeteer`, `allowScripts`
 - Version → `1.7.2`
+
+### Iteration K — Audit Fixes (Code Quality + Bugfixes)
+- **pull.js**: инвертирована логика `git status` — скрипт теперь выполняет `git pull`, а не выходит при чистом working tree
+- **gc-uploads.js**: удалено второе неиспользуемое соединение с БД, добавлено закрытие соединения
+- **src/db.js**: `appendAudit` обёрнут в транзакцию (INSERT + DELETE атомарны)
+- **src/helpers.js**: удалён мёртвый код (`err.statusCode`, `err.field`) из `parseJSONArray`
+- **src/routes/backfill.js**: удалена недостижимая ветка `item.price === null` (rowToItem уже конвертит null → 0)
+- **src/routes/pages.js**: дублированный массив `known` вынесен в константу модуля `STATIC_ROUTES`
+- **deploy.js**: устранён дублирующий импорт `execFileSync`
+- **api.js**: `checkAuth()` обёрнут в try/catch — больше нет unhandled promise rejections
+- **image-editor.js**: `openCrop`/`openEdit` теперь закрывают модалку перед повторным открытием — нет утечки focus-trap слушателей
+- **eslint.config.mjs**: `sourceType: module` → `commonjs` (весь код на CJS), добавлена конфигурация для тестов
+- **package.json**: `check` скрипт авто-обнаруживает роуты в `src/routes/`; `lint`/`format` теперь включают `test/`
+- **`.gitignore`**: добавлены `.DS_Store`, `Thumbs.db`, `.vscode/`, `.idea/`, `*.log`, `coverage/`
+- **`.env.example`**: добавлен комментарий про `NODE_ENV=production`
+- **`.github/workflows/ci.yml`: матрица Node 20+22, timeout, permissions, upload coverage отчёта
+- **HTML (admin, gallery, index, dice, miniatures)**: `aria-label` на кнопки темы/админки; `for` атрибуты на всех form labels
+- **AGENTS.md**: синхронизирована версия (1.8.0), исправлено описание схемы категорий, добавлены пропущенные API endpoints
+- Version → `1.8.0`
+
+## Known Issues (Post-Audit)
+- `PUT /api/items` version check optional — `validateVersion` пропускает проверку, если `version` не отправлен. Конкурентные редактирования могут перезаписывать друг друга
+- CSP допускает `cdnjs.cloudflare.com` (Cropper.js) — риск компрометации CDN, смягчено SRI-хешами
+- `unhandledRejection` handler в server.js подавляет аварийный выход — процесс может остаться в неконсистентном состоянии
+- Admin rate limiter (60 req/15min) может блокировать батч-операции
+- Нет тестов для: pagination, search, reorder, upload, backfill, categories CRUD, version conflicts, rate limiting
+- Нет лицензионного файла LICENSE в репозитории (в package.json заявлен MIT)
 
 ## Planned Features
 - Telegram bot для загрузки позиций (бот принимает фото + подпись, пишет в `/api/items`)

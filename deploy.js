@@ -5,7 +5,7 @@
  *        node deploy.js              (auto-generates message with timestamp)
  */
 require('dotenv').config();
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 const Database = require('better-sqlite3');
 const path = require('path');
 
@@ -39,7 +39,6 @@ if (!status) {
 }
 
 // 3. Commit
-const { execFileSync } = require('child_process');
 const msg = process.argv[2] || 'Auto-deploy: ' + new Date().toISOString().replace('T', ' ').slice(0, 19);
 console.log('💾 Committing: "' + msg + '"');
 execFileSync('git', ['commit', '-m', msg], { cwd: ROOT, stdio: 'pipe' });
@@ -48,6 +47,10 @@ execFileSync('git', ['commit', '-m', msg], { cwd: ROOT, stdio: 'pipe' });
 console.log('🚀 Pushing to origin...');
 try {
   const branch = execSync('git branch --show-current', { cwd: ROOT, encoding: 'utf8' }).trim();
+  if (branch === 'main') {
+    console.error('⛔ Cannot deploy from main branch. Switch to test first.');
+    process.exit(1);
+  }
   execFileSync('git', ['push', 'origin', branch], { cwd: ROOT, stdio: 'inherit' });
   console.log('✅ Deploy complete: ' + itemCount + ' items pushed to origin/' + branch);
 } catch {

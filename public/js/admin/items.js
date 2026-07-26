@@ -347,43 +347,43 @@ async function loadCatList() {
   div.innerHTML = '';
   Object.entries(data).forEach(([key, sec]) => {
     const h4 = document.createElement('h4');
-    h4.style.cssText = 'font-weight:400;margin:12px 0 4px;color:var(--accent);font-size:1rem;display:flex;align-items:center;gap:8px';
+    h4.className = 'cat-section-heading';
     const sectionLink = document.createElement('a');
     sectionLink.href = '/' + key;
+    sectionLink.className = 'cat-section-link';
     sectionLink.textContent = sec.label;
-    sectionLink.style.cssText = 'color:var(--accent);text-decoration:none';
     h4.appendChild(sectionLink);
     const delSectionBtn = document.createElement('button');
     delSectionBtn.textContent = '\ud83d\uddd1\ufe0f';
-    delSectionBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:0.5';
+    delSectionBtn.className = 'cat-icon-btn';
     delSectionBtn.title = 'Delete section';
     delSectionBtn.addEventListener('click', () => deleteSection(key));
     h4.appendChild(delSectionBtn);
     div.appendChild(h4);
     const ul = document.createElement('ul');
-    ul.style.cssText = 'list-style:none;padding:0;margin:0';
+    ul.className = 'cat-list-ul';
     sec.subcategories.forEach(c => {
       const li = document.createElement('li');
-      li.style.cssText = 'padding:4px 0;font-size:0.9rem;color:var(--text-muted);display:flex;align-items:center;gap:6px';
+      li.className = 'cat-list-li';
       if (c.type === 'group' && c.subcategories) {
-        li.style.color = 'var(--accent-dark)';
+        li.classList.add('cat-group-label');
         li.appendChild(document.createTextNode(c.label + ' (group)'));
         const delGroupBtn = document.createElement('button');
         delGroupBtn.textContent = '\ud83d\uddd1\ufe0f';
-        delGroupBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:0.8rem;opacity:0.5';
+        delGroupBtn.className = 'cat-icon-btn';
         delGroupBtn.title = 'Delete group';
         delGroupBtn.addEventListener('click', () => deleteCat(key, c.id, null));
         li.appendChild(delGroupBtn);
         ul.appendChild(li);
         const subUl = document.createElement('ul');
-        subUl.style.cssText = 'list-style:none;padding:0 0 0 16px;margin:0 0 4px 0';
+        subUl.className = 'cat-list-subul';
         c.subcategories.forEach(sc => {
           const subLi = document.createElement('li');
-          subLi.style.cssText = 'padding:2px 0;font-size:0.85rem;color:var(--text-muted);display:flex;align-items:center;gap:6px';
+          subLi.className = 'cat-list-subli';
           subLi.appendChild(document.createTextNode(sc.label));
           const delSubBtn = document.createElement('button');
           delSubBtn.textContent = '\ud83d\uddd1\ufe0f';
-          delSubBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:0.75rem;opacity:0.5';
+          delSubBtn.className = 'cat-icon-btn';
           delSubBtn.title = 'Delete subcategory';
           delSubBtn.addEventListener('click', () => deleteCat(key, sc.id, c.id));
           subLi.appendChild(delSubBtn);
@@ -394,7 +394,7 @@ async function loadCatList() {
         li.appendChild(document.createTextNode(c.label));
         const delBtn = document.createElement('button');
         delBtn.textContent = '\ud83d\uddd1\ufe0f';
-        delBtn.style.cssText = 'background:none;border:none;cursor:pointer;font-size:0.8rem;opacity:0.5';
+        delBtn.className = 'cat-icon-btn';
         delBtn.title = 'Delete category';
         delBtn.addEventListener('click', () => deleteCat(key, c.id, null));
         li.appendChild(delBtn);

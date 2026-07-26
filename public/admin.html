@@ -12,7 +12,7 @@
 <body class="hidden">
   <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="admin-corner">
-    <button id="themeBtn" title="Toggle theme">☀️</button>
+    <button id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☀️</button>
   </div>
   <main id="main-content" role="main">
   <div class="admin-page">
@@ -32,43 +32,43 @@
       <h2 class="tab-heading">Add New Item</h2>
       <form id="addForm" class="form-narrow">
         <div class="form-group">
-          <label>Section</label>
+          <label for="addSection">Section</label>
           <select id="addSection" required>
             <option value="">Select section...</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Category / Subcategory</label>
+          <label for="addCategory">Category / Subcategory</label>
           <select id="addCategory" required>
             <option value="">Select section first</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Title</label>
+          <label for="addTitle">Title</label>
           <input type="text" id="addTitle" required placeholder="Item name" maxlength="200">
         </div>
         <div class="form-group">
-          <label>Author / Origin</label>
+          <label for="addAuthor">Author / Origin</label>
           <input type="text" id="addAuthor" placeholder="e.g. Games Workshop, Original" maxlength="100">
         </div>
         <div class="form-group">
-          <label>Price</label>
+          <label for="addPrice">Price</label>
           <input type="number" id="addPrice" placeholder="0" min="0" step="0.01">
         </div>
         <div class="form-group mini-field">
-          <label>Recaster</label>
+          <label for="addRecaster">Recaster</label>
           <input type="text" id="addRecaster" placeholder="e.g. Black Market" maxlength="100">
         </div>
         <div class="form-group mini-field">
-          <label>Command Points</label>
+          <label for="addCombatPoints">Command Points</label>
           <input type="text" id="addCombatPoints" placeholder="e.g. 150" maxlength="20">
         </div>
         <div class="form-group mini-field">
-          <label>Status</label>
+          <label for="addStatus">Status</label>
           <input type="text" id="addStatus" placeholder="e.g. Painted, Assembled" maxlength="50">
         </div>
         <div class="form-group">
-          <label>Images</label>
+          <label for="addImage">Images</label>
           <div class="file-input-wrap">
             <input type="file" id="addImage" accept="image/*" multiple>
           </div>
@@ -108,11 +108,11 @@
         <div class="section-block">
           <h3 class="section-heading">Add New Section</h3>
           <div class="form-group compact">
-            <label>Section Name</label>
+            <label for="newSectionLabel">Section Name</label>
             <input type="text" id="newSectionLabel" placeholder="e.g. Trading Cards">
           </div>
           <div class="form-group compact">
-            <label>ID (optional — auto-generated if empty)</label>
+            <label for="newSectionId">ID (optional — auto-generated if empty)</label>
             <input type="text" id="newSectionId" placeholder="e.g. trading-cards">
           </div>
           <button class="btn btn-success" id="addSectionBtn">Add Section</button>
@@ -122,23 +122,23 @@
 
         <h3 class="section-heading">Add Subcategory</h3>
         <div class="form-group">
-          <label>Section</label>
+          <label for="catSection">Section</label>
           <select id="catSection">
             <option value="">Select section...</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Parent (leave as root for top-level subcategory)</label>
+          <label for="catParent">Parent (leave as root for top-level subcategory)</label>
           <select id="catParent">
             <option value="">(root of section)</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Label</label>
+          <label for="catLabel">Label</label>
           <input type="text" id="catLabel" placeholder="e.g. Pokémon Booster">
         </div>
         <div class="form-group">
-          <label>ID (optional)</label>
+          <label for="catId">ID (optional)</label>
           <input type="text" id="catId" placeholder="e.g. pokemon-booster">
         </div>
         <div class="form-group">
@@ -178,18 +178,18 @@
       <h2 class="tab-heading">Settings</h2>
       <div class="form-narrow">
         <div class="form-group">
-          <label>Site Name</label>
+          <label for="setSiteName">Site Name</label>
           <input type="text" id="setSiteName">
         </div>
         <div class="form-group">
-          <label>Default Theme (for new visitors)</label>
+          <label for="setDefaultTheme">Default Theme (for new visitors)</label>
           <select id="setDefaultTheme">
             <option value="dark">Dark</option>
             <option value="light">Light</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Default Image</label>
+          <label for="setDefaultImage">Default Image</label>
           <div class="file-input-wrap">
             <input type="file" id="setDefaultImage" accept="image/*">
           </div>
@@ -248,12 +248,12 @@
     <div class="modal modal-wide">
       <h2>Edit Item</h2>
       <input type="hidden" id="editId">
-      <div class="form-group"><label>Title</label><input type="text" id="editTitle" maxlength="200"></div>
-      <div class="form-group"><label>Author / Origin</label><input type="text" id="editAuthor" maxlength="100"></div>
-      <div class="form-group"><label>Price</label><input type="number" id="editPrice" min="0" step="0.01"></div>
-      <div class="form-group mini-field"><label>Recaster</label><input type="text" id="editRecaster" maxlength="100"></div>
-      <div class="form-group mini-field"><label>Command Points</label><input type="text" id="editCombatPoints" maxlength="20"></div>
-      <div class="form-group mini-field"><label>Status</label><input type="text" id="editStatus" maxlength="50"></div>
+      <div class="form-group"><label for="editTitle">Title</label><input type="text" id="editTitle" maxlength="200"></div>
+      <div class="form-group"><label for="editAuthor">Author / Origin</label><input type="text" id="editAuthor" maxlength="100"></div>
+      <div class="form-group"><label for="editPrice">Price</label><input type="number" id="editPrice" min="0" step="0.01"></div>
+      <div class="form-group mini-field"><label for="editRecaster">Recaster</label><input type="text" id="editRecaster" maxlength="100"></div>
+      <div class="form-group mini-field"><label for="editCombatPoints">Command Points</label><input type="text" id="editCombatPoints" maxlength="20"></div>
+      <div class="form-group mini-field"><label for="editStatus">Status</label><input type="text" id="editStatus" maxlength="50"></div>
       <div class="form-group">
         <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit, arrows to reorder)</span>
           <span class="edit-img-counter" id="editImageCounter">0 / 10</span></label>

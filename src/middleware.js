@@ -25,8 +25,8 @@ function requireSameOrigin(req, res, next) {
   const source = origin || referer;
   if (!source) return res.status(403).json({ error: 'Origin or Referer header is required' });
   let originHost;
-  try { originHost = new URL(source).host; } catch { return res.status(403).json({ error: 'Invalid Origin header' }); }
-  if (originHost !== req.get('host')) return res.status(403).json({ error: 'Cross-origin request rejected' });
+  try { originHost = new URL(source).hostname; } catch { return res.status(403).json({ error: 'Invalid Origin header' }); }
+  if (originHost !== req.hostname) return res.status(403).json({ error: 'Cross-origin request rejected' });
   next();
 }
 

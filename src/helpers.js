@@ -145,8 +145,6 @@ function parseJSONArray(value, fieldName) {
     return parsed;
   } catch (e) {
     const err = new Error(e.message || 'Invalid JSON for ' + fieldName);
-    err.statusCode = 400;
-    err.field = fieldName;
     throw err;
   }
 }
