@@ -17,22 +17,26 @@ export async function initGalleryPage() {
 
   // Set dynamic back link
   if (backLink && section) {
-    const cats = await API.get('/api/categories');
-    const sec = cats[section];
-    if (sec) {
-      const cat = sec.subcategories.find(c => c.id === category);
-      const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
-      const label = parentGroup ? parentGroup.label : sec.label;
-      backLink.href = parentGroup ? '/' + encodeURIComponent(section) + '/' + encodeURIComponent(parentGroup.id) : '/' + encodeURIComponent(section);
-      backLink.textContent = '';
-      const arrow = document.createElement('span');
-      arrow.className = 'back-arrow';
-      arrow.textContent = '\u2190';
-      const text = document.createElement('span');
-      text.className = 'back-text';
-      text.textContent = 'Back to ' + label;
-      backLink.appendChild(arrow);
-      backLink.appendChild(text);
+    try {
+      const cats = await API.get('/api/categories');
+      const sec = cats[section];
+      if (sec) {
+        const cat = sec.subcategories.find(c => c.id === category);
+        const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
+        const label = parentGroup ? parentGroup.label : sec.label;
+        backLink.href = parentGroup ? '/' + encodeURIComponent(section) + '/' + encodeURIComponent(parentGroup.id) : '/' + encodeURIComponent(section);
+        backLink.textContent = '';
+        const arrow = document.createElement('span');
+        arrow.className = 'back-arrow';
+        arrow.textContent = '\u2190';
+        const text = document.createElement('span');
+        text.className = 'back-text';
+        text.textContent = 'Back to ' + label;
+        backLink.appendChild(arrow);
+        backLink.appendChild(text);
+      }
+    } catch (err) {
+      console.error('Failed to set back link:', err);
     }
   }
 
@@ -489,4 +493,4 @@ async function saveReorder() {
   }
 }
 
-initGalleryPage();
+initGalleryPage().catch(err => console.error('Gallery init failed:', err));

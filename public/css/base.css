@@ -959,6 +959,40 @@ a:hover { text-decoration: underline; }
 .error-page p { color: var(--text-muted); margin: 0 0 30px; }
 .error-page a { color: var(--accent); }
 
+/* Search result count */
+.sr-count-info {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 6px 8px 2px;
+  border-bottom: 1px solid var(--border);
+}
+/* Small empty state for search dropdown */
+.empty-state-sm {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+/* Currency settings layout */
+.currency-row {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.currency-label {
+  min-width: 100px;
+  font-size: 0.85rem;
+}
+.currency-input {
+  width: 60px;
+  padding: 4px 8px;
+}
+.currency-hint {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
 @media (max-width: 600px) {
   .ps-subcategory { margin-left: 8px; }
   .ps-table { font-size: 0.82rem; }

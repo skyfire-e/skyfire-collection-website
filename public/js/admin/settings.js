@@ -1,7 +1,14 @@
 import { API } from '../api.js';
 
 export async function loadSettings() {
-  const settings = await API.get('/api/settings');
+  let settings;
+  try {
+    settings = await API.get('/api/settings');
+  } catch (err) {
+    console.error('Failed to load settings:', err);
+    alert('Failed to load settings');
+    return;
+  }
   document.getElementById('setSiteName').value = settings.siteName || '';
   document.getElementById('setDefaultTheme').value = settings.defaultTheme || 'dark';
   document.getElementById('currentDefaultImg').textContent = settings.defaultImage || 'not set';
@@ -21,19 +28,18 @@ async function renderCurrencySettings(currencies) {
   Object.entries(cats).forEach(([key, sec]) => {
     const row = document.createElement('div');
     row.className = 'currency-row';
-    row.style.cssText = 'margin-bottom:6px;display:flex;align-items:center;gap:8px';
     const labelEl = document.createElement('label');
-    labelEl.style.cssText = 'min-width:100px;font-size:0.85rem';
+    labelEl.className = 'currency-label';
     labelEl.textContent = sec.label;
     const inputEl = document.createElement('input');
     inputEl.type = 'text';
     inputEl.id = 'cur_' + key;
     inputEl.value = currencies[key] || '';
     inputEl.placeholder = 'USD';
-    inputEl.style.cssText = 'width:60px;padding:4px 8px';
+    inputEl.className = 'currency-input';
     inputEl.maxLength = 3;
     const hint = document.createElement('span');
-    hint.style.cssText = 'color:var(--text-muted);font-size:0.78rem';
+    hint.className = 'currency-hint';
     hint.textContent = 'ISO 4217';
     row.append(labelEl, inputEl, hint);
     container.appendChild(row);
@@ -42,52 +48,77 @@ async function renderCurrencySettings(currencies) {
 
 export function initAdminSettings() {
   document.getElementById('backfillBtn').addEventListener('click', async () => {
-    const res = await API.post('/api/backfill-defaults');
-    alert('Updated ' + res.updated + ' items with default image: ' + res.defaultImage);
+    try {
+      const res = await API.post('/api/backfill-defaults');
+      alert('Updated ' + res.updated + ' items with default image: ' + res.defaultImage);
+    } catch (err) {
+      console.error('Backfill failed:', err);
+      alert('Backfill failed: ' + (err.message || 'Unknown error'));
+    }
   });
 
   document.getElementById('backfillImagesBtn').addEventListener('click', async () => {
-    const res = await API.post('/api/backfill-images');
-    alert('Updated ' + res.updated + ' items: image → images[0]');
+    try {
+      const res = await API.post('/api/backfill-images');
+      alert('Updated ' + res.updated + ' items: image → images[0]');
+    } catch (err) {
+      console.error('Backfill images failed:', err);
+      alert('Backfill failed: ' + (err.message || 'Unknown error'));
+    }
   });
 
   document.getElementById('backfillPricesBtn').addEventListener('click', async () => {
-    const res = await API.post('/api/backfill-prices');
-    alert('Updated ' + res.updated + ' items: price normalized to number');
+    try {
+      const res = await API.post('/api/backfill-prices');
+      alert('Updated ' + res.updated + ' items: price normalized to number');
+    } catch (err) {
+      console.error('Backfill prices failed:', err);
+      alert('Backfill failed: ' + (err.message || 'Unknown error'));
+    }
   });
 
   document.getElementById('checkpointBtn').addEventListener('click', async () => {
-    await API.post('/api/checkpoint');
-    alert('WAL checkpoint done — DB is ready for commit');
+    try {
+      await API.post('/api/checkpoint');
+      alert('WAL checkpoint done — DB is ready for commit');
+    } catch (err) {
+      console.error('Checkpoint failed:', err);
+      alert('Checkpoint failed: ' + (err.message || 'Unknown error'));
+    }
   });
 
   document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
-    const fileInput = document.getElementById('setDefaultImage');
-    if (fileInput.files[0]) {
-      const imgFd = new FormData();
-      imgFd.append('image', fileInput.files[0]);
-      await API.post('/api/upload/default', imgFd);
-      fileInput.value = '';
+    try {
+      const fileInput = document.getElementById('setDefaultImage');
+      if (fileInput.files[0]) {
+        const imgFd = new FormData();
+        imgFd.append('image', fileInput.files[0]);
+        await API.post('/api/upload/default', imgFd);
+        fileInput.value = '';
+      }
+      const currencies = {};
+      document.querySelectorAll('#currencySettings .currency-row').forEach(row => {
+        const input = row.querySelector('input');
+        const sectionId = input.id.replace('cur_', '');
+        if (input.value.trim()) currencies[sectionId] = input.value.trim();
+      });
+      await API.put('/api/settings', {
+        siteName: document.getElementById('setSiteName').value,
+        defaultTheme: document.getElementById('setDefaultTheme').value,
+        showSpreadsheet: document.getElementById('setShowSpreadsheet').checked,
+        showPublicSpreadsheet: document.getElementById('setShowPublicSpreadsheet').checked,
+        showMiniaturesColumns: {
+          recaster: document.getElementById('setShowRecaster').checked,
+          combatPoints: document.getElementById('setShowCombatPoints').checked,
+          status: document.getElementById('setShowStatus').checked,
+        },
+        currencies: currencies,
+      });
+      alert('Settings saved!');
+      loadSettings();
+    } catch (err) {
+      console.error('Save settings failed:', err);
+      alert('Save settings failed: ' + (err.message || 'Unknown error'));
     }
-    const currencies = {};
-    document.querySelectorAll('#currencySettings .currency-row').forEach(row => {
-      const input = row.querySelector('input');
-      const sectionId = input.id.replace('cur_', '');
-      if (input.value.trim()) currencies[sectionId] = input.value.trim();
-    });
-    await API.put('/api/settings', {
-      siteName: document.getElementById('setSiteName').value,
-      defaultTheme: document.getElementById('setDefaultTheme').value,
-      showSpreadsheet: document.getElementById('setShowSpreadsheet').checked,
-      showPublicSpreadsheet: document.getElementById('setShowPublicSpreadsheet').checked,
-      showMiniaturesColumns: {
-        recaster: document.getElementById('setShowRecaster').checked,
-        combatPoints: document.getElementById('setShowCombatPoints').checked,
-        status: document.getElementById('setShowStatus').checked,
-      },
-      currencies: currencies,
-    });
-    alert('Settings saved!');
-    loadSettings();
   });
 }

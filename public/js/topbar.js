@@ -81,10 +81,10 @@ function doSearch(query) {
       const data = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=50');
       const items = data.items || data;
       const container = document.getElementById('searchResults');
-      if (items.length === 0) { container.innerHTML = '<p class="empty-state" style="padding:20px">No results</p>'; return; }
+      if (items.length === 0) { container.innerHTML = '<p class="empty-state-sm">No results</p>'; return; }
       container.innerHTML = '';
       const countInfo = document.createElement('div');
-      countInfo.style.cssText = 'font-size:0.78rem;color:var(--text-muted);padding:6px 8px 2px;border-bottom:1px solid var(--border);';
+      countInfo.className = 'sr-count-info';
       countInfo.textContent = items.length + ' result' + (items.length !== 1 ? 's' : '');
       container.appendChild(countInfo);
       items.forEach(item => {
@@ -113,7 +113,7 @@ function doSearch(query) {
         container.appendChild(div);
       });
     } catch (err) {
-      document.getElementById('searchResults').innerHTML = '<p class="empty-state" style="padding:20px">Search failed</p>';
+      document.getElementById('searchResults').innerHTML = '<p class="empty-state-sm">Search failed</p>';
     }
   }, 200);
 }

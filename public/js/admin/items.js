@@ -183,16 +183,17 @@ async function loadSpreadsheet() {
   const tbody = document.getElementById('spreadsheetBody');
   if (!tbody) return;
   try {
-    const items = await API.get('/api/spreadsheet');
+    let items = await API.get('/api/spreadsheet');
+    if (!Array.isArray(items)) items = [];
     tbody.innerHTML = '';
 
-  const sprCols = 9;
+  const sprCols = document.querySelectorAll('#sprHeader th').length || 9;
 
   if (items.length === 0) {
     const tr = document.createElement('tr');
     const td = document.createElement('td');
     td.colSpan = sprCols;
-    td.style.cssText = 'text-align:center;color:var(--text-muted);padding:40px';
+    td.className = 'empty-state';
     td.textContent = 'No items';
     tr.appendChild(td);
     tbody.appendChild(tr);

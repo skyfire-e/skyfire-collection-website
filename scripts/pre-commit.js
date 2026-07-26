@@ -1,4 +1,4 @@
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -10,8 +10,9 @@ if (fs.existsSync(WAL_FILE)) {
     const stats = fs.statSync(WAL_FILE);
     if (stats.size > 0) {
       console.log('  SQLite WAL is not checkpointed (' + stats.size + ' bytes pending), running checkpoint...');
-      execSync('node -e "const db=require(\\'better-sqlite3\\')(\\'data/collection.db\\'); db.pragma(\\'wal_checkpoint(TRUNCATE)\\'); db.close();"', { cwd: ROOT, stdio: 'pipe' });
-      execSync('git diff --quiet -- data/collection.db || git add data/collection.db', { cwd: ROOT, stdio: 'pipe' });
+      execFileSync('node', ['-e', "const db=require('better-sqlite3')('data/collection.db'); db.pragma('wal_checkpoint(TRUNCATE)'); db.close();"], { cwd: ROOT, stdio: 'pipe' });
+      execFileSync('git', ['diff', '--quiet', '--', 'data/collection.db'], { cwd: ROOT, stdio: 'pipe' });
+      try { execFileSync('git', ['add', 'data/collection.db'], { cwd: ROOT, stdio: 'pipe' }); } catch {}
       console.log('  Checkpoint done, collection.db re-staged');
     }
   } catch {}
