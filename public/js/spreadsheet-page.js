@@ -1,24 +1,33 @@
 import { API, checkAuth, isAdmin } from './api.js';
 
-async function getSpreadsheetData() {
-  return API.get('/api/spreadsheet' + (isAdmin() ? '' : '/public'));
+function buildCSV(sections) {
+  let csv = 'Section,Category,Title,Author,Price,Recaster,Command Points,Status\n';
+  for (const sec of sections) {
+    for (const sub of sec.subcategories) {
+      for (const item of sub.items) {
+        const row = [
+          sec.label, sub.groupLabel ? sub.groupLabel + ' - ' + sub.label : sub.label,
+          item.title || '', item.author || '', item.price || '',
+          item.recaster || '', item.combatPoints || '', item.status || ''
+        ].map(f => '"' + String(f).replace(/"/g, '""') + '"').join(',');
+        csv += row + '\n';
+      }
+    }
+  }
+  return csv;
 }
 
 function exportCSV() {
-  getSpreadsheetData().then(sections => {
-    let csv = 'Section,Category,Title,Author,Price,Recaster,Command Points,Status\n';
-    for (const sec of sections) {
-      for (const sub of sec.subcategories) {
-        for (const item of sub.items) {
-          const row = [
-            sec.label, sub.groupLabel ? sub.groupLabel + ' - ' + sub.label : sub.label,
-            item.title || '', item.author || '', item.price || '',
-            item.recaster || '', item.combatPoints || '', item.status || ''
-          ].map(f => '"' + String(f).replace(/"/g, '""') + '"').join(',');
-          csv += row + '\n';
-        }
-      }
+  const url = isAdmin() ? '/api/spreadsheet' : '/api/spreadsheet/public';
+  API.get(url).then(data => {
+    let sections;
+    if (isAdmin()) {
+      // /api/spreadsheet returns flat items array — wrap for CSV
+      sections = [{ label: 'All', subcategories: [{ label: 'All', items: data }] }];
+    } else {
+      sections = data;
     }
+    const csv = buildCSV(sections);
     const blob = new Blob([csv], { type: 'text/csv' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -46,7 +55,7 @@ export async function initSpreadsheetPage() {
   container.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
 
   try {
-    const sections = await getSpreadsheetData();
+    const sections = await API.get('/api/spreadsheet/public');
     if (!sections || sections.length === 0) {
       container.innerHTML = '<p class="empty-state">No items yet</p>';
       return;
