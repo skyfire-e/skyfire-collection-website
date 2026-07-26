@@ -1,4 +1,7 @@
 User-agent: *
+Disallow: /admin
+Disallow: /api/
+Disallow: /spreadsheet
 Allow: /
 
 Sitemap: /sitemap.xml

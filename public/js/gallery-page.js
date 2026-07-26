@@ -48,7 +48,7 @@ export async function initGalleryPage() {
 
   function setPageTitle(label) {
     title.textContent = label;
-    document.title = label + ' - skyf1re Collection';
+    document.title = label + ' - skyfire Collection';
   }
 
   if (category && backLink) {

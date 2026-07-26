@@ -21,7 +21,7 @@ async function initSectionPage() {
     const data = await API.get('/api/categories');
     const section = data[sectionId];
     if (!section) { grid.innerHTML = '<p class="empty-state">Section not found.</p>'; return; }
-    if (titleEl) titleEl.textContent = section.label + ' - skyf1re Collection';
+    if (titleEl) titleEl.textContent = section.label + ' - skyfire Collection';
     if (titleEl2) titleEl2.textContent = section.label;
 
     section.subcategories.forEach(c => {
@@ -57,7 +57,7 @@ async function initSubgroupPage() {
     const group = section.subcategories.find(c => c.id === groupId);
     if (!group || !group.subcategories) { grid.innerHTML = '<p class="empty-state">Group not found.</p>'; return; }
 
-    if (titleEl) titleEl.textContent = group.label + ' - skyf1re Collection';
+    if (titleEl) titleEl.textContent = group.label + ' - skyfire Collection';
     if (titleEl2) titleEl2.textContent = group.label;
     if (backLink) {
       backLink.href = '/' + encodeURIComponent(sectionId);

@@ -6,7 +6,7 @@ if (!process.env.SESSION_SECRET) {
   process.exit(1);
 }
 
-if ((process.env.ADMIN_PASSWORD || '').trim() === '') {
+if (process.env.ADMIN_PASSWORD !== undefined && (process.env.ADMIN_PASSWORD || '').trim() === '') {
   console.error('ADMIN_PASSWORD cannot be empty. Use ADMIN_PASSWORD_HASH instead.');
   process.exit(1);
 }
@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 3000;
 const SHUTDOWN_TIMEOUT = parseInt(process.env.SHUTDOWN_TIMEOUT, 10) || 5000;
 
 const server = app.listen(PORT, () => {
-  console.log('skyf1re Collection running at http://localhost:' + PORT);
+  console.log('skyfire Collection running at http://localhost:' + PORT);
 });
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
