@@ -17,16 +17,16 @@ app.use(morgan('tiny'));
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+      defaultSrc: ['\'self\''],
+      scriptSrc: ['\'self\'', 'https://cdnjs.cloudflare.com'],
       scriptSrcAttr: null,
-      styleSrc: ["'self'", "https://cdnjs.cloudflare.com"],
-      imgSrc: ["'self'", "data:", "blob:"],
-      fontSrc: ["'self'", "https:", "data:"],
-      objectSrc: ["'none'"],
-      baseUri: ["'self'"],
-      formAction: ["'self'"],
-      frameAncestors: ["'self'"],
+      styleSrc: ['\'self\'', 'https://cdnjs.cloudflare.com'],
+      imgSrc: ['\'self\'', 'data:', 'blob:'],
+      fontSrc: ['\'self\'', 'https:', 'data:'],
+      objectSrc: ['\'none\''],
+      baseUri: ['\'self\''],
+      formAction: ['\'self\''],
+      frameAncestors: ['\'self\''],
       upgradeInsecureRequests: []
     }
   }
@@ -68,24 +68,32 @@ const { getSession, setSession, destroySession } = require('./db');
 const SQLiteStore = function() {};
 SQLiteStore.prototype.__proto__ = session.Store.prototype;
 SQLiteStore.prototype.get = function(sid, cb) {
-  const data = getSession(sid);
-  cb(null, data);
+  try {
+    const data = getSession(sid);
+    cb(null, data);
+  } catch (err) { cb(err); }
 };
 const SESSION_MAX_AGE = 24 * 60 * 60 * 1000;
 
 SQLiteStore.prototype.set = function(sid, sessionData, cb) {
-  const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
-  setSession(sid, sessionData, maxAge);
-  cb(null);
+  try {
+    const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+    setSession(sid, sessionData, maxAge);
+    cb(null);
+  } catch (err) { cb(err); }
 };
 SQLiteStore.prototype.destroy = function(sid, cb) {
-  destroySession(sid);
-  cb(null);
+  try {
+    destroySession(sid);
+    cb(null);
+  } catch (err) { cb(err); }
 };
 SQLiteStore.prototype.touch = function(sid, sessionData, cb) {
-  const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
-  setSession(sid, sessionData, maxAge);
-  cb(null);
+  try {
+    const maxAge = (sessionData.cookie && sessionData.cookie.maxAge) || SESSION_MAX_AGE;
+    setSession(sid, sessionData, maxAge);
+    cb(null);
+  } catch (err) { cb(err); }
 };
 
 app.use(session({

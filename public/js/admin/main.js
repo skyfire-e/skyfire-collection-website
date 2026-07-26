@@ -16,7 +16,4 @@ checkAuth().then(() => {
   document.body.classList.remove('hidden');
   initAdminSettings();
   initAdminItems();
-}).catch(err => {
-  console.error('Auth check failed:', err);
-  showLogin();
-});
+}).catch(() => showLogin());

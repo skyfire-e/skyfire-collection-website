@@ -141,3 +141,89 @@ describe('CSRF protection', () => {
     assert.strictEqual(res.status, 403);
   });
 });
+
+describe('CRUD (authenticated)', () => {
+  let agent;
+
+  before(async () => {
+    agent = supertest.agent(app);
+    const res = await agent
+      .post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+    assert.strictEqual(res.status, 200);
+  });
+
+  it('POST /api/items — creates item', async () => {
+    const res = await agent
+      .post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'HTTP Test Item')
+      .field('price', '25');
+    assert.strictEqual(res.status, 201);
+    assert.strictEqual(res.body.title, 'HTTP Test Item');
+    assert.strictEqual(res.body.price, 25);
+    assert.ok(res.body.id);
+    // cleanup
+    await agent
+      .delete('/api/items/' + res.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+  });
+
+  it('PUT /api/items/:id — updates item', async () => {
+    const res = await agent
+      .put('/api/items/test-item-1')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('title', 'Updated Dragon')
+      .field('version', '1');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.title, 'Updated Dragon');
+    assert.strictEqual(res.body.version, 2);
+    // revert
+    await agent
+      .put('/api/items/test-item-1')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('title', 'Dragon')
+      .field('version', '2');
+  });
+
+  it('DELETE /api/items/:id — deletes item', async () => {
+    // create temp item to delete
+    const created = await agent
+      .post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'Delete Me');
+    const res = await agent
+      .delete('/api/items/' + created.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.success, true);
+    assert.strictEqual(db.getItem(created.body.id), null);
+  });
+
+  it('POST /api/auth/logout — logs out', async () => {
+    const res = await agent
+      .post('/api/auth/logout')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.success, true);
+    // re-login for subsequent tests
+    await agent
+      .post('/api/auth/login')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ username: 'admin', password: 'admin123' });
+  });
+});

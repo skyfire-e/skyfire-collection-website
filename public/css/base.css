@@ -701,6 +701,26 @@ a:hover { text-decoration: underline; }
   font-weight: 400;
 }
 
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 9999;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+.edit-img-counter {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-left: 8px;
+}
+
 .edit-image-grid {
   display: flex;
   flex-wrap: wrap;

@@ -18,7 +18,12 @@ router.get('/', (req, res) => {
     return res.json(items);
   }
 
-  const parsedLimit = limit !== undefined ? Math.min(Math.max(parseInt(limit, 10) || 0, 1), 100) : undefined;
+  let parsedLimit;
+  if (limit !== undefined) {
+    const n = parseInt(limit, 10);
+    if (isNaN(n) || n < 0) return res.status(400).json({ error: 'limit must be a non-negative integer' });
+    parsedLimit = n === 0 ? 0 : Math.min(n, 100);
+  }
   const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
   const items = db.getItems(section, category, parsedLimit, parsedOffset);
   const total = db.getItemCount(section, category);
@@ -47,7 +52,7 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
       category: data.category,
       title: data.title,
       author: data.author || '',
-      price: data.price,
+      price: data.price ?? 0,
       recaster: data.recaster || '',
       combatPoints: data.combatPoints || '',
       status: data.status || '',
@@ -79,7 +84,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       ...(req.body.author !== undefined && { author: req.body.author }),
       ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
       ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
-      ...(req.body.price !== undefined && { price: Number(req.body.price) }),
+      ...(req.body.price !== undefined && { price: req.body.price === '' ? null : Number(req.body.price) }),
       ...(req.body.recaster !== undefined && { recaster: req.body.recaster }),
       ...(req.body.combatPoints !== undefined && { combatPoints: req.body.combatPoints }),
       ...(req.body.status !== undefined && { status: req.body.status })
@@ -102,9 +107,9 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       return res.status(400).json({ error: e.message });
     }
 
-    if (!Array.isArray(removeIdx) || !removeIdx.every(Number.isInteger) || removeIdx.some(v => v < 0)) {
+    if (!Array.isArray(removeIdx) || !removeIdx.every(Number.isInteger) || removeIdx.some(v => v < 0) || removeIdx.some(v => v >= oldImages.length)) {
       cleanupUploadedFiles(files);
-      return res.status(400).json({ error: 'imagesToRemove must contain non-negative integers' });
+      return res.status(400).json({ error: 'imagesToRemove contains invalid or out-of-bounds indices' });
     }
 
     if (finalOrder.length > 0) {
@@ -160,8 +165,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     const toDelete = [];
     for (const img of oldImagesForCleanup) {
       if (!newSet.has(img)) {
-        const items = db.allItems();
-        const stillReferenced = items.some(other => other.id !== candidate.id && (other.image === img || other.images?.includes(img)));
+        const stillReferenced = db.countImageReferences(img, candidate.id) > 0;
         if (!stillReferenced) toDelete.push(img);
       }
     }
@@ -182,10 +186,9 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
     db.deleteItem(req.params.id);
     db.appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
 
-    const currentItems = db.allItems();
     const toDelete = [];
     for (const img of uniquePaths) {
-      const stillReferenced = currentItems.some(other => other.image === img || other.images?.includes(img));
+      const stillReferenced = db.countImageReferences(img, deletedItem.id) > 0;
       if (!stillReferenced) toDelete.push(img);
     }
     toDelete.forEach(img => safeUnlink(img));
@@ -196,6 +199,8 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
 router.post('/reorder', requireSameOrigin, requireAdmin, (req, res, next) => {
   try {
     const { section, category, items } = req.body;
+    if (!section || typeof section !== 'string') return res.status(400).json({ error: 'Invalid section' });
+    if (!category || typeof category !== 'string') return res.status(400).json({ error: 'Invalid category' });
     if (!Array.isArray(items) || items.length === 0) return res.status(400).json({ error: 'Items array required' });
     db.reorderItems(section, category, items);
     res.json({ success: true, count: items.length });

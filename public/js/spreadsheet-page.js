@@ -200,4 +200,5 @@ export async function initSpreadsheetPage() {
 
 initSpreadsheetPage();
 
-document.getElementById('csvBtn').addEventListener('click', exportCSV);
+const csvBtn = document.getElementById('csvBtn');
+if (csvBtn) csvBtn.addEventListener('click', exportCSV);

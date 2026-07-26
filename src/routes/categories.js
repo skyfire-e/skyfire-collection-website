@@ -3,6 +3,8 @@ const { requireAdmin, requireSameOrigin } = require('../middleware');
 const { findCategory } = require('../helpers');
 const db = require('../db');
 
+const NEW_SECTION_MAGIC = '__new_section__';
+
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -29,7 +31,7 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
     try {
       const cats = db.getCategories();
 
-      if (parentId === '__new_section__') {
+      if (parentId === NEW_SECTION_MAGIC) {
         if (cats[catId]) throw Object.assign(new Error('Section already exists'), { status: 400 });
         cats[catId] = { label, subcategories: [] };
       } else if (parentId && section && cats[section]) {

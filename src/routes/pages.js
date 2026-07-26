@@ -11,8 +11,8 @@ router.get('/health', (req, res) => {
   try {
     db.db.prepare('SELECT 1').get();
     res.json({ status: 'ok', uptime: process.uptime(), db: 'ok' });
-  } catch (e) {
-    res.status(503).json({ status: 'error', db: 'unavailable', error: e.message });
+  } catch {
+    res.status(503).json({ status: 'error', db: 'unavailable', error: 'Database unavailable' });
   }
 });
 

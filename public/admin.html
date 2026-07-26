@@ -9,9 +9,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
 <body class="hidden">
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="admin-corner">
     <button id="themeBtn" title="Toggle theme">☀️</button>
   </div>
+  <main id="main-content" role="main">
   <div class="admin-page">
     <a href="/" class="back-link text-muted-link">← Back to Home</a>
     <h1>Admin Panel</h1>
@@ -149,6 +151,7 @@
         <div class="section-spaced">
           <h3 class="section-heading-wide">Current Categories</h3>
           <div id="catList"></div>
+        </div>
       </div>
     </div>
 
@@ -235,6 +238,7 @@
     </div>
     </div>
   </div>
+  </main>
 
   <!-- Edit Modal -->
   <div class="modal-overlay" id="editModal" role="dialog" aria-modal="true" aria-label="Edit item">
@@ -248,7 +252,8 @@
       <div class="form-group mini-field"><label>Command Points</label><input type="text" id="editCombatPoints"></div>
       <div class="form-group mini-field"><label>Status</label><input type="text" id="editStatus"></div>
       <div class="form-group">
-        <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit, arrows to reorder)</span></label>
+        <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit, arrows to reorder)</span>
+          <span class="edit-img-counter" id="editImageCounter">0 / 10</span></label>
         <div class="edit-image-grid" id="editImageGrid"></div>
         <div class="margin-top-sm">
           <button type="button" class="btn btn-sm" id="addImagesBtn">+ Add Images</button>

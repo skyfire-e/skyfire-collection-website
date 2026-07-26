@@ -79,6 +79,7 @@ export async function initGalleryPage() {
   function openLightbox(item) {
     lbCurrentImages = item.images && item.images.length > 0 ? item.images : [item.image];
     lbCurrentImgIdx = 0;
+    lbImg.alt = item.title || 'Image preview';
     for (let i = 1; i < lbCurrentImages.length; i++) {
       const p = new Image();
       p.src = lbCurrentImages[i];
@@ -102,6 +103,7 @@ export async function initGalleryPage() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
     if (lbFocusTrap) { lightbox.removeEventListener('keydown', lbFocusTrap); lbFocusTrap = null; }
+    document.removeEventListener('keydown', onLightboxKeydown);
   }
 
   function updateLightbox(item) {
@@ -306,12 +308,13 @@ export async function initGalleryPage() {
     }
   }, { passive: true });
 
-  document.addEventListener('keydown', (e) => {
+  function onLightboxKeydown(e) {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
     if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
-  });
+  }
+  document.addEventListener('keydown', onLightboxKeydown);
 
   initImageEditor();
 
@@ -363,6 +366,7 @@ async function toggleReorder() {
 }
 
 let dragSrc = null;
+let touchReorder = null;
 
 function enableDragAndDrop(grid) {
   grid.querySelectorAll('.gallery-card').forEach(card => {
@@ -371,6 +375,9 @@ function enableDragAndDrop(grid) {
     card.addEventListener('dragover', onDragOver);
     card.addEventListener('drop', onDrop);
     card.addEventListener('dragend', onDragEnd);
+    card.addEventListener('touchstart', onTouchStart, { passive: true });
+    card.addEventListener('touchmove', onTouchMove, { passive: true });
+    card.addEventListener('touchend', onTouchEnd);
   });
 }
 
@@ -381,6 +388,9 @@ function disableDragAndDrop(grid) {
     card.removeEventListener('dragover', onDragOver);
     card.removeEventListener('drop', onDrop);
     card.removeEventListener('dragend', onDragEnd);
+    card.removeEventListener('touchstart', onTouchStart);
+    card.removeEventListener('touchmove', onTouchMove);
+    card.removeEventListener('touchend', onTouchEnd);
   });
 }
 
@@ -412,6 +422,39 @@ function onDragEnd() {
   this.style.opacity = '';
   dragSrc = null;
   document.querySelectorAll('.gallery-card').forEach(c => c.style.opacity = '');
+}
+
+function onTouchStart(e) {
+  const touch = e.touches[0];
+  touchReorder = { card: this, startY: touch.clientY, startX: touch.clientX, moved: false };
+}
+
+function onTouchMove(e) {
+  if (!touchReorder || touchReorder.card !== this) return;
+  const touch = e.touches[0];
+  const dy = touch.clientY - touchReorder.startY;
+  if (Math.abs(dy) > 15) {
+    touchReorder.moved = true;
+    e.preventDefault();
+    const grid = this.parentNode;
+    const children = [...grid.querySelectorAll('.gallery-card')];
+    const idx = children.indexOf(this);
+    const rect = this.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    let target = null;
+    for (const child of children) {
+      if (child === this) continue;
+      const r = child.getBoundingClientRect();
+      if (touch.clientY < r.top + r.height / 2) { target = child; break; }
+    }
+    if (target) grid.insertBefore(this, target);
+    else grid.appendChild(this);
+    touchReorder.startY = touch.clientY;
+  }
+}
+
+function onTouchEnd() {
+  touchReorder = null;
 }
 
 async function saveReorder() {

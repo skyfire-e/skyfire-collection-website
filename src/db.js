@@ -14,6 +14,7 @@ if (TEST_DB) {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
   db = new Database(DB_FILE);
   db.pragma('journal_mode = WAL');
+  db.pragma('busy_timeout = 5000');
 }
 db.pragma('foreign_keys = ON');
 
@@ -31,6 +32,7 @@ db.exec(`
     image TEXT DEFAULT '',
     images TEXT DEFAULT '[]',
     version INTEGER NOT NULL DEFAULT 1 CHECK (version > 0),
+    sort_order INTEGER DEFAULT 0,
     createdAt TEXT DEFAULT '',
     updatedAt TEXT DEFAULT ''
   );
@@ -38,6 +40,7 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_items_section ON items(section);
   CREATE INDEX IF NOT EXISTS idx_items_category ON items(category);
   CREATE INDEX IF NOT EXISTS idx_items_section_category ON items(section, category);
+  CREATE INDEX IF NOT EXISTS idx_items_sort ON items(section, category, sort_order);
 
   CREATE TABLE IF NOT EXISTS sections (
     id TEXT PRIMARY KEY,
@@ -75,6 +78,8 @@ db.exec(`
     data TEXT NOT NULL,
     expires INTEGER
   );
+
+  CREATE INDEX IF NOT EXISTS idx_sessions_expires ON sessions(expires);
 `);
 
 // --- Migrations ---
@@ -107,7 +112,7 @@ if (currentVersion < 3) {
   db.exec('CREATE INDEX IF NOT EXISTS idx_items_updatedAt ON items(updatedAt)');
 
   // v3: normalize categories — migrate from old JSON `categories` table to normalized `sections` + `categories`
-  const oldTableExists = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='categories' AND sql LIKE '%data%'").get();
+  const oldTableExists = db.prepare('SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'categories\' AND sql LIKE \'%data%\'').get();
   if (oldTableExists) {
     // Create new normalized categories table
     db.exec(`
@@ -144,9 +149,10 @@ if (currentVersion < 3) {
       }
     }
 
-    // Replace old table
-    db.prepare('DROP TABLE categories').run();
+    // Replace old table — safe rename to avoid data loss on crash
+    db.exec('ALTER TABLE categories RENAME TO categories_old');
     db.exec('ALTER TABLE categories_new RENAME TO categories');
+    db.prepare('DROP TABLE IF EXISTS categories_old').run();
     db.exec('CREATE INDEX IF NOT EXISTS idx_categories_section ON categories(section_id)');
     db.exec('CREATE INDEX IF NOT EXISTS idx_categories_parent ON categories(parent_id)');
   }
@@ -184,32 +190,32 @@ function reorderItems(section, category, orderedIds) {
     orderedIds.forEach((id, i) => update.run(i, String(id), section, category));
   });
   tx();
-  db.appendAudit({ action: 'item.reorder', section, category, count: orderedIds.length });
+  appendAudit({ action: 'item.reorder', section, category, count: orderedIds.length });
 }
 
 function searchItems(query, limit) {
   const escaped = query.replace(/[%_\\]/g, c => '\\' + c);
   const pattern = '%' + escaped + '%';
+  const likeClauses = ['items.title', 'items.author', 'items.recaster', 'items.status', 'items.combatPoints', 'items.section', 'items.category', 'c.label', 'pc.label'];
   const params = [];
-  for (let i = 0; i < 9; i++) { params.push(pattern, '\\'); }
+  for (let i = 0; i < likeClauses.length; i++) { params.push(pattern, '\\'); }
   params.push(limit || 50);
   const rows = db.prepare(`
-    SELECT DISTINCT items.* FROM items
+    SELECT items.*, COALESCE(c.label, items.category) AS categoryLabel, COALESCE(s.label, items.section) AS sectionLabel
+    FROM items
     LEFT JOIN categories c ON items.section = c.section_id AND items.category = c.id
     LEFT JOIN categories pc ON c.section_id = pc.section_id AND c.parent_id = pc.id
-    WHERE items.title LIKE ? ESCAPE ?
-       OR items.author LIKE ? ESCAPE ?
-       OR items.recaster LIKE ? ESCAPE ?
-       OR items.status LIKE ? ESCAPE ?
-       OR items.combatPoints LIKE ? ESCAPE ?
-       OR items.section LIKE ? ESCAPE ?
-       OR items.category LIKE ? ESCAPE ?
-       OR c.label LIKE ? ESCAPE ?
-       OR pc.label LIKE ? ESCAPE ?
+    LEFT JOIN sections s ON items.section = s.id
+    WHERE ${likeClauses.map(col => col + ' LIKE ? ESCAPE ?').join(' OR ')}
     ORDER BY items.sort_order ASC, items.rowid ASC
     LIMIT ?
   `).all(...params);
-  return rows.map(rowToItem);
+  return rows.map(row => {
+    const item = rowToItem(row);
+    item.sectionLabel = row.sectionLabel;
+    item.categoryLabel = row.categoryLabel;
+    return item;
+  });
 }
 
 function getItemCount(section, category) {
@@ -233,7 +239,7 @@ function insertItem(item) {
     category: item.category,
     title: item.title,
     author: item.author || '',
-    price: Number(item.price) || 0,
+    price: item.price !== null && item.price !== undefined ? Number(item.price) : 0,
     recaster: item.recaster || '',
     combatPoints: item.combatPoints || '',
     status: item.status || '',
@@ -245,6 +251,8 @@ function insertItem(item) {
   });
 }
 
+const UPDATE_ITEM_ALLOWED_KEYS = ['section', 'category', 'title', 'author', 'recaster', 'combatPoints', 'status', 'image'];
+
 function updateItem(id, fields) {
   const sets = [];
   const params = {};
@@ -254,11 +262,11 @@ function updateItem(id, fields) {
       params.images = JSON.stringify(v);
     } else if (k === 'price') {
       sets.push('price = @price');
-      params.price = Number(v) || 0;
+      params.price = v === null || v === undefined ? null : Number(v);
     } else if (k === 'version') {
       sets.push('version = @version');
       params.version = v;
-    } else if (['section', 'category', 'title', 'author', 'recaster', 'combatPoints', 'status', 'image'].includes(k)) {
+    } else if (UPDATE_ITEM_ALLOWED_KEYS.includes(k)) {
       sets.push(k + ' = @' + k);
       params[k] = v;
     }
@@ -272,6 +280,12 @@ function updateItem(id, fields) {
 
 function deleteItem(id) {
   db.prepare('DELETE FROM items WHERE id = ?').run(String(id));
+}
+
+function countImageReferences(imgPath, excludeId) {
+  if (!imgPath) return 0;
+  const row = db.prepare('SELECT COUNT(*) as c FROM items WHERE id != ? AND (image = ? OR images LIKE ?)').get(String(excludeId || ''), imgPath, '%"' + imgPath + '"%');
+  return row.c;
 }
 
 function allItems() {
@@ -420,7 +434,7 @@ cleanupTimer.unref();
 
 module.exports = {
   db,
-  getItems, getItemCount, searchItems, reorderItems, getItem, insertItem, updateItem, deleteItem, allItems,
+  getItems, getItemCount, searchItems, reorderItems, getItem, insertItem, updateItem, deleteItem, allItems, countImageReferences,
   getCategories, saveCategories,
   getSettings, updateSettings,
   appendAudit, getAuditLog,

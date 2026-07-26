@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <main id="main-content" role="main">
   <div class="gallery-page">
     <div class="back-nav">
       <a href="/" class="back-link"><span class="back-arrow">←</span> <span class="back-text">Back to Home</span></a>
@@ -17,6 +19,7 @@
     <h1 id="pageTitle">Gallery</h1>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
+  </main>
 
   <div class="admin-corner">
     <button id="themeBtn" title="Toggle theme">☀️</button>
@@ -58,7 +61,8 @@
         <input type="text" id="editStatus">
       </div>
       <div class="form-group">
-        <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit)</span></label>
+        <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit)</span>
+          <span class="edit-img-counter" id="editImageCounter">0 / 10</span></label>
         <div class="edit-image-grid" id="editImageGrid"></div>
         <div class="margin-top-sm">
           <button type="button" class="btn btn-sm" id="addImagesBtn">+ Add Images</button>

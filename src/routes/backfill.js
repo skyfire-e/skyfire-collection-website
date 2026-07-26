@@ -54,10 +54,11 @@ router.post('/backfill-prices', requireSameOrigin, requireAdmin, (req, res) => {
   } catch (err) { console.error('Backfill prices failed:', err); res.status(500).json({ error: 'Backfill prices failed' }); }
 });
 
-router.get('/audit', requireAdmin, (req, res) => {
-  const logs = db.getAuditLog(100);
-  const dbModule = require('../db');
-  res.json(logs.map(l => ({ id: l.id, timestamp: l.timestamp, ...dbModule.safeJsonParse(l.data, { action: l.action }) })));
+router.get('/audit', requireAdmin, (req, res, next) => {
+  try {
+    const logs = db.getAuditLog(100);
+    res.json(logs.map(l => ({ id: l.id, timestamp: l.timestamp, ...db.safeJsonParse(l.data, { action: l.action }) })));
+  } catch (err) { next(err); }
 });
 
 module.exports = router;

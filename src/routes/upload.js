@@ -15,8 +15,7 @@ router.post('/default', requireSameOrigin, requireAdmin, upload.single('image'),
     const oldDefault = settings.defaultImage;
     db.updateSettings({ defaultImage: imagePath });
     if (oldDefault && oldDefault !== imagePath) {
-      const items = db.allItems();
-      const stillReferenced = items.some(i => i.image === oldDefault || i.images?.includes(oldDefault));
+      const stillReferenced = db.countImageReferences(oldDefault) > 0;
       if (!stillReferenced) safeUnlink(oldDefault);
     }
     res.json(db.getSettings());
