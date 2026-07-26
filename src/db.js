@@ -181,7 +181,7 @@ function getItems(section, category, limit, offset) {
   if (section) { query += ' WHERE items.section = ?'; params.push(section); }
   if (category) { query += (section ? ' AND' : ' WHERE') + ' items.category = ?'; params.push(category); }
   query += ' ORDER BY items.sort_order ASC, items.rowid ASC';
-  if (limit) {
+  if (limit !== undefined && limit !== null) {
     query += ' LIMIT ?';
     params.push(limit);
     if (offset) { query += ' OFFSET ?'; params.push(offset); }
@@ -249,7 +249,7 @@ function insertItem(item) {
     category: item.category,
     title: item.title,
     author: item.author || '',
-    price: item.price !== null && item.price !== undefined ? Number(item.price) : 0,
+    price: toNumber(item.price),
     recaster: item.recaster || '',
     combatPoints: item.combatPoints || '',
     status: item.status || '',
@@ -272,7 +272,7 @@ function updateItem(id, fields) {
       params.images = JSON.stringify(v);
     } else if (k === 'price') {
       sets.push('price = @price');
-      params.price = v === null || v === undefined ? null : Number(v);
+      params.price = toNumber(v);
     } else if (k === 'version') {
       sets.push('version = @version');
       params.version = v;
@@ -294,9 +294,11 @@ function deleteItem(id) {
 
 function countImageReferences(imgPath, excludeId) {
   if (!imgPath) return 0;
-  const escaped = imgPath.replace(/[%_\\]/g, c => '\\' + c);
-  const pattern = '%"' + escaped + '"%';
-  const row = db.prepare('SELECT COUNT(*) as c FROM items WHERE id != ? AND (image = ? OR images LIKE ? ESCAPE \'\\\')').get(String(excludeId || ''), imgPath, pattern);
+  const row = db.prepare(`
+    SELECT COUNT(*) as c FROM items
+    WHERE id != ?
+      AND (image = ? OR EXISTS (SELECT 1 FROM json_each(images) WHERE value = ?))
+  `).get(String(excludeId || ''), imgPath, imgPath);
   return row.c;
 }
 
@@ -311,7 +313,7 @@ function rowToItem(row) {
     category: row.category,
     title: row.title,
     author: row.author,
-    price: row.price,
+    price: row.price ?? 0,
     recaster: row.recaster,
     combatPoints: row.combatPoints,
     status: row.status,
@@ -357,26 +359,33 @@ function saveCategories(cats) {
   const insertSection = db.prepare('INSERT INTO sections (id, label, sort_order) VALUES (?, ?, ?)');
   const insertCat = db.prepare('INSERT INTO categories (id, section_id, parent_id, label, type, sort_order) VALUES (?, ?, ?, ?, ?, ?)');
 
-  const tx = db.transaction(() => {
-    delCats.run();
-    delSections.run();
-    let secOrder = 0;
-    for (const [sectionId, section] of Object.entries(cats)) {
-      insertSection.run(sectionId, section.label || sectionId, secOrder++);
-      let catOrder = 0;
-      for (const cat of (section.subcategories || [])) {
-        if (cat.type === 'group' && cat.subcategories) {
-          insertCat.run(cat.id, sectionId, null, cat.label, 'group', catOrder++);
-          for (const sc of cat.subcategories) {
-            insertCat.run(sc.id, sectionId, cat.id, sc.label, 'leaf', catOrder++);
+  try {
+    const tx = db.transaction(() => {
+      delCats.run();
+      delSections.run();
+      let secOrder = 0;
+      for (const [sectionId, section] of Object.entries(cats)) {
+        insertSection.run(sectionId, section.label || sectionId, secOrder++);
+        let catOrder = 0;
+        for (const cat of (section.subcategories || [])) {
+          if (cat.type === 'group' && cat.subcategories) {
+            insertCat.run(cat.id, sectionId, null, cat.label, 'group', catOrder++);
+            for (const sc of cat.subcategories) {
+              insertCat.run(sc.id, sectionId, cat.id, sc.label, 'leaf', catOrder++);
+            }
+          } else {
+            insertCat.run(cat.id, sectionId, null, cat.label, 'leaf', catOrder++);
           }
-        } else {
-          insertCat.run(cat.id, sectionId, null, cat.label, 'leaf', catOrder++);
         }
       }
+    });
+    tx();
+  } catch (err) {
+    if (err.message && err.message.includes('FOREIGN KEY constraint failed')) {
+      throw Object.assign(new Error('Cannot change categories: items still reference a section or category you removed'), { status: 409 });
     }
-  });
-  tx();
+    throw err;
+  }
 }
 
 // --- Settings ---
@@ -444,6 +453,12 @@ function cleanupSessions() {
 const cleanupTimer = setInterval(cleanupSessions, 3600000);
 cleanupTimer.unref();
 
+function toNumber(value) {
+  if (value === null || value === undefined || value === '') return 0;
+  const n = Number(value);
+  return isNaN(n) ? 0 : n;
+}
+
 module.exports = {
   db,
   getItems, getItemCount, searchItems, reorderItems, getItem, insertItem, updateItem, deleteItem, allItems, countImageReferences,
@@ -451,5 +466,5 @@ module.exports = {
   getSettings, updateSettings,
   appendAudit, getAuditLog,
   getSession, setSession, destroySession,
-  safeJsonParse
+  safeJsonParse, toNumber
 };

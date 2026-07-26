@@ -126,13 +126,13 @@ app.use('/api/spreadsheet', require('./routes/spreadsheet'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api', require('./routes/backfill'));
 
+// Checkpoint (must be before 404 handler)
+app.use('/api', require('./routes/checkpoint'));
+
 // 404 for unknown API endpoints
 app.use('/api', (req, res) => {
   res.status(404).json({ error: 'API endpoint not found' });
 });
-
-// Checkpoint
-app.use('/api/checkpoint', require('./routes/checkpoint'));
 
 // Page routes
 app.use(require('./routes/pages'));

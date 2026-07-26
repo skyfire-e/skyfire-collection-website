@@ -4,33 +4,31 @@ const { loginLimiter, requireSameOrigin } = require('../middleware');
 const { secureCookies } = require('../helpers');
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-const users = [{ username: ADMIN_USERNAME, password: ADMIN_PASSWORD_HASH || ADMIN_PASSWORD, role: 'admin' }];
+const ADMIN_ROLE = 'admin';
 
 const router = Router();
 
 router.post('/login', requireSameOrigin, loginLimiter, async (req, res) => {
   const { username, password } = req.body;
-  const user = users.find(u => u.username === username);
-  if (!user) return res.status(401).json({ error: 'Invalid credentials' });
-  let valid;
-  if (ADMIN_PASSWORD_HASH) {
+  if (username !== ADMIN_USERNAME) return res.status(401).json({ error: 'Invalid credentials' });
+  let valid = false;
+  if (process.env.ADMIN_PASSWORD_HASH) {
     try {
-      valid = await argon2.verify(user.password, password);
+      valid = await argon2.verify(process.env.ADMIN_PASSWORD_HASH, password);
     } catch {
       return res.status(500).json({ error: 'Authentication error' });
     }
-  } else {
-    if (!ADMIN_PASSWORD) return res.status(500).json({ error: 'Server misconfigured' });
-    valid = user.password === password;
+  } else if (process.env.ADMIN_PASSWORD) {
+    valid = process.env.ADMIN_PASSWORD === password;
     console.warn('WARNING: Using plain-text password. Set ADMIN_PASSWORD_HASH in .env');
+  } else {
+    return res.status(500).json({ error: 'Server misconfigured' });
   }
   if (!valid) return res.status(401).json({ error: 'Invalid credentials' });
   req.session.regenerate(err => {
     if (err) return res.status(500).json({ error: 'Session error' });
-    req.session.user = { username: user.username, role: user.role };
-    res.json({ success: true, user: { username: user.username, role: user.role } });
+    req.session.user = { username: ADMIN_USERNAME, role: ADMIN_ROLE };
+    res.json({ success: true, user: { username: ADMIN_USERNAME, role: ADMIN_ROLE } });
   });
 });
 

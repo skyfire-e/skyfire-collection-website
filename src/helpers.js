@@ -155,11 +155,18 @@ function validateVersion(item, clientVersion) {
   }
 }
 
+function toNumber(value) {
+  if (value === null || value === undefined || value === '') return 0;
+  const n = Number(value);
+  return isNaN(n) ? 0 : n;
+}
+
 module.exports = {
   ROOT, UPLOADS_DIR, TEMP_DIR,
   envBoolean, secureCookies,
   safeUnlink, cleanupUploadedFiles,
   normalizeImage, findCategory, flattenCategories,
   validateItemInput, validateFinalOrder, parseJSONArray,
-  validateVersion
+  validateVersion,
+  toNumber
 };

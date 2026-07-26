@@ -68,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const h1 = document.querySelector('h1');
       if (h1 && h1.closest('.home-page')) h1.textContent = s.siteName;
     }
+    const ssBtn = document.querySelector('.ss-public-btn');
+    if (ssBtn) {
+      ssBtn.style.display = s.showSpreadsheet !== false ? '' : 'none';
+    }
   }).catch(e => { console.warn('Settings fetch failed:', e); });
 
   const themeBtn = document.getElementById('themeBtn');

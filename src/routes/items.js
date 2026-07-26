@@ -4,7 +4,7 @@ const { requireAdmin, requireSameOrigin, upload } = require('../middleware');
 const {
   safeUnlink, cleanupUploadedFiles,
   normalizeImage, validateItemInput, validateFinalOrder, parseJSONArray,
-  validateVersion,
+  validateVersion, toNumber,
 } = require('../helpers');
 const db = require('../db');
 
@@ -23,17 +23,20 @@ router.get('/', (req, res) => {
   }
 
   let parsedLimit;
+  let hasLimit = false;
   if (limit !== undefined) {
     const n = parseInt(limit, 10);
     if (isNaN(n) || n < 0) return res.status(400).json({ error: 'limit must be a non-negative integer' });
     parsedLimit = n === 0 ? 0 : Math.min(n, 100);
+    hasLimit = true;
   }
   const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
-  const items = db.getItems(section, category, parsedLimit, parsedOffset);
-  const total = db.getItemCount(section, category);
-  if (parsedLimit) {
+  if (hasLimit) {
+    const items = db.getItems(section, category, parsedLimit, parsedOffset);
+    const total = db.getItemCount(section, category);
     res.json({ items, total, limit: parsedLimit, offset: parsedOffset || 0 });
   } else {
+    const items = db.getItems(section, category);
     res.json(items);
   }
 });
@@ -99,7 +102,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       ...(req.body.author !== undefined && { author: String(req.body.author).trim() }),
       ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
       ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
-      ...(req.body.price !== undefined && { price: req.body.price === '' ? null : Number(req.body.price) }),
+      ...(req.body.price !== undefined && { price: toNumber(req.body.price) }),
       ...(req.body.recaster !== undefined && { recaster: String(req.body.recaster).trim() }),
       ...(req.body.combatPoints !== undefined && { combatPoints: String(req.body.combatPoints).trim() }),
       ...(req.body.status !== undefined && { status: String(req.body.status).trim() })

@@ -4,7 +4,7 @@ const db = require('../db');
 
 const router = Router();
 
-router.post('/', requireSameOrigin, requireAdmin, (req, res) => {
+router.post('/checkpoint', requireSameOrigin, requireAdmin, (req, res) => {
   db.db.pragma('wal_checkpoint(TRUNCATE)');
   res.json({ success: true });
 });

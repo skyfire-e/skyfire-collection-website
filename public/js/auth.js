@@ -42,19 +42,19 @@ async function initAuth() {
 
   function updateUI() {
     if (isAdmin()) {
-      adminActions.classList.remove('hidden');
+      if (adminActions) adminActions.classList.remove('hidden');
       loginBtn.classList.add('hidden');
       logoutBtn.classList.remove('hidden');
       document.getElementById('authTitle').textContent = 'Admin Panel';
       API.get('/api/settings').then(s => {
-        const spreadsheetBtn = adminActions.querySelector('button:last-child');
+        const spreadsheetBtn = adminActions ? adminActions.querySelector('button:last-child') : null;
         if (spreadsheetBtn) {
           if (s.showSpreadsheet !== false) spreadsheetBtn.classList.remove('hidden');
           else spreadsheetBtn.classList.add('hidden');
         }
       });
     } else {
-      adminActions.classList.add('hidden');
+      if (adminActions) adminActions.classList.add('hidden');
       loginBtn.classList.remove('hidden');
       logoutBtn.classList.add('hidden');
       document.getElementById('authTitle').textContent = 'Admin Login';
