@@ -1,7 +1,11 @@
-import { API } from './api.js';
+import { API, checkAuth, isAdmin } from './api.js';
+
+async function getSpreadsheetData() {
+  return API.get('/api/spreadsheet' + (isAdmin() ? '' : '/public'));
+}
 
 function exportCSV() {
-  API.get('/api/spreadsheet/public').then(sections => {
+  getSpreadsheetData().then(sections => {
     let csv = 'Section,Category,Title,Author,Price,Recaster,Command Points,Status\n';
     for (const sec of sections) {
       for (const sub of sec.subcategories) {
@@ -37,11 +41,12 @@ function toggleCategory(header) {
 }
 
 export async function initSpreadsheetPage() {
+  await checkAuth();
   const container = document.getElementById('spreadsheetContainer');
   container.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
 
   try {
-    const sections = await API.get('/api/spreadsheet/public');
+    const sections = await getSpreadsheetData();
     if (!sections || sections.length === 0) {
       container.innerHTML = '<p class="empty-state">No items yet</p>';
       return;
@@ -200,4 +205,5 @@ export async function initSpreadsheetPage() {
 
 initSpreadsheetPage();
 
-document.getElementById('csvBtn').addEventListener('click', exportCSV);
+const csvBtn = document.getElementById('csvBtn');
+if (csvBtn) csvBtn.addEventListener('click', exportCSV);

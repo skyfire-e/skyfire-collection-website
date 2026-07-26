@@ -1,6 +1,4 @@
 (function() {
-  const theme = localStorage.getItem('theme');
-  if (theme) document.documentElement.setAttribute('data-theme', theme);
   const name = localStorage.getItem('siteName');
   if (name) {
     document.title = name;
@@ -58,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => { location.href = btn.dataset.href; });
   });
 
-  fetch('/api/settings').then(r => r.json()).then(s => {
+  fetch('/api/settings').then(r => { if (!r.ok) throw new Error('Settings fetch failed'); return r.json(); }).then(s => {
     const stored = localStorage.getItem('theme');
     const theme = stored || s.defaultTheme || 'dark';
     document.documentElement.setAttribute('data-theme', theme);
@@ -70,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const h1 = document.querySelector('h1');
       if (h1 && h1.closest('.home-page')) h1.textContent = s.siteName;
     }
-  }).catch(() => {});
+  }).catch(e => { console.warn('Settings fetch failed:', e); });
 
   const themeBtn = document.getElementById('themeBtn');
   if (themeBtn) {

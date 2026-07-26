@@ -34,7 +34,7 @@ async function initAuth() {
   });
 
   logoutBtn.addEventListener('click', async () => {
-    try { await API.post('/api/auth/logout'); } catch {}
+    try { await API.post('/api/auth/logout'); } catch (e) { console.warn('Logout error:', e); }
     authModal.classList.remove('open');
     await checkAuth();
     updateUI();

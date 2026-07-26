@@ -14,25 +14,29 @@ async function initSectionPage() {
   const titleEl = document.getElementById('pageTitle');
   const titleEl2 = document.getElementById('sectionTitle');
 
-  const data = await API.get('/api/categories');
-  const section = data[sectionId];
-  if (!section) return;
-  if (titleEl) titleEl.textContent = section.label + ' - skyf1re Collection';
-  if (titleEl2) titleEl2.textContent = section.label;
+  try {
+    const data = await API.get('/api/categories');
+    const section = data[sectionId];
+    if (!section) { grid.innerHTML = '<p class="empty-state">Section not found.</p>'; return; }
+    if (titleEl) titleEl.textContent = section.label + ' - skyf1re Collection';
+    if (titleEl2) titleEl2.textContent = section.label;
 
-  section.subcategories.forEach(c => {
-    const a = document.createElement('a');
-    if (c.type === 'group') {
-      a.href = '/' + sectionId + '/' + c.id;
-    } else {
-      a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
-    }
-    a.className = 'category-btn' + (c.type === 'group' ? ' category-group' : '');
-    a.textContent = c.label;
-    grid.appendChild(a);
-  });
+    section.subcategories.forEach(c => {
+      const a = document.createElement('a');
+      if (c.type === 'group') {
+        a.href = '/' + sectionId + '/' + c.id;
+      } else {
+        a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
+      }
+      a.className = 'category-btn' + (c.type === 'group' ? ' category-group' : '');
+      a.textContent = c.label;
+      grid.appendChild(a);
+    });
 
-  showAdminActions();
+    showAdminActions();
+  } catch (err) {
+    grid.innerHTML = '<p class="empty-state">Failed to load categories. Please refresh.</p>';
+  }
 }
 
 async function initSubgroupPage() {
@@ -43,23 +47,38 @@ async function initSubgroupPage() {
   const titleEl2 = document.getElementById('pageTitle2');
   const backLink = document.getElementById('backLink');
 
-  const data = await API.get('/api/categories');
-  const section = data[sectionId];
-  if (!section) return;
-  const group = section.subcategories.find(c => c.id === groupId);
-  if (!group || !group.subcategories) return;
+  try {
+    const data = await API.get('/api/categories');
+    const section = data[sectionId];
+    if (!section) { grid.innerHTML = '<p class="empty-state">Section not found.</p>'; return; }
+    const group = section.subcategories.find(c => c.id === groupId);
+    if (!group || !group.subcategories) { grid.innerHTML = '<p class="empty-state">Group not found.</p>'; return; }
 
-  if (titleEl) titleEl.textContent = group.label + ' - skyf1re Collection';
-  if (titleEl2) titleEl2.textContent = group.label;
-  if (backLink) { backLink.href = '/' + sectionId; backLink.innerHTML = '<span class="back-arrow">\u2190</span> <span class="back-text">Back to ' + section.label + '</span>'; }
+    if (titleEl) titleEl.textContent = group.label + ' - skyf1re Collection';
+    if (titleEl2) titleEl2.textContent = group.label;
+    if (backLink) {
+      backLink.href = '/' + sectionId;
+      backLink.textContent = '';
+      const arrow = document.createElement('span');
+      arrow.className = 'back-arrow';
+      arrow.textContent = '\u2190';
+      const text = document.createElement('span');
+      text.className = 'back-text';
+      text.textContent = 'Back to ' + section.label;
+      backLink.appendChild(arrow);
+      backLink.appendChild(text);
+    }
 
-  group.subcategories.forEach(c => {
-    const a = document.createElement('a');
-    a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
-    a.className = 'category-btn';
-    a.textContent = c.label;
-    grid.appendChild(a);
-  });
+    group.subcategories.forEach(c => {
+      const a = document.createElement('a');
+      a.href = '/gallery?section=' + sectionId + '&category=' + c.id;
+      a.className = 'category-btn';
+      a.textContent = c.label;
+      grid.appendChild(a);
+    });
+  } catch (err) {
+    grid.innerHTML = '<p class="empty-state">Failed to load categories. Please refresh.</p>';
+  }
 }
 
 async function showAdminActions() {

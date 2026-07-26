@@ -44,7 +44,7 @@ try {
   const branch = execSync('git branch --show-current', { cwd: ROOT, encoding: 'utf8' }).trim();
   execSync('git push origin ' + branch, { cwd: ROOT, stdio: 'inherit' });
   console.log('✅ Deploy complete: ' + itemCount + ' items pushed to origin/' + branch);
-} catch (err) {
+} catch {
   console.error('❌ Push failed. Run manually: git push origin ' + 
     execSync('git branch --show-current', { cwd: ROOT, encoding: 'utf8' }).trim());
   process.exit(1);

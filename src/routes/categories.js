@@ -3,6 +3,8 @@ const { requireAdmin, requireSameOrigin } = require('../middleware');
 const { findCategory } = require('../helpers');
 const db = require('../db');
 
+const NEW_SECTION_MAGIC = '__new_section__';
+
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -29,7 +31,7 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
     try {
       const cats = db.getCategories();
 
-      if (parentId === '__new_section__') {
+      if (parentId === NEW_SECTION_MAGIC) {
         if (cats[catId]) throw Object.assign(new Error('Section already exists'), { status: 400 });
         cats[catId] = { label, subcategories: [] };
       } else if (parentId && section && cats[section]) {
@@ -73,8 +75,17 @@ router.delete('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
       if (!cats[section]) throw Object.assign(new Error('Invalid section'), { status: 400 });
 
       function collectIds(cat) {
-        const ids = [cat.id];
-        if (cat.subcategories) cat.subcategories.forEach(sc => ids.push(...collectIds(sc)));
+        const ids = [];
+        const stack = [cat];
+        while (stack.length > 0) {
+          const current = stack.pop();
+          ids.push(current.id);
+          if (current.subcategories) {
+            for (const sc of current.subcategories) {
+              stack.push(sc);
+            }
+          }
+        }
         return ids;
       }
 

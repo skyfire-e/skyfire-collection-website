@@ -1,4 +1,4 @@
-const { describe, it, after } = require('node:test');
+const { describe, it, after, beforeEach } = require('node:test');
 const assert = require('node:assert');
 
 process.env.NODE_TEST_DB = '1';
@@ -147,6 +147,15 @@ describe('parseJSONArray', () => {
 });
 
 describe('SQLite database (in-memory)', () => {
+  beforeEach(() => {
+    db.db.exec('DELETE FROM items');
+    db.db.exec('DELETE FROM categories');
+    db.db.exec('DELETE FROM sections');
+    db.db.exec('DELETE FROM settings');
+    db.db.exec('DELETE FROM audit');
+    db.db.exec('DELETE FROM sessions');
+  });
+
   it('starts empty', () => {
     assert.strictEqual(db.allItems().length, 0);
   });
@@ -209,6 +218,53 @@ describe('SQLite database (in-memory)', () => {
     db.appendAudit({ action: 'test.action', id: '123' });
     const count = db.db.prepare('SELECT COUNT(*) as c FROM audit').get().c;
     assert.strictEqual(count, 1);
+  });
+
+  it('searches items by title', () => {
+    db.saveCategories({ dice: { label: 'Dice', subcategories: [{ id: 'metal-dice', label: 'Metal Dice' }] } });
+    db.insertItem({ id: 'search-1', section: 'dice', category: 'metal-dice', title: 'Dragon Sword', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
+    const results = db.searchItems('Dragon', 10);
+    assert.strictEqual(results.length, 1);
+    assert.strictEqual(results[0].title, 'Dragon Sword');
+  });
+
+  it('search returns empty for no match', () => {
+    const results = db.searchItems('zzz_nonexistent_zzz', 10);
+    assert.strictEqual(results.length, 0);
+  });
+
+  it('search returns sectionLabel and categoryLabel', () => {
+    db.saveCategories({ dice: { label: 'Dice', subcategories: [{ id: 'metal-dice', label: 'Metal Dice' }] } });
+    db.insertItem({ id: 'search-label', section: 'dice', category: 'metal-dice', title: 'Label Test', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
+    const results = db.searchItems('Label', 10);
+    assert.strictEqual(results.length, 1);
+    assert.strictEqual(results[0].sectionLabel, 'Dice');
+    assert.strictEqual(results[0].categoryLabel, 'Metal Dice');
+  });
+
+  it('reorderItems updates sort_order', () => {
+    db.insertItem({ id: 'reorder-a', section: 'dice', category: 'metal-dice', title: 'A', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
+    db.insertItem({ id: 'reorder-b', section: 'dice', category: 'metal-dice', title: 'B', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
+    db.reorderItems('dice', 'metal-dice', ['reorder-b', 'reorder-a']);
+    const items = db.getItems('dice', 'metal-dice');
+    assert.strictEqual(items[0].id, 'reorder-b');
+    assert.strictEqual(items[1].id, 'reorder-a');
+  });
+
+  it('getItemCount returns correct count', () => {
+    db.insertItem({ id: 'count-1', section: 'dice', category: 'metal-dice', title: 'C1', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
+    db.insertItem({ id: 'count-2', section: 'dice', category: 'metal-dice', title: 'C2', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
+    assert.strictEqual(db.getItemCount('dice', 'metal-dice'), 2);
+    assert.strictEqual(db.getItemCount('dice'), 2);
+    assert.strictEqual(db.getItemCount('dice', 'nonexistent'), 0);
+  });
+
+  it('countImageReferences returns correct count', () => {
+    db.insertItem({ id: 'ref-1', section: 'dice', category: 'metal-dice', title: 'R1', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '/uploads/img.jpg', images: ['/uploads/img.jpg'], version: 1, createdAt: '' });
+    db.insertItem({ id: 'ref-2', section: 'dice', category: 'metal-dice', title: 'R2', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '', images: [], version: 1, createdAt: '' });
+    assert.strictEqual(db.countImageReferences('/uploads/img.jpg', 'ref-1'), 0);
+    db.insertItem({ id: 'ref-3', section: 'dice', category: 'metal-dice', title: 'R3', author: '', price: 0, recaster: '', combatPoints: '', status: '', image: '/uploads/img.jpg', images: [], version: 1, createdAt: '' });
+    assert.strictEqual(db.countImageReferences('/uploads/img.jpg', 'ref-1'), 1);
   });
 });
 

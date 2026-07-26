@@ -14,11 +14,20 @@ router.get('/', (req, res) => {
   const { section, category, limit, offset, q } = req.query;
 
   if (q) {
-    const items = db.searchItems(q, limit ? Math.min(parseInt(limit, 10), 200) : 50);
+    const parsedLimit = limit ? Math.min(parseInt(limit, 10), 200) : 50;
+    const items = db.searchItems(q, parsedLimit);
+    if (limit !== undefined) {
+      return res.json({ items, total: items.length, limit: parsedLimit, offset: 0 });
+    }
     return res.json(items);
   }
 
-  const parsedLimit = limit !== undefined ? Math.min(Math.max(parseInt(limit, 10) || 0, 1), 100) : undefined;
+  let parsedLimit;
+  if (limit !== undefined) {
+    const n = parseInt(limit, 10);
+    if (isNaN(n) || n < 0) return res.status(400).json({ error: 'limit must be a non-negative integer' });
+    parsedLimit = n === 0 ? 0 : Math.min(n, 100);
+  }
   const parsedOffset = offset ? Math.max(parseInt(offset, 10) || 0, 0) : undefined;
   const items = db.getItems(section, category, parsedLimit, parsedOffset);
   const total = db.getItemCount(section, category);
@@ -30,15 +39,20 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
+  const files = req.files || [];
+  const createdPaths = [];
   try {
     const cats = db.getCategories();
-    const files = req.files || [];
 
     const validation = validateItemInput(req.body, cats);
     if (validation.errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: validation.errors }); }
 
     const { data } = validation;
-    const images = await Promise.all(files.map(normalizeImage));
+    const images = await Promise.all(files.map(async (f) => {
+      const p = await normalizeImage(f);
+      createdPaths.push(p);
+      return p;
+    }));
     const settings = db.getSettings();
 
     const item = {
@@ -47,7 +61,7 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
       category: data.category,
       title: data.title,
       author: data.author || '',
-      price: data.price,
+      price: data.price ?? 0,
       recaster: data.recaster || '',
       combatPoints: data.combatPoints || '',
       status: data.status || '',
@@ -59,13 +73,18 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
     };
     db.insertItem(item);
     res.status(201).json(item);
-  } catch (err) { next(err); }
+  } catch (err) {
+    cleanupUploadedFiles(files);
+    createdPaths.forEach(p => safeUnlink(p));
+    next(err);
+  }
 });
 
 router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
+  const files = req.files || [];
+  let newFilePaths = [];
   try {
     const cats = db.getCategories();
-    const files = req.files || [];
 
     const currentItem = db.getItem(req.params.id);
     if (!currentItem) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
@@ -76,18 +95,18 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       ...currentItem,
       version: (currentItem.version || 0) + 1,
       ...(req.body.title !== undefined && { title: String(req.body.title).trim() }),
-      ...(req.body.author !== undefined && { author: req.body.author }),
+      ...(req.body.author !== undefined && { author: String(req.body.author).trim() }),
       ...(req.body.section !== undefined && { section: String(req.body.section).trim() }),
       ...(req.body.category !== undefined && { category: String(req.body.category).trim() }),
-      ...(req.body.price !== undefined && { price: Number(req.body.price) }),
-      ...(req.body.recaster !== undefined && { recaster: req.body.recaster }),
-      ...(req.body.combatPoints !== undefined && { combatPoints: req.body.combatPoints }),
-      ...(req.body.status !== undefined && { status: req.body.status })
+      ...(req.body.price !== undefined && { price: req.body.price === '' ? null : Number(req.body.price) }),
+      ...(req.body.recaster !== undefined && { recaster: String(req.body.recaster).trim() }),
+      ...(req.body.combatPoints !== undefined && { combatPoints: String(req.body.combatPoints).trim() }),
+      ...(req.body.status !== undefined && { status: String(req.body.status).trim() })
     };
     const validation = validateItemInput(candidate, cats);
     if (validation.errors) { cleanupUploadedFiles(files); return res.status(400).json({ error: 'Validation failed', details: validation.errors }); }
 
-    const newFilePaths = await Promise.all(files.map(normalizeImage));
+    newFilePaths = await Promise.all(files.map(normalizeImage));
 
     if (!Array.isArray(candidate.images)) candidate.images = [];
     const oldImages = [...candidate.images];
@@ -99,18 +118,21 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       finalOrder = parseJSONArray(req.body.finalOrder, 'finalOrder');
     } catch (e) {
       cleanupUploadedFiles(files);
+      newFilePaths.forEach(p => safeUnlink(p));
       return res.status(400).json({ error: e.message });
     }
 
-    if (!Array.isArray(removeIdx) || !removeIdx.every(Number.isInteger) || removeIdx.some(v => v < 0)) {
+    if (!Array.isArray(removeIdx) || !removeIdx.every(Number.isInteger) || removeIdx.some(v => v < 0) || removeIdx.some(v => v >= oldImages.length)) {
       cleanupUploadedFiles(files);
-      return res.status(400).json({ error: 'imagesToRemove must contain non-negative integers' });
+      newFilePaths.forEach(p => safeUnlink(p));
+      return res.status(400).json({ error: 'imagesToRemove contains invalid or out-of-bounds indices' });
     }
 
     if (finalOrder.length > 0) {
       const validationError = validateFinalOrder(finalOrder, oldImages, newFilePaths, removeIdx);
       if (validationError) {
         cleanupUploadedFiles(files);
+        newFilePaths.forEach(p => safeUnlink(p));
         return res.status(400).json({ error: validationError });
       }
 
@@ -140,6 +162,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
 
     if (candidate.images.length > 10) {
       cleanupUploadedFiles(files);
+      newFilePaths.forEach(p => safeUnlink(p));
       return res.status(400).json({ error: 'Maximum 10 images per item' });
     }
 
@@ -160,8 +183,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     const toDelete = [];
     for (const img of oldImagesForCleanup) {
       if (!newSet.has(img)) {
-        const items = db.allItems();
-        const stillReferenced = items.some(other => other.id !== candidate.id && (other.image === img || other.images?.includes(img)));
+        const stillReferenced = db.countImageReferences(img, candidate.id) > 0;
         if (!stillReferenced) toDelete.push(img);
       }
     }
@@ -169,7 +191,11 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
 
     db.appendAudit({ action: 'item.update', entityId: candidate.id, title: candidate.title });
     res.json(candidate);
-  } catch (err) { next(err); }
+  } catch (err) {
+    cleanupUploadedFiles(files);
+    newFilePaths.forEach(p => safeUnlink(p));
+    next(err);
+  }
 });
 
 router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) => {
@@ -182,10 +208,9 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
     db.deleteItem(req.params.id);
     db.appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
 
-    const currentItems = db.allItems();
     const toDelete = [];
     for (const img of uniquePaths) {
-      const stillReferenced = currentItems.some(other => other.image === img || other.images?.includes(img));
+      const stillReferenced = db.countImageReferences(img, deletedItem.id) > 0;
       if (!stillReferenced) toDelete.push(img);
     }
     toDelete.forEach(img => safeUnlink(img));
@@ -196,6 +221,8 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
 router.post('/reorder', requireSameOrigin, requireAdmin, (req, res, next) => {
   try {
     const { section, category, items } = req.body;
+    if (!section || typeof section !== 'string') return res.status(400).json({ error: 'Invalid section' });
+    if (!category || typeof category !== 'string') return res.status(400).json({ error: 'Invalid category' });
     if (!Array.isArray(items) || items.length === 0) return res.status(400).json({ error: 'Items array required' });
     db.reorderItems(section, category, items);
     res.json({ success: true, count: items.length });

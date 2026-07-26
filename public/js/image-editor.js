@@ -1,19 +1,28 @@
 import { API } from './api.js';
 
-let extraFieldsSections = ['miniatures'];
+const MAX_IMAGES_PER_ITEM = 10;
+let extraFieldsSections = null;
+let extraFieldsPromise = null;
 
-async function loadExtraFields() {
-  try {
-    const settings = await API.get('/api/settings');
-    if (settings.sectionsWithExtraFields) extraFieldsSections = settings.sectionsWithExtraFields;
-  } catch {}
+async function getExtraFieldsSections() {
+  if (extraFieldsSections !== null) return extraFieldsSections;
+  if (extraFieldsPromise) return extraFieldsPromise;
+  extraFieldsPromise = (async () => {
+    try {
+      const settings = await API.get('/api/settings');
+      extraFieldsSections = settings.sectionsWithExtraFields || ['miniatures'];
+    } catch {
+      extraFieldsSections = ['miniatures'];
+    }
+    return extraFieldsSections;
+  })();
+  return extraFieldsPromise;
 }
-loadExtraFields();
 
 function thumbUrl(imgPath) {
   if (!imgPath || !imgPath.startsWith('/uploads/') || imgPath.startsWith('blob:')) return imgPath;
-  const basename = imgPath.split('/').pop();
-  return '/uploads/thumb-' + basename;
+  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
+  return '/uploads/thumb-' + name;
 }
 
 let editSlots = [];
@@ -26,8 +35,6 @@ let cropCtx = null;
 let cropSrc = null;
 let cropQueue = [];
 
-let scrollPosition = 0;
-
 function isObjectURL(url) {
   return url && typeof url === 'string' && url.startsWith('blob:');
 }
@@ -37,19 +44,11 @@ function revokeSlot(slot) {
 }
 
 function lockScroll() {
-  scrollPosition = window.scrollY;
   document.body.style.overflow = 'hidden';
-  document.body.style.position = 'fixed';
-  document.body.style.top = '-' + scrollPosition + 'px';
-  document.body.style.width = '100%';
 }
 
 function unlockScroll() {
   document.body.style.overflow = '';
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  window.scrollTo(0, scrollPosition);
 }
 
 function trapFocus(modal) {
@@ -79,7 +78,7 @@ function releaseTrap(modal) {
   }
 }
 
-export function openEdit(item, { onSave } = {}) {
+export async function openEdit(item, { onSave } = {}) {
   editingId = item.id;
   editCurrentItem = item;
   onSaveCallback = onSave || null;
@@ -95,10 +94,11 @@ export function openEdit(item, { onSave } = {}) {
   document.getElementById('editCombatPoints').value = item.combatPoints || '';
   document.getElementById('editStatus').value = item.status || '';
 
-    document.querySelectorAll('#editModal .mini-field').forEach(el => {
-      if (extraFieldsSections.includes(item.section)) el.classList.remove('hidden');
-      else el.classList.add('hidden');
-    });
+  const sections = await getExtraFieldsSections();
+  document.querySelectorAll('#editModal .mini-field').forEach(el => {
+    if (sections.includes(item.section)) el.classList.remove('hidden');
+    else el.classList.add('hidden');
+  });
 
   document.getElementById('editImage').value = '';
   renderEditImages();
@@ -111,13 +111,15 @@ export function openEdit(item, { onSave } = {}) {
 function renderEditImages() {
   const grid = document.getElementById('editImageGrid');
   grid.innerHTML = '';
+  const counter = document.getElementById('editImageCounter');
+  if (counter) counter.textContent = editSlots.length + ' / ' + MAX_IMAGES_PER_ITEM;
   editSlots.forEach((slot, i) => {
     const wrapper = document.createElement('div');
     wrapper.className = 'edit-img-item';
 
     const img = document.createElement('img');
     img.src = thumbUrl(slot.src);
-    img.alt = '';
+    img.alt = 'Image ' + (i + 1) + ' of item';
     img.onerror = function () { if (this.src !== slot.src) { this.src = slot.src; } else { this.src = '/images/default.svg'; } };
     wrapper.appendChild(img);
 
@@ -172,33 +174,40 @@ function openCrop(imageSrc, ctx) {
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
   cropSrc = imageSrc;
   cropQueue = (ctx && ctx.fileQueue) || [];
-  document.getElementById('cropImage').src = imageSrc;
+  const cropImg = document.getElementById('cropImage');
+  cropImg.onload = () => {
+    if (cropper) cropper.destroy();
+    try {
+      cropper = new Cropper(cropImg, {
+        aspectRatio: NaN,
+        viewMode: 1,
+        autoCropArea: 0.9,
+        background: false,
+      });
+    } catch (e) {
+      closeCrop();
+      return;
+    }
+    trapFocus(document.getElementById('cropModal'));
+    cropImg.onload = null;
+  };
+  cropImg.src = imageSrc;
   lockScroll();
   document.getElementById('cropModal').classList.add('open');
-  trapFocus(document.getElementById('cropModal'));
   document.addEventListener('keydown', onEscapeKey);
-  setTimeout(() => {
-    if (cropper) cropper.destroy();
-    cropper = new Cropper(document.getElementById('cropImage'), {
-      aspectRatio: NaN,
-      viewMode: 1,
-      autoCropArea: 0.9,
-      background: false,
-    });
-  }, 200);
   cropCtx = ctx;
 }
 
 function closeCrop() {
   if (cropper) { cropper.destroy(); cropper = null; }
   if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
+  cropQueue.forEach(url => { if (isObjectURL(url)) URL.revokeObjectURL(url); });
+  cropQueue = [];
   releaseTrap(document.getElementById('cropModal'));
   cropSrc = null;
-  const hadQueue = cropQueue && cropQueue.length > 0;
   cropCtx = null;
   document.getElementById('cropModal').classList.remove('open');
   document.removeEventListener('keydown', onEscapeKey);
-  if (hadQueue) loadNextFile();
 }
 
 function loadNextFile() {
@@ -326,9 +335,9 @@ export function initImageEditor() {
     const files = Array.from(this.files);
     if (files.length === 0) return;
     this.value = '';
-    const available = 10 - editSlots.length;
+    const available = MAX_IMAGES_PER_ITEM - editSlots.length;
     if (files.length > available) {
-      alert('Maximum 10 images total. You can add ' + available + ' more.');
+      alert('Maximum ' + MAX_IMAGES_PER_ITEM + ' images total. You can add ' + available + ' more.');
       return;
     }
     const fileQueue = files.slice(1);

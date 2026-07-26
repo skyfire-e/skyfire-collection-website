@@ -9,14 +9,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha384-AMJcAgMUmNt1Zo4ranquGLeT5m7yOrVbtNsNk0oZohvxqKk6RRzXHqlEaS9gFXR7" crossorigin="anonymous">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <main id="main-content" role="main">
   <div class="gallery-page">
     <div class="back-nav">
-      <a href="/" class="back-link"><span class="back-arrow">←</span> <span class="back-text">Back to Home</span></a>
-      <a class="back-link" id="galleryBackLink"><span class="back-arrow">←</span> <span class="back-text">Back</span></a>
+      <a href="/" class="back-link" id="galleryBackLink"><span class="back-arrow">←</span> <span class="back-text">Back to Home</span></a>
     </div>
     <h1 id="pageTitle">Gallery</h1>
     <div class="gallery-grid" id="galleryGrid"></div>
   </div>
+  </main>
 
   <div class="admin-corner">
     <button id="themeBtn" title="Toggle theme">☀️</button>
@@ -27,6 +29,7 @@
     <button data-href="/admin#add">+ Add</button>
     <button data-href="/admin#spreadsheet">📊 CommanderHQ</button>
   </div>
+  <div class="reorder-actions hidden" id="reorderActions"></div>
 
   <!-- Edit Modal -->
   <div class="modal-overlay" id="editModal" role="dialog" aria-modal="true" aria-label="Edit item">
@@ -35,11 +38,11 @@
       <input type="hidden" id="editId">
       <div class="form-group">
         <label>Title</label>
-        <input type="text" id="editTitle">
+        <input type="text" id="editTitle" maxlength="200">
       </div>
       <div class="form-group">
         <label>Author / Origin</label>
-        <input type="text" id="editAuthor">
+        <input type="text" id="editAuthor" maxlength="100">
       </div>
       <div class="form-group">
         <label>Price</label>
@@ -47,18 +50,19 @@
       </div>
       <div class="form-group mini-field">
         <label>Recaster</label>
-        <input type="text" id="editRecaster">
+        <input type="text" id="editRecaster" maxlength="100">
       </div>
       <div class="form-group mini-field">
         <label>Command Points</label>
-        <input type="text" id="editCombatPoints">
+        <input type="text" id="editCombatPoints" maxlength="20">
       </div>
       <div class="form-group mini-field">
         <label>Status</label>
-        <input type="text" id="editStatus">
+        <input type="text" id="editStatus" maxlength="50">
       </div>
       <div class="form-group">
-        <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit)</span></label>
+        <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit)</span>
+          <span class="edit-img-counter" id="editImageCounter">0 / 10</span></label>
         <div class="edit-image-grid" id="editImageGrid"></div>
         <div class="margin-top-sm">
           <button type="button" class="btn btn-sm" id="addImagesBtn">+ Add Images</button>

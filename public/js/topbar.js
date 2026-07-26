@@ -1,5 +1,11 @@
 import { API } from './api.js';
 
+function thumbUrl(imgPath) {
+  if (!imgPath || !imgPath.startsWith('/uploads/')) return imgPath;
+  const name = imgPath.split('/').pop().replace(/\.[^.]+$/, '.jpg');
+  return '/uploads/thumb-' + name;
+}
+
 function buildNavTree(cats) {
   const tree = [{ label: 'Home', href: '/', icon: '🏠' }];
   for (const [sectionId, section] of Object.entries(cats)) {
@@ -44,7 +50,7 @@ function renderNavDrawer() {
       a.textContent = (item.icon ? item.icon + ' ' : '') + item.label;
       drawer.appendChild(a);
     }
-  }).catch(() => {});
+  }).catch(e => { console.warn('Nav drawer categories load failed:', e); });
 }
 
 function openNavDrawer() {
@@ -72,7 +78,8 @@ function doSearch(query) {
   if (!query.trim()) { document.getElementById('searchResults').innerHTML = ''; return; }
   searchTimer = setTimeout(async () => {
     try {
-      const items = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=50');
+      const data = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=50');
+      const items = data.items || data;
       const container = document.getElementById('searchResults');
       if (items.length === 0) { container.innerHTML = '<p class="empty-state" style="padding:20px">No results</p>'; return; }
       container.innerHTML = '';
@@ -87,7 +94,7 @@ function doSearch(query) {
         div.dataset.section = item.section;
         div.dataset.category = item.category;
         const img = document.createElement('img');
-        img.src = item.image || '/images/default.svg';
+        img.src = thumbUrl(item.image) || '/images/default.svg';
         img.onerror = function() { this.src = '/images/default.svg'; };
         div.appendChild(img);
         const info = document.createElement('div');
@@ -97,7 +104,7 @@ function doSearch(query) {
         info.appendChild(title);
         const cat = document.createElement('div');
         cat.className = 'sr-cat';
-        cat.textContent = item.section + ' / ' + item.category;
+        cat.textContent = (item.sectionLabel || item.section) + ' / ' + (item.categoryLabel || item.category);
         info.appendChild(cat);
         div.appendChild(info);
         div.addEventListener('click', () => {
@@ -128,7 +135,9 @@ export function initTopbar() {
   if (searchModal) searchModal.addEventListener('click', (e) => { if (e.target === searchModal) closeSearch(); });
   if (searchClose) searchClose.addEventListener('click', closeSearch);
   if (searchInput) searchInput.addEventListener('input', (e) => doSearch(e.target.value));
-  document.addEventListener('keydown', (e) => {
+  function onTopbarKeydown(e) {
     if (e.key === 'Escape') { closeNavDrawer(); closeSearch(); }
-  });
+  }
+  document.addEventListener('keydown', onTopbarKeydown);
+  window.addEventListener('beforeunload', () => document.removeEventListener('keydown', onTopbarKeydown), { once: true });
 }
