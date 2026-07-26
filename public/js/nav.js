@@ -42,7 +42,7 @@ function injectNav() {
   searchModal.innerHTML = `
     <div class="search-box">
       <div class="search-header">
-        <input type="text" id="searchInput" placeholder="Search items...">
+        <input type="text" id="searchInput" placeholder="Search items..." autocomplete="nope">
         <button class="nav-corner-btn" id="searchClose">×</button>
       </div>
       <div class="search-results" id="searchResults"></div>

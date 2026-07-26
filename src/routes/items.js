@@ -1,8 +1,10 @@
 const { Router } = require('express');
 const crypto = require('crypto');
+const path = require('path');
+const fs = require('fs');
 const { requireAdmin, requireSameOrigin, upload } = require('../middleware');
 const {
-  safeUnlink, cleanupUploadedFiles,
+  safeUnlink, cleanupUploadedFiles, UPLOADS_DIR,
   normalizeImage, validateItemInput, validateFinalOrder, parseJSONArray,
   validateVersion,
 } = require('../helpers');
@@ -14,7 +16,14 @@ router.get('/', (req, res) => {
   const { section, category, limit, offset, q } = req.query;
 
   if (q) {
-    const parsedLimit = limit ? Math.min(parseInt(limit, 10), 200) : 50;
+    let parsedLimit;
+    if (limit !== undefined) {
+      const n = parseInt(limit, 10);
+      if (isNaN(n) || n < 1) return res.status(400).json({ error: 'limit must be a positive integer' });
+      parsedLimit = Math.min(n, 200);
+    } else {
+      parsedLimit = 50;
+    }
     const result = db.searchItems(q, parsedLimit);
     return res.json({ items: result.items, total: result.total, limit: parsedLimit, offset: 0 });
   }
@@ -216,7 +225,18 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
       const stillReferenced = db.countImageReferences(img, deletedItem.id) > 0;
       if (!stillReferenced) toDelete.push(img);
     }
+    const orphaned = [];
     toDelete.forEach(img => safeUnlink(img));
+    for (const img of toDelete) {
+      const basename = path.basename(img);
+      const target = path.resolve(UPLOADS_DIR, basename);
+      if (fs.existsSync(target)) orphaned.push(img);
+      const thumb = path.join(UPLOADS_DIR, 'thumb-' + basename);
+      if (fs.existsSync(thumb)) orphaned.push(thumb);
+    }
+    if (orphaned.length > 0) {
+      console.error('Orphaned images after delete ' + deletedItem.id + ':', orphaned.join(', '));
+    }
     res.json({ success: true });
   } catch (err) { next(err); }
 });
