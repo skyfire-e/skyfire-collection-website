@@ -37,24 +37,33 @@ function cleanupUploadedFiles(files) {
   }
 }
 
-const IMAGE_MAGIC_BYTES = {
-  jpeg: [[0xFF, 0xD8, 0xFF]],
-  png: [[0x89, 0x50, 0x4E, 0x47]],
-  webp: [[0x52, 0x49, 0x46, 0x46, 0x57, 0x45, 0x42, 0x50]]
-};
+function hasBytes(buffer, offset, bytes) {
+  if (!Buffer.isBuffer(buffer)) return false;
+  if (offset < 0 || buffer.length < offset + bytes.length) return false;
+  for (let i = 0; i < bytes.length; i += 1) {
+    if (buffer[offset + i] !== bytes[i]) return false;
+  }
+  return true;
+}
 
 function checkImageMagicBytes(filePath) {
   const fd = fs.openSync(filePath, 'r');
-  const sigs = Object.values(IMAGE_MAGIC_BYTES);
-  const maxLen = Math.max(...sigs.flat().map(s => s.length));
-  const buf = Buffer.alloc(maxLen);
-  try { fs.readSync(fd, buf, 0, maxLen, 0); } finally { fs.closeSync(fd); }
-  for (const sigsList of sigs) {
-    for (const sig of sigsList) {
-      if (buf.slice(0, sig.length).equals(Buffer.from(sig))) return;
-    }
+  const buffer = Buffer.alloc(12);
+  let bytesRead;
+  try {
+    bytesRead = fs.readSync(fd, buffer, 0, buffer.length, 0);
+  } finally {
+    fs.closeSync(fd);
   }
-  throw new Error('File does not appear to be a valid image (magic bytes mismatch)');
+  if (bytesRead < 4) {
+    throw new ValidationError('File does not appear to be a valid JPEG, PNG or WebP image');
+  }
+  const isJpeg = hasBytes(buffer, 0, [0xFF, 0xD8, 0xFF]);
+  const isPng = hasBytes(buffer, 0, [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
+  const isWebP = bytesRead >= 12 && hasBytes(buffer, 0, [0x52, 0x49, 0x46, 0x46]) && hasBytes(buffer, 8, [0x57, 0x45, 0x42, 0x50]);
+  if (!isJpeg && !isPng && !isWebP) {
+    throw new ValidationError('File does not appear to be a valid JPEG, PNG or WebP image');
+  }
 }
 
 async function normalizeImage(file) {
@@ -211,7 +220,7 @@ module.exports = {
   validateItemInput, validateFinalOrder, parseJSONArray,
   validateVersion,
   toNumber,
-  checkImageMagicBytes,
+  checkImageMagicBytes, hasBytes,
   STATIC_ROUTES,
   safeJsonParse
 };

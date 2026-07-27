@@ -3,7 +3,7 @@ const assert = require('node:assert');
 
 process.env.NODE_TEST_DB = '1';
 
-const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray, safeUnlink, validateVersion, validateItemInput, checkImageMagicBytes } = require('../src/helpers');
+const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray, safeUnlink, validateVersion, validateItemInput, checkImageMagicBytes, hasBytes } = require('../src/helpers');
 const { VersionConflictError } = require('../src/errors');
 const db = require('../src/db');
 
@@ -338,16 +338,51 @@ describe('checkImageMagicBytes', () => {
     assert.doesNotThrow(() => checkImageMagicBytes(f));
     fs.unlinkSync(f);
   });
-  it('accepts a valid PNG', () => {
+  it('accepts a valid PNG (full 8-byte signature)', () => {
     const f = path.join(os.tmpdir(), 'test-png-' + Date.now() + '.png');
-    fs.writeFileSync(f, Buffer.from([0x89, 0x50, 0x4E, 0x47]));
+    fs.writeFileSync(f, Buffer.from([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]));
     assert.doesNotThrow(() => checkImageMagicBytes(f));
+    fs.unlinkSync(f);
+  });
+  it('accepts a valid WebP (RIFF + size + WEBP)', () => {
+    const f = path.join(os.tmpdir(), 'test-webp-' + Date.now() + '.webp');
+    const riffHeader = Buffer.from([0x52, 0x49, 0x46, 0x46]); // RIFF
+    const fileSize = Buffer.alloc(4); // 4 bytes size (arbitrary)
+    const webpHeader = Buffer.from([0x57, 0x45, 0x42, 0x50]); // WEBP
+    fs.writeFileSync(f, Buffer.concat([riffHeader, fileSize, webpHeader]));
+    assert.doesNotThrow(() => checkImageMagicBytes(f));
+    fs.unlinkSync(f);
+  });
+  it('rejects WebP without RIFF header', () => {
+    const f = path.join(os.tmpdir(), 'test-bad-webp-' + Date.now() + '.webp');
+    const wrong = Buffer.from([0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x57, 0x45, 0x42, 0x50]);
+    fs.writeFileSync(f, wrong);
+    assert.throws(() => checkImageMagicBytes(f), /JPEG, PNG or WebP/);
+    fs.unlinkSync(f);
+  });
+  it('rejects WebP without WEBP fourCC', () => {
+    const f = path.join(os.tmpdir(), 'test-bad-webp2-' + Date.now() + '.webp');
+    const wrong = Buffer.from([0x52, 0x49, 0x46, 0x46, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]);
+    fs.writeFileSync(f, wrong);
+    assert.throws(() => checkImageMagicBytes(f), /JPEG, PNG or WebP/);
+    fs.unlinkSync(f);
+  });
+  it('rejects file shorter than 12 bytes for WebP check', () => {
+    const f = path.join(os.tmpdir(), 'test-short-' + Date.now() + '.bin');
+    fs.writeFileSync(f, Buffer.from([0x52, 0x49, 0x46, 0x46, 0x00, 0x00]));
+    assert.throws(() => checkImageMagicBytes(f), /JPEG, PNG or WebP/);
     fs.unlinkSync(f);
   });
   it('rejects non-image bytes', () => {
     const f = path.join(os.tmpdir(), 'test-txt-' + Date.now() + '.txt');
     fs.writeFileSync(f, 'not an image');
-    assert.throws(() => checkImageMagicBytes(f), /magic bytes/);
+    assert.throws(() => checkImageMagicBytes(f), /JPEG, PNG or WebP/);
+    fs.unlinkSync(f);
+  });
+  it('rejects file with less than 4 bytes', () => {
+    const f = path.join(os.tmpdir(), 'test-tiny-' + Date.now() + '.bin');
+    fs.writeFileSync(f, Buffer.from([0x00, 0x00]));
+    assert.throws(() => checkImageMagicBytes(f), /JPEG, PNG or WebP/);
     fs.unlinkSync(f);
   });
 });

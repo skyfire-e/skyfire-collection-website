@@ -177,9 +177,6 @@ app.use((error, req, res, next) => {
   if (error instanceof VersionConflictError) {
     return res.status(error.status).json({ error: error.message });
   }
-  if (error.message === 'Only JPEG, PNG and WebP are allowed') {
-    return res.status(400).json({ error: error.message });
-  }
   res.status(500).json({ error: 'Internal server error' });
 });
 
