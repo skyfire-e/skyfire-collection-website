@@ -565,16 +565,11 @@ a:hover { text-decoration: underline; }
   .ps-price-col { width: 60px; }
   .ps-section-title { font-size: 1.3rem; }
   .ps-subcat-title { font-size: 1rem; }
-}
   .spreadsheet-bar button, .spreadsheet-bar a.ss-public-btn { font-size: 1rem; padding: 10px 20px; border-radius: 10px; }
-
   .modal { padding: 24px; }
-
   .admin-tabs { flex-wrap: wrap; gap: 4px; }
   .admin-tabs button { padding: 8px 12px; font-size: 0.85rem; }
-
   .lightbox-nav { width: 40px; height: 40px; font-size: 1.5rem; }
-
   .edit-image-grid { gap: 4px; }
   .edit-img-item { width: 72px; height: 72px; }
   .edit-img-idx { font-size: 0.55rem; padding: 1px 3px; }
