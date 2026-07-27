@@ -171,6 +171,12 @@ describe('Search and pagination', () => {
     const res = await supertest(app).get('/api/items?limit=foo');
     assert.strictEqual(res.status, 400);
   });
+
+  it('GET /api/items?q=too long — rejects >100 chars', async () => {
+    const longQuery = 'a'.repeat(101);
+    const res = await supertest(app).get('/api/items?q=' + longQuery);
+    assert.strictEqual(res.status, 400);
+  });
 });
 
 describe('Reorder', () => {
@@ -216,6 +222,16 @@ describe('Reorder', () => {
       .set('Host', '127.0.0.1:3000')
       .send({});
     assert.strictEqual(res.status, 400);
+    assert.ok(res.body.details);
+  });
+
+  it('POST /api/items/reorder — rejects nonexistent item', async () => {
+    const res = await agent.post('/api/items/reorder')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'dice', category: 'metal-dice', items: ['00000000-0000-0000-0000-000000000000'] });
+    assert.strictEqual(res.status, 400);
+    assert.ok(res.body.error.includes('not found'));
   });
 });
 
@@ -407,10 +423,34 @@ describe('CRUD (authenticated)', () => {
     const res = await agent
       .delete('/api/items/' + created.body.id)
       .set('Origin', 'http://127.0.0.1:3000')
-      .set('Host', '127.0.0.1:3000');
+      .set('Host', '127.0.0.1:3000')
+      .send({ version: 1 });
     assert.strictEqual(res.status, 200);
     assert.strictEqual(res.body.success, true);
     assert.strictEqual(db.getItem(created.body.id), null);
+  });
+
+  it('DELETE /api/items/:id — rejects wrong version', async () => {
+    const created = await agent
+      .post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'Version Conflict Delete');
+    // item is version 1, send version 2 → should fail
+    const res = await agent
+      .delete('/api/items/' + created.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ version: 99 });
+    assert.strictEqual(res.status, 409);
+    // cleanup
+    await agent
+      .delete('/api/items/' + created.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ version: 1 });
   });
 
   it('PUT /api/settings — rejects unknown keys (strict mode)', async () => {

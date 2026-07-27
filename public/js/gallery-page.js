@@ -247,7 +247,7 @@ export async function initGalleryPage() {
           e.stopPropagation();
           if (!confirm('Delete "' + item.title + '"?')) return;
           try {
-            await API.del('/api/items/' + item.id);
+            await API.del('/api/items/' + item.id, { version: item.version });
             loadItems();
           } catch (err) {
             showToast('Delete failed: ' + (err.message || 'Unknown error'), 'error');

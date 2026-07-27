@@ -8,6 +8,7 @@ const {
   normalizeImage, validateItemInput, validateFinalOrder, parseJSONArray,
   validateVersion,
 } = require('../helpers');
+const { reorderInputSchema } = require('../../lib/validate');
 const db = require('../db');
 
 const router = Router();
@@ -16,6 +17,7 @@ router.get('/', (req, res) => {
   const { section, category, limit, offset, q } = req.query;
 
   if (q) {
+    if (q.length > 100) return res.status(400).json({ error: 'Search query too long (max 100 characters)' });
     let parsedLimit;
     if (limit !== undefined) {
       const n = parseInt(limit, 10);
@@ -215,6 +217,11 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
     const deletedItem = db.getItem(req.params.id);
     if (!deletedItem) return res.status(404).json({ error: 'Not found' });
 
+    if (req.body.version === undefined) {
+      return res.status(400).json({ error: 'Version is required for deletion' });
+    }
+    validateVersion(deletedItem, req.body.version);
+
     const uniquePaths = [...new Set([deletedItem.image, ...(deletedItem.images || [])].filter(Boolean))];
 
     db.deleteItem(req.params.id);
@@ -243,10 +250,23 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
 
 router.post('/reorder', requireSameOrigin, requireAdmin, (req, res, next) => {
   try {
-    const { section, category, items } = req.body;
-    if (!section || typeof section !== 'string') return res.status(400).json({ error: 'Invalid section' });
-    if (!category || typeof category !== 'string') return res.status(400).json({ error: 'Invalid category' });
-    if (!Array.isArray(items) || items.length === 0) return res.status(400).json({ error: 'Items array required' });
+    const parsed = reorderInputSchema.safeParse(req.body);
+    if (!parsed.success) {
+      const details = parsed.error.issues.map(i => i.message);
+      return res.status(400).json({ error: 'Validation failed', details });
+    }
+    const { section, category, items } = parsed.data;
+
+    for (const id of items) {
+      const item = db.getItem(id);
+      if (!item) {
+        return res.status(400).json({ error: 'Item not found: ' + id });
+      }
+      if (item.section !== section || item.category !== category) {
+        return res.status(400).json({ error: 'Item "' + id + '" does not belong to section "' + section + '" and category "' + category + '"' });
+      }
+    }
+
     db.reorderItems(section, category, items);
     res.json({ success: true, count: items.length });
   } catch (err) { next(err); }

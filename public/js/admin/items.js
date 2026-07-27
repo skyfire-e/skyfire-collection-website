@@ -267,7 +267,7 @@ async function loadSpreadsheet() {
         delBtn.addEventListener('click', async () => {
           if (!confirm('Delete "' + item.title + '"?')) return;
           try {
-            await withPending(delBtn, () => API.del('/api/items/' + item.id));
+            await withPending(delBtn, () => API.del('/api/items/' + item.id, { version: item.version }));
             loadSpreadsheet();
           } catch (err) {
             showToast('Delete failed: ' + (err.message || 'Unknown error'), 'error');
