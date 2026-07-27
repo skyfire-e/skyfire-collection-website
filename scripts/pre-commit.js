@@ -1,19 +1,83 @@
-const { execFileSync } = require('child_process');
+#!/usr/bin/env node
+const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
+const Database = require('better-sqlite3');
 
 const ROOT = path.resolve(__dirname, '..');
-const WAL_FILE = path.join(ROOT, 'data', 'collection.db-wal');
+const DB_FILE = path.join(ROOT, 'data', 'collection.db');
 
-const fs = require('fs');
-if (fs.existsSync(WAL_FILE)) {
+function fail(message, error) {
+  console.error(`[pre-commit] ${message}`);
+  if (error) {
+    console.error(error.stack || error.message || String(error));
+  }
+  process.exit(1);
+}
+
+function getWalSize() {
+  const walPath = DB_FILE + '-wal';
   try {
-    const stats = fs.statSync(WAL_FILE);
-    if (stats.size > 0) {
-      console.log('  SQLite WAL is not checkpointed (' + stats.size + ' bytes pending), running checkpoint...');
-      execFileSync('node', ['-e', "const db=require('better-sqlite3')('data/collection.db'); db.pragma('wal_checkpoint(TRUNCATE)'); db.close();"], { cwd: ROOT, stdio: 'pipe' });
-      execFileSync('git', ['diff', '--quiet', '--', 'data/collection.db'], { cwd: ROOT, stdio: 'pipe' });
-      try { execFileSync('git', ['add', 'data/collection.db'], { cwd: ROOT, stdio: 'pipe' }); } catch {}
-      console.log('  Checkpoint done, collection.db re-staged');
+    return fs.statSync(walPath).size;
+  } catch (error) {
+    if (error.code === 'ENOENT') return 0;
+    throw error;
+  }
+}
+
+function isDatabaseStaged() {
+  const output = execFileSync('git', ['diff', '--cached', '--name-only', '--', 'data/collection.db'], {
+    cwd: ROOT,
+    encoding: 'utf8'
+  });
+  return output.trim() !== '';
+}
+
+function checkpointDatabase() {
+  if (!fs.existsSync(DB_FILE)) {
+    console.log('[pre-commit] collection.db does not exist; skipping checkpoint');
+    return;
+  }
+
+  let database;
+  try {
+    database = new Database(DB_FILE);
+    database.pragma('busy_timeout = 5000');
+
+    const checkpointResult = database.pragma('wal_checkpoint(TRUNCATE)');
+    const quickCheck = database.pragma('quick_check', { simple: true });
+
+    if (quickCheck !== 'ok') {
+      throw new Error(`SQLite quick_check returned: ${String(quickCheck)}`);
     }
-  } catch {}
+
+    console.log('[pre-commit] SQLite checkpoint completed:', JSON.stringify(checkpointResult));
+  } finally {
+    if (database) {
+      database.close();
+    }
+  }
+}
+
+function stageDatabase() {
+  execFileSync('git', ['add', '--', 'data/collection.db'], {
+    cwd: ROOT,
+    stdio: 'inherit'
+  });
+}
+
+try {
+  const walSize = getWalSize();
+  const dbStaged = isDatabaseStaged();
+
+  if (walSize === 0 && !dbStaged) {
+    console.log('[pre-commit] No database changes detected');
+    process.exit(0);
+  }
+
+  checkpointDatabase();
+  stageDatabase();
+  console.log('[pre-commit] collection.db checked and staged');
+} catch (error) {
+  fail('Database checkpoint failed; commit was cancelled to avoid losing WAL data.', error);
 }
