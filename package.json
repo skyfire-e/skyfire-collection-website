@@ -9,7 +9,6 @@
     "dev": "node --watch server.js",
     "backup": "node backup.js",
     "checkpoint": "node -e \"const db=require('better-sqlite3')('data/collection.db'); db.prepare('DELETE FROM sessions').run(); db.pragma('wal_checkpoint(TRUNCATE)'); db.close(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
-    "deploy": "node deploy.js",
     "postinstall": "node -e \"if(process.env.NODE_ENV==='production')process.exit(0);var f='.git/hooks/pre-commit';var s='../scripts/pre-commit.js';try{require('fs').symlinkSync(s,f)}catch(e){try{require('fs').copyFileSync(s,f)}catch(e2){}}\"",
     "pull": "node pull.js",
     "gc": "node gc-uploads.js",
@@ -17,11 +16,11 @@
     "gc:quarantine": "node gc-uploads.js --quarantine",
     "test": "node --test",
     "test:coverage": "node --experimental-test-coverage --test",
-    "lint": "eslint server.js src/ lib/ backup.js gc-uploads.js deploy.js pull.js test/",
-    "lint:fix": "eslint --fix server.js src/ lib/ backup.js gc-uploads.js deploy.js pull.js test/",
+    "lint": "eslint server.js src/ lib/ backup.js gc-uploads.js pull.js test/",
+    "lint:fix": "eslint --fix server.js src/ lib/ backup.js gc-uploads.js pull.js test/",
     "ci": "npm run lint && npm test",
     "format": "prettier --write 'src/**/*.js' 'public/js/**/*.js' 'lib/**/*.js' 'test/**/*.js' '*.js'",
-    "check": "node --check server.js && node --check src/app.js && node --check src/middleware.js && node --check src/helpers.js && node --check src/db.js && node --check src/errors.js && node -e \"require('fs').readdirSync('src/routes').filter(f=>f.endsWith('.js')).forEach(f=>{const r=require('child_process').execFileSync('node',['--check','src/routes/'+f],{stdio:'inherit',encoding:'utf8'});console.log('src/routes/'+f+': OK')})\" && node --check lib/validate.js && node --check backup.js && node --check gc-uploads.js && node --check deploy.js && node --check pull.js"
+    "check": "node --check server.js && node --check src/app.js && node --check src/middleware.js && node --check src/helpers.js && node --check src/db.js && node --check src/errors.js && node -e \"require('fs').readdirSync('src/routes').filter(f=>f.endsWith('.js')).forEach(f=>{const r=require('child_process').execFileSync('node',['--check','src/routes/'+f],{stdio:'inherit',encoding:'utf8'});console.log('src/routes/'+f+': OK')})\" && node --check lib/validate.js && node --check backup.js && node --check gc-uploads.js && node --check pull.js"
   },
   "engines": {
     "node": ">=22"

@@ -174,7 +174,6 @@ See `.env.example` for all options. Key variables:
 | `npm run lint` | ESLint on server + lib code |
 | `npm run check` | Syntax check all backend files |
 | `npm run ci` | lint + test sequentially |
-| `node deploy` | Git-add/commit/push with WAL checkpoint |
 | `node backup` | Create timestamped `.tar.gz` of data/ + uploads/ |
 | `node gc-uploads --dry-run` | Find orphaned uploads |
 | `node gc-uploads --quarantine` | Move orphans to `.quarantine/` |
