@@ -2,7 +2,7 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 const { safeJsonParse } = require('./helpers');
-const { VersionConflictError } = require('./errors');
+const { ValidationError, VersionConflictError } = require('./errors');
 
 const TEST_DB = process.env.NODE_TEST_DB === '1';
 const ROOT = path.resolve(__dirname, '..');
@@ -390,7 +390,27 @@ function getCategories() {
   return result;
 }
 
+function assertSupportedCategoryTree(cats) {
+  for (const [sectionId, section] of Object.entries(cats)) {
+    for (const category of (section.subcategories || [])) {
+      if (category.type !== 'group') {
+        if (Array.isArray(category.subcategories) && category.subcategories.length > 0) {
+          throw new Error(`Leaf category "${sectionId}/${category.id}" cannot have children`);
+        }
+        continue;
+      }
+      for (const child of (category.subcategories || [])) {
+        if (child.type === 'group' || (Array.isArray(child.subcategories) && child.subcategories.length > 0)) {
+          throw new Error(`Nested groups are not supported: "${sectionId}/${category.id}/${child.id}"`);
+        }
+      }
+    }
+  }
+}
+
 function saveCategories(cats) {
+  assertSupportedCategoryTree(cats);
+
   const delCats = db.prepare('DELETE FROM categories');
   const delSections = db.prepare('DELETE FROM sections');
   const insertSection = db.prepare('INSERT INTO sections (id, label, sort_order) VALUES (?, ?, ?)');
@@ -420,6 +440,9 @@ function saveCategories(cats) {
   } catch (err) {
     if (err.message && err.message.includes('FOREIGN KEY constraint failed')) {
       throw Object.assign(new Error('Cannot change categories: items still reference a section or category you removed'), { status: 409 });
+    }
+    if (err.message && err.message.startsWith('Leaf category') || err.message.startsWith('Nested groups')) {
+      throw new ValidationError(err.message);
     }
     throw err;
   }

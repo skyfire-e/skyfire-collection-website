@@ -258,6 +258,31 @@ describe('Categories CRUD', () => {
     assert.strictEqual(res.status, 409);
   });
 
+  it('POST /api/categories — rejects nested group (group inside group)', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'miniatures', parentId: 'skaven', label: 'Nested Group', isGroup: true });
+    assert.strictEqual(res.status, 400);
+    assert.ok(res.body.details.some(d => d.includes('group cannot be created inside another group')));
+  });
+
+  it('POST /api/categories — rejects child under leaf category', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'dice', parentId: 'metal-dice', label: 'Child of Leaf' });
+    assert.strictEqual(res.status, 400);
+  });
+
+  it('POST /api/categories — accepts leaf inside group', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ section: 'miniatures', parentId: 'skaven', label: 'New Leaf Under Group' });
+    assert.strictEqual(res.status, 200);
+  });
+
   it('DELETE /api/categories — deletes a leaf category', async () => {
     const res = await agent.delete('/api/categories?section=dice&id=plastic-dice')
       .set('Origin', 'http://127.0.0.1:3000')

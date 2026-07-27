@@ -43,12 +43,15 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
       } else if (parentId && section && cats[section]) {
         const parent = cats[section].subcategories.find(c => c.id === parentId);
         if (parent && parent.subcategories) {
+          if (isGroup) {
+            throw Object.assign(new Error('Nested groups are not supported'), { status: 400 });
+          }
           catId = id || slugify(label);
           if (!catId) return res.status(400).json({ error: 'Could not generate category ID. Specify an ID manually.' });
           if (findCategory(cats[section].subcategories, catId)) {
             throw Object.assign(new Error('Category ID "' + catId + '" already exists'), { status: 409 });
           }
-          const newCat = isGroup ? { id: catId, label, type: 'group', subcategories: [] } : { id: catId, label };
+          const newCat = { id: catId, label };
           parent.subcategories.push(newCat);
         } else {
           throw Object.assign(new Error('Parent not found or not a group'), { status: 400 });

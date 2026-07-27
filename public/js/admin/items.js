@@ -102,7 +102,20 @@ export async function initAdminItems() {
         parentSel.appendChild(opt);
       }
     });
+    updateCategoryTypeAvailability();
   });
+
+  // Prevent creating a group inside another group
+  document.getElementById('catParent').addEventListener('change', updateCategoryTypeAvailability);
+
+  function updateCategoryTypeAvailability() {
+    const hasParent = Boolean(document.getElementById('catParent').value);
+    const groupCheckbox = document.getElementById('catIsGroup');
+    groupCheckbox.disabled = hasParent;
+    if (hasParent) {
+      groupCheckbox.checked = false;
+    }
+  }
 
   // Add New Section
   document.getElementById('addSectionBtn').addEventListener('click', async () => {
