@@ -11,6 +11,7 @@ data/*.db-shm
 
 # Backup artifacts
 backups/
+data/*.migrate-backup.*.db
 
 # Fix plan document
 ToFix1.md
@@ -26,6 +27,9 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Shell artifacts
+console.log*
 
 # Test coverage
 coverage/

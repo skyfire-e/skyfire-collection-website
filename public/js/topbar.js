@@ -40,7 +40,7 @@ function renderNavDrawer() {
       const a = document.createElement('a');
       a.href = item.href;
       const cls = [item.section ? 'nav-section' : '', item.sub ? 'nav-sub' : '', item.subSub ? 'nav-sub-sub' : ''].filter(Boolean).join(' ');
-      const isCurrent = (item.href === '/' && currentPath === '/') || (item.href !== '/' && currentPath.startsWith(item.href));
+      const isCurrent = currentPath === item.href || currentPath.startsWith(item.href + '/') || currentPath.startsWith(item.href + '?');
       a.className = cls + (isCurrent ? ' nav-current' : '');
       a.textContent = (item.icon ? item.icon + ' ' : '') + item.label;
       drawer.appendChild(a);

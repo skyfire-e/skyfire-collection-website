@@ -280,7 +280,7 @@ export async function initGalleryPage() {
     if (category) url += (section ? '&' : '?') + 'category=' + encodeURIComponent(category);
     try {
       const data = await API.get(url);
-      const items = Array.isArray(data) ? data : data.items;
+      const items = data.items;
       renderItems(items);
       if (reorderMode) enableDragAndDrop(document.getElementById('galleryGrid'));
     } catch (err) {

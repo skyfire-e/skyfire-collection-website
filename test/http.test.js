@@ -388,7 +388,7 @@ describe('CRUD (authenticated)', () => {
     assert.strictEqual(db.getItem(created.body.id), null);
   });
 
-  it('POST /api/settings — rejects unknown keys (strict mode)', async () => {
+  it('PUT /api/settings — rejects unknown keys (strict mode)', async () => {
     const res = await agent
       .put('/api/settings')
       .set('Origin', 'http://127.0.0.1:3000')
@@ -398,7 +398,7 @@ describe('CRUD (authenticated)', () => {
     assert.ok(res.body.error);
   });
 
-  it('POST /api/settings — accepts valid settings', async () => {
+  it('PUT /api/settings — accepts valid settings', async () => {
     const res = await agent
       .put('/api/settings')
       .set('Origin', 'http://127.0.0.1:3000')
