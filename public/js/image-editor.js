@@ -46,6 +46,21 @@ let editingId = null;
 let editCurrentItem = null;
 let onSaveCallback = null;
 let editTriggerElement = null;
+let editSnapshot = null;
+
+// Serialized state of the edit form + image slots, taken when the modal opens.
+// Crops flip a slot's type to replace/new and swap its src, so they are
+// captured by the slot signature too.
+function formSnapshot() {
+  const fields = ['editTitle', 'editAuthor', 'editPrice', 'editRecaster', 'editCombatPoints', 'editStatus']
+    .map(id => document.getElementById(id).value);
+  const slots = editSlots.map(s => s.type + ':' + s.src);
+  return JSON.stringify({ fields, slots });
+}
+
+function hasUnsavedEditChanges() {
+  return editSnapshot !== null && formSnapshot() !== editSnapshot;
+}
 
 let cropper = null;
 let cropCtx = null;
@@ -97,7 +112,8 @@ function releaseTrap(modal) {
 
 export async function openEdit(item, { onSave } = {}) {
   if (document.getElementById('editModal').classList.contains('open')) {
-    closeEdit();
+    // U4: switching to another item counts as closing — same discard guard
+    if (!closeEdit()) return;
   }
   editingId = item.id;
   editCurrentItem = item;
@@ -123,6 +139,7 @@ export async function openEdit(item, { onSave } = {}) {
 
   document.getElementById('editImage').value = '';
   renderEditImages();
+  editSnapshot = formSnapshot(); // U4: baseline for the unsaved-changes guard
   lockScroll();
   editTriggerElement = document.activeElement; // capture before trapFocus moves focus into the modal
   document.getElementById('editModal').classList.add('open');
@@ -355,14 +372,14 @@ async function saveEdit() {
   } catch (err) {
     if (err.status === 409) {
       showToast('Item was modified in another session. Please reload and try again.', 'error');
-      closeEdit();
+      closeEdit(true);
       return;
     }
     showToast('Save failed: ' + (err.message || 'Unknown error'), 'error');
     return;
   }
   if (onSaveCallback) onSaveCallback();
-  closeEdit();
+  closeEdit(true);
 }
 
 function onEscapeKey(e) {
@@ -374,7 +391,12 @@ function onEscapeKey(e) {
   }
 }
 
-function closeEdit() {
+// Returns false when the user chose to keep editing (unsaved changes guard).
+// `force` skips the guard: used after a successful save / fatal conflict.
+function closeEdit(force = false) {
+  if (!force && hasUnsavedEditChanges()) {
+    if (!confirm('Discard unsaved changes?')) return false;
+  }
   unlockScroll();
   releaseTrap(document.getElementById('editModal'));
   document.getElementById('editModal').classList.remove('open');
@@ -386,7 +408,9 @@ function closeEdit() {
   editCurrentItem = null;
   editingId = null;
   onSaveCallback = null;
+  editSnapshot = null;
   if (editTriggerElement) { editTriggerElement.focus(); editTriggerElement = null; }
+  return true;
 }
 
 export function initImageEditor() {
@@ -427,7 +451,9 @@ export function initImageEditor() {
     }
   });
 
-  document.getElementById('cancelEditBtn').addEventListener('click', closeEdit);
+  // NB: () => closeEdit() — a direct reference would pass the click Event
+  // as the `force` argument and silently skip the unsaved-changes guard
+  document.getElementById('cancelEditBtn').addEventListener('click', () => closeEdit());
 
   document.getElementById('editModal').addEventListener('click', (e) => {
     if (e.target === document.getElementById('editModal')) closeEdit();
