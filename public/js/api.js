@@ -23,7 +23,13 @@ async function request(url, options = {}) {
       data = null;
     }
     if (!response.ok) {
-      const error = new Error(data?.error || `Request failed with HTTP ${response.status}`);
+      let message = data?.error || `Request failed with HTTP ${response.status}`;
+      if (response.status === 429) {
+        const retry = response.headers.get('retry-after');
+        message = 'Rate limit reached' + (retry ? ' — retry in ' + retry + 's' : '') +
+          '. Sign in as admin to bypass the limit.';
+      }
+      const error = new Error(message);
       error.status = response.status;
       error.details = data?.details;
       throw error;

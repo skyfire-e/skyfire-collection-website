@@ -327,3 +327,93 @@ describe('sort_order numbering is per sibling group (no cross-level collisions)'
     assert.deepStrictEqual(order, ['sort-probe', 'space-orks', 'skaven']);
   });
 });
+
+describe('New items are appended to the end of their category', () => {
+  // Uses dedicated categories so items seeded by earlier blocks cannot skew the order
+  before(() => {
+    db.saveCategories({
+      dice: { label: 'Dice', subcategories: [
+        { id: 'metal-dice', label: 'Metal Dice' },
+        { id: 'stone-dice', label: 'Stone Dice' },
+        { id: 'order-probe', label: 'Order Probe' },
+        { id: 'order-target', label: 'Order Target' }
+      ]}
+    });
+    db.db.prepare('DELETE FROM items WHERE category IN (?, ?)').run('order-probe', 'order-target');
+  });
+
+  function addItem(id, category) {
+    db.insertItem({
+      id, section: 'dice', category, title: id,
+      author: '', price: null, recaster: '', combatPoints: '', status: '',
+      image: '', images: [], version: 1, createdAt: new Date().toISOString()
+    });
+  }
+
+  it('assigns an increasing sort_order per category', () => {
+    addItem('ord-1', 'order-probe');
+    addItem('ord-2', 'order-probe');
+    addItem('ord-3', 'order-probe');
+    const order = db.getItems('dice', 'order-probe').map(i => i.id);
+    assert.deepStrictEqual(order, ['ord-1', 'ord-2', 'ord-3']);
+  });
+
+  it('a new item lands last even after the category was re-arranged', () => {
+    // Re-arrange puts ord-3 first; a subsequent insert must still go to the end
+    db.reorderItems('dice', 'order-probe', ['ord-3', 'ord-2', 'ord-1']);
+    assert.deepStrictEqual(db.getItems('dice', 'order-probe').map(i => i.id), ['ord-3', 'ord-2', 'ord-1']);
+
+    addItem('ord-4', 'order-probe');
+    assert.deepStrictEqual(
+      db.getItems('dice', 'order-probe').map(i => i.id),
+      ['ord-3', 'ord-2', 'ord-1', 'ord-4'],
+      'newly added item must be last, not first'
+    );
+  });
+
+  it('sort_order is scoped per category (a fresh category starts at 0)', () => {
+    addItem('tgt-1', 'order-target');
+    const row = db.db.prepare('SELECT sort_order FROM items WHERE id = ?').get('tgt-1');
+    assert.strictEqual(row.sort_order, 0);
+  });
+
+  it('moving an item to another category places it at the end of the target', () => {
+    const moved = db.getItem('ord-1');
+    db.updateItem('ord-1', { category: 'order-target', version: moved.version + 1 }, moved.version);
+    const targetOrder = db.getItems('dice', 'order-target').map(i => i.id);
+    assert.deepStrictEqual(targetOrder, ['tgt-1', 'ord-1'], 'moved item must be appended, not inserted mid-list');
+  });
+});
+
+describe('Rate limiting exempts the signed-in admin', () => {
+  it('an admin session can exceed the anonymous read allowance', async () => {
+    const agent = supertest.agent(app);
+    const login = await agent.post('/api/auth/login').set(ORIGIN)
+      .send({ username: 'admin', password: 'admin123' });
+    assert.strictEqual(login.status, 200);
+
+    // Anonymous callers are capped (default 2000/15min); an admin must never see 429,
+    // otherwise normal editing surfaced as "Failed to load items" until a restart.
+    for (let i = 0; i < 40; i++) {
+      const res = await agent.get('/api/items?section=dice');
+      assert.strictEqual(res.status, 200, 'admin request #' + (i + 1) + ' was throttled');
+    }
+  });
+
+  it('a write by the admin does not consume the read allowance', async () => {
+    const agent = supertest.agent(app);
+    await agent.post('/api/auth/login').set(ORIGIN)
+      .send({ username: 'admin', password: 'admin123' });
+
+    const before = await agent.get('/api/items?section=dice');
+    // Admin is skipped entirely, so no RateLimit headers are emitted for them
+    assert.strictEqual(before.status, 200);
+    assert.strictEqual(before.headers['ratelimit-remaining'], undefined);
+  });
+
+  it('anonymous reads still report a remaining allowance (limiter active)', async () => {
+    const res = await supertest(app).get('/api/items?section=dice');
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.headers['ratelimit-remaining'] !== undefined, 'limiter must stay active for anonymous users');
+  });
+});

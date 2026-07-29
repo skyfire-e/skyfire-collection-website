@@ -256,7 +256,13 @@ function getItem(id) {
 
 function insertItem(item) {
   const now = new Date().toISOString();
-  db.prepare('INSERT INTO items (id, section, category, title, author, price, recaster, combatPoints, status, image, images, version, createdAt, updatedAt) VALUES (@id, @section, @category, @title, @author, @price, @recaster, @combatPoints, @status, @image, @images, @version, @createdAt, @updatedAt)').run({
+  // Default ordering is "newest last": place the item after the current maximum
+  // within its category. Relying on the column default (0) put new items at the
+  // top of any category whose order had been customised via re-arrange.
+  const nextOrder = db.prepare(
+    'SELECT COALESCE(MAX(sort_order), -1) + 1 AS next FROM items WHERE section = ? AND category = ?'
+  ).get(item.section, item.category).next;
+  db.prepare('INSERT INTO items (id, section, category, title, author, price, recaster, combatPoints, status, image, images, version, sort_order, createdAt, updatedAt) VALUES (@id, @section, @category, @title, @author, @price, @recaster, @combatPoints, @status, @image, @images, @version, @sort_order, @createdAt, @updatedAt)').run({
     id: String(item.id),
     section: item.section,
     category: item.category,
@@ -269,6 +275,7 @@ function insertItem(item) {
     image: item.image || '',
     images: JSON.stringify(item.images || []),
     version: item.version || 1,
+    sort_order: item.sort_order != null ? item.sort_order : nextOrder,
     createdAt: item.createdAt || now,
     updatedAt: now
   });
@@ -295,6 +302,23 @@ function updateItem(id, fields, expectedVersion) {
     }
   }
   if (sets.length === 0) return;
+
+  // Moving an item to another section/category re-anchors it at the end of the
+  // target, so it does not land in the middle of a manually arranged list.
+  if (fields.section !== undefined || fields.category !== undefined) {
+    const existing = getItem(id);
+    if (existing) {
+      const targetSection = fields.section !== undefined ? fields.section : existing.section;
+      const targetCategory = fields.category !== undefined ? fields.category : existing.category;
+      if (targetSection !== existing.section || targetCategory !== existing.category) {
+        sets.push('sort_order = @sort_order');
+        params.sort_order = db.prepare(
+          'SELECT COALESCE(MAX(sort_order), -1) + 1 AS next FROM items WHERE section = ? AND category = ?'
+        ).get(targetSection, targetCategory).next;
+      }
+    }
+  }
+
   sets.push('updatedAt = @updatedAt');
   params.updatedAt = new Date().toISOString();
   params.id = String(id);

@@ -43,42 +43,6 @@ app.use(helmet({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting on mutation endpoints (skip GET/HEAD/OPTIONS)
-// writeLimiter (~60 req/15min) applies to POST/PUT/DELETE, skips GET
-// readLimiter (~200 req/15min) applies to GET on shared paths
-// GET /api/items is counted only by readLimiter (writeLimiter skips it)
-const writeLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 60,
-  standardHeaders: true,
-  legacyHeaders: false,
-  skip: (req) => ['GET', 'HEAD', 'OPTIONS'].includes(req.method),
-  message: { error: 'Too many requests, try again later' }
-});
-app.use('/api/items', writeLimiter);
-app.use('/api/categories', writeLimiter);
-app.use('/api/settings', writeLimiter);
-app.use('/api/upload', writeLimiter);
-app.use('/api/backfill-defaults', writeLimiter);
-app.use('/api/backfill-images', writeLimiter);
-app.use('/api/backfill-prices', writeLimiter);
-app.use('/api/checkpoint', writeLimiter);
-
-// Rate limiting on public read endpoints
-const readLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 200,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'Too many requests, try again later' }
-});
-app.use('/api/auth/me', readLimiter);
-app.use('/api/spreadsheet/public', readLimiter);
-app.use('/api/items', readLimiter);
-app.use('/api/categories', readLimiter);
-app.use('/api/settings', readLimiter);
-app.use('/api/spreadsheet', readLimiter);
-
 // SQLite session store
 const { getSession, setSession, destroySession, db: dbInstance } = require('./db');
 
@@ -127,6 +91,52 @@ app.use(session({
     maxAge: SESSION_MAX_AGE
   }
 }));
+
+// Rate limiting — mounted after the session so the signed-in owner can be exempted.
+// The limiters exist to slow down anonymous abuse, not to throttle the admin: an
+// admin session doing normal work (adding items, browsing galleries) used to burn
+// through the read quota and get 429s that surfaced in the UI as
+// "Failed to load items", persisting until the in-memory counters were reset by a
+// server restart.
+const RATE_LIMIT_WRITE = parseInt(process.env.RATE_LIMIT_WRITE, 10) || 300;
+const RATE_LIMIT_READ = parseInt(process.env.RATE_LIMIT_READ, 10) || 2000;
+
+function isAdminRequest(req) {
+  return Boolean(req.session && req.session.user && req.session.user.role === 'admin');
+}
+
+const writeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: RATE_LIMIT_WRITE,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => ['GET', 'HEAD', 'OPTIONS'].includes(req.method) || isAdminRequest(req),
+  message: { error: 'Too many requests, try again later' }
+});
+app.use('/api/items', writeLimiter);
+app.use('/api/categories', writeLimiter);
+app.use('/api/settings', writeLimiter);
+app.use('/api/upload', writeLimiter);
+app.use('/api/backfill-defaults', writeLimiter);
+app.use('/api/backfill-images', writeLimiter);
+app.use('/api/backfill-prices', writeLimiter);
+app.use('/api/checkpoint', writeLimiter);
+
+// Read limiter: only counts reads, so a mutation no longer consumes both quotas
+const readLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: RATE_LIMIT_READ,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => !['GET', 'HEAD'].includes(req.method) || isAdminRequest(req),
+  message: { error: 'Too many requests, try again later' }
+});
+app.use('/api/auth/me', readLimiter);
+app.use('/api/spreadsheet/public', readLimiter);
+app.use('/api/items', readLimiter);
+app.use('/api/categories', readLimiter);
+app.use('/api/settings', readLimiter);
+app.use('/api/spreadsheet', readLimiter);
 
 // Static files
 app.use(express.static(path.join(ROOT, 'public')));

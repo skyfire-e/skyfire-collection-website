@@ -326,7 +326,13 @@ export async function initGalleryPage() {
       }
       if (reorderMode) enableDragAndDrop(getGalleryGrid());
     } catch (err) {
-      grid.innerHTML = '<p class="empty-state">Failed to load items. Please try again.</p>';
+      // Surface the real reason (e.g. rate limit) instead of a generic failure —
+      // an empty grid used to look like the collection had vanished.
+      grid.textContent = '';
+      const p = document.createElement('p');
+      p.className = 'empty-state';
+      p.textContent = 'Failed to load items: ' + (err.message || 'Unknown error');
+      grid.appendChild(p);
     }
   }
 
