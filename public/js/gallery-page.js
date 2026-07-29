@@ -19,8 +19,21 @@ export async function initGalleryPage() {
       if (sec) {
         const cat = sec.subcategories.find(c => c.id === category);
         const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
-        const label = parentGroup ? parentGroup.label : sec.label;
-        backLink.href = parentGroup ? '/' + encodeURIComponent(section) + '/' + encodeURIComponent(parentGroup.id) : '/' + encodeURIComponent(section);
+        // Items filed directly under a group's own root (category === the group's id itself)
+        // should link back into that group's subgroup page, not the top-level section page.
+        const isGroupRoot = !parentGroup && cat && cat.type === 'group';
+        let label, backHref;
+        if (parentGroup) {
+          label = parentGroup.label;
+          backHref = '/' + encodeURIComponent(section) + '/' + encodeURIComponent(parentGroup.id);
+        } else if (isGroupRoot) {
+          label = cat.label;
+          backHref = '/' + encodeURIComponent(section) + '/' + encodeURIComponent(cat.id);
+        } else {
+          label = sec.label;
+          backHref = '/' + encodeURIComponent(section);
+        }
+        backLink.href = backHref;
         backLink.textContent = '';
         const arrow = document.createElement('span');
         arrow.className = 'back-arrow';

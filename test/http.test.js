@@ -389,7 +389,31 @@ describe('CRUD (authenticated)', () => {
     await agent
       .delete('/api/items/' + res.body.id)
       .set('Origin', 'http://127.0.0.1:3000')
-      .set('Host', '127.0.0.1:3000');
+      .set('Host', '127.0.0.1:3000')
+      .send({ version: res.body.version });
+  });
+
+  it('POST /api/items — accepts a group id as category (item filed at the group root)', async () => {
+    const res = await agent
+      .post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'miniatures')
+      .field('category', 'skaven') // 'skaven' is the group itself, not a leaf like 'citadel-skaven'
+      .field('title', 'Root Skaven Item');
+    assert.strictEqual(res.status, 201);
+    assert.strictEqual(res.body.category, 'skaven');
+
+    const list = await supertest(app).get('/api/items?section=miniatures&category=skaven');
+    assert.strictEqual(list.status, 200);
+    assert.ok(list.body.items.some(i => i.id === res.body.id));
+
+    // cleanup
+    await agent
+      .delete('/api/items/' + res.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ version: res.body.version });
   });
 
   it('PUT /api/items/:id — updates item', async () => {

@@ -1,5 +1,6 @@
 import { API, checkAuth, isAdmin } from './api.js';
 import { showToast } from './toast.js';
+import { thumbUrl } from './utils.js';
 
 let grid;
 
@@ -80,9 +81,57 @@ async function initSubgroupPage() {
 
     group.subcategories.forEach(c => grid.appendChild(renderCategoryButton(sectionId, c)));
 
+    // Items filed directly under this group's own root (not in any of its sub-categories)
+    await renderGroupRootItems(sectionId, groupId);
+
     showAdminActions({ section: sectionId, parentId: groupId });
   } catch (err) {
     grid.innerHTML = '<p class="empty-state">Failed to load categories. Please refresh.</p>';
+  }
+}
+
+// Items with category === the group's own id (added via admin's "Skaven" root option,
+// distinct from items filed under its sub-categories like "Citadel Skaven").
+// Shown read-only here; full view/edit/delete/reorder happens on the linked gallery page.
+async function renderGroupRootItems(sectionId, groupId) {
+  const section = document.getElementById('subgroupItemsSection');
+  const itemsGrid = document.getElementById('subgroupItemsGrid');
+  if (!section || !itemsGrid) return;
+  try {
+    const data = await API.get('/api/items?section=' + encodeURIComponent(sectionId) + '&category=' + encodeURIComponent(groupId));
+    const items = data.items || [];
+    if (items.length === 0) return;
+    items.forEach(item => {
+      const a = document.createElement('a');
+      a.className = 'gallery-card';
+      a.href = '/gallery?section=' + encodeURIComponent(sectionId) + '&category=' + encodeURIComponent(groupId) + '#item-' + item.id;
+
+      const imgWrap = document.createElement('div');
+      imgWrap.className = 'img-wrap';
+      const img = document.createElement('img');
+      img.src = thumbUrl(item.image);
+      img.alt = item.title || '';
+      img.loading = 'lazy';
+      img.addEventListener('error', function() {
+        if (!this.dataset.fullTried && item.image) { this.dataset.fullTried = '1'; this.src = item.image; }
+        else if (!this.dataset.fallbackAttempted) { this.dataset.fallbackAttempted = '1'; this.src = '/images/default.svg'; }
+      });
+      imgWrap.appendChild(img);
+      a.appendChild(imgWrap);
+
+      const cardBody = document.createElement('div');
+      cardBody.className = 'card-body';
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'title';
+      titleDiv.textContent = item.title;
+      cardBody.appendChild(titleDiv);
+      a.appendChild(cardBody);
+
+      itemsGrid.appendChild(a);
+    });
+    section.classList.remove('hidden');
+  } catch (err) {
+    console.error('Failed to load group root items:', err);
   }
 }
 

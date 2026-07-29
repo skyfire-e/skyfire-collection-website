@@ -102,11 +102,11 @@ body {
   left: 72px;
   z-index: 150;
 }
-/* Reorder button (bottom-right, left of search) */
+/* Reorder button (bottom-right, left of admin-corner) */
 .reorder-corner-btn {
   position: fixed;
   bottom: 24px;
-  right: 136px;
+  right: 80px;
   z-index: 100;
 }
 
@@ -430,6 +430,24 @@ a:hover { text-decoration: underline; }
   padding: 0;
 }
 
+/* Items filed directly under a group's own root — shown below its sub-category buttons */
+.subgroup-items-section {
+  margin-top: 32px;
+}
+.subgroup-items-heading {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+a.gallery-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .category-btn {
   display: flex;
   flex-direction: column;
@@ -453,12 +471,6 @@ a:hover { text-decoration: underline; }
   color: var(--accent);
   transform: translateY(-2px);
   text-decoration: none;
-}
-/* Group buttons look identical to regular category buttons; arrow hints at nested categories */
-.category-group::after {
-  content: ' →';
-  font-size: 1.2rem;
-  margin-left: 4px;
 }
 
 /* Category re-arrange mode (admin) */
@@ -566,6 +578,7 @@ a:hover { text-decoration: underline; }
   .admin-actions a, .admin-actions button { padding: 8px 16px; font-size: 0.8rem; }
   .admin-corner { bottom: 80px; right: 16px; gap: 6px; }
   .admin-corner button { width: 40px; height: 40px; font-size: 1rem; }
+  .reorder-corner-btn { bottom: 80px; right: 64px; width: 40px; height: 40px; font-size: 1rem; }
   .spreadsheet-bar { bottom: 72px; }
 
   .ps-subcategory { margin-left: 8px; }

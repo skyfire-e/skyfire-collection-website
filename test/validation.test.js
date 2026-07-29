@@ -59,7 +59,7 @@ describe('findCategory', () => {
 });
 
 describe('flattenCategories', () => {
-  it('flattens mixed groups and leaf categories', () => {
+  it('flattens mixed groups and leaf categories, including an entry for the group itself (its root, for direct items)', () => {
     const cats = [
       { id: 'a', label: 'A' },
       { id: 'b', label: 'B', type: 'group', subcategories: [
@@ -68,13 +68,15 @@ describe('flattenCategories', () => {
       ]}
     ];
     const flat = flattenCategories(cats);
-    assert.strictEqual(flat.length, 3);
+    assert.strictEqual(flat.length, 4);
     assert.strictEqual(flat[0].id, 'a');
-    assert.strictEqual(flat[1].id, 'b1');
-    assert.strictEqual(flat[1].groupLabel, 'B');
-    assert.strictEqual(flat[2].id, 'b2');
+    assert.strictEqual(flat[1].id, 'b');
+    assert.strictEqual(flat[1].groupLabel, null);
+    assert.strictEqual(flat[2].id, 'b1');
+    assert.strictEqual(flat[2].groupLabel, 'B');
+    assert.strictEqual(flat[3].id, 'b2');
   });
-  it('handles nested groups at depth 3', () => {
+  it('handles nested groups at depth 3, including own-root entries for each group level', () => {
     const cats = [
       { id: 'x', label: 'X', type: 'group', subcategories: [
         { id: 'y', label: 'Y', type: 'group', subcategories: [
@@ -83,12 +85,22 @@ describe('flattenCategories', () => {
       ]}
     ];
     const flat = flattenCategories(cats);
-    assert.strictEqual(flat.length, 1);
-    assert.strictEqual(flat[0].id, 'z');
-    assert.strictEqual(flat[0].groupLabel, 'X → Y');
+    assert.strictEqual(flat.length, 3);
+    assert.strictEqual(flat[0].id, 'x');
+    assert.strictEqual(flat[0].groupLabel, null);
+    assert.strictEqual(flat[1].id, 'y');
+    assert.strictEqual(flat[1].groupLabel, 'X');
+    assert.strictEqual(flat[2].id, 'z');
+    assert.strictEqual(flat[2].groupLabel, 'X → Y');
   });
   it('returns empty for no categories', () => {
     assert.deepStrictEqual(flattenCategories([]), []);
+  });
+  it('group with no children still gets its own entry (can hold items even if empty of subcategories)', () => {
+    const cats = [{ id: 'g', label: 'G', type: 'group', subcategories: [] }];
+    const flat = flattenCategories(cats);
+    assert.strictEqual(flat.length, 1);
+    assert.strictEqual(flat[0].id, 'g');
   });
 });
 

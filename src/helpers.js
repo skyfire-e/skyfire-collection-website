@@ -108,16 +108,14 @@ function findCategory(subcategories, targetId) {
 function flattenCategories(subcategories, ancestors = []) {
   return (subcategories || []).flatMap(cat => {
     const p = [...ancestors, cat.label];
+    const groupLabel = ancestors.length > 0 ? ancestors.join(' → ') : null;
     if (cat.type === 'group') {
-      if (!cat.subcategories?.length) return [];
-      return flattenCategories(cat.subcategories, p);
+      // The group itself can hold items directly (its "root"), in addition to its children
+      const ownEntry = { id: cat.id, label: cat.label, path: p, groupLabel };
+      const childEntries = cat.subcategories?.length ? flattenCategories(cat.subcategories, p) : [];
+      return [ownEntry, ...childEntries];
     }
-    return [{
-      id: cat.id,
-      label: cat.label,
-      path: p,
-      groupLabel: ancestors.length > 0 ? ancestors.join(' → ') : null
-    }];
+    return [{ id: cat.id, label: cat.label, path: p, groupLabel }];
   });
 }
 
