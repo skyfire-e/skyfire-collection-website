@@ -95,6 +95,9 @@ router.post('/', requireSameOrigin, requireAdmin, upload.array('images', 10), as
 router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), async (req, res, next) => {
   const files = req.files || [];
   let newFilePaths = [];
+  // Tracks every normalized file as soon as it is written, so a partial
+  // Promise.all failure can't leave already-created jpg+thumb pairs orphaned.
+  const createdPaths = [];
   try {
     const cats = db.getCategories();
 
@@ -128,7 +131,11 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
       ...validation.data
     };
 
-    newFilePaths = await Promise.all(files.map(normalizeImage));
+    newFilePaths = await Promise.all(files.map(async (f) => {
+      const p = await normalizeImage(f);
+      createdPaths.push(p);
+      return p;
+    }));
 
     if (!Array.isArray(merged.images)) merged.images = [];
     const oldImages = [...merged.images];
@@ -201,9 +208,12 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
 
     db.updateItem(currentItem.id, merged, currentItem.version);
 
+    // A2 (same as DELETE): never unlink the shared default image
+    const protectedDefault = db.getSettings().defaultImage;
     const newSet = new Set(merged.images);
     const toDelete = [];
     for (const img of oldImagesForCleanup) {
+      if (protectedDefault && img === protectedDefault) continue;
       if (!newSet.has(img)) {
         const stillReferenced = db.countImageReferences(img, merged.id) > 0;
         if (!stillReferenced) toDelete.push(img);
@@ -215,7 +225,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     res.json(merged);
   } catch (err) {
     cleanupUploadedFiles(files);
-    newFilePaths.forEach(p => safeUnlink(p));
+    createdPaths.forEach(p => safeUnlink(p));
     next(err);
   }
 });

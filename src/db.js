@@ -20,6 +20,10 @@ if (TEST_DB) {
 }
 db.pragma('foreign_keys = ON');
 
+// SQLite's built-in lower()/LIKE are ASCII-only; this makes search work for
+// Cyrillic (and any other Unicode) text case-insensitively.
+db.function('lower_uni', { deterministic: true }, (s) => (s == null ? null : String(s).toLowerCase()));
+
 db.exec(`
   CREATE TABLE IF NOT EXISTS items (
     id TEXT PRIMARY KEY,
@@ -208,12 +212,13 @@ function reorderItems(section, category, orderedIds) {
 }
 
 function searchItems(query, limit) {
-  const escaped = query.replace(/[%_\\]/g, c => '\\' + c);
+  // Lowercase in JS + lower_uni() in SQL = Unicode case-insensitive search
+  const escaped = query.toLowerCase().replace(/[%_\\]/g, c => '\\' + c);
   const pattern = '%' + escaped + '%';
   const likeClauses = ['items.title', 'items.author', 'items.recaster', 'items.status', 'items.combatPoints', 'items.section', 'items.category', 'c.label', 'pc.label'];
   const params = [];
   for (let i = 0; i < likeClauses.length; i++) { params.push(pattern); }
-  const whereClause = likeClauses.map(col => col + ' LIKE ? ESCAPE \'\\\'').join(' OR ');
+  const whereClause = likeClauses.map(col => 'lower_uni(' + col + ') LIKE ? ESCAPE \'\\\'').join(' OR ');
   const total = db.prepare(`
     SELECT COUNT(*) as c FROM items
     LEFT JOIN categories c ON items.section = c.section_id AND items.category = c.id
@@ -540,7 +545,7 @@ function getSession(sid) {
     db.prepare('DELETE FROM sessions WHERE sid = ?').run(sid);
     return null;
   }
-  try { return safeJsonParse(row.data, null); } catch { return null; }
+  return safeJsonParse(row.data, null);
 }
 
 function setSession(sid, data, maxAge) {

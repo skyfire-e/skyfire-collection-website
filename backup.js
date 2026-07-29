@@ -83,31 +83,6 @@ function verifyDatabaseSnapshot(snapshotPath) {
   }
 }
 
-function getReferencedUploads(snapshotDb) {
-  const rows = snapshotDb.prepare('SELECT id, image, images FROM items').all();
-  const paths = new Set();
-  for (const row of rows) {
-    if (row.image && typeof row.image === 'string' && row.image.startsWith('/uploads/')) {
-      paths.add(row.image);
-    }
-    let images;
-    try {
-      images = JSON.parse(row.images || '[]');
-    } catch {
-      throw new Error(`Invalid images JSON for item ${row.id}`);
-    }
-    if (!Array.isArray(images)) {
-      throw new Error(`images is not an array for item ${row.id}`);
-    }
-    for (const image of images) {
-      if (typeof image === 'string' && image.startsWith('/uploads/')) {
-        paths.add(image);
-      }
-    }
-  }
-  return paths;
-}
-
 function getGitCommit() {
   try {
     return execFileSync('git', ['rev-parse', 'HEAD'], {
@@ -190,7 +165,6 @@ async function main() {
 
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'skyfire-backup-'));
   let snapshotPath;
-  let snapshotDb;
 
   try {
     snapshotPath = path.join(tempDir, 'collection.db');

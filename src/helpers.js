@@ -3,7 +3,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 const sharp = require('sharp');
 const { VersionConflictError, ValidationError } = require('./errors');
-const { itemInputSchema, itemInputPartialSchema } = require('../lib/validate');
+const { itemInputSchema } = require('../lib/validate');
 
 const ROOT = path.resolve(__dirname, '..');
 const UPLOADS_DIR = path.resolve(ROOT, 'uploads');
@@ -119,9 +119,8 @@ function flattenCategories(subcategories, ancestors = []) {
   });
 }
 
-function validateItemInput(body, cats, partial) {
-  const schema = partial ? itemInputPartialSchema : itemInputSchema;
-  const result = schema.safeParse(body);
+function validateItemInput(body, cats) {
+  const result = itemInputSchema.safeParse(body);
   const errors = [];
 
   if (!result.success) {
@@ -133,13 +132,9 @@ function validateItemInput(body, cats, partial) {
   const section = body.section !== undefined ? String(body.section).trim() : undefined;
   const category = body.category !== undefined ? String(body.category).trim() : undefined;
 
-  if (!partial || body.section !== undefined) {
-    if (section && !cats[section]) errors.push('Section "' + section + '" does not exist');
-  }
-  if (!partial || body.category !== undefined) {
-    if (category && section && cats[section] && !findCategory(cats[section].subcategories, category)) {
-      errors.push('Category "' + category + '" does not exist in section "' + section + '"');
-    }
+  if (section && !cats[section]) errors.push('Section "' + section + '" does not exist');
+  if (category && section && cats[section] && !findCategory(cats[section].subcategories, category)) {
+    errors.push('Category "' + category + '" does not exist in section "' + section + '"');
   }
 
   if (errors.length > 0) return { errors, data: null };
@@ -193,22 +188,16 @@ function validateVersion(item, clientVersion) {
 }
 
 /**
- * Convert a value to a number. Returns 0 for null, undefined, or empty string.
- * Does not distinguish between "" and 0 — both return 0.
- * @param {*} value
- * @returns {number}
+ * Parse a JSON string, returning the fallback on any error.
+ * @param {string} value
+ * @param {*} fallback
  */
 function safeJsonParse(value, fallback) {
   try { return JSON.parse(value); } catch { return fallback; }
 }
 
-function toNumber(value) {
-  if (value === null || value === undefined || value === '') return 0;
-  const n = Number(value);
-  return Number.isNaN(n) ? NaN : n;
-}
-
-const STATIC_ROUTES = ['admin', 'gallery', 'dice', 'miniatures', 'css', 'js', 'images', 'uploads'];
+// Reserved top-level paths that can never be used as section IDs
+const STATIC_ROUTES = ['admin', 'gallery', 'dice', 'miniatures', 'spreadsheet', 'health', 'css', 'js', 'images', 'uploads', 'vendor'];
 
 module.exports = {
   ROOT, UPLOADS_DIR, TEMP_DIR,
@@ -217,7 +206,6 @@ module.exports = {
   normalizeImage, findCategory, flattenCategories,
   validateItemInput, validateFinalOrder, parseJSONArray,
   validateVersion,
-  toNumber,
   checkImageMagicBytes, hasBytes,
   STATIC_ROUTES,
   safeJsonParse

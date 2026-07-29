@@ -21,21 +21,26 @@ const items = appDb.allItems();
 const settings = appDb.getSettings();
 
 const referenced = new Set();
+function addReference(imgPath) {
+  const base = path.basename(imgPath);
+  referenced.add(base);
+  referenced.add('thumb-' + base);
+  // Legacy: scripts/backfill-thumbnails.js always wrote thumb-<name>.jpg,
+  // even for .webp/.png originals — keep those thumbs too.
+  referenced.add('thumb-' + base.replace(/\.[^.]+$/, '') + '.jpg');
+}
 for (const item of items) {
   if (item.image && item.image.startsWith('/uploads/')) {
-    referenced.add(path.basename(item.image));
-    referenced.add('thumb-' + path.basename(item.image));
+    addReference(item.image);
   }
   for (const img of (item.images || [])) {
     if (img && img.startsWith('/uploads/')) {
-      referenced.add(path.basename(img));
-      referenced.add('thumb-' + path.basename(img));
+      addReference(img);
     }
   }
 }
 if (settings.defaultImage && settings.defaultImage.startsWith('/uploads/')) {
-  referenced.add(path.basename(settings.defaultImage));
-  referenced.add('thumb-' + path.basename(settings.defaultImage));
+  addReference(settings.defaultImage);
 }
 
 const files = fs.readdirSync(UPLOADS_DIR).filter(f =>

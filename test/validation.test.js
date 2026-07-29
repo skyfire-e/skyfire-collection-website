@@ -3,7 +3,7 @@ const assert = require('node:assert');
 
 process.env.NODE_TEST_DB = '1';
 
-const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray, safeUnlink, validateVersion, validateItemInput, checkImageMagicBytes, hasBytes } = require('../src/helpers');
+const { findCategory, flattenCategories, envBoolean, validateFinalOrder, parseJSONArray, safeUnlink, validateVersion, validateItemInput, checkImageMagicBytes } = require('../src/helpers');
 const { VersionConflictError } = require('../src/errors');
 const db = require('../src/db');
 
@@ -419,9 +419,5 @@ describe('validateItemInput', () => {
   it('rejects invalid category', () => {
     const result = validateItemInput({ title: 'X', section: 'dice', category: 'nope' }, cats);
     assert.ok(result.errors);
-  });
-  it('accepts partial update', () => {
-    const result = validateItemInput({ title: 'Updated' }, cats, true);
-    assert.strictEqual(result.errors, null);
   });
 });

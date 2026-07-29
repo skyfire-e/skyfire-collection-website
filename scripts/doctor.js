@@ -90,7 +90,9 @@ function runDoctor(database) {
               missingFiles++;
             }
             const thumb = 'thumb-' + basename;
-            if (!onDisk.has(thumb)) {
+            // Legacy backfill wrote thumb-<name>.jpg even for .webp/.png originals
+            const legacyThumb = 'thumb-' + basename.replace(/\.[^.]+$/, '') + '.jpg';
+            if (!onDisk.has(thumb) && !onDisk.has(legacyThumb)) {
               report('images', 'warning', `Missing thumbnail for: ${basename}`);
               missingThumbs++;
             }
@@ -113,20 +115,25 @@ function runDoctor(database) {
       const allItems = database.prepare('SELECT image, images FROM items').all();
       const settings = getSettings();
       const referenced = new Set();
+      const addReference = (p) => {
+        const base = path.basename(p);
+        referenced.add(base);
+        referenced.add('thumb-' + base);
+        // Legacy backfill thumb naming (always .jpg)
+        referenced.add('thumb-' + base.replace(/\.[^.]+$/, '') + '.jpg');
+      };
       for (const item of allItems) {
         let imgArr;
         try { imgArr = JSON.parse(item.images || '[]'); } catch { imgArr = []; }
         const paths = [item.image, ...imgArr].filter(Boolean);
         for (const p of paths) {
           if (p.startsWith('/uploads/')) {
-            referenced.add(path.basename(p));
-            referenced.add('thumb-' + path.basename(p));
+            addReference(p);
           }
         }
       }
       if (settings && settings.startsWith('/uploads/')) {
-        referenced.add(path.basename(settings));
-        referenced.add('thumb-' + path.basename(settings));
+        addReference(settings);
       }
       const files = fs.readdirSync(UPLOADS_DIR).filter(f =>
         !f.startsWith('.') && (f.endsWith('.jpg') || f.endsWith('.webp'))

@@ -16,13 +16,22 @@ router.get('/health', (req, res) => {
   }
 });
 
+function xmlEscape(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
 function generateSitemap(baseUrl) {
   const cats = db.getCategories();
   const loc = (path) => baseUrl + path;
+  // /spreadsheet is intentionally absent: robots.txt disallows it
   const entries = [
     { loc: loc('/'), priority: '1.0' },
-    { loc: loc('/gallery'), priority: '0.6' },
-    { loc: loc('/spreadsheet'), priority: '0.5' }
+    { loc: loc('/gallery'), priority: '0.6' }
   ];
   for (const [id, section] of Object.entries(cats)) {
     entries.push({ loc: loc('/' + id), priority: '0.8' });
@@ -38,16 +47,33 @@ function generateSitemap(baseUrl) {
     }
   }
   const urls = entries.map(e =>
-    '  <url><loc>' + e.loc.replace(/&/g, '&amp;') + '</loc><changefreq>weekly</changefreq><priority>' + e.priority + '</priority></url>'
+    '  <url><loc>' + xmlEscape(e.loc) + '</loc><changefreq>weekly</changefreq><priority>' + e.priority + '</priority></url>'
   ).join('\n');
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>';
 }
 
+function getBaseUrl(req) {
+  return (process.env.SITE_URL || 'https://' + req.hostname).replace(/\/$/, '');
+}
+
+router.get('/robots.txt', (req, res) => {
+  res.set('Content-Type', 'text/plain');
+  res.send([
+    'User-agent: *',
+    'Disallow: /admin',
+    'Disallow: /api/',
+    'Disallow: /spreadsheet',
+    'Allow: /',
+    '',
+    'Sitemap: ' + getBaseUrl(req) + '/sitemap.xml',
+    ''
+  ].join('\n'));
+});
+
 router.get('/sitemap.xml', (req, res) => {
   try {
-    const baseUrl = process.env.SITE_URL || 'https://' + req.hostname;
     res.set('Content-Type', 'application/xml');
-    res.send(generateSitemap(baseUrl.replace(/\/$/, '')));
+    res.send(generateSitemap(getBaseUrl(req)));
   } catch (err) {
     console.error('Sitemap generation failed:', err.message);
     res.status(503).json({ error: 'Database unavailable' });
@@ -64,11 +90,13 @@ const pages = {
 };
 
 router.get(Object.keys(pages), (req, res) => {
-  const page = pages[req.path];
-  if (page) res.sendFile(path.join(PUB, page));
+  res.sendFile(path.join(PUB, pages[req.path]));
 });
 
-router.get('/miniatures/:group', (req, res) => {
+router.get('/miniatures/:group', (req, res, next) => {
+  const cats = db.getCategories();
+  const group = cats.miniatures && cats.miniatures.subcategories.find(c => c.id === req.params.group);
+  if (!group || group.type !== 'group') return next();
   res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
 });
 
