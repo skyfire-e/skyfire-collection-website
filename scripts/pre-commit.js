@@ -15,8 +15,8 @@ function fail(message, error) {
   process.exit(1);
 }
 
-function getWalSize() {
-  const walPath = DB_FILE + '-wal';
+function getWalSize(dbFile = DB_FILE) {
+  const walPath = dbFile + '-wal';
   try {
     return fs.statSync(walPath).size;
   } catch (error) {
@@ -41,16 +41,27 @@ function isDatabaseModified() {
   return output.trim() !== '';
 }
 
-function checkpointDatabase() {
-  if (!fs.existsSync(DB_FILE)) {
+function checkpointDatabase(dbFile = DB_FILE) {
+  if (!fs.existsSync(dbFile)) {
     console.log('[pre-commit] collection.db does not exist; skipping checkpoint');
     return;
   }
 
   let database;
   try {
-    database = new Database(DB_FILE);
+    database = new Database(dbFile);
     database.pragma('busy_timeout = 5000');
+
+    // Never commit auth sessions to the repository: the DB is pushed to a
+    // public GitHub repo, and a live admin sid does not belong in a backup.
+    // Side effect: the signed-in admin is logged out after each commit that
+    // touches the DB — an accepted trade-off (see security review B1).
+    try {
+      database.prepare('DELETE FROM sessions').run();
+    } catch (error) {
+      // Old snapshots may predate the sessions table — that is fine.
+      if (!/no such table: sessions/.test(error.message)) throw error;
+    }
 
     const checkpointResult = database.pragma('wal_checkpoint(TRUNCATE)');
     const quickCheck = database.pragma('quick_check', { simple: true });
@@ -74,18 +85,36 @@ function stageDatabase() {
   });
 }
 
-try {
-  const walSize = getWalSize();
-  const dbChanged = isDatabaseStaged() || isDatabaseModified();
-
-  if (walSize === 0 && !dbChanged) {
-    console.log('[pre-commit] No database changes detected');
-    process.exit(0);
+function hasSessions(dbFile = DB_FILE) {
+  if (!fs.existsSync(dbFile)) return false;
+  let database;
+  try {
+    database = new Database(dbFile, { readonly: true });
+    return database.prepare('SELECT COUNT(*) AS c FROM sessions').get().c > 0;
+  } catch {
+    return false; // no sessions table or unreadable — nothing to clean
+  } finally {
+    if (database) database.close();
   }
-
-  checkpointDatabase();
-  stageDatabase();
-  console.log('[pre-commit] collection.db checked and staged');
-} catch (error) {
-  fail('Database checkpoint failed; commit was cancelled to avoid losing WAL data.', error);
 }
+
+if (require.main === module) {
+  try {
+    const walSize = getWalSize();
+    const dbChanged = isDatabaseStaged() || isDatabaseModified();
+    const sessionsPresent = hasSessions();
+
+    if (walSize === 0 && !dbChanged && !sessionsPresent) {
+      console.log('[pre-commit] No database changes detected');
+      process.exit(0);
+    }
+
+    checkpointDatabase();
+    stageDatabase();
+    console.log('[pre-commit] collection.db checked and staged');
+  } catch (error) {
+    fail('Database checkpoint failed; commit was cancelled to avoid losing WAL data.', error);
+  }
+}
+
+module.exports = { checkpointDatabase, getWalSize, hasSessions };
