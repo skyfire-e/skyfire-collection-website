@@ -38,12 +38,15 @@ variable (port, session, rate limits, upload limits, reverse-proxy options).
 |---|---|---|
 | Items, categories, settings, audit log | `data/collection.db` (SQLite, WAL mode) | yes |
 | Images + thumbnails | `uploads/` (normalized JPEG, max 3000px + 400px thumb) | yes |
-| Sessions | same DB, `sessions` table | yes (cleared as needed) |
+| Sessions | same DB, `sessions` table | **never** (wiped by the pre-commit hook) |
 
-A git **pre-commit hook** (installed automatically by `npm install`) runs a
-WAL checkpoint, verifies DB integrity (`quick_check`) and stages
+A git **pre-commit hook** (installed automatically by `npm install`) wipes the
+`sessions` table (auth sessions must not end up in a public repo), runs a WAL
+checkpoint, verifies DB integrity (`quick_check`) and stages
 `data/collection.db` on every commit — a committed repository always contains
-the up-to-date database. Backup workflow is simply:
+the up-to-date database and never contains sessions. Side effect: the
+signed-in admin is logged out after a commit that touches the DB. Backup
+workflow is simply:
 
 ```bash
 git add -A && git commit -m "collection update" && git push
@@ -52,6 +55,31 @@ git add -A && git commit -m "collection update" && git push
 Additionally `npm run backup` creates a self-contained
 `backups/skyfire-backup-<date>.tar.gz` (verified DB snapshot + all uploads +
 manifest), keeping the last 10 archives.
+
+### Scheduled local backups (macOS)
+
+```bash
+npm run backup:schedule   # installs a launchd agent: daily backup at 21:00
+```
+
+The agent (`scripts/com.skyfire.collection-backup.plist`) runs
+`node backup.js` daily; logs go to `/tmp/skyfire-backup.log`. Git push stays
+manual on purpose: with more than one machine an automatic push can create
+unmergeable conflicts in the binary DB.
+
+### Repository size
+
+Images live in git history forever (every crop/re-upload adds new blobs and
+keeps the old ones). Check the pack size occasionally:
+
+```bash
+git count-objects -vH   # watch size-pack
+```
+
+Rule of thumb: fine below ~500 MB. If it ever grows past that, migrate
+`uploads/` to Git LFS (`git lfs migrate import --include='uploads/*'`) —
+note this rewrites history, so every clone (including a server using
+`npm run pull`) must be re-cloned afterwards.
 
 ---
 
@@ -94,7 +122,7 @@ POST   /api/auth/login | logout      GET /api/auth/me
 GET    /api/items?section=&category=&q=&limit=&offset=
 POST   /api/items                    PUT/DELETE /api/items/:id
 POST   /api/items/reorder
-GET    /api/categories               POST/DELETE /api/categories
+GET    /api/categories               POST/PATCH/DELETE /api/categories
 POST   /api/categories/reorder
 GET/PUT /api/settings                POST /api/upload/default
 GET    /api/spreadsheet/public       GET /api/spreadsheet (admin, CSV source)
@@ -117,6 +145,7 @@ POST   /api/backfill-defaults | backfill-images | backfill-prices   (data repair
 | `npm run doctor` | DB integrity + image/thumbnail consistency report |
 | `npm run checkpoint` | Manual WAL checkpoint + clear sessions |
 | `npm run backup` | Create verified `.tar.gz` backup (DB + uploads) |
+| `npm run backup:schedule` | Install daily 21:00 backup via launchd (macOS) |
 | `npm run gc:dry` / `npm run gc` | Find / delete orphaned upload files |
 | `npm run gc:quarantine` | Move orphans to `uploads/.quarantine/` instead |
 | `npm run pull` | On a server: git pull + conditional npm install |

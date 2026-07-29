@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.skyfire.collection-backup</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/node</string>
+    <string>backup.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/skyfire/Documents/mySiteR</string>
+
+  <!-- Daily at 21:00; if the Mac was asleep at that time, launchd runs the
+       job as soon as it wakes up (StartCalendarInterval semantics). -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>21</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/skyfire-backup.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/skyfire-backup.err.log</string>
+</dict>
+</plist>

@@ -220,15 +220,13 @@ async function main() {
     console.error('Backup failed:', error.message || error);
     process.exit(1);
   } finally {
-    if (fs.existsSync(tempDir)) {
-      try {
-        if (snapshotPath && fs.existsSync(snapshotPath)) {
-          fs.unlinkSync(snapshotPath);
-        }
-        fs.rmdirSync(tempDir);
-      } catch (cleanupError) {
-        console.warn('Temporary file cleanup warning:', cleanupError.message);
-      }
+    // The snapshot may leave -wal/-shm companions next to collection.db,
+    // so remove the whole temp directory recursively (rmdir failed with
+    // ENOTEMPTY on them before).
+    try {
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    } catch (cleanupError) {
+      console.warn('Temporary file cleanup warning:', cleanupError.message);
     }
   }
 }
