@@ -83,6 +83,41 @@ describe('A3: updateItem on deleted item throws VersionConflictError', () => {
   });
 });
 
+describe('Reorder accepts legacy (non-UUID) item IDs', () => {
+  let agent;
+
+  before(async () => {
+    agent = supertest.agent(app);
+    const res = await agent.post('/api/auth/login').set(ORIGIN)
+      .send({ username: 'admin', password: 'admin123' });
+    assert.strictEqual(res.status, 200);
+
+    db.insertItem({
+      id: '1784583148001', section: 'dice', category: 'metal-dice',
+      title: 'Legacy One', author: '', price: null, recaster: '', combatPoints: '', status: '',
+      image: '', images: [], version: 1, createdAt: new Date().toISOString()
+    });
+    db.insertItem({
+      id: '1784583148002', section: 'dice', category: 'metal-dice',
+      title: 'Legacy Two', author: '', price: null, recaster: '', combatPoints: '', status: '',
+      image: '', images: [], version: 1, createdAt: new Date().toISOString()
+    });
+  });
+
+  it('legacy timestamp IDs pass validation and reorder succeeds', async () => {
+    const res = await agent.post('/api/items/reorder').set(ORIGIN)
+      .send({ section: 'dice', category: 'metal-dice', items: ['1784583148002', '1784583148001'] });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.success, true);
+  });
+
+  it('garbage IDs are still rejected', async () => {
+    const res = await agent.post('/api/items/reorder').set(ORIGIN)
+      .send({ section: 'dice', category: 'metal-dice', items: ['../../etc/passwd'] });
+    assert.strictEqual(res.status, 400);
+  });
+});
+
 describe('A7: saveCategories maps tree errors to ValidationError (400, not 500)', () => {
   it('leaf with children throws ValidationError with status 400', () => {
     try {
