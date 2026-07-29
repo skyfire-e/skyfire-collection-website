@@ -83,7 +83,12 @@ function doSearch(query) {
       container.innerHTML = '';
       const countInfo = document.createElement('div');
       countInfo.className = 'sr-count-info';
-      countInfo.textContent = items.length + ' result' + (items.length !== 1 ? 's' : '');
+      // B4: the server caps results (limit=50) but reports the full match
+      // count — show "50 of 123" so truncation is visible
+      const total = typeof data.total === 'number' ? data.total : items.length;
+      countInfo.textContent = items.length < total
+        ? items.length + ' of ' + total + ' results'
+        : items.length + ' result' + (items.length !== 1 ? 's' : '');
       container.appendChild(countInfo);
       items.forEach(item => {
         const div = document.createElement('div');

@@ -382,7 +382,10 @@ export async function initGalleryPage() {
   if (isAdmin()) {
     el('adminActions')?.classList.remove('hidden');
     const reorderContainer = document.getElementById('reorderActions');
-    if (reorderContainer) {
+    // B3: item order is stored per (section, category) — without both there is
+    // nothing the server could save, so don't offer the button at all
+    // (e.g. /gallery opened without query params).
+    if (reorderContainer && section && category) {
       reorderContainer.classList.remove('hidden');
       const reorderBtn = document.createElement('button');
       reorderBtn.className = 'nav-corner-btn reorder-corner-btn';
@@ -433,6 +436,7 @@ async function toggleReorder() {
     grid.classList.remove('reorder-mode');
     disableDragAndDrop(grid);
     reorderMode = false;
+    showToast('Order saved', 'success');
   } else {
     reorderMode = true;
     btn.textContent = '✓';

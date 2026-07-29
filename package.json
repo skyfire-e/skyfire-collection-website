@@ -9,7 +9,7 @@
     "dev": "node --watch server.js",
     "backup": "node backup.js",
     "doctor": "node scripts/doctor.js",
-    "checkpoint": "node -e \"const db=require('better-sqlite3')('data/collection.db'); db.prepare('DELETE FROM sessions').run(); db.pragma('wal_checkpoint(TRUNCATE)'); db.close(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
+    "checkpoint": "node -e \"const db=require('better-sqlite3')('data/collection.db'); db.pragma('busy_timeout = 5000'); db.prepare('DELETE FROM sessions').run(); db.pragma('wal_checkpoint(TRUNCATE)'); db.close(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
     "postinstall": "node scripts/install-hook.js",
     "pull": "node pull.js",
     "gc": "node gc-uploads.js",
