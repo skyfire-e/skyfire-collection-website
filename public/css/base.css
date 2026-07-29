@@ -11,7 +11,6 @@
   --text-inverse: #fff;
   --accent: #6db58c;
   --accent-dark: #3d7a5a;
-  --accent-group-grad: #1a3025;
   --border: #333;
   --danger: #ef5350;
   --success: #66bb6a;
@@ -37,7 +36,6 @@
   --text-inverse: #1a1a1a;
   --accent: #4a8c6a;
   --accent-dark: #2d5f44;
-  --accent-group-grad: #b8d4c4;
   --border: #ddd;
   --danger: #d32f2f;
   --success: #2e7d32;
@@ -456,14 +454,25 @@ a:hover { text-decoration: underline; }
   transform: translateY(-2px);
   text-decoration: none;
 }
-.category-group {
-  border-color: var(--accent-dark);
-  background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-group-grad) 100%);
-}
+/* Group buttons look identical to regular category buttons; arrow hints at nested categories */
 .category-group::after {
   content: ' →';
   font-size: 1.2rem;
   margin-left: 4px;
+}
+
+/* Category re-arrange mode (admin) */
+.reorder-mode .category-btn {
+  cursor: grab;
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}
+.reorder-mode .category-btn:active {
+  cursor: grabbing;
+}
+.reorder-mode .category-btn:hover {
+  outline-color: var(--success);
+  transform: none;
 }
 
 /* === Auth Modal === */

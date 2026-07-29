@@ -450,6 +450,19 @@ function saveCategories(cats) {
   }
 }
 
+function reorderCategories(sectionId, parentId, orderedIds) {
+  // Reorders siblings: top-level categories of a section (parentId = null)
+  // or children of a group. Only touches sort_order of the given ids.
+  const update = db.prepare(
+    'UPDATE categories SET sort_order = ? WHERE section_id = ? AND id = ? AND parent_id IS ?'
+  );
+  const tx = db.transaction(() => {
+    orderedIds.forEach((id, i) => update.run(i, sectionId, String(id), parentId || null));
+  });
+  tx();
+  appendAudit({ action: 'category.reorder', section: sectionId, parentId: parentId || null, count: orderedIds.length });
+}
+
 // --- Settings ---
 function getSettings() {
   const rows = db.prepare('SELECT * FROM settings').all();
@@ -521,7 +534,7 @@ cleanupTimer.unref();
 module.exports = {
   db,
   getItems, getItemCount, searchItems, reorderItems, getItem, insertItem, updateItem, deleteItem, allItems, countImageReferences,
-  getCategories, saveCategories,
+  getCategories, saveCategories, reorderCategories,
   getSettings, updateSettings,
   appendAudit, getAuditLog,
   getSession, setSession, destroySession,

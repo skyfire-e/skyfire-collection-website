@@ -98,6 +98,7 @@ npm run dev     # http://localhost:3000
 | GET | `/api/categories` | Public |
 | POST | `/api/categories` | Admin |
 | DELETE | `/api/categories` | Admin |
+| POST | `/api/categories/reorder` | Admin — `{ section, parentId?, items: [id, ...] }` |
 
 ### Other
 | Method | Path | Auth | Description |

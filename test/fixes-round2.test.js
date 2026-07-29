@@ -194,3 +194,93 @@ describe('A2 + A6: admin flows', () => {
     assert.ok(fs.existsSync(TEST_DEFAULT_FILE), 'default image file must survive item deletion');
   });
 });
+
+describe('Category reorder: POST /api/categories/reorder', () => {
+  let agent;
+
+  before(async () => {
+    agent = supertest.agent(app);
+    const res = await agent.post('/api/auth/login').set(ORIGIN)
+      .send({ username: 'admin', password: 'admin123' });
+    assert.strictEqual(res.status, 200);
+
+    db.saveCategories({
+      dice: { label: 'Dice', subcategories: [
+        { id: 'metal-dice', label: 'Metal Dice' },
+        { id: 'stone-dice', label: 'Stone Dice' }
+      ]},
+      miniatures: { label: 'Miniatures', subcategories: [
+        { id: 'skaven', label: 'Skaven', type: 'group', subcategories: [
+          { id: 'citadel-skaven', label: 'Citadel Skaven' },
+          { id: 'forgeworld-skaven', label: 'Forgeworld Skaven' }
+        ]},
+        { id: 'space-orks', label: 'Space Orks', type: 'group', subcategories: [
+          { id: 'citadel-orks', label: 'Citadel Orks' }
+        ]}
+      ]}
+    });
+  });
+
+  it('reorders top-level categories (groups swap: skaven <-> space-orks)', async () => {
+    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
+      .send({ section: 'miniatures', items: ['space-orks', 'skaven'] });
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.success, true);
+
+    const cats = db.getCategories();
+    const order = cats.miniatures.subcategories.map(c => c.id);
+    assert.deepStrictEqual(order, ['space-orks', 'skaven']);
+  });
+
+  it('reorders children inside a group via parentId', async () => {
+    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
+      .send({ section: 'miniatures', parentId: 'skaven', items: ['forgeworld-skaven', 'citadel-skaven'] });
+    assert.strictEqual(res.status, 200);
+
+    const cats = db.getCategories();
+    const group = cats.miniatures.subcategories.find(c => c.id === 'skaven');
+    assert.deepStrictEqual(group.subcategories.map(c => c.id), ['forgeworld-skaven', 'citadel-skaven']);
+  });
+
+  it('rejects id that is not a direct sibling (child id at top level)', async () => {
+    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
+      .send({ section: 'miniatures', items: ['citadel-skaven'] });
+    assert.strictEqual(res.status, 400);
+  });
+
+  it('rejects unknown section', async () => {
+    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
+      .send({ section: 'nope', items: ['metal-dice'] });
+    assert.strictEqual(res.status, 400);
+  });
+
+  it('rejects unknown parentId group', async () => {
+    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
+      .send({ section: 'dice', parentId: 'not-a-group', items: ['metal-dice'] });
+    assert.strictEqual(res.status, 400);
+  });
+
+  it('rejects garbage ids by format', async () => {
+    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
+      .send({ section: 'dice', items: ['../../etc'] });
+    assert.strictEqual(res.status, 400);
+  });
+
+  it('requires authentication', async () => {
+    const res = await supertest(app).post('/api/categories/reorder').set(ORIGIN)
+      .send({ section: 'dice', items: ['metal-dice', 'stone-dice'] });
+    assert.strictEqual(res.status, 401);
+  });
+
+  it('reorder survives saveCategories rebuild (create a category after reorder)', async () => {
+    // saveCategories rewrites all sort_order values from tree order —
+    // relative order set by reorder must persist through category creation
+    const res = await agent.post('/api/categories').set(ORIGIN)
+      .send({ section: 'miniatures', label: 'Terrain' });
+    assert.strictEqual(res.status, 200);
+
+    const cats = db.getCategories();
+    const order = cats.miniatures.subcategories.map(c => c.id);
+    assert.deepStrictEqual(order, ['space-orks', 'skaven', 'terrain']);
+  });
+});

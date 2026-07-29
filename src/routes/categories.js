@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
 const { findCategory, STATIC_ROUTES } = require('../helpers');
 const { slugify } = require('../slugify');
-const { categoryInputSchema } = require('../../lib/validate');
+const { categoryInputSchema, categoryReorderSchema } = require('../../lib/validate');
 const db = require('../db');
 
 const NEW_SECTION_MAGIC = '__new_section__';
@@ -11,6 +11,38 @@ const router = Router();
 
 router.get('/', (req, res) => {
   res.json(db.getCategories());
+});
+
+router.post('/reorder', requireSameOrigin, requireAdmin, (req, res, next) => {
+  try {
+    const parsed = categoryReorderSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: 'Validation failed', details: parsed.error.issues.map(i => i.message) });
+    }
+    const { section, parentId, items } = parsed.data;
+
+    const cats = db.getCategories();
+    if (!cats[section]) return res.status(400).json({ error: 'Section not found' });
+
+    let siblings;
+    if (parentId) {
+      const group = cats[section].subcategories.find(c => c.id === parentId && c.type === 'group');
+      if (!group) return res.status(400).json({ error: 'Group "' + parentId + '" not found in section "' + section + '"' });
+      siblings = group.subcategories || [];
+    } else {
+      siblings = cats[section].subcategories;
+    }
+
+    const siblingIds = new Set(siblings.map(c => c.id));
+    for (const id of items) {
+      if (!siblingIds.has(id)) {
+        return res.status(400).json({ error: 'Category "' + id + '" is not a direct child of the given section/group' });
+      }
+    }
+
+    db.reorderCategories(section, parentId || null, items);
+    res.json({ success: true, count: items.length });
+  } catch (err) { next(err); }
 });
 
 router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
