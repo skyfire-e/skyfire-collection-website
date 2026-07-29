@@ -10,7 +10,7 @@
     "backup": "node backup.js",
     "doctor": "node scripts/doctor.js",
     "checkpoint": "node -e \"const db=require('better-sqlite3')('data/collection.db'); db.prepare('DELETE FROM sessions').run(); db.pragma('wal_checkpoint(TRUNCATE)'); db.close(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
-    "postinstall": "node -e \"if(process.env.NODE_ENV==='production')process.exit(0);var f='.git/hooks/pre-commit';var s='../scripts/pre-commit.js';try{require('fs').symlinkSync(s,f)}catch(e){try{require('fs').copyFileSync(s,f)}catch(e2){}}\"",
+    "postinstall": "node scripts/install-hook.js",
     "pull": "node pull.js",
     "gc": "node gc-uploads.js",
     "gc:dry": "node gc-uploads.js --dry-run",

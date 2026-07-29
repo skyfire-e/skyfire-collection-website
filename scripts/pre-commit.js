@@ -33,6 +33,14 @@ function isDatabaseStaged() {
   return output.trim() !== '';
 }
 
+function isDatabaseModified() {
+  const output = execFileSync('git', ['diff', '--name-only', '--', 'data/collection.db'], {
+    cwd: ROOT,
+    encoding: 'utf8'
+  });
+  return output.trim() !== '';
+}
+
 function checkpointDatabase() {
   if (!fs.existsSync(DB_FILE)) {
     console.log('[pre-commit] collection.db does not exist; skipping checkpoint');
@@ -68,9 +76,9 @@ function stageDatabase() {
 
 try {
   const walSize = getWalSize();
-  const dbStaged = isDatabaseStaged();
+  const dbChanged = isDatabaseStaged() || isDatabaseModified();
 
-  if (walSize === 0 && !dbStaged) {
+  if (walSize === 0 && !dbChanged) {
     console.log('[pre-commit] No database changes detected');
     process.exit(0);
   }
