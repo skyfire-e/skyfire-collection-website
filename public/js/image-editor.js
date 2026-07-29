@@ -1,5 +1,5 @@
 import { API } from './api.js';
-import { thumbUrl, disableWheelOnNumberInputs } from './utils.js';
+import { thumbUrl, disableWheelOnNumberInputs, withPending } from './utils.js';
 import { showToast } from './toast.js';
 
 const MAX_IMAGES_PER_ITEM = 10;
@@ -73,6 +73,18 @@ function isObjectURL(url) {
 
 function revokeSlot(slot) {
   if (slot && isObjectURL(slot.src)) URL.revokeObjectURL(slot.src);
+}
+
+// B3 fix: when re-cropping an already-cropped slot, cropSrc IS the slot's live
+// blob URL. Revoking it on cancel would kill the slot's preview (next render
+// falls back to default.svg and invites the user to delete the "broken" slot).
+// Only revoke URLs that no slot owns.
+function isSlotOwnedURL(url) {
+  return editSlots.some(s => s && s.src === url);
+}
+
+function revokeCropSrc() {
+  if (isObjectURL(cropSrc) && !isSlotOwnedURL(cropSrc)) URL.revokeObjectURL(cropSrc);
 }
 
 function lockScroll() {
@@ -222,7 +234,7 @@ function openCrop(imageSrc, ctx) {
   if (document.getElementById('cropModal').classList.contains('open')) {
     closeCrop();
   }
-  if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
+  revokeCropSrc();
   cropSrc = imageSrc;
   cropQueue = (ctx && ctx.fileQueue) || [];
   const cropImg = document.getElementById('cropImage');
@@ -258,7 +270,7 @@ function openCrop(imageSrc, ctx) {
 
 function closeCrop() {
   if (cropper) { cropper.destroy(); cropper = null; }
-  if (isObjectURL(cropSrc)) URL.revokeObjectURL(cropSrc);
+  revokeCropSrc();
   cropQueue.forEach(url => { if (isObjectURL(url)) URL.revokeObjectURL(url); });
   cropQueue = [];
   releaseTrap(document.getElementById('cropModal'));
@@ -443,9 +455,12 @@ export function initImageEditor() {
     document.getElementById('editImage').click();
   });
 
-  document.getElementById('saveEditBtn').addEventListener('click', async () => {
+  const saveEditBtn = document.getElementById('saveEditBtn');
+  saveEditBtn.addEventListener('click', async () => {
+    // B4 fix: guard against double-click — a second PUT with the same version
+    // would hit the optimistic lock and show a false conflict toast.
     try {
-      await saveEdit();
+      await withPending(saveEditBtn, saveEdit);
     } catch (err) {
       showToast('Save failed: ' + (err.message || 'Unknown error'), 'error');
     }

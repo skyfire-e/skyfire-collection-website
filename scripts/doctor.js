@@ -42,6 +42,10 @@ function runDoctor(database) {
   heading('Section/category references');
   try {
     const allItems = database.prepare('SELECT * FROM items').all();
+    // Valid sections come from the sections table itself: a section with zero
+    // categories is still a real section (deriving it from categories.section_id
+    // used to flag every item in an empty section as an error).
+    const validSections = new Set(database.prepare('SELECT id FROM sections').all().map(r => r.id));
     const catsRaw = database.prepare('SELECT * FROM categories').all();
     const sections = {};
     for (const row of catsRaw) {
@@ -50,11 +54,11 @@ function runDoctor(database) {
     }
     let categoryIssues = 0;
     for (const item of allItems) {
-      if (item.section && !sections[item.section]) {
+      if (item.section && !validSections.has(item.section)) {
         report('category-ref', 'error', `Item "${item.id}" references unknown section "${item.section}"`);
         categoryIssues++;
       }
-      if (item.category && sections[item.section] && !sections[item.section][item.category]) {
+      if (item.category && validSections.has(item.section) && !(sections[item.section] && sections[item.section][item.category])) {
         report('category-ref', 'warning', `Item "${item.id}" references unknown category "${item.category}" in section "${item.section}"`);
         categoryIssues++;
       }

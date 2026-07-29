@@ -10,7 +10,7 @@
     "backup": "node backup.js",
     "backup:schedule": "cp scripts/com.skyfire.collection-backup.plist ~/Library/LaunchAgents/ && (launchctl unload ~/Library/LaunchAgents/com.skyfire.collection-backup.plist 2>/dev/null; launchctl load ~/Library/LaunchAgents/com.skyfire.collection-backup.plist) && echo 'Daily backup scheduled (21:00, see /tmp/skyfire-backup.log)'",
     "doctor": "node scripts/doctor.js",
-    "checkpoint": "node -e \"const db=require('better-sqlite3')('data/collection.db'); db.pragma('busy_timeout = 5000'); db.prepare('DELETE FROM sessions').run(); db.pragma('wal_checkpoint(TRUNCATE)'); db.close(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
+    "checkpoint": "node -e \"require('./scripts/pre-commit.js').checkpointDatabase(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
     "postinstall": "node scripts/install-hook.js",
     "pull": "node pull.js",
     "gc": "node gc-uploads.js",

@@ -70,4 +70,28 @@ describe('pre-commit checkpoint', () => {
   it('B1: hasSessions is false for a missing DB file', () => {
     assert.strictEqual(hasSessions(path.join(TMP_DIR, 'nope.db')), false);
   });
+
+  it('B1: fails loudly when the checkpoint cannot complete (busy reader)', () => {
+    createTestDb();
+
+    // A second connection holding an open read snapshot prevents the WAL from
+    // being truncated — exactly what happens when the server is running.
+    const reader = new Database(TMP_DB);
+    const iterator = reader.prepare('SELECT * FROM items').iterate();
+    iterator.next(); // acquires and holds the read lock
+
+    try {
+      assert.throws(
+        () => checkpointDatabase(TMP_DB, { busyTimeout: 100 }),
+        /busy|stale/i,
+        'a busy checkpoint must abort the commit instead of staging a stale DB'
+      );
+    } finally {
+      iterator.return();
+      reader.close();
+    }
+
+    // With the reader gone the same checkpoint must succeed.
+    assert.doesNotThrow(() => checkpointDatabase(TMP_DB));
+  });
 });

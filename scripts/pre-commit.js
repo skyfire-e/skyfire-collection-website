@@ -41,7 +41,7 @@ function isDatabaseModified() {
   return output.trim() !== '';
 }
 
-function checkpointDatabase(dbFile = DB_FILE) {
+function checkpointDatabase(dbFile = DB_FILE, { busyTimeout = 5000 } = {}) {
   if (!fs.existsSync(dbFile)) {
     console.log('[pre-commit] collection.db does not exist; skipping checkpoint');
     return;
@@ -50,7 +50,7 @@ function checkpointDatabase(dbFile = DB_FILE) {
   let database;
   try {
     database = new Database(dbFile);
-    database.pragma('busy_timeout = 5000');
+    database.pragma(`busy_timeout = ${busyTimeout}`);
 
     // Never commit auth sessions to the repository: the DB is pushed to a
     // public GitHub repo, and a live admin sid does not belong in a backup.
@@ -64,6 +64,25 @@ function checkpointDatabase(dbFile = DB_FILE) {
     }
 
     const checkpointResult = database.pragma('wal_checkpoint(TRUNCATE)');
+    // wal_checkpoint does NOT throw when it cannot complete: it returns
+    // { busy: 1 } if another connection (e.g. the running server) holds a
+    // read lock. Committing in that state would stage a stale .db file that
+    // is missing everything still in the WAL — including the session wipe
+    // above. Fail loudly instead: stop the server (or retry) and commit again.
+    const checkpointRow = Array.isArray(checkpointResult) ? checkpointResult[0] : checkpointResult;
+    if (checkpointRow && checkpointRow.busy === 1) {
+      throw new Error(
+        'WAL checkpoint could not complete (database busy: ' + JSON.stringify(checkpointRow) + '). ' +
+        'Another connection is holding a lock — stop the server and retry the commit.'
+      );
+    }
+    const walSizeAfter = getWalSize(dbFile);
+    if (walSizeAfter !== 0) {
+      throw new Error(
+        'WAL file is still ' + walSizeAfter + ' bytes after checkpoint — ' +
+        'the staged collection.db would be stale. Stop the server and retry the commit.'
+      );
+    }
     const quickCheck = database.pragma('quick_check', { simple: true });
 
     if (quickCheck !== 'ok') {

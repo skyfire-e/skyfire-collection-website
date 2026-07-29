@@ -1,6 +1,6 @@
 import { API, checkAuth, isAdmin } from './api.js';
 import { showToast } from './toast.js';
-import { thumbUrl, createFocusTrap } from './utils.js';
+import { thumbUrl, createFocusTrap, withPending } from './utils.js';
 import { openEdit, initImageEditor } from './image-editor.js';
 
 // A subgroup page (e.g. /miniatures/skaven) renders items filed at the group's own
@@ -285,7 +285,9 @@ export async function initGalleryPage() {
           e.stopPropagation();
           if (!confirm('Delete "' + item.title + '"?')) return;
           try {
-            await API.del('/api/items/' + item.id, { version: item.version });
+            // B4 fix: withPending guards against double-click — the second
+            // DELETE would return 404 and show a false error toast.
+            await withPending(delBtn, () => API.del('/api/items/' + item.id, { version: item.version }));
             loadItems();
           } catch (err) {
             showToast('Delete failed: ' + (err.message || 'Unknown error'), 'error');
