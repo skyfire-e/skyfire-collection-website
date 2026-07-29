@@ -386,8 +386,11 @@ export async function initGalleryPage() {
       reorderContainer.classList.remove('hidden');
       const reorderBtn = document.createElement('button');
       reorderBtn.className = 'nav-corner-btn reorder-corner-btn';
-      reorderBtn.id = 'reorderBtn';
-      reorderBtn.title = 'Re-arrange';
+      // NB: not "reorderBtn" — section-pages.js uses that id for its category
+      // reorder button, and both scripts run together on subgroup pages
+      reorderBtn.id = 'itemReorderBtn';
+      reorderBtn.title = 'Re-arrange items';
+      reorderBtn.setAttribute('aria-label', 'Re-arrange items');
       reorderBtn.textContent = '🔀';
       reorderContainer.appendChild(reorderBtn);
       reorderBtn.addEventListener('click', toggleReorder);
@@ -414,7 +417,7 @@ export async function initGalleryPage() {
 let reorderMode = false;
 
 async function toggleReorder() {
-  const btn = document.getElementById('reorderBtn');
+  const btn = document.getElementById('itemReorderBtn');
   const grid = getGalleryGrid();
   if (reorderMode) {
     try {
@@ -501,7 +504,7 @@ function onDragEnd() {
 
 function onTouchStart(e) {
   const touch = e.touches[0];
-  touchReorder = { card: this, startY: touch.clientY, startX: touch.clientX, moved: false };
+  touchReorder = { card: this, startY: touch.clientY };
 }
 
 function onTouchMove(e) {
@@ -509,7 +512,6 @@ function onTouchMove(e) {
   const touch = e.touches[0];
   const dy = touch.clientY - touchReorder.startY;
   if (Math.abs(dy) > 15) {
-    touchReorder.moved = true;
     e.preventDefault();
     const grid = this.parentNode;
     const children = [...grid.querySelectorAll('.gallery-card')];

@@ -109,6 +109,8 @@ body {
   right: 80px;
   z-index: 100;
 }
+/* Subgroup pages show two reorder buttons (categories + group-root items) — keep them apart */
+body[data-page-type="subgroup"] #itemReorderBtn { right: 136px; }
 
 /* Nav drawer */
 .nav-drawer {
@@ -374,7 +376,7 @@ a:hover { text-decoration: underline; }
 }
 .spreadsheet-bar a { text-decoration: none; }
 
-.spreadsheet-bar button, .spreadsheet-bar a.ss-public-btn {
+.spreadsheet-bar a.ss-public-btn {
   font-size: 1.35rem;
   padding: 15px 36px;
   border-radius: 12px;
@@ -384,7 +386,7 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
   transition: all 0.2s;
 }
-.spreadsheet-bar button:hover, .spreadsheet-bar a.ss-public-btn:hover {
+.spreadsheet-bar a.ss-public-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -574,15 +576,15 @@ a:hover { text-decoration: underline; }
   .admin-corner { bottom: 80px; right: 16px; gap: 6px; }
   .admin-corner button { width: 40px; height: 40px; font-size: 1rem; }
   .reorder-corner-btn { bottom: 80px; right: 64px; width: 40px; height: 40px; font-size: 1rem; }
+  body[data-page-type="subgroup"] #itemReorderBtn { right: 112px; }
   .spreadsheet-bar { bottom: 72px; }
 
-  .ps-subcategory { margin-left: 8px; }
   .ps-table { font-size: 0.82rem; }
   .ps-table th, .ps-table td { padding: 4px 6px; }
   .ps-price-col { width: 60px; }
   .ps-section-title { font-size: 1.3rem; }
   .ps-subcat-title { font-size: 1rem; }
-  .spreadsheet-bar button, .spreadsheet-bar a.ss-public-btn { font-size: 1rem; padding: 10px 20px; border-radius: 10px; }
+  .spreadsheet-bar a.ss-public-btn { font-size: 1rem; padding: 10px 20px; border-radius: 10px; }
   .modal { padding: 24px; }
   .admin-tabs { flex-wrap: wrap; gap: 4px; }
   .admin-tabs button { padding: 8px 12px; font-size: 0.85rem; }
@@ -902,7 +904,6 @@ a:hover { text-decoration: underline; }
   padding-bottom: 6px;
   border-bottom: 2px solid var(--accent-dark);
 }
-.ps-subcategory { margin: 12px 0 12px 16px; }
 .ps-subcat-title {
   font-size: 1.15rem;
   font-weight: 400;
@@ -933,24 +934,7 @@ a:hover { text-decoration: underline; }
 .ps-table tr:hover td { background: var(--table-hover); }
 .ps-price-col { text-align: right; width: 100px; }
 .ps-author-col { color: var(--text-muted); font-size: 0.85rem; }
-.ps-subcat-sum {
-  text-align: right;
-  font-size: 0.9rem;
-  color: var(--accent);
-  padding: 4px 10px;
-  font-weight: 500;
-}
-.ps-section-sum {
-  text-align: right;
-  font-size: 1.05rem;
-  color: var(--accent);
-  padding: 8px 10px;
-  font-weight: 600;
-  border-top: 2px solid var(--accent-dark);
-  margin-top: 4px;
-}
-.ps-section > hr,
-.ps-subcategory > hr {
+.ps-section > hr {
   border: none;
   border-top: 1px solid var(--border);
   margin: 8px 0;

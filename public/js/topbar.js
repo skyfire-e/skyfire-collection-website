@@ -68,12 +68,15 @@ function closeSearch() {
 }
 
 let searchTimer;
+let searchSeq = 0; // discard out-of-order responses: an older slow request must not overwrite newer results
 function doSearch(query) {
   clearTimeout(searchTimer);
-  if (!query.trim()) { document.getElementById('searchResults').innerHTML = ''; return; }
+  if (!query.trim()) { searchSeq++; document.getElementById('searchResults').innerHTML = ''; return; }
   searchTimer = setTimeout(async () => {
+    const seq = ++searchSeq;
     try {
       const data = await API.get('/api/items?q=' + encodeURIComponent(query) + '&limit=50');
+      if (seq !== searchSeq) return; // a newer search finished or was started — drop this response
       const items = data.items || data;
       const container = document.getElementById('searchResults');
       if (items.length === 0) { container.innerHTML = '<p class="empty-state-sm">No results</p>'; return; }
@@ -108,6 +111,7 @@ function doSearch(query) {
         container.appendChild(div);
       });
     } catch (err) {
+      if (seq !== searchSeq) return;
       document.getElementById('searchResults').innerHTML = '<p class="empty-state-sm">Search failed</p>';
     }
   }, 200);

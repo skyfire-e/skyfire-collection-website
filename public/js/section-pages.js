@@ -206,7 +206,7 @@ function onDragEnd() {
 
 function onTouchStart(e) {
   const touch = e.touches[0];
-  touchReorder = { el: this, startY: touch.clientY, startX: touch.clientX, moved: false };
+  touchReorder = { el: this, startY: touch.clientY };
 }
 
 function onTouchMove(e) {
@@ -214,7 +214,6 @@ function onTouchMove(e) {
   const touch = e.touches[0];
   const dy = touch.clientY - touchReorder.startY;
   if (Math.abs(dy) > 15) {
-    touchReorder.moved = true;
     e.preventDefault();
     const children = [...grid.querySelectorAll('.category-btn')];
     let target = null;

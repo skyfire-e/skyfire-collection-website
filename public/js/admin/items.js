@@ -57,6 +57,7 @@ export async function initAdminItems() {
       await withPending(btn, () => API.post('/api/items', fd));
       e.target.reset();
       document.getElementById('addCategory').innerHTML = '<option value="">Select section first</option>';
+      updateAddExtraFields('');
       showToast('Item added', 'success');
     } catch (err) {
       showToast('Failed to add item: ' + (err.message || 'Unknown error'), 'error');
@@ -83,10 +84,21 @@ export async function initAdminItems() {
     if (tab) tab.click();
   }
 
-  // Add Item section → category handler
+  // Add Item section → category handler + extra fields visibility
   document.getElementById('addSection').addEventListener('change', function() {
     populateCategoryDropdown(this.value);
+    updateAddExtraFields(this.value);
   });
+  updateAddExtraFields(document.getElementById('addSection').value);
+
+  // Show Recaster/Combat Points/Status in the Add form only for sections
+  // configured with extra fields (same rule the Edit modal already applies)
+  function updateAddExtraFields(section) {
+    document.querySelectorAll('#addForm .mini-field').forEach(el => {
+      if (section && extraFieldsSections.includes(section)) el.classList.remove('hidden');
+      else el.classList.add('hidden');
+    });
+  }
 
   // Add Subcategory section handler
   document.getElementById('catSection').addEventListener('change', function() {

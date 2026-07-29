@@ -5,7 +5,7 @@ export function thumbUrl(imgPath) {
 }
 
 export function createFocusTrap(container) {
-  const focusable = container.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+  const focusable = container.querySelectorAll('button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
   if (focusable.length === 0) return null;
   return function(e) {
     if (e.key !== 'Tab') return;

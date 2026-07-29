@@ -8,6 +8,8 @@
   }
 })();
 
+import { API } from './api.js';
+
 function injectNav() {
   const navBtns = document.createElement('div');
   navBtns.className = 'nav-corner';
@@ -54,11 +56,7 @@ function injectNav() {
 document.addEventListener('DOMContentLoaded', () => {
   injectNav();
 
-  document.querySelectorAll('[data-href]').forEach(btn => {
-    btn.addEventListener('click', () => { location.href = btn.dataset.href; });
-  });
-
-  fetch('/api/settings').then(r => { if (!r.ok) throw new Error('Settings fetch failed'); return r.json(); }).then(s => {
+  API.get('/api/settings').then(s => {
     const stored = localStorage.getItem('theme');
     const theme = stored || s.defaultTheme || 'dark';
     if (!document.documentElement.hasAttribute('data-theme') || !stored) {

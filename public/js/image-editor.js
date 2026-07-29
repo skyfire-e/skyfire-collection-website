@@ -103,10 +103,10 @@ export async function openEdit(item, { onSave } = {}) {
   document.getElementById('editImage').value = '';
   renderEditImages();
   lockScroll();
+  editTriggerElement = document.activeElement; // capture before trapFocus moves focus into the modal
   document.getElementById('editModal').classList.add('open');
   trapFocus(document.getElementById('editModal'));
   document.addEventListener('keydown', onEscapeKey);
-  editTriggerElement = document.activeElement;
 }
 
 function renderEditImages() {
@@ -204,7 +204,13 @@ function openCrop(imageSrc, ctx) {
     trapFocus(document.getElementById('cropModal'));
     cropImg.onload = null;
   };
-  cropImg.src = '';
+  cropImg.onerror = () => {
+    cropImg.onerror = null;
+    showToast('Could not load image for cropping', 'error');
+    closeCrop();
+  };
+  // removeAttribute (not src='') forces a re-load for identical URLs without queuing a spurious error event
+  cropImg.removeAttribute('src');
   cropImg.src = imageSrc;
   lockScroll();
   document.getElementById('cropModal').classList.add('open');
@@ -245,6 +251,11 @@ function applyCrop() {
   const slotIdx = ctx.slotIdx;
 
   canvas.toBlob(blob => {
+    if (!blob) {
+      showToast('Crop failed: could not encode image', 'error');
+      closeCrop();
+      return;
+    }
     const file = new File([blob], 'cropped-' + Date.now() + '.jpg', { type: 'image/jpeg' });
     // B2: closeCrop() wipes cropQueue — capture remaining files first, restore after close
     const remaining = cropQueue.slice();
@@ -252,7 +263,13 @@ function applyCrop() {
     if (typeof slotIdx === 'number' && editSlots[slotIdx]) {
       const slot = editSlots[slotIdx];
       revokeSlot(slot);
-      editSlots[slotIdx] = { type: 'replace', originalIdx: slot.originalIdx, file, src: URL.createObjectURL(blob) };
+      // Keep 'new' slots as 'new': they have no original index on the server,
+      // so marking them 'replace' would send imagesToRemove:[null] and fail with 400.
+      if (slot.type === 'new') {
+        editSlots[slotIdx] = { type: 'new', originalIdx: null, file, src: URL.createObjectURL(blob) };
+      } else {
+        editSlots[slotIdx] = { type: 'replace', originalIdx: slot.originalIdx, file, src: URL.createObjectURL(blob) };
+      }
       renderEditImages();
       closeCrop();
       cropQueue = remaining;
