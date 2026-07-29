@@ -82,6 +82,7 @@ export const API = {
   },
   post(url, data) { invalidate(url); return request(url, buildOptions('POST', data)); },
   put(url, data) { invalidate(url); return request(url, buildOptions('PUT', data)); },
+  patch(url, data) { invalidate(url); return request(url, buildOptions('PATCH', data)); },
   del(url, data) { invalidate(url); return request(url, buildOptions('DELETE', data)); }
 };
 

@@ -357,6 +357,31 @@ async function deleteCat(section, id, parentId) {
   }
 }
 
+// U3: rename keeps the id (and therefore all item references and URLs);
+// only the human-readable label changes.
+async function renameCat(section, id, parentId, currentLabel) {
+  const label = prompt('New name:', currentLabel);
+  if (label === null) return;
+  if (!label.trim()) return showToast('Name cannot be empty', 'error');
+  if (label.trim() === currentLabel) return;
+  try {
+    await API.patch('/api/categories', { section, ...(id && { id }), ...(parentId && { parentId }), label: label.trim() });
+    loadCatList();
+    showToast('Renamed', 'success');
+  } catch (err) {
+    showToast(err.message || 'Rename failed', 'error');
+  }
+}
+
+function renameButton(onClick) {
+  const btn = document.createElement('button');
+  btn.textContent = '\u270f\ufe0f';
+  btn.className = 'cat-icon-btn';
+  btn.title = 'Rename';
+  btn.addEventListener('click', onClick);
+  return btn;
+}
+
 async function deleteSection(key) {
   if (!confirm('Delete entire section "' + key + '" and all its subcategories?')) return;
   const params = new URLSearchParams({ section: key });
@@ -383,6 +408,7 @@ async function loadCatList() {
     sectionLink.className = 'cat-section-link';
     sectionLink.textContent = sec.label;
     h4.appendChild(sectionLink);
+    h4.appendChild(renameButton(() => renameCat(key, null, null, sec.label)));
     const delSectionBtn = document.createElement('button');
     delSectionBtn.textContent = '\ud83d\uddd1\ufe0f';
     delSectionBtn.className = 'cat-icon-btn';
@@ -398,6 +424,7 @@ async function loadCatList() {
       if (c.type === 'group' && c.subcategories) {
         li.classList.add('cat-group-label');
         li.appendChild(document.createTextNode(c.label + ' (group)'));
+        li.appendChild(renameButton(() => renameCat(key, c.id, null, c.label)));
         const delGroupBtn = document.createElement('button');
         delGroupBtn.textContent = '\ud83d\uddd1\ufe0f';
         delGroupBtn.className = 'cat-icon-btn';
@@ -411,6 +438,7 @@ async function loadCatList() {
           const subLi = document.createElement('li');
           subLi.className = 'cat-list-subli';
           subLi.appendChild(document.createTextNode(sc.label));
+          subLi.appendChild(renameButton(() => renameCat(key, sc.id, c.id, sc.label)));
           const delSubBtn = document.createElement('button');
           delSubBtn.textContent = '\ud83d\uddd1\ufe0f';
           delSubBtn.className = 'cat-icon-btn';
@@ -422,6 +450,7 @@ async function loadCatList() {
         ul.appendChild(subUl);
       } else {
         li.appendChild(document.createTextNode(c.label));
+        li.appendChild(renameButton(() => renameCat(key, c.id, null, c.label)));
         const delBtn = document.createElement('button');
         delBtn.textContent = '\ud83d\uddd1\ufe0f';
         delBtn.className = 'cat-icon-btn';

@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { requireAdmin, requireSameOrigin } = require('../middleware');
 const { findCategory, STATIC_ROUTES } = require('../helpers');
 const { slugify } = require('../slugify');
-const { categoryInputSchema, categoryReorderSchema } = require('../../lib/validate');
+const { categoryInputSchema, categoryRenameSchema, categoryReorderSchema } = require('../../lib/validate');
 const db = require('../db');
 
 const NEW_SECTION_MAGIC = '__new_section__';
@@ -104,6 +104,48 @@ router.post('/', requireSameOrigin, requireAdmin, async (req, res, next) => {
       db.appendAudit({ action: 'category.create', section, categoryId: catId, label, parentId });
       res.json(cats);
     } catch (err) { if (err.status) return res.status(err.status).json({ error: err.message }); throw err; }
+  } catch (err) { next(err); }
+});
+
+// Rename a section / category / nested category label. IDs are immutable:
+// items reference categories by id, so labels can change freely while URLs
+// and item links stay stable. getCategories() -> saveCategories() round-trip
+// is lossless (type, parent, sort_order are all rebuilt in the same order).
+router.patch('/', requireSameOrigin, requireAdmin, (req, res, next) => {
+  try {
+    const parsed = categoryRenameSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: 'Validation failed', details: parsed.error.issues.map(i => i.message) });
+    }
+    const { section, id, parentId, label } = parsed.data;
+
+    const DANGEROUS = ['__proto__', 'constructor', 'prototype'];
+    if (DANGEROUS.includes(section) || (id && DANGEROUS.includes(id)) || (parentId && DANGEROUS.includes(parentId))) {
+      return res.status(400).json({ error: 'Invalid section or category ID' });
+    }
+
+    const cats = db.getCategories();
+    if (!Object.prototype.hasOwnProperty.call(cats, section)) {
+      return res.status(404).json({ error: 'Section not found' });
+    }
+
+    if (!id) {
+      cats[section].label = label;
+    } else if (parentId) {
+      const parent = cats[section].subcategories.find(c => c.id === parentId);
+      if (!parent || !parent.subcategories) return res.status(404).json({ error: 'Parent group not found' });
+      const target = parent.subcategories.find(c => c.id === id);
+      if (!target) return res.status(404).json({ error: 'Category not found' });
+      target.label = label;
+    } else {
+      const target = cats[section].subcategories.find(c => c.id === id);
+      if (!target) return res.status(404).json({ error: 'Category not found' });
+      target.label = label;
+    }
+
+    db.saveCategories(cats);
+    db.appendAudit({ action: 'category.rename', section, categoryId: id || section, parentId, label });
+    res.json(db.getCategories());
   } catch (err) { next(err); }
 });
 
