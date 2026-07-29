@@ -48,5 +48,9 @@
     "globals": "^17.7.0",
     "prettier": "^3.9.6",
     "supertest": "^7.2.2"
+  },
+  "allowScripts": {
+    "argon2@0.45.1": true,
+    "better-sqlite3@13.0.1": true
   }
 }

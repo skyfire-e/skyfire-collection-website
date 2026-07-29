@@ -259,7 +259,7 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
 
     const uniquePaths = [...new Set([deletedItem.image, ...(deletedItem.images || [])].filter(Boolean))];
 
-    db.deleteItem(req.params.id);
+    db.deleteItem(req.params.id, req.body.version);
     db.appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
 
     // A2: never unlink the shared default image, even if no item references it anymore

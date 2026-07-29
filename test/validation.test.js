@@ -190,7 +190,7 @@ describe('SQLite database (in-memory)', () => {
       version: 1, createdAt: new Date().toISOString()
     });
     assert.ok(db.getItem(testId));
-    db.deleteItem(testId);
+    db.deleteItem(testId, 1);
     assert.strictEqual(db.getItem(testId), null);
   });
   it('can filter items by section', () => {
@@ -209,8 +209,8 @@ describe('SQLite database (in-memory)', () => {
     const dice = db.getItems('dice');
     assert.strictEqual(dice.length, 1);
     assert.strictEqual(dice[0].section, 'dice');
-    db.deleteItem('test-dice');
-    db.deleteItem('test-mini');
+    db.deleteItem('test-dice', 1);
+    db.deleteItem('test-mini', 1);
   });
   it('can save and get categories', () => {
     db.saveCategories({ dice: { label: 'Dice', subcategories: [] } });

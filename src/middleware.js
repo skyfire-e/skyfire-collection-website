@@ -19,7 +19,10 @@ function requireAdmin(req, res, next) {
   next();
 }
 
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+const RAW_ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+const ALLOWED_ORIGIN_HOSTS = RAW_ALLOWED_ORIGINS.map(entry => {
+  try { return new URL('https://' + entry).hostname; } catch { return entry; }
+});
 
 function requireSameOrigin(req, res, next) {
   if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
@@ -29,8 +32,8 @@ function requireSameOrigin(req, res, next) {
   if (!source) return res.status(403).json({ error: 'Origin or Referer header is required' });
   let originHost;
   try { originHost = new URL(source).hostname; } catch { return res.status(403).json({ error: 'Invalid Origin header' }); }
-  if (ALLOWED_ORIGINS.length > 0) {
-    if (!ALLOWED_ORIGINS.includes(originHost)) return res.status(403).json({ error: 'Cross-origin request rejected' });
+  if (ALLOWED_ORIGIN_HOSTS.length > 0) {
+    if (!ALLOWED_ORIGIN_HOSTS.includes(originHost)) return res.status(403).json({ error: 'Cross-origin request rejected' });
   } else if (originHost !== req.hostname && originHost !== req.get('host')?.split(':')[0]) {
     return res.status(403).json({ error: 'Cross-origin request rejected' });
   }

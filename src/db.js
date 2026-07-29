@@ -342,8 +342,14 @@ function updateItem(id, fields, expectedVersion) {
   }
 }
 
-function deleteItem(id) {
-  db.prepare('DELETE FROM items WHERE id = ?').run(String(id));
+function deleteItem(id, expectedVersion) {
+  const result = db.prepare('DELETE FROM items WHERE id = ? AND version = ?').run(String(id), expectedVersion);
+  if (result.changes === 0) {
+    const current = getItem(id);
+    if (current) {
+      throw new VersionConflictError('Item was modified by another request. Refresh and try again.');
+    }
+  }
 }
 
 function countImageReferences(imgPath, excludeId) {

@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { execFileSync } = require('child_process');
-const { TarArchive } = require('archiver');
+const archiver = require('archiver');
 const Database = require('better-sqlite3');
 
 const ROOT = __dirname;
@@ -98,7 +98,7 @@ function getGitCommit() {
 function createArchive({ outputPath, files, snapshotPath, snapshotData, root }) {
   return new Promise((resolve, reject) => {
     const output = fs.createWriteStream(outputPath);
-    const archive = new TarArchive({ gzip: true });
+    const archive = archiver('tar', { gzip: true });
     let settled = false;
 
     function fail(error) {

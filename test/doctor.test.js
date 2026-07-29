@@ -63,7 +63,7 @@ describe('Doctor script', () => {
       );
       assert.strictEqual(catWarnings.length, 1, JSON.stringify(catWarnings));
     } finally {
-      db.deleteItem('doctor-b2-item');
+      db.deleteItem('doctor-b2-item', 1);
       db.db.prepare('DELETE FROM sections WHERE id = ?').run('empty-section');
     }
   });
