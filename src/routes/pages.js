@@ -82,8 +82,7 @@ router.get('/sitemap.xml', (req, res) => {
 
 const pages = {
   '/': 'index.html',
-  '/dice': 'dice.html',
-  '/miniatures': 'miniatures.html',
+
   '/gallery': 'gallery.html',
   '/admin': 'admin.html',
   '/spreadsheet': 'spreadsheet.html'

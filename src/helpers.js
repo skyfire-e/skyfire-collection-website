@@ -197,7 +197,7 @@ function safeJsonParse(value, fallback) {
 }
 
 // Reserved top-level paths that can never be used as section IDs
-const STATIC_ROUTES = ['admin', 'gallery', 'dice', 'miniatures', 'spreadsheet', 'health', 'css', 'js', 'images', 'uploads', 'vendor'];
+const STATIC_ROUTES = ['admin', 'gallery', 'spreadsheet', 'health', 'css', 'js', 'images', 'uploads', 'vendor'];
 
 module.exports = {
   ROOT, UPLOADS_DIR, TEMP_DIR,
