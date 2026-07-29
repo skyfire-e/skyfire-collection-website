@@ -25,7 +25,7 @@ function addReference(imgPath) {
   const base = path.basename(imgPath);
   referenced.add(base);
   referenced.add('thumb-' + base);
-  // Legacy: scripts/backfill-thumbnails.js always wrote thumb-<name>.jpg,
+  // Legacy thumbnails were always written as thumb-<name>.jpg,
   // even for .webp/.png originals — keep those thumbs too.
   referenced.add('thumb-' + base.replace(/\.[^.]+$/, '') + '.jpg');
 }

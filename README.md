@@ -1,167 +1,106 @@
 # skyfire Collection
 
-Self-hosted gallery and collection manager for dice, miniatures, and tabletop items.
+Personal collection catalog for dice & miniatures: a lightweight self-hosted
+website used as the collection's system of record. The git repository doubles
+as the backup point — both the SQLite database and all images are tracked, so
+`git push` = offsite backup of the entire collection.
 
----
-
-## Quick Start
-
-```bash
-cp .env.example .env
-# edit .env — SESSION_SECRET (min 32 chars) + ADMIN_PASSWORD or ADMIN_PASSWORD_HASH
-npm install
-npm run dev     # http://localhost:3000
-```
+**Stack:** Node.js + Express + better-sqlite3 (WAL), vanilla JS frontend
+(no framework, no build step), Sharp for image processing, Cropper.js for
+in-browser cropping.
 
 **Requirements:** Node.js >= 22
 
 ---
 
-## Features
+## Quick start
 
-### Public
+```bash
+npm install          # also installs the git pre-commit hook
+cp .env.example .env # then edit: SESSION_SECRET + ADMIN_PASSWORD_HASH
+npm run dev          # http://localhost:3000
+```
 
-- **Homepage** — landing with links to sections
-- **Dynamic section pages** — auto-generated from database-defined sections and categories
-- **Gallery** — grid view with lightbox carousel, swipe support, keyboard navigation
-- **Spreadsheet** — collapsible table view with CSV export (formula-injection safe)
-- **Search** — real-time search with debounce across titles, authors, and metadata
-- **Dark/light theme** — persisted to localStorage, server-configurable default
-- **Responsive** — mobile, tablet, desktop layouts
+Generate the admin password hash:
 
-### Admin
+```bash
+node -e "require('argon2').hash('YOUR_PASSWORD').then(h => console.log(h))"
+```
 
-- **Item management** — add, edit, delete with inline image editor
-- **Image editing** — crop, reorder, add, remove images (up to 10 per item)
-- **Category management** — create/edit/delete sections, groups, and leaf categories (Cyrillic slug auto-generation)
-- **Drag-and-drop reorder** — rearrange items within categories
-- **Settings** — site name, default theme, default image, currency codes per section, column visibility per section
-- **Activity log** — audit trail of all create/update/delete operations
-- **Backfill tools** — normalize images, prices, and apply defaults
-- **WAL checkpoint** — manual commit trigger for git-safe database state
+All configuration lives in `.env` — see `.env.example` for every supported
+variable (port, session, rate limits, upload limits, reverse-proxy options).
 
-### Security
+---
 
-- Argon2 password hashing (production) / timing-safe plaintext (development)
-- Session-based auth with SQLite store, HTTP-only cookies, configurable TTL
-- Rate limiting — write (60/15min), read (200/15min), login (10/15min)
-- CSP, HSTS, X-Frame-Options, referrer policy via Helmet
-- Origin/Referer CSRF protection
-- Zod schema validation on all inputs
-- Image magic byte verification + MIME filter + pixel limit (25M)
-- Version concurrency control on item updates (optimistic locking)
-- Prototype pollution blocking in category IDs
-- Orphaned image cleanup on delete
-- No vulnerable polyfill CDN — all dependencies locally installed
+## How data is stored and backed up
+
+| What | Where | In git |
+|---|---|---|
+| Items, categories, settings, audit log | `data/collection.db` (SQLite, WAL mode) | yes |
+| Images + thumbnails | `uploads/` (normalized JPEG, max 3000px + 400px thumb) | yes |
+| Sessions | same DB, `sessions` table | yes (cleared as needed) |
+
+A git **pre-commit hook** (installed automatically by `npm install`) runs a
+WAL checkpoint, verifies DB integrity (`quick_check`) and stages
+`data/collection.db` on every commit — a committed repository always contains
+the up-to-date database. Backup workflow is simply:
+
+```bash
+git add -A && git commit -m "collection update" && git push
+```
+
+Additionally `npm run backup` creates a self-contained
+`backups/skyfire-backup-<date>.tar.gz` (verified DB snapshot + all uploads +
+manifest), keeping the last 10 archives.
 
 ---
 
 ## Pages
 
-| Route | Page | Description |
-|---|---|---|
-| `/` | Home | Landing page with section links |
-| `/gallery` | Gallery | Grid view with lightbox, filtering by section/category |
-| `/spreadsheet` | Spreadsheet | Collapsible table + CSV export |
-| `/dice` | Dice | Static dice section page |
-| `/miniatures` | Miniatures | Static miniatures section page |
-| `/miniatures/:group` | Subgroup | Nested category group page |
-| `/:section` | Section | Dynamic section page from DB |
-| `/:section/:groupId` | Subgroup | Dynamic subgroup page |
-| `/admin` | Admin panel | Items, categories, spreadsheet, settings, activity log |
-| `/health` | — | JSON health check |
-| `/sitemap.xml` | — | Auto-generated sitemap |
+| Route | Page |
+|---|---|
+| `/` | Home — section tiles |
+| `/dice`, `/miniatures`, `/:section` | Section page — category tiles |
+| `/miniatures/:group`, `/:section/:group` | Group page — subcategories + items filed at group root |
+| `/gallery?section=&category=` | Item gallery with lightbox carousel |
+| `/spreadsheet` | Read-only spreadsheet view (CommanderHQ), toggleable in settings |
+| `/admin` | Admin panel (login required) |
+| `/health`, `/sitemap.xml`, `/robots.txt` | Service endpoints |
 
----
+## Admin features
 
-## API
+- **Add items** — up to 10 images per item, drag-free multi-upload, automatic
+  normalization to JPEG + thumbnail generation, per-section extra fields
+  (Recaster / Combat Points / Status)
+- **Edit in place** — from any gallery card: fields, image add/remove/reorder,
+  in-browser crop (Cropper.js), optimistic locking via item versions
+- **Categories** — sections, categories and one level of groups; create,
+  rename, delete (with item checks), drag & drop / touch reorder
+- **Spreadsheet tab** — full table with sums and CSV export
+- **Settings** — site name, default theme, default image, spreadsheet
+  visibility, per-section extra fields, currencies
+- **Activity log** — recent create/update/delete/reorder actions
+- **WAL checkpoint button** — flush the DB before committing manually
 
-### Auth
-| Method | Path | Auth |
-|---|---|---|
-| POST | `/api/auth/login` | Same-origin + rate-limited |
-| POST | `/api/auth/logout` | Same-origin |
-| GET | `/api/auth/me` | Public |
+Anonymous visitors get read-only access (rate-limited); the signed-in owner
+is exempt from rate limits.
 
-### Items
-| Method | Path | Auth | Query Params |
-|---|---|---|---|
-| GET | `/api/items` | Public | `?section=`, `?category=`, `?limit=`, `?offset=`, `?q=` |
-| POST | `/api/items` | Admin | FormData with `images[]` |
-| PUT | `/api/items/:id` | Admin | FormData with `version`, `imagesToRemove`, `finalOrder` |
-| DELETE | `/api/items/:id` | Admin | — |
-| POST | `/api/items/reorder` | Admin | `{ section, category, items: [id, ...] }` |
+## API overview
 
-### Categories
-| Method | Path | Auth |
-|---|---|---|
-| GET | `/api/categories` | Public |
-| POST | `/api/categories` | Admin |
-| DELETE | `/api/categories` | Admin |
-| POST | `/api/categories/reorder` | Admin — `{ section, parentId?, items: [id, ...] }` |
-
-### Other
-| Method | Path | Auth | Description |
-|---|---|---|---|
-| GET/PUT | `/api/settings` | Public/Admin | App settings |
-| POST | `/api/upload/default` | Admin | Upload default image |
-| GET | `/api/spreadsheet/public` | Public | Structured spreadsheet data |
-| GET | `/api/spreadsheet` | Admin | Flat items array |
-| POST | `/api/backfill-defaults` | Admin | Apply default image to items without one |
-| POST | `/api/backfill-images` | Admin | Copy `image` to `images[0]` |
-| POST | `/api/backfill-prices` | Admin | Normalize string prices to numbers |
-| POST | `/api/checkpoint` | Admin | Force WAL checkpoint |
-| GET | `/api/audit` | Admin | Last 100 audit log entries |
-
----
-
-## Architecture
+All mutating endpoints require an admin session + same-origin check.
 
 ```
-server.js          — entry point, env validation, graceful shutdown
-src/
-  app.js           — Express setup, middleware, session store, error handler
-  db.js            — SQLite (better-sqlite3), migrations, all queries
-  helpers.js       — image processing (sharp), validation, utilities
-  slugify.js       — Cyrillic → Latin transliteration
-  errors.js        — ValidationError, VersionConflictError
-  routes/          — Express route handlers
-    auth.js        — login/logout/me
-    items.js       — CRUD + reorder with image pipeline
-    categories.js  — CRUD for sections, groups, leaf categories
-    settings.js    — get/update settings
-    upload.js      — default image upload
-    spreadsheet.js — public + admin data endpoints
-    backfill.js    — data normalization tools
-    checkpoint.js  — WAL checkpoint
-    pages.js       — static + dynamic page serving, sitemap
-public/
-  css/             — base.css (1000+ lines), gallery.css, admin.css
-  js/              — ES modules: api.js, utils.js, toast.js, etc.
-  vendor/          — Cropper.js (minified)
-  .html files      — 9 pages including 404
+POST   /api/auth/login | logout      GET /api/auth/me
+GET    /api/items?section=&category=&q=&limit=&offset=
+POST   /api/items                    PUT/DELETE /api/items/:id
+POST   /api/items/reorder
+GET    /api/categories               POST/DELETE /api/categories
+POST   /api/categories/reorder
+GET/PUT /api/settings                POST /api/upload/default
+GET    /api/spreadsheet/public       GET /api/spreadsheet (admin, CSV source)
+GET    /api/audit                    POST /api/checkpoint
+POST   /api/backfill-defaults | backfill-images | backfill-prices   (data repair tools)
 ```
-
-**Frontend:** Vanilla ES modules, no framework. All state lives in module closures. Each page JS file has an `init*()` export called from the HTML.
-
-**Database:** SQLite with WAL mode, normalized categories (sections + categories tables with FK), JSON `images` column, optimistic locking via `version` column. Migrations via `user_version` pragma.
-
-**Images:** Uploaded → magic byte check → Sharp (rotate, resize 3000px max, JPEG quality 88) → thumbnail (400px, quality 80) → UUID filenames. Thumbnails prefixed `thumb-`.
-
----
-
-## Configuration
-
-See `.env.example` for all options. Key variables:
-
-| Variable | Required | Default | Notes |
-|---|---|---|---|
-| `SESSION_SECRET` | Yes | — | Min 32 characters |
-| `ADMIN_PASSWORD_HASH` | Production | — | Argon2 hash (preferred) |
-| `ADMIN_PASSWORD` | Dev fallback | — | Plaintext (logs warning) |
-| `PORT` | No | 3000 | HTTP listen port |
-| `ALLOWED_ORIGINS` | No | `req.hostname` | CSV for CORS |
-| `SITE_URL` | No | `req.hostname` | Used in sitemap.xml |
 
 ---
 
@@ -169,20 +108,50 @@ See `.env.example` for all options. Key variables:
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Start with `node --watch server.js` |
+| `npm run dev` | Start with `node --watch` |
 | `npm start` | Start server |
-| `npm test` | Run 140+ tests (`node --test`) |
-| `npm run lint` | ESLint on server, lib, scripts and tests |
-| `npm run check` | Syntax check all backend files |
-| `npm run ci` | lint + test sequentially |
+| `npm test` | Run the test suite (`node --test`, 140+ tests) |
+| `npm run lint` | ESLint over server, src, lib, scripts, tests |
+| `npm run check` | Syntax-check every backend file |
+| `npm run ci` | lint + test |
 | `npm run doctor` | DB integrity + image/thumbnail consistency report |
-| `npm run checkpoint` | Force WAL checkpoint + clear sessions (before manual commit) |
-| `node backup` | Create timestamped `.tar.gz` of data/ + uploads/ |
-| `npm run gc:dry` | Find orphaned uploads (dry run) |
-| `node gc-uploads --quarantine` | Move orphans to `.quarantine/` |
-| `node pull` | Git pull + auto npm install |
+| `npm run checkpoint` | Manual WAL checkpoint + clear sessions |
+| `npm run backup` | Create verified `.tar.gz` backup (DB + uploads) |
+| `npm run gc:dry` / `npm run gc` | Find / delete orphaned upload files |
+| `npm run gc:quarantine` | Move orphans to `uploads/.quarantine/` instead |
+| `npm run pull` | On a server: git pull + conditional npm install |
+| `npm run format` | Prettier over all JS |
 
----
+## Project structure
+
+```
+server.js            entry point (graceful shutdown, port binding)
+src/app.js           Express app: helmet/CSP, sessions (SQLite store),
+                     rate limits, static, routes, error handler
+src/db.js            schema, migrations, all SQL, Unicode-aware search
+src/helpers.js       image normalization, validation glue, path safety
+src/middleware.js    auth guards, same-origin check, multer setup
+src/routes/          auth, items, categories, settings, spreadsheet,
+                     upload, pages, checkpoint, backfill
+lib/validate.js      zod schemas (items, categories, settings, reorder)
+public/              static frontend: pages, js modules, css, Cropper.js
+scripts/             doctor, pre-commit hook, hook installer
+test/                unit + HTTP integration tests
+```
+
+## Security
+
+- Argon2 password hashing, session regeneration on login
+- Helmet with strict CSP (`script-src 'self'`, no inline scripts)
+- Same-origin verification on all mutations
+- Zod validation everywhere; image magic-byte checks; path-traversal-safe
+  file deletion; rate limiting for anonymous traffic
+- All user content rendered via `textContent` (no innerHTML XSS surface)
+
+## CI
+
+GitHub Actions on push/PR to `main`: syntax check, ESLint, full test suite
+(Node 22).
 
 ## License
 
