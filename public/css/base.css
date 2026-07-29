@@ -442,11 +442,6 @@ a:hover { text-decoration: underline; }
   padding-top: 24px;
   border-top: 1px solid var(--border);
 }
-a.gallery-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
 
 .category-btn {
   display: flex;

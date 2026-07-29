@@ -1,5 +1,5 @@
 import { API } from './api.js';
-import { thumbUrl } from './utils.js';
+import { thumbUrl, disableWheelOnNumberInputs } from './utils.js';
 import { showToast } from './toast.js';
 
 const MAX_IMAGES_PER_ITEM = 10;
@@ -349,6 +349,7 @@ function closeEdit() {
 }
 
 export function initImageEditor() {
+  disableWheelOnNumberInputs();
   document.getElementById('cropApplyBtn').addEventListener('click', applyCrop);
   document.getElementById('cropCancelBtn').addEventListener('click', closeCrop);
   document.getElementById('cropModal').addEventListener('click', (e) => {

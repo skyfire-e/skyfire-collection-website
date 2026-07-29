@@ -3,11 +3,31 @@ import { showToast } from './toast.js';
 import { thumbUrl, createFocusTrap } from './utils.js';
 import { openEdit, initImageEditor } from './image-editor.js';
 
-export async function initGalleryPage() {
+// A subgroup page (e.g. /miniatures/skaven) renders items filed at the group's own
+// root: section/category come from the path, and a dedicated grid is used so the
+// category buttons rendered by section-pages.js stay untouched.
+function isSubgroupPage() {
+  return document.body.dataset.pageType === 'subgroup';
+}
+
+function getGalleryContext() {
+  if (isSubgroupPage()) {
+    const parts = location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+    return { section: parts[0] || null, category: parts[1] || null };
+  }
   const params = new URLSearchParams(location.search);
-  const section = params.get('section');
-  const category = params.get('category');
-  const grid = document.getElementById('galleryGrid');
+  return { section: params.get('section'), category: params.get('category') };
+}
+
+function getGalleryGrid() {
+  return document.getElementById(isSubgroupPage() ? 'subgroupItemsGrid' : 'galleryGrid');
+}
+
+export async function initGalleryPage() {
+  const { section, category } = getGalleryContext();
+  const subgroup = isSubgroupPage();
+  const grid = getGalleryGrid();
+  if (!grid) return;
   const title = document.getElementById('pageTitle');
   const backLink = document.getElementById('galleryBackLink');
 
@@ -64,7 +84,8 @@ export async function initGalleryPage() {
     document.title = label + ' - skyfire Collection';
   }
 
-  if (category && backLink) {
+  // On a subgroup page the heading/title are owned by section-pages.js
+  if (category && backLink && !subgroup) {
     (async () => {
       try {
         const data = await API.get('/api/categories');
@@ -299,7 +320,11 @@ export async function initGalleryPage() {
       const data = await API.get(url);
       const items = data.items;
       renderItems(items);
-      if (reorderMode) enableDragAndDrop(document.getElementById('galleryGrid'));
+      // On a subgroup page the whole items block stays hidden when the group root is empty
+      if (subgroup) {
+        document.getElementById('subgroupItemsSection')?.classList.toggle('hidden', items.length === 0);
+      }
+      if (reorderMode) enableDragAndDrop(getGalleryGrid());
     } catch (err) {
       grid.innerHTML = '<p class="empty-state">Failed to load items. Please try again.</p>';
     }
@@ -384,7 +409,7 @@ let reorderMode = false;
 
 async function toggleReorder() {
   const btn = document.getElementById('reorderBtn');
-  const grid = document.getElementById('galleryGrid');
+  const grid = getGalleryGrid();
   if (reorderMode) {
     try {
       await saveReorder();
@@ -392,14 +417,17 @@ async function toggleReorder() {
       showToast('Failed to save order: ' + (err.message || 'Unknown error'), 'error');
       return;
     }
-    btn.textContent = '🔀 Re-arrange';
+    // Icon-only labels: the button is a 48px circle, text does not fit
+    btn.textContent = '🔀';
+    btn.title = 'Re-arrange';
     btn.classList.remove('btn-success');
     grid.classList.remove('reorder-mode');
     disableDragAndDrop(grid);
     reorderMode = false;
   } else {
     reorderMode = true;
-    btn.textContent = '✓ Done';
+    btn.textContent = '✓';
+    btn.title = 'Done — save order';
     btn.classList.add('btn-success');
     grid.classList.add('reorder-mode');
     enableDragAndDrop(grid);
@@ -497,15 +525,13 @@ function onTouchEnd() {
 }
 
 async function saveReorder() {
-  // B1: section/category are scoped to initGalleryPage — read them from the URL here
-  const params = new URLSearchParams(location.search);
-  const section = params.get('section');
-  const category = params.get('category');
+  // B1: section/category are scoped to initGalleryPage — resolve them from the page context here
+  const { section, category } = getGalleryContext();
   if (!section || !category) {
     console.warn('Reorder requires section and category');
     return;
   }
-  const grid = document.getElementById('galleryGrid');
+  const grid = getGalleryGrid();
   if (!grid) return;
   const cards = [...grid.querySelectorAll('.gallery-card')];
   const itemIds = cards.map(c => c.dataset.itemId);

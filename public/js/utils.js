@@ -26,3 +26,16 @@ export async function withPending(button, operation) {
     button.textContent = prev;
   }
 }
+
+// Stop <input type="number"> from changing its value on mouse wheel while focused.
+// The wheel event is only swallowed when the input actually has focus, so scrolling
+// the page with the cursor merely hovering over the field keeps working.
+export function disableWheelOnNumberInputs(root = document) {
+  root.querySelectorAll('input[type="number"]').forEach(input => {
+    if (input.dataset.wheelGuard) return;
+    input.dataset.wheelGuard = '1';
+    input.addEventListener('wheel', function (e) {
+      if (document.activeElement === this) e.preventDefault();
+    }, { passive: false });
+  });
+}

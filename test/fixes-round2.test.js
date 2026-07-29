@@ -242,8 +242,7 @@ describe('Category reorder: POST /api/categories/reorder', () => {
     assert.deepStrictEqual(group.subcategories.map(c => c.id), ['forgeworld-skaven', 'citadel-skaven']);
   });
 
-  it('rejects id that is not a direct sibling (child id at top level)', async () => {
-    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
+  it('rejects id that is not a direct sibling (child id at top level)', async () => {    const res = await agent.post('/api/categories/reorder').set(ORIGIN)
       .send({ section: 'miniatures', items: ['citadel-skaven'] });
     assert.strictEqual(res.status, 400);
   });
@@ -282,5 +281,49 @@ describe('Category reorder: POST /api/categories/reorder', () => {
     const cats = db.getCategories();
     const order = cats.miniatures.subcategories.map(c => c.id);
     assert.deepStrictEqual(order, ['space-orks', 'skaven', 'terrain']);
+  });
+});
+
+// Must stay last: saveCategories() rewrites the whole tree, so this block owns the
+// final category state and would otherwise clash with the tests above.
+describe('sort_order numbering is per sibling group (no cross-level collisions)', () => {
+  it('saveCategories numbers top level and each group\'s children independently', () => {
+    db.saveCategories({
+      miniatures: { label: 'Miniatures', subcategories: [
+        { id: 'skaven', label: 'Skaven', type: 'group', subcategories: [
+          { id: 'citadel-skaven', label: 'Citadel Skaven' },
+          { id: 'forgeworld-skaven', label: 'Forgeworld Skaven' }
+        ]},
+        { id: 'space-orks', label: 'Space Orks', type: 'group', subcategories: [
+          { id: 'citadel-orks', label: 'Citadel Orks' }
+        ]},
+        { id: 'sort-probe', label: 'Sort Probe' }
+      ]}
+    });
+
+    const rows = db.db.prepare(
+      'SELECT id, parent_id, sort_order FROM categories WHERE section_id = ?'
+    ).all('miniatures');
+    const bySort = (a, b) => a.sort_order - b.sort_order;
+    const topLevel = rows.filter(r => r.parent_id === null).sort(bySort);
+    const skavenKids = rows.filter(r => r.parent_id === 'skaven').sort(bySort);
+
+    // Each sibling set starts at 0 — mirrors what reorderCategories() writes,
+    // so a reorder can no longer collide with saveCategories' numbering.
+    assert.deepStrictEqual(topLevel.map(r => r.sort_order), [0, 1, 2]);
+    assert.deepStrictEqual(topLevel.map(r => r.id), ['skaven', 'space-orks', 'sort-probe']);
+    assert.deepStrictEqual(skavenKids.map(r => r.sort_order), [0, 1]);
+    assert.deepStrictEqual(skavenKids.map(r => r.id), ['citadel-skaven', 'forgeworld-skaven']);
+  });
+
+  it('getCategories still returns the intended order after a reorder + rebuild cycle', () => {
+    db.reorderCategories('miniatures', null, ['sort-probe', 'space-orks', 'skaven']);
+    let order = db.getCategories().miniatures.subcategories.map(c => c.id);
+    assert.deepStrictEqual(order, ['sort-probe', 'space-orks', 'skaven']);
+
+    // A rebuild (triggered in production by creating/deleting a category) must preserve it
+    db.saveCategories(db.getCategories());
+    order = db.getCategories().miniatures.subcategories.map(c => c.id);
+    assert.deepStrictEqual(order, ['sort-probe', 'space-orks', 'skaven']);
   });
 });

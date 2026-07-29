@@ -425,15 +425,19 @@ function saveCategories(cats) {
       let secOrder = 0;
       for (const [sectionId, section] of Object.entries(cats)) {
         insertSection.run(sectionId, section.label || sectionId, secOrder++);
-        let catOrder = 0;
+        // sort_order is numbered per sibling group (top level, then each group's children
+        // separately) so it stays consistent with reorderCategories(), which also assigns
+        // 0..N among siblings. A single global counter would collide across levels.
+        let topOrder = 0;
         for (const cat of (section.subcategories || [])) {
           if (cat.type === 'group' && cat.subcategories) {
-            insertCat.run(cat.id, sectionId, null, cat.label, 'group', catOrder++);
+            insertCat.run(cat.id, sectionId, null, cat.label, 'group', topOrder++);
+            let childOrder = 0;
             for (const sc of cat.subcategories) {
-              insertCat.run(sc.id, sectionId, cat.id, sc.label, 'leaf', catOrder++);
+              insertCat.run(sc.id, sectionId, cat.id, sc.label, 'leaf', childOrder++);
             }
           } else {
-            insertCat.run(cat.id, sectionId, null, cat.label, 'leaf', catOrder++);
+            insertCat.run(cat.id, sectionId, null, cat.label, 'leaf', topOrder++);
           }
         }
       }
