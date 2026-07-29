@@ -3,22 +3,42 @@ import { thumbUrl, disableWheelOnNumberInputs } from './utils.js';
 import { showToast } from './toast.js';
 
 const MAX_IMAGES_PER_ITEM = 10;
-let extraFieldsSections = null;
-let extraFieldsPromise = null;
+let settingsCache = null;
+let settingsPromise = null;
 
-async function getExtraFieldsSections() {
-  if (extraFieldsSections !== null) return extraFieldsSections;
-  if (extraFieldsPromise) return extraFieldsPromise;
-  extraFieldsPromise = (async () => {
+function getEditorSettings() {
+  if (settingsCache !== null) return settingsCache;
+  if (settingsPromise) return settingsPromise;
+  settingsPromise = (async () => {
     try {
-      const settings = await API.get('/api/settings');
-      extraFieldsSections = settings.sectionsWithExtraFields || ['miniatures'];
+      settingsCache = await API.get('/api/settings');
     } catch {
-      extraFieldsSections = ['miniatures'];
+      settingsCache = {};
     }
-    return extraFieldsSections;
+    return settingsCache;
   })();
-  return extraFieldsPromise;
+  return settingsPromise;
+}
+
+// The shared default image (stock /images/default.svg OR a custom
+// settings.defaultImage upload) is a placeholder, not a photo of the item.
+// It must never become an editable slot: a "keep" slot for it produces
+// finalOrder indexes for images the server does not have in images[],
+// which fails the whole save with 400 (B2).
+function isDefaultImage(src, settings) {
+  if (!src) return true;
+  if (src.includes('/images/default.svg')) return true;
+  return Boolean(settings && settings.defaultImage && src === settings.defaultImage);
+}
+
+// Effective photo list of an item: images[] when present, otherwise the
+// legacy single `image` field (real uploads only, never the default).
+// Used by BOTH openEdit (slot building) and saveEdit (removal accounting) —
+// the two must always agree, or indexes get out of sync.
+function realItemImages(item, settings) {
+  if (item.images && item.images.length > 0) return item.images;
+  if (item.image && !isDefaultImage(item.image, settings)) return [item.image];
+  return [];
 }
 
 let editSlots = [];
@@ -83,7 +103,8 @@ export async function openEdit(item, { onSave } = {}) {
   editCurrentItem = item;
   onSaveCallback = onSave || null;
 
-  const imgs = item.images && item.images.length > 0 ? item.images : (item.image && !item.image.includes('default.svg') ? [item.image] : []);
+  const settings = await getEditorSettings();
+  const imgs = realItemImages(item, settings);
   editSlots = imgs.map((src, i) => ({ type: 'keep', originalIdx: i, src }));
 
   document.getElementById('editId').value = item.id;
@@ -94,7 +115,7 @@ export async function openEdit(item, { onSave } = {}) {
   document.getElementById('editCombatPoints').value = item.combatPoints || '';
   document.getElementById('editStatus').value = item.status || '';
 
-  const sections = await getExtraFieldsSections();
+  const sections = (await getEditorSettings()).sectionsWithExtraFields || ['miniatures'];
   document.querySelectorAll('#editModal .mini-field').forEach(el => {
     if (sections.includes(item.section)) el.classList.remove('hidden');
     else el.classList.add('hidden');
@@ -310,7 +331,10 @@ async function saveEdit() {
     }
   }
 
-  const originalImgs = editCurrentItem.images && editCurrentItem.images.length > 0 ? editCurrentItem.images : (editCurrentItem.image && !editCurrentItem.image.includes('default.svg') ? [editCurrentItem.image] : []);
+  // Must mirror the slot source used by openEdit exactly (same helper),
+  // otherwise the default image would be counted as a removable original
+  // and produce out-of-bounds imagesToRemove indexes (B2).
+  const originalImgs = realItemImages(editCurrentItem, await getEditorSettings());
   for (let i = 0; i < originalImgs.length; i++) {
     const stillPresent = editSlots.some(s => (s.type === 'keep' || s.type === 'replace') && s.originalIdx === i);
     if (!stillPresent && !allRemoved.includes(i)) {

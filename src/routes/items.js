@@ -138,7 +138,26 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     }));
 
     if (!Array.isArray(merged.images)) merged.images = [];
+
+    // B2 (legacy rows): pre-gallery items can hold a real photo in `image`
+    // while images[] is still empty. The editor shows that photo as slot 0,
+    // so treat it as implicit images[0] here — otherwise finalOrder/
+    // imagesToRemove indexes reference images the server "doesn't have" and
+    // every save fails with 400. The shared default image (stock or the
+    // custom settings.defaultImage) is a placeholder, never a photo.
+    const defaultImageSetting = db.getSettings().defaultImage;
+    if (merged.images.length === 0 &&
+        currentItem.image &&
+        currentItem.image.startsWith('/uploads/') &&
+        currentItem.image !== defaultImageSetting) {
+      merged.images = [currentItem.image];
+    }
+
     const oldImages = [...merged.images];
+    // Snapshot for post-update file cleanup, taken before removeIdx splices
+    // oldImages: must be the same effective list (incl. the legacy photo),
+    // so a removed legacy image file is unlinked instead of orphaned.
+    const oldImagesForCleanup = [...oldImages];
 
     let removeIdx = [];
     let finalOrder = [];
@@ -200,16 +219,14 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
         merged.image = merged.images[0];
       } else {
         merged.images = [];
-        merged.image = db.getSettings().defaultImage || '/images/default.svg';
+        merged.image = defaultImageSetting || '/images/default.svg';
       }
     }
-
-    const oldImagesForCleanup = [...(currentItem.images || [])];
 
     db.updateItem(currentItem.id, merged, currentItem.version);
 
     // A2 (same as DELETE): never unlink the shared default image
-    const protectedDefault = db.getSettings().defaultImage;
+    const protectedDefault = defaultImageSetting;
     const newSet = new Set(merged.images);
     const toDelete = [];
     for (const img of oldImagesForCleanup) {
