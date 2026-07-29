@@ -196,8 +196,12 @@ export async function initGalleryPage() {
       img.alt = item.title || '';
       img.loading = 'lazy';
       img.addEventListener('error', function() {
-        if (this.src !== item.image) { this.src = item.image; }
-        else { handleImgError(this); }
+        // B3: one-shot fallback thumb -> full image -> default.svg
+        // (this.src is absolute, item.image is relative — direct comparison always mismatches)
+        if (!this.dataset.fullTried && item.image) {
+          this.dataset.fullTried = '1';
+          this.src = item.image;
+        } else { handleImgError(this); }
       });
       imgWrap.appendChild(img);
 
@@ -480,6 +484,10 @@ function onTouchEnd() {
 }
 
 async function saveReorder() {
+  // B1: section/category are scoped to initGalleryPage — read them from the URL here
+  const params = new URLSearchParams(location.search);
+  const section = params.get('section');
+  const category = params.get('category');
   if (!section || !category) {
     console.warn('Reorder requires section and category');
     return;
@@ -489,11 +497,8 @@ async function saveReorder() {
   const cards = [...grid.querySelectorAll('.gallery-card')];
   const itemIds = cards.map(c => c.dataset.itemId);
   if (itemIds.length === 0) return;
-  try {
-    await API.post('/api/items/reorder', { section, category, items: itemIds });
-  } catch (err) {
-    showToast('Failed to save order: ' + (err.message || 'Unknown error'), 'error');
-  }
+  // B1: no inner try/catch — toggleReorder handles failures and keeps reorder mode on
+  await API.post('/api/items/reorder', { section, category, items: itemIds });
 }
 
 initGalleryPage().catch(err => console.error('Gallery init failed:', err));

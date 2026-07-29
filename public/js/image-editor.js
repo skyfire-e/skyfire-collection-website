@@ -121,7 +121,16 @@ function renderEditImages() {
     const img = document.createElement('img');
     img.src = thumbUrl(slot.src) || '/images/default.svg';
     img.alt = 'Image ' + (i + 1) + ' of item';
-    img.onerror = function () { if (slot.src && this.src !== slot.src) { this.src = slot.src; } else { this.src = '/images/default.svg'; } };
+    img.onerror = function () {
+      // B3: one-shot fallback thumb -> full image -> default.svg (src comparison is unreliable: absolute vs relative)
+      if (!this.dataset.fullTried && slot.src) {
+        this.dataset.fullTried = '1';
+        this.src = slot.src;
+      } else {
+        this.src = '/images/default.svg';
+        this.onerror = null;
+      }
+    };
     wrapper.appendChild(img);
 
     const leftBtn = document.createElement('button');
@@ -237,6 +246,8 @@ function applyCrop() {
 
   canvas.toBlob(blob => {
     const file = new File([blob], 'cropped-' + Date.now() + '.jpg', { type: 'image/jpeg' });
+    // B2: closeCrop() wipes cropQueue — capture remaining files first, restore after close
+    const remaining = cropQueue.slice();
 
     if (typeof slotIdx === 'number' && editSlots[slotIdx]) {
       const slot = editSlots[slotIdx];
@@ -244,6 +255,7 @@ function applyCrop() {
       editSlots[slotIdx] = { type: 'replace', originalIdx: slot.originalIdx, file, src: URL.createObjectURL(blob) };
       renderEditImages();
       closeCrop();
+      cropQueue = remaining;
       loadNextFile();
       return;
     }
@@ -251,6 +263,7 @@ function applyCrop() {
     editSlots.push({ type: 'new', originalIdx: null, file, src: URL.createObjectURL(blob) });
     renderEditImages();
     closeCrop();
+    cropQueue = remaining;
     loadNextFile();
   }, 'image/jpeg', 0.92);
 }

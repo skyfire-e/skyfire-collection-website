@@ -23,6 +23,8 @@ async function initAuth() {
       const res = await API.post('/api/auth/login', { username, password });
       if (res.success) {
         authModal.classList.remove('open');
+        // B4: /admin gates content on load-time auth check — reload to initialize the panel
+        if (location.pathname === '/admin') { location.reload(); return; }
         await checkAuth();
         updateUI();
       } else {
