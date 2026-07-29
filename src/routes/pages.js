@@ -93,18 +93,14 @@ router.get(Object.keys(pages), (req, res) => {
   res.sendFile(path.join(PUB, pages[req.path]));
 });
 
-router.get('/miniatures/:group', (req, res, next) => {
-  const cats = db.getCategories();
-  const group = cats.miniatures && cats.miniatures.subcategories.find(c => c.id === req.params.group);
-  if (!group || group.type !== 'group') return next();
-  res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
-});
-
+// Group page for ANY section (e.g. /miniatures/skaven, /dice/metal-sets).
+// The DB is the source of truth: existing sections can't collide with static
+// pages (those routes match earlier), and unknown sections fall through to 404.
 router.get('/:section/:groupId', (req, res, next) => {
-  if (STATIC_ROUTES.includes(req.params.section) || req.params.section.startsWith('api')) return next();
   const cats = db.getCategories();
-  if (!cats[req.params.section]) return next();
-  const group = cats[req.params.section].subcategories.find(c => c.id === req.params.groupId);
+  const section = cats[req.params.section];
+  if (!section) return next();
+  const group = section.subcategories.find(c => c.id === req.params.groupId);
   if (!group || group.type !== 'group') return next();
   res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
 });
