@@ -8,8 +8,8 @@ const { execSync, execFileSync } = require('child_process');
 const path = require('path');
 
 const nodeMajor = parseInt(process.versions.node.split('.')[0], 10);
-if (nodeMajor < 20) {
-  console.error('Node.js >= 20 required, current: ' + process.version);
+if (nodeMajor < 22) {
+  console.error('Node.js >= 22 required, current: ' + process.version);
   process.exit(1);
 }
 

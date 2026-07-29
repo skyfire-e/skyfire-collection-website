@@ -171,12 +171,14 @@ See `.env.example` for all options. Key variables:
 |---|---|
 | `npm run dev` | Start with `node --watch server.js` |
 | `npm start` | Start server |
-| `npm test` | Run 97+ tests (`node --test`) |
-| `npm run lint` | ESLint on server + lib code |
+| `npm test` | Run 140+ tests (`node --test`) |
+| `npm run lint` | ESLint on server, lib, scripts and tests |
 | `npm run check` | Syntax check all backend files |
 | `npm run ci` | lint + test sequentially |
+| `npm run doctor` | DB integrity + image/thumbnail consistency report |
+| `npm run checkpoint` | Force WAL checkpoint + clear sessions (before manual commit) |
 | `node backup` | Create timestamped `.tar.gz` of data/ + uploads/ |
-| `node gc-uploads --dry-run` | Find orphaned uploads |
+| `npm run gc:dry` | Find orphaned uploads (dry run) |
 | `node gc-uploads --quarantine` | Move orphans to `.quarantine/` |
 | `node pull` | Git pull + auto npm install |
 
