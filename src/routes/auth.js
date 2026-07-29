@@ -11,18 +11,22 @@ const router = Router();
 
 router.post('/login', requireSameOrigin, loginLimiter, async (req, res) => {
   const { username, password } = req.body;
+  // A1: guard against non-string password (null/number/object would crash length check below)
+  const pwd = typeof password === 'string' ? password : '';
   let valid = false;
   if (process.env.ADMIN_PASSWORD_HASH) {
     let passwordValid = false;
     try {
-      passwordValid = await argon2.verify(process.env.ADMIN_PASSWORD_HASH, password || '');
+      passwordValid = await argon2.verify(process.env.ADMIN_PASSWORD_HASH, pwd);
     } catch (e) { console.error('Argon2 verify error:', e.message); }
     valid = (username === ADMIN_USERNAME) && passwordValid;
   } else if (process.env.ADMIN_PASSWORD) {
     const pw = process.env.ADMIN_PASSWORD;
+    const pwBuf = Buffer.from(pw);
+    const pwdBuf = Buffer.from(pwd);
     valid = (username === ADMIN_USERNAME) &&
-      (pw.length === password.length) &&
-      crypto.timingSafeEqual(Buffer.from(pw), Buffer.from(password));
+      (pwBuf.length === pwdBuf.length) &&
+      crypto.timingSafeEqual(pwBuf, pwdBuf);
     console.warn('WARNING: Using plain-text password. Set ADMIN_PASSWORD_HASH in .env');
   } else {
     return res.status(500).json({ error: 'Server misconfigured' });

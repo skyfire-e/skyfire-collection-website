@@ -304,7 +304,10 @@ function updateItem(id, fields, expectedVersion) {
   });
   if (result.changes === 0) {
     const current = getItem(id);
-    if (current && current.version !== expectedVersion) {
+    if (!current) {
+      throw new VersionConflictError('Item no longer exists. It may have been deleted by another request.');
+    }
+    if (current.version !== expectedVersion) {
       throw new VersionConflictError('Item was modified by another request. Refresh and try again.');
     }
   }
@@ -409,14 +412,13 @@ function assertSupportedCategoryTree(cats) {
 }
 
 function saveCategories(cats) {
-  assertSupportedCategoryTree(cats);
-
   const delCats = db.prepare('DELETE FROM categories');
   const delSections = db.prepare('DELETE FROM sections');
   const insertSection = db.prepare('INSERT INTO sections (id, label, sort_order) VALUES (?, ?, ?)');
   const insertCat = db.prepare('INSERT INTO categories (id, section_id, parent_id, label, type, sort_order) VALUES (?, ?, ?, ?, ?, ?)');
 
   try {
+    assertSupportedCategoryTree(cats);
     const tx = db.transaction(() => {
       delCats.run();
       delSections.run();
@@ -441,7 +443,7 @@ function saveCategories(cats) {
     if (err.message && err.message.includes('FOREIGN KEY constraint failed')) {
       throw Object.assign(new Error('Cannot change categories: items still reference a section or category you removed'), { status: 409 });
     }
-    if (err.message && err.message.startsWith('Leaf category') || err.message.startsWith('Nested groups')) {
+    if (err.message && (err.message.startsWith('Leaf category') || err.message.startsWith('Nested groups'))) {
       throw new ValidationError(err.message);
     }
     throw err;

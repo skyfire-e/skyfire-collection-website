@@ -16,6 +16,13 @@ const router = Router();
 router.get('/', (req, res) => {
   const { section, category, limit, offset, q } = req.query;
 
+  // A5: repeated (?q=a&q=b) or bracketed (?q[a]=1) params arrive as arrays/objects — reject early
+  for (const [name, value] of Object.entries({ section, category, limit, offset, q })) {
+    if (value !== undefined && typeof value !== 'string') {
+      return res.status(400).json({ error: `Query parameter "${name}" must be a single string value` });
+    }
+  }
+
   if (q) {
     if (q.length > 100) return res.status(400).json({ error: 'Search query too long (max 100 characters)' });
     let parsedLimit;
@@ -95,6 +102,7 @@ router.put('/:id', requireSameOrigin, requireAdmin, upload.array('images', 10), 
     if (!currentItem) { cleanupUploadedFiles(files); return res.status(404).json({ error: 'Not found' }); }
 
     if (req.body.version === undefined) {
+      cleanupUploadedFiles(files);
       return res.status(400).json({ error: 'Version is required for updates' });
     }
     validateVersion(currentItem, req.body.version);
@@ -227,8 +235,11 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
     db.deleteItem(req.params.id);
     db.appendAudit({ action: 'item.delete', entityId: deletedItem.id, title: deletedItem.title });
 
+    // A2: never unlink the shared default image, even if no item references it anymore
+    const protectedDefault = db.getSettings().defaultImage;
     const toDelete = [];
     for (const img of uniquePaths) {
+      if (protectedDefault && img === protectedDefault) continue;
       const stillReferenced = db.countImageReferences(img, deletedItem.id) > 0;
       if (!stillReferenced) toDelete.push(img);
     }

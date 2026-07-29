@@ -20,7 +20,8 @@ function runDoctor(database) {
   function getSettings() {
     try {
       const row = database.prepare('SELECT value FROM settings WHERE key = ?').get('defaultImage');
-      return row ? row.value : null;
+      // Settings values are stored JSON-encoded (with quotes) — parse before use
+      return row ? JSON.parse(row.value) : null;
     } catch {
       return null;
     }
