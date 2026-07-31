@@ -19,7 +19,9 @@ export async function loadSettings() {
   document.getElementById('setShowRecaster').checked = mc.recaster || false;
   document.getElementById('setShowCombatPoints').checked = mc.combatPoints || false;
   document.getElementById('setShowStatus').checked = mc.status || false;
-  renderCurrencySettings(settings.currencies || {});
+  // Await: saving before the currency rows finish rendering would collect an
+  // empty set and silently wipe the stored currencies (bug B3).
+  await renderCurrencySettings(settings.currencies || {});
 }
 
 async function renderCurrencySettings(currencies) {

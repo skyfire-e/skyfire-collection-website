@@ -101,11 +101,11 @@ router.get('/:section/:groupId', (req, res, next) => {
   if (!section) return next();
   const group = section.subcategories.find(c => c.id === req.params.groupId);
   if (!group || group.type !== 'group') return next();
-  res.sendFile(path.join(PUB, 'miniatures-subgroup.html'));
+  res.sendFile(path.join(PUB, 'group-page.html'));
 });
 
 router.get('/:section', (req, res, next) => {
-  if (STATIC_ROUTES.includes(req.params.section) || req.params.section.startsWith('api')) return next();
+  if (STATIC_ROUTES.includes(req.params.section)) return next();
   const cats = db.getCategories();
   if (!cats[req.params.section]) return next();
   // Если подкатегорий нет — всё равно рендерим страницу (пустой список)

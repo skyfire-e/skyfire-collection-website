@@ -15,7 +15,6 @@
   <main id="main-content" role="main">
   <div class="gallery-page">
     <div class="back-nav">
-      <a href="/" class="back-link"><span class="back-arrow">&larr;</span> <span class="back-text">Back to Home</span></a>
       <a id="galleryBackLink" href="/" class="back-link"><span class="back-arrow">&larr;</span> <span class="back-text">Back</span></a>
     </div>
     <h1 id="pageTitle"></h1>
@@ -34,26 +33,8 @@
   </div>
   <div class="reorder-actions hidden" id="reorderActions"></div>
 
-  <!-- Edit/Crop/Lightbox modals are injected by /js/shared-modals.js -->
-
-  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-label="Admin login">
-    <div class="modal">
-      <h2 id="authTitle">Admin Login</h2>
-      <div class="form-group">
-        <label for="loginUsername">Username</label>
-        <input type="text" id="loginUsername" placeholder="admin">
-      </div>
-      <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" placeholder="Password">
-      </div>
-      <div class="btn-row">
-        <button class="btn" id="loginBtn">Login</button>
-        <button class="btn btn-danger hidden" id="logoutBtn">Logout</button>
-      </div>
-      <p id="authError" class="danger-text" role="alert" aria-live="polite"></p>
-    </div>
-  </div>
+  <!-- Edit/Crop/Lightbox modals are injected by /js/shared-modals.js;
+       the auth modal is injected by /js/nav.js -->
 
   <script src="/vendor/cropper.min.js"></script>
   <script type="module" src="/js/nav.js"></script>

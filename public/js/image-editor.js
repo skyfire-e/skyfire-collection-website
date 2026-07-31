@@ -52,7 +52,7 @@ let editSnapshot = null;
 // Crops flip a slot's type to replace/new and swap its src, so they are
 // captured by the slot signature too.
 function formSnapshot() {
-  const fields = ['editTitle', 'editAuthor', 'editPrice', 'editRecaster', 'editCombatPoints', 'editStatus']
+  const fields = ['editSection', 'editCategory', 'editTitle', 'editAuthor', 'editPrice', 'editRecaster', 'editCombatPoints', 'editStatus']
     .map(id => document.getElementById(id).value);
   const slots = editSlots.map(s => s.type + ':' + s.src);
   return JSON.stringify({ fields, slots });
@@ -122,6 +122,34 @@ function releaseTrap(modal) {
   }
 }
 
+// Category options for a section: a group can hold items directly (its own id),
+// its children are listed underneath — mirrors admin/items.js dropdowns (U2).
+function populateEditCategorySelect(cats, sectionId) {
+  const sel = document.getElementById('editCategory');
+  sel.innerHTML = '';
+  const sec = cats[sectionId];
+  if (!sec) return;
+  for (const c of sec.subcategories) {
+    if (c.type === 'group' && c.subcategories) {
+      const groupOpt = document.createElement('option');
+      groupOpt.value = c.id;
+      groupOpt.textContent = c.label;
+      sel.appendChild(groupOpt);
+      for (const sc of c.subcategories) {
+        const opt = document.createElement('option');
+        opt.value = sc.id;
+        opt.textContent = '  ↳ ' + sc.label;
+        sel.appendChild(opt);
+      }
+    } else {
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.label;
+      sel.appendChild(opt);
+    }
+  }
+}
+
 export async function openEdit(item, { onSave } = {}) {
   if (document.getElementById('editModal').classList.contains('open')) {
     // U4: switching to another item counts as closing — same discard guard
@@ -142,6 +170,46 @@ export async function openEdit(item, { onSave } = {}) {
   document.getElementById('editRecaster').value = item.recaster || '';
   document.getElementById('editCombatPoints').value = item.combatPoints || '';
   document.getElementById('editStatus').value = item.status || '';
+
+  // U2: section/category selects let the item move between categories/sections.
+  // The server re-anchors sort_order at the end of the target category.
+  let cats = {};
+  try {
+    cats = await API.get('/api/categories');
+  } catch {
+    // Categories failed to load: the fallbacks below pin both selects to the
+    // item's current values, so other fields stay editable and the item is
+    // never silently moved (same as before U2, when moving was impossible)
+  }
+  const sectionSel = document.getElementById('editSection');
+  sectionSel.innerHTML = '';
+  for (const [id, sec] of Object.entries(cats)) {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = sec.label;
+    sectionSel.appendChild(opt);
+  }
+  sectionSel.value = item.section;
+  if (sectionSel.value !== item.section) {
+    // Legacy data: the item's section is not in the tree — keep it visible
+    const opt = document.createElement('option');
+    opt.value = item.section;
+    opt.textContent = item.section;
+    sectionSel.appendChild(opt);
+    sectionSel.value = item.section;
+  }
+  populateEditCategorySelect(cats, item.section);
+  const catSel = document.getElementById('editCategory');
+  catSel.value = item.category;
+  if (catSel.value !== item.category) {
+    // Legacy data: the item's category is not in the tree — keep it visible
+    // instead of silently preselecting a different category
+    const opt = document.createElement('option');
+    opt.value = item.category;
+    opt.textContent = item.category;
+    catSel.appendChild(opt);
+    catSel.value = item.category;
+  }
 
   const sections = (await getEditorSettings()).sectionsWithExtraFields || ['miniatures'];
   document.querySelectorAll('#editModal .mini-field').forEach(el => {
@@ -336,7 +404,16 @@ function applyCrop() {
 }
 
 async function saveEdit() {
+  const section = document.getElementById('editSection').value;
+  const category = document.getElementById('editCategory').value;
+  if (!section || !category) {
+    showToast('Select a section and category', 'error');
+    return;
+  }
+
   const fd = new FormData();
+  fd.append('section', section);
+  fd.append('category', category);
   fd.append('title', document.getElementById('editTitle').value);
   fd.append('author', document.getElementById('editAuthor').value);
   fd.append('price', document.getElementById('editPrice').value);
@@ -427,6 +504,18 @@ function closeEdit(force = false) {
 
 export function initImageEditor() {
   disableWheelOnNumberInputs();
+  document.getElementById('editSection').addEventListener('change', async function() {
+    const cats = await API.get('/api/categories');
+    populateEditCategorySelect(cats, this.value);
+    // Extra fields (Recaster/Combat Points/Status) follow the target section,
+    // same visibility rule as when the modal opens
+    const settings = await getEditorSettings();
+    const sections = settings.sectionsWithExtraFields || ['miniatures'];
+    document.querySelectorAll('#editModal .mini-field').forEach(el => {
+      if (sections.includes(this.value)) el.classList.remove('hidden');
+      else el.classList.add('hidden');
+    });
+  });
   document.getElementById('cropApplyBtn').addEventListener('click', applyCrop);
   document.getElementById('cropCancelBtn').addEventListener('click', closeCrop);
   document.getElementById('cropModal').addEventListener('click', (e) => {

@@ -9,6 +9,13 @@
 })();
 
 import { API } from './api.js';
+import { injectAuthModal } from './shared-modals.js';
+
+// The auth modal lives in shared-modals.js (single source of truth). nav.js is
+// the first module script on every page, and module scripts run after the DOM
+// is parsed — so injecting here guarantees #authModal exists before auth.js
+// (loaded next) queries it.
+injectAuthModal();
 
 function injectNav() {
   const navBtns = document.createElement('div');

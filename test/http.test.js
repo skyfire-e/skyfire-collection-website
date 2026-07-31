@@ -274,6 +274,34 @@ describe('Categories CRUD', () => {
     assert.strictEqual(res.status, 409);
   });
 
+  it('POST /api/categories — rejects reserved section id "api" (B2)', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ parentId: '__new_section__', label: 'API', id: 'api' });
+    assert.strictEqual(res.status, 400);
+    assert.match(res.body.error, /reserved/);
+  });
+
+  it('POST /api/categories — section "apiary" is allowed and its page renders (B2)', async () => {
+    const res = await agent.post('/api/categories')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ parentId: '__new_section__', label: 'Apiary', id: 'apiary' });
+    assert.strictEqual(res.status, 200);
+    assert.ok(res.body.apiary);
+
+    const page = await supertest(app).get('/apiary');
+    assert.strictEqual(page.status, 200);
+    assert.match(page.text, /<html/);
+
+    // cleanup: empty section can be deleted
+    const del = await agent.delete('/api/categories?section=apiary')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000');
+    assert.strictEqual(del.status, 200);
+  });
+
   it('POST /api/categories — rejects nested group (group inside group)', async () => {
     const res = await agent.post('/api/categories')
       .set('Origin', 'http://127.0.0.1:3000')
@@ -357,6 +385,20 @@ describe('CRUD (authenticated)', () => {
       .send({ version: res.body.version });
   });
 
+  it('POST /api/items — rejects a non-image file with 400, not 500 (B1)', async () => {
+    const gif = Buffer.from('GIF89a' + '0'.repeat(100));
+    const res = await agent
+      .post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'GIF upload')
+      .attach('images', gif, { filename: 'x.gif', contentType: 'image/gif' });
+    assert.strictEqual(res.status, 400);
+    assert.match(res.body.error, /JPEG, PNG and WebP/);
+  });
+
   it('POST /api/items — accepts a group id as category (item filed at the group root)', async () => {
     const res = await agent
       .post('/api/items')
@@ -397,6 +439,72 @@ describe('CRUD (authenticated)', () => {
       .set('Host', '127.0.0.1:3000')
       .field('title', 'Dragon')
       .field('version', '2');
+  });
+
+  it('PUT /api/items/:id — moves item to another section/category, re-anchors order (U2)', async () => {
+    const created = await agent
+      .post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'Mover');
+    assert.strictEqual(created.status, 201);
+
+    const res = await agent
+      .put('/api/items/' + created.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'miniatures')
+      .field('category', 'citadel-skaven')
+      .field('version', String(created.body.version));
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.section, 'miniatures');
+    assert.strictEqual(res.body.category, 'citadel-skaven');
+
+    // gone from the source category, present in the target
+    const oldList = await supertest(app).get('/api/items?section=dice&category=metal-dice');
+    assert.ok(!oldList.body.items.some(i => i.id === created.body.id));
+    const newList = await supertest(app).get('/api/items?section=miniatures&category=citadel-skaven');
+    assert.ok(newList.body.items.some(i => i.id === created.body.id));
+
+    // re-anchored at the end of the (empty) target category
+    const row = db.db.prepare('SELECT sort_order FROM items WHERE id = ?').get(created.body.id);
+    assert.strictEqual(row.sort_order, 0);
+
+    // cleanup
+    await agent
+      .delete('/api/items/' + created.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ version: res.body.version });
+  });
+
+  it('PUT /api/items/:id — rejects a move to a category missing in the target section (U2)', async () => {
+    const created = await agent
+      .post('/api/items')
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'dice')
+      .field('category', 'metal-dice')
+      .field('title', 'Bad Mover');
+    assert.strictEqual(created.status, 201);
+
+    const res = await agent
+      .put('/api/items/' + created.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .field('section', 'miniatures')
+      .field('category', 'metal-dice') // exists in dice, not in miniatures
+      .field('version', String(created.body.version));
+    assert.strictEqual(res.status, 400);
+
+    // cleanup
+    await agent
+      .delete('/api/items/' + created.body.id)
+      .set('Origin', 'http://127.0.0.1:3000')
+      .set('Host', '127.0.0.1:3000')
+      .send({ version: created.body.version });
   });
 
   it('DELETE /api/items/:id — deletes item', async () => {

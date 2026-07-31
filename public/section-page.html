@@ -28,24 +28,7 @@
     <a href="/admin#spreadsheet" data-btn="spreadsheet">📊 CommanderHQ</a>
   </div>
 
-  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-label="Admin login">
-    <div class="modal">
-      <h2 id="authTitle">Admin Login</h2>
-      <div class="form-group">
-        <label for="loginUsername">Username</label>
-        <input type="text" id="loginUsername" placeholder="admin">
-      </div>
-      <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" placeholder="Password">
-      </div>
-      <div class="btn-row">
-        <button class="btn" id="loginBtn">Login</button>
-        <button class="btn btn-danger hidden" id="logoutBtn">Logout</button>
-      </div>
-      <p id="authError" class="danger-text" role="alert" aria-live="polite"></p>
-    </div>
-  </div>
+  <!-- Auth modal is injected by /js/nav.js from /js/shared-modals.js -->
 
   <script type="module" src="/js/nav.js"></script>
   <script type="module" src="/js/auth.js"></script>

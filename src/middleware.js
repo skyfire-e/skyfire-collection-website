@@ -1,13 +1,16 @@
 const multer = require('multer');
 const rateLimit = require('express-rate-limit');
 const { TEMP_DIR } = require('./helpers');
+const { ValidationError } = require('./errors');
 
 const ALLOWED_MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
 const upload = multer({
   dest: TEMP_DIR,
   fileFilter: (req, file, cb) => {
-    if (!ALLOWED_MIMES.has(file.mimetype)) return cb(new Error('Only JPEG, PNG and WebP are allowed'));
+    // ValidationError (not a plain Error) so the central error handler answers
+    // 400 with a readable reason instead of a confusing 500 (bug B1).
+    if (!ALLOWED_MIMES.has(file.mimetype)) return cb(new ValidationError('Only JPEG, PNG and WebP images are allowed'));
     cb(null, true);
   },
   limits: { fileSize: parseInt(process.env.UPLOAD_FILE_SIZE, 10) || 10 * 1024 * 1024, files: parseInt(process.env.UPLOAD_MAX_FILES, 10) || 10, fields: parseInt(process.env.UPLOAD_MAX_FIELDS, 10) || 30 }

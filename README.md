@@ -100,13 +100,14 @@ note this rewrites history, so every clone (including a server using
 - **Add items** — up to 10 images per item, drag-free multi-upload, automatic
   normalization to JPEG + thumbnail generation, per-section extra fields
   (Recaster / Combat Points / Status)
-- **Edit in place** — from any gallery card: fields, image add/remove/reorder,
-  in-browser crop (Cropper.js), optimistic locking via item versions
+- **Edit in place** — from any gallery card: fields, moving to another
+  section/category, image add/remove/reorder, in-browser crop (Cropper.js),
+  optimistic locking via item versions
 - **Categories** — sections, categories and one level of groups; create,
   rename, delete (with item checks), drag & drop / touch reorder
 - **Spreadsheet tab** — full table with sums and CSV export
 - **Settings** — site name, default theme, default image, spreadsheet
-  visibility, per-section extra fields, currencies
+  visibility, currencies
 - **Activity log** — recent create/update/delete/reorder actions
 - **WAL checkpoint button** — flush the DB before committing manually
 

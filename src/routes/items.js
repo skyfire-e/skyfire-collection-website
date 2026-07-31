@@ -270,17 +270,17 @@ router.delete('/:id', requireSameOrigin, requireAdmin, async (req, res, next) =>
       const stillReferenced = db.countImageReferences(img, deletedItem.id) > 0;
       if (!stillReferenced) toDelete.push(img);
     }
-    const orphaned = [];
+    const failedToDelete = [];
     toDelete.forEach(img => safeUnlink(img));
     for (const img of toDelete) {
       const basename = path.basename(img);
       const target = path.resolve(UPLOADS_DIR, basename);
-      if (fs.existsSync(target)) orphaned.push(img);
+      if (fs.existsSync(target)) failedToDelete.push(img);
       const thumb = path.join(UPLOADS_DIR, 'thumb-' + basename);
-      if (fs.existsSync(thumb)) orphaned.push(thumb);
+      if (fs.existsSync(thumb)) failedToDelete.push(thumb);
     }
-    if (orphaned.length > 0) {
-      console.error('Orphaned images after delete ' + deletedItem.id + ':', orphaned.join(', '));
+    if (failedToDelete.length > 0) {
+      console.error('Files that could not be deleted after item delete ' + deletedItem.id + ':', failedToDelete.join(', '));
     }
     res.json({ success: true });
   } catch (err) { next(err); }

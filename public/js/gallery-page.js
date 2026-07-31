@@ -3,6 +3,7 @@ import { showToast } from './toast.js';
 import { thumbUrl, createFocusTrap, withPending } from './utils.js';
 import { openEdit, initImageEditor } from './image-editor.js';
 import { injectSharedModals } from './shared-modals.js';
+import { createReorderDnd } from './dnd.js';
 
 // Edit/crop/lightbox dialogs come from the shared module (single source of truth)
 injectSharedModals();
@@ -27,11 +28,17 @@ function getGalleryGrid() {
   return document.getElementById(isSubgroupPage() ? 'subgroupItemsGrid' : 'galleryGrid');
 }
 
+// Bound to the page's gallery grid in initGalleryPage (dnd.js, shared with
+// section-pages.js). The container element persists across re-renders, so one
+// instance is enough — enable() re-binds to the current cards.
+let dnd = null;
+
 export async function initGalleryPage() {
   const { section, category } = getGalleryContext();
   const subgroup = isSubgroupPage();
   const grid = getGalleryGrid();
   if (!grid) return;
+  dnd = createReorderDnd(grid, '.gallery-card');
   const title = document.getElementById('pageTitle');
   const backLink = document.getElementById('galleryBackLink');
 
@@ -330,7 +337,7 @@ export async function initGalleryPage() {
       if (subgroup) {
         document.getElementById('subgroupItemsSection')?.classList.toggle('hidden', items.length === 0);
       }
-      if (reorderMode) enableDragAndDrop(getGalleryGrid());
+      if (reorderMode && dnd) dnd.enable();
     } catch (err) {
       // Surface the real reason (e.g. rate limit) instead of a generic failure —
       // an empty grid used to look like the collection had vanished.
@@ -440,7 +447,7 @@ async function toggleReorder() {
     btn.title = 'Re-arrange';
     btn.classList.remove('btn-success');
     grid.classList.remove('reorder-mode');
-    disableDragAndDrop(grid);
+    dnd.disable();
     reorderMode = false;
     showToast('Order saved', 'success');
   } else {
@@ -449,97 +456,8 @@ async function toggleReorder() {
     btn.title = 'Done — save order';
     btn.classList.add('btn-success');
     grid.classList.add('reorder-mode');
-    enableDragAndDrop(grid);
+    dnd.enable();
   }
-}
-
-let dragSrc = null;
-let touchReorder = null;
-
-function enableDragAndDrop(grid) {
-  grid.querySelectorAll('.gallery-card').forEach(card => {
-    card.draggable = true;
-    card.addEventListener('dragstart', onDragStart);
-    card.addEventListener('dragover', onDragOver);
-    card.addEventListener('drop', onDrop);
-    card.addEventListener('dragend', onDragEnd);
-    card.addEventListener('touchstart', onTouchStart, { passive: true });
-    card.addEventListener('touchmove', onTouchMove, { passive: false });
-    card.addEventListener('touchend', onTouchEnd, { passive: true });
-  });
-}
-
-function disableDragAndDrop(grid) {
-  grid.querySelectorAll('.gallery-card').forEach(card => {
-    card.draggable = false;
-    card.removeEventListener('dragstart', onDragStart);
-    card.removeEventListener('dragover', onDragOver);
-    card.removeEventListener('drop', onDrop);
-    card.removeEventListener('dragend', onDragEnd);
-    card.removeEventListener('touchstart', onTouchStart);
-    card.removeEventListener('touchmove', onTouchMove);
-    card.removeEventListener('touchend', onTouchEnd);
-  });
-}
-
-function onDragStart(e) {
-  dragSrc = this;
-  this.style.opacity = '0.4';
-  e.dataTransfer.effectAllowed = 'move';
-}
-
-function onDragOver(e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  if (this !== dragSrc) {
-    const grid = this.parentNode;
-    const children = [...grid.children];
-    const srcIdx = children.indexOf(dragSrc);
-    const tgtIdx = children.indexOf(this);
-    if (srcIdx < tgtIdx) this.parentNode.insertBefore(dragSrc, this.nextSibling);
-    else this.parentNode.insertBefore(dragSrc, this);
-  }
-}
-
-function onDrop(e) {
-  e.preventDefault();
-  e.stopPropagation();
-}
-
-function onDragEnd() {
-  this.style.opacity = '';
-  dragSrc = null;
-  document.querySelectorAll('.gallery-card').forEach(c => c.style.opacity = '');
-}
-
-function onTouchStart(e) {
-  const touch = e.touches[0];
-  touchReorder = { card: this, startY: touch.clientY };
-}
-
-function onTouchMove(e) {
-  if (!touchReorder || touchReorder.card !== this) return;
-  const touch = e.touches[0];
-  const dy = touch.clientY - touchReorder.startY;
-  if (Math.abs(dy) > 15) {
-    e.preventDefault();
-    const grid = this.parentNode;
-    const children = [...grid.querySelectorAll('.gallery-card')];
-    const thisRect = this.getBoundingClientRect();
-    let target = null;
-    for (const child of children) {
-      if (child === this) continue;
-      const r = child.getBoundingClientRect();
-      if (touch.clientY < r.top + r.height / 2) { target = child; break; }
-    }
-    if (target) grid.insertBefore(this, target);
-    else grid.appendChild(this);
-    touchReorder.startY = touch.clientY;
-  }
-}
-
-function onTouchEnd() {
-  touchReorder = null;
 }
 
 async function saveReorder() {

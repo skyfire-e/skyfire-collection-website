@@ -2,7 +2,8 @@ import { API, checkAuth, isAdmin } from './api.js';
 import { showToast } from './toast.js';
 
 function buildCSV(sections) {
-  let csv = 'Section,Category,Title,Author,Price,Recaster,Combat Points,Status\n';
+  // BOM (\uFEFF) so Excel opens the file as UTF-8 and Cyrillic survives (bug B5)
+  let csv = '\uFEFF' + 'Section,Category,Title,Author,Price,Recaster,Combat Points,Status\n';
   for (const sec of sections) {
     for (const sub of sec.subcategories) {
       for (const item of sub.items) {

@@ -196,8 +196,10 @@ function safeJsonParse(value, fallback) {
   try { return JSON.parse(value); } catch { return fallback; }
 }
 
-// Reserved top-level paths that can never be used as section IDs
-const STATIC_ROUTES = ['admin', 'gallery', 'spreadsheet', 'health', 'css', 'js', 'images', 'uploads', 'vendor'];
+// Reserved top-level paths that can never be used as section IDs.
+// 'api' is reserved too: API routes are mounted under /api and would shadow
+// the section page. (IDs merely starting with "api", e.g. "apiary", are fine.)
+const STATIC_ROUTES = ['admin', 'api', 'gallery', 'spreadsheet', 'health', 'css', 'js', 'images', 'uploads', 'vendor'];
 
 module.exports = {
   ROOT, UPLOADS_DIR, TEMP_DIR,

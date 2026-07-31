@@ -1,10 +1,13 @@
 import { API, checkAuth, isAdmin } from './api.js';
 import { showToast } from './toast.js';
+import { createReorderDnd } from './dnd.js';
 
 let grid;
+let dnd = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   grid = document.getElementById('categoryGrid');
+  if (grid) dnd = createReorderDnd(grid, '.category-btn');
   const pageType = document.body.dataset.pageType;
   if (pageType === 'section') {
     initSectionPage();
@@ -119,11 +122,11 @@ async function toggleReorder(ctx) {
       showToast('Failed to save order: ' + (err.message || 'Unknown error'), 'error');
       return;
     }
-    btn.textContent = '\u{1F500}';
+    btn.textContent = '🔀';
     btn.title = 'Re-arrange categories';
     btn.classList.remove('btn-success');
     grid.classList.remove('reorder-mode');
-    disableDragAndDrop();
+    dnd.disable();
     reorderMode = false;
     showToast('Category order saved', 'success');
   } else {
@@ -133,7 +136,7 @@ async function toggleReorder(ctx) {
     btn.title = 'Done — save order';
     btn.classList.add('btn-success');
     grid.classList.add('reorder-mode');
-    enableDragAndDrop();
+    dnd.enable();
   }
 }
 
@@ -144,90 +147,4 @@ async function saveReorder(ctx) {
   const body = { section: ctx.section, items: ids };
   if (ctx.parentId) body.parentId = ctx.parentId;
   await API.post('/api/categories/reorder', body);
-}
-
-let dragSrc = null;
-let touchReorder = null;
-
-function enableDragAndDrop() {
-  grid.querySelectorAll('.category-btn').forEach(el => {
-    el.draggable = true;
-    el.addEventListener('dragstart', onDragStart);
-    el.addEventListener('dragover', onDragOver);
-    el.addEventListener('drop', onDrop);
-    el.addEventListener('dragend', onDragEnd);
-    el.addEventListener('touchstart', onTouchStart, { passive: true });
-    el.addEventListener('touchmove', onTouchMove, { passive: false });
-    el.addEventListener('touchend', onTouchEnd, { passive: true });
-  });
-}
-
-function disableDragAndDrop() {
-  grid.querySelectorAll('.category-btn').forEach(el => {
-    el.draggable = false;
-    el.removeEventListener('dragstart', onDragStart);
-    el.removeEventListener('dragover', onDragOver);
-    el.removeEventListener('drop', onDrop);
-    el.removeEventListener('dragend', onDragEnd);
-    el.removeEventListener('touchstart', onTouchStart);
-    el.removeEventListener('touchmove', onTouchMove);
-    el.removeEventListener('touchend', onTouchEnd);
-  });
-}
-
-function onDragStart(e) {
-  dragSrc = this;
-  this.style.opacity = '0.4';
-  e.dataTransfer.effectAllowed = 'move';
-}
-
-function onDragOver(e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  if (this !== dragSrc && dragSrc) {
-    const children = [...grid.children];
-    const srcIdx = children.indexOf(dragSrc);
-    const tgtIdx = children.indexOf(this);
-    if (srcIdx < tgtIdx) grid.insertBefore(dragSrc, this.nextSibling);
-    else grid.insertBefore(dragSrc, this);
-  }
-}
-
-function onDrop(e) {
-  e.preventDefault();
-  e.stopPropagation();
-}
-
-function onDragEnd() {
-  this.style.opacity = '';
-  dragSrc = null;
-  grid.querySelectorAll('.category-btn').forEach(el => el.style.opacity = '');
-}
-
-function onTouchStart(e) {
-  const touch = e.touches[0];
-  touchReorder = { el: this, startY: touch.clientY };
-}
-
-function onTouchMove(e) {
-  if (!touchReorder || touchReorder.el !== this) return;
-  const touch = e.touches[0];
-  const dy = touch.clientY - touchReorder.startY;
-  if (Math.abs(dy) > 15) {
-    e.preventDefault();
-    const children = [...grid.querySelectorAll('.category-btn')];
-    let target = null;
-    for (const child of children) {
-      if (child === this) continue;
-      const r = child.getBoundingClientRect();
-      if (touch.clientY < r.top + r.height / 2) { target = child; break; }
-    }
-    if (target) grid.insertBefore(this, target);
-    else grid.appendChild(this);
-    touchReorder.startY = touch.clientY;
-  }
-}
-
-function onTouchEnd() {
-  touchReorder = null;
 }
