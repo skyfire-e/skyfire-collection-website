@@ -2,6 +2,7 @@ import { API } from '../api.js';
 import { withPending } from '../utils.js';
 import { showToast } from '../toast.js';
 import { openEdit, initImageEditor } from '../image-editor.js';
+import { injectSharedModals } from '../shared-modals.js';
 
 let categoriesData = {};
 let extraFieldsSections = ['miniatures'];
@@ -21,6 +22,8 @@ export async function initAdminItems() {
   populateAddSectionDropdown(categoriesData);
   loadCatList();
 
+  // Edit/crop dialogs from the shared module (admin has no lightbox)
+  injectSharedModals({ lightbox: false });
   initImageEditor();
 
   // Add Item form submit

@@ -74,7 +74,7 @@ async function normalizeImage(file) {
   const thumbDestination = path.join(UPLOADS_DIR, thumbFilename);
   try {
     checkImageMagicBytes(file.path);
-    const pipeline = sharp(file.path, { failOn: 'error', limitInputPixels: 25_000_000 })
+    const pipeline = sharp(file.path, { failOn: 'error', limitInputPixels: 50_000_000 })
       .rotate();
     await Promise.all([
       pipeline.clone()

@@ -14,9 +14,6 @@ backups/
 data/*.migrate-backup.*.db
 data/*.before-fixes.db
 
-# Fix plan document
-ToFix1.md
-
 # OS artifacts
 .DS_Store
 Thumbs.db

@@ -32,3 +32,6 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Doctor (committed DB + uploads consistency)
+        run: npm run doctor

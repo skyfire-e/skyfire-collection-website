@@ -49,36 +49,6 @@ async function renderCurrencySettings(currencies) {
 }
 
 export function initAdminSettings() {
-  document.getElementById('backfillBtn').addEventListener('click', async () => {
-    try {
-      const res = await API.post('/api/backfill-defaults');
-      showToast('Updated ' + res.updated + ' items with default image: ' + res.defaultImage, 'success');
-    } catch (err) {
-      console.error('Backfill failed:', err);
-      showToast('Backfill failed: ' + (err.message || 'Unknown error'), 'error');
-    }
-  });
-
-  document.getElementById('backfillImagesBtn').addEventListener('click', async () => {
-    try {
-      const res = await API.post('/api/backfill-images');
-      showToast('Updated ' + res.updated + ' items: image → images[0]', 'success');
-    } catch (err) {
-      console.error('Backfill images failed:', err);
-      showToast('Backfill failed: ' + (err.message || 'Unknown error'), 'error');
-    }
-  });
-
-  document.getElementById('backfillPricesBtn').addEventListener('click', async () => {
-    try {
-      const res = await API.post('/api/backfill-prices');
-      showToast('Updated ' + res.updated + ' items: price normalized to number', 'success');
-    } catch (err) {
-      console.error('Backfill prices failed:', err);
-      showToast('Backfill failed: ' + (err.message || 'Unknown error'), 'error');
-    }
-  });
-
   document.getElementById('checkpointBtn').addEventListener('click', async () => {
     try {
       await API.post('/api/checkpoint');

@@ -317,47 +317,11 @@ describe('Categories CRUD', () => {
 
   it('DELETE /api/categories — 404 for missing category', async () => {
     const res = await agent.delete('/api/categories?section=dice&id=nonexistent')
-      .set('Origin', 'http://127.0.0.1:3000')
-      .set('Host', '127.0.0.1:3000');
-    assert.strictEqual(res.status, 404);
-  });
-});
-
-describe('Backfill', () => {
-  let agent;
-
-  before(async () => {
-    agent = supertest.agent(app);
-    await agent.post('/api/auth/login')
-      .set('Origin', 'http://127.0.0.1:3000')
-      .set('Host', '127.0.0.1:3000')
-      .send({ username: 'admin', password: 'admin123' });
-  });
-
-  it('POST /api/backfill-images — copies image to images[0]', async () => {
-    const res = await agent.post('/api/backfill-images')
-      .set('Origin', 'http://127.0.0.1:3000')
-      .set('Host', '127.0.0.1:3000');
-    assert.strictEqual(res.status, 200);
-    assert.ok(res.body.updated >= 0);
-  });
-
-  it('POST /api/backfill-prices — normalizes prices', async () => {
-    const res = await agent.post('/api/backfill-prices')
-      .set('Origin', 'http://127.0.0.1:3000')
-      .set('Host', '127.0.0.1:3000');
-    assert.strictEqual(res.status, 200);
-    assert.ok(res.body.updated >= 0);
-  });
-
-  it('POST /api/backfill-defaults — applies default images', async () => {
-    const res = await agent.post('/api/backfill-defaults')
-      .set('Origin', 'http://127.0.0.1:3000')
-      .set('Host', '127.0.0.1:3000');
-    assert.strictEqual(res.status, 200);
-    assert.ok(res.body.updated >= 0);
-  });
-});
+       .set('Origin', 'http://127.0.0.1:3000')
+       .set('Host', '127.0.0.1:3000');
+     assert.strictEqual(res.status, 404);
+   });
+ });
 
 describe('CRUD (authenticated)', () => {
   let agent;

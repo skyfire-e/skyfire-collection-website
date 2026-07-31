@@ -127,7 +127,6 @@ POST   /api/categories/reorder
 GET/PUT /api/settings                POST /api/upload/default
 GET    /api/spreadsheet/public       GET /api/spreadsheet (admin, CSV source)
 GET    /api/audit                    POST /api/checkpoint
-POST   /api/backfill-defaults | backfill-images | backfill-prices   (data repair tools)
 ```
 
 ---
@@ -161,7 +160,7 @@ src/db.js            schema, migrations, all SQL, Unicode-aware search
 src/helpers.js       image normalization, validation glue, path safety
 src/middleware.js    auth guards, same-origin check, multer setup
 src/routes/          auth, items, categories, settings, spreadsheet,
-                     upload, pages, checkpoint, backfill
+                     upload, pages, checkpoint, audit
 lib/validate.js      zod schemas (items, categories, settings, reorder)
 public/              static frontend: pages, js modules, css, Cropper.js
 scripts/             doctor, pre-commit hook, hook installer

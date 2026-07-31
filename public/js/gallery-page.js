@@ -2,6 +2,10 @@ import { API, checkAuth, isAdmin } from './api.js';
 import { showToast } from './toast.js';
 import { thumbUrl, createFocusTrap, withPending } from './utils.js';
 import { openEdit, initImageEditor } from './image-editor.js';
+import { injectSharedModals } from './shared-modals.js';
+
+// Edit/crop/lightbox dialogs come from the shared module (single source of truth)
+injectSharedModals();
 
 // A subgroup page (e.g. /miniatures/skaven) renders items filed at the group's own
 // root: section/category come from the path, and a dedicated grid is used so the

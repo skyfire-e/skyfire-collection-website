@@ -117,9 +117,6 @@ app.use('/api/items', writeLimiter);
 app.use('/api/categories', writeLimiter);
 app.use('/api/settings', writeLimiter);
 app.use('/api/upload', writeLimiter);
-app.use('/api/backfill-defaults', writeLimiter);
-app.use('/api/backfill-images', writeLimiter);
-app.use('/api/backfill-prices', writeLimiter);
 app.use('/api/checkpoint', writeLimiter);
 
 // Read limiter: only counts reads, so a mutation no longer consumes both quotas
@@ -158,7 +155,7 @@ app.use('/api/items', require('./routes/items'));
 app.use('/api/settings', require('./routes/settings'));
 app.use('/api/spreadsheet', require('./routes/spreadsheet'));
 app.use('/api/upload', require('./routes/upload'));
-app.use('/api', require('./routes/backfill'));
+app.use('/api', require('./routes/audit'));
 
 // Checkpoint (must be before 404 handler)
 app.use('/api', require('./routes/checkpoint'));

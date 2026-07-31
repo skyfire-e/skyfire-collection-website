@@ -239,9 +239,6 @@
           </div>
         </div>
         <button class="btn" id="saveSettingsBtn">Save Settings</button>
-        <button class="btn btn-accent" id="backfillBtn">Backfill Default Image</button>
-        <button class="btn btn-accent" id="backfillImagesBtn">Backfill Images</button>
-        <button class="btn btn-accent" id="backfillPricesBtn">Backfill Prices</button>
         <hr class="divider">
         <button class="btn btn-accent" id="checkpointBtn">📦 WAL Checkpoint</button>
       </div>
@@ -249,46 +246,9 @@
     </div>
   </main>
 
-  <!-- Edit Modal -->
-  <div class="modal-overlay" id="editModal" role="dialog" aria-modal="true" aria-label="Edit item">
-    <div class="modal modal-wide">
-      <h2>Edit Item</h2>
-      <input type="hidden" id="editId">
-      <div class="form-group"><label for="editTitle">Title</label><input type="text" id="editTitle" maxlength="200"></div>
-      <div class="form-group"><label for="editAuthor">Author / Origin</label><input type="text" id="editAuthor" maxlength="100"></div>
-      <div class="form-group"><label for="editPrice">Price</label><input type="number" id="editPrice" min="0" step="0.01"></div>
-      <div class="form-group mini-field"><label for="editRecaster">Recaster</label><input type="text" id="editRecaster" maxlength="100"></div>
-      <div class="form-group mini-field"><label for="editCombatPoints">Combat Points</label><input type="text" id="editCombatPoints" maxlength="20"></div>
-      <div class="form-group mini-field"><label for="editStatus">Status</label><input type="text" id="editStatus" maxlength="50"></div>
-      <div class="form-group">
-        <label>Images <span class="edit-img-hint">(click X to remove, crop icon to edit, arrows to reorder)</span>
-          <span class="edit-img-counter" id="editImageCounter">0 / 10</span></label>
-        <div class="edit-image-grid" id="editImageGrid"></div>
-        <div class="margin-top-sm">
-          <button type="button" class="btn btn-sm" id="addImagesBtn">+ Add Images</button>
-          <input type="file" id="editImage" accept="image/*" multiple class="hidden">
-        </div>
-      </div>
-      <div class="btn-row">
-        <button class="btn" id="saveEditBtn">Save</button>
-        <button class="btn btn-danger" id="cancelEditBtn">Cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Crop Modal -->
-  <div class="modal-overlay" id="cropModal" role="dialog" aria-modal="true" aria-label="Crop image">
-    <div class="modal modal-crop">
-      <h2>Crop Image</h2>
-      <div class="crop-container"><img id="cropImage" src="" alt=""></div>
-      <div class="btn-row-end">
-        <button class="btn btn-success" id="cropApplyBtn">Apply Crop</button>
-        <button class="btn btn-danger" id="cropCancelBtn">Cancel</button>
-      </div>
-    </div>
-  </div>
-
   </div><!-- /adminContent -->
+
+  <!-- Edit/Crop modals are injected by /js/shared-modals.js (admin has no lightbox) -->
 
   <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-label="Admin login">
     <div class="modal">
