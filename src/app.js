@@ -33,7 +33,12 @@ app.use(helmet({
       baseUri: ['\'self\''],
       formAction: ['\'self\''],
       frameAncestors: ['\'self\''],
-      upgradeInsecureRequests: []
+      // Only force-upgrade subresources when explicitly deployed behind HTTPS.
+      // Unconditional upgrade-insecure-requests broke plain-HTTP LAN access
+      // (browser upgraded all assets to https:// on a server with no TLS).
+      // Note: helmet's useDefaults includes this directive, so it must be
+      // explicitly nulled to remove it — deleting the line is not enough.
+      upgradeInsecureRequests: envBoolean(process.env.FORCE_HTTPS) ? [] : null
     }
   },
   referrerPolicy: { policy: 'strict-origin-when-cross-origin' },

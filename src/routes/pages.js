@@ -97,8 +97,12 @@ router.get(Object.keys(pages), (req, res) => {
 // pages (those routes match earlier), and unknown sections fall through to 404.
 router.get('/:section/:groupId', (req, res, next) => {
   const cats = db.getCategories();
+  // hasOwnProperty guard: cats is a plain object, so inherited keys like
+  // "__proto__"/"constructor" would otherwise be truthy and render phantom
+  // pages (or 500 on .subcategories access). Real section ids are slugified
+  // ([a-z0-9-] only) and can never collide with prototype keys.
+  if (!Object.prototype.hasOwnProperty.call(cats, req.params.section)) return next();
   const section = cats[req.params.section];
-  if (!section) return next();
   const group = section.subcategories.find(c => c.id === req.params.groupId);
   if (!group || group.type !== 'group') return next();
   res.sendFile(path.join(PUB, 'group-page.html'));
@@ -107,7 +111,7 @@ router.get('/:section/:groupId', (req, res, next) => {
 router.get('/:section', (req, res, next) => {
   if (STATIC_ROUTES.includes(req.params.section)) return next();
   const cats = db.getCategories();
-  if (!cats[req.params.section]) return next();
+  if (!Object.prototype.hasOwnProperty.call(cats, req.params.section)) return next();
   // Если подкатегорий нет — всё равно рендерим страницу (пустой список)
   res.sendFile(path.join(PUB, 'section-page.html'));
 });

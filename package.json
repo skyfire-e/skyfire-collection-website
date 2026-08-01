@@ -1,6 +1,6 @@
 {
   "name": "skyfire-collection",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "skyfire Collection - Dice & Miniatures gallery",
   "main": "server.js",
   "private": true,
