@@ -235,4 +235,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { createDatabaseSnapshot, verifyDatabaseSnapshot, collectFiles, shouldExclude };
+module.exports = { createDatabaseSnapshot, verifyDatabaseSnapshot, collectFiles, shouldExclude, createArchive };

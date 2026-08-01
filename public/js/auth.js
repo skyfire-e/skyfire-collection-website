@@ -43,10 +43,11 @@ async function initAuth() {
       const res = await API.post('/api/auth/login', { username, password });
       if (res.success) {
         closeModal();
-        // B4: /admin gates content on load-time auth check — reload to initialize the panel
-        if (location.pathname === '/admin') { location.reload(); return; }
-        await checkAuth();
-        updateUI();
+        // Page-level admin UI (per-card edit/delete buttons, reorder controls)
+        // is rendered once at init on EVERY page, not just /admin — reload to
+        // re-init with the new auth state. Do not re-run init functions
+        // instead: that would double-bind listeners (double saves/toasts).
+        location.reload();
       } else {
         authError.textContent = 'Invalid credentials';
       }
@@ -66,10 +67,9 @@ async function initAuth() {
   logoutBtn.addEventListener('click', async () => {
     try { await API.post('/api/auth/logout'); } catch (e) { console.warn('Logout error:', e); }
     closeModal();
-    // The admin panel is initialized for a signed-in user — reload to reset it
-    if (location.pathname === '/admin') { location.reload(); return; }
-    await checkAuth();
-    updateUI();
+    // Reload on every page (not just /admin): otherwise stale edit/reorder
+    // buttons stay rendered and click through to 401s.
+    location.reload();
   });
 
   function updateUI() {

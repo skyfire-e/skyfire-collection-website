@@ -1,5 +1,6 @@
 import { API } from '../api.js';
 import { showToast } from '../toast.js';
+import { invalidateEditorSettings } from '../image-editor.js';
 
 export async function loadSettings() {
   let settings;
@@ -74,7 +75,8 @@ export function initAdminSettings() {
       document.querySelectorAll('#currencySettings .currency-row').forEach(row => {
         const input = row.querySelector('input');
         const sectionId = input.id.replace('cur_', '');
-        if (input.value.trim()) currencies[sectionId] = input.value.trim();
+        // Schema requires ISO 4217 uppercase (^[A-Z]{3}$) — normalize "usd" → "USD"
+        if (input.value.trim()) currencies[sectionId] = input.value.trim().toUpperCase();
       });
       await API.put('/api/settings', {
         siteName: document.getElementById('setSiteName').value,
@@ -89,6 +91,9 @@ export function initAdminSettings() {
         currencies: currencies,
       });
       showToast('Settings saved!', 'success');
+      // The image editor keeps its own module-level settings cache — reset it
+      // so isDefaultImage() sees the new defaultImage in this page session.
+      invalidateEditorSettings();
       loadSettings();
     } catch (err) {
       console.error('Save settings failed:', err);

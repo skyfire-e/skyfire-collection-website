@@ -6,6 +6,14 @@ const MAX_IMAGES_PER_ITEM = 10;
 let settingsCache = null;
 let settingsPromise = null;
 
+// Settings change rarely, but when they do (new default image uploaded in the
+// admin panel), a stale cache makes isDefaultImage() treat the NEW default as
+// a real photo → save fails with 400. Callers that mutate settings must reset.
+export function invalidateEditorSettings() {
+  settingsCache = null;
+  settingsPromise = null;
+}
+
 function getEditorSettings() {
   if (settingsCache !== null) return settingsCache;
   if (settingsPromise) return settingsPromise;

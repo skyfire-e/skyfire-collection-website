@@ -40,24 +40,37 @@ export function createReorderDnd(container, itemSelector) {
 
   function onTouchStart(e) {
     const touch = e.touches[0];
-    touchReorder = { el: this, startY: touch.clientY };
+    touchReorder = { el: this, startX: touch.clientX, startY: touch.clientY };
   }
 
   function onTouchMove(e) {
     if (!touchReorder || touchReorder.el !== this) return;
     const touch = e.touches[0];
+    const dx = touch.clientX - touchReorder.startX;
     const dy = touch.clientY - touchReorder.startY;
-    if (Math.abs(dy) > 15) {
+    if (Math.hypot(dx, dy) > 15) {
       e.preventDefault();
+      // Nearest-neighbor hit-test in BOTH axes: galleries are multi-column
+      // grids, so the old clientY-only comparison made horizontal moves
+      // within a row impossible (the drop target was always mis-computed).
       const children = [...container.querySelectorAll(itemSelector)];
       let target = null;
+      let best = Infinity;
       for (const child of children) {
         if (child === this) continue;
         const r = child.getBoundingClientRect();
-        if (touch.clientY < r.top + r.height / 2) { target = child; break; }
+        const d = Math.hypot(touch.clientX - (r.left + r.width / 2), touch.clientY - (r.top + r.height / 2));
+        if (d < best) { best = d; target = child; }
       }
-      if (target) container.insertBefore(this, target);
-      else container.appendChild(this);
+      if (target) {
+        // Move toward the nearest card: forward → insert after it, back → before it
+        if (this.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING) {
+          container.insertBefore(this, target.nextSibling);
+        } else {
+          container.insertBefore(this, target);
+        }
+      }
+      touchReorder.startX = touch.clientX;
       touchReorder.startY = touch.clientY;
     }
   }
@@ -78,6 +91,9 @@ export function createReorderDnd(container, itemSelector) {
         el.addEventListener('touchstart', onTouchStart, { passive: true });
         el.addEventListener('touchmove', onTouchMove, { passive: false });
         el.addEventListener('touchend', onTouchEnd, { passive: true });
+        // System gesture interruptions (notifications, app switch) fire
+        // touchcancel, not touchend — without this the drag state "sticks"
+        el.addEventListener('touchcancel', onTouchEnd, { passive: true });
       });
     },
     disable() {
@@ -90,6 +106,7 @@ export function createReorderDnd(container, itemSelector) {
         el.removeEventListener('touchstart', onTouchStart);
         el.removeEventListener('touchmove', onTouchMove);
         el.removeEventListener('touchend', onTouchEnd);
+        el.removeEventListener('touchcancel', onTouchEnd);
       });
     }
   };

@@ -24,6 +24,15 @@ console.log('📍 Current branch: ' + branch);
 const status = execSync('git status --porcelain -uno', { cwd: ROOT, encoding: 'utf8' }).trim();
 if (status) {
   console.log('⚠️  Local uncommitted changes detected — pulling may cause conflicts');
+  // collection.db is a tracked BINARY file: pulling while it has local changes
+  // can end in a binary merge conflict that corrupts the database. Abort.
+  const dbDirty = status.split('\n').some(line => line.includes('collection.db'));
+  if (dbDirty && !process.argv.includes('--force')) {
+    console.error('❌ data/collection.db has uncommitted local changes — aborting pull.');
+    console.error('   Commit it first (WAL checkpoint + git commit), or re-run with:');
+    console.error('   node pull.js --force');
+    process.exit(1);
+  }
 }
 
 console.log('📥 Pulling...');

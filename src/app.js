@@ -41,6 +41,12 @@ app.use(helmet({
       upgradeInsecureRequests: envBoolean(process.env.FORCE_HTTPS) ? [] : null
     }
   },
+  // HSTS only when explicitly HTTPS-deployed: one accidental HTTPS response
+  // would otherwise pin HTTPS in the browser for a year and break later
+  // plain-HTTP (LAN) visits with SSL errors before the server is contacted.
+  strictTransportSecurity: envBoolean(process.env.FORCE_HTTPS)
+    ? { maxAge: 31536000, includeSubDomains: false }
+    : false,
   referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
   crossOriginOpenerPolicy: { policy: 'same-origin' },
   crossOriginEmbedderPolicy: false

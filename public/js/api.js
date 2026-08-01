@@ -67,6 +67,9 @@ function invalidate(url) {
   for (const key of cache.keys()) {
     if (clean === key || clean.startsWith(key + '/')) cache.delete(key);
   }
+  // Uploads mutate settings too: POST /api/upload/default changes
+  // settings.defaultImage, so the cached /api/settings must not survive it.
+  if (clean.startsWith('/api/upload')) cache.delete('/api/settings');
 }
 
 export const API = {

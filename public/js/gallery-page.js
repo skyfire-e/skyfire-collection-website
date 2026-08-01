@@ -313,6 +313,9 @@ export async function initGalleryPage() {
       grid.appendChild(card);
 
       card.addEventListener('click', (e) => {
+        // In reorder mode taps rearrange cards — they must not open the
+        // lightbox (category links in section-pages.js have the same guard)
+        if (reorderMode) return;
         if (e.target.closest('.card-actions')) return;
         lbTriggerElement = card;
         openLightbox(item);
