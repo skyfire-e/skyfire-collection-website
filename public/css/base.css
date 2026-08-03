@@ -837,10 +837,25 @@ a:hover {
     padding: 8px 12px;
     font-size: 0.85rem;
   }
+  .lightbox-main {
+    position: relative;
+  }
   .lightbox-nav {
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: var(--overlay);
+    border-radius: 50%;
+  }
+  .lightbox-nav#lbPrev {
+    left: 4px;
+  }
+  .lightbox-nav#lbNext {
+    right: 4px;
   }
   .edit-image-grid {
     gap: 4px;
@@ -925,6 +940,8 @@ a:hover {
 
 .lightbox-image-wrap {
   display: flex;
+  flex: 1;
+  width: 0;
   align-items: center;
   justify-content: center;
 }
