@@ -3,7 +3,7 @@ import { showToast } from './toast.js';
 import { thumbUrl, createFocusTrap, withPending } from './utils.js';
 import { openEdit, initImageEditor } from './image-editor.js';
 import { injectSharedModals } from './shared-modals.js';
-import { createReorderDnd } from './dnd.js';
+import { createReorderDnd, createSwapArrows } from './dnd.js';
 
 // Edit/crop/lightbox dialogs come from the shared module (single source of truth)
 injectSharedModals();
@@ -32,6 +32,7 @@ function getGalleryGrid() {
 // section-pages.js). The container element persists across re-renders, so one
 // instance is enough — enable() re-binds to the current cards.
 let dnd = null;
+let swapArrows = null;
 
 export async function initGalleryPage() {
   const { section, category } = getGalleryContext();
@@ -39,6 +40,7 @@ export async function initGalleryPage() {
   const grid = getGalleryGrid();
   if (!grid) return;
   dnd = createReorderDnd(grid, '.gallery-card');
+  swapArrows = createSwapArrows(grid, '.gallery-card');
   const title = document.getElementById('pageTitle');
   const backLink = document.getElementById('galleryBackLink');
 
@@ -48,8 +50,10 @@ export async function initGalleryPage() {
       const cats = await API.get('/api/categories');
       const sec = cats[section];
       if (sec) {
-        const cat = sec.subcategories.find(c => c.id === category);
-        const parentGroup = sec.subcategories.find(c => c.type === 'group' && c.subcategories?.find(sc => sc.id === category));
+        const cat = sec.subcategories.find((c) => c.id === category);
+        const parentGroup = sec.subcategories.find(
+          (c) => c.type === 'group' && c.subcategories?.find((sc) => sc.id === category)
+        );
         // Items filed directly under a group's own root (category === the group's id itself)
         // should link back into that group's subgroup page, not the top-level section page.
         const isGroupRoot = !parentGroup && cat && cat.type === 'group';
@@ -102,10 +106,16 @@ export async function initGalleryPage() {
         const data = await API.get('/api/categories');
         for (const sec of Object.values(data)) {
           for (const cat of sec.subcategories) {
-            if (cat.id === category) { setPageTitle(cat.label); return; }
+            if (cat.id === category) {
+              setPageTitle(cat.label);
+              return;
+            }
             if (cat.subcategories) {
-              const found = cat.subcategories.find(s => s.id === category);
-              if (found) { setPageTitle(found.label); return; }
+              const found = cat.subcategories.find((s) => s.id === category);
+              if (found) {
+                setPageTitle(found.label);
+                return;
+              }
             }
           }
         }
@@ -131,7 +141,10 @@ export async function initGalleryPage() {
     lbCurrentImages = item.images && item.images.length > 0 ? item.images : [item.image];
     lbCurrentImgIdx = 0;
     lbImg.alt = item.title || 'Image preview';
-    for (const p of lbPreloaders) { p.src = ''; p.onload = p.onerror = null; }
+    for (const p of lbPreloaders) {
+      p.src = '';
+      p.onload = p.onerror = null;
+    }
     lbPreloaders = [];
     for (let i = 1; i < lbCurrentImages.length; i++) {
       const p = new Image();
@@ -151,10 +164,19 @@ export async function initGalleryPage() {
   function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
-    if (lbFocusTrap) { lightbox.removeEventListener('keydown', lbFocusTrap); lbFocusTrap = null; }
-    for (const p of lbPreloaders) { p.src = ''; p.onload = p.onerror = null; }
+    if (lbFocusTrap) {
+      lightbox.removeEventListener('keydown', lbFocusTrap);
+      lbFocusTrap = null;
+    }
+    for (const p of lbPreloaders) {
+      p.src = '';
+      p.onload = p.onerror = null;
+    }
     lbPreloaders = [];
-    if (lbTriggerElement) { lbTriggerElement.focus(); lbTriggerElement = null; }
+    if (lbTriggerElement) {
+      lbTriggerElement.focus();
+      lbTriggerElement = null;
+    }
   }
 
   function updateLightbox(item) {
@@ -183,7 +205,7 @@ export async function initGalleryPage() {
         dot.addEventListener('click', () => {
           lbCurrentImgIdx = i;
           loadLightboxImage(lbCurrentImages[i]);
-          lbDots.querySelectorAll('.lightbox-dot').forEach(d => d.classList.remove('active'));
+          lbDots.querySelectorAll('.lightbox-dot').forEach((d) => d.classList.remove('active'));
           dot.classList.add('active');
         });
         dot.addEventListener('keydown', (e) => {
@@ -225,7 +247,7 @@ export async function initGalleryPage() {
       grid.appendChild(empty);
       return;
     }
-    items.forEach(item => {
+    items.forEach((item) => {
       const card = document.createElement('div');
       card.className = 'gallery-card';
       card.id = 'item-' + item.id;
@@ -240,13 +262,15 @@ export async function initGalleryPage() {
       img.src = thumbUrl(item.image);
       img.alt = item.title || '';
       img.loading = 'lazy';
-      img.addEventListener('error', function() {
+      img.addEventListener('error', function () {
         // B3: one-shot fallback thumb -> full image -> default.svg
         // (this.src is absolute, item.image is relative — direct comparison always mismatches)
         if (!this.dataset.fullTried && item.image) {
           this.dataset.fullTried = '1';
           this.src = item.image;
-        } else { handleImgError(this); }
+        } else {
+          handleImgError(this);
+        }
       });
       imgWrap.appendChild(img);
 
@@ -341,6 +365,7 @@ export async function initGalleryPage() {
         document.getElementById('subgroupItemsSection')?.classList.toggle('hidden', items.length === 0);
       }
       if (reorderMode && dnd) dnd.enable();
+      if (reorderMode && swapArrows) swapArrows.enable();
     } catch (err) {
       // Surface the real reason (e.g. rate limit) instead of a generic failure —
       // an empty grid used to look like the collection had vanished.
@@ -354,7 +379,11 @@ export async function initGalleryPage() {
 
   // Lightbox controls
   const $ = (id) => document.getElementById(id);
-  const el = (id) => { const e = $(id); if (!e) console.warn('#' + id + ' not found in DOM'); return e; };
+  const el = (id) => {
+    const e = $(id);
+    if (!e) console.warn('#' + id + ' not found in DOM');
+    return e;
+  };
 
   el('lbClose')?.addEventListener('click', closeLightbox);
   lightbox?.addEventListener('click', (e) => {
@@ -375,14 +404,24 @@ export async function initGalleryPage() {
 
   // Touch swipe for lightbox
   let touchStartX = 0;
-  lbImg?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  lbImg?.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) el('lbNext')?.click();
-      else el('lbPrev')?.click();
-    }
-  }, { passive: true });
+  lbImg?.addEventListener(
+    'touchstart',
+    (e) => {
+      touchStartX = e.touches[0].clientX;
+    },
+    { passive: true }
+  );
+  lbImg?.addEventListener(
+    'touchend',
+    (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) el('lbNext')?.click();
+        else el('lbPrev')?.click();
+      }
+    },
+    { passive: true }
+  );
 
   function onLightboxKeydown(e) {
     if (!lightbox.classList.contains('open')) return;
@@ -451,6 +490,7 @@ async function toggleReorder() {
     btn.classList.remove('btn-success');
     grid.classList.remove('reorder-mode');
     dnd.disable();
+    swapArrows.disable();
     reorderMode = false;
     showToast('Order saved', 'success');
   } else {
@@ -460,6 +500,7 @@ async function toggleReorder() {
     btn.classList.add('btn-success');
     grid.classList.add('reorder-mode');
     dnd.enable();
+    swapArrows.enable();
   }
 }
 
@@ -473,10 +514,10 @@ async function saveReorder() {
   const grid = getGalleryGrid();
   if (!grid) return;
   const cards = [...grid.querySelectorAll('.gallery-card')];
-  const itemIds = cards.map(c => c.dataset.itemId);
+  const itemIds = cards.map((c) => c.dataset.itemId);
   if (itemIds.length === 0) return;
   // B1: no inner try/catch — toggleReorder handles failures and keeps reorder mode on
   await API.post('/api/items/reorder', { section, category, items: itemIds });
 }
 
-initGalleryPage().catch(err => console.error('Gallery init failed:', err));
+initGalleryPage().catch((err) => console.error('Gallery init failed:', err));

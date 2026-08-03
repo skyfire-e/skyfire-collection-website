@@ -16,7 +16,9 @@
 .gallery-page .back-nav .back-link + .back-link {
   margin-top: 6px;
 }
-.gallery-page .back-nav .back-link:hover { color: var(--accent); }
+.gallery-page .back-nav .back-link:hover {
+  color: var(--accent);
+}
 .gallery-page h1 {
   text-align: center;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -31,11 +33,14 @@
 }
 
 .gallery-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .gallery-card:hover {
@@ -123,13 +128,14 @@
 }
 
 .reorder-mode .gallery-card {
-  cursor: grab;
   outline: 2px dashed var(--accent);
   outline-offset: 4px;
 }
-.reorder-mode .gallery-card:active {
-  cursor: grabbing;
-}
 .reorder-mode .gallery-card:hover {
   outline-color: var(--success);
+}
+.reorder-mode .gallery-card .card-actions {
+  /* fade edit/delete buttons in reorder mode — arrows take over */
+  opacity: 0.3;
+  pointer-events: none;
 }

@@ -1,13 +1,15 @@
 import { API, checkAuth, isAdmin } from './api.js';
 import { showToast } from './toast.js';
-import { createReorderDnd } from './dnd.js';
+import { createReorderDnd, createSwapArrows } from './dnd.js';
 
 let grid;
 let dnd = null;
+let swapArrows = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   grid = document.getElementById('categoryGrid');
   if (grid) dnd = createReorderDnd(grid, '.category-btn');
+  if (grid) swapArrows = createSwapArrows(grid, '.category-btn');
   const pageType = document.body.dataset.pageType;
   if (pageType === 'section') {
     initSectionPage();
@@ -27,7 +29,9 @@ function renderCategoryButton(sectionId, c) {
   a.dataset.catId = c.id;
   a.textContent = c.label;
   // In reorder mode links must not navigate
-  a.addEventListener('click', (e) => { if (reorderMode) e.preventDefault(); });
+  a.addEventListener('click', (e) => {
+    if (reorderMode) e.preventDefault();
+  });
   return a;
 }
 
@@ -39,11 +43,14 @@ async function initSectionPage() {
   try {
     const data = await API.get('/api/categories');
     const section = data[sectionId];
-    if (!section) { grid.innerHTML = '<p class="empty-state">Section not found.</p>'; return; }
+    if (!section) {
+      grid.innerHTML = '<p class="empty-state">Section not found.</p>';
+      return;
+    }
     if (titleEl) titleEl.textContent = section.label + ' - skyfire Collection';
     if (titleEl2) titleEl2.textContent = section.label;
 
-    section.subcategories.forEach(c => grid.appendChild(renderCategoryButton(sectionId, c)));
+    section.subcategories.forEach((c) => grid.appendChild(renderCategoryButton(sectionId, c)));
 
     showAdminActions({ section: sectionId, parentId: null });
   } catch (err) {
@@ -62,9 +69,15 @@ async function initSubgroupPage() {
   try {
     const data = await API.get('/api/categories');
     const section = data[sectionId];
-    if (!section) { grid.innerHTML = '<p class="empty-state">Section not found.</p>'; return; }
-    const group = section.subcategories.find(c => c.id === groupId);
-    if (!group || !group.subcategories) { grid.innerHTML = '<p class="empty-state">Group not found.</p>'; return; }
+    if (!section) {
+      grid.innerHTML = '<p class="empty-state">Section not found.</p>';
+      return;
+    }
+    const group = section.subcategories.find((c) => c.id === groupId);
+    if (!group || !group.subcategories) {
+      grid.innerHTML = '<p class="empty-state">Group not found.</p>';
+      return;
+    }
 
     if (titleEl) titleEl.textContent = group.label + ' - skyfire Collection';
     if (titleEl2) titleEl2.textContent = group.label;
@@ -81,7 +94,7 @@ async function initSubgroupPage() {
       backLink.appendChild(text);
     }
 
-    group.subcategories.forEach(c => grid.appendChild(renderCategoryButton(sectionId, c)));
+    group.subcategories.forEach((c) => grid.appendChild(renderCategoryButton(sectionId, c)));
 
     // Items filed at this group's own root are rendered by gallery-page.js into
     // #subgroupItemsGrid — a full gallery (lightbox, edit, delete), not a link preview.
@@ -127,6 +140,7 @@ async function toggleReorder(ctx) {
     btn.classList.remove('btn-success');
     grid.classList.remove('reorder-mode');
     dnd.disable();
+    swapArrows.disable();
     reorderMode = false;
     showToast('Category order saved', 'success');
   } else {
@@ -137,12 +151,13 @@ async function toggleReorder(ctx) {
     btn.classList.add('btn-success');
     grid.classList.add('reorder-mode');
     dnd.enable();
+    swapArrows.enable();
   }
 }
 
 async function saveReorder(ctx) {
   const buttons = [...grid.querySelectorAll('.category-btn')];
-  const ids = buttons.map(b => b.dataset.catId);
+  const ids = buttons.map((b) => b.dataset.catId);
   if (ids.length === 0) return;
   const body = { section: ctx.section, items: ids };
   if (ctx.parentId) body.parentId = ctx.parentId;
