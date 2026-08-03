@@ -89,6 +89,7 @@ export function createSwapArrows(container, itemSelector) {
       overlay.appendChild(rightBtn);
 
       leftBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         const prev = el.previousElementSibling;
         if (prev && prev.matches(itemSelector)) {
@@ -97,6 +98,7 @@ export function createSwapArrows(container, itemSelector) {
       });
 
       rightBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         const next = el.nextElementSibling;
         if (next && next.matches(itemSelector)) {
