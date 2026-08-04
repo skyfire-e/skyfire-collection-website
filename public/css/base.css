@@ -866,6 +866,10 @@ a:hover {
   .lightbox-overlay .lightbox-nav {
     display: none !important;
   }
+  .lightbox-hint.show {
+    display: block;
+    opacity: 1;
+  }
   .edit-image-grid {
     gap: 4px;
   }
@@ -1005,6 +1009,24 @@ a:hover {
 }
 .lightbox-close:hover {
   opacity: 1;
+}
+
+.lightbox-hint {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 315;
+  background: var(--overlay-light);
+  color: var(--text-inverse);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
 }
 
 .lightbox-info {

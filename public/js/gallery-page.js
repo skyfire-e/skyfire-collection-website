@@ -194,6 +194,9 @@ export async function initGalleryPage() {
       lbNext.classList.remove('hidden-nav');
     }
 
+    const lbHint = document.getElementById('lbHint');
+    if (lbHint) lbHint.classList.toggle('show', lbCurrentImages.length > 1);
+
     lbDots.innerHTML = '';
     if (lbCurrentImages.length > 1) {
       lbCurrentImages.forEach((_, i) => {
