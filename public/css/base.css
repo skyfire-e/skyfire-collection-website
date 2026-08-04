@@ -837,34 +837,34 @@ a:hover {
     padding: 8px 12px;
     font-size: 0.85rem;
   }
-  .lightbox-content {
+  .lightbox-overlay .lightbox-content {
     width: 100%;
     max-width: 100%;
     height: 100%;
     max-height: 100%;
     padding: 48px 0 8px;
   }
-  .lightbox-main {
+  .lightbox-overlay .lightbox-main {
     position: relative;
     width: 100%;
     flex: 1 1 0%;
     min-height: 0;
   }
-  .lightbox-image-wrap {
+  .lightbox-overlay .lightbox-image-wrap {
     flex: 1 1 0%;
     min-width: 0;
     min-height: 0;
     max-width: 100%;
     max-height: 100%;
   }
-  .lightbox-image-wrap img {
+  .lightbox-overlay .lightbox-image-wrap img {
     width: 100%;
     height: 100%;
     max-height: 100%;
     object-fit: contain;
   }
-  .lightbox-nav {
-    display: none;
+  .lightbox-overlay .lightbox-nav {
+    display: none !important;
   }
   .edit-image-grid {
     gap: 4px;
