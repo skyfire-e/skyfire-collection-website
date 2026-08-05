@@ -870,6 +870,9 @@ a:hover {
     display: block;
     opacity: 1;
   }
+  .lightbox-edge {
+    display: block;
+  }
   .edit-image-grid {
     gap: 4px;
   }
@@ -1027,6 +1030,21 @@ a:hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s;
+}
+
+.lightbox-edge {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 64px;
+  z-index: 305;
+}
+.lightbox-edge.left {
+  left: 0;
+}
+.lightbox-edge.right {
+  right: 0;
 }
 
 .lightbox-info {

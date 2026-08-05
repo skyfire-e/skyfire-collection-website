@@ -393,17 +393,24 @@ export async function initGalleryPage() {
     if (e.target === lightbox) closeLightbox();
   });
 
-  el('lbPrev')?.addEventListener('click', () => {
+  function prevImage() {
     if (lbCurrentImages.length === 0) return;
     lbCurrentImgIdx = lbCurrentImgIdx > 0 ? lbCurrentImgIdx - 1 : lbCurrentImages.length - 1;
     loadLightboxImage(lbCurrentImages[lbCurrentImgIdx], updateDots);
-  });
+  }
 
-  el('lbNext')?.addEventListener('click', () => {
+  function nextImage() {
     if (lbCurrentImages.length === 0) return;
     lbCurrentImgIdx = lbCurrentImgIdx < lbCurrentImages.length - 1 ? lbCurrentImgIdx + 1 : 0;
     loadLightboxImage(lbCurrentImages[lbCurrentImgIdx], updateDots);
-  });
+  }
+
+  el('lbPrev')?.addEventListener('click', prevImage);
+  el('lbNext')?.addEventListener('click', nextImage);
+
+  // Invisible left/right screen-edge tap zones (mobile only, shown via CSS)
+  el('lbEdgeLeft')?.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+  el('lbEdgeRight')?.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
 
   // Touch swipe for lightbox
   let touchStartX = 0;
@@ -419,8 +426,8 @@ export async function initGalleryPage() {
     (e) => {
       const diff = touchStartX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) el('lbNext')?.click();
-        else el('lbPrev')?.click();
+        if (diff > 0) nextImage();
+        else prevImage();
       }
     },
     { passive: true }
@@ -429,8 +436,8 @@ export async function initGalleryPage() {
   function onLightboxKeydown(e) {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') document.getElementById('lbPrev')?.click();
-    if (e.key === 'ArrowRight') document.getElementById('lbNext')?.click();
+    if (e.key === 'ArrowLeft') prevImage();
+    if (e.key === 'ArrowRight') nextImage();
   }
   document.addEventListener('keydown', onLightboxKeydown);
 

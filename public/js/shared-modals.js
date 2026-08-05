@@ -94,7 +94,9 @@ const CROP_MODAL_HTML = `
 const LIGHTBOX_HTML = `
 <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
-  <div class="lightbox-hint" id="lbHint">Swipe left &amp; right</div>
+  <div class="lightbox-hint" id="lbHint">Swipe or tap screen edges</div>
+  <div class="lightbox-edge left" id="lbEdgeLeft" aria-hidden="true"></div>
+  <div class="lightbox-edge right" id="lbEdgeRight" aria-hidden="true"></div>
   <div class="lightbox-content">
     <div class="lightbox-main">
       <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous image">&#10094;</button>
