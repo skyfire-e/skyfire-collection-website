@@ -5,6 +5,7 @@
 import { API } from './api.js';
 
 const ICONS = { dice: '\u{1F3B2}', miniatures: '\u2694\uFE0F' };
+ICONS.simracing = '\u{1F3CE}\uFE0F';
 const FALLBACK_ICON = '\u{1F4E6}';
 
 document.addEventListener('DOMContentLoaded', () => {

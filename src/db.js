@@ -176,6 +176,15 @@ if (currentVersion < 4) {
   })();
 }
 
+// Simracing is a normal, admin-visible section with a dedicated public viewer.
+if (currentVersion < 5) {
+  db.transaction(() => {
+    db.prepare(`INSERT OR IGNORE INTO sections (id, label, sort_order)
+      SELECT 'simracing', 'Simracing', COALESCE(MAX(sort_order), -1) + 1 FROM sections`).run();
+    db.pragma('user_version = 5');
+  })();
+}
+
 // --- Items ---
 function getItems(section, category, limit, offset) {
   let query = `

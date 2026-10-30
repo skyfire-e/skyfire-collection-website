@@ -113,7 +113,7 @@ router.get('/:section', (req, res, next) => {
   const cats = db.getCategories();
   if (!Object.prototype.hasOwnProperty.call(cats, req.params.section)) return next();
   // Если подкатегорий нет — всё равно рендерим страницу (пустой список)
-  res.sendFile(path.join(PUB, 'section-page.html'));
+  res.sendFile(path.join(PUB, req.params.section === 'simracing' ? 'simracing.html' : 'section-page.html'));
 });
 
 router.get('*', (req, res) => {

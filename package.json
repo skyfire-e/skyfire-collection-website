@@ -11,7 +11,7 @@
     "backup:schedule": "cp scripts/com.skyfire.collection-backup.plist ~/Library/LaunchAgents/ && (launchctl unload ~/Library/LaunchAgents/com.skyfire.collection-backup.plist 2>/dev/null; launchctl load ~/Library/LaunchAgents/com.skyfire.collection-backup.plist) && echo 'Daily backup scheduled (21:00, see /tmp/skyfire-backup.log)'",
     "doctor": "node scripts/doctor.js",
     "checkpoint": "node -e \"require('./scripts/pre-commit.js').checkpointDatabase(); console.log('WAL checkpoint done, sessions cleared, ready to commit');\"",
-    "postinstall": "node scripts/install-hook.js",
+    "postinstall": "node scripts/install-hook.js && node scripts/vendor-three.js",
     "pull": "node pull.js",
     "gc": "node gc-uploads.js",
     "gc:dry": "node gc-uploads.js --dry-run",
@@ -22,7 +22,8 @@
     "lint:fix": "eslint --fix server.js src/ lib/ scripts/ backup.js gc-uploads.js pull.js test/",
     "ci": "npm run lint && npm test",
     "format": "prettier --write 'src/**/*.js' 'public/js/**/*.js' 'lib/**/*.js' 'test/**/*.js' '*.js'",
-    "check": "node --check server.js && node --check src/app.js && node --check src/middleware.js && node --check src/helpers.js && node --check src/db.js && node --check src/errors.js && node -e \"['src/routes','scripts'].forEach(dir=>require('fs').readdirSync(dir).filter(f=>f.endsWith('.js')).forEach(f=>{require('child_process').execFileSync('node',['--check',dir+'/'+f],{stdio:'inherit',encoding:'utf8'});console.log(dir+'/'+f+': OK')}))\" && node --check lib/validate.js && node --check backup.js && node --check gc-uploads.js && node --check pull.js"
+    "check": "node --check server.js && node --check src/app.js && node --check src/middleware.js && node --check src/helpers.js && node --check src/db.js && node --check src/errors.js && node -e \"['src/routes','scripts'].forEach(dir=>require('fs').readdirSync(dir).filter(f=>f.endsWith('.js')).forEach(f=>{require('child_process').execFileSync('node',['--check',dir+'/'+f],{stdio:'inherit',encoding:'utf8'});console.log(dir+'/'+f+': OK')}))\" && node --check lib/validate.js && node --check backup.js && node --check gc-uploads.js && node --check pull.js",
+    "vendor:three": "node scripts/vendor-three.js"
   },
   "engines": {
     "node": ">=22"
@@ -41,6 +42,7 @@
     "morgan": "^1.11.0",
     "multer": "^2.0.0",
     "sharp": "^0.35.3",
+    "three": "0.180.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

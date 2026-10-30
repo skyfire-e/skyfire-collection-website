@@ -31,3 +31,6 @@ console.log*
 
 # Test coverage
 coverage/
+
+# Recreated from the pinned npm dependency by postinstall
+public/vendor/three/

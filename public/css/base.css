@@ -1457,3 +1457,9 @@ a:hover {
     transform: translateY(0);
   }
 }
+
+/* Three home sections can wrap; keep the title in flow on compact screens. */
+@media (max-width: 1000px) {
+  .home-page { padding: 100px 20px 160px; }
+  .home-page h1 { transform: none; margin-bottom: 48px; }
+}

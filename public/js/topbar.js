@@ -4,7 +4,7 @@ import { thumbUrl } from './utils.js';
 function buildNavTree(cats) {
   const tree = [{ label: 'Home', href: '/', icon: '🏠' }];
   for (const [sectionId, section] of Object.entries(cats)) {
-    tree.push({ label: section.label, href: '/' + sectionId, icon: sectionId === 'dice' ? '🎲' : '⚔️', section: true });
+    tree.push({ label: section.label, href: '/' + sectionId, icon: sectionId === 'dice' ? '🎲' : sectionId === 'simracing' ? '🏎️' : '⚔️', section: true });
     for (const cat of (section.subcategories || [])) {
       if (cat.type === 'group' && cat.subcategories) {
         tree.push({ label: cat.label, href: '/' + sectionId + '/' + cat.id, sub: true, section: true });

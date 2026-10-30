@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simracing - skyfire Collection</title>
+    <meta name="description" content="Explore the hardware in my sim racing cockpit in 3D." />
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/simracing.css" />
+    <script src="/js/theme-init.js"></script>
+  </head>
+  <body data-page-type="simracing">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <main id="main-content" class="simracing-page">
+      <a href="/" class="back-link rig-back"
+        ><span class="back-arrow">&larr;</span> <span class="back-text">Back to Home</span></a
+      >
+      <section class="showroom" aria-label="Simracing cockpit">
+        <div class="scene-stage">
+          <div
+            class="scene"
+            id="scene"
+            role="region"
+            aria-label="Interactive cockpit. Drag to rotate, scroll to zoom, or use the view buttons."
+          >
+            <div id="canvas-host"></div>
+            <div id="hotspots"></div>
+            <div id="loading" role="status">Loading cockpit…</div>
+            <div id="fallback" hidden>
+              <p>The 3D view is unavailable in this browser.</p>
+              <p>Explore the equipment list below.</p>
+            </div>
+          </div>
+          <div class="scene-bottom">
+            <p class="gesture">Drag to rotate · Scroll to zoom · Tap a point</p>
+            <div class="view-controls" role="group" aria-label="3D view controls">
+              <button class="btn btn-sm" data-view="overview" aria-label="Reset to overview">↺ Overview</button>
+              <button class="btn btn-sm" data-view="side">Side</button
+              ><button class="btn btn-sm" data-view="front">Pedals</button>
+              <button class="btn btn-sm" data-view="driver">Driver</button>
+              <button class="btn btn-sm" id="rotate" aria-pressed="false" aria-label="Toggle automatic rotation">
+                ↻
+              </button>
+              <button class="btn btn-sm" id="points" aria-pressed="true" aria-label="Toggle component points">⊙</button>
+              <label class="wheel-picker" for="wheel-variant"
+                ><span>Wheel</span>
+                <select id="wheel-variant" aria-label="Steering wheel" aria-describedby="wheel-status"></select>
+              </label>
+              <span id="wheel-status" class="visually-hidden" role="status"></span>
+            </div>
+          </div>
+        </div>
+        <aside id="detail" class="detail" hidden aria-label="Selected component" aria-live="polite">
+          <button id="close-detail" class="close" aria-label="Close component details">×</button>
+          <span id="detail-group" class="detail-group"></span>
+          <h2 id="detail-name"></h2>
+          <p id="detail-description"></p>
+          <div class="detail-price"><strong id="detail-price"></strong><span id="detail-rub"></span></div>
+          <p id="detail-provenance" class="fine"></p>
+          <p id="detail-note" class="fine"></p>
+          <a id="detail-source" target="_blank" rel="noopener noreferrer">View price source ↗</a>
+        </aside>
+      </section>
+      <section class="inventory" id="equipment" aria-labelledby="equipment-title">
+        <div class="inventory-top">
+          <h2 id="equipment-title">Equipment</h2>
+          <p id="inventory-count"></p>
+        </div>
+        <div class="filters">
+          <div class="tabs" role="group" aria-label="Filter equipment">
+            <button class="btn btn-sm active" data-group="all" aria-pressed="true">All</button>
+            <button class="btn btn-sm" data-group="Hardware" aria-pressed="false">Hardware</button>
+            <button class="btn btn-sm" data-group="Cockpit" aria-pressed="false">Cockpit</button>
+            <button class="btn btn-sm" data-group="Usability" aria-pressed="false">Usability</button>
+          </div>
+        </div>
+        <div id="equipment-list" class="equipment-list"></div>
+        <section class="equipment-summary" id="equipment-summary" aria-labelledby="summary-title" hidden>
+          <div>
+            <h2 id="summary-title">Summary</h2>
+            <p id="summary-count"></p>
+          </div>
+          <div class="summary-total" aria-live="polite" aria-atomic="true">
+            <span id="summary-label">Estimated total</span>
+            <strong id="summary-eur"></strong>
+            <span id="summary-rub"></span>
+            <p id="summary-note" hidden></p>
+          </div>
+        </section>
+        <noscript><p>Enable JavaScript to view the cockpit and equipment catalog.</p></noscript>
+      </section>
+    </main>
+    <div class="admin-corner">
+      <button id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☀️</button
+      ><button id="adminBtn" title="Admin" aria-label="Admin">🔐</button>
+    </div>
+    <div class="admin-actions hidden" id="adminActions">
+      <a href="/admin#add">+ Add</a><a href="/admin#spreadsheet" data-btn="spreadsheet">📊 CommanderHQ</a>
+    </div>
+    <script type="module" src="/js/nav.js"></script>
+    <script type="module" src="/js/auth.js"></script>
+    <script type="module" src="/js/simracing/page.js"></script>
+  </body>
+</html>

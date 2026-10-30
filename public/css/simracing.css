@@ -1,0 +1,533 @@
+/* Use the collection's existing theme, navigation, buttons and modal styles. */
+.simracing-page {
+  padding: 80px 20px 100px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.rig-back {
+  margin: 10px 0 20px;
+}
+.showroom {
+  position: relative;
+  height: 76svh;
+  min-height: 590px;
+  max-height: 1000px;
+  background: #e7e8e5;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  isolation: isolate;
+  scroll-margin-top: 80px;
+}
+.scene-stage {
+  position: relative;
+  height: 100%;
+}
+.scene,
+#canvas-host,
+#hotspots {
+  position: absolute;
+  inset: 0;
+}
+#hotspots {
+  pointer-events: none;
+}
+#canvas-host canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+.hotspot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  cursor: pointer;
+}
+.hotspot:before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #f2f7f2;
+  border: 2px solid #4a8c6a;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px #fff5,
+    0 1px 5px #0004;
+  transition: transform 0.2s;
+}
+.hotspot.unknown:before {
+  background: #fff;
+  border-color: #657d71;
+}
+.hotspot:hover,
+.hotspot:focus-visible,
+.hotspot.selected {
+  z-index: 4;
+}
+.hotspot:hover:before,
+.hotspot.selected:before {
+  transform: scale(1.4);
+  background: #b4ddc7;
+}
+.hotspot:after {
+  content: attr(data-label);
+  display: none;
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 11px;
+  white-space: normal;
+  width: max-content;
+  padding: 8px 11px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px #0003;
+  max-width: 270px;
+}
+.hotspot:hover:after,
+.hotspot:focus-visible:after {
+  display: block;
+}
+.detail {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  width: 300px;
+  z-index: 6;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 15px 45px #0002;
+}
+.detail[hidden],
+.detail a[hidden],
+.hotspot[hidden],
+.equipment-row[hidden],
+.equipment-summary[hidden],
+#loading[hidden],
+#fallback[hidden] {
+  display: none !important;
+}
+.close {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  border: 0;
+  background: none;
+  font-size: 25px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.detail-group {
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  color: var(--accent);
+}
+.detail h2 {
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 450;
+  margin: 15px 0 10px;
+}
+.detail p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.detail-price {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+  margin-top: 18px;
+  padding-top: 15px;
+  gap: 6px;
+}
+.detail-price strong {
+  font-size: 28px;
+  font-weight: 400;
+}
+.detail-price span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.detail p.fine {
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+.detail a {
+  font-size: 11px;
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+.scene-bottom {
+  position: absolute;
+  bottom: 18px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  pointer-events: none;
+  z-index: 5;
+}
+.gesture {
+  font-size: 11px;
+  color: #737c75;
+}
+.view-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: auto;
+  justify-content: flex-end;
+  align-items: center;
+}
+.view-controls .btn {
+  background: var(--bg-card);
+  color: var(--text);
+  padding: 9px 12px;
+}
+.view-controls .btn[aria-pressed='true'],
+.view-controls .btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+#loading,
+#fallback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  color: #4f6455;
+  background: #f5f7f0ec;
+  padding: 22px;
+  border-radius: 12px;
+  text-align: center;
+}
+#fallback p + p {
+  margin-top: 10px;
+}
+.inventory {
+  padding: 38px 8px 20px;
+}
+.inventory-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.inventory h2 {
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+#inventory-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 25px 0 18px;
+  flex-wrap: wrap;
+}
+.tabs {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.tabs .btn {
+  background: var(--bg-card);
+  color: var(--text-muted);
+}
+.tabs .btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.wheel-picker select {
+  font: inherit;
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: 6px;
+}
+.wheel-picker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text);
+  font-size: 11px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding-left: 10px;
+}
+.wheel-picker select {
+  max-width: 235px;
+  border: 0;
+  padding: 9px 6px;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.equipment-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+.equipment-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) minmax(170px, 0.65fr) 100px 18px;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.equipment-row:hover,
+.equipment-row.selected {
+  background: var(--bg-card);
+  border-left-color: var(--accent);
+}
+.equipment-row .part-num {
+  font-family: monospace;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+.equipment-row .part-name {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 450;
+}
+.equipment-row .part-group {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.equipment-row .part-price {
+  text-align: right;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+.equipment-row .part-price.unpriced {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.equipment-row .part-arrow {
+  color: var(--text-muted);
+  text-align: right;
+}
+.equipment-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 24px;
+  padding: 28px 14px;
+  border-top: 1px solid var(--border);
+}
+#summary-count {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.summary-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  color: var(--text-muted);
+  font-size: 12px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+#summary-eur {
+  color: var(--accent);
+  font-size: 30px;
+  font-weight: 450;
+}
+#summary-note {
+  max-width: 280px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+@media (max-width: 1000px) {
+  .scene-bottom {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .gesture {
+    align-self: center;
+    order: 2;
+  }
+}
+@media (max-width: 600px) {
+  .simracing-page {
+    padding: 80px 10px 125px;
+  }
+  .showroom {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    border-radius: 12px;
+  }
+  .scene-stage {
+    height: 70svh;
+    min-height: 510px;
+  }
+  .rig-back {
+    margin-left: 6px;
+  }
+  .detail {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    padding: 20px;
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .detail h2 {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  .detail-price {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+  .detail-price strong {
+    font-size: 23px;
+  }
+  .detail a {
+    margin-top: 10px;
+  }
+  .scene-bottom {
+    left: 8px;
+    right: 8px;
+    bottom: 14px;
+  }
+  .view-controls {
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .view-controls .btn {
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+  .gesture {
+    font-size: 9px;
+  }
+  .inventory {
+    padding: 28px 6px;
+  }
+  .inventory-top {
+    display: block;
+  }
+  .inventory h2 {
+    font-size: 25px;
+  }
+  #inventory-count {
+    margin-top: 10px;
+  }
+  .filters {
+    gap: 14px;
+  }
+  .tabs .btn {
+    padding: 8px 12px;
+  }
+  .equipment-row {
+    grid-template-columns: 20px minmax(0, 1fr) 84px 12px;
+    gap: 4px 8px;
+    padding: 10px 7px;
+    min-height: 62px;
+  }
+  .equipment-row .part-num {
+    grid-row: 1 / 3;
+  }
+  .equipment-row .part-name {
+    font-size: 12px;
+    grid-column: 2;
+  }
+  .equipment-row .part-group {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 9px;
+  }
+  .equipment-row .part-price {
+    grid-column: 3;
+    grid-row: 1 / 3;
+    font-size: 12px;
+  }
+  .equipment-row .part-arrow {
+    grid-column: 4;
+    grid-row: 1 / 3;
+  }
+  .equipment-summary {
+    padding: 24px 7px;
+    gap: 16px;
+  }
+  #summary-eur {
+    font-size: 23px;
+  }
+  .wheel-picker {
+    font-size: 10px;
+    gap: 2px;
+  }
+  .wheel-picker select {
+    max-width: 220px;
+    padding: 8px 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .simracing-page * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
