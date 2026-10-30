@@ -38,51 +38,82 @@ export function createSeat(THREE) {
   weave.colorSpace = THREE.NoColorSpace;
   weave.wrapS = weave.wrapT = THREE.RepeatWrapping;
   weave.repeat.set(5, 7);
-  const black = new THREE.MeshStandardMaterial({
-    color: 0x28292c,
-    roughness: 0.86,
+  const black = new THREE.MeshPhysicalMaterial({
+    color: 0x17181b,
+    roughness: 0.94,
     metalness: 0.02,
+    sheen: 0.22,
+    sheenColor: new THREE.Color(0x66636a),
+    sheenRoughness: 0.85,
     bumpMap: weave,
     bumpScale: 0.0007
   });
   const shellMaterial = new THREE.MeshStandardMaterial({
-    color: 0x24262b,
-    roughness: 0.46,
-    metalness: 0.16,
+    color: 0x121417,
+    roughness: 0.6,
+    metalness: 0.08,
     bumpMap: weave,
     bumpScale: 0.00025
   });
   const plastic = new THREE.MeshStandardMaterial({ color: 0x121417, roughness: 0.42, metalness: 0.08 });
   const steel = new THREE.MeshStandardMaterial({ color: 0x777d83, roughness: 0.36, metalness: 0.68 });
   const stitching = new THREE.MeshStandardMaterial({ color: 0xa03537, roughness: 0.88 });
-  const red = new THREE.MeshStandardMaterial({
-    color: 0xd71730,
-    roughness: 0.8,
+  const webbing = canvas(256, 256, (ctx, w, h) => {
+    ctx.fillStyle = '#999999';
+    ctx.fillRect(0, 0, w, h);
+    for (let x = 0; x < w; x += 4) {
+      ctx.fillStyle = x % 16 === 0 ? '#dddddd' : '#b9b9b9';
+      ctx.fillRect(x, 0, 1, h);
+    }
+    ctx.fillStyle = '#5c5c5c';
+    for (let y = 0; y < h; y += 8) ctx.fillRect(0, y, w, 2);
+  });
+  webbing.colorSpace = THREE.NoColorSpace;
+  webbing.wrapS = webbing.wrapT = THREE.RepeatWrapping;
+  webbing.repeat.set(1, 1);
+  const red = new THREE.MeshPhysicalMaterial({
+    color: 0xd0061b,
+    roughness: 0.9,
+    specularIntensity: 0.25,
+    sheen: 0.12,
+    sheenColor: new THREE.Color(0x851225),
+    sheenRoughness: 0.95,
     metalness: 0,
-    bumpMap: weave,
-    bumpScale: 0.0005,
+    bumpMap: webbing,
+    bumpScale: 0.00025,
     side: THREE.DoubleSide
   });
   const gradation = canvas(1024, 1536, (ctx, w, h) => {
     const gradient = ctx.createLinearGradient(0, 0, 0, h);
-    gradient.addColorStop(0, '#92948f');
-    gradient.addColorStop(0.5, '#c5c2b3');
-    gradient.addColorStop(1, '#d4cebb');
+    gradient.addColorStop(0, '#747771');
+    gradient.addColorStop(0.5, '#a4a496');
+    gradient.addColorStop(1, '#b5ad94');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, w, h);
-    ctx.font = 'italic 900 117px Arial, sans-serif';
+    ctx.font = '900 190px Arial Black, Arial, sans-serif';
     ctx.textBaseline = 'middle';
     for (let row = -1; row < 8; row++) {
-      ctx.fillStyle = row < 3 ? '#50534f' : '#737164';
-      for (let col = -1; col < 4; col++) ctx.fillText('BRIDE', col * 403 + (row % 2) * 22, row * 224 + 90);
+      ctx.fillStyle = row < 3 ? '#40433f' : '#626050';
+      for (let col = -1; col < 3; col++) ctx.fillText('BRIDE', col * 620 - 70 + (row % 2) * 24, row * 224 + 90, 590);
     }
+    // Fine warp/weft lines keep the lettering embedded in the cloth.
+    ctx.fillStyle = 'rgba(20,22,20,.12)';
+    for (let x = 0; x < w; x += 3) ctx.fillRect(x, 0, 1, h);
+    ctx.fillStyle = 'rgba(235,230,211,.10)';
+    for (let y = 0; y < h; y += 4) ctx.fillRect(0, y, w, 1);
     // The woven grain is also visible in diffuse color, not only in normal light.
     for (let i = 0; i < 18000; i++) {
       ctx.fillStyle = random() > 0.5 ? 'rgba(255,255,255,.055)' : 'rgba(20,22,20,.06)';
       ctx.fillRect(random() * w, random() * h, 1, 3);
     }
   });
-  const fabric = new THREE.MeshStandardMaterial({ map: gradation, roughness: 0.96, bumpMap: weave, bumpScale: 0.0007 });
+  const fabric = new THREE.MeshStandardMaterial({
+    color: 0xd9d5c8,
+    map: gradation,
+    roughness: 0.96,
+    bumpMap: weave,
+    bumpScale: 0.0007
+  });
 
   let componentId = 'seat';
   function add(geometry, material, name) {
@@ -221,6 +252,15 @@ export function createSeat(THREE) {
     256
   );
 
+  // Sewn side panels follow the shoulder wings, separate from the piping.
+  for (const side of [-1, 1]) {
+    const seam = [0.47, 0.58, 0.68, 0.78, 0.85, 0.91, 0.975].map((y) => {
+      const x = side * widthAt(y) * 0.76;
+      return [x, y, surfaceZ(x, y) - 0.0018];
+    });
+    path(seam, 0.00075, stitching, 90).name = 'BRIDE shoulder panel stitching';
+  }
+
   // Plastic oval belt-hole grommets and curved inner tunnels.
   holes.forEach((h) => {
     function point(theta, outer, depth) {
@@ -310,17 +350,101 @@ export function createSeat(THREE) {
   pillow([0.313, 0.185, 0.048], [0, 0.807, surfaceZ(0, 0.807) - 0.025], fabric);
   pillow([0.32, 0.073, 0.285], [0, 0.423, 0.382], fabric, 'pan', 0.27);
   pillow([0.323, 0.09, 0.116], [0, 0.454, 0.173], fabric, 'pan', 0.31);
-  for (const side of [-1, 1]) {
-    pillow([0.112, 0.172, 0.44], [side * 0.213, 0.446, 0.345], black, 'pan', 0.45);
-    const seam = [];
-    for (let i = 0; i <= 40; i++) {
-      const t = i / 40,
-        z = 0.137 + t * 0.418,
-        y = 0.5 - 0.065 * t + 0.015 * Math.sin(t * Math.PI);
-      seam.push([side * (0.2 + 0.011 * Math.sin(t * Math.PI)), y, z]);
+  // A swept bolster has a raised knee end and tapers into the recliner.
+  // Its crown stays below the existing lap-belt envelope.
+  const bolsterStations = [
+    [0.115, 0.216, 0.444, 0, 0],
+    [0.14, 0.215, 0.448, 0.044, 0.074],
+    [0.2, 0.214, 0.445, 0.055, 0.086],
+    [0.32, 0.212, 0.439, 0.055, 0.087],
+    [0.4, 0.214, 0.429, 0.054, 0.086],
+    [0.49, 0.218, 0.416, 0.052, 0.074],
+    [0.555, 0.222, 0.408, 0.039, 0.049],
+    [0.578, 0.222, 0.408, 0, 0]
+  ];
+  const bolsterCentre = new THREE.CatmullRomCurve3(bolsterStations.map(([z, x, y]) => v([x, y, z])));
+  const bolsterSize = new THREE.CatmullRomCurve3(bolsterStations.map(([, , , rx, ry]) => v([rx, ry, 0])));
+  function bolsterPoint(t, angle) {
+    const c = bolsterCentre.getPoint(t),
+      r = bolsterSize.getPoint(t);
+    return [
+      c.x + Math.cos(angle) * Math.max(0, r.x),
+      c.y + Math.sign(Math.sin(angle)) * Math.abs(Math.sin(angle)) ** 0.8 * Math.max(0, r.y),
+      c.z
+    ];
+  }
+  const bolsterPositions = [],
+    bolsterUvs = [],
+    bolsterIndices = [];
+  const longitudinal = 72,
+    circumference = 32;
+  for (let i = 0; i <= longitudinal; i++)
+    for (let j = 0; j <= circumference; j++) {
+      bolsterPositions.push(...bolsterPoint(i / longitudinal, (j / circumference) * Math.PI * 2));
+      bolsterUvs.push(j / circumference, i / longitudinal);
+      if (i < longitudinal && j < circumference) {
+        const a = i * (circumference + 1) + j,
+          b = a + 1,
+          c = a + circumference + 1,
+          d = c + 1;
+        bolsterIndices.push(a, b, c, b, d, c);
+      }
     }
-    path(seam, 0.001, stitching, 64);
-    // Small recliner hinge, with stamped cover and exposed fastener.
+  const bolsterGeometry = new THREE.BufferGeometry();
+  bolsterGeometry.setAttribute('position', new THREE.Float32BufferAttribute(bolsterPositions, 3));
+  bolsterGeometry.setAttribute('uv', new THREE.Float32BufferAttribute(bolsterUvs, 2));
+  bolsterGeometry.setIndex(bolsterIndices);
+  bolsterGeometry.computeVertexNormals();
+  for (const side of [-1, 1]) {
+    const bolster = add(bolsterGeometry, black, 'Tapered BRIDE hip bolster');
+    bolster.scale.x = side;
+    // Two rows of individual stitches follow the actual curved upholstery.
+    const stitches = [];
+    for (const angle of [1.07, 1.14])
+      for (let i = 4; i < 143; i += 2) {
+        for (const t of [i / 150, (i + 1) / 150]) {
+          const pt = bolsterPoint(t, angle);
+          pt[0] *= side;
+          pt[1] += 0.0008;
+          stitches.push(...pt);
+        }
+      }
+    const stitchGeometry = new THREE.BufferGeometry();
+    stitchGeometry.setAttribute('position', new THREE.Float32BufferAttribute(stitches, 3));
+    const sewing = new THREE.LineSegments(stitchGeometry, new THREE.LineBasicMaterial({ color: 0xb94d50 }));
+    sewing.name = 'Double red bolster stitching';
+    sewing.userData.componentId = 'seat';
+    seat.add(sewing);
+    // Broad molded recliner cover under the hip bolster, visible in the side photo.
+    const coverShape = new THREE.Shape();
+    coverShape.moveTo(0.23, 0.331);
+    coverShape.lineTo(0.565, 0.331);
+    coverShape.quadraticCurveTo(0.583, 0.381, 0.548, 0.433);
+    coverShape.quadraticCurveTo(0.511, 0.465, 0.467, 0.427);
+    coverShape.lineTo(0.324, 0.388);
+    coverShape.quadraticCurveTo(0.26, 0.4, 0.23, 0.367);
+    coverShape.closePath();
+    const coverGeo = new THREE.ExtrudeGeometry(coverShape, {
+      depth: 0.008,
+      bevelEnabled: true,
+      bevelSize: 0.003,
+      bevelThickness: 0.003,
+      bevelSegments: 3,
+      curveSegments: 16
+    });
+    coverGeo.translate(0, 0, -0.004);
+    const cover = add(coverGeo, plastic, 'BRIDE molded recliner side cover');
+    cover.rotation.y = -Math.PI / 2;
+    cover.position.x = side * 0.246;
+    for (const [z, y] of [
+      [0.29, 0.357],
+      [0.39, 0.352],
+      [0.49, 0.38]
+    ]) {
+      const screw = add(new THREE.CylinderGeometry(0.006, 0.006, 0.003, 12), plastic, 'Recliner cover screw');
+      screw.rotation.z = Math.PI / 2;
+      screw.position.set(side * 0.253, y, z);
+    }
     const hinge = add(new THREE.CylinderGeometry(0.048, 0.048, 0.018, 40), plastic, 'Reclining hinge');
     hinge.rotation.z = Math.PI / 2;
     hinge.position.set(side * 0.255, 0.405, 0.506);
@@ -338,11 +462,12 @@ export function createSeat(THREE) {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#f3f1e9';
-    ctx.font = 'italic 900 205px Arial, sans-serif';
+    ctx.font = 'italic 900 225px Arial Black, Arial, sans-serif';
     ctx.fillText('BRIDE', w / 2, 180, w * 0.96);
     ctx.fillStyle = '#d92c42';
-    ctx.font = 'italic 90px Georgia, serif';
-    ctx.fillText('Low MAX', w / 2, 360);
+    ctx.font = 'italic bold 90px cursive';
+    ctx.fillText('Low', w * 0.46, 318);
+    ctx.fillText('Max', w * 0.56, 395);
   });
   // The logo conforms to the rounded front of the headrest.
   function decal(map, width, height, centreY, offset = 0) {
@@ -390,111 +515,141 @@ export function createSeat(THREE) {
   componentId = 'harness';
   // Woven belts follow continuous paths through the holes and over the cushions.
   function ribbon(points, width, material, widthAxis = [1, 0, 0]) {
-    const curve = new THREE.CatmullRomCurve3(points.map(v)),
-      segments = Math.max(100, (points.length - 1) * 12);
+    const curve = new THREE.CatmullRomCurve3(points.map(v));
+    const segments = Math.max(100, (points.length - 1) * 12),
+      columns = 6,
+      stride = columns + 1;
     const positions = [],
       uv = [],
       idx = [];
-    for (let i = 0; i <= segments; i++) {
-      const p = curve.getPoint(i / segments),
-        t = curve.getTangent(i / segments);
-      const across = v(widthAxis);
-      const right = across
-        .addScaledVector(t, -across.dot(t))
-        .normalize()
-        .multiplyScalar(width / 2);
-      positions.push(...p.clone().sub(right).toArray(), ...p.clone().add(right).toArray());
-      uv.push(0, i / segments, 1, i / segments);
+    const length = curve.getLength();
+    const edges = [[], []];
+    for (let layer = 0; layer < 2; layer++) {
+      const sign = layer === 0 ? 1 : -1;
+      for (let i = 0; i <= segments; i++) {
+        const t = i / segments,
+          p = curve.getPoint(t),
+          tangent = curve.getTangent(t);
+        const right = v(widthAxis).addScaledVector(tangent, -v(widthAxis).dot(tangent)).normalize();
+        const normal = right.clone().cross(tangent).normalize();
+        for (let j = 0; j <= columns; j++) {
+          const across = (j / columns) * 2 - 1;
+          const crown = 0.0007 + 0.00035 * (1 - across * across);
+          const pt = p
+            .clone()
+            .addScaledVector(right, (across * width) / 2)
+            .addScaledVector(normal, sign * crown);
+          positions.push(...pt.toArray());
+          uv.push(j / columns, (t * length) / 0.09);
+          if (layer === 0 && (j === 0 || j === columns)) edges[j === 0 ? 0 : 1].push(pt.toArray());
+        }
+      }
     }
+    const offset = (segments + 1) * stride;
     for (let i = 0; i < segments; i++) {
-      const a = i * 2;
-      idx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3);
+      for (let j = 0; j < columns; j++) {
+        const a = i * stride + j,
+          b = a + 1,
+          c = a + stride,
+          d = c + 1;
+        idx.push(a, b, c, b, d, c, a + offset, c + offset, b + offset, b + offset, c + offset, d + offset);
+      }
+      for (const j of [0, columns]) {
+        const a = i * stride + j,
+          b = a + stride;
+        idx.push(a, b, a + offset, b, b + offset, a + offset);
+      }
     }
+    for (const i of [0, segments])
+      for (let j = 0; j < columns; j++) {
+        const a = i * stride + j,
+          b = a + 1;
+        idx.push(a, a + offset, b, b, a + offset, b + offset);
+      }
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
     geo.setIndex(idx);
     geo.computeVertexNormals();
-    add(geo, material, 'OMP woven belt');
+    add(geo, material, 'Thick woven harness webbing');
+    // A subtle bound edge gives the webbing a physical silhouette at grazing angles.
+    if (width > 0.025) for (const edge of edges) path(edge, 0.00045, material, segments).name = 'Bound harness edge';
     return curve;
   }
   function rearHarnessHook(x) {
-    // The MS120 rear crossmember is centred at Y .155 / Z .68;
-    // its rear face is Z .70. Both plates sit directly on that face.
-    const plate = add(new THREE.BoxGeometry(0.07, 0.065, 0.008), shellMaterial, 'Rear harness anchor plate');
-    plate.position.set(x, 0.163, 0.704);
-    for (const dx of [-0.022, 0.022]) {
-      const bolt = add(new THREE.CylinderGeometry(0.006, 0.006, 0.007, 6), steel, 'Rear harness anchor bolt');
-      bolt.rotation.x = Math.PI / 2;
-      bolt.position.set(x + dx, 0.163, 0.711);
-    }
-    const stem = add(new THREE.CylinderGeometry(0.005, 0.005, 0.036, 16), steel, 'Harness eye bolt stem');
-    stem.rotation.x = Math.PI / 2;
-    stem.position.set(x, 0.158, 0.725);
-    const eye = add(new THREE.TorusGeometry(0.014, 0.004, 10, 32), steel, 'Harness eye bolt');
-    eye.position.set(x, 0.172, 0.746);
-
-    // The snap hook lies perpendicular to the eye, with a visible closing gate.
+    // The close-up shows vertical eye bolts threaded into the TOP of the rear
+    // crossmember (Y .195), with silver snap hooks clipped through the black eyes.
+    const washer = add(new THREE.CylinderGeometry(0.014, 0.014, 0.003, 24), steel, 'Harness eye washer');
+    washer.position.set(x, 0.197, 0.68);
+    const nut = add(new THREE.CylinderGeometry(0.009, 0.009, 0.008, 6), plastic, 'Harness eye locking nut');
+    nut.position.set(x, 0.202, 0.68);
+    const stem = add(new THREE.CylinderGeometry(0.005, 0.005, 0.022, 16), steel, 'Vertical harness eye bolt stem');
+    stem.position.set(x, 0.202, 0.68);
+    const eye = add(new THREE.TorusGeometry(0.014, 0.004, 10, 32), plastic, 'Harness eye bolt');
+    eye.rotation.y = Math.PI / 2;
+    eye.position.set(x, 0.222, 0.68);
     path(
       [
-        [x, 0.188, 0.741],
-        [x, 0.181, 0.753],
-        [x, 0.189, 0.768],
-        [x, 0.224, 0.766],
-        [x, 0.239, 0.753],
-        [x, 0.231, 0.74],
-        [x, 0.203, 0.738]
+        [x - 0.006, 0.231, 0.68],
+        [x - 0.012, 0.22, 0.68],
+        [x + 0.009, 0.216, 0.68],
+        [x + 0.016, 0.238, 0.68],
+        [x + 0.011, 0.265, 0.68],
+        [x - 0.012, 0.265, 0.68],
+        [x - 0.014, 0.242, 0.68]
       ],
       0.004,
       steel,
-      48
+      40
     ).name = 'Rear harness snap hook';
     path(
       [
-        [x, 0.203, 0.738],
-        [x, 0.188, 0.741]
+        [x - 0.014, 0.242, 0.68],
+        [x - 0.006, 0.231, 0.68]
       ],
       0.002,
       steel,
       4
     ).name = 'Snap hook closing gate';
-    for (const y of [0.241, 0.263]) {
-      const bar = add(new THREE.BoxGeometry(0.058, 0.006, 0.008), steel, 'Harness webbing slot');
-      bar.position.set(x, y, 0.755);
+    for (const y of [0.265, 0.289]) {
+      const bar = add(new THREE.BoxGeometry(0.058, 0.006, 0.006), steel, 'Harness webbing slot');
+      bar.position.set(x, y, 0.68);
     }
     for (const dx of [-0.026, 0.026]) {
-      const side = add(new THREE.BoxGeometry(0.006, 0.022, 0.008), steel, 'Harness webbing slot');
-      side.position.set(x + dx, 0.252, 0.755);
+      const edge = add(new THREE.BoxGeometry(0.006, 0.024, 0.006), steel, 'Harness webbing slot');
+      edge.position.set(x + dx, 0.277, 0.68);
     }
-    // A short folded return closes around the metal slot, rather than ending in mid-air.
     ribbon(
       [
-        [x, 0.305, 0.752],
-        [x, 0.29, 0.765],
-        [x, 0.265, 0.764],
-        [x, 0.263, 0.755],
-        [x, 0.27, 0.746]
+        [x, 0.335, 0.703],
+        [x, 0.312, 0.695],
+        [x, 0.29, 0.687],
+        [x, 0.289, 0.68],
+        [x, 0.298, 0.676]
       ],
       0.045,
       red
     );
-    return [x, 0.27, 0.746];
+    return [x, 0.298, 0.676];
   }
-  const omp = textMap((ctx, w, h) => {
-    ctx.fillStyle = '#18191b';
-    ctx.fillRect(0, 0, w, h);
-    ctx.strokeStyle = '#6d6b54';
-    ctx.lineWidth = 10;
-    ctx.strokeRect(8, 8, w - 16, h - 16);
-    ctx.fillStyle = '#f3df65';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.font = 'italic 900 240px Arial';
-    ctx.fillText('OMP', w / 2, h * 0.47, w * 0.85);
-    ctx.fillStyle = '#e7e3c9';
-    ctx.font = '32px Arial';
-    ctx.fillText('RACING', w / 2, h * 0.82);
-  });
+  const omp = textMap(
+    (ctx, w, h) => {
+      ctx.fillStyle = '#18191b';
+      ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = '#585244';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(8, 8, w - 16, h - 16);
+      ctx.translate(w / 2, h / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillStyle = '#f5d526';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = 'italic 900 240px Arial Black, Arial';
+      ctx.fillText('OMP', 0, 0, h * 0.85);
+    },
+    512,
+    1024
+  );
   for (const side of [-1, 1]) {
     const hx = side * 0.09,
       hy = 1.012,
@@ -503,7 +658,7 @@ export function createSeat(THREE) {
     ribbon(
       [
         rearAnchor,
-        [side * 0.135, 0.33, 0.755],
+        [side * 0.135, 0.36, 0.727],
         [side * 0.125, 0.49, 0.77],
         [side * 0.115, 0.68, 0.79],
         [hx, 0.9, hz + 0.075],
@@ -524,18 +679,33 @@ export function createSeat(THREE) {
       red
     );
     const patch = add(
-      new THREE.PlaneGeometry(0.049, 0.085),
+      new THREE.PlaneGeometry(0.039, 0.083),
       new THREE.MeshStandardMaterial({ map: omp, roughness: 0.93, side: THREE.DoubleSide }),
       'OMP shoulder pad label'
     );
     patch.position.set(side * 0.105, 0.813, surfaceZ(side * 0.106, 0.81) - 0.074);
     patch.rotation.set(0.29, Math.PI, side * -0.03);
-    // Two steel adjuster slots on each shoulder strap.
-    for (const yy of [0.688, 0.711]) {
-      const bar = add(new THREE.BoxGeometry(0.052, 0.008, 0.007), steel);
-      bar.position.set(side * 0.101, yy, surfaceZ(side * 0.1, yy) - 0.077);
-      bar.rotation.x = 0.28;
+    // Stamped adjuster with open slots, a central roller and folded pull tab.
+    const adjuster = new THREE.Group();
+    adjuster.position.set(side * 0.101, 0.7, surfaceZ(side * 0.1, 0.7) - 0.078);
+    adjuster.rotation.x = 0.28;
+    seat.add(adjuster);
+    function adjusterBar(w, h, d, x, y, z, material = steel) {
+      const bar = add(new THREE.BoxGeometry(w, h, d), material, 'OMP strap adjuster');
+      seat.remove(bar);
+      adjuster.add(bar);
+      bar.position.set(x, y, z);
+      return bar;
     }
+    for (const y of [-0.014, 0, 0.014]) adjusterBar(0.056, 0.005, 0.008, 0, y, 0);
+    for (const x of [-0.026, 0.026]) adjusterBar(0.005, 0.033, 0.008, x, 0, 0);
+    adjusterBar(0.028, 0.027, 0.002, 0, -0.029, 0.003, plastic);
+    const folded = [
+      [side * 0.101, 0.708, surfaceZ(side * 0.1, 0.708) - 0.089],
+      [side * 0.101, 0.68, surfaceZ(side * 0.1, 0.68) - 0.087],
+      [side * 0.102, 0.641, surfaceZ(side * 0.1, 0.641) - 0.079]
+    ];
+    ribbon(folded, 0.039, red);
     // Wrap outside the hip bolster, then over its crown before dropping to the
     // latch. The full ribbon width needs clearance, including the sloped edges.
     ribbon(
@@ -562,9 +732,43 @@ export function createSeat(THREE) {
   buckle.position.set(0, 0.49, 0.32);
   const buckleFace = add(new THREE.CylinderGeometry(0.024, 0.024, 0.002, 48), steel);
   buckleFace.position.set(0, 0.5, 0.32);
-  const lever = add(new THREE.BoxGeometry(0.037, 0.006, 0.008), plastic);
-  lever.position.set(0.004, 0.505, 0.32);
-  lever.rotation.y = 0.5;
+  const camShape = new THREE.Shape();
+  camShape.moveTo(-0.025, -0.006);
+  camShape.lineTo(-0.004, -0.008);
+  camShape.quadraticCurveTo(0.019, -0.015, 0.022, -0.003);
+  camShape.quadraticCurveTo(0.016, 0.012, 0.004, 0.009);
+  camShape.lineTo(-0.023, 0.005);
+  camShape.quadraticCurveTo(-0.031, 0.001, -0.025, -0.006);
+  const camGeometry = new THREE.ExtrudeGeometry(camShape, {
+    depth: 0.003,
+    bevelEnabled: true,
+    bevelSize: 0.001,
+    bevelThickness: 0.001,
+    bevelSegments: 2,
+    curveSegments: 12
+  });
+  const cam = add(camGeometry, steel, 'OMP cam lock release lever');
+  cam.rotation.x = -Math.PI / 2;
+  cam.rotation.z = 0.32;
+  cam.position.set(-0.007, 0.504, 0.32);
+  const badgeMap = canvas(256, 256, (ctx, w, h) => {
+    ctx.fillStyle = '#dcc23d';
+    ctx.beginPath();
+    ctx.arc(w / 2, h / 2, 118, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#242528';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = 'italic 900 72px Arial';
+    ctx.fillText('OMP', w / 2, h / 2, 210);
+  });
+  const badge = add(
+    new THREE.CircleGeometry(0.011, 32),
+    new THREE.MeshStandardMaterial({ map: badgeMap, roughness: 0.55 }),
+    'OMP buckle badge'
+  );
+  badge.rotation.x = -Math.PI / 2;
+  badge.position.set(0.004, 0.51, 0.32);
 
   seat.userData.anchors = {
     seat: new THREE.Vector3(-0.19, 0.92, 0.68),

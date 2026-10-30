@@ -241,9 +241,28 @@
   font-weight: 300;
   letter-spacing: 1px;
 }
-#inventory-count {
-  font-size: 12px;
+.equipment-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.headset-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  background: var(--bg-card);
+  color: var(--text);
+  white-space: nowrap;
+}
+.headset-toggle span {
+  min-width: 26px;
   color: var(--text-muted);
+}
+.headset-toggle[aria-pressed='true'] span {
+  color: var(--accent);
 }
 .filters {
   display: flex;
@@ -473,8 +492,10 @@
   .inventory h2 {
     font-size: 25px;
   }
-  #inventory-count {
-    margin-top: 10px;
+  .equipment-controls {
+    justify-content: flex-start;
+    margin-top: 14px;
+    gap: 8px;
   }
   .filters {
     gap: 14px;
@@ -517,12 +538,18 @@
     font-size: 23px;
   }
   .wheel-picker {
-    font-size: 10px;
-    gap: 2px;
+    font-size: 11px;
+    gap: 6px;
+    min-width: 0;
+    max-width: 100%;
   }
   .wheel-picker select {
-    max-width: 220px;
-    padding: 8px 4px;
+    min-width: 0;
+    max-width: 235px;
+    padding: 10px 4px;
+  }
+  .headset-toggle {
+    min-height: 40px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

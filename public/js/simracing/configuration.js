@@ -28,10 +28,9 @@ export function resolveEquipment(catalog, variant = catalog.configuration.instal
   });
 }
 
-export function shouldShowHotspot(item, group, threshold, includeUnpriced) {
+export function shouldShowHotspot(item, group) {
   if (item.catalogOnly) return false;
-  if (group !== 'all' && item.group !== group) return false;
-  return item.hotspotAlwaysVisible || (item.priceEur === null ? includeUnpriced : item.priceEur >= threshold);
+  return group === 'all' || item.group === group;
 }
 
 export function summarizeEquipment(items, group = 'all') {

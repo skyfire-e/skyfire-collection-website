@@ -43,11 +43,6 @@
                 ↻
               </button>
               <button class="btn btn-sm" id="points" aria-pressed="true" aria-label="Toggle component points">⊙</button>
-              <label class="wheel-picker" for="wheel-variant"
-                ><span>Wheel</span>
-                <select id="wheel-variant" aria-label="Steering wheel" aria-describedby="wheel-status"></select>
-              </label>
-              <span id="wheel-status" class="visually-hidden" role="status"></span>
             </div>
           </div>
         </div>
@@ -65,7 +60,16 @@
       <section class="inventory" id="equipment" aria-labelledby="equipment-title">
         <div class="inventory-top">
           <h2 id="equipment-title">Equipment</h2>
-          <p id="inventory-count"></p>
+          <div class="equipment-controls" role="group" aria-label="Cockpit configuration">
+            <label class="wheel-picker" for="wheel-variant"
+              ><span>Wheel</span>
+              <select id="wheel-variant" aria-label="Steering wheel" aria-describedby="wheel-status" disabled></select>
+            </label>
+            <span id="wheel-status" class="visually-hidden" role="status"></span>
+            <button class="btn btn-sm headset-toggle" id="headset-toggle" type="button" aria-pressed="true" disabled>
+              VR headset <span id="headset-state">On</span>
+            </button>
+          </div>
         </div>
         <div class="filters">
           <div class="tabs" role="group" aria-label="Filter equipment">

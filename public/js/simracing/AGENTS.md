@@ -38,9 +38,11 @@ The public interface is entirely English and intentionally light gray.
   or Escape clears the outline and returns focus. Selecting the catalog-only spare
   wheel fits it temporarily and highlights the installed slot.
 - Markers render above the canvas and are never culled by model occlusion or by
-  proximity to other markers. Only explicit filters, the points toggle and the
-  camera viewport may hide them. A low-price row can still select its component.
-- The wheel selector belongs to the scene toolbar. Inventory uses full-width rows.
+  proximity to other markers. Only explicit filters, the points toggle, VR
+  visibility and the camera viewport may hide them. A low-price row can still select its component.
+- The wheel selector and VR headset toggle belong to the right of the Equipment
+  heading, replacing the component count; camera controls remain on the scene.
+  Inventory uses full-width rows.
   On phones details flow below the scene, keeping the selected geometry visible.
 - All current components use original geometry. The generic CC0 seat was
   replaced by a photo-based BRIDE Low Max model with OMP harness.
@@ -49,6 +51,13 @@ The public interface is entirely English and intentionally light gray.
   wheel remains in the catalog as `spare-wheel`; never float it in the scene.
   `configuration.ownedWheels` distinguishes owned alternatives from previews.
   Do not change the wheelbase when switching rims.
+- Match the photographed GT Neo with a SIMAGIC wordmark on its bridge,
+  warm white upper buttons and red encoders; its bridge has no RPM light bar.
+  All three photographed pedal faces are solid. Ultimate has a shorter rear
+  housing with an open sensor window and exposed front guide rods.
+- The fixed coiled steering cable belongs to frame wiring, outside the swappable
+  wheel group. LCD key faces use unlit textures so studio reflections do not
+  wash out their icons; selection tint still applies to these materials.
 - Pedal order from the driver's left is Co-Pedal, Ultimate, Pro; move matching
   anchors with geometry. Fosi sits on the front shelf beneath the Link Hub;
   ACASIS is on the same rail farther toward the pedals. HBP sits beside AB9.
@@ -68,9 +77,17 @@ The public interface is entirely English and intentionally light gray.
   button box stationary when adjusting this device offset. Shorten the button
   mount cantilever instead of moving its clamp off the profile. Ulanzi sits at
   Y .85 on a short tilt bracket; keep it connected and clear of the keyboard.
-- Rear shoulder belts loop through snap hooks and eye bolts on the rear
-  crossmember (rear face Z .70). Keep the plates against the frame and preserve
-  clearance over the front cushions when changing the belt paths.
+- The Simucube Baseplate is elevated on four perforated SIMART risers bolted to
+  the top of the main rails, with transverse adapters under the narrower tray.
+  Keep mounting hardware tagged `pedal-mount` and the Baseplate's own side cheeks
+  tagged `pedal-plate`. Derive pedal hotspots from the tray's transform.
+- Owner close-ups show short camera tilt heads on flat offset plates behind
+  DIMSIM/Ulanzi, top-edge dock ports, four-panel stitched AB9 leather, 120 mm
+  uprights and small swivel casters. `cameraMount` derives supports from the
+  unchanged device poses; do not replace them with long floating struts.
+- Rear shoulder belts loop through snap hooks and vertical eye bolts threaded
+  into the TOP of the rear crossmember (Y .195 / Z .68). Preserve clearance over
+  the front cushions when changing the belt paths.
 - Lap belts wrap outside and over the hip bolsters before reaching the buckle.
   Check the full ribbon width against the cushion meshes; a clear centreline
   alone can still leave the strap edges buried in the upholstery.
@@ -80,8 +97,17 @@ The public interface is entirely English and intentionally light gray.
   The headset has its own `vr-headset` hotspot and catalog entry; no owner price
   was provided, so `ownerPriceRub` stays null.
 - Public wheel previews are transient; never persist them as owned equipment.
-- `hotspotAlwaysVisible` makes confirmed physical components (especially
-  DIMSIM button box) visible even when their prices are not verified.
+- VR Off hides the Pimax AND its tether, hotspot and selection geometry, while
+  preserving the seat hooks, catalog entry and Summary. Wheel swaps and filters
+  preserve this state. Selecting its catalog row reveals it and sets VR On.
+  The whole headset/tether assembly shares one parent with toggled visibility.
+- NEO X-330R uses a 330 mm leather rim with inward thumb swells, red centre marker
+  and inner cross-stitching, three brushed-metal spokes, the shaped forged-carbon
+  hub, eight buttons, nine RPM segments and two lower encoders. Reference:
+  https://simagic.com/products/simagic-neo-x-series-steering-wheels
+- All physically fitted components have hotspots, regardless of price or price
+  availability. Only catalog-only equipment, category filters and the global
+  points toggle (or VR Off for the headset) can exclude an item; do not restore a price threshold.
 - Prefer verified exact catalog listings; use the supplied `ownerPriceRub` as
   fallback when the exact product or bundle cannot be identified. Preserve the
   baseline even when a catalog price wins. `priceType` and `sourceLabel` expose
@@ -91,8 +117,8 @@ The public interface is entirely English and intentionally light gray.
 - EUR/RUB is owner-defined and fixed at 90, not a CBR quote. USD listings use
   the dated CBR USD/RUB snapshot, then divide by 90. Preserve this explicit
   distinction and recompute prices from sourceCurrency/sourcePrice.
-- The hotspot price threshold stays EUR 25, with no public price/unpriced controls.
-  All components remain available in the list. Summary below the list totals the
+- All components remain available in the list, with no public price/unpriced
+  controls. Summary below the list totals the
   current category in EUR and RUB, including the catalog-only alternate wheel
   once. Sum integer cents; unknown prices are excluded and explicitly counted.
   Refresh totals when filtering or switching wheels. Keep provenance in item

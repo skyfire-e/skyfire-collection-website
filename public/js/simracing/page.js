@@ -25,6 +25,7 @@ let selected = null;
 let lastTrigger = null;
 let group = 'all';
 let showPoints = true;
+let showHeadset = true;
 let catalog;
 let sourceCatalog;
 const markers = new Map();
@@ -37,7 +38,7 @@ function updateWheelStatus(variant) {
 }
 
 function visibleItems() {
-  return catalog.items.filter((item) => shouldShowHotspot(item, group, 25, false));
+  return catalog.items.filter((item) => shouldShowHotspot(item, group));
 }
 function updateSummary() {
   const { count, unpricedCount, totalEur } = summarizeEquipment(catalog.items, group);
@@ -71,6 +72,8 @@ function closeDetail() {
   if (lastTrigger?.isConnected) lastTrigger.focus({ preventScroll: true });
 }
 function selectItem(item, trigger) {
+  // Selecting the headset in the catalog reveals it for inspection.
+  if (item.id === 'vr-headset' && !showHeadset) setHeadsetVisible(true);
   // An alternate wheel has no floating mesh: fit it before highlighting it.
   if (item.catalogOnly && item.id === 'spare-wheel') {
     changeWheel(wheelArrangement($('wheel-variant').value).spare);
@@ -163,8 +166,18 @@ function renderCatalog() {
     $('hotspots').append(marker);
   });
   $('equipment-list').append(fragment);
-  $('inventory-count').textContent = `${catalog.items.length} components`;
 }
+function setHeadsetVisible(value) {
+  showHeadset = value;
+  if (!value && selected === 'vr-headset') closeDetail();
+  $('headset-toggle').setAttribute('aria-pressed', String(value));
+  $('headset-state').textContent = value ? 'On' : 'Off';
+  viewer?.setHeadsetVisible(value);
+}
+$('headset-toggle').addEventListener('click', () => {
+  setHeadsetVisible(!showHeadset);
+  $('headset-toggle').focus({ preventScroll: true });
+});
 $('close-detail').addEventListener('click', closeDetail);
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && selected) closeDetail();
@@ -233,11 +246,13 @@ try {
     );
     updateFilter();
     if (selected) viewer.select(selected);
+    $('wheel-variant').disabled = false;
+    $('headset-toggle').disabled = false;
   } catch (error) {
     console.error('Cockpit viewer:', error);
     $('fallback').hidden = false;
     document
-      .querySelectorAll('.view-controls button, .view-controls select')
+      .querySelectorAll('.view-controls button, .equipment-controls button, .equipment-controls select')
       .forEach((control) => (control.disabled = true));
   }
 } catch (error) {

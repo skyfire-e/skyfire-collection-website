@@ -12,16 +12,16 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1;
   renderer.domElement.setAttribute('aria-label', '3D model of the sim racing cockpit');
   host.append(renderer.domElement);
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
   const room = new RoomEnvironment();
   scene.environment = pmrem.fromScene(room, 0.04).texture;
-  scene.environmentIntensity = 1.0;
+  scene.environmentIntensity = 0.85;
   room.dispose();
   pmrem.dispose();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.05, 35);
@@ -34,17 +34,17 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   controls.minPolarAngle = 0.13;
   controls.enablePan = false;
   controls.autoRotateSpeed = 0.65;
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8d9481, 1.6));
-  const key = new THREE.DirectionalLight(0xfffaf0, 3.2);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x92928a, 1.05));
+  const key = new THREE.DirectionalLight(0xfffaf3, 2.7);
   key.position.set(-2.5, 5, 2);
   key.castShadow = true;
   key.shadow.mapSize.set(2048, 2048);
   Object.assign(key.shadow.camera, { left: -2, right: 2, top: 2, bottom: -2, near: 0.1, far: 12 });
   key.shadow.bias = -0.0005;
-  key.shadow.normalBias = 0.012;
-  key.shadow.radius = 4;
+  key.shadow.normalBias = 0.003;
+  key.shadow.radius = 3;
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xe6f0ff, 2.1);
+  const fill = new THREE.DirectionalLight(0xeaf1ff, 1.25);
   fill.position.set(3, 2, -4);
   scene.add(fill);
   const rig = createCockpit(THREE, initialWheel);
@@ -62,7 +62,7 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   outline.edgeGlow = 0;
   composer.addPass(outline);
   composer.addPass(new OutputPass());
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({ opacity: 0.07 }));
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.ShadowMaterial({ opacity: 0.12 }));
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -0.003;
   ground.receiveShadow = true;
@@ -96,7 +96,7 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
     // to another marker hides a component; only filters and the viewport do.
     for (const [id, marker] of markers) {
       const anchor = rig.anchors[id];
-      if (!anchor || !visible.has(id)) {
+      if (!anchor || !visible.has(id) || !rig.isComponentVisible(id)) {
         marker.hidden = true;
         continue;
       }
@@ -145,7 +145,7 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
     const targets = {
       overview: [0, 0.57, -0.02],
       side: [0, 0.58, -0.05],
-      front: [0, 0.4, -0.6],
+      front: [0, 0.44, -0.6],
       driver: [0, 0.835, 0.01]
     };
     controls.target.fromArray(targets[name] || targets.overview);
@@ -157,7 +157,7 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
       0.4 / (2 * Math.tan(THREE.MathUtils.degToRad(55) / 2) * camera.aspect) + 0.06
     );
     const distance =
-      name === 'driver' ? driverDistance : mobile ? (closeup ? 1.5 : width < 450 ? 4.3 : 3.5) : closeup ? 1.25 : 3.4;
+      name === 'driver' ? driverDistance : mobile ? (closeup ? 1.5 : width < 450 ? 4.3 : 3.5) : closeup ? 1.4 : 3.4;
     camera.position.copy(controls.target).add(direction.normalize().multiplyScalar(distance));
     controls.minDistance = name === 'driver' ? 0.3 : closeup ? 0.65 : 1.4;
     camera.fov = name === 'driver' ? 55 : mobile ? 43 : 34;
@@ -197,8 +197,16 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   });
   renderer.domElement.addEventListener('webglcontextrestored', () => location.reload());
   host.dataset.model = 'ready';
+  host.dataset.headsetVisible = 'true';
   requestRender();
   return {
+    setHeadsetVisible(value) {
+      rig.setHeadsetVisible(value);
+      if (!value && selected === 'vr-headset') selected = null;
+      host.dataset.headsetVisible = String(value);
+      updateSelection();
+      requestRender();
+    },
     setWheel(variant) {
       rig.setWheel(variant);
       updateSelection();

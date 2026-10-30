@@ -115,7 +115,7 @@ describe('Simracing collection integration', () => {
         assert.equal(item.sourceUrl, data.wheelVariants[key].sourceUrl);
         assert.doesNotMatch(item.description, /Preview/);
         assert.equal(item.catalogOnly, slot === 'spare-wheel');
-        assert.equal(shouldShowHotspot(item, 'all', 0, true), slot === 'installed-wheel');
+        assert.equal(shouldShowHotspot(item, 'all'), slot === 'installed-wheel');
         assert.doesNotMatch(item.description, /above the cockpit/);
       }
       const nonWheels = (list) => list.filter((item) => !['installed-wheel', 'spare-wheel'].includes(item.id));
@@ -154,19 +154,25 @@ describe('Simracing collection integration', () => {
     });
     assert.deepEqual(summarizeEquipment([]), { count: 0, unpricedCount: 0, totalEur: 0 });
   });
-  it('keeps DIMSIM accessible without enabling unpriced points', async () => {
-    const { shouldShowHotspot } = await import('../public/js/simracing/configuration.js');
-    const buttonbox = data.items.find((item) => item.id === 'buttonbox');
-    assert.equal(buttonbox.priceEur, 166.67);
-    assert.equal(buttonbox.priceType, 'owner');
-    assert.equal(shouldShowHotspot(buttonbox, 'all', 30, false), true);
-    assert.equal(shouldShowHotspot(buttonbox, 'Usability', 30, false), true);
-    assert.equal(shouldShowHotspot(buttonbox, 'Hardware', 30, false), false);
-    assert.equal(shouldShowHotspot({ priceEur: 19, group: 'Cockpit' }, 'all', 20, false), false);
-    const velcro = data.items.find((item) => item.id === 'velcro');
-    assert.equal(shouldShowHotspot(velcro, 'all', 25, false), false);
-    assert.equal(shouldShowHotspot(velcro, 'all', 0, false), true);
-    assert.equal(shouldShowHotspot({ ...buttonbox, priceEur: null }, 'all', 30, false), true);
+  it('shows every fitted component regardless of price while preserving category filters', async () => {
+    const { shouldShowHotspot, resolveEquipment } = await import('../public/js/simracing/configuration.js');
+    const items = resolveEquipment(data);
+    assert.equal(items.filter((item) => shouldShowHotspot(item, 'all')).length, 27);
+    for (const item of items) {
+      assert.equal(shouldShowHotspot(item, 'all'), !item.catalogOnly);
+      assert.equal(shouldShowHotspot(item, item.group), !item.catalogOnly);
+      const otherGroup = item.group === 'Hardware' ? 'Cockpit' : 'Hardware';
+      assert.equal(shouldShowHotspot(item, otherGroup), false);
+    }
+    for (const id of ['buttonbox', 'velcro', 'usb']) {
+      const item = items.find((entry) => entry.id === id);
+      assert.ok(item);
+      assert.equal(shouldShowHotspot(item, 'all'), true);
+      assert.equal(shouldShowHotspot({ ...item, priceEur: null }, 'all'), true);
+    }
+    const preview = resolveEquipment(data, 'savu-pro').find((item) => item.id === 'installed-wheel');
+    assert.equal(preview.priceEur, null);
+    assert.equal(shouldShowHotspot(preview, 'all'), true);
     assert.ok(!data.items.some((item) => item.id === 'booster-plate'));
     assert.equal(data.items.find((item) => item.id === 'pedal-plate').name, 'Simucube Baseplate');
   });
@@ -213,6 +219,18 @@ describe('Simracing collection integration', () => {
       }
       assert.deepEqual(rig.getComponentMeshes('spare-wheel'), []);
       assert.deepEqual(rig.getComponentMeshes(null), []);
+      const headset = rig.getComponentMeshes('vr-headset');
+      const hooks = rig.getComponentMeshes('hooks');
+      assert.ok(headset.some((mesh) => mesh.name === 'Pimax tether to cockpit cable routing'));
+      rig.setHeadsetVisible(false);
+      assert.equal(rig.isComponentVisible('vr-headset'), false);
+      assert.deepEqual(rig.getComponentMeshes('vr-headset'), []);
+      assert.deepEqual(rig.getComponentMeshes('hooks'), hooks);
+      for (const mesh of headset) {
+        let object = mesh;
+        while (object && object.visible) object = object.parent;
+        assert.ok(object, 'Headset and tether must actually leave the rendered scene');
+      }
       const base = rig.getComponentMeshes('wheelbase');
       let previousWheel = rig.getComponentMeshes('installed-wheel');
       for (const variant of ['neo-x', 'savu-pro', 'gt-neo']) {
@@ -221,8 +239,12 @@ describe('Simracing collection integration', () => {
         assert.ok(wheel.length > 0);
         assert.ok(wheel.every((mesh) => !previousWheel.includes(mesh)));
         assert.deepEqual(rig.getComponentMeshes('wheelbase'), base);
+        assert.equal(rig.isComponentVisible('vr-headset'), false, 'Wheel changes must preserve the VR toggle');
         previousWheel = wheel;
       }
+      rig.setHeadsetVisible(true);
+      assert.equal(rig.isComponentVisible('vr-headset'), true);
+      assert.deepEqual(rig.getComponentMeshes('vr-headset'), headset);
     } finally {
       if (previousDocument === undefined) delete globalThis.document;
       else globalThis.document = previousDocument;

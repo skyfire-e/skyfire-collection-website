@@ -11,13 +11,13 @@ export function createPedals(THREE) {
   const anchors = {};
   let componentId = 'pedal-plate';
   const m = {
-    shell: new THREE.MeshStandardMaterial({ color: 0x24272b, metalness: 0.64, roughness: 0.34 }),
-    edge: new THREE.MeshStandardMaterial({ color: 0x42464c, metalness: 0.75, roughness: 0.3 }),
+    shell: new THREE.MeshStandardMaterial({ color: 0x151719, metalness: 0.64, roughness: 0.34 }),
+    edge: new THREE.MeshStandardMaterial({ color: 0x2a2d30, metalness: 0.75, roughness: 0.3 }),
     dark: new THREE.MeshStandardMaterial({ color: 0x080b0d, metalness: 0.2, roughness: 0.72 }),
     aluminum: new THREE.MeshStandardMaterial({ color: 0x989fa6, metalness: 0.86, roughness: 0.25 }),
     steel: new THREE.MeshStandardMaterial({ color: 0xd3d9dd, metalness: 0.9, roughness: 0.21 }),
     orange: new THREE.MeshStandardMaterial({ color: 0xee720c, metalness: 0.6, roughness: 0.3 }),
-    face: new THREE.MeshStandardMaterial({ color: 0x303438, metalness: 0.52, roughness: 0.58 }),
+    face: new THREE.MeshStandardMaterial({ color: 0x191c1e, metalness: 0.52, roughness: 0.58 }),
     rubber: new THREE.MeshStandardMaterial({ color: 0x111316, roughness: 0.92 })
   };
   const unitY = new THREE.Vector3(0, 1, 0);
@@ -159,9 +159,42 @@ export function createPedals(THREE) {
   // Simucube Baseplate: three 360mm mounting extrusions, narrow heel support,
   // two bolted side plates and independently tilted heel rest (not a solid tray).
   const tray = new THREE.Group();
-  tray.position.set(0, 0.24, -0.6);
-  tray.rotation.x = -0.035;
+  tray.position.set(0, 0.405, -0.6);
+  tray.rotation.x = -0.07;
   group.add(tray);
+  tray.updateWorldMatrix(true, false);
+  // The owner's Baseplate sits on four SIMART height-adjustment brackets,
+  // above the MS120 rails. These supports stay fixed while the tray is tilted.
+  componentId = 'pedal-mount';
+  for (const z of [-0.19, 0.13]) {
+    const top = tray.localToWorld(new THREE.Vector3(0, -0.032, z));
+    box(0.55, 0.035, 0.04, [0, top.y, top.z], m.shell, group).name = 'Pedal mount transverse adapter';
+    for (const side of [-1, 1]) {
+      const x = side * 0.27;
+      box(0.055, 0.006, 0.09, [side * 0.29, 0.218, top.z + 0.018], m.shell, group);
+      for (const dz of [-0.014, 0.05]) screw([side * 0.29, 0.223, top.z + dz], group);
+      const upright = new THREE.Shape();
+      [
+        [top.z - 0.025, 0.221],
+        [top.z + 0.047, 0.221],
+        [top.z + 0.025, top.y + 0.036],
+        [top.z - 0.024, top.y + 0.036]
+      ].forEach(([zz, y], i) => (i ? upright.lineTo(zz, y) : upright.moveTo(zz, y)));
+      upright.closePath();
+      for (let y = 0.245; y < top.y + 0.025; y += 0.017) {
+        const hole = new THREE.Path();
+        hole.absarc(top.z, y, 0.0036, 0, Math.PI * 2, true);
+        upright.holes.push(hole);
+      }
+      const cheek = extrude(upright, 0.006, [x, 0, 0], m.shell, group, 0.0006);
+      cheek.rotation.y = -Math.PI / 2;
+      cheek.name = 'SIMART perforated height-adjustment bracket';
+      screw([x + side * 0.005, top.y, top.z], group, true, 0.006);
+      // Bolted top adapter connects the wider cockpit to the narrower Baseplate.
+      for (const xx of [side * 0.17, side * 0.25]) screw([xx, top.y + 0.021, top.z], group);
+    }
+  }
+  componentId = 'pedal-plate';
   for (const z of [-0.23, -0.065, 0.1]) {
     box(0.36, 0.028, 0.065, [0, 0, z], m.shell, tray);
     for (const zz of [-0.019, 0.019]) {
@@ -170,7 +203,6 @@ export function createPedals(THREE) {
     }
   }
   box(0.36, 0.028, 0.025, [0, 0, 0.25], m.shell, tray);
-  componentId = 'pedal-mount';
   for (const x of [-0.187, 0.187]) {
     const s = new THREE.Shape();
     [
@@ -198,10 +230,36 @@ export function createPedals(THREE) {
 
   function motorBody(p, length, ultimate) {
     plate(0.1, length, [0, 0.022, 0], p);
-    const body = rounded(0.087, 0.092, length - 0.018, [0, 0.071, -0.003], m.shell, p, 0.008);
-    // Flat lid, end caps, gasket seams, longitudinal orange inlay.
-    box(0.072, 0.002, length - 0.038, [0, 0.118, -0.003], m.edge, p);
-    for (const z of [-length / 2 + 0.003, length / 2 - 0.006]) {
+    // The Ultimate exposes its front actuator; Pro has the long enclosed housing.
+    const bodyLength = ultimate ? 0.24 : length - 0.018;
+    const bodyZ = ultimate ? -0.075 : -0.003;
+    const frontZ = ultimate ? 0.047 : length / 2 - 0.006;
+    let body;
+    if (ultimate) {
+      body = box(0.087, 0.007, bodyLength, [0, 0.028, bodyZ], m.shell, p);
+      for (const x of [-0.041, 0.041]) box(0.005, 0.087, bodyLength, [x, 0.074, bodyZ], m.shell, p);
+      // Real opening in the top cover with a recessed sensor board, not a decal.
+      const lidShape = outline(0.082, bodyLength - 0.006, 0.005);
+      const window = outline(0.038, 0.042, 0.002);
+      const cutout = new THREE.Path();
+      window.getPoints(12).forEach((v, i) => (i ? cutout.lineTo(v.x, v.y + 0.036) : cutout.moveTo(v.x, v.y + 0.036)));
+      lidShape.holes.push(cutout);
+      const lid = extrude(lidShape, 0.002, [0, 0.118, bodyZ], m.shell, p, 0.0004);
+      lid.rotation.x = Math.PI / 2;
+      const pcb = new THREE.MeshStandardMaterial({ color: 0x2c5b48, roughness: 0.8 });
+      box(0.037, 0.001, 0.04, [0, 0.108, -0.111], pcb, p);
+      box(0.014, 0.004, 0.017, [0, 0.111, -0.111], m.dark, p);
+      for (const x of [-0.014, 0.014]) screw([x, 0.111, -0.126], p, false, 0.002);
+      rounded(0.066, 0.066, 0.083, [0, 0.066, 0.093], m.shell, p, 0.008);
+      rounded(0.086, 0.089, 0.034, [0, 0.07, 0.156], m.shell, p, 0.008);
+      for (const x of [-0.033, 0.033]) rod([x, 0.063, 0.049], [x, 0.063, 0.151], 0.0035, m.steel, p);
+      const status = new THREE.MeshStandardMaterial({ color: 0x6be698, emissive: 0x22cb6b, emissiveIntensity: 0.8 });
+      for (const z of [-0.065, -0.078]) rod([-0.043, 0.084, z], [-0.045, 0.084, z], 0.002, status, p);
+    } else {
+      body = rounded(0.087, 0.092, bodyLength, [0, 0.071, bodyZ], m.shell, p, 0.008);
+      box(0.072, 0.002, bodyLength - 0.02, [0, 0.118, bodyZ], m.shell, p);
+    }
+    for (const z of [-length / 2 + 0.003, frontZ]) {
       rounded(0.089, 0.094, 0.005, [0, 0.071, z], m.edge, p, 0.008);
       for (const x of [-0.034, 0.034]) {
         const capbolt = rod([x, 0.037, z - 0.003], [x, 0.037, z + 0.003], 0.0028, m.steel, p, 12);
@@ -209,15 +267,18 @@ export function createPedals(THREE) {
       }
     }
     for (const x of [-0.0444, 0.0444]) {
-      box(0.001, 0.0035, length - 0.028, [x, 0.064, 0], m.orange, p);
-      brand('SIMUCUBE', 0.17, 0.018, [x * 1.015, 0.085, -0.033], p, [0, (Math.sign(x) * Math.PI) / 2, 0]);
+      box(0.001, 0.002, bodyLength - 0.01, [x, 0.064, bodyZ], m.orange, p);
+      brand('SIMUCUBE', ultimate ? 0.13 : 0.17, 0.014, [x * 1.015, 0.085, ultimate ? -0.08 : -0.033], p, [
+        0,
+        (Math.sign(x) * Math.PI) / 2,
+        0
+      ]);
       for (const z of [-length * 0.33, 0, length * 0.33]) screw([x * 1.03, 0.043, z], p, true, 0.0027);
     }
     if (ultimate) {
       // Ultimate's split front housing and orange collar are recognizable in the photo.
       box(0.091, 0.096, 0.009, [0, 0.071, 0.046], m.orange, p);
       box(0.095, 0.0015, 0.012, [0, 0.12, 0.046], m.aluminum, p);
-      box(0.037, 0.0015, 0.032, [0, 0.12, -0.108], m.dark, p);
     } else {
       box(0.052, 0.0018, 0.022, [0, 0.12, -0.139], m.dark, p);
     }
@@ -281,11 +342,46 @@ export function createPedals(THREE) {
     border.translate(0, 0, -0.003);
     const line = new THREE.LineSegments(border, new THREE.LineBasicMaterial({ color: 0x7b8086 }));
     faceGroup.add(line);
-    if (!perforated) brand('SIMUCUBE', w * 0.78, 0.009, [0, -0.013, 0.004], faceGroup);
-    for (const yy of [-0.025, 0.025]) {
-      const b = rod([0, yy, -0.018], [0, yy, -0.005], 0.003, m.steel, faceGroup);
-      b.name = 'Pedal face adjustment fastener';
+    if (!perforated) {
+      brand('SIMUCUBE', w * 0.78, 0.008, [0, -0.013, 0.004], faceGroup);
+      const marque = new THREE.Shape();
+      [
+        [-0.011, -0.006],
+        [-0.011, 0.006],
+        [0, 0.012],
+        [0.011, 0.006],
+        [0.011, -0.006],
+        [0, -0.012]
+      ].forEach(([x, y], i) => (i ? marque.lineTo(x, y) : marque.moveTo(x, y)));
+      marque.closePath();
+      const inset = new THREE.Path();
+      [
+        [-0.008, -0.004],
+        [-0.008, 0.004],
+        [0, 0.008],
+        [0.008, 0.004],
+        [0.008, -0.004],
+        [0, -0.008]
+      ].forEach(([x, y], i) => (i ? inset.lineTo(x, y) : inset.moveTo(x, y)));
+      inset.closePath();
+      marque.holes.push(inset);
+      extrude(marque, 0.0002, [0, 0.012, 0.0037], m.aluminum, faceGroup, 0);
     }
+    // Slotted rear carrier bridges the foot plate to the pivot shaft.
+    const carrier = outline(0.03, Math.min(0.084, h - 0.025), 0.004);
+    const carrierSlot = new THREE.Path();
+    slot(0.05, 0.007, 0, 0)
+      .getPoints(16)
+      .forEach((point, i) => (i ? carrierSlot.lineTo(-point.y, point.x) : carrierSlot.moveTo(-point.y, point.x)));
+    carrier.holes.push(carrierSlot);
+    extrude(carrier, 0.005, [0, -0.009, -0.016], m.shell, faceGroup, 0.0006);
+    for (const yy of [-0.025, 0.025]) {
+      const bolt = rod([0, yy, -0.022], [0, yy, -0.004], 0.003, m.steel, faceGroup);
+      bolt.name = 'Pedal face adjustment fastener';
+      const washer = add(new THREE.TorusGeometry(0.0043, 0.001, 8, 20), m.steel, [0, yy, -0.02], faceGroup);
+      washer.name = 'Pedal face carrier washer';
+    }
+    box(0.026, 0.018, 0.014, [0, -0.02, -0.023], m.shell, faceGroup);
     return faceGroup;
   }
   function active(x, ultimate, id) {
@@ -311,9 +407,17 @@ export function createPedals(THREE) {
     }
     for (const zz of [-0.109, 0.109]) {
       rod([-0.027, 0, zz], [0.027, 0, zz], 0.009, m.shell, linkage);
-      screw([0.029, 0, zz], linkage, true, 0.0048);
+      for (const side of [-1, 1]) {
+        const bearing = add(new THREE.TorusGeometry(0.0073, 0.0017, 8, 24), m.aluminum, [side * 0.027, 0, zz], linkage);
+        bearing.rotation.y = Math.PI / 2;
+        bearing.name = 'Actuator clevis bearing';
+        screw([side * 0.03, 0, zz], linkage, true, 0.0048);
+      }
     }
     box(0.039, 0.022, 0.027, [0, 0, 0], ultimate ? m.aluminum : m.shell, linkage);
+    if (!ultimate) {
+      for (const x of [-0.019, 0.019]) box(0.002, 0.0012, 0.19, [x, 0.013, 0], m.aluminum, linkage);
+    }
     if (ultimate) {
       for (const xx of [-0.009, 0.009]) box(0.006, 0.001, 0.016, [xx, 0.012, 0], m.dark, linkage);
       cable(
@@ -330,8 +434,8 @@ export function createPedals(THREE) {
     // Actuator's rear clevis with two cheeks and a visible pin.
     for (const xx of [-0.024, 0.024]) rounded(0.008, 0.043, 0.028, [xx, 0.155, -0.098], m.shell, p, 0.003);
     rod([-0.031, 0.176, -0.098], [0.031, 0.176, -0.098], 0.007, m.steel, p);
-    face(p, { y: 0.214, z: 0.145, w: 0.077, h: ultimate ? 0.116 : 0.122, perforated: ultimate });
-    anchors[id] = new THREE.Vector3(x, 0.495, -0.495);
+    face(p, { y: 0.214, z: 0.145, w: 0.077, h: ultimate ? 0.116 : 0.122 });
+    anchors[id] = tray.localToWorld(new THREE.Vector3(x, 0.255, 0.105));
   }
   function coPedal() {
     componentId = 'co-pedal';
@@ -371,12 +475,12 @@ export function createPedals(THREE) {
     for (const x of [-0.037, 0.037])
       brand('SIMUCUBE', 0.095, 0.013, [x * 1.025, 0.078, -0.081], p, [0, (Math.sign(x) * Math.PI) / 2, 0]);
     face(p, { y: 0.19, z: 0.106, w: 0.058, h: 0.173, tilt: -0.16 });
-    anchors['co-pedal'] = new THREE.Vector3(-0.12, 0.49, -0.49);
+    anchors['co-pedal'] = tray.localToWorld(new THREE.Vector3(-0.12, 0.25, 0.11));
   }
   active(0.12, false, 'active-pro');
   active(0, true, 'active-ultimate');
   coPedal();
-  anchors['pedal-plate'] = new THREE.Vector3(0.17, 0.31, -0.37);
-  anchors['pedal-mount'] = new THREE.Vector3(-0.195, 0.25, -0.58);
+  anchors['pedal-plate'] = tray.localToWorld(new THREE.Vector3(0.17, 0.07, 0.23));
+  anchors['pedal-mount'] = new THREE.Vector3(-0.28, 0.31, -0.47);
   return { group, anchors };
 }
