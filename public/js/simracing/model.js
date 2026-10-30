@@ -1009,12 +1009,31 @@ export function createCockpit(THREE, initialWheel = 'gt-neo') {
   ).name = 'Pimax tether to cockpit cable routing';
 
   componentId = 'shakers';
-  // Hidden essentials still have physical meshes and inspectable anchor points.
-  for (const z of [0.3, 0.61]) {
-    mesh(new THREE.CylinderGeometry(0.073, 0.073, 0.045, 32), palette.black, [0, 0.25, z]);
-    mesh(new THREE.CylinderGeometry(0.053, 0.053, 0.048, 32), palette.edge, [0, 0.25, z]);
+  // One transducer under the pedals, one under the seat. Both are fastened to
+  // cross-plates bolted to the main rails / seat runners.
+  for (const [name, z] of [
+    ['Front', -0.61],
+    ['Rear', 0.61]
+  ]) {
+    const shaker = support(`${name} Sounderlink bass shaker`);
+    const front = name === 'Front',
+      y = front ? 0.221 : 0.214,
+      railX = front ? 0.29 : 0.18;
+    box(front ? 0.62 : 0.4, 0.012, 0.18, 0, y, z, palette.black, shaker).name = 'Bass shaker rail mounting plate';
+    for (const x of [-railX, railX])
+      for (const dz of [-0.06, 0.06]) {
+        const fastener = bolt(x, y + (front ? 0.009 : -0.009), z + dz, shaker);
+        if (!front) fastener.rotation.x = Math.PI;
+      }
+    mesh(new THREE.CylinderGeometry(0.079, 0.079, 0.006, 40), palette.edge, [0, y + 0.009, z], shaker).name =
+      'Sounderlink mounting flange';
+    mesh(new THREE.CylinderGeometry(0.073, 0.073, 0.045, 40), palette.black, [0, y + 0.029, z], shaker).name =
+      'Sounderlink transducer housing';
+    mesh(new THREE.CylinderGeometry(0.053, 0.053, 0.048, 40), palette.edge, [0, y + 0.029, z], shaker);
+    for (const angle of [0, Math.PI / 2, Math.PI, Math.PI * 1.5])
+      bolt(Math.cos(angle) * 0.074, y + 0.014, z + Math.sin(angle) * 0.074, shaker);
   }
-  assign('shakers', 0.02, 0.28, 0.56);
+  assign('shakers', 0.02, 0.29, -0.61);
   // Front electronics shelf: amplifier directly below the Link Hub.
   componentId = 'frame';
   const electronics = support('Front electronics shelf');

@@ -88,9 +88,16 @@ The public interface is entirely English and intentionally light gray.
 - Rear shoulder belts loop through snap hooks and vertical eye bolts threaded
   into the TOP of the rear crossmember (Y .195 / Z .68). Preserve clearance over
   the front cushions when changing the belt paths.
-- Lap belts wrap outside and over the hip bolsters before reaching the buckle.
+- Lap belts clip to vertical eye bolts in the TOP slots of the side rails at
+  X ±.29 / Z .565 (rail top Y .215). Use stamped snap hooks with open webbing
+  slots, spring gates and folded strap ends; do not leave the lower ends floating.
+  Lap belts wrap outside and over the hip bolsters before reaching the buckle.
   Check the full ribbon width against the cushion meshes; a clear centreline
   alone can still leave the strap edges buried in the upholstery.
+- The Sounderlink pair has one shaker under the pedals (Z -.61), one under the
+  seat (Z .61). Front mounting plate rests on the main rails; the rear plate
+  fastens under the seat runners and stays clear of the lap-belt eye bolts.
+  Keep both under the shared `shakers` selection and its front anchor.
 - Pimax Crystal Light hangs nose-down by its rear headband on the two DIMSIM
   seat hooks. Keep the cradle on the hooks, the retaining tips outside the pad,
   and the visor clear of the seat and lap belts. Its cable returns to the rail.

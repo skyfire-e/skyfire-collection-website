@@ -632,6 +632,99 @@ export function createSeat(THREE) {
     );
     return [x, 0.298, 0.676];
   }
+  function lapHarnessHook(side) {
+    // Photo: the lap strap clips into an upright eye bolt in the TOP slot of
+    // the side rail, next to the recliner. Rail top is Y .215 (not the .195
+    // rear crossmember used by the shoulder straps).
+    const x = side * 0.29,
+      z = 0.565;
+    const washer = add(new THREE.CylinderGeometry(0.013, 0.013, 0.003, 24), steel, 'Lap belt rail washer');
+    washer.position.set(x, 0.2165, z);
+    const stem = add(new THREE.CylinderGeometry(0.0045, 0.0045, 0.024, 16), steel, 'Lap belt threaded eye stem');
+    stem.position.set(x, 0.219, z);
+    const nut = add(new THREE.CylinderGeometry(0.008, 0.008, 0.006, 6), plastic, 'Lap belt eye locking nut');
+    nut.position.set(x, 0.221, z);
+    const eye = add(new THREE.TorusGeometry(0.012, 0.0035, 12, 40), plastic, 'Lap belt rail eye bolt');
+    eye.position.set(x, 0.2415, z);
+
+    // Stamped silver snap hook, with an actual opening around the eye and a
+    // broad webbing slot. Its face follows the longitudinal plane of the strap.
+    const hook = new THREE.Group();
+    hook.name = 'Lap belt snap hook assembly';
+    hook.position.set(x, 0.23, z);
+    hook.rotation.set(0, Math.PI / 2, -0.24);
+    seat.add(hook);
+    const shape = new THREE.Shape();
+    shape.moveTo(-0.025, 0.076);
+    shape.lineTo(0.025, 0.076);
+    shape.quadraticCurveTo(0.031, 0.076, 0.031, 0.068);
+    shape.lineTo(0.027, 0.051);
+    shape.lineTo(0.013, 0.038);
+    shape.lineTo(0.014, 0.012);
+    shape.quadraticCurveTo(0.015, -0.008, 0.001, -0.009);
+    shape.quadraticCurveTo(-0.016, -0.009, -0.018, 0.007);
+    shape.quadraticCurveTo(-0.021, 0.025, -0.011, 0.038);
+    shape.lineTo(-0.027, 0.051);
+    shape.lineTo(-0.031, 0.068);
+    shape.quadraticCurveTo(-0.031, 0.076, -0.025, 0.076);
+    const opening = new THREE.Path();
+    opening.absellipse(-0.002, 0.012, 0.009, 0.014, 0, Math.PI * 2, true);
+    shape.holes.push(opening);
+    const slot = new THREE.Path();
+    slot.moveTo(-0.022, 0.058);
+    slot.lineTo(0.022, 0.058);
+    slot.quadraticCurveTo(0.025, 0.058, 0.025, 0.061);
+    slot.lineTo(0.025, 0.067);
+    slot.quadraticCurveTo(0.025, 0.07, 0.022, 0.07);
+    slot.lineTo(-0.022, 0.07);
+    slot.quadraticCurveTo(-0.025, 0.07, -0.025, 0.067);
+    slot.lineTo(-0.025, 0.061);
+    slot.quadraticCurveTo(-0.025, 0.058, -0.022, 0.058);
+    shape.holes.push(slot);
+    const geo = new THREE.ExtrudeGeometry(shape, {
+      depth: 0.003,
+      bevelEnabled: true,
+      bevelSize: 0.0006,
+      bevelThickness: 0.0006,
+      bevelSegments: 2,
+      curveSegments: 16
+    });
+    geo.translate(0, 0, -0.0015);
+    function onHook(geometry, material, name, position) {
+      const part = add(geometry, material, name);
+      hook.add(part);
+      part.position.set(...position);
+      return part;
+    }
+    onHook(geo, steel, 'Stamped lap belt snap hook', [0, 0, 0]);
+    onHook(new THREE.BoxGeometry(0.006, 0.029, 0.001), steel, 'Lap hook spring gate', [0.011, 0.025, 0.0024]);
+    for (const y of [0.013, 0.037]) {
+      const pin = onHook(new THREE.CylinderGeometry(0.0024, 0.0024, 0.005, 16), steel, 'Lap hook gate rivet', [
+        0.011,
+        y,
+        0
+      ]);
+      pin.rotation.x = Math.PI / 2;
+    }
+    hook.updateMatrix();
+    const point = (y, depth) => new THREE.Vector3(0, y, depth).applyMatrix4(hook.matrix).toArray();
+    // Fold the full-width webbing through the slot and around the upper bar.
+    ribbon(
+      [
+        point(0.109, -0.005),
+        point(0.086, -0.005),
+        point(0.072, -0.005),
+        point(0.07, 0),
+        point(0.072, 0.005),
+        point(0.086, 0.005),
+        point(0.109, 0.005)
+      ],
+      0.044,
+      red,
+      [0, 0, 1]
+    );
+    return point(0.109, 0.005);
+  }
   const omp = textMap(
     (ctx, w, h) => {
       ctx.fillStyle = '#18191b';
@@ -710,7 +803,8 @@ export function createSeat(THREE) {
     // latch. The full ribbon width needs clearance, including the sloped edges.
     ribbon(
       [
-        [side * 0.282, 0.365, 0.5],
+        lapHarnessHook(side),
+        [side * 0.292, 0.365, 0.5],
         [side * 0.282, 0.41, 0.475],
         [side * 0.282, 0.475, 0.425],
         [side * 0.273, 0.516, 0.385],
