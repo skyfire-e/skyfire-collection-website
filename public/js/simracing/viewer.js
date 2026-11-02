@@ -8,7 +8,7 @@ import { OutputPass } from '/vendor/three/OutputPass.js';
 import { createCockpit } from './model.js';
 import { createSelectionTint } from './selection.js';
 
-export async function createViewer(host, markers, onContextLost, initialWheel = 'savu-pro') {
+export async function createViewer(host, markers, onContextLost, initialWheel = 'savu-pro', onZoomChange = () => {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
@@ -26,6 +26,11 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   pmrem.dispose();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.05, 35);
   const controls = new OrbitControls(camera, renderer.domElement);
+  // Wheel/trackpad scrolling belongs to the page. Touch gestures keep native
+  // vertical scrolling and browser pinch zoom; horizontal swipes rotate the rig.
+  controls.enableZoom = false;
+  controls.touches.TWO = null;
+  renderer.domElement.style.touchAction = 'pan-y pinch-zoom';
   controls.enableDamping = true;
   controls.dampingFactor = 0.09;
   controls.minDistance = 1.4;
@@ -130,7 +135,27 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
     if (outline.selectedObjects.length) composer.render();
     else renderer.render(scene, camera);
     updateMarkers();
+    updateZoomState();
     if (changed || controls.autoRotate) requestRender();
+  }
+  function updateZoomState() {
+    const distance = camera.position.distanceTo(controls.target);
+    onZoomChange({
+      canZoomIn: distance > controls.minDistance + 0.001,
+      canZoomOut: distance < controls.maxDistance - 0.001
+    });
+  }
+  function zoom(direction) {
+    const offset = camera.position.clone().sub(controls.target);
+    const distance = THREE.MathUtils.clamp(
+      offset.length() * (direction === 'in' ? 0.8 : 1.25),
+      controls.minDistance,
+      controls.maxDistance
+    );
+    camera.position.copy(controls.target).add(offset.setLength(distance));
+    controls.update();
+    updateZoomState();
+    requestRender();
   }
   function setView(name = 'overview') {
     currentView = name;
@@ -222,6 +247,7 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
       requestRender();
     },
     setView,
+    zoom,
     setRotate(value) {
       controls.autoRotate = value;
       requestRender();

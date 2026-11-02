@@ -314,7 +314,7 @@ export function createCockpit(THREE, initialWheel = 'savu-pro') {
     box(0.009, 0.15, 0.17, x + Math.sign(x) * 0.025, 0.265, -0.22, palette.black);
     for (const y of [0.23, 0.29]) for (const z of [-0.27, -0.17]) bolt(x + Math.sign(x) * 0.031, y, z, group, 'side');
   }
-  for (const z of [-0.77, -0.46, 0.35, 0.68]) profile(0.56, 0.08, 'x', 0, 0.155, z);
+  for (const z of [-0.77, 0.35, 0.68]) profile(0.56, 0.08, 'x', 0, 0.155, z);
   profile(0.6, 0.08, 'x', 0, 0.8, -0.22);
   rounded(0.555, 0.092, 0.006, 0, 0.153, 0.707, palette.black, group, 0.004);
   label('M A X S I M', 0.51, 0.085, 0, 0.153, 0.711, group, '#141619', '#d82330');
@@ -1009,8 +1009,8 @@ export function createCockpit(THREE, initialWheel = 'savu-pro') {
   ).name = 'Pimax tether to cockpit cable routing';
 
   componentId = 'shakers';
-  // Front transducer sits on a short cantilever from the nearest crossmember
-  // (Z -.46, top Y .195). It does not bridge the two longitudinal side rails.
+  // Front transducer sits on a short cantilever extending BACK from the front
+  // crossmember (Z -.77, top Y .195), without an extra crossmember behind it.
   // The rear transducer remains attached beneath the seat runners.
   for (const [name, z] of [
     ['Front', -0.61],
@@ -1020,13 +1020,13 @@ export function createCockpit(THREE, initialWheel = 'savu-pro') {
     const front = name === 'Front',
       y = front ? 0.201 : 0.214;
     if (front) {
-      box(0.18, 0.012, 0.26, 0, y, -0.57, palette.black, shaker).name = 'Short longitudinal shaker bridge';
+      box(0.18, 0.012, 0.26, 0, y, -0.66, palette.black, shaker).name = 'Short longitudinal shaker bridge';
       for (const x of [-0.055, 0.055]) {
-        bolt(x, y + 0.009, -0.46, shaker);
+        bolt(x, y + 0.009, -0.77, shaker);
         const rib = new THREE.Shape();
-        rib.moveTo(-0.48, 0.195);
-        rib.lineTo(-0.6, 0.195);
-        rib.lineTo(-0.48, 0.16);
+        rib.moveTo(-0.75, 0.195);
+        rib.lineTo(-0.62, 0.195);
+        rib.lineTo(-0.75, 0.16);
         rib.closePath();
         const geometry = new THREE.ExtrudeGeometry(rib, { depth: 0.004, bevelEnabled: false });
         geometry.translate(0, 0, -0.002);

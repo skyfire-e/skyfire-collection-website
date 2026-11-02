@@ -44,6 +44,12 @@ The public interface is entirely English and intentionally light gray.
   heading, replacing the component count; camera controls remain on the scene.
   Inventory uses full-width rows.
   On phones details flow below the scene, keeping the selected geometry visible.
+- Wheel/trackpad input scrolls the page, never zooms the rig. Scene zoom uses
+  the accessible 44 px +/− buttons at the top right, bounded by the current
+  camera preset's distance limits. Keep OrbitControls.enableZoom false and
+  restore canvas touch-action to `pan-y pinch-zoom` after its constructor:
+  vertical touch gestures scroll the page, horizontal swipes rotate the rig.
+  Preserve native browser pinch zoom and disable two-finger Orbit gestures.
 - All current components use original geometry. The generic CC0 seat was
   replaced by a photo-based BRIDE Low Max model with OMP harness.
 - `configuration.installedWheel` selects a `wheelVariants` entry. The stable
@@ -97,7 +103,8 @@ The public interface is entirely English and intentionally light gray.
   alone can still leave the strap edges buried in the upholstery.
 - The Sounderlink pair has one shaker under the pedals (Z -.61), one under the
   seat (Z .61). The front uses an 18 cm wide longitudinal bridge from the
-  nearest crossmember at Z -.46 (top Y .195), with two underside gussets;
+  FRONT crossmember at Z -.77 (top Y .195), extending rearward with two
+  underside gussets. There is no extra frame crossmember at Z -.46;
   never span it across the longitudinal rails. The rear plate fastens under
   the seat runners and stays clear of the lap-belt eye bolts.
   Keep both under the shared `shakers` selection and its front anchor.

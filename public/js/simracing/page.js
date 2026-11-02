@@ -212,6 +212,9 @@ $('rotate').addEventListener('click', () => {
   $('rotate').setAttribute('aria-pressed', String(enabled));
   viewer?.setRotate(enabled);
 });
+document
+  .querySelectorAll('[data-zoom]')
+  .forEach((button) => button.addEventListener('click', () => viewer?.zoom(button.dataset.zoom)));
 try {
   const response = await fetch('/data/simracing.json');
   if (!response.ok) throw new Error('Equipment catalog unavailable');
@@ -241,8 +244,13 @@ try {
       () => {
         $('fallback').hidden = false;
         for (const marker of markers.values()) marker.hidden = true;
+        document.querySelectorAll('[data-zoom]').forEach((button) => (button.disabled = true));
       },
-      catalog.configuration.installedWheel
+      catalog.configuration.installedWheel,
+      ({ canZoomIn, canZoomOut }) => {
+        $('zoom-in').disabled = !canZoomIn;
+        $('zoom-out').disabled = !canZoomOut;
+      }
     );
     updateFilter();
     if (selected) viewer.select(selected);
@@ -252,7 +260,9 @@ try {
     console.error('Cockpit viewer:', error);
     $('fallback').hidden = false;
     document
-      .querySelectorAll('.view-controls button, .equipment-controls button, .equipment-controls select')
+      .querySelectorAll(
+        '.view-controls button, .zoom-controls button, .equipment-controls button, .equipment-controls select'
+      )
       .forEach((control) => (control.disabled = true));
   }
 } catch (error) {

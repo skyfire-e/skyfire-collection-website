@@ -22,7 +22,7 @@
             class="scene"
             id="scene"
             role="region"
-            aria-label="Interactive cockpit. Drag to rotate, scroll to zoom, or use the view buttons."
+            aria-label="Interactive cockpit. Drag to rotate or swipe sideways on touchscreens. Scroll vertically to browse the page. Use the plus and minus buttons to zoom."
           >
             <div id="canvas-host"></div>
             <div id="hotspots"></div>
@@ -32,8 +32,35 @@
               <p>Explore the equipment list below.</p>
             </div>
           </div>
+          <div class="zoom-controls" role="group" aria-label="Zoom controls">
+            <button
+              class="btn btn-sm"
+              id="zoom-in"
+              data-zoom="in"
+              type="button"
+              aria-label="Zoom in"
+              title="Zoom in"
+              disabled
+            >
+              +
+            </button>
+            <button
+              class="btn btn-sm"
+              id="zoom-out"
+              data-zoom="out"
+              type="button"
+              aria-label="Zoom out"
+              title="Zoom out"
+              disabled
+            >
+              −
+            </button>
+          </div>
           <div class="scene-bottom">
-            <p class="gesture">Drag to rotate · Scroll to zoom · Tap a point</p>
+            <p class="gesture">
+              <span class="gesture-mouse">Drag to rotate · + / − to zoom · Tap a point</span>
+              <span class="gesture-touch">Swipe sideways to rotate · Swipe up / down to scroll</span>
+            </p>
             <div class="view-controls" role="group" aria-label="3D view controls">
               <button class="btn btn-sm" data-view="overview" aria-label="Reset to overview">↺ Overview</button>
               <button class="btn btn-sm" data-view="side">Side</button
