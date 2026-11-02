@@ -7,6 +7,7 @@ import { OutlinePass } from '/vendor/three/OutlinePass.js';
 import { OutputPass } from '/vendor/three/OutputPass.js';
 import { createCockpit } from './model.js';
 import { createSelectionTint } from './selection.js';
+import { attachTouchControls } from './touch-controls.js';
 
 export async function createViewer(host, markers, onContextLost, initialWheel = 'savu-pro', onZoomChange = () => {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -26,11 +27,12 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   pmrem.dispose();
   const camera = new THREE.PerspectiveCamera(34, 1, 0.05, 35);
   const controls = new OrbitControls(camera, renderer.domElement);
-  // Wheel/trackpad scrolling belongs to the page. Touch gestures keep native
-  // vertical scrolling and browser pinch zoom; horizontal swipes rotate the rig.
+  // Mouse wheel/trackpad scrolling belongs to the page. Touch is handled
+  // separately so a single finger never reaches OrbitControls.
   controls.enableZoom = false;
+  controls.touches.ONE = null;
   controls.touches.TWO = null;
-  renderer.domElement.style.touchAction = 'pan-y pinch-zoom';
+  renderer.domElement.style.touchAction = 'auto';
   controls.enableDamping = true;
   controls.dampingFactor = 0.09;
   controls.minDistance = 1.4;
@@ -39,6 +41,24 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   controls.minPolarAngle = 0.13;
   controls.enablePan = false;
   controls.autoRotateSpeed = 0.65;
+  const removeTouchControls = attachTouchControls(host.parentElement, {
+    onStart: stopAutoRotate,
+    onMove({ deltaX, deltaY, scale }) {
+      const offset = camera.position.clone().sub(controls.target);
+      const orbit = new THREE.Spherical().setFromVector3(offset);
+      const anglePerPixel = (2 * Math.PI) / host.clientHeight;
+      orbit.theta -= deltaX * anglePerPixel;
+      orbit.phi = THREE.MathUtils.clamp(
+        orbit.phi - deltaY * anglePerPixel,
+        controls.minPolarAngle,
+        controls.maxPolarAngle
+      );
+      orbit.radius = THREE.MathUtils.clamp(orbit.radius * scale, controls.minDistance, controls.maxDistance);
+      camera.position.copy(controls.target).add(offset.setFromSpherical(orbit));
+      controls.update();
+      requestRender();
+    }
+  });
   scene.add(new THREE.HemisphereLight(0xffffff, 0x92928a, 1.05));
   const key = new THREE.DirectionalLight(0xfffaf3, 2.7);
   key.position.set(-2.5, 5, 2);
@@ -209,14 +229,16 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   resize();
   setView();
   controls.addEventListener('change', requestRender);
-  controls.addEventListener('start', () => {
+  function stopAutoRotate() {
     controls.autoRotate = false;
     document.getElementById('rotate').setAttribute('aria-pressed', 'false');
-  });
+  }
+  controls.addEventListener('start', stopAutoRotate);
   document.addEventListener('visibilitychange', requestRender);
   renderer.domElement.addEventListener('webglcontextlost', (event) => {
     event.preventDefault();
     disposed = true;
+    removeTouchControls();
     selectionTint.clear();
     onContextLost();
   });

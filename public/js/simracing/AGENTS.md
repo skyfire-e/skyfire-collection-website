@@ -13,6 +13,7 @@ The public interface is entirely English and intentionally light gray.
 
 - `page.js` — compact equipment rows, filters, detail selection and wheel switching.
 - `viewer.js` — Three scene, camera, DOM markers and OutlinePass selection rendering.
+- `touch-controls.js` — cooperative two-finger rotation/pinch; one-finger native scrolling.
 - `selection.js` — resolve meshes by `userData.componentId` and manage temporary tint materials.
 - `model.js` — original procedural geometry and named anchors, independent of UI.
 - `../../data/simracing.json` — all names, prices, source links and exchange rates.
@@ -46,10 +47,15 @@ The public interface is entirely English and intentionally light gray.
   On phones details flow below the scene, keeping the selected geometry visible.
 - Wheel/trackpad input scrolls the page, never zooms the rig. Scene zoom uses
   the accessible 44 px +/− buttons at the top right, bounded by the current
-  camera preset's distance limits. Keep OrbitControls.enableZoom false and
-  restore canvas touch-action to `pan-y pinch-zoom` after its constructor:
-  vertical touch gestures scroll the page, horizontal swipes rotate the rig.
-  Preserve native browser pinch zoom and disable two-finger Orbit gestures.
+  camera preset's distance limits. OrbitControls handles mouse/pen only, with
+  enableZoom false. Restore canvas touch-action to `auto` after its constructor.
+  A scene-level touch handler claims two contacts before movement for orbit/pinch;
+  single-finger scrolling remains native in every direction. Never reclaim an
+  already-started scroll or a non-cancelable gesture. After one finger lifts,
+  finish the gesture without switching to page scrolling or opening a hotspot.
+  Scope listeners to the scene (including its hotspots), not the page/buttons;
+  native browser pinch zoom outside the scene must remain available.
+  Coarse-pointer and narrow layouts show the short corner hint `2 fingers to rotate`.
 - All current components use original geometry. The generic CC0 seat was
   replaced by a photo-based BRIDE Low Max model with OMP harness.
 - `configuration.installedWheel` selects a `wheelVariants` entry. The stable

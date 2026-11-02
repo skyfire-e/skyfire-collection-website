@@ -181,7 +181,7 @@ describe('Simracing collection integration', () => {
     const page = await supertest(app).get('/simracing');
     for (const script of ['/js/nav.js', '/js/auth.js', '/js/theme-init.js']) assert.ok(page.text.includes(script));
     assert.ok(!page.text.includes('Built to feel'));
-    for (const file of ['seat', 'pedals', 'wheels', 'headset', 'configuration', 'selection']) {
+    for (const file of ['seat', 'pedals', 'wheels', 'headset', 'configuration', 'selection', 'touch-controls']) {
       const module = await supertest(app).get(`/js/simracing/${file}.js`);
       assert.equal(module.status, 200);
       assert.match(module.headers['content-type'], /javascript/);
