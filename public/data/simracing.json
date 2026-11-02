@@ -308,18 +308,18 @@
       "id": "installed-wheel",
       "name": "Simucube Savu Pro",
       "group": "Hardware",
-      "priceEur": null,
-      "sourcePrice": null,
+      "priceEur": 1259.99,
+      "sourcePrice": 1259.99,
       "sourceCurrency": "EUR",
-      "sourceUrl": "https://docs.simucube.com/Wheels/Savu/Savu.html",
-      "priceNote": "Price to confirm for the chosen SC3 version.",
+      "sourceUrl": "https://simufy.com/en/products/volante-simucube-savu-pro?variant=52546591785293",
+      "priceNote": "SC3 version, without the optional Link Hub. Wheel-side quick release included. VAT included; shipping extra.",
       "description": "295 mm GT wheel with aluminum body, illuminated controls and telemetry LEDs.",
       "hotspotAlwaysVisible": true,
-      "priceType": "unconfirmed",
-      "sourceLabel": "Product reference",
-      "ownerPriceRub": null,
+      "priceType": "catalog",
+      "sourceLabel": "Simufy",
+      "ownerPriceRub": 127000,
       "dimensionsMm": [295, null, null],
-      "priceCheckedAt": null
+      "priceCheckedAt": "2026-11-02"
     },
     {
       "id": "spare-wheel",
@@ -466,6 +466,38 @@
       "priceCheckedAt": "2026-10-30",
       "priceType": "catalog",
       "sourceLabel": "Pimax official store"
+    },
+    {
+      "id": "vr-foam",
+      "name": "Pimax Facial Foam 15mm",
+      "group": "Hardware",
+      "priceEur": 21.99,
+      "sourcePrice": 21.99,
+      "sourceCurrency": "EUR",
+      "sourceUrl": "https://simufy.com/en/products/pimax-facial-foam-comfort-kit-15mm",
+      "priceNote": "Flocking 15 mm replacement facial foam. Listed sale price, including VAT; shipping extra.",
+      "description": "The 15 mm flocked facial cushion fitted around the Pimax lens opening.",
+      "hotspotAlwaysVisible": true,
+      "ownerPriceRub": 2500,
+      "priceCheckedAt": "2026-11-02",
+      "priceType": "catalog",
+      "sourceLabel": "Simufy"
+    },
+    {
+      "id": "vr-topstrap",
+      "name": "Pimax Comfort Top Strap",
+      "group": "Hardware",
+      "priceEur": 17.95,
+      "sourcePrice": 17.95,
+      "sourceCurrency": "EUR",
+      "sourceUrl": "https://eu.pimax.com/products/crystal-comfort-topstrap",
+      "priceNote": "Original Crystal Comfort Topstrap. Listed price excludes tax and shipping; temporarily out of stock when checked.",
+      "description": "A padded top support attached to the Pimax headband for a more comfortable fit.",
+      "hotspotAlwaysVisible": true,
+      "ownerPriceRub": 3500,
+      "priceCheckedAt": "2026-11-02",
+      "priceType": "catalog",
+      "sourceLabel": "Pimax official EU store"
     }
   ],
   "models": [
@@ -506,7 +538,7 @@
       "license": "Granite Devices Inc. All rights reserved. For commercial use or reproduction, contact Granite Devices for permissions."
     }
   ],
-  "note": "Catalog prices checked 30 October 2026 take priority. Where the exact product or bundle cannot be verified, the owner-provided RUB amount is used. Fixed display conversion: EUR 1 = RUB 90. USD catalog prices use the dated CBR USD/RUB rate before conversion at RUB 90/EUR. Shipping, tax, region and bundle contents may vary. Savu Pro is the default wheel; its price is not yet confirmed and is excluded from the subtotal.",
+  "note": "Catalog prices take priority; each item records its own price-check date. Where the exact product or bundle cannot be verified, the owner-provided RUB amount is used. Fixed display conversion: EUR 1 = RUB 90. USD catalog prices use the dated CBR USD/RUB rate before conversion at RUB 90/EUR. Shipping, tax, region and bundle contents may vary. Savu Pro is the default wheel, priced for the SC3 variant without the optional Link Hub.",
   "configuration": {
     "installedWheel": "savu-pro",
     "ownedWheels": ["savu-pro", "neo-x"]
@@ -516,18 +548,18 @@
       "id": "installed-wheel",
       "name": "Simucube Savu Pro",
       "group": "Hardware",
-      "priceEur": null,
-      "sourcePrice": null,
+      "priceEur": 1259.99,
+      "sourcePrice": 1259.99,
       "sourceCurrency": "EUR",
-      "sourceUrl": "https://docs.simucube.com/Wheels/Savu/Savu.html",
-      "priceNote": "Price to confirm for the chosen SC3 version.",
+      "sourceUrl": "https://simufy.com/en/products/volante-simucube-savu-pro?variant=52546591785293",
+      "priceNote": "SC3 version, without the optional Link Hub. Wheel-side quick release included. VAT included; shipping extra.",
       "description": "295 mm GT wheel with aluminum body, illuminated controls and telemetry LEDs.",
       "hotspotAlwaysVisible": true,
-      "priceType": "unconfirmed",
-      "sourceLabel": "Product reference",
-      "ownerPriceRub": null,
+      "priceType": "catalog",
+      "sourceLabel": "Simufy",
+      "ownerPriceRub": 127000,
       "dimensionsMm": [295, null, null],
-      "priceCheckedAt": null
+      "priceCheckedAt": "2026-11-02"
     },
     "neo-x": {
       "id": "spare-wheel",

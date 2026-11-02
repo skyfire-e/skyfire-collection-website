@@ -64,8 +64,9 @@ The public interface is entirely English and intentionally light gray.
   wheel remains in the catalog as `spare-wheel`; never float it in the scene.
   `configuration.ownedWheels` distinguishes owned alternatives from previews.
   Do not change the wheelbase when switching rims.
-- Savu Pro has no confirmed price yet: keep its price null and exclude it from
-  the subtotal in either wheel slot. Do not inherit the removed GT-NEO price.
+- Savu Pro uses the exact SC3 catalog variant without the optional Link Hub.
+  Keep its price/source and owner baseline in sync between items and wheelVariants;
+  wheel swaps must preserve the total. Do not inherit the removed GT-NEO price.
 - All three photographed pedal faces are solid. Ultimate has a shorter rear
   housing with an open sensor window and exposed front guide rods.
 - The fixed coiled steering cable belongs to frame wiring, outside the swappable
@@ -117,13 +118,19 @@ The public interface is entirely English and intentionally light gray.
 - Pimax Crystal Light hangs nose-down by its rear headband on the two DIMSIM
   seat hooks. Keep the cradle on the hooks, the retaining tips outside the pad,
   and the visor clear of the seat and lap belts. Its cable returns to the rail.
-  The headset has its own `vr-headset` hotspot and catalog entry; no owner price
-  was provided, so `ownerPriceRub` stays null.
+  The headset has its own `vr-headset` hotspot and catalog entry. The owner
+  confirmed the current bundle entry; preserve its existing price metadata.
 - Public wheel previews are transient; never persist them as owned equipment.
 - VR Off hides the Pimax AND its tether, hotspot and selection geometry, while
   preserving the seat hooks, catalog entry and Summary. Wheel swaps and filters
   preserve this state. Selecting its catalog row reveals it and sets VR On.
   The whole headset/tether assembly shares one parent with toggled visibility.
+- Facial Foam 15mm (`vr-foam`) and Comfort Top Strap (`vr-topstrap`) have their
+  own catalog rows, tagged geometry, transformed anchors and selection tint.
+  `isHeadsetComponent` includes both accessories: VR Off hides them together
+  with the headset; selecting any of their rows reveals the assembly. Original
+  longitudinal webbing remains part of the headset; the added comfort band
+  spans its side arms. Keep the existing headset bundle/price unchanged.
 - NEO X-330R uses a 330 mm leather rim with inward thumb swells, red centre marker
   and inner cross-stitching, three brushed-metal spokes, the shaped forged-carbon
   hub, eight buttons, nine RPM segments and two lower encoders. Reference:
@@ -135,6 +142,8 @@ The public interface is entirely English and intentionally light gray.
   fallback when the exact product or bundle cannot be identified. Preserve the
   baseline even when a catalog price wins. `priceType` and `sourceLabel` expose
   this distinction in the public UI; owner fallbacks have no catalog source URL.
+- `researchedAt` is the original catalog batch date; individual `priceCheckedAt`
+  values record later checks. Updating a few products must not redate untouched prices.
 - Price `null` means unknown, never zero. Show the listing's source, tax/bundle
   caveats and snapshot date. Do not imply these are the owner's purchase prices.
 - EUR/RUB is owner-defined and fixed at 90, not a CBR quote. USD listings use

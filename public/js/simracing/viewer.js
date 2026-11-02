@@ -249,7 +249,7 @@ export async function createViewer(host, markers, onContextLost, initialWheel = 
   return {
     setHeadsetVisible(value) {
       rig.setHeadsetVisible(value);
-      if (!value && selected === 'vr-headset') selected = null;
+      if (selected && !rig.isComponentVisible(selected)) selected = null;
       host.dataset.headsetVisible = String(value);
       updateSelection();
       requestRender();

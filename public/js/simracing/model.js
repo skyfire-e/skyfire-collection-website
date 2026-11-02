@@ -2,7 +2,7 @@ import { createSeat } from './seat.js';
 import { createPedals } from './pedals.js';
 import { createWheel } from './wheels.js';
 import { createHeadset } from './headset.js';
-import { wheelArrangement } from './configuration.js';
+import { isHeadsetComponent, wheelArrangement } from './configuration.js';
 import { componentMeshes } from './selection.js';
 /**
  * Original, reference-based geometry. Dimensions and placement are approximate;
@@ -1000,6 +1000,9 @@ export function createCockpit(THREE, initialWheel = 'savu-pro') {
   headsetAssembly.add(headset);
   headset.updateWorldMatrix(true, false);
   anchors['vr-headset'] = headset.localToWorld(headset.userData.hotspot.clone());
+  for (const [id, point] of Object.entries(headset.userData.accessoryAnchors)) {
+    anchors[id] = headset.localToWorld(point.clone());
+  }
   const cablePoint = headset.localToWorld(headset.userData.cablePoint.clone());
   tube(
     [cablePoint.toArray(), [-0.4, 0.415, 0.75], [-0.465, 0.28, 0.735], [-0.44, 0.225, 0.64], [-0.31, 0.24, 0.56]],
@@ -1117,7 +1120,7 @@ export function createCockpit(THREE, initialWheel = 'savu-pro') {
     0.003,
     palette.groove
   );
-  const isComponentVisible = (id) => id !== 'vr-headset' || headsetAssembly.visible;
+  const isComponentVisible = (id) => !isHeadsetComponent(id) || headsetAssembly.visible;
   return {
     group,
     anchors,

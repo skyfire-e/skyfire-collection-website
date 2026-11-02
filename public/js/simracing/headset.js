@@ -170,7 +170,7 @@ export function createHeadset(THREE) {
     disc(0.03, 0.006, [side * 0.035, 0, -0.041], rubber, 'Aspheric lens bezel');
     disc(0.026, 0.007, [side * 0.035, 0, -0.037], lens, 'Aspheric glass lens');
   }
-  tube(
+  const facialFoam = tube(
     [
       [-0.102, -0.029, -0.037],
       [-0.108, 0.019, -0.032],
@@ -185,11 +185,12 @@ export function createHeadset(THREE) {
       [-0.023, -0.014, -0.026],
       [-0.045, -0.036, -0.029]
     ],
-    0.009,
+    0.0075,
     rubber,
-    'Contoured face cushion',
+    'Pimax Facial Foam 15mm',
     true
   );
+  facialFoam.userData.componentId = 'vr-foam';
   strap(
     [
       [0, 0.06, -0.059],
@@ -202,6 +203,30 @@ export function createHeadset(THREE) {
     band,
     'Woven top strap'
   );
+  // The comfort accessory bridges the two rigid side arms; the original
+  // longitudinal webbing stays part of the headset itself.
+  const comfortArch = [
+    [-0.113, 0.019, 0.027],
+    [-0.087, 0.083, 0.027],
+    [0, 0.132, 0.027],
+    [0.087, 0.083, 0.027],
+    [0.113, 0.019, 0.027]
+  ];
+  const topSupport = strap(comfortArch, 0.052, [0, 0, 1], band, 'Comfort Top Strap support');
+  topSupport.userData.componentId = 'vr-topstrap';
+  const topPadding = strap(
+    comfortArch.map(([x, y, z]) => [x * 0.98, y - 0.005, z]),
+    0.046,
+    [0, 0, 1],
+    rubber,
+    'Comfort Top Strap padding'
+  );
+  topPadding.userData.componentId = 'vr-topstrap';
+  for (const side of [-1, 1]) {
+    const attachment = disc(0.012, 0.007, [side * 0.113, 0.019, 0.027], panel, 'Comfort Top Strap attachment');
+    attachment.rotation.set(0, 0, Math.PI / 2);
+    attachment.userData.componentId = 'vr-topstrap';
+  }
   // The rear headband rests on the two DIMSIM hooks. Crystal Light has no rear battery.
   const pad = add(new THREE.BoxGeometry(0.13, 0.055, 0.028, 4, 2, 2), panel, [0, 0.015, 0.14], 'Rear headband cradle');
   const padPositions = pad.geometry.attributes.position;
@@ -225,5 +250,9 @@ export function createHeadset(THREE) {
   add(new THREE.BoxGeometry(0.018, 0.012, 0.024), rubber, [-0.12, 0.023, -0.035], 'DisplayPort cable connector');
   group.userData.cablePoint = new THREE.Vector3(-0.133, 0.023, -0.03);
   group.userData.hotspot = new THREE.Vector3(0, 0.075, -0.1);
+  group.userData.accessoryAnchors = {
+    'vr-foam': new THREE.Vector3(-0.103, 0.035, -0.022),
+    'vr-topstrap': new THREE.Vector3(0.065, 0.112, 0.027)
+  };
   return group;
 }

@@ -31,18 +31,17 @@ describe('Simracing collection integration', () => {
     db.saveCategories(categories);
   });
   it('uses catalog prices first and retains owner fallbacks at the fixed conversion', () => {
-    assert.equal(data.items.length, 28);
-    assert.equal(new Set(data.items.map((item) => item.id)).size, 28);
+    assert.equal(data.items.length, 30);
+    assert.equal(new Set(data.items.map((item) => item.id)).size, 30);
     assert.equal(data.rate.date, '2026-10-30');
     assert.equal(data.rate.kind, 'fixed');
     assert.equal(data.rate.eurRub, 90);
     assert.equal(data.rate.eurRub * 25, 2250);
-    assert.equal(data.items.filter((item) => item.priceType === 'catalog').length, 16);
+    assert.equal(data.items.filter((item) => item.priceType === 'catalog').length, 19);
     assert.equal(data.items.filter((item) => item.priceType === 'owner').length, 11);
     for (const item of data.items) {
       assert.ok(['Hardware', 'Cockpit', 'Usability'].includes(item.group));
       if (item.priceType === 'unconfirmed') {
-        assert.equal(item.name, 'Simucube Savu Pro');
         assert.equal(item.priceEur, null);
         assert.equal(item.sourcePrice, null);
         assert.equal(item.priceCheckedAt, null);
@@ -50,7 +49,8 @@ describe('Simracing collection integration', () => {
       }
       assert.ok(item.priceEur > 0);
       assert.ok(item.ownerPriceRub === null || item.ownerPriceRub > 0);
-      assert.equal(item.priceCheckedAt, data.researchedAt);
+      assert.match(item.priceCheckedAt, /^\d{4}-\d{2}-\d{2}$/);
+      assert.ok(item.priceCheckedAt >= data.researchedAt);
       if (item.priceType === 'catalog') {
         assert.ok(item.sourceUrl.startsWith('https://'));
       } else {
@@ -79,6 +79,20 @@ describe('Simracing collection integration', () => {
     assert.equal(frame.ownerPriceRub, 81000);
     assert.equal(frame.priceEur, 811.11);
     assert.equal(data.items.find((item) => item.id === 'seat').priceEur, 222.22);
+    for (const [id, ownerPrice, catalogPrice] of [
+      ['vr-foam', 2500, 21.99],
+      ['vr-topstrap', 3500, 17.95]
+    ]) {
+      const item = data.items.find((entry) => entry.id === id);
+      assert.equal(item.ownerPriceRub, ownerPrice);
+      assert.equal(item.priceEur, catalogPrice);
+      assert.equal(item.priceType, 'catalog');
+      assert.equal(item.priceCheckedAt, '2026-11-02');
+    }
+    // The headset bundle was explicitly left unchanged by the owner.
+    const headset = data.items.find((item) => item.id === 'vr-headset');
+    assert.equal(headset.priceEur, 805.86);
+    assert.equal(headset.priceCheckedAt, '2026-10-30');
   });
   it('offers only Savu Pro and NEO X without reusing the removed GT Neo price', async () => {
     const { resolveEquipment } = await import('../public/js/simracing/configuration.js');
@@ -87,8 +101,10 @@ describe('Simracing collection integration', () => {
     const items = resolveEquipment(data);
     const wheel = items.find((item) => item.id === 'installed-wheel');
     assert.equal(wheel.name, 'Simucube Savu Pro');
-    assert.equal(wheel.priceEur, null);
-    assert.equal(wheel.priceType, 'unconfirmed');
+    assert.equal(wheel.priceEur, 1259.99);
+    assert.equal(wheel.ownerPriceRub, 127000);
+    assert.equal(wheel.priceCheckedAt, '2026-11-02');
+    assert.equal(wheel.priceType, 'catalog');
     assert.deepEqual(
       data.wheelVariants['savu-pro'],
       data.items.find((item) => item.id === 'installed-wheel')
@@ -104,8 +120,8 @@ describe('Simracing collection integration', () => {
     for (const variant of ['neo-x', 'savu-pro', 'neo-x']) {
       const items = resolveEquipment(data, variant);
       const layout = wheelArrangement(variant);
-      assert.equal(items.length, 28);
-      assert.equal(new Set(items.map((item) => item.id)).size, 28);
+      assert.equal(items.length, 30);
+      assert.equal(new Set(items.map((item) => item.id)).size, 30);
       for (const [slot, key] of [
         ['installed-wheel', layout.mounted],
         ['spare-wheel', layout.spare]
@@ -133,15 +149,15 @@ describe('Simracing collection integration', () => {
     assert.ok(anchors['co-pedal'].x < anchors['active-ultimate'].x);
     assert.ok(anchors['active-ultimate'].x < anchors['active-pro'].x);
   });
-  it('keeps the total stable when wheels swap and excludes the unknown Savu price', async () => {
+  it('includes the priced Savu and VR accessories once while wheels swap', async () => {
     const { resolveEquipment, summarizeEquipment } = await import('../public/js/simracing/configuration.js');
     const total = summarizeEquipment(resolveEquipment(data));
-    assert.deepEqual(total, { count: 28, unpricedCount: 1, totalEur: 9886.06 });
+    assert.deepEqual(total, { count: 30, unpricedCount: 0, totalEur: 11185.99 });
     assert.deepEqual(summarizeEquipment(resolveEquipment(data, 'neo-x')), total);
     assert.deepEqual(summarizeEquipment(resolveEquipment(data, 'savu-pro')), {
-      count: 28,
-      unpricedCount: 1,
-      totalEur: 9886.06
+      count: 30,
+      unpricedCount: 0,
+      totalEur: 11185.99
     });
     assert.deepEqual(summarizeEquipment(resolveEquipment(data), 'Usability'), {
       count: 3,
@@ -158,7 +174,7 @@ describe('Simracing collection integration', () => {
   it('shows every fitted component regardless of price while preserving category filters', async () => {
     const { shouldShowHotspot, resolveEquipment } = await import('../public/js/simracing/configuration.js');
     const items = resolveEquipment(data);
-    assert.equal(items.filter((item) => shouldShowHotspot(item, 'all')).length, 27);
+    assert.equal(items.filter((item) => shouldShowHotspot(item, 'all')).length, 29);
     for (const item of items) {
       assert.equal(shouldShowHotspot(item, 'all'), !item.catalogOnly);
       assert.equal(shouldShowHotspot(item, item.group), !item.catalogOnly);
@@ -172,7 +188,7 @@ describe('Simracing collection integration', () => {
       assert.equal(shouldShowHotspot({ ...item, priceEur: null }, 'all'), true);
     }
     const savu = resolveEquipment(data, 'savu-pro').find((item) => item.id === 'installed-wheel');
-    assert.equal(savu.priceEur, null);
+    assert.equal(savu.priceEur, 1259.99);
     assert.equal(shouldShowHotspot(savu, 'all'), true);
     assert.ok(!data.items.some((item) => item.id === 'booster-plate'));
     assert.equal(data.items.find((item) => item.id === 'pedal-plate').name, 'Simucube Baseplate');
@@ -220,14 +236,20 @@ describe('Simracing collection integration', () => {
       }
       assert.deepEqual(rig.getComponentMeshes('spare-wheel'), []);
       assert.deepEqual(rig.getComponentMeshes(null), []);
-      const headset = rig.getComponentMeshes('vr-headset');
+      const headsetParts = new Map(
+        ['vr-headset', 'vr-foam', 'vr-topstrap'].map((id) => [id, rig.getComponentMeshes(id)])
+      );
+      const headset = headsetParts.get('vr-headset');
       const hooks = rig.getComponentMeshes('hooks');
       assert.ok(headset.some((mesh) => mesh.name === 'Pimax tether to cockpit cable routing'));
       rig.setHeadsetVisible(false);
-      assert.equal(rig.isComponentVisible('vr-headset'), false);
-      assert.deepEqual(rig.getComponentMeshes('vr-headset'), []);
+      for (const id of headsetParts.keys()) {
+        assert.equal(rig.isComponentVisible(id), false);
+        assert.deepEqual(rig.getComponentMeshes(id), []);
+        assert.ok(rig.anchors[id].toArray().every(Number.isFinite));
+      }
       assert.deepEqual(rig.getComponentMeshes('hooks'), hooks);
-      for (const mesh of headset) {
+      for (const mesh of [...headsetParts.values()].flat()) {
         let object = mesh;
         while (object && object.visible) object = object.parent;
         assert.ok(object, 'Headset and tether must actually leave the rendered scene');
@@ -240,12 +262,16 @@ describe('Simracing collection integration', () => {
         assert.ok(wheel.length > 0);
         assert.ok(wheel.every((mesh) => !previousWheel.includes(mesh)));
         assert.deepEqual(rig.getComponentMeshes('wheelbase'), base);
-        assert.equal(rig.isComponentVisible('vr-headset'), false, 'Wheel changes must preserve the VR toggle');
+        for (const id of headsetParts.keys()) {
+          assert.equal(rig.isComponentVisible(id), false, 'Wheel changes must preserve the VR toggle');
+        }
         previousWheel = wheel;
       }
       rig.setHeadsetVisible(true);
-      assert.equal(rig.isComponentVisible('vr-headset'), true);
-      assert.deepEqual(rig.getComponentMeshes('vr-headset'), headset);
+      for (const [id, meshes] of headsetParts) {
+        assert.equal(rig.isComponentVisible(id), true);
+        assert.deepEqual(rig.getComponentMeshes(id), meshes);
+      }
     } finally {
       if (previousDocument === undefined) delete globalThis.document;
       else globalThis.document = previousDocument;

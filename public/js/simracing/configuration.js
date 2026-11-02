@@ -1,5 +1,9 @@
 // One mounted wheel in the scene; the unused owned wheel stays in the catalog.
 // The collection contains Savu Pro and NEO X-330R; switching keeps both in the catalog.
+export function isHeadsetComponent(id) {
+  return ['vr-headset', 'vr-foam', 'vr-topstrap'].includes(id);
+}
+
 export function wheelArrangement(variant) {
   if (!['savu-pro', 'neo-x'].includes(variant)) throw new Error(`Unknown steering wheel: ${variant}`);
   return { mounted: variant, spare: variant === 'neo-x' ? 'savu-pro' : 'neo-x' };

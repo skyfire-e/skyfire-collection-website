@@ -2,6 +2,7 @@ import {
   resolveEquipment,
   shouldShowHotspot,
   isOwnedWheel,
+  isHeadsetComponent,
   wheelArrangement,
   summarizeEquipment
 } from './configuration.js';
@@ -73,7 +74,7 @@ function closeDetail() {
 }
 function selectItem(item, trigger) {
   // Selecting the headset in the catalog reveals it for inspection.
-  if (item.id === 'vr-headset' && !showHeadset) setHeadsetVisible(true);
+  if (isHeadsetComponent(item.id) && !showHeadset) setHeadsetVisible(true);
   // An alternate wheel has no floating mesh: fit it before highlighting it.
   if (item.catalogOnly && item.id === 'spare-wheel') {
     changeWheel(wheelArrangement($('wheel-variant').value).spare);
@@ -169,7 +170,7 @@ function renderCatalog() {
 }
 function setHeadsetVisible(value) {
   showHeadset = value;
-  if (!value && selected === 'vr-headset') closeDetail();
+  if (!value && isHeadsetComponent(selected)) closeDetail();
   $('headset-toggle').setAttribute('aria-pressed', String(value));
   $('headset-state').textContent = value ? 'On' : 'Off';
   viewer?.setHeadsetVisible(value);
