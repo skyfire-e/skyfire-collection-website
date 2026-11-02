@@ -8,7 +8,7 @@ import { OutputPass } from '/vendor/three/OutputPass.js';
 import { createCockpit } from './model.js';
 import { createSelectionTint } from './selection.js';
 
-export async function createViewer(host, markers, onContextLost, initialWheel = 'gt-neo') {
+export async function createViewer(host, markers, onContextLost, initialWheel = 'savu-pro') {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;

@@ -37,10 +37,17 @@ describe('Simracing collection integration', () => {
     assert.equal(data.rate.kind, 'fixed');
     assert.equal(data.rate.eurRub, 90);
     assert.equal(data.rate.eurRub * 25, 2250);
-    assert.equal(data.items.filter((item) => item.priceType === 'catalog').length, 17);
+    assert.equal(data.items.filter((item) => item.priceType === 'catalog').length, 16);
     assert.equal(data.items.filter((item) => item.priceType === 'owner').length, 11);
     for (const item of data.items) {
       assert.ok(['Hardware', 'Cockpit', 'Usability'].includes(item.group));
+      if (item.priceType === 'unconfirmed') {
+        assert.equal(item.name, 'Simucube Savu Pro');
+        assert.equal(item.priceEur, null);
+        assert.equal(item.sourcePrice, null);
+        assert.equal(item.priceCheckedAt, null);
+        continue;
+      }
       assert.ok(item.priceEur > 0);
       assert.ok(item.ownerPriceRub === null || item.ownerPriceRub > 0);
       assert.equal(item.priceCheckedAt, data.researchedAt);
@@ -73,34 +80,28 @@ describe('Simracing collection integration', () => {
     assert.equal(frame.priceEur, 811.11);
     assert.equal(data.items.find((item) => item.id === 'seat').priceEur, 222.22);
   });
-  it('switches only the mounted wheel and never reuses GT Neo pricing for Savu', async () => {
+  it('offers only Savu Pro and NEO X without reusing the removed GT Neo price', async () => {
     const { resolveEquipment } = await import('../public/js/simracing/configuration.js');
-    const current = resolveEquipment(data);
-    const preview = resolveEquipment(data, 'savu-pro');
-    const wheel = preview.find((item) => item.id === 'installed-wheel');
-    assert.equal(current.length, preview.length);
-    assert.equal(current.find((item) => item.id === 'installed-wheel').name, 'Simagic GT-NEO');
+    assert.deepEqual(Object.keys(data.wheelVariants).sort(), ['neo-x', 'savu-pro']);
+    assert.ok(!JSON.stringify(data).includes('GT-NEO'));
+    const items = resolveEquipment(data);
+    const wheel = items.find((item) => item.id === 'installed-wheel');
     assert.equal(wheel.name, 'Simucube Savu Pro');
     assert.equal(wheel.priceEur, null);
     assert.equal(wheel.priceType, 'unconfirmed');
     assert.deepEqual(
-      data.wheelVariants['gt-neo'],
+      data.wheelVariants['savu-pro'],
       data.items.find((item) => item.id === 'installed-wheel')
     );
-    assert.match(wheel.description, /Preview/);
-    assert.deepEqual(
-      current.filter((item) => item.id !== 'installed-wheel'),
-      preview.filter((item) => item.id !== 'installed-wheel')
-    );
-    const updated = { ...data, configuration: { ...data.configuration, installedWheel: 'savu-pro' } };
-    assert.doesNotMatch(resolveEquipment(updated).find((item) => item.id === 'installed-wheel').description, /Preview/);
+    assert.doesNotMatch(wheel.description, /Preview/);
+    assert.throws(() => resolveEquipment(data, 'gt-neo'), /Unknown steering wheel/);
     assert.throws(() => resolveEquipment(data, 'unknown'), /Unknown steering wheel/);
   });
   it('switches the mounted wheel while keeping the unused wheel in the catalog without a hotspot', async () => {
     const { resolveEquipment, isOwnedWheel, wheelArrangement, shouldShowHotspot } =
       await import('../public/js/simracing/configuration.js');
     const baseline = resolveEquipment(data);
-    for (const variant of ['neo-x', 'gt-neo', 'neo-x']) {
+    for (const variant of ['neo-x', 'savu-pro', 'neo-x']) {
       const items = resolveEquipment(data, variant);
       const layout = wheelArrangement(variant);
       assert.equal(items.length, 28);
@@ -122,8 +123,8 @@ describe('Simracing collection integration', () => {
       assert.deepEqual(nonWheels(items), nonWheels(baseline));
     }
     assert.equal(isOwnedWheel(data, 'neo-x'), true);
-    assert.equal(isOwnedWheel(data, 'savu-pro'), false);
-    assert.equal(data.configuration.installedWheel, 'gt-neo');
+    assert.equal(isOwnedWheel(data, 'savu-pro'), true);
+    assert.equal(data.configuration.installedWheel, 'savu-pro');
   });
   it('places the Co-Pedal to the driver’s left and ActivePedal Pro to the right', async () => {
     const THREE = await import('three');
@@ -132,10 +133,10 @@ describe('Simracing collection integration', () => {
     assert.ok(anchors['co-pedal'].x < anchors['active-ultimate'].x);
     assert.ok(anchors['active-ultimate'].x < anchors['active-pro'].x);
   });
-  it('totals each listed wheel once and reports unknown preview prices separately', async () => {
+  it('keeps the total stable when wheels swap and excludes the unknown Savu price', async () => {
     const { resolveEquipment, summarizeEquipment } = await import('../public/js/simracing/configuration.js');
     const total = summarizeEquipment(resolveEquipment(data));
-    assert.deepEqual(total, { count: 28, unpricedCount: 0, totalEur: 10175.06 });
+    assert.deepEqual(total, { count: 28, unpricedCount: 1, totalEur: 9886.06 });
     assert.deepEqual(summarizeEquipment(resolveEquipment(data, 'neo-x')), total);
     assert.deepEqual(summarizeEquipment(resolveEquipment(data, 'savu-pro')), {
       count: 28,
@@ -170,9 +171,9 @@ describe('Simracing collection integration', () => {
       assert.equal(shouldShowHotspot(item, 'all'), true);
       assert.equal(shouldShowHotspot({ ...item, priceEur: null }, 'all'), true);
     }
-    const preview = resolveEquipment(data, 'savu-pro').find((item) => item.id === 'installed-wheel');
-    assert.equal(preview.priceEur, null);
-    assert.equal(shouldShowHotspot(preview, 'all'), true);
+    const savu = resolveEquipment(data, 'savu-pro').find((item) => item.id === 'installed-wheel');
+    assert.equal(savu.priceEur, null);
+    assert.equal(shouldShowHotspot(savu, 'all'), true);
     assert.ok(!data.items.some((item) => item.id === 'booster-plate'));
     assert.equal(data.items.find((item) => item.id === 'pedal-plate').name, 'Simucube Baseplate');
   });
@@ -233,7 +234,7 @@ describe('Simracing collection integration', () => {
       }
       const base = rig.getComponentMeshes('wheelbase');
       let previousWheel = rig.getComponentMeshes('installed-wheel');
-      for (const variant of ['neo-x', 'savu-pro', 'gt-neo']) {
+      for (const variant of ['neo-x', 'savu-pro', 'neo-x']) {
         rig.setWheel(variant);
         const wheel = rig.getComponentMeshes('installed-wheel');
         assert.ok(wheel.length > 0);

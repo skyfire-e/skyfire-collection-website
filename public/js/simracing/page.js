@@ -95,7 +95,7 @@ function selectItem(item, trigger) {
       ? `Owner-provided · ${ruble.format(item.ownerPriceRub)} ÷ ${catalog.rate.eurRub}`
       : item.priceType === 'catalog'
         ? `Catalog · ${item.sourceLabel} · checked ${date(item.priceCheckedAt)}`
-        : 'Preview · price not yet confirmed';
+        : 'Price not yet confirmed';
   $('detail-note').textContent = item.priceNote;
   $('detail-source').hidden = !item.sourceUrl;
   if (item.sourceUrl) {

@@ -306,20 +306,20 @@
     },
     {
       "id": "installed-wheel",
-      "name": "Simagic GT-NEO",
+      "name": "Simucube Savu Pro",
       "group": "Hardware",
-      "priceEur": 289,
-      "sourcePrice": 289,
+      "priceEur": null,
+      "sourcePrice": null,
       "sourceCurrency": "EUR",
-      "sourceUrl": "https://simultimate.eu/product/simagic-gt-neo/",
-      "priceNote": "EU retailer listing including VAT. 300 mm diameter.",
-      "dimensionsMm": [300, null, null],
-      "description": "A compact GT rim with thumb encoders and illuminated controls.",
+      "sourceUrl": "https://docs.simucube.com/Wheels/Savu/Savu.html",
+      "priceNote": "Price to confirm for the chosen SC3 version.",
+      "description": "295 mm GT wheel with aluminum body, illuminated controls and telemetry LEDs.",
       "hotspotAlwaysVisible": true,
-      "ownerPriceRub": 23800,
-      "priceCheckedAt": "2026-10-30",
-      "priceType": "catalog",
-      "sourceLabel": "SimUltimate"
+      "priceType": "unconfirmed",
+      "sourceLabel": "Product reference",
+      "ownerPriceRub": null,
+      "dimensionsMm": [295, null, null],
+      "priceCheckedAt": null
     },
     {
       "id": "spare-wheel",
@@ -506,28 +506,28 @@
       "license": "Granite Devices Inc. All rights reserved. For commercial use or reproduction, contact Granite Devices for permissions."
     }
   ],
-  "note": "Catalog prices checked 30 October 2026 take priority. Where the exact product or bundle cannot be verified, the owner-provided RUB amount is used. Fixed display conversion: EUR 1 = RUB 90. USD catalog prices use the dated CBR USD/RUB rate before conversion at RUB 90/EUR. Shipping, tax, region and bundle contents may vary. Savu Pro is an unpriced preview.",
+  "note": "Catalog prices checked 30 October 2026 take priority. Where the exact product or bundle cannot be verified, the owner-provided RUB amount is used. Fixed display conversion: EUR 1 = RUB 90. USD catalog prices use the dated CBR USD/RUB rate before conversion at RUB 90/EUR. Shipping, tax, region and bundle contents may vary. Savu Pro is the default wheel; its price is not yet confirmed and is excluded from the subtotal.",
   "configuration": {
-    "installedWheel": "gt-neo",
-    "ownedWheels": ["gt-neo", "neo-x"]
+    "installedWheel": "savu-pro",
+    "ownedWheels": ["savu-pro", "neo-x"]
   },
   "wheelVariants": {
-    "gt-neo": {
+    "savu-pro": {
       "id": "installed-wheel",
-      "name": "Simagic GT-NEO",
+      "name": "Simucube Savu Pro",
       "group": "Hardware",
-      "priceEur": 289,
-      "sourcePrice": 289,
+      "priceEur": null,
+      "sourcePrice": null,
       "sourceCurrency": "EUR",
-      "sourceUrl": "https://simultimate.eu/product/simagic-gt-neo/",
-      "priceNote": "EU retailer listing including VAT. 300 mm diameter.",
-      "dimensionsMm": [300, null, null],
-      "description": "A compact GT rim with thumb encoders and illuminated controls.",
+      "sourceUrl": "https://docs.simucube.com/Wheels/Savu/Savu.html",
+      "priceNote": "Price to confirm for the chosen SC3 version.",
+      "description": "295 mm GT wheel with aluminum body, illuminated controls and telemetry LEDs.",
       "hotspotAlwaysVisible": true,
-      "ownerPriceRub": 23800,
-      "priceCheckedAt": "2026-10-30",
-      "priceType": "catalog",
-      "sourceLabel": "SimUltimate"
+      "priceType": "unconfirmed",
+      "sourceLabel": "Product reference",
+      "ownerPriceRub": null,
+      "dimensionsMm": [295, null, null],
+      "priceCheckedAt": null
     },
     "neo-x": {
       "id": "spare-wheel",
@@ -545,30 +545,12 @@
       "priceType": "catalog",
       "sourceLabel": "Simufy",
       "hotspotAlwaysVisible": true
-    },
-    "savu-pro": {
-      "id": "installed-wheel",
-      "name": "Simucube Savu Pro",
-      "group": "Hardware",
-      "priceEur": null,
-      "sourcePrice": null,
-      "sourceCurrency": "EUR",
-      "sourceUrl": "https://docs.simucube.com/Wheels/Savu/Savu.html",
-      "priceNote": "Price to confirm for the chosen SC3 version.",
-      "description": "295 mm GT wheel with aluminum body, illuminated controls and telemetry LEDs.",
-      "hotspotAlwaysVisible": true,
-      "priceType": "unconfirmed",
-      "sourceLabel": "Product reference"
     }
   },
   "visualReferences": [
     {
       "part": "seat",
       "url": "https://bride-jp.com/download/catalog/2019_BRIDE_catalog_04.pdf"
-    },
-    {
-      "part": "gt-neo",
-      "url": "https://simagic.com/pages/details-gt-neo"
     },
     {
       "part": "savu-pro",

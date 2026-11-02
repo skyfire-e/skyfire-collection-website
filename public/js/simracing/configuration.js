@@ -1,8 +1,8 @@
 // One mounted wheel in the scene; the unused owned wheel stays in the catalog.
-// Change configuration.installedWheel in simracing.json when the new wheel arrives.
+// The collection contains Savu Pro and NEO X-330R; switching keeps both in the catalog.
 export function wheelArrangement(variant) {
-  if (!['gt-neo', 'neo-x', 'savu-pro'].includes(variant)) throw new Error(`Unknown steering wheel: ${variant}`);
-  return { mounted: variant, spare: variant === 'neo-x' ? 'gt-neo' : 'neo-x' };
+  if (!['savu-pro', 'neo-x'].includes(variant)) throw new Error(`Unknown steering wheel: ${variant}`);
+  return { mounted: variant, spare: variant === 'neo-x' ? 'savu-pro' : 'neo-x' };
 }
 
 export function isOwnedWheel(catalog, variant) {

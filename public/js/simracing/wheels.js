@@ -1,13 +1,12 @@
 /**
  * Original, photo/reference-based wheel meshes. Front face is +Z; metres.
- * GT Neo: SIMAGIC product photos. Savu Pro: Simucube package drawing (SC3).
- * The Savu mesh is a preview, not a downloaded manufacturer CAD model.
+ * NEO X: SIMAGIC product photos. Savu Pro: Simucube package drawing (SC3).
+ * These are original approximations, not downloaded manufacturer CAD models.
  */
-export function createWheel(THREE, variant = 'gt-neo') {
-  if (!['gt-neo', 'neo-x', 'savu-pro'].includes(variant)) throw new Error(`Unknown wheel variant: ${variant}`);
-  const savu = variant === 'savu-pro';
+export function createWheel(THREE, variant = 'savu-pro') {
+  if (!['savu-pro', 'neo-x'].includes(variant)) throw new Error(`Unknown wheel variant: ${variant}`);
   const group = new THREE.Group();
-  group.name = variant === 'neo-x' ? 'Simagic NEO X-330R' : savu ? 'Simucube Savu Pro preview' : 'Simagic GT Neo';
+  group.name = variant === 'neo-x' ? 'Simagic NEO X-330R' : 'Simucube Savu Pro';
   group.userData.variant = variant;
   const mat = (color, metalness = 0.1, roughness = 0.58) =>
     new THREE.MeshStandardMaterial({ color, metalness, roughness });
@@ -465,33 +464,9 @@ export function createWheel(THREE, variant = 'gt-neo') {
   const carbon = document.createElement('canvas');
   carbon.width = carbon.height = 512;
   const cc = carbon.getContext('2d');
-  cc.fillStyle = savu ? '#282b2e' : '#131517';
+  cc.fillStyle = '#282b2e';
   cc.fillRect(0, 0, 512, 512);
-  let carbonSeed = 2147;
-  const carbonRandom = () => {
-    carbonSeed = (Math.imul(carbonSeed, 1664525) + 1013904223) >>> 0;
-    return carbonSeed / 4294967296;
-  };
-  if (!savu)
-    for (let i = 0; i < 1500; i++) {
-      const x = carbonRandom() * 512,
-        y = carbonRandom() * 512,
-        r = carbonRandom() * 13,
-        v = 23 + carbonRandom() * 17;
-      cc.save();
-      cc.translate(x, y);
-      cc.rotate(carbonRandom() * Math.PI);
-      cc.fillStyle = `rgb(${v},${v + 2},${v + 3})`;
-      cc.beginPath();
-      cc.moveTo(0, 0);
-      cc.lineTo(r + 3, -3);
-      cc.lineTo(r + 9, 5);
-      cc.lineTo(3, 8);
-      cc.closePath();
-      cc.fill();
-      cc.restore();
-    }
-  const face = mat(0xffffff, savu ? 0.62 : 0.2, savu ? 0.4 : 0.55);
+  const face = mat(0xffffff, 0.62, 0.4);
   face.map = new THREE.CanvasTexture(carbon);
   face.map.colorSpace = THREE.SRGBColorSpace;
   face.map.anisotropy = 4;
@@ -521,28 +496,14 @@ export function createWheel(THREE, variant = 'gt-neo') {
     ])
       screw(side * x, y, 0.015);
   }
-  if (!savu && variant === 'gt-neo') {
-    const cap = mat(0x797d80, 0.25, 0.52);
-    for (const side of [-1, 1]) {
-      const points = [
-        [side * 0.116, 0.077],
-        [side * 0.127, 0.071],
-        [side * 0.139, 0.047],
-        [side * 0.13, 0.043],
-        [side * 0.12, 0.06]
-      ];
-      plate(side < 0 ? points.reverse() : points, 0.016, cap, 0.007, 0.003);
-    }
-  }
   function button(x, y, label, color) {
     disk(0.0102, 0.0035, black, x, y, 0.0155);
     const glow = mat(color, 0.18, 0.38);
     glow.emissive = new THREE.Color(color);
     glow.emissiveIntensity = 0.27;
     ring(0.0083, 0.001, glow, x, y, 0.018);
-    const litCap = variant === 'gt-neo' && y > 0.025;
-    disk(0.0074, 0.003, litCap ? glow : rubber, x, y, 0.019);
-    caption(label, 0.0112, 0.0048, x, y, 0.0207, litCap ? '#24272a' : '#e5e7e8');
+    disk(0.0074, 0.003, rubber, x, y, 0.019);
+    caption(label, 0.0112, 0.0048, x, y, 0.0207, '#e5e7e8');
   }
   function knob(x, y, label, color = 0x737d87) {
     const ringMat = mat(color, 0.45, 0.4);
@@ -584,7 +545,7 @@ export function createWheel(THREE, variant = 'gt-neo') {
     const g = new THREE.Group();
     g.position.set(side * 0.087, y, 0.022);
     group.add(g);
-    const material = mat(savu ? 0x4b4f55 : 0xb63c32, 0.3, 0.42);
+    const material = mat(0x4b4f55, 0.3, 0.42);
     const barrel = add(new THREE.CylinderGeometry(0.009, 0.009, 0.013, 16), material, 0, 0, 0, g);
     barrel.rotation.z = Math.PI / 2;
     for (let i = 0; i < 12; i++) {
@@ -600,68 +561,43 @@ export function createWheel(THREE, variant = 'gt-neo') {
       b.rotation.x = a;
     }
   }
-  if (savu) {
-    const colors = [0xb4d7e2, 0xefcf7f, 0x8cb8e0, 0xe08282, 0xa2d4a2, 0xe6e1cd];
-    for (const side of [-1, 1]) {
-      const pts = [
-        [0.114, 0.064],
-        [0.095, 0.056],
-        [0.076, 0.047],
-        [0.067, -0.021],
-        [0.052, -0.032],
-        [0.063, -0.048]
-      ];
-      pts.forEach(([x, y], i) => button(side * x, y, ['PIT', 'RAD', 'LIM', 'TC', 'ABS', 'DRS'][i], colors[i]));
-      funky(side * 0.062, -0.004);
-      thumb(side, 0.019);
-      // Shoulder thumb roller, distinct from vertical thumb encoders.
-      const r = add(new THREE.CylinderGeometry(0.005, 0.005, 0.018, 16), edge, side * 0.123, 0.04, 0.019);
-      r.rotation.z = side * 0.4;
-    }
-    knob(-0.037, 0.025, 'TC');
-    knob(0.037, 0.025, 'ABS');
-    knob(0, -0.034, 'MAP');
-    for (const side of [-1, 1]) {
-      disk(0.008, 0.004, black, side * 0.026, -0.056, 0.018);
-      add(new THREE.BoxGeometry(0.003, 0.013, 0.006), silver, side * 0.026, -0.056, 0.021);
-    }
-    caption('SIMUCUBE', 0.055, 0.007, 0, 0.002, 0.0153);
-    // Hexagonal marque above the manufacturer's word mark.
-    ring(0.007, 0.0006, silver, 0, 0.027, 0.016);
-  } else {
-    const namesL = ['RAD', 'PIT', 'LIM', 'TC', 'FLASH'],
-      namesR = ['PIT', 'DRS', 'ERS', 'ABS', 'START'];
-    const colors = [0xf4e6bc, 0xf4e6bc, 0xf4e6bc, 0xec263e, 0xec263e];
-    for (const side of [-1, 1]) {
-      [
-        [0.112, 0.066],
-        [0.093, 0.055],
-        [0.078, 0.039],
-        [0.074, -0.027],
-        [0.071, -0.059]
-      ].forEach(([x, y], i) => button(side * x, y, (side < 0 ? namesL : namesR)[i], colors[i]));
-      thumb(side, 0.006);
-      funky(side * 0.056, -0.025);
-    }
-    knob(-0.035, 0.016, 'TC', 0xd32b3a);
-    knob(0.035, 0.016, 'ABS', 0xd32b3a);
-    knob(-0.026, -0.053, 'MAP', 0xd32b3a);
-    knob(0.026, -0.053, 'BRAKE', 0xd32b3a);
-    caption('SIMAGIC', 0.094, 0.014, 0, 0.043, 0.0154);
-    caption('GT NEO', 0.028, 0.006, 0, -0.021, 0.0154, '#9c9fa2');
+  const colors = [0xb4d7e2, 0xefcf7f, 0x8cb8e0, 0xe08282, 0xa2d4a2, 0xe6e1cd];
+  for (const side of [-1, 1]) {
+    const pts = [
+      [0.114, 0.064],
+      [0.095, 0.056],
+      [0.076, 0.047],
+      [0.067, -0.021],
+      [0.052, -0.032],
+      [0.063, -0.048]
+    ];
+    pts.forEach(([x, y], i) => button(side * x, y, ['PIT', 'RAD', 'LIM', 'TC', 'ABS', 'DRS'][i], colors[i]));
+    funky(side * 0.062, -0.004);
+    thumb(side, 0.019);
+    // Shoulder thumb roller, distinct from vertical thumb encoders.
+    const r = add(new THREE.CylinderGeometry(0.005, 0.005, 0.018, 16), edge, side * 0.123, 0.04, 0.019);
+    r.rotation.z = side * 0.4;
   }
-  // GT Neo has a wordmark across its bridge; the preview Savu keeps its LED strip.
-  if (savu) {
-    const ledCount = 15,
-      ledY = 0.047;
-    add(new THREE.BoxGeometry(0.104, 0.008, 0.0025), rubber, 0, ledY, 0.016);
-    for (let i = 0; i < ledCount; i++) {
-      const color = i < 5 ? 0x54be82 : i < 10 ? 0xe5cc68 : 0xda6362;
-      const light = mat(color, 0.02, 0.44);
-      light.emissive = new THREE.Color(color);
-      light.emissiveIntensity = 0.45;
-      add(new THREE.BoxGeometry(0.0043, 0.0042, 0.001), light, (i - (ledCount - 1) / 2) * 0.0065, ledY, 0.018);
-    }
+  knob(-0.037, 0.025, 'TC');
+  knob(0.037, 0.025, 'ABS');
+  knob(0, -0.034, 'MAP');
+  for (const side of [-1, 1]) {
+    disk(0.008, 0.004, black, side * 0.026, -0.056, 0.018);
+    add(new THREE.BoxGeometry(0.003, 0.013, 0.006), silver, side * 0.026, -0.056, 0.021);
+  }
+  caption('SIMUCUBE', 0.055, 0.007, 0, 0.002, 0.0153);
+  // Hexagonal marque above the manufacturer's word mark.
+  ring(0.007, 0.0006, silver, 0, 0.027, 0.016);
+  // Savu telemetry strip above the central controls.
+  const ledCount = 15,
+    ledY = 0.047;
+  add(new THREE.BoxGeometry(0.104, 0.008, 0.0025), rubber, 0, ledY, 0.016);
+  for (let i = 0; i < ledCount; i++) {
+    const color = i < 5 ? 0x54be82 : i < 10 ? 0xe5cc68 : 0xda6362;
+    const light = mat(color, 0.02, 0.44);
+    light.emissive = new THREE.Color(color);
+    light.emissiveIntensity = 0.45;
+    add(new THREE.BoxGeometry(0.0043, 0.0042, 0.001), light, (i - (ledCount - 1) / 2) * 0.0065, ledY, 0.018);
   }
   // Rear mounting flange, bolts, paddle pivots and two independent paddle pairs.
   disk(0.035, 0.015, edge, 0, 0, -0.035, 32);
@@ -694,7 +630,6 @@ export function createWheel(THREE, variant = 'gt-neo') {
     disk(0.005, 0.006, black, side * 0.063, -0.038, -0.039);
   }
   const bounds = new THREE.Box3().setFromObject(group);
-  group.scale.x = (savu ? 0.295 : 0.3) / (bounds.max.x - bounds.min.x);
-  if (!savu) group.scale.y = 0.156 / (bounds.max.y - bounds.min.y);
+  group.scale.x = 0.295 / (bounds.max.x - bounds.min.x);
   return group;
 }

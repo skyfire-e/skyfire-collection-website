@@ -47,13 +47,14 @@ The public interface is entirely English and intentionally light gray.
 - All current components use original geometry. The generic CC0 seat was
   replaced by a photo-based BRIDE Low Max model with OMP harness.
 - `configuration.installedWheel` selects a `wheelVariants` entry. The stable
-  `installed-wheel` slot accepts GT Neo, NEO X-330R or Savu Pro. The unused owned
+  `installed-wheel` slot accepts Savu Pro (default) or NEO X-330R. GT-NEO is
+  removed from the catalog, switcher and model factory. The unused owned
   wheel remains in the catalog as `spare-wheel`; never float it in the scene.
   `configuration.ownedWheels` distinguishes owned alternatives from previews.
   Do not change the wheelbase when switching rims.
-- Match the photographed GT Neo with a SIMAGIC wordmark on its bridge,
-  warm white upper buttons and red encoders; its bridge has no RPM light bar.
-  All three photographed pedal faces are solid. Ultimate has a shorter rear
+- Savu Pro has no confirmed price yet: keep its price null and exclude it from
+  the subtotal in either wheel slot. Do not inherit the removed GT-NEO price.
+- All three photographed pedal faces are solid. Ultimate has a shorter rear
   housing with an open sensor window and exposed front guide rods.
 - The fixed coiled steering cable belongs to frame wiring, outside the swappable
   wheel group. LCD key faces use unlit textures so studio reflections do not
@@ -95,8 +96,10 @@ The public interface is entirely English and intentionally light gray.
   Check the full ribbon width against the cushion meshes; a clear centreline
   alone can still leave the strap edges buried in the upholstery.
 - The Sounderlink pair has one shaker under the pedals (Z -.61), one under the
-  seat (Z .61). Front mounting plate rests on the main rails; the rear plate
-  fastens under the seat runners and stays clear of the lap-belt eye bolts.
+  seat (Z .61). The front uses an 18 cm wide longitudinal bridge from the
+  nearest crossmember at Z -.46 (top Y .195), with two underside gussets;
+  never span it across the longitudinal rails. The rear plate fastens under
+  the seat runners and stays clear of the lap-belt eye bolts.
   Keep both under the shared `shakers` selection and its front anchor.
 - Pimax Crystal Light hangs nose-down by its rear headband on the two DIMSIM
   seat hooks. Keep the cradle on the hooks, the retaining tips outside the pad,

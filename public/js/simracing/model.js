@@ -9,7 +9,7 @@ import { componentMeshes } from './selection.js';
  * these meshes are not manufacturer CAD or an engineering assembly.
  * Metres; X = driver's right, Y = up, -Z = pedals/front.
  */
-export function createCockpit(THREE, initialWheel = 'gt-neo') {
+export function createCockpit(THREE, initialWheel = 'savu-pro') {
   const group = new THREE.Group();
   group.name = 'Skyfire cockpit';
   const anchors = {};
@@ -1009,22 +1009,36 @@ export function createCockpit(THREE, initialWheel = 'gt-neo') {
   ).name = 'Pimax tether to cockpit cable routing';
 
   componentId = 'shakers';
-  // One transducer under the pedals, one under the seat. Both are fastened to
-  // cross-plates bolted to the main rails / seat runners.
+  // Front transducer sits on a short cantilever from the nearest crossmember
+  // (Z -.46, top Y .195). It does not bridge the two longitudinal side rails.
+  // The rear transducer remains attached beneath the seat runners.
   for (const [name, z] of [
     ['Front', -0.61],
     ['Rear', 0.61]
   ]) {
     const shaker = support(`${name} Sounderlink bass shaker`);
     const front = name === 'Front',
-      y = front ? 0.221 : 0.214,
-      railX = front ? 0.29 : 0.18;
-    box(front ? 0.62 : 0.4, 0.012, 0.18, 0, y, z, palette.black, shaker).name = 'Bass shaker rail mounting plate';
-    for (const x of [-railX, railX])
-      for (const dz of [-0.06, 0.06]) {
-        const fastener = bolt(x, y + (front ? 0.009 : -0.009), z + dz, shaker);
-        if (!front) fastener.rotation.x = Math.PI;
+      y = front ? 0.201 : 0.214;
+    if (front) {
+      box(0.18, 0.012, 0.26, 0, y, -0.57, palette.black, shaker).name = 'Short longitudinal shaker bridge';
+      for (const x of [-0.055, 0.055]) {
+        bolt(x, y + 0.009, -0.46, shaker);
+        const rib = new THREE.Shape();
+        rib.moveTo(-0.48, 0.195);
+        rib.lineTo(-0.6, 0.195);
+        rib.lineTo(-0.48, 0.16);
+        rib.closePath();
+        const geometry = new THREE.ExtrudeGeometry(rib, { depth: 0.004, bevelEnabled: false });
+        geometry.translate(0, 0, -0.002);
+        const brace = mesh(geometry, palette.black, [x, 0, 0], shaker);
+        brace.rotation.y = -Math.PI / 2;
+        brace.name = 'Shaker bridge gusset to crossmember';
       }
+    } else {
+      box(0.4, 0.012, 0.18, 0, y, z, palette.black, shaker).name = 'Rear shaker seat-runner mounting plate';
+      for (const x of [-0.18, 0.18])
+        for (const dz of [-0.06, 0.06]) bolt(x, y - 0.009, z + dz, shaker).rotation.x = Math.PI;
+    }
     mesh(new THREE.CylinderGeometry(0.079, 0.079, 0.006, 40), palette.edge, [0, y + 0.009, z], shaker).name =
       'Sounderlink mounting flange';
     mesh(new THREE.CylinderGeometry(0.073, 0.073, 0.045, 40), palette.black, [0, y + 0.029, z], shaker).name =
@@ -1033,7 +1047,7 @@ export function createCockpit(THREE, initialWheel = 'gt-neo') {
     for (const angle of [0, Math.PI / 2, Math.PI, Math.PI * 1.5])
       bolt(Math.cos(angle) * 0.074, y + 0.014, z + Math.sin(angle) * 0.074, shaker);
   }
-  assign('shakers', 0.02, 0.29, -0.61);
+  assign('shakers', 0.02, 0.27, -0.61);
   // Front electronics shelf: amplifier directly below the Link Hub.
   componentId = 'frame';
   const electronics = support('Front electronics shelf');
