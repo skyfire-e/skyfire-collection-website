@@ -8,6 +8,8 @@ const router = Router();
 const PUB = path.join(ROOT, 'public');
 
 router.get('/health', (req, res) => {
+  // Monitoring must reach the running app instead of a cached health response.
+  res.set('Cache-Control', 'no-store, max-age=0');
   try {
     db.db.prepare('SELECT 1').get();
     res.json({ status: 'ok', uptime: process.uptime(), db: 'ok' });

@@ -32,6 +32,42 @@ variable (port, session, rate limits, upload limits, reverse-proxy options).
 
 ---
 
+## Deploy to Layero
+
+Connect this GitHub repository in Layero, select the `main` branch and use the
+Free plan. Pushes to the selected branch publish the latest committed catalog,
+database and uploads. The root `layero.json` selects the Node server runtime and
+`npm start`; dependencies are installed from `package-lock.json`, including the
+postinstall step that prepares the local Three.js modules. No frontend build or
+output directory is needed. Node 22 is the platform default and the CI target.
+
+Set these secrets in the project's Environment Variables before deployment:
+
+- `SESSION_SECRET`: a random value of at least 32 characters.
+- `ADMIN_PASSWORD_HASH`: the existing Argon2 hash from the Render environment.
+- `ADMIN_USERNAME`: copy the existing value if it differs from `admin`.
+
+Do not put secrets in `layero.json` or commit a `.env` file. The non-secret
+production, HTTPS and reverse-proxy settings are already in `layero.json`.
+`PORT` is supplied by the platform; the app defaults to 3000.
+
+After deployment, check `/health`, the home page, galleries and `/simracing`.
+In UptimeRobot, add an HTTP(S) monitor for `https://<project>.layero.app/health`
+with a five-minute interval. Both GET and HEAD check the database and return
+uncacheable responses. This monitors availability and periodically wakes the
+runtime; it does not guarantee an always-hot process. Layero can freeze an idle
+process after about 20 seconds and wake it on the next request.
+
+The deployment intentionally uses the temporary container disk. New containers
+start from the database and uploads committed to GitHub; runtime edits are not
+preserved across container replacement or a new deployment.
+
+Platform references: [GitHub deployment](https://docs.layero.ru/deploys/github),
+[runtime configuration](https://docs.layero.ru/deploys/layero-json),
+[runtime lifecycle](https://docs.layero.ru/runtime/lifecycle).
+
+---
+
 ## How data is stored and backed up
 
 | What | Where | In git |

@@ -120,6 +120,14 @@ describe('Health', () => {
     assert.strictEqual(res.status, 200);
     assert.strictEqual(res.body.status, 'ok');
     assert.strictEqual(res.body.db, 'ok');
+    assert.strictEqual(res.headers['cache-control'], 'no-store, max-age=0');
+  });
+
+  it('HEAD /health — supports uptime monitors without caching', async () => {
+    const res = await supertest(app).head('/health');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.headers['cache-control'], 'no-store, max-age=0');
+    assert.strictEqual(res.text, undefined);
   });
 });
 
